@@ -71,3 +71,9 @@ Why the word is "pre-specified", not "pre-registered": no committed record shows
 
 So the rule and rest days were fixed before the data for five of the seven countries were downloaded, but after the US and Nepal data were in hand and around the time the first US and Nepal results were produced. Local file times are not a committed record.
 
+## Out-of-sample prediction: Bangladesh hills (review E2), written before the analysis
+
+Prediction: the Chittagong Hill Tracts (hill shifting cultivation, communities mostly not Christian) will NOT show a significant Sunday dip, unlike India's northeastern hill states.
+
+Test, fixed before running: the per-cell method of `reference/rhythm_map.py` (VIIRS for the map, Aqua as a check; 1-degree cells with at least 300 detections a year on average and 8 usable years; Benjamini-Hochberg at 5%) applied to Bangladesh with Sunday as the tested day. Cells are counted as Chittagong Hill Tracts if their centroid falls in Rangamati, Khagrachari or Bandarban districts, or otherwise if their centroid lies east of 91.5 E and south of 23.5 N. The prediction holds if no such cell has a significant Sunday dip. No Bangladesh per-cell result had been computed when this was committed.
+
