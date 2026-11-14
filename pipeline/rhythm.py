@@ -2,6 +2,15 @@
 
 Input dates must already be local CIVIL dates. This module never interprets
 an empty detection day as a cloud-free satellite observation.
+
+OFFICIAL DECISION: the gate pre-registered in kill_test.py (team reference script,
+reference/kill_test.py). Its outputs (kill_test_gate.json, kill_test_results.csv) are
+loaded with load_official() and are the only source of the published decision.
+
+ROBUSTNESS CHECKS: make_gate() below is this module's stricter variant (verified
+adjacent-year archives, rest-day 95% upper bound < 1, fixed 21-test Bonferroni family,
+matched per-country static-source controls). It is reported NEXT TO the official
+decision as robustness checks and never replaces or overrides it.
 """
 from __future__ import annotations
 
@@ -39,7 +48,7 @@ def _rng(seed: int, key: str) -> np.random.Generator:
 
 def weekday_exposure(year: int) -> np.ndarray:
     dates = pd.date_range(f"{year}-01-01", f"{year}-12-31", freq="D")
-    return np.bincount(dates.dayofweek, minlength=7).astype(float)
+    return np.bincount(dates.day_of_week, minlength=7).astype(float)
 
 
 def _manifest_dict(manifest) -> dict:
@@ -91,7 +100,7 @@ def _prepare(detections: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     dates = pd.to_datetime(df[date_col], errors="coerce")
     invalid = dates.isna()
     df["year"] = dates.dt.year
-    df["weekday"] = dates.dt.dayofweek
+    df["weekday"] = dates.dt.day_of_week
     df["type"] = pd.to_numeric(df["type"], errors="coerce")
     known = df["country"].isin(REST_DAYS) & df["stream"].isin(STREAMS)
     df = df[~invalid & known].copy()
@@ -178,6 +187,7 @@ def analyse_family(df: pd.DataFrame, manifest: dict, config: dict, subset: str =
 
 
 def make_gate(main: list[dict], controls: list[dict], label: str) -> dict:
+    """Stricter re-analysis used ONLY as robustness checks, never as the official gate."""
     per_country = {}
     for country in REST_DAYS:
         rows = [r for r in main if r["country"] == country]
@@ -225,6 +235,71 @@ def make_gate(main: list[dict], controls: list[dict], label: str) -> dict:
             "per_country": per_country, "replication_check": {"country": "United_States", "status": us["status"]},
             "reasons": reasons, "caveats": CAVEATS,
             "rule": "US and >=2 other countries each require >=2 streams with verified input years, rest day lowest, 95% upper bound <1 and fixed-family adjusted p<0.05; matching controls must be available and unflagged. Synthetic data never enable production."}
+
+
+OFFICIAL_SOURCE = "kill_test.py (pre-registered gate; reference/kill_test.py)"
+ROBUSTNESS_DESCRIPTIONS = {
+    "ci_upper_below_one": "Rest-day 95% upper bound below 1.0 in at least two streams (official estimates).",
+    "strict_reanalysis": "Re-analysis using only years with both neighbouring annual archives, rest day lowest, "
+                         "95% upper bound below 1 and fixed 21-test Bonferroni, in at least two streams.",
+    "matched_static_controls": "At least two per-country static-source control streams available, none showing "
+                               "a corrected rest-day dip.",
+}
+SYNTHETIC_WORDS = ("SYNTHETIC", "FAKE", "MOCK")
+
+
+def load_official(directory) -> dict | None:
+    """Read the official pre-registered gate and per-stream estimates written by kill_test.py."""
+    folder = Path(directory)
+    gate_path, results_path = folder / "kill_test_gate.json", folder / "kill_test_results.csv"
+    if not gate_path.exists() or not results_path.exists():
+        return None
+    return {"gate": json.loads(gate_path.read_text(encoding="utf-8")), "results": pd.read_csv(results_path)}
+
+
+def official_gate(official: dict | None, label: str) -> dict:
+    """The published decision. Comes only from kill_test.py; synthetic input never enables it."""
+    if official is None:
+        return {"decision": "insufficient_data", "source": OFFICIAL_SOURCE, "label": label,
+                "reasons": ["Official pre-registered gate (kill_test.py outputs) was not supplied."]}
+    gate = dict(official["gate"])
+    labels = (label + " " + str(gate.get("label", ""))).upper()
+    if any(word in labels for word in SYNTHETIC_WORDS):
+        return {"decision": "insufficient_data", "source": OFFICIAL_SOURCE, "label": label,
+                "reasons": ["Synthetic data cannot enable a real-data scientific claim."]}
+    gate.pop("negative_control_static_sources", None)
+    gate["source"] = OFFICIAL_SOURCE
+    return gate
+
+
+def robustness_checks(official: dict | None, strict: dict) -> dict:
+    """Per officially passing country: which stricter checks hold. Reported, never gating."""
+    checks = {}
+    gate = (official or {}).get("gate", {})
+    results = (official or {}).get("results")
+    for country, row in gate.get("per_country", {}).items():
+        if row.get("status") != "pass":
+            continue
+        rest = row.get("predicted_rest_day") or REST_DAYS.get(country)
+        n_ci = 0
+        if results is not None and f"{rest}_hi" in results:
+            sub = results[(results.country == country) & (results.subset == "all") & (results.status == "ok")]
+            n_ci = int((sub[f"{rest}_hi"] < 1).sum())
+        strict_row = strict.get("per_country", {}).get(country, {})
+        country_checks = {
+            "ci_upper_below_one": {"passed": n_ci >= 2, "streams": n_ci},
+            "strict_reanalysis": {"passed": strict_row.get("status") == "pass",
+                                  "status": strict_row.get("status", "not_run"),
+                                  "streams_significant": strict_row.get("streams_significant", 0)},
+            "matched_static_controls": {"passed": strict_row.get("controls_status") == "no_detected_rest_day_dip",
+                                        "status": strict_row.get("controls_status", "not_run")},
+        }
+        failed = [name for name, value in country_checks.items() if not value["passed"]]
+        checks[country] = {**country_checks, "failed": failed, "all_passed": not failed}
+    return {"role": "robustness checks reported next to the official decision; they never change it",
+            "descriptions": ROBUSTNESS_DESCRIPTIONS, "per_country": checks,
+            "strict_variant": {"decision": strict.get("decision"), "per_country": strict.get("per_country"),
+                               "rule": strict.get("rule"), "reasons": strict.get("reasons")}}
 
 
 def _plot(rows: list[dict], output: Path, label: str) -> str:
@@ -284,7 +359,7 @@ def _plot(rows: list[dict], output: Path, label: str) -> str:
 
 
 def run(detections: pd.DataFrame, output_dir, label: str = "REAL FIRMS DATA", manifest=None,
-        config: dict | None = None) -> dict:
+        config: dict | None = None, official=None) -> dict:
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
     settings = {**DEFAULTS, **(config or {})}
@@ -297,7 +372,10 @@ def run(detections: pd.DataFrame, output_dir, label: str = "REAL FIRMS DATA", ma
     main = analyse_family(df, manifest, settings)
     daytime = analyse_family(df, manifest, settings, subset="day")
     controls = analyse_family(df, manifest, settings, control=True)
-    gate = make_gate(main, controls, label)
+    strict = make_gate(main, controls, label)
+    official_data = load_official(official) if isinstance(official, (str, Path)) else official
+    gate = official_gate(official_data, label)
+    robustness = robustness_checks(official_data if gate.get("decision") != "insufficient_data" else None, strict)
     diagnostics.update(label=label, settings=settings, observation_coverage="unknown",
                        archive_manifest_supplied=bool(manifest),
                        main_family_tests=len(REST_DAYS) * len(STREAMS),
@@ -305,11 +383,13 @@ def run(detections: pd.DataFrame, output_dir, label: str = "REAL FIRMS DATA", ma
                        control_family="separate diagnostic family; no dip is not proof of equivalence")
     countries = {country: {"rest_day": rest, "streams": [r for r in main if r["country"] == country],
                            "daytime_streams": [r for r in daytime if r["country"] == country],
-                           "status": gate["per_country"][country]["status"]}
+                           "status": gate.get("per_country", {}).get(country, {}).get("status", "insufficient_data"),
+                           "strict_status": strict["per_country"][country]["status"]}
                  for country, rest in REST_DAYS.items()}
-    result = {"gate": gate, "countries": countries, "diagnostics": diagnostics, "controls": controls}
-    for name, payload in [("kill_test_gate.json", gate), ("kill_test_diagnostics.json", diagnostics),
-                          ("rhythm_results.json", result)]:
+    result = {"gate": gate, "robustness": robustness, "countries": countries, "diagnostics": diagnostics,
+              "controls": controls}
+    for name, payload in [("kill_test_gate.json", gate), ("robustness_checks.json", robustness),
+                          ("kill_test_diagnostics.json", diagnostics), ("rhythm_results.json", result)]:
         (output / name).write_text(json.dumps(payload, indent=2, allow_nan=False), encoding="utf-8")
     flat = []
     for family, rows in [("vegetation_all", main), ("vegetation_day", daytime), ("static_control", controls)]:
@@ -331,8 +411,10 @@ if __name__ == "__main__":
     parser.add_argument("--manifest")
     parser.add_argument("--output", default="reports")
     parser.add_argument("--label", default="REAL FIRMS DATA")
+    parser.add_argument("--official", help="Folder with kill_test.py outputs (the official gate)")
     args = parser.parse_args()
     path = Path(args.detections)
     data = pd.read_parquet(path) if path.suffix == ".parquet" else pd.read_csv(path)
-    result = run(data, args.output, args.label, args.manifest)
-    print(json.dumps(result["gate"], indent=2))
+    result = run(data, args.output, args.label, args.manifest, official=args.official)
+    print(json.dumps({"official_decision": result["gate"].get("decision"),
+                      "robustness": result["robustness"]["per_country"]}, indent=2, default=str))
