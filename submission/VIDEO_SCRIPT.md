@@ -1,19 +1,17 @@
-# FIRETRACE: 30-second demo script
+# FIRETRACE: demo video script
 
-Draft. Record only verified interactions, and check the allowed video duration in the live submission instructions. Keep the same country, dates and spatial scope through the evidence sequence.
+Draft, two acts. Check the allowed video length in the live submission instructions; the timings below assume about 60 seconds. Record only interactions that work in the deployed build.
 
 | Time | Screen | Voiceover |
 |---|---|---|
-| 0–5 s | Earth, Nepal and the real-data label | “Did fire activity change, or did the satellite camera change?” |
-| 5–11 s | One observed week's separate sensor counts, then raw/harmonized comparison | “FIRETRACE keeps NASA's instruments separate, then compares their observations on an Aqua reference scale.” |
-| 11–19 s | Open that week's evidence: scope, source, estimates and bounds | “Follow one week from the calendar to its observations, calibration uncertainty and coverage limits.” |
-| 19–24 s | Held-out evaluation, with the selected model and baseline visible | “Check the result against simpler baselines on withheld years.” |
-| 24–30 s | Copy/reopen the evidence link; live URL and attribution | “Share that exact view. Follow the evidence before trusting the trend.” |
+| 0-6 s | Calendar, one country, real-data label | "Did fire activity change, or did the satellite camera change?" |
+| 6-16 s | Flip raw versus harmonized at the switch to VIIRS | "FIRETRACE keeps NASA's instruments separate and puts them on one Aqua reference scale, for seven countries." |
+| 16-24 s | Open one week's evidence card, then the held-out evaluation table | "Every week opens to its sensor counts, its conversion and its uncertainty, tested against simpler baselines on withheld years." |
+| 24-36 s | Human rhythm tab: official decision, United States weekday chart, Sunday bar highlighted | "Nature has no seven-day cycle. We fixed each country's rest day in advance. The US, Australia and Brazil show a Sunday dip." |
+| 36-44 s | Scroll to the Sunday caveat and the Brazil robustness note | "All three rest on Sunday, so this does not show the dip following each country's own rest day, and Brazil's evidence is weaker." |
+| 44-54 s | Exploratory map, India; northeast cells outlined | "Inside India, the dip sits almost entirely in the northeast." [PLACEHOLDER: one line on the northeast India pattern, to be written and reviewed before submission.] |
+| 54-60 s | Live URL, NASA FIRMS attribution | "A dip is consistent with people scheduling their burning, not proof of cause. Follow the evidence before trusting the trend." |
 
-Use captions and rehearse against the actual recording. The Earth always shows Aqua-equivalent annual activity; the raw/harmonized toggle controls the calendar/comparison. The displayed illustrative week is not an evaluation result. A selected cell must remain identified as a cell rather than a national total.
+**Numeric anchors (check against the app before recording):** harmonized calendar for 7 countries, 2003-2024. Official rhythm decision pass: US 3/3 streams, Australia 3/3, Brazil 2/3; India, Nepal, Bangladesh, Egypt fail. Brazil's Terra static-source control index 0.913, adjusted p = 0.021. Northeast India: 19 of 26 cells significant after false-discovery correction; Aqua agrees.
 
-**Current numeric anchors:** Seven-country model, 2003–2024. Nepal's selected M1 monthly test MAE is 30.24 versus B1 182.52, with −8.11% bias. The US selects B1 (MAE 1,537.79 versus M1 2,078.57). The full table retains unfavorable results including Egypt's +51.68% bias. Values concern agreement with Aqua detections, not ground truth.
-
-The optional rhythm feature stays out of the demonstration because its overall gate is `insufficient_data`. Its results and controls remain available in reports. Do not replace this evidence journey with an unsupported “human fingerprint” claim.
-
-[Live app](https://firetrace-bhaktapur-2026.pages.dev/) · [Repository](https://github.com/Water-Mal0ne/FIRETRACE), private pending arranged judge access. Verify the deployed revision before recording. Retain NASA data attribution, AI disclosure and “NASA does not endorse this project.” No NASA logo or implied endorsement. Any synthetic example must say “SYNTHETIC DATA” inside the video frame.
+Use captions. Hotspots are detections, not fires. Keep NASA data attribution, the AI disclosure and "NASA does not endorse this project." No NASA logo. Any synthetic example must say "SYNTHETIC DATA" inside the frame.

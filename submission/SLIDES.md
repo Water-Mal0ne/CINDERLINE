@@ -1,67 +1,64 @@
 # FIRETRACE: seven-slide presentation outline
 
-Draft for the event's permitted submission format. Check actual slide/video requirements before submitting. Use the seven-country model revision and retain unfavorable results.
+Draft. Check the event's actual slide and video requirements before submitting. Two acts: harmonization, then the human rhythm. Keep unfavorable results visible.
 
 ## 1. The question
 
-**Title:** Did fire activity change—or did our camera change?
+**Title:** Did fire activity change, or did our camera change?
 
-Show a real regional record with its instrument labels. A hotspot is a detected pixel, not an independent fire. Do not call a real increase artificial before comparing and evaluating it.
+Show a real regional record with its instrument labels. When VIIRS joined MODIS in 2012 it saw many more small fires, so a naive joined record appears to jump. A hotspot is a detected pixel, not an independent fire.
 
-**Speaker line:** “An apparent increase can mix environmental change with a change in what the instrument detects.”
+**Speaker line:** "An apparent increase can mix real change with a change in what the instrument sees."
 
-## 2. The person using it
+## 2. Act 1: one comparable history for seven countries
 
-**Title:** A fire manager needs a comparable history
+**Title:** A burning activity calendar on one named scale
 
-Orient on the 3D Earth, select Nepal and show the burning-activity calendar. The task is to inspect unusual historical activity against that area's usual season, with observation limits visible. This is not emergency forecasting.
+Select a country in the calendar (Australia, Bangladesh, Brazil, Egypt, India, Nepal, United States; 2003-2024). Flip the raw versus harmonized toggle to show how much of the apparent jump at the switch to VIIRS is the instrument, and what change remains on the Aqua scale. Show typical season, high-activity windows and unusual weeks. This is historical context, not a forecast.
 
-**Scope:** Seven countries, 2003–2024; 41,986 annual grid cells; national totals plus 12 training-selected daily cells per country. The globe is always Aqua-equivalent; raw/harmonized controls change the calendar/comparison, not the Earth's measurement scale.
+## 3. Act 1: the method and the honest test
 
-## 3. The method
+**Title:** Separate streams, one reference, a locked evaluation
 
-**Title:** Separate streams, one named reference, a locked evaluation
-
-Show FIRMS → IANA civil dates and stream separation → exact counts → calibration → held-out evaluation → evidence card.
-
-B0 is uncalibrated, B1 is a global training ratio, and M1 uses country/day-night/reported-FRP strata. Train 2013–2017; select 2018–2019; test 2020–2024. B1 is selected in Australia/Brazil/US; M1 in Bangladesh/Egypt/India/Nepal. Adding countries changes the training ratio and is recorded as a new model revision.
-
-## 4. The signature demonstration
-
-**Title:** One week, all the way back to its evidence
-
-Use the existing evidence journey: inspect the same dates' separate sensor counts, open the converted estimate, compare the full record, then check held-out results. Keep the selected spatial scope visible in the evidence card. End by copying a share link and reopening that exact week.
-
-The week is an illustrative example, not a model-performance test. Exact values and evidence matter more than a dramatic disappearance of a trend. A synthetic sensor-switch figure may explain the mechanism only if “SYNTHETIC DATA” remains visible within it.
-
-## 5. What the tests say
-
-**Title:** Compare the selected model with simpler alternatives
-
-Use the current report table for all seven countries, with B0/B1/M1 monthly and weekly metrics available. Selected examples, 60 held-out months in 2020–2024:
+FIRMS archives, local civil dates, Terra/Aqua/VIIRS kept separate, MODIS-Aqua-equivalent scale. B0 is uncalibrated VIIRS, B1 one training ratio, M1 ratios by country, day/night and fire intensity. Train 2013-2017, select 2018-2019, test once 2020-2024.
 
 | Country | Selected | Selected monthly MAE | Comparator | Remaining limitation |
 |---|---|---:|---:|---|
-| Nepal | M1 | 30.24 | B1: 182.52 | −8.11% bias |
-| United States | B1 | 1,537.79 | M1: 2,078.57 | 10.0-week mean peak timing error |
-| Egypt | M1 | 15.04 | B1: 90.40 | +51.68% bias; 17.6-week peak timing error |
+| Nepal | M1 | 30.24 | B1: 182.52 | -8.11% bias |
+| United States | B1 | 1,537.79 | M1: 2,078.57 | simpler model wins |
+| Egypt | M1 | 15.04 | B1: 90.40 | +51.68% bias |
 
-Units are Aqua-equivalent detections, not real fire counts. Retain Egypt's weakness and the US result where the simpler method wins. Synthetic software checks and real-data evaluation answer different questions.
+Units are Aqua-equivalent detections, not fire counts.
 
-## 6. The optional rhythm question
+## 4. Act 1: one week, back to its evidence
 
-**Title:** A research gate that stays closed when evidence is incomplete
+**Title:** Follow the evidence before trusting the trend
 
-All seven countries were tested. US/Australia support the rest-day criterion in three streams each; Brazil in two. Brazil's matched control is flagged, so only Australia qualifies beyond the US. Nepal/Egypt have zero supporting streams; Bangladesh/India have one each.
+Open one week: separate sensor counts, the converted estimate and its bounds, the held-out results, then a share link that reopens the same view.
 
-**Overall:** `insufficient_data`, `production_allowed: false`. The statistical criterion alone is not the production decision. Do not show an enabled rhythm feature or make an ignition-cause claim. This outcome strengthens the evidence discipline, not the substantive rhythm hypothesis.
+## 5. Act 2: the human rhythm test
+
+**Title:** Nature has no seven-day cycle; people do
+
+Rest days fixed in advance: Sunday (US, Australia, Brazil, India), Saturday (Nepal), Friday (Bangladesh, Egypt). Pass rule fixed in advance: the US replicates the known Sunday dip, and at least two other countries show their rest day as the lowest weekday, significant after correction, in at least two of three satellite streams.
+
+**Result: pass.** US 3/3 streams (Sunday 22-33% below an average day), Australia 3/3, Brazil 2/3. India, Nepal, Bangladesh and Egypt fail. Show the Human rhythm tab: weekday bars with 95% intervals, rest day highlighted.
+
+## 6. Act 2: what it does and does not show
+
+**Title:** The caveats are part of the result
+
+- All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.
+- Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. Its support is weaker than the US and Australia, whose static controls are clean.
+- Exploratory map: in India the Sunday dip sits almost entirely in the northeast (19 of 26 cells significant after false-discovery correction, Aqua agrees); the rest of India shows none.
+- [PLACEHOLDER: team explanation of the northeast India pattern, to be written and reviewed before submission.]
+
+**Speaker line:** "A dip is consistent with people scheduling their burning. It is not proof of who lit the fires."
 
 ## 7. What is ready and what remains
 
-**Title:** A reproducible comparison with visible limits
+**Title:** A reproducible record with visible limits
 
-Show the [live app](https://firetrace-bhaktapur-2026.pages.dev/), [repository](https://github.com/Water-Mal0ne/FIRETRACE) and NASA data attribution. Source is private by team choice; arrange judge access. State the supported seven-country scope, selected-cell limitation and actual deployed revision from `DEPLOYMENT.md`.
+Show the [live app](https://firetrace-bhaktapur-2026.pages.dev/), the [public repository](https://github.com/Water-Mal0ne/FIRETRACE) and NASA FIRMS attribution. No worldwide coverage, 2000-2002 reconstruction or operational forecast is claimed; selected-cell errors stay visible. Include the AI disclosure and "NASA does not endorse this project."
 
-No worldwide coverage or operational forecast is claimed. The 0.25°/0.5° selected-cell diagnostic is complete and exposes high local errors; national performance does not establish cell accuracy. Early Terra-bridge feasibility is documented, but no reconstruction is qualified or published. Arbitrary daily-area exploration remains outside the product scope. A script is not a finished video; record and review the actual demo. Include the AI disclosure and NASA non-endorsement statement.
-
-**Closing line:** “Follow the evidence before trusting the trend.”
+**Closing line:** "Follow the evidence before trusting the trend."
