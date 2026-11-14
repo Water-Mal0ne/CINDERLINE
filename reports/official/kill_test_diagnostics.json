@@ -1,0 +1,18 @@
+{
+  "label": "REAL FIRMS DATA",
+  "files": 168,
+  "rows_loaded": 54168264,
+  "rows_usable_confidence": 49333709,
+  "rows_vegetation": 46765553,
+  "rows_static_control": 2435621,
+  "vegetation": {
+    "invalid_timestamps_dropped": 0,
+    "unresolved_timezone_dropped": 0,
+    "share_date_changed_by_utc_to_local": 0.1577
+  },
+  "static_control": {
+    "invalid_timestamps_dropped": 0,
+    "unresolved_timezone_dropped": 0,
+    "share_date_changed_by_utc_to_local": 0.4064
+  }
+}
