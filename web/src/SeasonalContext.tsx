@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useId, useMemo, useState} from 'react';
 import type {KeyboardEvent} from 'react';
 import {ArrowDownToLine, CalendarDays, ChevronLeft, ChevronRight, Info, Waves} from 'lucide-react';
 import type {Region} from './types';
@@ -26,6 +26,7 @@ function contiguous<T>(rows:T[],ok:(row:T)=>boolean):T[][] {
 }
 
 export default function SeasonalContext({region,label,selectedYear,onExport,cell}:Props) {
+  const weekControlId=useId();
   const points=useMemo(()=>{
     const byWeek=new Map(region.weekly_climatology.map(p=>[p.week,p]));
     return Array.from({length:52},(_,i)=>byWeek.get(i+1)||{week:i+1,median:null,p10:null,p90:null,critical:false});
@@ -75,13 +76,14 @@ export default function SeasonalContext({region,label,selectedYear,onExport,cell
       </svg><div className="seasonal-readout" aria-live="polite" aria-atomic="true"><div><span>WEEK {String(active.week).padStart(2,'0')}</span><strong>{dateSpan(selectedYear,active.week)}</strong></div>
         <div><span>HISTORICAL MEDIAN</span><strong>{fmt(active.median,1)}</strong></div><div><span>10TH–90TH PERCENTILE</span><strong>{numeric(active.p10)&&numeric(active.p90)?`${fmt(active.p10,1)}–${fmt(active.p90,1)}`:'Unavailable'}</strong></div>
         <div className="seasonal-steppers"><button type="button" aria-label="Previous week" onClick={()=>select(selected-1)} disabled={selected<=1}><ChevronLeft size={16}/></button><button type="button" aria-label="Next week" onClick={()=>select(selected+1)} disabled={selected>=52}><ChevronRight size={16}/></button></div></div>
-      <p className="seasonal-instructions" id="seasonal-instructions">Hover to inspect. Focus the chart and use the arrow keys to select a week; Home and End jump to either edge.</p></>:
+      <div className="seasonal-week-control"><label htmlFor={weekControlId}>Explore a historical week <strong>{String(selected).padStart(2,'0')} / 52</strong></label><input id={weekControlId} type="range" min={1} max={52} step={1} value={selected} onChange={event=>select(Number(event.target.value))} aria-valuetext={`Week ${selected}, ${dateSpan(selectedYear,selected)}, historical median ${fmt(points[selected-1].median,1)} Aqua-reference-equivalent detections`} aria-describedby="seasonal-instructions"/><div aria-hidden="true"><span>January</span><span>December</span></div></div>
+      <p className="seasonal-instructions" id="seasonal-instructions">Drag the week slider or use arrow keys to explore; Home and End jump to either edge. Hover over the chart for a quick preview.</p></>:
       <div className="seasonal-empty"><Waves size={28}/><h3>No complete seasonal baseline</h3><p>Historical week estimates will appear when sufficient complete observations are available.</p></div>}
       <p className="seasonal-method-note">Seven-day periods begin January 1. Only complete periods contribute; the final partial period is omitted. Shading marks historically high-activity weeks, not a forecast.</p>
       <span className={`seasonal-data-label ${/synthetic/i.test(label)?'is-synthetic':''}`}>{label}</span>
     </div><aside className="seasonal-period-card" aria-labelledby="seasonal-period-title"><div className="seasonal-period-heading"><CalendarDays size={19}/><span>{selectedYear} DATE GUIDE</span></div>
       <h3 id="seasonal-period-title">Historical high-activity periods</h3><p>Seasonal windows translated into dates for the selected year.</p>
-      <div className="seasonal-period-list">{periods.length?periods.map((period,i)=><button type="button" key={`${period.start_week}-${period.end_week}`} onClick={()=>select(period.start_week)} className={active.week>=period.start_week&&active.week<=period.end_week?'is-selected':''}>
+      <div className="seasonal-period-list">{periods.length?periods.map((period,i)=><button type="button" key={`${period.start_week}-${period.end_week}`} onClick={()=>select(period.start_week)} aria-pressed={selected>=period.start_week&&selected<=period.end_week} className={active.week>=period.start_week&&active.week<=period.end_week?'is-selected':''}>
         <span className="seasonal-period-number">{String(i+1).padStart(2,'0')}</span><span><strong>{dateSpan(selectedYear,period.start_week,period.end_week)}</strong><small>Weeks {period.start_week}–{period.end_week} · historical threshold</small></span><ChevronRight size={15}/>
       </button>):<div className="seasonal-no-periods">No high-activity periods meet the historical threshold for this region.</div>}</div>
       <button type="button" className="seasonal-export" onClick={onExport} disabled={!periods.length}><ArrowDownToLine size={16}/> Add historical periods to calendar</button>

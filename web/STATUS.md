@@ -1,5 +1,13 @@
 # Web implementation status
 
+## Local UI reliability cycle — November 14, 2026
+
+Prepared on `ui/qa-polish`; not pushed or deployed. The existing Cloudflare release remains unchanged.
+
+Invalid date inputs now produce accessible recovery states; partial weeks have explicit date/day-count labels. The Earth table exposes all annual cells with search, pagination and a daily-record filter. Monthly exports retain country/cell identity, seasonal weeks have a direct slider, and mobile controls have larger text and touch targets. Dialog focus and active navigation were also corrected.
+
+Independent review, 40 named web tests plus legacy checks, 61 Python tests, TypeScript, production build and desktop/mobile browser checks passed. Scientific data and locked model hashes are unchanged. See [local-cycle verification](../reports/UI_CYCLE_QA.md) for evidence and limits.
+
 ## Phase 2: evidence journey and Earth explorer
 
 Integrated all four landing sections while preserving source labels and the rhythm gate:
