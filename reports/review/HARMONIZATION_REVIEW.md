@@ -13,7 +13,7 @@ see `layer1_reproduction_check.csv`.
 `layer1_table.md` / `layer1_table.csv`. Selected models (on 2018-2019 validation daily MAE): B1 for Australia,
 Brazil and the United States; M1 for Bangladesh, Egypt, India and Nepal.
 
-**Independent validation on NOAA-20 (review E3).** NOAA-20 VIIRS, converted with the saved S-NPP-fitted model and no refitting, matches the released converted S-NPP series in the test years 2020-2024: Nepal +0.6% (weekly r 0.989), Bangladesh -0.5% (r 0.987), Egypt -2.6% (r 0.829). Egypt's high bias against Aqua persists with NOAA-20 (+47.7%), which points at the Egypt ratio rather than at S-NPP. Details: `reports/review/noaa20/NOAA20.md`.
+**Independent validation on NOAA-20 (review E3).** NOAA-20 VIIRS, converted with the saved S-NPP-fitted model and no refitting, matches the released converted S-NPP series in the test years 2020-2024: United States +1.3% (weekly r 0.984), Nepal +0.6% (r 0.989), Bangladesh -0.5% (r 0.987), Egypt -2.6% (r 0.829). Egypt's high bias against Aqua persists with NOAA-20 (+47.7%), which points at the Egypt ratio rather than at S-NPP. Details: `reports/review/noaa20/NOAA20.md`.
 
 ## A2. Per test year, selected model (weekly bias %, weekly correlation)
 
