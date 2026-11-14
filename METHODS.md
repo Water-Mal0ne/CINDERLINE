@@ -115,3 +115,13 @@ Synthetic fixtures verify known signal recovery, null behavior, gate logic, peri
 ## Northeast India interpretation (exploratory)
 
 Religion shares in the northeast India text are from the Census of India 2011, religion data by state (Office of the Registrar General and Census Commissioner, India). The per-state Sunday indices are in `reports/official/exploratory_ne_india/ne_india_states.csv` (cells assigned to states by centroid with Natural Earth admin-1 boundaries). The text describes a correlation, not a cause.
+
+## Uncertainty shown in the evidence card (review A7)
+
+The interval next to each converted-VIIRS daily estimate is the 2.5th-97.5th percentile range of that estimate across 200 bootstrap refits of the conversion ratios, each refit resampling the 2013-2017 training years with replacement (`pipeline/streaming/prepared_runtime.py`, seed 2841). It is a bootstrap interval of the conversion ratio over training years. It is not a 95% confidence interval for the true number of detections or fires: it ignores observation, cloud and sampling uncertainty, and the day-to-day variability of the conversion. For observed Aqua days no conversion is applied and the bounds equal the observed count.
+
+## FIRMS products used (review A8)
+
+- MODIS: the FIRMS archive MODIS active fire/hotspot product (MCD14ML, 1 km), Terra and Aqua. The `version` field in the country files changes over the record: `6.2` in 2013-2017, `6.03` in 2018-2022 and `61.03` in 2023-2024 (values as recorded; FIRMS describes the field as collection plus processing source). NASA states that Collection 6.1 changed Level-1B calibration, not the fire algorithm. The change crosses the training (2013-2017), validation (2018-2019) and test (2020-2024) windows; see LIMITATIONS.md.
+- VIIRS: the Suomi-NPP VIIRS 375 m active fire product (`version` 2 throughout 2013-2024). The 375 m I-band product is the standard VIIRS active-fire product in the FIRMS country archive and is more sensitive to small fires than the 1 km MODIS product. We did not compare it with the 750 m VIIRS M-band product.
+

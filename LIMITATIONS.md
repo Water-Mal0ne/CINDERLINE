@@ -36,6 +36,9 @@ The test set must not be reused for tuning. A negative or inconclusive evaluatio
 - Bangladesh 2022 is a failed test year for the selected model (weekly bias +114%, correlation 0.18). Egypt is biased high in every test year (+36% to +66%).
 - Converted VIIRS produces far fewer zero weeks than observed Aqua in Egypt (0.6% vs 9.4%). Low-activity anomaly flags before 2013 are therefore unreliable for Egypt (100 low flags in 2003-2012 vs 38 in 2013-2024). In all countries, anomaly flags near the 2013 switch partly reflect the conversion, and flags compare each week with all other years, so long-term trends also shift flags between the two periods.
 
+- The MODIS `version` field in the FIRMS country files changes from `6.2` (2013-2017) to `6.03` (2018-2022) and `61.03` (2023-2024), crossing the training, validation and test windows. NASA describes Collection 6.1 as a calibration-only change, but we have not tested whether the version change shifts detection counts; it is a possible contributor to the test-year ratio differences above.
+- The evidence-card interval is a bootstrap interval of the conversion ratio over training years, not a confidence interval for true detections.
+
 ## Rhythm statistics and controls
 
 Year resampling preserves each year's aggregate weekday pattern but does not solve confounding, nonstationarity or observation bias. The random-weekday null assumes exchangeable weekday labels within each year. Short records and weak signals can be underpowered. Equal weighting across years describes the average year's normalized pattern, rather than the distribution of all detections pooled together.
