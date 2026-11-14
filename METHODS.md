@@ -114,7 +114,7 @@ Synthetic fixtures verify known signal recovery, null behavior, gate logic, peri
 
 ## Northeast India interpretation (exploratory)
 
-Religion shares in the northeast India text are from the Census of India 2011, religion data by state (Office of the Registrar General and Census Commissioner, India). The per-state Sunday indices are in `reports/official/exploratory_ne_india/ne_india_states.csv` (cells assigned to states by centroid with Natural Earth admin-1 boundaries). The text describes a correlation, not a cause.
+Context only, NOT tested: Census of India 2011 religion data by state (Office of the Registrar General and Census Commissioner, India) records Christian shares of 87.9% (Nagaland), 87.2% (Mizoram), 74.6% (Meghalaya), 41.3% (Manipur) and 3.7% (Assam). We have not tested any link between these figures and the weekly pattern, and the app and project page make no such claim. The per-state Sunday indices are in `reports/official/exploratory_ne_india/ne_india_states.csv` (cells assigned to states by centroid with Natural Earth admin-1 boundaries). Area-based checks (land share of each cell inside India and each state, from Natural Earth admin-1) are in `reports/review/northeast_india/`.
 
 ## Uncertainty shown in the evidence card (review A7)
 

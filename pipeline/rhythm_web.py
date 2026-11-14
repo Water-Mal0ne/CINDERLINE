@@ -175,7 +175,13 @@ def build(official_dir, robustness_dir, output_dir, comparison_dir=None) -> dict
             stale.unlink()
     summary = official_dir / "rhythm_summary.json"
     if summary.exists():
-        shutil.copyfile(summary, output_dir / "rhythm_cells_summary.json")
+        cells_summary = json.loads(summary.read_text(encoding="utf-8"))
+        area = Path(official_dir).parent / "review" / "northeast_india" / "c_summary.json"
+        if area.exists():
+            a = json.loads(area.read_text(encoding="utf-8"))
+            cells_summary["northeast_india_area"] = {k: a[k] for k in ("northeast_mostly_india", "northeast_cross_border",
+                                                                     "rest_of_india_mostly_india")}
+        (output_dir / "rhythm_cells_summary.json").write_text(json.dumps(cells_summary, indent=1), encoding="utf-8")
     return payload
 
 

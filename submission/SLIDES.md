@@ -50,8 +50,8 @@ Rest days fixed in advance: Sunday (US, Australia, Brazil, India), Saturday (Nep
 
 - All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.
 - Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. Its support is weaker than the US and Australia, whose static controls are clean.
-- Exploratory map: in India the Sunday dip sits almost entirely in the northeast (19 of 26 cells significant after false-discovery correction, Aqua agrees); the rest of India shows none.
-- Within India, the Sunday dip is concentrated in the northeast. It is deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day, and it is just as deep in the Indian cells along the border with Myanmar. Nagaland and Mizoram are mostly Christian and Manipur is about 41% Christian, and in many of these communities Sunday is widely kept as a church day. The link is not clean: Meghalaya, also mostly Christian, shows a weaker dip, and Assam, mostly not Christian, still shows one. This is an exploratory correlation, not evidence of what causes the pattern. (Religion shares: Census of India 2011.)
+- Exploratory map: in India the Sunday dip sits almost entirely in the northeast (19 of 26 cells significant after false-discovery correction, 14 of 21 cells mostly inside India; Aqua agrees); the rest of India shows none.
+- Within India, the Sunday dip is concentrated in the northeastern hill states, deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day; the rest of India, including the Punjab crop-burning belt, shows no weekly dip. The cause is unresolved; local scheduling of burning is one possible explanation we have not tested.
 
 **Speaker line:** "A dip is consistent with people scheduling their burning. It is not proof of who lit the fires."
 
