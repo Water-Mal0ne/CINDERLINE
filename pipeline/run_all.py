@@ -97,7 +97,7 @@ def main():
         for region, rows in daily.groupby("region"):
             rows.to_parquet(processed / f"harmonized_{region}.parquet", index=False)
         print("Computing weekday estimates and release gate...", flush=True)
-        # Official decision = pre-registered kill_test.py outputs; rhythm.py adds robustness checks only.
+        # Official decision = pre-specified kill_test.py outputs; rhythm.py adds robustness checks only.
         official = None if args.synthetic else root / "reports/official"
         rhythm_result = rhythm.run(detections, reports, label=label, manifest=manifest, official=official)
     from pipeline.synthetic import save_switch_check

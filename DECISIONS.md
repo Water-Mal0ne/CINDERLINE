@@ -26,7 +26,7 @@
 - Every measurement is identified as satellite detections or an Aqua-equivalent estimate, not independent fires. Complete input archives do not prove cloud-free satellite observing exposure. Zero archived detections, unknown observation coverage and unprocessed geography remain distinct.
 - Whole-training-year bootstrap bounds describe calibration uncertainty only. Equal conversion bounds on observed Aqua mean identity/no conversion, not perfect measurement certainty.
 - The weekly research algorithm keeps per-stream analysis, IANA civil dates, weekday exposure adjustment, seeded year resampling, corrected tests and matched controls. The streaming route additionally enforces first complete instrument-year guards before archive/local-period qualification.
-- The official rhythm decision is the gate pre-registered in `reference/kill_test.py` (pass: US 3/3 streams, Australia 3/3, Brazil 2/3). The stricter gate in `pipeline/rhythm.py` / `pipeline/streaming/weighted_rhythm.py` changed the pre-registered rule after the fact, so it is reported only as robustness checks next to the official decision. In the 2002–2024 release analysis, Brazil's matched static control is flagged; this is stated plainly in the app and LIMITATIONS.md. No threshold or control rule is relaxed or tightened to change the story.
+- The official rhythm decision is the gate pre-specified in `reference/kill_test.py` (pass: US 3/3 streams, Australia 3/3, Brazil 2/3). The stricter gate in `pipeline/rhythm.py` / `pipeline/streaming/weighted_rhythm.py` changed the pre-specified rule after the fact, so it is reported only as robustness checks next to the official decision. In the 2002–2024 release analysis, Brazil's matched static control is flagged; this is stated plainly in the app and LIMITATIONS.md. No threshold or control rule is relaxed or tightened to change the story.
 - Agreement among instruments observing overlapping events is corroboration, not independent replication. Weekly associations do not establish ignition cause. Static controls can themselves follow human schedules; a nonsignificant control is not proof of no bias.
 - Synthetic fixtures and figures are visibly labeled and kept separate. They cannot enable a real-data rhythm claim.
 - Calendar weeks begin January 1. Seasonal/anomaly statistics require seven distinct observed dates in bins 1–52 and exclude the target year from its anomaly history. The final one- or two-day bin remains inspectable but is not compared with complete weeks. ICS windows describe historical seasonality, not forecasts.
@@ -48,8 +48,26 @@
 - Raw archives, caches, credentials, dependencies and the Python environment are excluded from Git. The repository contains reproducible analysis code, source manifests, processed static data and reviewable reports.
 
 ## Human rhythm integration (14 November 2026)
-- Official decision = pre-registered `reference/kill_test.py`, seven countries, 2013–2024, outputs in `reports/official/`. Per-day 95% intervals were added to its CSV as an output-only change; all other numbers are byte-identical.
+- Official decision = pre-specified `reference/kill_test.py`, seven countries, 2013–2024, outputs in `reports/official/`. Per-day 95% intervals were added to its CSV as an output-only change; all other numbers are byte-identical.
 - Robustness checks are derived from the stricter seven-country release analysis (`reports/rhythm_results.json`, 2002–2024) with `python -m pipeline.rhythm --from-saved`, without re-estimating anything. The US and Australia meet all checks. Brazil fails the matched static-control check (Terra static-source index 0.913, adjusted p = 0.021); on 2014–2023 alone the same control was clean (`reports/rhythm_robustness_2014_2023/`). The official result is unchanged.
 - The human rhythm view is a standalone tab for all seven countries. The earlier locked per-region rhythm panel now links to it.
 - The per-cell map is exploratory. A regional finding is featured only if it survives Benjamini-Hochberg correction and Aqua agrees; the northeast India boundary was drawn after viewing the map and is stated as such. No cultural or religious explanation is given in the app or docs.
 - No Terra-to-Aqua bridge is used in the product; the supported calendar record starts in 2003.
+
+## Gate timeline (review B6, 14 November 2026, Nepal time)
+
+Why the word is "pre-specified", not "pre-registered": no committed record shows the gate rule before any real data were analysed.
+
+- 15:27 - synthetic test of the kill test (`test/make_fake_data.py`, `kill_test_FAKE_DATA_example.png`; local file times).
+- 15:30 - United States and Nepal FIRMS archives downloaded (local file times).
+- 15:45 - the gate rule is written in the team's build brief (`FIRETRACE_codex_prompt.md`, section 7: rest days, two-stream rule, US plus two other countries). Local file time; the brief is not in this repository.
+- 15:51 - first real-data result files of the kill test (US and Nepal, version 1 script) created in the analysis folder (local file times). The team brief to Claude Code lists these version-1 results.
+- about 15:56 - version 2 of `kill_test.py` (writes `kill_test_gate.json`) last saved before the 7-country analysis; this modification time was observed at the start of the Claude Code session.
+- 15:58 onward - Australia, Bangladesh, Brazil, Egypt and India archives downloaded (local file times), after the rule was written.
+- 16:12 - first repository commit `94ba102` (EileyDeezNuts, Codex build): adds `reference/kill_test.py` (v2) together with US and Nepal real-data results, and `pipeline/rhythm.py` with the stricter gate (verified adjacent-year archives, upper bound below 1, matched per-country controls).
+- about 17:10 - official 7-country run of `kill_test.py` (Rohit Poudel with Claude Code): decision pass.
+- 17:56 - commit `e71f214` (EileyDeezNuts): stricter gate run on seven countries; Brazil's matched control flagged.
+- 18:12-18:19 - commits `a062a19`, `a0be600` (Rohit Poudel with Claude Code): official outputs committed; stricter checks reported as robustness checks.
+
+So the rule and rest days were fixed before the data for five of the seven countries were downloaded, but after the US and Nepal data were in hand and around the time the first US and Nepal results were produced. Local file times are not a committed record.
+

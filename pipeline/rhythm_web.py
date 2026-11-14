@@ -25,6 +25,7 @@ STREAMS = ["Terra", "Aqua", "VIIRS"]
 DAY_NAMES = {"Mon": "Monday", "Tue": "Tuesday", "Wed": "Wednesday", "Thu": "Thursday", "Fri": "Friday",
              "Sat": "Saturday", "Sun": "Sunday"}
 SHORT = {"United_States": "the US"}
+HEADLINE = ('Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.')  # team-agreed headline after expert review; numbers behind it are in reports/
 SUNDAY_CAVEAT = ("All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show "
                  "a dip, so this does not show the dip following each country's own rest day.")
 
@@ -78,7 +79,7 @@ def control_notes(robustness: dict | None, comparison: dict | None, decision: st
         if earlier.get("passed") and years:
             text += f" The control was clean on {years}."
         others = [SHORT.get(c, NAMES.get(c, c)) for c in clean]
-        text += f" The official pre-registered result is unchanged ({decision.upper()})"
+        text += f" The official pre-specified result is unchanged ({decision.upper()})"
         text += f", but {name}'s support is weaker than {_join(others)}." if others else "."
         notes[country] = text
     return notes
@@ -144,10 +145,11 @@ def build(official_dir, robustness_dir, output_dir, comparison_dir=None) -> dict
     payload = {
         "label": gate.get("label", "UNVERIFIED INPUT"),
         "official": {"decision": gate.get("decision"), "rule": gate.get("rule"),
-                     "source": "kill_test.py (pre-registered gate; reference/kill_test.py)",
+                     "source": "kill_test.py (pre-specified gate; reference/kill_test.py)",
                      "replication_check": gate.get("replication_check"),
                      "countries_passing": gate.get("countries_passing", []),
                      "per_country": per_country},
+        "headline": HEADLINE if gate.get("decision") == "pass" else None,
         "sunday_caveat": SUNDAY_CAVEAT if sunday_only else None,
         "robustness": robustness and {"role": robustness.get("role"), "descriptions": robustness.get("descriptions"),
                                       "per_country": robustness.get("per_country"), "flagged": flagged,
@@ -175,7 +177,13 @@ def build(official_dir, robustness_dir, output_dir, comparison_dir=None) -> dict
             stale.unlink()
     summary = official_dir / "rhythm_summary.json"
     if summary.exists():
-        shutil.copyfile(summary, output_dir / "rhythm_cells_summary.json")
+        cells_summary = json.loads(summary.read_text(encoding="utf-8"))
+        area = Path(official_dir).parent / "review" / "northeast_india" / "c_summary.json"
+        if area.exists():
+            a = json.loads(area.read_text(encoding="utf-8"))
+            cells_summary["northeast_india_area"] = {k: a[k] for k in ("northeast_mostly_india", "northeast_cross_border",
+                                                                     "rest_of_india_mostly_india")}
+        (output_dir / "rhythm_cells_summary.json").write_text(json.dumps(cells_summary, indent=1), encoding="utf-8")
     return payload
 
 

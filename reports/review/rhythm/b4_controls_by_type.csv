@@ -1,0 +1,43 @@
+label,country,control,stream,detections,status,years,rest_day,rest_index,ci95,p_null,lowest_day,rest_is_lowest,significant_bonferroni21
+REAL FIRMS DATA,United_States,type 1 (volcano),Terra,5342,ok,5.0,Sun,0.817,0.630-0.943,0.026194761047790442,Sun,True,False
+REAL FIRMS DATA,United_States,type 1 (volcano),Aqua,4940,ok,5.0,Sun,1.016,0.817-1.205,0.6084783043391322,Sat,False,False
+REAL FIRMS DATA,United_States,type 1 (volcano),VIIRS,42920,ok,11.0,Sun,0.861,0.755-0.958,0.0011997600479904018,Sun,True,True
+REAL FIRMS DATA,United_States,type 2 (other static land source),Terra,36697,ok,12.0,Sun,1.007,0.968-1.045,0.6206758648270346,Wed,False,False
+REAL FIRMS DATA,United_States,type 2 (other static land source),Aqua,29075,ok,12.0,Sun,0.998,0.953-1.042,0.4683063387322535,Sat,False,False
+REAL FIRMS DATA,United_States,type 2 (other static land source),VIIRS,887094,ok,12.0,Sun,1.01,1.000-1.019,0.8590281943611278,Thu,False,False
+REAL FIRMS DATA,Australia,type 1 (volcano),Terra,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Australia,type 1 (volcano),Aqua,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Australia,type 1 (volcano),VIIRS,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Australia,type 2 (other static land source),Terra,8840,ok,12.0,Sun,1.062,0.988-1.140,0.9438112377524495,Wed,False,False
+REAL FIRMS DATA,Australia,type 2 (other static land source),Aqua,5894,ok,12.0,Sun,1.006,0.933-1.091,0.5498900219956009,Wed,False,False
+REAL FIRMS DATA,Australia,type 2 (other static land source),VIIRS,157483,ok,12.0,Sun,1.02,0.994-1.044,0.9574085182963408,Thu,False,False
+REAL FIRMS DATA,Brazil,type 1 (volcano),Terra,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Brazil,type 1 (volcano),Aqua,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Brazil,type 1 (volcano),VIIRS,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Brazil,type 2 (other static land source),Terra,21690,ok,12.0,Sun,0.966,0.889-1.051,0.15496900619876025,Sun,True,False
+REAL FIRMS DATA,Brazil,type 2 (other static land source),Aqua,21758,ok,12.0,Sun,1.0,0.943-1.054,0.5060987802439512,Tue,False,False
+REAL FIRMS DATA,Brazil,type 2 (other static land source),VIIRS,175341,ok,12.0,Sun,1.024,0.992-1.054,0.9458108378324335,Wed,False,False
+REAL FIRMS DATA,India,type 1 (volcano),Terra,4,insufficient_data,,,,,,,,
+REAL FIRMS DATA,India,type 1 (volcano),Aqua,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,India,type 1 (volcano),VIIRS,73,insufficient_data,,,,,,,,
+REAL FIRMS DATA,India,type 2 (other static land source),Terra,24387,ok,12.0,Sun,1.014,0.961-1.061,0.7430513897220556,Thu,False,False
+REAL FIRMS DATA,India,type 2 (other static land source),Aqua,19437,ok,12.0,Sun,1.056,0.997-1.110,0.9756048790241951,Thu,False,False
+REAL FIRMS DATA,India,type 2 (other static land source),VIIRS,721128,ok,12.0,Sun,0.998,0.972-1.022,0.4261147770445911,Fri,False,False
+REAL FIRMS DATA,Nepal,type 1 (volcano),Terra,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Nepal,type 1 (volcano),Aqua,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Nepal,type 1 (volcano),VIIRS,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Nepal,type 2 (other static land source),Terra,6,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Nepal,type 2 (other static land source),Aqua,12,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Nepal,type 2 (other static land source),VIIRS,29,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Bangladesh,type 1 (volcano),Terra,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Bangladesh,type 1 (volcano),Aqua,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Bangladesh,type 1 (volcano),VIIRS,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Bangladesh,type 2 (other static land source),Terra,30,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Bangladesh,type 2 (other static land source),Aqua,30,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Bangladesh,type 2 (other static land source),VIIRS,2964,ok,9.0,Fri,0.966,0.841-1.088,0.26974605078984204,Fri,True,False
+REAL FIRMS DATA,Egypt,type 1 (volcano),Terra,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Egypt,type 1 (volcano),Aqua,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Egypt,type 1 (volcano),VIIRS,0,insufficient_data,,,,,,,,
+REAL FIRMS DATA,Egypt,type 2 (other static land source),Terra,3466,ok,8.0,Fri,0.958,0.897-1.023,0.14177164567086584,Sat,False,False
+REAL FIRMS DATA,Egypt,type 2 (other static land source),Aqua,2544,ok,8.0,Fri,1.044,0.974-1.106,0.7684463107378524,Tue,False,False
+REAL FIRMS DATA,Egypt,type 2 (other static land source),VIIRS,264437,ok,12.0,Fri,0.998,0.980-1.018,0.3815236952609478,Thu,False,False

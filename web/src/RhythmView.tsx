@@ -17,6 +17,7 @@ export interface RhythmPayload {
   official: {decision: string; rule: string; source: string; countries_passing: string[];
     per_country: Record<string, {status: string; streams_significant: number; streams_with_data: number; predicted_rest_day: string}>};
   sunday_caveat: string | null;
+  headline?: string | null;
   robustness: null | {role: string; descriptions: Record<string, string>; per_country: Record<string, RobustnessCountry>; flagged: Record<string, string[]>; notes?: Record<string, string>; control_nuance?: string | null; source?: string};
   countries: CountryRow[];
   negative_control: {stream: string; status: string; detections: number; max_abs_deviation?: number}[];
@@ -97,14 +98,15 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
   const testCount = data.countries.flatMap(c => c.streams).find(r => typeof r.bonferroni_m === 'number')?.bonferroni_m ?? '—';
 
   return <div className="rhythm-page">
-    <div className="section-intro"><span className="eyebrow">HUMAN RHYTHM · PRE-REGISTERED TEST · 7 COUNTRIES</span>
+    <div className="section-intro"><span className="eyebrow">HUMAN RHYTHM · PRE-SPECIFIED TEST · 7 COUNTRIES</span>
       <h2>Do detections dip on each country's <em>rest day?</em></h2>
       <p>Natural fire has no seven-day cycle. Each country's rest day was fixed before looking at the data. A dip on that day is consistent with people scheduling their burning; it is not proof of who lit the fires or why.</p></div>
 
     <section className="panel rh-verdict" aria-labelledby="rh-verdict-title">
       <div className="panel-heading"><div><span className="eyebrow">OFFICIAL DECISION</span>
-        <h2 id="rh-verdict-title">{passed ? 'The pre-registered test passes' : `Decision: ${official.decision.replaceAll('_', ' ')}`}</h2></div>
+        <h2 id="rh-verdict-title">{passed ? 'The pre-specified rule passes, narrowly' : `Decision: ${official.decision.replaceAll('_', ' ')}`}</h2></div>
         <span className={`gate-badge ${passed ? 'pass' : ''}`}><ShieldCheck size={13}/>{official.decision.replaceAll('_', ' ')}</span></div>
+      {data.headline && <p className="rh-headline">{data.headline}</p>}
       <p className="panel-description">{passing.map(nameOf).join(', ') || 'No country'} passed: the predicted rest day is the lowest weekday and significant after correction in at least two satellite streams. The United States is the replication check. Source: {official.source}.</p>
       {data.sunday_caveat && <div className="rh-caveat" role="note"><AlertTriangle size={18}/><p><strong>Read this first.</strong> {data.sunday_caveat}</p></div>}
       <div className="table-scroll"><table className="rh-table"><thead><tr><th>Country</th><th>Rest day</th><th>Result</th><th>Streams significant</th><th>Terra</th><th>Aqua</th><th>VIIRS</th></tr></thead>

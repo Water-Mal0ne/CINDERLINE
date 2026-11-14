@@ -77,7 +77,7 @@ export default function AnomalyPanel({anomalies, cell, onSelect, label}: Anomaly
         const directionText = direction === 'high' ? 'Higher than historical range' : direction === 'low' ? 'Lower than historical range' : 'Flagged observation';
         const signedZ = numeric(anomaly.z_score) ? `${anomaly.z_score >= 0 ? '+' : ''}${fmt(anomaly.z_score, 2)}` : null;
         return <li key={`${anomaly.date}-${anomaly.week}-${anomaly.status}`}>
-          <button type="button" className={`ft-anomaly-result ${direction}`} onClick={() => onSelect(anomaly)} aria-label={`${directionText}, week ${anomaly.week}, starting ${prettyDate(anomaly.date)}. ${fmt(anomaly.value, 1)} Aqua-equivalent detections. Open weekly evidence.`}>
+          <button type="button" className={`ft-anomaly-result ${direction}`} onClick={() => onSelect(anomaly)} aria-label={`${directionText}, week ${anomaly.week}, starting ${prettyDate(anomaly.date)}. ${fmt(anomaly.value, 1)} Aqua-reference-equivalent detections. Open weekly evidence.`}>
             <span className="ft-anomaly-direction" aria-hidden="true">{direction === 'low' ? <ArrowDown size={19}/> : <ArrowUp size={19}/>}</span>
             <span className="ft-anomaly-date"><strong>{prettyDate(anomaly.date)}</strong><small>Week {String(anomaly.week).padStart(2, '0')} · {directionText}</small></span>
             <span className="ft-anomaly-value"><strong>{fmt(anomaly.value, 1)}</strong><small>{signedZ !== null ? `z ${signedZ}` : 'z unavailable'}</small></span>
@@ -86,7 +86,7 @@ export default function AnomalyPanel({anomalies, cell, onSelect, label}: Anomaly
         </li>;
       })}</ul> : <div className="ft-anomaly-empty"><CircleHelp size={25} aria-hidden="true"/><div><h3>{anomalies.length ? 'No weeks match this filter.' : 'No flagged weeks in the selected dates.'}</h3><p>Missing or incomplete records cannot establish normal conditions. The one- or two-day year-end bin is excluded from weekly anomaly comparisons.</p></div></div>}
       {selected.length > limit && <button type="button" className="button subtle ft-anomaly-more" onClick={() => setLimit(current => current + 8)}><ChevronDown size={15} aria-hidden="true"/> Show {Math.min(8, selected.length - limit)} more weeks</button>}
-      <div className="ft-anomaly-explainer"><CircleHelp size={14} aria-hidden="true"/><p>Values are weekly Aqua-equivalent detections, not distinct fires. {sort === 'strongest' ? 'Largest |z-score| ranks standardized deviations, not hazard severity. ' : ''}{hasUnknownZ ? 'Unavailable z-scores stay last in that sort and are never treated as zero; a reference with no variation can still produce a percentile flag. ' : ''}Cloud and overpass coverage remain unknown.</p></div>
+      <div className="ft-anomaly-explainer"><CircleHelp size={14} aria-hidden="true"/><p>Values are weekly Aqua-reference-equivalent detections, not distinct fires. {sort === 'strongest' ? 'Largest |z-score| ranks standardized deviations, not hazard severity. ' : ''}{hasUnknownZ ? 'Unavailable z-scores stay last in that sort and are never treated as zero; a reference with no variation can still produce a percentile flag. ' : ''}Cloud and overpass coverage remain unknown.</p></div>
     </>}
     <span className="chart-label">{label}</span>
   </section>;

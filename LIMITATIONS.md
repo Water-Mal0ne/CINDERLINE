@@ -30,22 +30,34 @@ Observed Aqua is used directly for 2003–2012; converted VIIRS is used for 2013
 
 The test set must not be reused for tuning. A negative or inconclusive evaluation is a valid result and must not be hidden by selecting only favorable countries. No forced trend correction is justified. No 2000-present coverage claim is supported without actual early data and a validated instrument bridge.
 
+### Conversion stability and anomaly flags (review A2-A5)
+
+- The VIIRS-to-Aqua detection ratio shows no trend distinguishable from zero in any country over 2013-2024 (year bootstrap; `reports/review/ratio_trend.csv`). But in the 2020-2024 test years the ratio is higher than in training for Egypt (+39%) and the United States (+10%). Aqua's orbit drifted to a later crossing in the early 2020s; these data cannot separate that drift from real changes in fire timing or size. The US weekly test correlation falls from 0.97 (2020) to 0.74 (2024).
+- Bangladesh 2022 is a failed test year for the selected model (weekly bias +114%, correlation 0.18). Egypt is biased high in every test year (+36% to +66%).
+- Converted VIIRS produces far fewer zero weeks than observed Aqua in Egypt (0.6% vs 9.4%). Low-activity anomaly flags before 2013 are therefore unreliable for Egypt (100 low flags in 2003-2012 vs 38 in 2013-2024). In all countries, anomaly flags near the 2013 switch partly reflect the conversion, and flags compare each week with all other years, so long-term trends also shift flags between the two periods.
+
+- The MODIS `version` field in the FIRMS country files changes from `6.2` (2013-2017) to `6.03` (2018-2022) and `61.03` (2023-2024), crossing the training, validation and test windows. NASA describes Collection 6.1 as a calibration-only change, but we have not tested whether the version change shifts detection counts; it is a possible contributor to the test-year ratio differences above.
+- The evidence-card interval is a bootstrap interval of the conversion ratio over training years, not a confidence interval for true detections.
+
 ## Rhythm statistics and controls
 
 Year resampling preserves each year's aggregate weekday pattern but does not solve confounding, nonstationarity or observation bias. The random-weekday null assumes exchangeable weekday labels within each year. Short records and weak signals can be underpowered. Equal weighting across years describes the average year's normalized pattern, rather than the distribution of all detections pooled together.
 
 Calendar exposure adjusts 52/53 weekday counts but does not measure clear-sky exposure. Inference remains conditional on that unmeasured factor. The displayed 95% intervals are pointwise, while the p-values use a fixed Bonferroni family. Daytime and control analyses are separate diagnostic families; they must not be searched for whichever result happens to look strongest.
 
-Static industrial sources can follow human schedules, and volcanic detections may be scarce. These are imperfect controls. A nonsignificant control does not demonstrate absence of bias. In the official pre-registered test the control is pooled across countries; per-country matched controls are a robustness check, not part of the gate.
+Static industrial sources can follow human schedules, and volcanic detections may be scarce. These are imperfect controls. A nonsignificant control does not demonstrate absence of bias. In the official pre-specified test the control is pooled across countries; per-country matched controls are a robustness check, not part of the gate.
 
 ### What the rhythm result does and does not show
 
-- The official decision (pass) comes from the pre-registered `kill_test.py` gate. All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.
-- Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-registered result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.
+- The official decision (pass) comes from the pre-specified `kill_test.py` gate. All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.
+- Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-specified result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.
 - A Sunday dip in static sources does not by itself mean a satellite artifact: some type-2 static sources are industrial sites that may also follow the work week. The clean static controls in the US and Australia are what argue against a satellite or processing artifact.
+- Split by type (review B4), the US type-1 (volcano) VIIRS control shows a significant Sunday dip (index 0.861, p = 0.0012). Volcanic heat should not follow a work week; this may be vegetation fires near volcanoes typed as volcanic, but it weakens the US control as evidence against an observational artifact. The much larger type-2 control is flat everywhere.
+- Nepal cannot confirm or rule out a modest Saturday dip (review B5): with Nepal's real volume, a planted 20% dip passes the country rule only 12% of the time (VIIRS alone detects it 85% of the time); a 10% dip is almost never detected. "No dip in Nepal" means "no dip of 20% or more in VIIRS detections", not "no weekly pattern".
+- Brazil's VIIRS stream does not have Sunday as its lowest day in 11 of 12 leave-one-year-out runs (review B2); Brazil passes on Terra and Aqua only.
 - The official analysis uses 2013–2024 for all streams; the stricter release analysis uses 2002–2024 MODIS. The two can disagree, as Brazil's control shows.
 - Countries are treated as single units with one rest day; large countries mix regions with very different burning practices.
-- The northeast India interpretation is an exploratory correlation between a detection pattern and census religion shares (Census of India 2011), not evidence of cause. The link is not clean (Meghalaya, mostly Christian, has a weaker dip; Assam, mostly not Christian, still has one). Cells are assigned to states by centroid, two states rest on a single cell, and per-state p-values are not corrected for multiple comparisons.
+- The northeast India pattern is exploratory and its cause is unresolved. Five of the 26 northeast cells lie mostly outside India (their detections come from the Indian side of the border) and they carry the deepest dips; using only the 21 cells mostly inside India, 14 are significant (median Sunday index 0.717). Cells that are almost entirely Assam plains show a weaker, mixed dip (2 of 4 significant). Per-state p-values are not corrected for multiple comparisons. See `reports/review/NORTHEAST_INDIA_REVIEW.md`.
 - The per-cell map is exploratory. Its thresholds (300 detections a year, 8 usable years) limit it to places with a lot of burning; grey areas mean too few detections, not "no dip". Neighbouring cells share weather and practice, so a cluster of significant cells is one regional pattern, not many independent findings. Area boundaries quoted for regional findings were drawn after viewing the maps.
 
 Synthetic data can validate software under declared assumptions but cannot validate real-world generalization. A synthetic example must be visibly labeled in every exported figure, report and app view.

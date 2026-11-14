@@ -3,7 +3,7 @@
 Input dates must already be local CIVIL dates. This module never interprets
 an empty detection day as a cloud-free satellite observation.
 
-OFFICIAL DECISION: the gate pre-registered in kill_test.py (team reference script,
+OFFICIAL DECISION: the gate pre-specified in kill_test.py (team reference script,
 reference/kill_test.py). Its outputs (kill_test_gate.json, kill_test_results.csv) are
 loaded with load_official() and are the only source of the published decision.
 
@@ -241,7 +241,7 @@ def make_gate(main: list[dict], controls: list[dict], label: str) -> dict:
             "rule": "US and >=2 other countries each require >=2 streams with verified input years, rest day lowest, 95% upper bound <1 and fixed-family adjusted p<0.05; matching controls must be available and unflagged. Synthetic data never enable production."}
 
 
-OFFICIAL_SOURCE = "kill_test.py (pre-registered gate; reference/kill_test.py)"
+OFFICIAL_SOURCE = "kill_test.py (pre-specified gate; reference/kill_test.py)"
 ROBUSTNESS_DESCRIPTIONS = {
     "ci_upper_below_one": "Rest-day 95% upper bound below 1.0 in at least two streams (official estimates).",
     "strict_reanalysis": "Re-analysis using only years with both neighbouring annual archives, rest day lowest, "
@@ -253,7 +253,7 @@ SYNTHETIC_WORDS = ("SYNTHETIC", "FAKE", "MOCK")
 
 
 def load_official(directory) -> dict | None:
-    """Read the official pre-registered gate and per-stream estimates written by kill_test.py."""
+    """Read the official pre-specified gate and per-stream estimates written by kill_test.py."""
     folder = Path(directory)
     gate_path, results_path = folder / "kill_test_gate.json", folder / "kill_test_results.csv"
     if not gate_path.exists() or not results_path.exists():
@@ -265,7 +265,7 @@ def official_gate(official: dict | None, label: str) -> dict:
     """The published decision. Comes only from kill_test.py; synthetic input never enables it."""
     if official is None:
         return {"decision": "insufficient_data", "source": OFFICIAL_SOURCE, "label": label,
-                "reasons": ["Official pre-registered gate (kill_test.py outputs) was not supplied."]}
+                "reasons": ["Official pre-specified gate (kill_test.py outputs) was not supplied."]}
     gate = dict(official["gate"])
     labels = (label + " " + str(gate.get("label", ""))).upper()
     if any(word in labels for word in SYNTHETIC_WORDS):

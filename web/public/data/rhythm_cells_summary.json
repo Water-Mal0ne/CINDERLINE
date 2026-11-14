@@ -1,138 +1,155 @@
 {
+ "label": "REAL FIRMS DATA, VIIRS S-NPP 2013-2024",
+ "thresholds": {
+  "min_mean_per_year": 300,
+  "min_detections_usable_year": 140,
+  "min_usable_years": 8
+ },
+ "diagnostics": {
   "label": "REAL FIRMS DATA, VIIRS S-NPP 2013-2024",
-  "thresholds": {
-    "min_mean_per_year": 300,
-    "min_detections_usable_year": 140,
-    "min_usable_years": 8
+  "files": 96,
+  "rows_loaded": 53168069,
+  "rows_usable_confidence": 48414708,
+  "rows_vegetation": 46122511,
+  "rows_static_control": 2162103,
+  "vegetation": {
+   "invalid_timestamps_dropped": 0,
+   "unresolved_timezone_dropped": 0,
+   "share_date_changed_by_utc_to_local": 0.1472
   },
-  "diagnostics": {
-    "label": "REAL FIRMS DATA, VIIRS S-NPP 2013-2024",
-    "files": 96,
-    "rows_loaded": 53168069,
-    "rows_usable_confidence": 48414708,
-    "rows_vegetation": 46122511,
-    "rows_static_control": 2162103,
-    "vegetation": {
-      "invalid_timestamps_dropped": 0,
-      "unresolved_timezone_dropped": 0,
-      "share_date_changed_by_utc_to_local": 0.1472
-    },
-    "study_years": "2013-2024 (12)"
+  "study_years": "2013-2024 (12)"
+ },
+ "per_country": {
+  "Australia": {
+   "Aqua": {
+    "cells": 117,
+    "significant": 13,
+    "significant_dip_and_lowest": 11,
+    "cells_below_1": 85,
+    "cells_ci_above_1": 4,
+    "median_rest_index": 0.916
+   },
+   "VIIRS": {
+    "cells": 383,
+    "significant": 85,
+    "significant_dip_and_lowest": 72,
+    "cells_below_1": 274,
+    "cells_ci_above_1": 7,
+    "median_rest_index": 0.905
+   }
   },
-  "per_country": {
-    "Australia": {
-      "Aqua": {
-        "cells": 117,
-        "significant": 13,
-        "significant_dip_and_lowest": 11,
-        "cells_below_1": 85,
-        "cells_ci_above_1": 4,
-        "median_rest_index": 0.916
-      },
-      "VIIRS": {
-        "cells": 383,
-        "significant": 85,
-        "significant_dip_and_lowest": 72,
-        "cells_below_1": 274,
-        "cells_ci_above_1": 7,
-        "median_rest_index": 0.905
-      }
-    },
-    "Brazil": {
-      "Aqua": {
-        "cells": 236,
-        "significant": 16,
-        "significant_dip_and_lowest": 13,
-        "cells_below_1": 155,
-        "cells_ci_above_1": 8,
-        "median_rest_index": 0.944
-      },
-      "VIIRS": {
-        "cells": 575,
-        "significant": 207,
-        "significant_dip_and_lowest": 188,
-        "cells_below_1": 429,
-        "cells_ci_above_1": 20,
-        "median_rest_index": 0.908
-      }
-    },
-    "India": {
-      "Aqua": {
-        "cells": 36,
-        "significant": 9,
-        "significant_dip_and_lowest": 9,
-        "cells_below_1": 22,
-        "cells_ci_above_1": 0,
-        "median_rest_index": 0.918
-      },
-      "VIIRS": {
-        "cells": 234,
-        "significant": 19,
-        "significant_dip_and_lowest": 19,
-        "cells_below_1": 78,
-        "cells_ci_above_1": 48,
-        "median_rest_index": 1.042
-      }
-    },
-    "United_States": {
-      "Aqua": {
-        "cells": 20,
-        "significant": 14,
-        "significant_dip_and_lowest": 14,
-        "cells_below_1": 20,
-        "cells_ci_above_1": 0,
-        "median_rest_index": 0.482
-      },
-      "VIIRS": {
-        "cells": 269,
-        "significant": 181,
-        "significant_dip_and_lowest": 174,
-        "cells_below_1": 255,
-        "cells_ci_above_1": 1,
-        "median_rest_index": 0.647
-      }
-    }
+  "Brazil": {
+   "Aqua": {
+    "cells": 236,
+    "significant": 16,
+    "significant_dip_and_lowest": 13,
+    "cells_below_1": 155,
+    "cells_ci_above_1": 8,
+    "median_rest_index": 0.944
+   },
+   "VIIRS": {
+    "cells": 575,
+    "significant": 207,
+    "significant_dip_and_lowest": 188,
+    "cells_below_1": 429,
+    "cells_ci_above_1": 20,
+    "median_rest_index": 0.908
+   }
   },
-  "aqua_check": {
-    "ALL": {
-      "cells_with_both": 409,
-      "corr_rest_index": 0.856,
-      "share_same_side_of_1": 0.77,
-      "viirs_sig_cells_with_aqua": 106,
-      "of_those_aqua_below_1": 103,
-      "of_those_aqua_significant": 49
-    },
-    "Australia": {
-      "cells_with_both": 117,
-      "corr_rest_index": 0.802,
-      "share_same_side_of_1": 0.769,
-      "viirs_sig_cells_with_aqua": 22,
-      "of_those_aqua_below_1": 21,
-      "of_those_aqua_significant": 11
-    },
-    "Brazil": {
-      "cells_with_both": 236,
-      "corr_rest_index": 0.718,
-      "share_same_side_of_1": 0.754,
-      "viirs_sig_cells_with_aqua": 55,
-      "of_those_aqua_below_1": 53,
-      "of_those_aqua_significant": 15
-    },
-    "India": {
-      "cells_with_both": 36,
-      "corr_rest_index": 0.945,
-      "share_same_side_of_1": 0.75,
-      "viirs_sig_cells_with_aqua": 12,
-      "of_those_aqua_below_1": 12,
-      "of_those_aqua_significant": 9
-    },
-    "United_States": {
-      "cells_with_both": 20,
-      "corr_rest_index": 0.947,
-      "share_same_side_of_1": 1.0,
-      "viirs_sig_cells_with_aqua": 17,
-      "of_those_aqua_below_1": 17,
-      "of_those_aqua_significant": 14
-    }
+  "India": {
+   "Aqua": {
+    "cells": 36,
+    "significant": 9,
+    "significant_dip_and_lowest": 9,
+    "cells_below_1": 22,
+    "cells_ci_above_1": 0,
+    "median_rest_index": 0.918
+   },
+   "VIIRS": {
+    "cells": 234,
+    "significant": 19,
+    "significant_dip_and_lowest": 19,
+    "cells_below_1": 78,
+    "cells_ci_above_1": 48,
+    "median_rest_index": 1.042
+   }
+  },
+  "United_States": {
+   "Aqua": {
+    "cells": 20,
+    "significant": 14,
+    "significant_dip_and_lowest": 14,
+    "cells_below_1": 20,
+    "cells_ci_above_1": 0,
+    "median_rest_index": 0.482
+   },
+   "VIIRS": {
+    "cells": 269,
+    "significant": 181,
+    "significant_dip_and_lowest": 174,
+    "cells_below_1": 255,
+    "cells_ci_above_1": 1,
+    "median_rest_index": 0.647
+   }
   }
+ },
+ "aqua_check": {
+  "ALL": {
+   "cells_with_both": 409,
+   "corr_rest_index": 0.856,
+   "share_same_side_of_1": 0.77,
+   "viirs_sig_cells_with_aqua": 106,
+   "of_those_aqua_below_1": 103,
+   "of_those_aqua_significant": 49
+  },
+  "Australia": {
+   "cells_with_both": 117,
+   "corr_rest_index": 0.802,
+   "share_same_side_of_1": 0.769,
+   "viirs_sig_cells_with_aqua": 22,
+   "of_those_aqua_below_1": 21,
+   "of_those_aqua_significant": 11
+  },
+  "Brazil": {
+   "cells_with_both": 236,
+   "corr_rest_index": 0.718,
+   "share_same_side_of_1": 0.754,
+   "viirs_sig_cells_with_aqua": 55,
+   "of_those_aqua_below_1": 53,
+   "of_those_aqua_significant": 15
+  },
+  "India": {
+   "cells_with_both": 36,
+   "corr_rest_index": 0.945,
+   "share_same_side_of_1": 0.75,
+   "viirs_sig_cells_with_aqua": 12,
+   "of_those_aqua_below_1": 12,
+   "of_those_aqua_significant": 9
+  },
+  "United_States": {
+   "cells_with_both": 20,
+   "corr_rest_index": 0.947,
+   "share_same_side_of_1": 1.0,
+   "viirs_sig_cells_with_aqua": 17,
+   "of_those_aqua_below_1": 17,
+   "of_those_aqua_significant": 14
+  }
+ },
+ "northeast_india_area": {
+  "northeast_mostly_india": {
+   "cells": 21,
+   "significant": 14,
+   "median_sunday_index": 0.717
+  },
+  "northeast_cross_border": {
+   "cells": 5,
+   "significant": 5,
+   "median_sunday_index": 0.383
+  },
+  "rest_of_india_mostly_india": {
+   "cells": 201,
+   "significant": 0,
+   "median_sunday_index": 1.055
+  }
+ }
 }

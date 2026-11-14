@@ -20,7 +20,7 @@ Select a country in the calendar (Australia, Bangladesh, Brazil, Egypt, India, N
 
 **Title:** Separate streams, one reference, a locked evaluation
 
-FIRMS archives, local civil dates, Terra/Aqua/VIIRS kept separate, MODIS-Aqua-equivalent scale. B0 is uncalibrated VIIRS, B1 one training ratio, M1 ratios by country, day/night and fire intensity. Train 2013-2017, select 2018-2019, test once 2020-2024.
+FIRMS archives, local civil dates, Terra/Aqua/VIIRS kept separate, Aqua-reference-equivalent scale. B0 is uncalibrated VIIRS, B1 one training ratio, M1 ratios by country, day/night and fire intensity. Train 2013-2017, select 2018-2019, test once 2020-2024.
 
 | Country | Selected | Selected monthly MAE | Comparator | Remaining limitation |
 |---|---|---:|---:|---|
@@ -28,7 +28,7 @@ FIRMS archives, local civil dates, Terra/Aqua/VIIRS kept separate, MODIS-Aqua-eq
 | United States | B1 | 1,537.79 | M1: 2,078.57 | simpler model wins |
 | Egypt | M1 | 15.04 | B1: 90.40 | +51.68% bias |
 
-Units are Aqua-equivalent detections, not fire counts.
+Units are Aqua-reference-equivalent detections, not fire counts.
 
 ## 4. Act 1: one week, back to its evidence
 
@@ -42,6 +42,8 @@ Open one week: separate sensor counts, the converted estimate and its bounds, th
 
 Rest days fixed in advance: Sunday (US, Australia, Brazil, India), Saturday (Nepal), Friday (Bangladesh, Egypt). Pass rule fixed in advance: the US replicates the known Sunday dip, and at least two other countries show their rest day as the lowest weekday, significant after correction, in at least two of three satellite streams.
 
+**Headline:** Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.
+
 **Result: pass.** US 3/3 streams (Sunday 22-33% below an average day), Australia 3/3, Brazil 2/3. India, Nepal, Bangladesh and Egypt fail. Show the Human rhythm tab: weekday bars with 95% intervals, rest day highlighted.
 
 ## 6. Act 2: what it does and does not show
@@ -50,8 +52,8 @@ Rest days fixed in advance: Sunday (US, Australia, Brazil, India), Saturday (Nep
 
 - All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.
 - Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. Its support is weaker than the US and Australia, whose static controls are clean.
-- Exploratory map: in India the Sunday dip sits almost entirely in the northeast (19 of 26 cells significant after false-discovery correction, Aqua agrees); the rest of India shows none.
-- Within India, the Sunday dip is concentrated in the northeast. It is deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day, and it is just as deep in the Indian cells along the border with Myanmar. Nagaland and Mizoram are mostly Christian and Manipur is about 41% Christian, and in many of these communities Sunday is widely kept as a church day. The link is not clean: Meghalaya, also mostly Christian, shows a weaker dip, and Assam, mostly not Christian, still shows one. This is an exploratory correlation, not evidence of what causes the pattern. (Religion shares: Census of India 2011.)
+- Exploratory map: in India the Sunday dip sits almost entirely in the northeast (19 of 26 cells significant after false-discovery correction, 14 of 21 cells mostly inside India; Aqua agrees); the rest of India shows none.
+- Within India, the Sunday dip is concentrated in the northeastern hill states, deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day; the rest of India, including the Punjab crop-burning belt, shows no weekly dip. The cause is unresolved; local scheduling of burning is one possible explanation we have not tested.
 
 **Speaker line:** "A dip is consistent with people scheduling their burning. It is not proof of who lit the fires."
 

@@ -12,15 +12,17 @@ interface Cells {metadata: {label: string; significant: string; cell: string}; f
 interface CellTable {metadata: Cells['metadata']; columns: string[]; rows: unknown[][]}
 const decodeCells = (t: CellTable): Cells => ({metadata: t.metadata, features: t.rows.map(r => ({properties: Object.fromEntries(t.columns.map((k, i) => [k, r[i]])) as unknown as CellProps}))});
 interface AquaCheck {cells_with_both: number; corr_rest_index: Num; share_same_side_of_1: Num; viirs_sig_cells_with_aqua: number; of_those_aqua_below_1: number; of_those_aqua_significant: number}
-interface Summary {aqua_check: Record<string, AquaCheck>; per_country: Record<string, Record<string, {cells: number; significant: number}>>}
+interface AreaGroup {cells: number; significant: number; median_sunday_index: Num}
+interface Summary {aqua_check: Record<string, AquaCheck>; per_country: Record<string, Record<string, {cells: number; significant: number}>>;
+  northeast_india_area?: {northeast_mostly_india: AreaGroup; northeast_cross_border: AreaGroup; rest_of_india_mostly_india: AreaGroup}}
 type Land = {features: {geometry: {type: string; coordinates: number[][][][] | number[][][]}}[]};
 
 const NAMES: Record<string, string> = {United_States: 'United States', Brazil: 'Brazil', Australia: 'Australia', India: 'India'};
 // A highlighted area is drawn by eye after viewing the maps; every number shown for it is computed from the cells.
-// context: team-written interpretation (religion shares: Census of India 2011; see METHODS.md and reports/official/exploratory_ne_india/).
+// context: team-written description (see METHODS.md and reports/review/northeast_india/).
 const HIGHLIGHTS: Record<string, {title: string; test: (p: CellProps) => boolean; rest: string; restTest: (p: CellProps) => boolean; context?: string}> = {
   India: {title: 'Northeast India (east of 89° E)', test: p => p.cell_lon >= 89, rest: 'rest of India', restTest: p => p.cell_lon < 89,
-    context: "Within India, the Sunday dip is concentrated in the northeast. It is deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day, and it is just as deep in the Indian cells along the border with Myanmar. Nagaland and Mizoram are mostly Christian and Manipur is about 41% Christian, and in many of these communities Sunday is widely kept as a church day. The link is not clean: Meghalaya, also mostly Christian, shows a weaker dip, and Assam, mostly not Christian, still shows one. This is an exploratory correlation, not evidence of what causes the pattern."},
+    context: "Within India, the Sunday dip is concentrated in the northeastern hill states, deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day; the rest of India, including the Punjab crop-burning belt, shows no weekly dip. The cause is unresolved; local scheduling of burning is one possible explanation we have not tested."},
 };
 
 function color(v: number) {
@@ -86,7 +88,7 @@ export default function RhythmCellMap() {
   return <section className="panel" aria-labelledby="rh-map-title">
     <div className="panel-heading"><div><span className="rh-exploratory"><FlaskConical size={11}/> EXPLORATORY</span>
       <h2 id="rh-map-title">Where is the dip? One-degree cells</h2></div></div>
-    <p className="panel-description">Not part of the pre-registered test. The same weekday method run for every 1° cell with enough VIIRS detections (at least 300 a year on average and 8 usable years), with a false-discovery correction (Benjamini-Hochberg, 5%) across all cells. Aqua is computed the same way as a check.</p>
+    <p className="panel-description">Not part of the pre-specified test. The same weekday method run for every 1° cell with enough VIIRS detections (at least 300 a year on average and 8 usable years), with a false-discovery correction (Benjamini-Hochberg, 5%) across all cells. Aqua is computed the same way as a check.</p>
     <div className="rh-country-picker" role="group" aria-label="Country map">{countries.map(c => <button key={c} className={c === country ? 'active' : ''} aria-pressed={c === country} onClick={() => { setCountry(c); setActive(null); }}>{NAMES[c] || c}<small>{cells.features.find(f => f.properties.country === c)?.properties.rest_day}</small></button>)}</div>
     <div className="rh-map-wrap">
       <svg className="rh-map" viewBox={`0 0 ${view.w.toFixed(0)} ${view.h.toFixed(0)}`} role="group" aria-label={`${NAMES[country]}: ${props.length} cells analysed, ${sig.length} with a significant Sunday dip. Select a cell for its values.`}>
@@ -109,7 +111,7 @@ export default function RhythmCellMap() {
         {check && <div>Aqua check: {check.cells_with_both} cells have both satellites; their Sunday indices correlate at r = {f3(check.corr_rest_index)}. Of {check.viirs_sig_cells_with_aqua} VIIRS-significant cells with Aqua data, {check.of_those_aqua_below_1} are also below 1 in Aqua and {check.of_those_aqua_significant} are significant in Aqua.</div>}
       </div>
     </div>
-    {hl && hlStats && <div className="rh-finding"><strong>{hl.title}.</strong> {hlStats.sig} of {hlStats.n} cells have a significant Sunday dip (median index {f3(hlStats.med)}). Of the {hlStats.aqua} significant cells that Aqua can also measure, {hlStats.aquaBelow} are below 1 in Aqua and {hlStats.aquaSig} are significant in Aqua. In the {hl.rest}, {hlStats.outSig} of {hlStats.outN} cells are significant (median {f3(hlStats.outMed)}). The area boundary was drawn after looking at the map; it is a description, not a test. The pattern is consistent with people scheduling their burning there; it does not show who lit the fires.{hl.context && <><br/><br/>{hl.context} <small>(Religion shares: Census of India 2011.)</small></>}</div>}
+    {hl && hlStats && <div className="rh-finding"><strong>{hl.title}.</strong> {hlStats.sig} of {hlStats.n} cells have a significant Sunday dip (median index {f3(hlStats.med)}). Of the {hlStats.aqua} significant cells that Aqua can also measure, {hlStats.aquaBelow} are below 1 in Aqua and {hlStats.aquaSig} are significant in Aqua. In the {hl.rest}, {hlStats.outSig} of {hlStats.outN} cells are significant (median {f3(hlStats.outMed)}). {country === 'India' && summary.northeast_india_area && <>Of the {hlStats.n} northeast cells, {summary.northeast_india_area.northeast_cross_border.cells} lie mostly outside India (their detections come from the Indian side of the border); using only the {summary.northeast_india_area.northeast_mostly_india.cells} cells mostly inside India, {summary.northeast_india_area.northeast_mostly_india.significant} are significant (median {f3(summary.northeast_india_area.northeast_mostly_india.median_sunday_index)}). </>}The area boundary was drawn after looking at the map; it is a description, not a test. The pattern is consistent with people scheduling their burning there; it does not show who lit the fires.{hl.context && <><br/><br/>{hl.context}</>}</div>}
     {all && <p className="chart-note">All four countries: Aqua and VIIRS Sunday indices correlate at r = {f3(all.corr_rest_index)} across {all.cells_with_both} shared cells. Neighbouring cells share weather and farming practice, so a cluster of significant cells is one regional pattern, not many independent findings. Grey land means too few detections to analyse, not "no dip".</p>}
     <span className="chart-label">{cells.metadata.label} · EXPLORATORY</span>
   </section>;
