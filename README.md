@@ -1,6 +1,6 @@
 # FIRETRACE
 
-**Deployment status:** this repository contains the seven-country update. Cloudflare still serves the verified two-country release; this cycle stops after commit and push, before another deployment. See `DEPLOYMENT.md`.
+**Deployment status:** the seven-country update is live at [FIRETRACE](https://firetrace-bhaktapur-2026.pages.dev/). All 115 public assets and the seven-country browser workflows were verified on November 14, 2026. See `DEPLOYMENT.md`.
 
 Compare satellite fire observations on a named reference scale, inspect historical seasons, and follow each displayed week back to its evidence.
 

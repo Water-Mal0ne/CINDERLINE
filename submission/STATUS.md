@@ -2,6 +2,8 @@
 
 ## Prepared
 
+- The seven-country app is deployed from commit `e71f214` and verified at the public Cloudflare URL: all 115 files match the build, all seven country workflows pass, and shared evidence reopens correctly. Details are in `DEPLOYMENT.md`.
+
 - A project page under 500 words, seven-slide outline and 30-second demo script describe the seven-country candidate.
 - Metrics come from the locked seven-country evaluation: B1 for Australia/Brazil/US; M1 for Bangladesh/Egypt/India/Nepal. The draft retains Egypt's large bias and regional peak-timing errors.
 - Scope is explicit: seven countries, 2003–2024, 41,986 annual cells and 12 detailed daily cells per country. No worldwide or 2000-present claim is made.
@@ -13,7 +15,7 @@
 
 ## Before submission
 
-- Confirm the final deployed revision matches these seven-country drafts; the public URL alone does not prove the newest local candidate is live.
+- Keep the submission's deployment reference aligned with the verified seven-country release if any later changes are published.
 - Arrange judge access to the private GitHub repository without silently changing the team's visibility choice.
 - Verify the live event's submission fields, deadline and media limits. The seven slides and 30-second duration are team draft formats, not a claim about the official limit.
 - Record and review the actual working demo, including mobile/keyboard behavior where relevant. A video script and slide outline are not completed media files.
