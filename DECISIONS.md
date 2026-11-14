@@ -16,6 +16,8 @@
 - 2026-11-14 19:47 UTC: Keep the existing independent rhythm-country picker and shared-URL schema; the requested deep link restores the tab, and broader state redesign exceeds this task.
 - 2026-11-14 19:47 UTC: Reuse the FRP branch's identical web test discovery runner so merging the features cannot omit either suite. All real country/grid assets passed; no speculative data-path rewrite or new dataset is needed.
 
+- 2026-11-14 20:20 UTC: During cross-PR review, relocate the unchanged UI decision section away from the shared end-of-file insertion point. Preserve every decision and all application code.
+
 ## Exact-count processing and payloads
 
 - The additive `pipeline.streaming` route cleans annual archives in bounded chunks, preserves exact count multiplicities and reduces repeated keys on disk. It never expands count rows back into individual detections. The original smaller raw-record `pipeline.run_all` route remains available; it is not the seven-country release command.
@@ -85,5 +87,3 @@ Prediction: the Chittagong Hill Tracts (hill shifting cultivation, communities m
 Test, fixed before running: the per-cell method of `reference/rhythm_map.py` (VIIRS for the map, Aqua as a check; 1-degree cells with at least 300 detections a year on average and 8 usable years; Benjamini-Hochberg at 5%) applied to Bangladesh with Sunday as the tested day. Cells are counted as Chittagong Hill Tracts if their centroid falls in Rangamati, Khagrachari or Bandarban districts, or otherwise if their centroid lies east of 91.5 E and south of 23.5 N. The prediction holds if no such cell has a significant Sunday dip. No Bangladesh per-cell result had been computed when this was committed.
 
 Result (added after the analysis): the prediction did NOT hold. Of the two hill-tract cells, 21N 92E has a significant Sunday dip in VIIRS (0.490, q 0.0004) and Aqua (0.564, q 0.020); 22N 92E does not (0.745, q 0.089). The prediction was committed in `5adb21a90e781ce642b17c9aee9915a600c84dda`. See `reports/review/bangladesh_hills/RESULT.md`.
-
-- 2026-11-14 20:20 UTC: During cross-PR review, relocate the unchanged UI decision section away from the shared end-of-file insertion point. Preserve every decision and all application code.
