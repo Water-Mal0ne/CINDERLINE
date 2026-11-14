@@ -125,3 +125,11 @@ The interval next to each converted-VIIRS daily estimate is the 2.5th-97.5th per
 - MODIS: the FIRMS archive MODIS active fire/hotspot product (MCD14ML, 1 km), Terra and Aqua. The `version` field in the country files changes over the record: `6.2` in 2013-2017, `6.03` in 2018-2022 and `61.03` in 2023-2024 (values as recorded; FIRMS describes the field as collection plus processing source). NASA states that Collection 6.1 changed Level-1B calibration, not the fire algorithm. The change crosses the training (2013-2017), validation (2018-2019) and test (2020-2024) windows; see LIMITATIONS.md.
 - VIIRS: the Suomi-NPP VIIRS 375 m active fire product (`version` 2 throughout 2013-2024). The 375 m I-band product is the standard VIIRS active-fire product in the FIRMS country archive and is more sensitive to small fires than the 1 km MODIS product. We did not compare it with the 750 m VIIRS M-band product.
 
+## Anomaly baseline (review E6)
+
+Anomaly flags already use a leave-one-year-out baseline: for each Jan-1-anchored seven-day bin, the 10th and 90th percentile thresholds are computed from the same bin in all other years, never including the year being flagged (`pipeline/calendar.py`, `seasonal_tables`, `weekly.year != row.year`; at least three other years required). The typical-season band shown in the calendar (median and 10th-90th percentile across all years) is descriptive and is not used to flag anomalies.
+
+## Grid sensitivity (review E8)
+
+The conversion weights depend on country and sensor strata, not on cell identity, so national harmonized totals are identical at 0.25 and 0.5 degrees; the pre-specified check in `reports/scientific_validation/` confirms this for every country and year 2013-2019. Model selection (on national 2018-2019 validation MAE) and the national 2020-2024 test metrics therefore cannot change with grid size. Cell-level agreement does change (selected-cell normalized monthly error falls at 0.5 degrees, partly through aggregation; see `SCIENTIFIC_SENSITIVITY.md`). We did not run a 0.5-degree cell-level evaluation on the 2020-2024 test years, so that the test set is not used to choose a grid.
+
