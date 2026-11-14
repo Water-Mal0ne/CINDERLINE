@@ -2,10 +2,11 @@ import {useId,useMemo,useState} from 'react';
 import {ArrowDownToLine,ChevronLeft,ChevronRight,Table2} from 'lucide-react';
 import type {Daily} from './types';
 import {compact,fmt,monthly,numeric,saveFile,sourcePeriods} from './utils';
+import {buildMonthlyExport} from './comparisonExport';
 import './comparison.css';
 
 type Series='raw'|'harmonized'|'aqua';
-export default function ComparisonChart({rows,mode,label}:{rows:Daily[];mode:'raw'|'harmonized';label:string}) {
+export default function ComparisonChart({rows,mode,label,regionId,regionName,cellId}:{rows:Daily[];mode:'raw'|'harmonized';label:string;regionId:string;regionName:string;cellId:string}) {
   const points=useMemo(()=>monthly(rows),[rows]);
   const periods=useMemo(()=>sourcePeriods(rows),[rows]);
   const [active,setActive]=useState(0),[referenceOnly,setReferenceOnly]=useState(false),[showTable,setShowTable]=useState(false);
@@ -16,10 +17,8 @@ export default function ComparisonChart({rows,mode,label}:{rows:Daily[];mode:'ra
   const expectedDays=new Date(Date.UTC(monthParts[0],monthParts[1],0)).getUTCDate();
   const partial=[point.rawDays,point.harmonizedDays,point.aquaDays].some(days=>days!==expectedDays);
   const exportMonths=()=>{
-    const fields=['month','raw_sensor_switch_detections','aqua_equivalent_detections','observed_aqua_detections','raw_days','harmonized_days','aqua_days','data_label'];
-    const quote=(v:unknown)=>`"${String(v??'').replaceAll('"','""')}"`;
-    const values=points.map(p=>[p.date,p.raw,p.harmonized,p.aqua,p.rawDays,p.harmonizedDays,p.aquaDays,label].map(quote).join(','));
-    saveFile('FIRETRACE_monthly_comparison.csv','\uFEFF'+[fields.join(','),...values].join('\r\n'),'text/csv;charset=utf-8');
+    const output=buildMonthlyExport(points,{regionId,regionName,cellId,label});
+    saveFile(output.filename,output.content,'text/csv;charset=utf-8');
   };
   const W=850,H=230,L=55,R=15,T=22,B=33;
   const series:Series[]=referenceOnly?['harmonized','aqua']:['raw','harmonized','aqua'];
