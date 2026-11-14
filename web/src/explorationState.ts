@@ -1,5 +1,5 @@
 /** Pure URL-state helpers. No network, storage, DOM, HTML or credentials. */
-export type View = 'explore' | 'evidence' | 'methods';
+export type View = 'explore' | 'evidence' | 'rhythm' | 'methods';
 export type Scale = 'harmonized' | 'raw';
 export type GlobeView = 'earth' | 'table';
 
@@ -169,7 +169,7 @@ export function resolveExploration(search: string, catalog: ExplorationCatalog):
     notify('An unsupported display setting was replaced with its default.');
     return fallback;
   };
-  state.view = readChoice('view',['explore','evidence','methods'] as const,'explore');
+  state.view = readChoice('view',['explore','evidence','rhythm','methods'] as const,'explore');
   state.scale = readChoice('scale',['harmonized','raw'] as const,'harmonized');
   state.globeView = readChoice('globeView',['earth','table'] as const,'earth');
   state.globeYear = yearForDate(state.end,region);

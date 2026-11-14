@@ -26,7 +26,7 @@
 - Every measurement is identified as satellite detections or an Aqua-equivalent estimate, not independent fires. Complete input archives do not prove cloud-free satellite observing exposure. Zero archived detections, unknown observation coverage and unprocessed geography remain distinct.
 - Whole-training-year bootstrap bounds describe calibration uncertainty only. Equal conversion bounds on observed Aqua mean identity/no conversion, not perfect measurement certainty.
 - The weekly research algorithm keeps per-stream analysis, IANA civil dates, weekday exposure adjustment, seeded year resampling, corrected tests and matched controls. The streaming route additionally enforces first complete instrument-year guards before archive/local-period qualification.
-- The seven-country rhythm statistical criterion passes for the US, Australia and Brazil, but Brazil's matching control is flagged. Only Australia qualifies beyond the US. The overall gate remains `insufficient_data` and the production rhythm module stays disabled. No threshold or control rule is relaxed to create a stronger story.
+- The official rhythm decision is the gate pre-registered in `reference/kill_test.py` (pass: US 3/3 streams, Australia 3/3, Brazil 2/3). The stricter gate in `pipeline/rhythm.py` / `pipeline/streaming/weighted_rhythm.py` changed the pre-registered rule after the fact, so it is reported only as robustness checks next to the official decision. In the 2002–2024 release analysis, Brazil's matched static control is flagged; this is stated plainly in the app and LIMITATIONS.md. No threshold or control rule is relaxed or tightened to change the story.
 - Agreement among instruments observing overlapping events is corroboration, not independent replication. Weekly associations do not establish ignition cause. Static controls can themselves follow human schedules; a nonsignificant control is not proof of no bias.
 - Synthetic fixtures and figures are visibly labeled and kept separate. They cannot enable a real-data rhythm claim.
 - Calendar weeks begin January 1. Seasonal/anomaly statistics require seven distinct observed dates in bins 1–52 and exclude the target year from its anomaly history. The final one- or two-day bin remains inspectable but is not compared with complete weeks. ICS windows describe historical seasonality, not forecasts.
@@ -37,12 +37,19 @@
 - A prespecified 0.25°/0.5° selected-cell diagnostic is complete on 2018–2019 with fixed model weights and training-only cell selection. National invariance is an arithmetic property; coarse-cell improvements do not establish spatial robustness. Large selected-cell US/Egypt errors remain explicit, and the product grid stays 0.25 degrees.
 - An early Terra bridge was investigated using a 2003–2007 training block and separate 2008–2011 validation. It improves count agreement but leaves timing and reconstruction-uncertainty issues unresolved. No 2001–2002 series is added. Neither new check touches the 2020–2024 held-out metrics or retunes the production model.
 - Arbitrary daily grid selection, worldwide data, land-cover stratification, the optional M2 model and festival analysis are not implemented.
-- The shareable evidence journey is the working signature: one observed week, separate sensors, a named conversion, held-out validation and a reopenable link. It remains useful without the gated weekly-rhythm finding.
+- The shareable evidence journey is the working signature: one observed week, separate sensors, a named conversion, held-out validation and a reopenable link. The human rhythm view is a second act with its own tab; the evidence journey does not depend on it.
 - Links reopen current published data rather than a frozen dataset version. Camera position, annual-cell selection and Earth/table preference are deliberately excluded and disclosed.
 - The submission page, slide outline and video script are drafts. A finished recording and actual submission are separate tasks; their existence is not inferred from a script.
 
 ## Publication
 
 - At the user's request, the public application uses free Cloudflare Pages. The initial private Sites preview remains separate. See `DEPLOYMENT.md` for the exact deployed revision rather than assuming the newest local data is already live.
-- The user requested a private GitHub repository named FIRETRACE. That choice remains in force; judge access needs to be arranged before submission without silently making source public.
+- The GitHub repository is public so judges can read the source.
 - Raw archives, caches, credentials, dependencies and the Python environment are excluded from Git. The repository contains reproducible analysis code, source manifests, processed static data and reviewable reports.
+
+## Human rhythm integration (14 November 2026)
+- Official decision = pre-registered `reference/kill_test.py`, seven countries, 2013–2024, outputs in `reports/official/`. Per-day 95% intervals were added to its CSV as an output-only change; all other numbers are byte-identical.
+- Robustness checks are derived from the stricter seven-country release analysis (`reports/rhythm_results.json`, 2002–2024) with `python -m pipeline.rhythm --from-saved`, without re-estimating anything. The US and Australia meet all checks. Brazil fails the matched static-control check (Terra static-source index 0.913, adjusted p = 0.021); on 2014–2023 alone the same control was clean (`reports/rhythm_robustness_2014_2023/`). The official result is unchanged.
+- The human rhythm view is a standalone tab for all seven countries. The earlier locked per-region rhythm panel now links to it.
+- The per-cell map is exploratory. A regional finding is featured only if it survives Benjamini-Hochberg correction and Aqua agrees; the northeast India boundary was drawn after viewing the map and is stated as such. No cultural or religious explanation is given in the app or docs.
+- No Terra-to-Aqua bridge is used in the product; the supported calendar record starts in 2003.

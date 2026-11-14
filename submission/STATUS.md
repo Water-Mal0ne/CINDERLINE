@@ -2,22 +2,17 @@
 
 ## Prepared
 
-- The seven-country app is deployed from commit `e71f214` and verified at the public Cloudflare URL: all 115 files match the build, all seven country workflows pass, and shared evidence reopens correctly. Details are in `DEPLOYMENT.md`.
-
-- A project page under 500 words, seven-slide outline and 30-second demo script describe the seven-country candidate.
-- Metrics come from the locked seven-country evaluation: B1 for Australia/Brazil/US; M1 for Bangladesh/Egypt/India/Nepal. The draft retains Egypt's large bias and regional peak-timing errors.
-- Scope is explicit: seven countries, 2003–2024, 41,986 annual cells and 12 detailed daily cells per country. No worldwide or 2000-present claim is made.
-- The working signature is the observed-week → sensor comparison → conversion evidence → held-out validation → shared-link journey.
-- The rhythm decision remains `insufficient_data` despite all seven countries being evaluated. Brazil's flagged control prevents the required US-plus-two-other-country qualification.
-- Prespecified grid sensitivity and Terra-bridge feasibility reports are complete. Their selected-geography/validation-period limits and unqualified early reconstruction are explicit; 2020–2024 held-out results remain unchanged.
-- AI assistance, NASA data attribution, MIT software licensing and non-endorsement are stated.
-- Independent scientific, payload and decoder evidence is in `reports/PHASE3_AUDIT.md`; browser/release status is owned by the coordinator and `DEPLOYMENT.md`.
+- Harmonized calendar for all seven countries (Australia, Bangladesh, Brazil, Egypt, India, Nepal, United States), 2003-2024, deployed from commit `e71f214` and verified at the public Cloudflare URL (see `DEPLOYMENT.md`).
+- Human rhythm: official pre-registered decision **pass** (US 3/3 streams, Australia 3/3, Brazil 2/3; India, Nepal, Bangladesh, Egypt fail), from `reference/kill_test.py`, outputs in `reports/official/`. Sunday-only caveat and Brazil static-control caveat are stated in the app, LIMITATIONS.md and these drafts.
+- Robustness checks from the stricter 2002-2024 analysis: US and Australia meet all; Brazil's Terra matched static control is flagged (index 0.913, adjusted p = 0.021).
+- Exploratory per-cell map, including the northeast India finding (19 of 26 cells significant after false-discovery correction; Aqua agrees). Per-state table and figure: `reports/official/exploratory_ne_india/`.
+- Project page (under 500 words), seven-slide outline and demo script follow the two-act story: act 1 harmonization, act 2 human rhythm.
+- The GitHub repository is public.
 
 ## Before submission
 
-- Keep the submission's deployment reference aligned with the verified seven-country release if any later changes are published.
-- Arrange judge access to the private GitHub repository without silently changing the team's visibility choice.
-- Verify the live event's submission fields, deadline and media limits. The seven slides and 30-second duration are team draft formats, not a claim about the official limit.
-- Record and review the actual working demo, including mobile/keyboard behavior where relevant. A video script and slide outline are not completed media files.
-- Retain the grid-sensitivity and early-bridge limitations in the final presentation. An evaluated feasibility experiment is not a published reconstructed series or independent ground-truth validation.
-- Team members must review the scientific interpretation and final submission. These drafts have not been submitted or sent externally.
+- **Merge PR #1 (`rhythm-integration`) and redeploy.** The live site was deployed from `e71f214` and does not yet include the Human rhythm tab.
+- The northeast India text (religion shares from the Census of India 2011) is in PROJECT_PAGE.md, SLIDES.md, VIDEO_SCRIPT.md and the app; the team should review it.
+- Verify the live event's submission fields, deadline (15 November 2026, 11:59 pm Nepal time) and media limits.
+- Record and review the actual demo video from the deployed build.
+- Team members must review the scientific interpretation and final text. These drafts have not been submitted or sent externally.

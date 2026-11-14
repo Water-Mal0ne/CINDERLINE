@@ -36,11 +36,15 @@ Egypt's selected model still has +51.68% test bias, and some countries retain su
 
 The seven-country model is a distinct revision, `seven-country-v1`. Adding countries legitimately changes the global training ratio and M1 shrinkage target. Do not reuse the old two-country metric values for this release. The historical two-country implementation is preserved in Git at commit `841998b`; exact-count processing was checked against all of its daily values, bootstrap bounds and evaluation results before expansion.
 
-## Optional rhythm result
+## Human rhythm result
 
-The research gate remains **`insufficient_data`**, with **`production_allowed: false`**. US and Australia support the predefined rest-day criterion in three streams each; Brazil supports it in two, but its matching control is flagged. Only Australia qualifies beyond the US, short of the required two additional countries. Nepal/Egypt have no qualifying streams; Bangladesh/India have one each. The overall statistical criterion and the stricter release decision are reported separately.
+The official decision comes from the pre-registered test in `reference/kill_test.py`, run on real FIRMS data for the seven countries, 2013–2024 (outputs in `reports/official/`). The rule, fixed before the data were analysed: the United States replication check must pass and at least two other countries must pass, where a country passes if its predicted rest day is the lowest weekday and significant after Bonferroni correction in at least two of Terra, Aqua and VIIRS.
 
-The public rhythm feature stays disabled. A weekly association cannot establish ignition cause; a nonsignificant result does not establish an absence of human influence. The useful creative core is the reproducible comparison and evidence journey, regardless of this research outcome.
+**Decision: pass.** The United States (3 of 3 streams), Australia (3 of 3) and Brazil (2 of 3) pass. India, Nepal, Bangladesh and Egypt do not. All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day. A dip is consistent with people scheduling their burning; it is not proof of cause.
+
+The stricter seven-country release analysis (`pipeline/streaming/weighted_rhythm.py`: 2002–2024 MODIS and 2013–2024 VIIRS, upper bound below 1, matched per-country static-source controls) is reported as robustness checks next to the official decision and never changes it. The US and Australia meet all of them. Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-registered result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.
+
+The **Human rhythm** tab shows the official result, weekday charts per country and stream with 95% intervals, the robustness checks and an exploratory per-cell map. The map (`reference/rhythm_map.py`) is not part of the pre-registered test.
 
 ## Run the app
 
@@ -74,6 +78,15 @@ The original `python -m pipeline.run_all` route remains available for the smalle
 .\.venv\Scripts\python.exe -m pipeline.run_all --synthetic
 ```
 
+To rebuild the human-rhythm outputs from the annual archives (same folder layout as the downloader):
+
+```powershell
+python reference/kill_test.py data --label "REAL FIRMS DATA"     # official gate; copy outputs to reports/official/
+python reference/rhythm_map.py data                            # exploratory per-cell map; copy to reports/official/
+.\.venv\Scripts\python.exe -m pipeline.rhythm --from-saved reports/rhythm_results.json --official reports/official --output reports/rhythm_robustness
+.\.venv\Scripts\python.exe -m pipeline.rhythm_web           # writes web/public/data/rhythm.json
+```
+
 Synthetic outputs stay separate under `reports/synthetic` and `work/synthetic-web-data`; the sensor-switch figure is visibly labeled synthetic.
 
 ## Inspect the evidence
@@ -85,8 +98,13 @@ Synthetic outputs stay separate under `reports/synthetic` and `work/synthetic-we
 | `reports/harmonization_model.json` | Ratios, country choices, model revision and uncertainty definition |
 | `reports/selection_lock.json` | Training/validation choices frozen before held-out evaluation |
 | `reports/harmonization_eval.csv` | All baselines and selected candidates on monthly/weekly held-out periods |
-| `reports/rhythm_results.json` | Per-stream, daytime and matched-control research results |
-| `reports/kill_test_gate.json` | Statistical and production-release decisions with reasons |
+| `reports/official/kill_test_gate.json` | **Official** pre-registered rhythm decision (seven countries, 2013–2024) |
+| `reports/official/kill_test_results.csv` | Official per-country, per-stream weekday estimates with per-day 95% intervals |
+| `reports/official/RESULTS.md` | Plain-language write-up of the rhythm result and the exploratory map |
+| `reports/rhythm_results.json`, `reports/kill_test_gate.json` | Stricter seven-country release analysis (2002–2024), used only for robustness checks |
+| `reports/rhythm_robustness/robustness_checks.json` | Robustness checks derived from that analysis, next to the official decision |
+| `reports/rhythm_robustness_2014_2023/` | Same stricter checks on 2014–2023 only (Brazil's control was clean there) |
+| `reports/official/rhythm_cells.geojson` | Exploratory per-cell rest-day map (VIIRS, with Aqua check) |
 | `reports/PHASE3_AUDIT.md` | Independent scientific, count and actual frontend-decoder checks |
 | `reports/scientific_validation/SCIENTIFIC_SENSITIVITY.md` | Prespecified 0.25°/0.5° selected-cell sensitivity and early Terra-bridge feasibility |
 | `reports/build_summary.json` | The built scope and data-size record |
@@ -101,9 +119,9 @@ The release does **not** include a validated 2000–2002 Terra reconstruction, w
 
 ## Hosting and source
 
-[Public application on Cloudflare Pages](https://firetrace-bhaktapur-2026.pages.dev/) · [Private source repository](https://github.com/Water-Mal0ne/FIRETRACE)
+[Public application on Cloudflare Pages](https://firetrace-bhaktapur-2026.pages.dev/) · [Public source repository](https://github.com/Water-Mal0ne/FIRETRACE)
 
-The user requested private source visibility. Judge access must be arranged before submission without silently changing that choice. Cloudflare serves static assets; no paid compute or database was provisioned. `scripts/publish.ps1` checks, builds, pushes, deploys and verifies the public files. See `DEPLOYMENT.md` for release-specific evidence.
+Cloudflare serves static assets; no paid compute or database was provisioned. `scripts/publish.ps1` checks, builds, pushes, deploys and verifies the public files. See `DEPLOYMENT.md` for release-specific evidence.
 
 ## Attribution
 

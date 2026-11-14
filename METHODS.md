@@ -64,7 +64,9 @@ The seasonal section remains a national summary when a daily grid cell is select
 
 The hypothesis is motivated by [Earl, Simmonds and Tapper (2015)](https://doi.org/10.1002/2015GL066383). Rest days are fixed before inspecting results: Sunday for the United States, Australia, India and Brazil; Saturday for Nepal; Friday for Bangladesh and Egypt. These are analysis hypotheses, not a claim that everyone in a country follows one schedule.
 
-The seven-country entry point is `pipeline.streaming.weighted_rhythm.run_counts(counts, manifest, output_dir, ...)`. It retains the raw-record algorithm's seeded resampling, weekday normalization, fixed testing family and matched controls, using exact detection multiplicities. The original raw-record API is `pipeline.rhythm.run(detections, output_dir, label, manifest)`. The release uses cleaned local civil dates and never reconstructs them from longitude-based solar time. For each country and stream:
+**Official decision.** The published decision is the gate pre-registered in `reference/kill_test.py`, run on the seven countries' archives for 2013–2024 (outputs in `reports/official/`): per complete year, weekday rate divided by the number of times that weekday occurs, normalised to a mean of 1; years averaged; 95% intervals from 2,000 whole-year bootstrap draws; one-sided null test from 5,000 draws of a random weekday per year; Bonferroni across all country × stream tests. A country passes when its predicted rest day is the lowest weekday and significant in at least two streams; the overall decision passes when the United States and at least two other countries pass. Static sources (types 1/2) are a pooled negative control.
+
+**Robustness checks.** The stricter analysis below is reported next to the official decision and never replaces it. The seven-country entry point is `pipeline.streaming.weighted_rhythm.run_counts(counts, manifest, output_dir, ...)`. It retains the raw-record algorithm's seeded resampling, weekday normalization, fixed testing family and matched controls, using exact detection multiplicities. The original raw-record API is `pipeline.rhythm.run(detections, output_dir, label, manifest)`. The release uses cleaned local civil dates and never reconstructs them from longitude-based solar time. For each country and stream:
 
 1. Exclude the configured current/future year (2026 by default) and years with fewer than 140 vegetation detections.
 2. Apply instrument commissioning guards before considering completeness: Terra no earlier than 2001, Aqua no earlier than 2003 and VIIRS no earlier than 2013. Then verify input periods from the manifest. An explicit attested local calendar period is accepted only after this guard. Otherwise require the canonical annual UTC archive and both neighboring UTC-year archives, conservatively handling local-date boundary spillover. This verifies archive completeness only; a MODIS file containing Terra before Aqua launched cannot establish a complete Aqua year.
@@ -76,13 +78,13 @@ The seven-country entry point is `pipeline.streaming.weighted_rhythm.run_counts(
 
 A stream supports the predefined dip when the rest day has the lowest mean, its 95% interval upper endpoint is below 1, and its adjusted p-value is below 0.05. Estimates with insufficiently verified input periods may still appear in reports as exploratory, but cannot satisfy the release gate. Confidence intervals are pointwise; the multiple-comparison correction applies to p-values.
 
-## Diagnostic controls and release gate
+## Diagnostic controls and robustness checks
 
 Types 1 and 2 are analyzed using the same per-country, per-stream annual exposure adjustment, resampling and null method. They are not pooled into one global weekday count. Industrial/static sources may themselves have weekly schedules, and volcano observations may be sparse. A detected control dip is therefore a diagnostic flag requiring investigation, not automatic proof that the vegetation result is wrong. A nonsignificant control is not evidence of equivalence and does not establish equal sensor coverage.
 
-The statistical criterion requires the US replication check and at least two other countries, each supported by at least two streams. Matching control results must also be available and unflagged for the supporting streams. Missing controls can therefore prevent release even when the statistical criterion passes. The report separates `statistical_decision` from the overall `decision` and explains the reasons.
+For each officially passing country, `python -m pipeline.rhythm --from-saved reports/rhythm_results.json --official reports/official` reports three robustness checks: rest-day upper bound below 1 in at least two streams (official estimates); the strict criterion above in at least two streams; and at least two matched, unflagged per-country control streams. A failed check is reported plainly in the app and LIMITATIONS.md and does not change the official decision.
 
-The overall decision is `pass`, `fail` or `insufficient_data`. Synthetic input can exercise the statistical criterion but can never set `production_allowed` to true. A failed US replication check calls for investigation of the sample, method and comparability; it is not by itself proof of a software bug. The remaining cloud/overpass caveat remains visible even if the gate passes.
+The official decision is `pass`, `fail` or `insufficient_data`. Missing official outputs or synthetic input give `insufficient_data`; synthetic input can exercise the strict criterion but can never enable a real-data claim. A failed US replication check calls for investigation of the sample, method and comparability; it is not by itself proof of a software bug. The remaining cloud/overpass caveat remains visible even if the gate passes.
 
 ## Reproducibility outputs
 
@@ -100,7 +102,7 @@ The seven-country model choices were persisted in `selection_lock.json` before t
 
 These measure agreement with archived Aqua detections, not ground truth. The full table includes B0, B1 and M1 for every country at both monthly and weekly aggregation. A favorable monthly error does not erase a remaining seasonal-timing error or a large relative bias on sparse reference counts.
 
-The rhythm statistical criterion passes for the US plus Australia and Brazil, but the stricter release gate remains `insufficient_data` and `production_allowed: false`. US/Australia have three supporting streams each; Brazil has two and a flagged matching control. Only Australia qualifies beyond the US, short of the two additional countries required. Nepal and Egypt have zero supporting streams; Bangladesh and India have one each. All seven countries were evaluated; this is no longer a missing-country explanation. No overall human-rhythm claim is enabled.
+The official rhythm decision is `pass`: the US passes in 3 of 3 streams, Australia in 3 of 3 and Brazil in 2 of 3; India, Nepal, Bangladesh and Egypt do not pass. All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day. In the stricter 2002–2024 analysis, the US and Australia meet all robustness checks; Brazil meets the vegetation criterion in two streams but its Terra matched static control is flagged (index 0.913, adjusted p = 0.021), so Brazil's support is weaker.
 
 - `kill_test_results.csv`: all country/stream/subset estimates, control results, intervals and adjusted tests.
 - `kill_test_gate.json`: statistical and release decisions with reasons.
@@ -109,3 +111,7 @@ The rhythm statistical criterion passes for the US plus Australia and Brazil, bu
 - `rhythm.svg` and, when Matplotlib is available, `rhythm.png`: figures labeled with the input provenance.
 
 Synthetic fixtures verify known signal recovery, null behavior, gate logic, period handling and reproducibility. They do not establish performance on real observations. The supplied original reference scripts remain in `reference/` for traceability; the executable implementation is in `pipeline/`.
+
+## Northeast India interpretation (exploratory)
+
+Religion shares in the northeast India text are from the Census of India 2011, religion data by state (Office of the Registrar General and Census Commissioner, India). The per-state Sunday indices are in `reports/official/exploratory_ne_india/ne_india_states.csv` (cells assigned to states by centroid with Natural Earth admin-1 boundaries). The text describes a correlation, not a cause.

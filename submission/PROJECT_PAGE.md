@@ -4,30 +4,32 @@
 
 **Team:** Bhaktapur, Nepal
 
-**Status:** Seven-country submission draft; consult `DEPLOYMENT.md` for the verified live revision.
+## Act 1: Did fire activity change, or did our camera change?
 
-## Did fire activity change—or did our camera change?
+VIIRS (from 2012) sees many more small fires than MODIS, so a naively joined record jumps. FIRETRACE puts both on one scale, MODIS-Aqua-equivalent detections, so years compare fairly.
 
-A satellite fire record can mix environmental change with changes in what the instrument detects. FIRETRACE makes that comparison inspectable for fire and land managers using NASA FIRMS observations.
+Terra, Aqua and VIIRS are never pooled. We compare three models: uncalibrated VIIRS (B0), one training ratio (B1) and ratios by country, day/night and fire intensity (M1). We trained on 2013-2017, chose models on 2018-2019 and tested once on 2020-2024. Nepal's M1 monthly test error is 30.24 versus 182.52 for B1. In the US the simpler B1 wins. Egypt keeps a +51.68% bias.
 
-Our signature is an evidence journey: choose one observed week, compare separate instrument counts, inspect its Aqua-equivalent estimate and calibration bounds, check held-out validation, then share a link that reopens the same evidence. Terra, Aqua and VIIRS are never pooled into a fictitious sensor. Hotspots remain detections, not independent fires.
+The burning activity calendar covers Australia, Bangladesh, Brazil, Egypt, India, Nepal and the United States, 2003-2024: raw versus harmonized toggle, typical seasons, unusual weeks, evidence cards and CSV/ICS downloads. Hotspots are detections, not a count of fires.
 
-The working calendar connects historical activity to typical seasons, high-activity windows, unusual-period flags and CSV/ICS exports. A rotatable Earth displays 41,986 annual grid cells on one fixed reference scale. National totals use every qualifying cell; 12 training-selected daily cells per country support detailed inspection.
+## Act 2: Is there a human rhythm in the record?
 
-**Supported scope:** Australia, Bangladesh, Brazil, Egypt, India, Nepal and the United States, 2003–2024. The release processes 273 verified archives and 67.9 million cleaned detections. It uses observed Aqua through 2012 and converted VIIRS thereafter; it does not claim a validated pre-Aqua reconstruction or worldwide coverage.
+Nature has no seven-day cycle; people do. Before looking at the data we fixed each country's rest day (Sunday for the US, Australia, Brazil and India; Saturday for Nepal; Friday for Bangladesh and Egypt) and a pass rule: the US replicates the known Sunday dip, and at least two other countries show their rest day as the lowest weekday, significant after correction, in two of three satellite streams.
 
-**Evaluation:** Training is 2013–2017, model selection is 2018–2019, and held-out testing is 2020–2024. All baselines remain visible. Nepal's selected M1 has monthly test MAE 30.24 versus B1 182.52. The US selects simpler B1: MAE 1,537.79 versus M1 2,078.57. Egypt still has +51.68% selected-model bias. These measure agreement with archived Aqua, not ground truth. Adding countries changed the training ratio, so this is a declared seven-country model revision.
+**Result: pass.** The US (3 of 3 streams, Sunday 22-33% below an average day), Australia (3 of 3) and Brazil (2 of 3) pass. India, Nepal, Bangladesh and Egypt do not. US and Australian static-source controls are clean.
 
-Our optional weekly-rhythm study stays disabled: the overall gate is **insufficient_data**. The US and Australia qualify, but Brazil's matching control is flagged, leaving too few qualified countries. We retain the negative/inconclusive evidence rather than weaken the gate. Weekly association cannot establish ignition cause.
+All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day. Brazil's Terra static-source control also dips on Sunday, so Brazil's support is weaker than the US and Australia.
 
-A separate grid-sensitivity check exposes substantial local error despite favorable national metrics. Early Terra-bridge feasibility does not yet qualify a reconstruction.
+An exploratory one-degree map: in northeast India 19 of 26 cells are significant and Aqua agrees; the rest of India shows none.
 
-Every displayed value is reproducible. Independent checks verified exact count reduction, held-out selection discipline and lossless decoding of all 731,276 published daily records. Unknown satellite/cloud coverage remains visible. Historical windows and anomaly flags are not forecasts or emergency alerts.
+Within India, the Sunday dip is concentrated in the northeast. It is deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day, and it is just as deep in the Indian cells along the border with Myanmar. Nagaland and Mizoram are mostly Christian and Manipur is about 41% Christian, and in many of these communities Sunday is widely kept as a church day. The link is not clean: Meghalaya, also mostly Christian, shows a weaker dip, and Assam, mostly not Christian, still shows one. This is an exploratory correlation, not evidence of what causes the pattern.
 
-[Live application](https://firetrace-bhaktapur-2026.pages.dev/) · [Source repository](https://github.com/Water-Mal0ne/FIRETRACE), private at the team's request; arrange judge access before submission.
+A dip is consistent with people scheduling their burning. It does not prove who lit a fire, and no dip does not mean fires are weather-driven.
 
-[NASA data: FIRMS](https://firms.modaps.eosdis.nasa.gov/country/) · [Challenge scope guidance](https://github.com/nasa/spaceapps/discussions/2016) · [Weekly-cycle research context](https://doi.org/10.1002/2015GL066383)
+[Live application](https://firetrace-bhaktapur-2026.pages.dev/) · [Source repository](https://github.com/Water-Mal0ne/FIRETRACE)
 
-**AI disclosure:** Codex assisted with code, tests, review and documentation; see `AI_DISCLOSURE.md`. Synthetic examples are visibly labeled and separate. Software is MIT licensed.
+[NASA data: FIRMS](https://firms.modaps.eosdis.nasa.gov/country/) · [Weekly-cycle research context](https://doi.org/10.1002/2015GL066383)
+
+**AI disclosure:** Codex and Claude Code assisted; see `AI_DISCLOSURE.md`. MIT licensed.
 
 **NASA does not endorse this project.**

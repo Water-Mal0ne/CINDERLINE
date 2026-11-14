@@ -2,6 +2,7 @@
 import json
 import tempfile
 import unittest
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -102,6 +103,40 @@ class RhythmTests(unittest.TestCase):
         self.assertFalse(synthetic["production_allowed"])
         self.assertEqual(synthetic["decision"], "insufficient_data")
         self.assertEqual(rhythm.make_gate(main, [], "REAL FIRMS DATA")["decision"], "insufficient_data")
+
+    def _official(self, folder, decision="pass", label="REAL FIRMS DATA"):
+        gate = {"decision": decision, "label": label,
+                "per_country": {"United_States": {"status": "pass", "predicted_rest_day": "Sun"},
+                                "Nepal": {"status": "fail", "predicted_rest_day": "Sat"}}}
+        (Path(folder) / "kill_test_gate.json").write_text(json.dumps(gate))
+        pd.DataFrame([{"country": "United_States", "subset": "all", "stream": s, "status": "ok",
+                       "Sun_hi": hi} for s, hi in [("Terra", .76), ("Aqua", .71), ("VIIRS", 1.02)]]
+                     ).to_csv(Path(folder) / "kill_test_results.csv", index=False)
+
+    def test_official_gate_is_published_and_robustness_never_changes_it(self):
+        data, manifest = fixture(controls=False)  # strict variant cannot qualify controls
+        with tempfile.TemporaryDirectory() as official, tempfile.TemporaryDirectory() as out:
+            self._official(official)
+            result = rhythm.run(data, out, label="REAL FIRMS DATA", manifest=manifest, official=official)
+            self.assertEqual(result["gate"]["decision"], "pass")
+            self.assertIn("kill_test.py", result["gate"]["source"])
+            us = result["robustness"]["per_country"]["United_States"]
+            self.assertEqual(us["ci_upper_below_one"]["streams"], 2)
+            self.assertTrue(us["ci_upper_below_one"]["passed"])
+            self.assertIn("matched_static_controls", us["failed"])
+            self.assertNotIn("Nepal", result["robustness"]["per_country"])
+            json.dumps(result, allow_nan=False, default=str)
+
+    def test_official_gate_missing_or_synthetic_is_insufficient(self):
+        data, manifest = fixture()
+        with tempfile.TemporaryDirectory() as official, tempfile.TemporaryDirectory() as out:
+            self.assertEqual(rhythm.run(data, out, manifest=manifest)["gate"]["decision"], "insufficient_data")
+            self._official(official, label="SYNTHETIC DATA")
+            self.assertEqual(rhythm.run(data, out, manifest=manifest, official=official)["gate"]["decision"],
+                             "insufficient_data")
+            self._official(official)
+            self.assertEqual(rhythm.run(data, out, label="SYNTHETIC DATA", manifest=manifest,
+                                        official=official)["gate"]["decision"], "insufficient_data")
 
     def test_empty_input_writes_valid_insufficient_report(self):
         with tempfile.TemporaryDirectory() as folder:

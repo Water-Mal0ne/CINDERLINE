@@ -51,6 +51,9 @@ MIN_YEARS = 5
 MIN_STREAMS_TO_CONFIRM = 2
 N_BOOT, N_NULL = 2000, 5000
 rng = np.random.default_rng(42)
+USE_COLS = {"latitude", "longitude", "acq_date", "acq_time", "satellite", "instrument",
+            "confidence", "type", "daynight"}
+CAT_COLS = ["acq_date", "satellite", "instrument", "confidence", "daynight", "country"]
 diag = {}
 
 
@@ -61,14 +64,25 @@ def load(data_dir):
         parts = base.split("_", 2)
         if len(parts) < 3:
             continue
-        df = pd.read_csv(path, low_memory=False)
+        # memory: keep only the columns the analysis uses; repeated text as categories
+        df = pd.read_csv(path, low_memory=False, usecols=lambda c: c in USE_COLS)
         df["country"] = parts[2]
         df["file_year"] = int(parts[1])
+        for c in CAT_COLS:
+            if c in df:
+                df[c] = df[c].astype(str).astype("category")
         frames.append(df)
     if not frames:
         sys.exit(f"No FIRMS CSV files found under {data_dir}/")
-    df = pd.concat(frames, ignore_index=True)
+    # identical categories in every frame, so concat keeps the compact dtype
+    for c in CAT_COLS:
+        cats = sorted(set().union(*(f[c].cat.categories for f in frames if c in f)))
+        for f in frames:
+            if c in f:
+                f[c] = f[c].cat.set_categories(cats)
     diag["files"] = len(frames)
+    df = pd.concat(frames, ignore_index=True)
+    del frames
     diag["rows_loaded"] = int(len(df))
     return df
 
@@ -82,7 +96,7 @@ def clean(df):
     conf = df["confidence"].astype(str).str.lower()
     viirs = df["stream"] == "VIIRS"
     ok = (viirs & conf.isin(["n", "h", "nominal", "high"])) | \
-         (~viirs & (pd.to_numeric(df["confidence"], errors="coerce") >= 30))
+         (~viirs & (pd.to_numeric(df["confidence"].astype(str), errors="coerce") >= 30))
     df = df[ok & (df["stream"] != "other")]
     ftype = df["type"].fillna(0).astype(int) if "type" in df.columns else pd.Series(0, index=df.index)
     veg, static = df[ftype == 0], df[ftype.isin([1, 2])]
@@ -125,12 +139,12 @@ def add_local_time(df, label):
     changed = float((df["local"].dt.date != df["utc"].dt.date).mean())
     diag[label] = {"invalid_timestamps_dropped": bad_ts, "unresolved_timezone_dropped": unresolved,
                    "share_date_changed_by_utc_to_local": round(changed, 4)}
-    return df.assign(weekday=df["local"].dt.dayofweek, year=df["local"].dt.year)
+    return df.assign(weekday=df["local"].dt.day_of_week, year=df["local"].dt.year)
 
 
 def weekday_exposure(year):
     days = pd.date_range(f"{year}-01-01", f"{year}-12-31", freq="D")
-    return np.bincount(days.dayofweek, minlength=7).astype(float)
+    return np.bincount(days.day_of_week, minlength=7).astype(float)
 
 
 def weekday_index(sub, rest_idx):
@@ -262,6 +276,8 @@ def plot(res, label):
     countries = list(dict.fromkeys(res.country))
     if not countries:
         return
+    ylo = min(0.8, float(np.min(np.vstack(res["_lo"].values))) - 0.03)
+    yhi = max(1.15, float(np.max(np.vstack(res["_hi"].values))) + 0.03)
     fig, axes = plt.subplots(len(countries), 3, figsize=(12, 2.6 * len(countries) + 0.8),
                              sharey=True, squeeze=False)
     for i, country in enumerate(countries):
@@ -277,15 +293,15 @@ def plot(res, label):
             colors = ["#d9480f" if d == row["rest_day"] else "#adb5bd" for d in DAYS]
             ax.bar(DAYS, vals, yerr=err, color=colors, capsize=2)
             ax.axhline(1, color="black", lw=0.6)
-            ax.set_ylim(0.8, 1.15)
+            ax.set_ylim(ylo, yhi)
             mark = " *" if row["significant"] else ""
-            ax.set_title(f"{country} - {stream} ({row['years']} yrs){mark}", fontsize=9)
+            ax.set_title(f"{country} - {stream} ({int(row['years'])} yrs){mark}", fontsize=9)
     fig.suptitle(f"[{label}]  Fire detections by local weekday (1.0 = average; "
                  f"orange = predicted rest day; * = significant after correction)", fontsize=10)
     if "SYNTHETIC" in label.upper():
         fig.text(0.5, 0.5, "SYNTHETIC DATA", fontsize=60, color="red", alpha=0.15,
                  ha="center", va="center", rotation=25)
-    fig.tight_layout()
+    fig.tight_layout(rect=[0, 0, 1, 0.98])
     fig.savefig("kill_test.png", dpi=120)
     print("Chart saved to kill_test.png")
 
@@ -306,7 +322,13 @@ def main():
     g = gate(main_res, negative_control(static))
     g["label"] = a.label
 
-    res.drop(columns=[c for c in ["_lo", "_hi", "rest_ci_hi"] if c in res], errors="ignore") \
+    # output only: per-weekday 95% bootstrap CI bounds (same bootstrap as rest_ci95)
+    out = res.copy()
+    for i, d in enumerate(DAYS):
+        for k in ("lo", "hi"):
+            out[f"{d}_{k}"] = [round(float(v[i]), 3) if isinstance(v, np.ndarray) else np.nan
+                               for v in out.get(f"_{k}", pd.Series([None] * len(out)))]
+    out.drop(columns=[c for c in ["_lo", "_hi", "rest_ci_hi"] if c in out], errors="ignore") \
        .to_csv("kill_test_results.csv", index=False)
     json.dump(g, open("kill_test_gate.json", "w"), indent=2, default=str)
     json.dump(diag, open("kill_test_diagnostics.json", "w"), indent=2)

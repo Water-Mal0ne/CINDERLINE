@@ -1,0 +1,117 @@
+{
+  "role": "robustness checks reported next to the official decision; they never change it",
+  "descriptions": {
+    "ci_upper_below_one": "Rest-day 95% upper bound below 1.0 in at least two streams (official estimates).",
+    "strict_reanalysis": "Re-analysis using only years with both neighbouring annual archives, rest day lowest, 95% upper bound below 1 and fixed 21-test Bonferroni, in at least two streams.",
+    "matched_static_controls": "At least two per-country static-source control streams available, none showing a corrected rest-day dip."
+  },
+  "per_country": {
+    "United_States": {
+      "ci_upper_below_one": {
+        "passed": true,
+        "streams": 3
+      },
+      "strict_reanalysis": {
+        "passed": true,
+        "status": "pass",
+        "streams_significant": 3
+      },
+      "matched_static_controls": {
+        "passed": true,
+        "status": "no_detected_rest_day_dip"
+      },
+      "failed": [],
+      "all_passed": true
+    },
+    "Australia": {
+      "ci_upper_below_one": {
+        "passed": true,
+        "streams": 3
+      },
+      "strict_reanalysis": {
+        "passed": true,
+        "status": "pass",
+        "streams_significant": 2
+      },
+      "matched_static_controls": {
+        "passed": true,
+        "status": "no_detected_rest_day_dip"
+      },
+      "failed": [],
+      "all_passed": true
+    },
+    "Brazil": {
+      "ci_upper_below_one": {
+        "passed": true,
+        "streams": 3
+      },
+      "strict_reanalysis": {
+        "passed": true,
+        "status": "pass",
+        "streams_significant": 2
+      },
+      "matched_static_controls": {
+        "passed": true,
+        "status": "no_detected_rest_day_dip"
+      },
+      "failed": [],
+      "all_passed": true
+    }
+  },
+  "strict_variant": {
+    "decision": "pass",
+    "per_country": {
+      "United_States": {
+        "status": "pass",
+        "streams_with_data": 3,
+        "streams_significant": 3,
+        "rest_day": "Sun",
+        "controls_status": "no_detected_rest_day_dip"
+      },
+      "Australia": {
+        "status": "pass",
+        "streams_with_data": 3,
+        "streams_significant": 2,
+        "rest_day": "Sun",
+        "controls_status": "no_detected_rest_day_dip"
+      },
+      "Nepal": {
+        "status": "fail",
+        "streams_with_data": 3,
+        "streams_significant": 0,
+        "rest_day": "Sat",
+        "controls_status": "insufficient_data"
+      },
+      "Bangladesh": {
+        "status": "fail",
+        "streams_with_data": 3,
+        "streams_significant": 1,
+        "rest_day": "Fri",
+        "controls_status": "insufficient_data"
+      },
+      "Egypt": {
+        "status": "fail",
+        "streams_with_data": 3,
+        "streams_significant": 0,
+        "rest_day": "Fri",
+        "controls_status": "insufficient_data"
+      },
+      "India": {
+        "status": "fail",
+        "streams_with_data": 3,
+        "streams_significant": 0,
+        "rest_day": "Sun",
+        "controls_status": "insufficient_data"
+      },
+      "Brazil": {
+        "status": "pass",
+        "streams_with_data": 3,
+        "streams_significant": 2,
+        "rest_day": "Sun",
+        "controls_status": "no_detected_rest_day_dip"
+      }
+    },
+    "rule": "US and >=2 other countries each require >=2 streams with verified input years, rest day lowest, 95% upper bound <1 and fixed-family adjusted p<0.05; matching controls must be available and unflagged. Synthetic data never enable production.",
+    "reasons": []
+  }
+}

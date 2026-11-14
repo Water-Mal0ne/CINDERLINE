@@ -1,0 +1,2630 @@
+{
+ "label": "REAL FIRMS DATA",
+ "official": {
+  "decision": "pass",
+  "rule": "United_States replication must pass AND >=2 other countries pass; a country passes when its predicted rest day is the lowest weekday with Bonferroni-adjusted null-test p < 0.05/m in >= 2 streams",
+  "source": "kill_test.py (pre-registered gate; reference/kill_test.py)",
+  "replication_check": {
+   "country": "United_States",
+   "status": "pass",
+   "note": "A fail here means investigate data, method and comparability with Earl et al. 2015; it is not by itself proof of a bug."
+  },
+  "countries_passing": [
+   "Australia",
+   "Brazil"
+  ],
+  "per_country": {
+   "United_States": {
+    "status": "pass",
+    "streams_significant": 3,
+    "streams_with_data": 3,
+    "predicted_rest_day": "Sun"
+   },
+   "Australia": {
+    "status": "pass",
+    "streams_significant": 3,
+    "streams_with_data": 3,
+    "predicted_rest_day": "Sun"
+   },
+   "Brazil": {
+    "status": "pass",
+    "streams_significant": 2,
+    "streams_with_data": 3,
+    "predicted_rest_day": "Sun"
+   },
+   "India": {
+    "status": "fail",
+    "streams_significant": 0,
+    "streams_with_data": 3,
+    "predicted_rest_day": "Sun"
+   },
+   "Nepal": {
+    "status": "fail",
+    "streams_significant": 0,
+    "streams_with_data": 3,
+    "predicted_rest_day": "Sat"
+   },
+   "Bangladesh": {
+    "status": "fail",
+    "streams_significant": 1,
+    "streams_with_data": 3,
+    "predicted_rest_day": "Fri"
+   },
+   "Egypt": {
+    "status": "fail",
+    "streams_significant": 0,
+    "streams_with_data": 3,
+    "predicted_rest_day": "Fri"
+   }
+  }
+ },
+ "sunday_caveat": "All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.",
+ "robustness": {
+  "role": "robustness checks reported next to the official decision; they never change it",
+  "descriptions": {
+   "ci_upper_below_one": "Rest-day 95% upper bound below 1.0 in at least two streams (official estimates).",
+   "strict_reanalysis": "Re-analysis using only years with both neighbouring annual archives, rest day lowest, 95% upper bound below 1 and fixed 21-test Bonferroni, in at least two streams.",
+   "matched_static_controls": "At least two per-country static-source control streams available, none showing a corrected rest-day dip."
+  },
+  "per_country": {
+   "United_States": {
+    "ci_upper_below_one": {
+     "passed": true,
+     "streams": 3
+    },
+    "strict_reanalysis": {
+     "passed": true,
+     "status": "pass",
+     "streams_significant": 3
+    },
+    "matched_static_controls": {
+     "passed": true,
+     "status": "no_detected_rest_day_dip",
+     "flagged_streams": []
+    },
+    "failed": [],
+    "all_passed": true
+   },
+   "Australia": {
+    "ci_upper_below_one": {
+     "passed": true,
+     "streams": 3
+    },
+    "strict_reanalysis": {
+     "passed": true,
+     "status": "pass",
+     "streams_significant": 3
+    },
+    "matched_static_controls": {
+     "passed": true,
+     "status": "no_detected_rest_day_dip",
+     "flagged_streams": []
+    },
+    "failed": [],
+    "all_passed": true
+   },
+   "Brazil": {
+    "ci_upper_below_one": {
+     "passed": true,
+     "streams": 3
+    },
+    "strict_reanalysis": {
+     "passed": true,
+     "status": "pass",
+     "streams_significant": 2
+    },
+    "matched_static_controls": {
+     "passed": false,
+     "status": "flagged",
+     "flagged_streams": [
+      {
+       "stream": "Terra",
+       "rest_day": "Sun",
+       "rest_index": 0.9134953748296444,
+       "p_adjusted": 0.020995800839832032,
+       "years": 23,
+       "first_year": 2002,
+       "last_year": 2024
+      }
+     ]
+    },
+    "failed": [
+     "matched_static_controls"
+    ],
+    "all_passed": false
+   }
+  },
+  "flagged": {
+   "Brazil": [
+    "matched_static_controls"
+   ]
+  },
+  "source": "reports/rhythm_results.json",
+  "notes": {
+   "Brazil": "Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-registered result is unchanged (PASS), but Brazil's support is weaker than the US and Australia."
+  },
+  "control_nuance": "A Sunday dip in static sources does not by itself mean a satellite artifact: some type-2 static sources are industrial sites that may also follow the work week. The clean static controls in the US and Australia are what argue against a satellite or processing artifact."
+ },
+ "countries": [
+  {
+   "country": "United_States",
+   "name": "United States",
+   "rest_day": "Sun",
+   "status": "pass",
+   "streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 635163,
+     "years": 12,
+     "rest_index": 0.723,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.019,
+       "lo": 0.963,
+       "hi": 1.07
+      },
+      {
+       "day": "Tue",
+       "index": 1.131,
+       "lo": 1.081,
+       "hi": 1.18
+      },
+      {
+       "day": "Wed",
+       "index": 1.126,
+       "lo": 1.063,
+       "hi": 1.199
+      },
+      {
+       "day": "Thu",
+       "index": 1.074,
+       "lo": 1.012,
+       "hi": 1.131
+      },
+      {
+       "day": "Fri",
+       "index": 1.06,
+       "lo": 0.987,
+       "hi": 1.136
+      },
+      {
+       "day": "Sat",
+       "index": 0.868,
+       "lo": 0.837,
+       "hi": 0.897
+      },
+      {
+       "day": "Sun",
+       "index": 0.723,
+       "lo": 0.683,
+       "hi": 0.762
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 716325,
+     "years": 12,
+     "rest_index": 0.667,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.091,
+       "lo": 1.046,
+       "hi": 1.137
+      },
+      {
+       "day": "Tue",
+       "index": 1.082,
+       "lo": 1.028,
+       "hi": 1.136
+      },
+      {
+       "day": "Wed",
+       "index": 1.135,
+       "lo": 1.092,
+       "hi": 1.177
+      },
+      {
+       "day": "Thu",
+       "index": 1.14,
+       "lo": 1.095,
+       "hi": 1.187
+      },
+      {
+       "day": "Fri",
+       "index": 0.985,
+       "lo": 0.908,
+       "hi": 1.063
+      },
+      {
+       "day": "Sat",
+       "index": 0.899,
+       "lo": 0.849,
+       "hi": 0.949
+      },
+      {
+       "day": "Sun",
+       "index": 0.667,
+       "lo": 0.616,
+       "hi": 0.714
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 4881876,
+     "years": 12,
+     "rest_index": 0.782,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.008,
+       "lo": 0.969,
+       "hi": 1.042
+      },
+      {
+       "day": "Tue",
+       "index": 1.096,
+       "lo": 1.039,
+       "hi": 1.155
+      },
+      {
+       "day": "Wed",
+       "index": 1.096,
+       "lo": 1.056,
+       "hi": 1.151
+      },
+      {
+       "day": "Thu",
+       "index": 1.091,
+       "lo": 1.061,
+       "hi": 1.124
+      },
+      {
+       "day": "Fri",
+       "index": 1.01,
+       "lo": 0.953,
+       "hi": 1.067
+      },
+      {
+       "day": "Sat",
+       "index": 0.917,
+       "lo": 0.88,
+       "hi": 0.95
+      },
+      {
+       "day": "Sun",
+       "index": 0.782,
+       "lo": 0.753,
+       "hi": 0.81
+      }
+     ]
+    }
+   ],
+   "daytime_streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 460657,
+     "years": 12,
+     "rest_index": 0.63,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.032,
+       "lo": 0.976,
+       "hi": 1.087
+      },
+      {
+       "day": "Tue",
+       "index": 1.172,
+       "lo": 1.127,
+       "hi": 1.219
+      },
+      {
+       "day": "Wed",
+       "index": 1.14,
+       "lo": 1.088,
+       "hi": 1.196
+      },
+      {
+       "day": "Thu",
+       "index": 1.123,
+       "lo": 1.066,
+       "hi": 1.181
+      },
+      {
+       "day": "Fri",
+       "index": 1.057,
+       "lo": 0.988,
+       "hi": 1.128
+      },
+      {
+       "day": "Sat",
+       "index": 0.847,
+       "lo": 0.81,
+       "hi": 0.883
+      },
+      {
+       "day": "Sun",
+       "index": 0.63,
+       "lo": 0.596,
+       "hi": 0.661
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 631342,
+     "years": 12,
+     "rest_index": 0.646,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.082,
+       "lo": 1.03,
+       "hi": 1.129
+      },
+      {
+       "day": "Tue",
+       "index": 1.105,
+       "lo": 1.052,
+       "hi": 1.156
+      },
+      {
+       "day": "Wed",
+       "index": 1.143,
+       "lo": 1.096,
+       "hi": 1.191
+      },
+      {
+       "day": "Thu",
+       "index": 1.159,
+       "lo": 1.105,
+       "hi": 1.219
+      },
+      {
+       "day": "Fri",
+       "index": 0.989,
+       "lo": 0.92,
+       "hi": 1.056
+      },
+      {
+       "day": "Sat",
+       "index": 0.877,
+       "lo": 0.825,
+       "hi": 0.931
+      },
+      {
+       "day": "Sun",
+       "index": 0.646,
+       "lo": 0.592,
+       "hi": 0.695
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 2784451,
+     "years": 12,
+     "rest_index": 0.657,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.057,
+       "lo": 1.012,
+       "hi": 1.098
+      },
+      {
+       "day": "Tue",
+       "index": 1.141,
+       "lo": 1.086,
+       "hi": 1.198
+      },
+      {
+       "day": "Wed",
+       "index": 1.138,
+       "lo": 1.093,
+       "hi": 1.181
+      },
+      {
+       "day": "Thu",
+       "index": 1.127,
+       "lo": 1.085,
+       "hi": 1.175
+      },
+      {
+       "day": "Fri",
+       "index": 1.008,
+       "lo": 0.949,
+       "hi": 1.068
+      },
+      {
+       "day": "Sat",
+       "index": 0.873,
+       "lo": 0.843,
+       "hi": 0.903
+      },
+      {
+       "day": "Sun",
+       "index": 0.657,
+       "lo": 0.617,
+       "hi": 0.698
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "country": "Australia",
+   "name": "Australia",
+   "rest_day": "Sun",
+   "status": "pass",
+   "streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 1118366,
+     "years": 12,
+     "rest_index": 0.936,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0018,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.968,
+       "lo": 0.942,
+       "hi": 0.993
+      },
+      {
+       "day": "Tue",
+       "index": 1.025,
+       "lo": 0.987,
+       "hi": 1.064
+      },
+      {
+       "day": "Wed",
+       "index": 1.046,
+       "lo": 1.003,
+       "hi": 1.088
+      },
+      {
+       "day": "Thu",
+       "index": 1.045,
+       "lo": 1.001,
+       "hi": 1.083
+      },
+      {
+       "day": "Fri",
+       "index": 1.02,
+       "lo": 0.979,
+       "hi": 1.066
+      },
+      {
+       "day": "Sat",
+       "index": 0.96,
+       "lo": 0.932,
+       "hi": 0.991
+      },
+      {
+       "day": "Sun",
+       "index": 0.936,
+       "lo": 0.899,
+       "hi": 0.97
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 1560421,
+     "years": 12,
+     "rest_index": 0.89,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.974,
+       "lo": 0.955,
+       "hi": 0.996
+      },
+      {
+       "day": "Tue",
+       "index": 1.027,
+       "lo": 0.988,
+       "hi": 1.068
+      },
+      {
+       "day": "Wed",
+       "index": 1.075,
+       "lo": 1.04,
+       "hi": 1.107
+      },
+      {
+       "day": "Thu",
+       "index": 1.085,
+       "lo": 1.048,
+       "hi": 1.124
+      },
+      {
+       "day": "Fri",
+       "index": 0.992,
+       "lo": 0.966,
+       "hi": 1.021
+      },
+      {
+       "day": "Sat",
+       "index": 0.956,
+       "lo": 0.915,
+       "hi": 1.004
+      },
+      {
+       "day": "Sun",
+       "index": 0.89,
+       "lo": 0.856,
+       "hi": 0.918
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 12176521,
+     "years": 12,
+     "rest_index": 0.937,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.946,
+       "lo": 0.924,
+       "hi": 0.966
+      },
+      {
+       "day": "Tue",
+       "index": 1.005,
+       "lo": 0.984,
+       "hi": 1.025
+      },
+      {
+       "day": "Wed",
+       "index": 1.069,
+       "lo": 1.041,
+       "hi": 1.104
+      },
+      {
+       "day": "Thu",
+       "index": 1.057,
+       "lo": 1.028,
+       "hi": 1.088
+      },
+      {
+       "day": "Fri",
+       "index": 1.017,
+       "lo": 1.003,
+       "hi": 1.033
+      },
+      {
+       "day": "Sat",
+       "index": 0.968,
+       "lo": 0.948,
+       "hi": 0.993
+      },
+      {
+       "day": "Sun",
+       "index": 0.937,
+       "lo": 0.917,
+       "hi": 0.955
+      }
+     ]
+    }
+   ],
+   "daytime_streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 767739,
+     "years": 12,
+     "rest_index": 0.926,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.967,
+       "lo": 0.946,
+       "hi": 0.989
+      },
+      {
+       "day": "Tue",
+       "index": 1.013,
+       "lo": 0.972,
+       "hi": 1.053
+      },
+      {
+       "day": "Wed",
+       "index": 1.046,
+       "lo": 1.012,
+       "hi": 1.082
+      },
+      {
+       "day": "Thu",
+       "index": 1.069,
+       "lo": 1.037,
+       "hi": 1.101
+      },
+      {
+       "day": "Fri",
+       "index": 1.02,
+       "lo": 0.982,
+       "hi": 1.062
+      },
+      {
+       "day": "Sat",
+       "index": 0.96,
+       "lo": 0.928,
+       "hi": 1.0
+      },
+      {
+       "day": "Sun",
+       "index": 0.926,
+       "lo": 0.888,
+       "hi": 0.96
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 1357744,
+     "years": 12,
+     "rest_index": 0.87,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.979,
+       "lo": 0.957,
+       "hi": 1.0
+      },
+      {
+       "day": "Tue",
+       "index": 1.041,
+       "lo": 1.002,
+       "hi": 1.082
+      },
+      {
+       "day": "Wed",
+       "index": 1.076,
+       "lo": 1.035,
+       "hi": 1.115
+      },
+      {
+       "day": "Thu",
+       "index": 1.103,
+       "lo": 1.062,
+       "hi": 1.146
+      },
+      {
+       "day": "Fri",
+       "index": 0.979,
+       "lo": 0.949,
+       "hi": 1.011
+      },
+      {
+       "day": "Sat",
+       "index": 0.951,
+       "lo": 0.908,
+       "hi": 1.008
+      },
+      {
+       "day": "Sun",
+       "index": 0.87,
+       "lo": 0.828,
+       "hi": 0.907
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 7395026,
+     "years": 12,
+     "rest_index": 0.897,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.964,
+       "lo": 0.953,
+       "hi": 0.975
+      },
+      {
+       "day": "Tue",
+       "index": 1.028,
+       "lo": 1.01,
+       "hi": 1.045
+      },
+      {
+       "day": "Wed",
+       "index": 1.078,
+       "lo": 1.058,
+       "hi": 1.099
+      },
+      {
+       "day": "Thu",
+       "index": 1.09,
+       "lo": 1.065,
+       "hi": 1.118
+      },
+      {
+       "day": "Fri",
+       "index": 1.005,
+       "lo": 0.99,
+       "hi": 1.022
+      },
+      {
+       "day": "Sat",
+       "index": 0.937,
+       "lo": 0.92,
+       "hi": 0.954
+      },
+      {
+       "day": "Sun",
+       "index": 0.897,
+       "lo": 0.867,
+       "hi": 0.927
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "country": "Nepal",
+   "name": "Nepal",
+   "rest_day": "Sat",
+   "status": "fail",
+   "streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 17860,
+     "years": 12,
+     "rest_index": 0.891,
+     "lowest_day": "Thu",
+     "rest_is_lowest": false,
+     "p_null": 0.1916,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.925,
+       "lo": 0.718,
+       "hi": 1.16
+      },
+      {
+       "day": "Tue",
+       "index": 1.117,
+       "lo": 0.87,
+       "hi": 1.345
+      },
+      {
+       "day": "Wed",
+       "index": 0.949,
+       "lo": 0.762,
+       "hi": 1.139
+      },
+      {
+       "day": "Thu",
+       "index": 0.854,
+       "lo": 0.665,
+       "hi": 1.066
+      },
+      {
+       "day": "Fri",
+       "index": 1.1,
+       "lo": 0.803,
+       "hi": 1.41
+      },
+      {
+       "day": "Sat",
+       "index": 0.891,
+       "lo": 0.672,
+       "hi": 1.117
+      },
+      {
+       "day": "Sun",
+       "index": 1.164,
+       "lo": 0.951,
+       "hi": 1.385
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 25776,
+     "years": 12,
+     "rest_index": 1.264,
+     "lowest_day": "Sun",
+     "rest_is_lowest": false,
+     "p_null": 0.978,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.193,
+       "lo": 0.983,
+       "hi": 1.405
+      },
+      {
+       "day": "Tue",
+       "index": 0.862,
+       "lo": 0.671,
+       "hi": 1.072
+      },
+      {
+       "day": "Wed",
+       "index": 1.122,
+       "lo": 0.862,
+       "hi": 1.393
+      },
+      {
+       "day": "Thu",
+       "index": 0.943,
+       "lo": 0.714,
+       "hi": 1.176
+      },
+      {
+       "day": "Fri",
+       "index": 0.821,
+       "lo": 0.669,
+       "hi": 1.032
+      },
+      {
+       "day": "Sat",
+       "index": 1.264,
+       "lo": 0.989,
+       "hi": 1.548
+      },
+      {
+       "day": "Sun",
+       "index": 0.796,
+       "lo": 0.625,
+       "hi": 0.974
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 339021,
+     "years": 12,
+     "rest_index": 1.015,
+     "lowest_day": "Thu",
+     "rest_is_lowest": false,
+     "p_null": 0.6139,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.032,
+       "lo": 0.96,
+       "hi": 1.108
+      },
+      {
+       "day": "Tue",
+       "index": 0.968,
+       "lo": 0.887,
+       "hi": 1.057
+      },
+      {
+       "day": "Wed",
+       "index": 0.97,
+       "lo": 0.866,
+       "hi": 1.064
+      },
+      {
+       "day": "Thu",
+       "index": 0.956,
+       "lo": 0.867,
+       "hi": 1.04
+      },
+      {
+       "day": "Fri",
+       "index": 0.986,
+       "lo": 0.865,
+       "hi": 1.108
+      },
+      {
+       "day": "Sat",
+       "index": 1.015,
+       "lo": 0.913,
+       "hi": 1.124
+      },
+      {
+       "day": "Sun",
+       "index": 1.074,
+       "lo": 1.014,
+       "hi": 1.143
+      }
+     ]
+    }
+   ],
+   "daytime_streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 11127,
+     "years": 12,
+     "rest_index": 0.876,
+     "lowest_day": "Wed",
+     "rest_is_lowest": false,
+     "p_null": 0.1934,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.93,
+       "lo": 0.686,
+       "hi": 1.178
+      },
+      {
+       "day": "Tue",
+       "index": 1.117,
+       "lo": 0.9,
+       "hi": 1.343
+      },
+      {
+       "day": "Wed",
+       "index": 0.875,
+       "lo": 0.651,
+       "hi": 1.142
+      },
+      {
+       "day": "Thu",
+       "index": 0.969,
+       "lo": 0.725,
+       "hi": 1.228
+      },
+      {
+       "day": "Fri",
+       "index": 1.046,
+       "lo": 0.78,
+       "hi": 1.343
+      },
+      {
+       "day": "Sat",
+       "index": 0.876,
+       "lo": 0.647,
+       "hi": 1.137
+      },
+      {
+       "day": "Sun",
+       "index": 1.186,
+       "lo": 0.887,
+       "hi": 1.523
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 23188,
+     "years": 12,
+     "rest_index": 1.295,
+     "lowest_day": "Sun",
+     "rest_is_lowest": false,
+     "p_null": 0.9756,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.19,
+       "lo": 0.928,
+       "hi": 1.429
+      },
+      {
+       "day": "Tue",
+       "index": 0.871,
+       "lo": 0.652,
+       "hi": 1.148
+      },
+      {
+       "day": "Wed",
+       "index": 1.114,
+       "lo": 0.802,
+       "hi": 1.415
+      },
+      {
+       "day": "Thu",
+       "index": 0.982,
+       "lo": 0.754,
+       "hi": 1.222
+      },
+      {
+       "day": "Fri",
+       "index": 0.782,
+       "lo": 0.609,
+       "hi": 1.017
+      },
+      {
+       "day": "Sat",
+       "index": 1.295,
+       "lo": 1.005,
+       "hi": 1.621
+      },
+      {
+       "day": "Sun",
+       "index": 0.766,
+       "lo": 0.577,
+       "hi": 0.977
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 135949,
+     "years": 12,
+     "rest_index": 1.071,
+     "lowest_day": "Thu",
+     "rest_is_lowest": false,
+     "p_null": 0.9624,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.995,
+       "lo": 0.932,
+       "hi": 1.048
+      },
+      {
+       "day": "Tue",
+       "index": 0.998,
+       "lo": 0.937,
+       "hi": 1.069
+      },
+      {
+       "day": "Wed",
+       "index": 0.976,
+       "lo": 0.89,
+       "hi": 1.07
+      },
+      {
+       "day": "Thu",
+       "index": 0.953,
+       "lo": 0.878,
+       "hi": 1.026
+      },
+      {
+       "day": "Fri",
+       "index": 0.975,
+       "lo": 0.887,
+       "hi": 1.06
+      },
+      {
+       "day": "Sat",
+       "index": 1.071,
+       "lo": 1.002,
+       "hi": 1.139
+      },
+      {
+       "day": "Sun",
+       "index": 1.031,
+       "lo": 0.952,
+       "hi": 1.11
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "country": "Bangladesh",
+   "name": "Bangladesh",
+   "rest_day": "Fri",
+   "status": "fail",
+   "streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 2674,
+     "years": 10,
+     "rest_index": 0.814,
+     "lowest_day": "Sun",
+     "rest_is_lowest": false,
+     "p_null": 0.0712,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.029,
+       "lo": 0.864,
+       "hi": 1.184
+      },
+      {
+       "day": "Tue",
+       "index": 1.093,
+       "lo": 0.801,
+       "hi": 1.406
+      },
+      {
+       "day": "Wed",
+       "index": 1.048,
+       "lo": 0.782,
+       "hi": 1.329
+      },
+      {
+       "day": "Thu",
+       "index": 0.916,
+       "lo": 0.764,
+       "hi": 1.087
+      },
+      {
+       "day": "Fri",
+       "index": 0.814,
+       "lo": 0.635,
+       "hi": 0.998
+      },
+      {
+       "day": "Sat",
+       "index": 1.401,
+       "lo": 1.155,
+       "hi": 1.652
+      },
+      {
+       "day": "Sun",
+       "index": 0.699,
+       "lo": 0.526,
+       "hi": 0.853
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 22963,
+     "years": 12,
+     "rest_index": 0.912,
+     "lowest_day": "Thu",
+     "rest_is_lowest": false,
+     "p_null": 0.2985,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.087,
+       "lo": 0.748,
+       "hi": 1.443
+      },
+      {
+       "day": "Tue",
+       "index": 1.316,
+       "lo": 0.94,
+       "hi": 1.7
+      },
+      {
+       "day": "Wed",
+       "index": 0.977,
+       "lo": 0.745,
+       "hi": 1.228
+      },
+      {
+       "day": "Thu",
+       "index": 0.701,
+       "lo": 0.504,
+       "hi": 0.898
+      },
+      {
+       "day": "Fri",
+       "index": 0.912,
+       "lo": 0.744,
+       "hi": 1.075
+      },
+      {
+       "day": "Sat",
+       "index": 1.151,
+       "lo": 0.767,
+       "hi": 1.549
+      },
+      {
+       "day": "Sun",
+       "index": 0.856,
+       "lo": 0.609,
+       "hi": 1.125
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 105174,
+     "years": 12,
+     "rest_index": 0.727,
+     "lowest_day": "Fri",
+     "rest_is_lowest": true,
+     "p_null": 0.0008,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.973,
+       "lo": 0.848,
+       "hi": 1.112
+      },
+      {
+       "day": "Tue",
+       "index": 1.325,
+       "lo": 1.202,
+       "hi": 1.437
+      },
+      {
+       "day": "Wed",
+       "index": 0.887,
+       "lo": 0.8,
+       "hi": 0.974
+      },
+      {
+       "day": "Thu",
+       "index": 0.8,
+       "lo": 0.745,
+       "hi": 0.864
+      },
+      {
+       "day": "Fri",
+       "index": 0.727,
+       "lo": 0.643,
+       "hi": 0.821
+      },
+      {
+       "day": "Sat",
+       "index": 1.526,
+       "lo": 1.361,
+       "hi": 1.694
+      },
+      {
+       "day": "Sun",
+       "index": 0.762,
+       "lo": 0.694,
+       "hi": 0.838
+      }
+     ]
+    }
+   ],
+   "daytime_streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 2102,
+     "years": 8,
+     "rest_index": 0.848,
+     "lowest_day": "Sun",
+     "rest_is_lowest": false,
+     "p_null": 0.2,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.017,
+       "lo": 0.755,
+       "hi": 1.26
+      },
+      {
+       "day": "Tue",
+       "index": 1.218,
+       "lo": 0.825,
+       "hi": 1.657
+      },
+      {
+       "day": "Wed",
+       "index": 0.971,
+       "lo": 0.611,
+       "hi": 1.342
+      },
+      {
+       "day": "Thu",
+       "index": 0.876,
+       "lo": 0.58,
+       "hi": 1.224
+      },
+      {
+       "day": "Fri",
+       "index": 0.848,
+       "lo": 0.533,
+       "hi": 1.183
+      },
+      {
+       "day": "Sat",
+       "index": 1.363,
+       "lo": 1.082,
+       "hi": 1.668
+      },
+      {
+       "day": "Sun",
+       "index": 0.707,
+       "lo": 0.513,
+       "hi": 0.922
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 22832,
+     "years": 12,
+     "rest_index": 0.913,
+     "lowest_day": "Thu",
+     "rest_is_lowest": false,
+     "p_null": 0.3159,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.088,
+       "lo": 0.755,
+       "hi": 1.463
+      },
+      {
+       "day": "Tue",
+       "index": 1.319,
+       "lo": 0.917,
+       "hi": 1.681
+      },
+      {
+       "day": "Wed",
+       "index": 0.979,
+       "lo": 0.74,
+       "hi": 1.219
+      },
+      {
+       "day": "Thu",
+       "index": 0.697,
+       "lo": 0.503,
+       "hi": 0.897
+      },
+      {
+       "day": "Fri",
+       "index": 0.913,
+       "lo": 0.746,
+       "hi": 1.082
+      },
+      {
+       "day": "Sat",
+       "index": 1.15,
+       "lo": 0.768,
+       "hi": 1.542
+      },
+      {
+       "day": "Sun",
+       "index": 0.855,
+       "lo": 0.598,
+       "hi": 1.114
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 94713,
+     "years": 12,
+     "rest_index": 0.706,
+     "lowest_day": "Fri",
+     "rest_is_lowest": true,
+     "p_null": 0.0006,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.982,
+       "lo": 0.843,
+       "hi": 1.143
+      },
+      {
+       "day": "Tue",
+       "index": 1.351,
+       "lo": 1.223,
+       "hi": 1.467
+      },
+      {
+       "day": "Wed",
+       "index": 0.868,
+       "lo": 0.779,
+       "hi": 0.959
+      },
+      {
+       "day": "Thu",
+       "index": 0.782,
+       "lo": 0.723,
+       "hi": 0.849
+      },
+      {
+       "day": "Fri",
+       "index": 0.706,
+       "lo": 0.609,
+       "hi": 0.805
+      },
+      {
+       "day": "Sat",
+       "index": 1.59,
+       "lo": 1.41,
+       "hi": 1.779
+      },
+      {
+       "day": "Sun",
+       "index": 0.723,
+       "lo": 0.649,
+       "hi": 0.81
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "country": "Egypt",
+   "name": "Egypt",
+   "rest_day": "Fri",
+   "status": "fail",
+   "streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 6557,
+     "years": 12,
+     "rest_index": 1.045,
+     "lowest_day": "Tue",
+     "rest_is_lowest": false,
+     "p_null": 0.7451,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.07,
+       "lo": 0.932,
+       "hi": 1.223
+      },
+      {
+       "day": "Tue",
+       "index": 0.929,
+       "lo": 0.851,
+       "hi": 1.009
+      },
+      {
+       "day": "Wed",
+       "index": 1.024,
+       "lo": 0.947,
+       "hi": 1.105
+      },
+      {
+       "day": "Thu",
+       "index": 0.965,
+       "lo": 0.83,
+       "hi": 1.083
+      },
+      {
+       "day": "Fri",
+       "index": 1.045,
+       "lo": 0.838,
+       "hi": 1.266
+      },
+      {
+       "day": "Sat",
+       "index": 1.018,
+       "lo": 0.892,
+       "hi": 1.158
+      },
+      {
+       "day": "Sun",
+       "index": 0.949,
+       "lo": 0.848,
+       "hi": 1.046
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 4222,
+     "years": 12,
+     "rest_index": 1.088,
+     "lowest_day": "Mon",
+     "rest_is_lowest": false,
+     "p_null": 0.7868,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.856,
+       "lo": 0.69,
+       "hi": 1.035
+      },
+      {
+       "day": "Tue",
+       "index": 0.99,
+       "lo": 0.869,
+       "hi": 1.116
+      },
+      {
+       "day": "Wed",
+       "index": 0.886,
+       "lo": 0.718,
+       "hi": 1.071
+      },
+      {
+       "day": "Thu",
+       "index": 1.051,
+       "lo": 0.842,
+       "hi": 1.265
+      },
+      {
+       "day": "Fri",
+       "index": 1.088,
+       "lo": 0.843,
+       "hi": 1.339
+      },
+      {
+       "day": "Sat",
+       "index": 1.011,
+       "lo": 0.749,
+       "hi": 1.291
+      },
+      {
+       "day": "Sun",
+       "index": 1.117,
+       "lo": 0.884,
+       "hi": 1.377
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 118795,
+     "years": 12,
+     "rest_index": 1.036,
+     "lowest_day": "Sun",
+     "rest_is_lowest": false,
+     "p_null": 0.9756,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.996,
+       "lo": 0.963,
+       "hi": 1.034
+      },
+      {
+       "day": "Tue",
+       "index": 1.011,
+       "lo": 0.983,
+       "hi": 1.035
+      },
+      {
+       "day": "Wed",
+       "index": 1.004,
+       "lo": 0.976,
+       "hi": 1.03
+      },
+      {
+       "day": "Thu",
+       "index": 0.992,
+       "lo": 0.975,
+       "hi": 1.013
+      },
+      {
+       "day": "Fri",
+       "index": 1.036,
+       "lo": 0.978,
+       "hi": 1.089
+      },
+      {
+       "day": "Sat",
+       "index": 0.992,
+       "lo": 0.967,
+       "hi": 1.017
+      },
+      {
+       "day": "Sun",
+       "index": 0.97,
+       "lo": 0.95,
+       "hi": 0.989
+      }
+     ]
+    }
+   ],
+   "daytime_streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 4405,
+     "years": 12,
+     "rest_index": 1.09,
+     "lowest_day": "Tue",
+     "rest_is_lowest": false,
+     "p_null": 0.8248,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.131,
+       "lo": 0.938,
+       "hi": 1.333
+      },
+      {
+       "day": "Tue",
+       "index": 0.913,
+       "lo": 0.804,
+       "hi": 1.031
+      },
+      {
+       "day": "Wed",
+       "index": 1.012,
+       "lo": 0.896,
+       "hi": 1.142
+      },
+      {
+       "day": "Thu",
+       "index": 0.916,
+       "lo": 0.765,
+       "hi": 1.059
+      },
+      {
+       "day": "Fri",
+       "index": 1.09,
+       "lo": 0.825,
+       "hi": 1.395
+      },
+      {
+       "day": "Sat",
+       "index": 1.02,
+       "lo": 0.817,
+       "hi": 1.221
+      },
+      {
+       "day": "Sun",
+       "index": 0.918,
+       "lo": 0.777,
+       "hi": 1.052
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 3408,
+     "years": 11,
+     "rest_index": 1.138,
+     "lowest_day": "Mon",
+     "rest_is_lowest": false,
+     "p_null": 0.831,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.847,
+       "lo": 0.654,
+       "hi": 1.064
+      },
+      {
+       "day": "Tue",
+       "index": 0.985,
+       "lo": 0.805,
+       "hi": 1.162
+      },
+      {
+       "day": "Wed",
+       "index": 0.883,
+       "lo": 0.663,
+       "hi": 1.119
+      },
+      {
+       "day": "Thu",
+       "index": 1.006,
+       "lo": 0.777,
+       "hi": 1.265
+      },
+      {
+       "day": "Fri",
+       "index": 1.138,
+       "lo": 0.831,
+       "hi": 1.456
+      },
+      {
+       "day": "Sat",
+       "index": 1.01,
+       "lo": 0.713,
+       "hi": 1.334
+      },
+      {
+       "day": "Sun",
+       "index": 1.13,
+       "lo": 0.859,
+       "hi": 1.44
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 50216,
+     "years": 12,
+     "rest_index": 0.981,
+     "lowest_day": "Sun",
+     "rest_is_lowest": false,
+     "p_null": 0.2659,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.975,
+       "lo": 0.909,
+       "hi": 1.04
+      },
+      {
+       "day": "Tue",
+       "index": 1.027,
+       "lo": 0.982,
+       "hi": 1.073
+      },
+      {
+       "day": "Wed",
+       "index": 0.982,
+       "lo": 0.936,
+       "hi": 1.023
+      },
+      {
+       "day": "Thu",
+       "index": 1.005,
+       "lo": 0.967,
+       "hi": 1.043
+      },
+      {
+       "day": "Fri",
+       "index": 0.981,
+       "lo": 0.879,
+       "hi": 1.094
+      },
+      {
+       "day": "Sat",
+       "index": 1.065,
+       "lo": 1.024,
+       "hi": 1.104
+      },
+      {
+       "day": "Sun",
+       "index": 0.966,
+       "lo": 0.929,
+       "hi": 1.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "country": "India",
+   "name": "India",
+   "rest_day": "Sun",
+   "status": "fail",
+   "streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 259057,
+     "years": 12,
+     "rest_index": 1.022,
+     "lowest_day": "Thu",
+     "rest_is_lowest": false,
+     "p_null": 0.7423,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.983,
+       "lo": 0.92,
+       "hi": 1.051
+      },
+      {
+       "day": "Tue",
+       "index": 0.991,
+       "lo": 0.933,
+       "hi": 1.05
+      },
+      {
+       "day": "Wed",
+       "index": 1.017,
+       "lo": 0.963,
+       "hi": 1.08
+      },
+      {
+       "day": "Thu",
+       "index": 0.962,
+       "lo": 0.905,
+       "hi": 1.013
+      },
+      {
+       "day": "Fri",
+       "index": 1.002,
+       "lo": 0.931,
+       "hi": 1.074
+      },
+      {
+       "day": "Sat",
+       "index": 1.023,
+       "lo": 0.96,
+       "hi": 1.097
+      },
+      {
+       "day": "Sun",
+       "index": 1.022,
+       "lo": 0.953,
+       "hi": 1.085
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 630552,
+     "years": 12,
+     "rest_index": 0.949,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.1344,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.001,
+       "lo": 0.928,
+       "hi": 1.079
+      },
+      {
+       "day": "Tue",
+       "index": 1.045,
+       "lo": 0.96,
+       "hi": 1.127
+      },
+      {
+       "day": "Wed",
+       "index": 1.021,
+       "lo": 0.92,
+       "hi": 1.126
+      },
+      {
+       "day": "Thu",
+       "index": 0.982,
+       "lo": 0.89,
+       "hi": 1.077
+      },
+      {
+       "day": "Fri",
+       "index": 1.02,
+       "lo": 0.934,
+       "hi": 1.115
+      },
+      {
+       "day": "Sat",
+       "index": 0.982,
+       "lo": 0.893,
+       "hi": 1.069
+      },
+      {
+       "day": "Sun",
+       "index": 0.949,
+       "lo": 0.872,
+       "hi": 1.038
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 5048853,
+     "years": 12,
+     "rest_index": 1.003,
+     "lowest_day": "Thu",
+     "rest_is_lowest": false,
+     "p_null": 0.5885,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.001,
+       "lo": 0.973,
+       "hi": 1.029
+      },
+      {
+       "day": "Tue",
+       "index": 1.012,
+       "lo": 0.984,
+       "hi": 1.043
+      },
+      {
+       "day": "Wed",
+       "index": 0.99,
+       "lo": 0.97,
+       "hi": 1.01
+      },
+      {
+       "day": "Thu",
+       "index": 0.979,
+       "lo": 0.952,
+       "hi": 1.003
+      },
+      {
+       "day": "Fri",
+       "index": 0.983,
+       "lo": 0.948,
+       "hi": 1.013
+      },
+      {
+       "day": "Sat",
+       "index": 1.033,
+       "lo": 1.0,
+       "hi": 1.062
+      },
+      {
+       "day": "Sun",
+       "index": 1.003,
+       "lo": 0.977,
+       "hi": 1.035
+      }
+     ]
+    }
+   ],
+   "daytime_streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 196806,
+     "years": 12,
+     "rest_index": 1.022,
+     "lowest_day": "Thu",
+     "rest_is_lowest": false,
+     "p_null": 0.6923,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.968,
+       "lo": 0.878,
+       "hi": 1.06
+      },
+      {
+       "day": "Tue",
+       "index": 1.009,
+       "lo": 0.928,
+       "hi": 1.088
+      },
+      {
+       "day": "Wed",
+       "index": 1.016,
+       "lo": 0.925,
+       "hi": 1.112
+      },
+      {
+       "day": "Thu",
+       "index": 0.955,
+       "lo": 0.879,
+       "hi": 1.029
+      },
+      {
+       "day": "Fri",
+       "index": 1.023,
+       "lo": 0.926,
+       "hi": 1.116
+      },
+      {
+       "day": "Sat",
+       "index": 1.006,
+       "lo": 0.922,
+       "hi": 1.1
+      },
+      {
+       "day": "Sun",
+       "index": 1.022,
+       "lo": 0.921,
+       "hi": 1.128
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 616026,
+     "years": 12,
+     "rest_index": 0.95,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.1464,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.999,
+       "lo": 0.923,
+       "hi": 1.081
+      },
+      {
+       "day": "Tue",
+       "index": 1.048,
+       "lo": 0.964,
+       "hi": 1.129
+      },
+      {
+       "day": "Wed",
+       "index": 1.018,
+       "lo": 0.92,
+       "hi": 1.132
+      },
+      {
+       "day": "Thu",
+       "index": 0.984,
+       "lo": 0.887,
+       "hi": 1.081
+      },
+      {
+       "day": "Fri",
+       "index": 1.02,
+       "lo": 0.933,
+       "hi": 1.113
+      },
+      {
+       "day": "Sat",
+       "index": 0.982,
+       "lo": 0.892,
+       "hi": 1.064
+      },
+      {
+       "day": "Sun",
+       "index": 0.95,
+       "lo": 0.872,
+       "hi": 1.042
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 3767039,
+     "years": 12,
+     "rest_index": 0.988,
+     "lowest_day": "Thu",
+     "rest_is_lowest": false,
+     "p_null": 0.2545,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 1.002,
+       "lo": 0.965,
+       "hi": 1.037
+      },
+      {
+       "day": "Tue",
+       "index": 1.029,
+       "lo": 1.004,
+       "hi": 1.055
+      },
+      {
+       "day": "Wed",
+       "index": 0.981,
+       "lo": 0.966,
+       "hi": 0.998
+      },
+      {
+       "day": "Thu",
+       "index": 0.969,
+       "lo": 0.937,
+       "hi": 0.996
+      },
+      {
+       "day": "Fri",
+       "index": 0.973,
+       "lo": 0.942,
+       "hi": 1.004
+      },
+      {
+       "day": "Sat",
+       "index": 1.056,
+       "lo": 1.028,
+       "hi": 1.081
+      },
+      {
+       "day": "Sun",
+       "index": 0.988,
+       "lo": 0.964,
+       "hi": 1.015
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "country": "Brazil",
+   "name": "Brazil",
+   "rest_day": "Sun",
+   "status": "pass",
+   "streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 1560796,
+     "years": 12,
+     "rest_index": 0.892,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.958,
+       "lo": 0.928,
+       "hi": 0.988
+      },
+      {
+       "day": "Tue",
+       "index": 1.018,
+       "lo": 0.985,
+       "hi": 1.051
+      },
+      {
+       "day": "Wed",
+       "index": 1.054,
+       "lo": 1.031,
+       "hi": 1.08
+      },
+      {
+       "day": "Thu",
+       "index": 1.013,
+       "lo": 0.995,
+       "hi": 1.029
+      },
+      {
+       "day": "Fri",
+       "index": 1.046,
+       "lo": 1.01,
+       "hi": 1.079
+      },
+      {
+       "day": "Sat",
+       "index": 1.018,
+       "lo": 0.991,
+       "hi": 1.049
+      },
+      {
+       "day": "Sun",
+       "index": 0.892,
+       "lo": 0.85,
+       "hi": 0.934
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 2444343,
+     "years": 12,
+     "rest_index": 0.922,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.953,
+       "lo": 0.908,
+       "hi": 0.992
+      },
+      {
+       "day": "Tue",
+       "index": 1.003,
+       "lo": 0.968,
+       "hi": 1.042
+      },
+      {
+       "day": "Wed",
+       "index": 1.061,
+       "lo": 1.025,
+       "hi": 1.098
+      },
+      {
+       "day": "Thu",
+       "index": 1.002,
+       "lo": 0.965,
+       "hi": 1.038
+      },
+      {
+       "day": "Fri",
+       "index": 1.034,
+       "lo": 0.978,
+       "hi": 1.094
+      },
+      {
+       "day": "Sat",
+       "index": 1.026,
+       "lo": 0.991,
+       "hi": 1.067
+      },
+      {
+       "day": "Sun",
+       "index": 0.922,
+       "lo": 0.891,
+       "hi": 0.956
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 15090238,
+     "years": 12,
+     "rest_index": 0.941,
+     "lowest_day": "Mon",
+     "rest_is_lowest": false,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": false,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.933,
+       "lo": 0.906,
+       "hi": 0.962
+      },
+      {
+       "day": "Tue",
+       "index": 1.008,
+       "lo": 0.984,
+       "hi": 1.032
+      },
+      {
+       "day": "Wed",
+       "index": 1.046,
+       "lo": 1.024,
+       "hi": 1.069
+      },
+      {
+       "day": "Thu",
+       "index": 1.035,
+       "lo": 1.011,
+       "hi": 1.061
+      },
+      {
+       "day": "Fri",
+       "index": 1.014,
+       "lo": 0.983,
+       "hi": 1.043
+      },
+      {
+       "day": "Sat",
+       "index": 1.024,
+       "lo": 0.997,
+       "hi": 1.049
+      },
+      {
+       "day": "Sun",
+       "index": 0.941,
+       "lo": 0.917,
+       "hi": 0.967
+      }
+     ]
+    }
+   ],
+   "daytime_streams": [
+    {
+     "stream": "Terra",
+     "status": "ok",
+     "detections": 927623,
+     "years": 12,
+     "rest_index": 0.894,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.958,
+       "lo": 0.921,
+       "hi": 0.993
+      },
+      {
+       "day": "Tue",
+       "index": 1.006,
+       "lo": 0.971,
+       "hi": 1.039
+      },
+      {
+       "day": "Wed",
+       "index": 1.042,
+       "lo": 1.016,
+       "hi": 1.065
+      },
+      {
+       "day": "Thu",
+       "index": 1.029,
+       "lo": 1.007,
+       "hi": 1.054
+      },
+      {
+       "day": "Fri",
+       "index": 1.034,
+       "lo": 1.002,
+       "hi": 1.065
+      },
+      {
+       "day": "Sat",
+       "index": 1.037,
+       "lo": 1.012,
+       "hi": 1.063
+      },
+      {
+       "day": "Sun",
+       "index": 0.894,
+       "lo": 0.848,
+       "hi": 0.94
+      }
+     ]
+    },
+    {
+     "stream": "Aqua",
+     "status": "ok",
+     "detections": 2181533,
+     "years": 12,
+     "rest_index": 0.909,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.96,
+       "lo": 0.91,
+       "hi": 1.006
+      },
+      {
+       "day": "Tue",
+       "index": 1.007,
+       "lo": 0.965,
+       "hi": 1.048
+      },
+      {
+       "day": "Wed",
+       "index": 1.07,
+       "lo": 1.03,
+       "hi": 1.11
+      },
+      {
+       "day": "Thu",
+       "index": 0.993,
+       "lo": 0.96,
+       "hi": 1.026
+      },
+      {
+       "day": "Fri",
+       "index": 1.04,
+       "lo": 0.978,
+       "hi": 1.101
+      },
+      {
+       "day": "Sat",
+       "index": 1.022,
+       "lo": 0.98,
+       "hi": 1.072
+      },
+      {
+       "day": "Sun",
+       "index": 0.909,
+       "lo": 0.878,
+       "hi": 0.942
+      }
+     ]
+    },
+    {
+     "stream": "VIIRS",
+     "status": "ok",
+     "detections": 10050731,
+     "years": 12,
+     "rest_index": 0.91,
+     "lowest_day": "Sun",
+     "rest_is_lowest": true,
+     "p_null": 0.0002,
+     "bonferroni_m": 21,
+     "significant": true,
+     "weekdays": [
+      {
+       "day": "Mon",
+       "index": 0.948,
+       "lo": 0.92,
+       "hi": 0.976
+      },
+      {
+       "day": "Tue",
+       "index": 1.021,
+       "lo": 0.997,
+       "hi": 1.047
+      },
+      {
+       "day": "Wed",
+       "index": 1.058,
+       "lo": 1.032,
+       "hi": 1.083
+      },
+      {
+       "day": "Thu",
+       "index": 1.032,
+       "lo": 1.006,
+       "hi": 1.056
+      },
+      {
+       "day": "Fri",
+       "index": 1.017,
+       "lo": 0.977,
+       "hi": 1.05
+      },
+      {
+       "day": "Sat",
+       "index": 1.015,
+       "lo": 0.991,
+       "hi": 1.036
+      },
+      {
+       "day": "Sun",
+       "index": 0.91,
+       "lo": 0.883,
+       "hi": 0.938
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "negative_control": [
+  {
+   "stream": "Terra",
+   "status": "ok",
+   "detections": 100462,
+   "max_abs_deviation": 0.016,
+   "Mon": 1.011,
+   "Tue": 0.993,
+   "Wed": 0.994,
+   "Thu": 0.984,
+   "Fri": 1.01,
+   "Sat": 1.005,
+   "Sun": 1.004
+  },
+  {
+   "stream": "Aqua",
+   "status": "ok",
+   "detections": 83690,
+   "max_abs_deviation": 0.024,
+   "Mon": 1.008,
+   "Tue": 0.998,
+   "Wed": 0.99,
+   "Thu": 0.976,
+   "Fri": 1.022,
+   "Sat": 0.986,
+   "Sun": 1.021
+  },
+  {
+   "stream": "VIIRS",
+   "status": "ok",
+   "detections": 2251469,
+   "max_abs_deviation": 0.017,
+   "Mon": 0.996,
+   "Tue": 1.01,
+   "Wed": 0.998,
+   "Thu": 0.983,
+   "Fri": 0.998,
+   "Sat": 1.011,
+   "Sun": 1.005
+  }
+ ],
+ "diagnostics": {
+  "files": 168,
+  "rows_loaded": 54168264,
+  "rows_vegetation": 46765553,
+  "rows_static_control": 2435621,
+  "vegetation": {
+   "invalid_timestamps_dropped": 0,
+   "unresolved_timezone_dropped": 0,
+   "share_date_changed_by_utc_to_local": 0.1577
+  }
+ },
+ "caveats": [
+  "A robust rest-day dip is consistent with human scheduling of burning; it does not by itself establish ignition cause. Absence of a dip does not establish weather-driven fire.",
+  "Streams observe overlapping fires: agreement is corroboration, not independent replication.",
+  "Observation coverage (cloud, overpass gaps) by weekday is not measured."
+ ],
+ "wording": "A rest-day dip is consistent with people scheduling their burning. It is not proof of cause, and no dip does not mean fires are weather-driven. Counts are satellite detections, not fires."
+}

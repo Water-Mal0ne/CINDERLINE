@@ -5,7 +5,7 @@
 - A hotspot is a detected pixel, not an independent fire or ignition. One event can generate many detections across days, pixels and instruments.
 - Aqua-equivalent counts are a calibrated instrument scale, not ground truth. Differences in resolution, overpass time, saturation and detection probability remain.
 - An absent record does not distinguish a genuine absence of fire from obscuration or missed observations. Annual archive completeness is not observation completeness.
-- A weekly dip is consistent with human scheduling. It cannot determine ignition cause, estimate the fraction of human-set fires, or distinguish prevention needs from forecasting needs on its own.
+- A weekly dip is consistent with people scheduling their burning. It cannot determine ignition cause, estimate the fraction of human-set fires, or distinguish prevention needs from forecasting needs on its own. Absence of a dip does not mean fires are weather-driven.
 - The streams share underlying events and some measurement limitations. Agreement between them is not independent replication.
 
 ## Input coverage and spatial resolution
@@ -36,7 +36,17 @@ Year resampling preserves each year's aggregate weekday pattern but does not sol
 
 Calendar exposure adjusts 52/53 weekday counts but does not measure clear-sky exposure. Inference remains conditional on that unmeasured factor. The displayed 95% intervals are pointwise, while the p-values use a fixed Bonferroni family. Daytime and control analyses are separate diagnostic families; they must not be searched for whichever result happens to look strongest.
 
-Static industrial sources can follow human schedules, and volcanic detections may be scarce. These are imperfect controls. A nonsignificant control does not demonstrate absence of bias. Missing or flagged controls prevent an unqualified release verdict in the implemented gate. In this seven-country release, Brazil meets the vegetation statistical criterion but its matching control is flagged. Only Australia qualifies beyond the US; the overall production gate remains `insufficient_data` even though all seven countries have been evaluated.
+Static industrial sources can follow human schedules, and volcanic detections may be scarce. These are imperfect controls. A nonsignificant control does not demonstrate absence of bias. In the official pre-registered test the control is pooled across countries; per-country matched controls are a robustness check, not part of the gate.
+
+### What the rhythm result does and does not show
+
+- The official decision (pass) comes from the pre-registered `kill_test.py` gate. All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.
+- Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-registered result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.
+- A Sunday dip in static sources does not by itself mean a satellite artifact: some type-2 static sources are industrial sites that may also follow the work week. The clean static controls in the US and Australia are what argue against a satellite or processing artifact.
+- The official analysis uses 2013–2024 for all streams; the stricter release analysis uses 2002–2024 MODIS. The two can disagree, as Brazil's control shows.
+- Countries are treated as single units with one rest day; large countries mix regions with very different burning practices.
+- The northeast India interpretation is an exploratory correlation between a detection pattern and census religion shares (Census of India 2011), not evidence of cause. The link is not clean (Meghalaya, mostly Christian, has a weaker dip; Assam, mostly not Christian, still has one). Cells are assigned to states by centroid, two states rest on a single cell, and per-state p-values are not corrected for multiple comparisons.
+- The per-cell map is exploratory. Its thresholds (300 detections a year, 8 usable years) limit it to places with a lot of burning; grey areas mean too few detections, not "no dip". Neighbouring cells share weather and practice, so a cluster of significant cells is one regional pattern, not many independent findings. Area boundaries quoted for regional findings were drawn after viewing the maps.
 
 Synthetic data can validate software under declared assumptions but cannot validate real-world generalization. A synthetic example must be visibly labeled in every exported figure, report and app view.
 

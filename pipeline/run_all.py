@@ -9,7 +9,7 @@ import time
 
 import pandas as pd
 
-from pipeline import calendar, clean, download, harmonize, rhythm
+from pipeline import calendar, clean, download, harmonize, rhythm, rhythm_web
 
 
 def manifest_signature(manifest, countries):
@@ -97,7 +97,9 @@ def main():
         for region, rows in daily.groupby("region"):
             rows.to_parquet(processed / f"harmonized_{region}.parquet", index=False)
         print("Computing weekday estimates and release gate...", flush=True)
-        rhythm_result = rhythm.run(detections, reports, label=label, manifest=manifest)
+        # Official decision = pre-registered kill_test.py outputs; rhythm.py adds robustness checks only.
+        official = None if args.synthetic else root / "reports/official"
+        rhythm_result = rhythm.run(detections, reports, label=label, manifest=manifest, official=official)
     from pipeline.synthetic import save_switch_check
     save_switch_check(reports)
     regions = calendar.build(daily, evaluation, rhythm_result, public, detections=detections,
@@ -105,6 +107,8 @@ def main():
     from pipeline import globe
     model_card = json.loads((reports / "harmonization_model.json").read_text(encoding="utf-8"))
     globe.build(detections, model_card, public / "globe.json")
+    if not args.synthetic and (root / "reports/official/kill_test_gate.json").exists():
+        rhythm_web.build(root / "reports/official", root / "reports/rhythm_robustness", public)
     summary = dict(label=label, regions=regions, detections=len(detections),
                    harmonized_rows=len(daily), rhythm_gate=rhythm_result["gate"]["decision"],
                    seconds=round(time.time() - started, 1),
