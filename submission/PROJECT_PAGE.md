@@ -4,30 +4,22 @@
 
 **Team:** Bhaktapur, Nepal
 
-## Act 1: Did fire activity change, or did our camera change?
+A sharper satellite can make the fire record change even when burning has not. FIRETRACE builds a historical calendar on a declared reference scale, and tests whether better-looking numbers preserve the season people need to understand.
 
-VIIRS (from 2012) detects smaller fires than MODIS, so a naively joined record can jump. FIRETRACE builds an Aqua-reference-equivalent detection record with explicit comparison limits.
+NASA FIRMS observations come from instruments with different detection characteristics. We compare uncalibrated VIIRS, one global conversion ratio, and stratified ratios against MODIS Aqua. Training uses 2013–2017, model selection 2018–2019, and locked evaluation 2020–2024. Nepal's weekly mean absolute error falls from 43.3 with the simple ratio to 11.3 with its selected model. Egypt retains +51.7% weekly bias. These measure agreement with Aqua, not true fire counts. [S01–S02]
 
-Terra, Aqua and VIIRS are never pooled. We compare three models: uncalibrated VIIRS (B0), one training ratio (B1) and ratios by country, day/night and fire intensity (M1). We trained on 2013-2017, chose models on 2018-2019 and tested once on 2020-2024. Nepal's M1 weekly test error is 11.3 versus 43.3 for B1. In the US the simpler B1 wins. Egypt keeps a +52% bias, and the US fit weakens through the test years.
+The calendar covers Australia, Bangladesh, Brazil, Egypt, India, Nepal and the United States, 2003–2024. Users compare raw and harmonized views, inspect weekly evidence, distinguish outage weeks from recorded zero, explore annual geography, and export CSV or historical ICS references. It supports historical exploration, not forecasts or emergency alerts. [S08]
 
-The historical calendar covers Australia, Bangladesh, Brazil, Egypt, India, Nepal and the United States, 2003-2024: raw/harmonized toggle, typical seasons, unusual weeks, evidence cards and CSV/ICS downloads. It complements near-real-time alerts such as ICIMOD's; it is not a forecast. Hotspots are detections, not a count of fires.
-
-## Act 2: A separately measured weekly pattern
+We also test whether conversion preserves seasonal shape. In India's retrospective whole-year comparison, a better annual total accompanies worse monthly-share agreement. That direction survives both common-date outage masks; Nepal's seasonal improvement also survives. The full results retain simple baselines and failures. [S10]
 
 We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration.
 
-We fixed rest days (Sunday: US, Australia, Brazil, India; Saturday: Nepal; Friday: Bangladesh, Egypt) and a rule: the US replicates the known Sunday dip, and at least two other countries have their rest day lowest and significant after correction in two of three streams.
+The official country rule passes for the US, Australia and Brazil; India, Nepal, Bangladesh and Egypt do not pass. All passing countries test Sunday. Brazil's evidence is weaker under stricter controls. Newly active grid cells are not verified ignitions. Northeast India's map is exploratory, Nepal's simulation shows limited power, and a Bangladesh hills prediction failed. No result identifies who burns or why. [S04–S07, S13]
 
-**Sunday dip clear in the US and Australia, weaker in Brazil, and not established by the country rule where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.**
+A separate fixed US daytime comparison finds a smaller Sunday deficit in sampled radiative power than in counts for Aqua and S-NPP; Terra fails the criterion. The same observations, both outage masks and independent recomputation are retained. Its protocol was locally frozen before analysis, but the Git receipt came after the original result. Summed FRP is not energy, emissions or burned area. [S11]
 
-The US (3 of 3 streams, Sunday 22-33% below an average day) and Australia (3 of 3) pass. Brazil passes two streams, not VIIRS; its Terra industrial-source control dips only in 2002-2007. All three passing countries rest on Sunday: the result does not follow different national rest days. Nepal's country rule has low power for a modest Saturday dip.
+[Live application](https://firetrace-bhaktapur-2026.pages.dev/) · [Source repository](https://github.com/Water-Mal0ne/FIRETRACE) · [NASA FIRMS](https://firms.modaps.eosdis.nasa.gov/country/)
 
-Exploratory one-degree map: northeast India has 19 of 26 significant cells (14 of 21 mostly inside India); Aqua agrees. The deepest dips are in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day. No weekly dip is established in the rest of India, including Punjab. Causes remain unresolved; a failed rest-day test does not classify fire causes.
+**AI disclosure:** Codex and Claude Code assisted with implementation, testing and writing; the team must review the scientific claims before submission. See `AI_DISCLOSURE.md`. NASA does not endorse this project. [S12]
 
-[Live application](https://firetrace-bhaktapur-2026.pages.dev/) · [Source repository](https://github.com/Water-Mal0ne/FIRETRACE)
-
-[NASA data: FIRMS](https://firms.modaps.eosdis.nasa.gov/country/) · [Weekly-cycle research context](https://doi.org/10.1002/2015GL066383)
-
-**AI disclosure:** Codex and Claude Code assisted; see `AI_DISCLOSURE.md`. MIT licensed.
-
-**NASA does not endorse this project.**
+Sources [S01–S13]: `submission/JUDGE_QA.md` and the submission evidence ledger. Reviewed research additions remain on separate branches until team approval.

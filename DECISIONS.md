@@ -1,5 +1,14 @@
 # Implementation decisions
 
+## Submission package decisions, 15 November 2026 Nepal time
+
+- 2026-11-14 20:05 UTC: Keep seven authored slides, each title plus authored content within 40 words and notes within 60–90. Preserve real chart and screenshot labels separately as evidence; do not erase scientific labels to satisfy a literal OCR word count.
+- 2026-11-14 20:07 UTC: Preserve exact source snapshots from the reviewed FRP and season branches, pin their source commits and hashes, and distinguish them from the deployed baseline. Repository visibility was checked with GitHub CLI and is PUBLIC; repeat public-link access checks before submission.
+- 2026-11-14 20:08 UTC: The bundled presentation engine can export editable PPTX and render slides, but its native PDF exporter lacks a standard-font dependency. Produce the PDF from the same verified high-resolution slide renders using bundled ReportLab; no library installation or scientific-chart alteration is needed.
+- 2026-11-14 20:10 UTC: Use NASA's current Global Organizing Team submission-field answer because the main guide URL returns HTTP 502. Leave registered team identity and the official project URL as explicit placeholders; no login, acceptance of terms or submission is performed.
+- 2026-11-14 20:10 UTC: Real live evidence screenshots show the deployed baseline. The Nepal 2016 example is from training, and the India rhythm map is exploratory. Do not present these screenshots as validation of new branch results.
+- 2026-11-14 20:10 UTC: Correct the judge explanation of uncertainty to match the app: daily conversion intervals are displayed separately, not summed into a weekly confidence interval. This is a documentation correction only.
+
 ## Scope and delivery
 
 - The user requested continued implementation, distinct builder/checker/creative roles and successive independent reviews. Up to three agents work alongside the coordinator, with separate file ownership; additional roles rotate through those slots. The coordinator integrates and publishes tested changes.

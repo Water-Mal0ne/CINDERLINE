@@ -1,4 +1,7 @@
 *.ics -text whitespace=cr-at-eol
+submission/evidence/** -text -whitespace
+submission/*.pdf binary
+submission/*.pptx binary
 reports/harmonization_model.json -text whitespace=cr-at-eol
 reports/harmonization_eval.csv -text whitespace=cr-at-eol
 reports/selection_lock.json -text whitespace=cr-at-eol

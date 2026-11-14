@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "model",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/harmonization_model.json",
+      "local_path": "submission/evidence/base/reports/harmonization_model.json",
+      "sha256": "596adf75f544032e1b733f2f85d4fd97120b4514bdd2f2a894e97bf7ab8a303a",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/harmonization_model.json"
+    },
+    {
+      "id": "selection",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/selection_lock.json",
+      "local_path": "submission/evidence/base/reports/selection_lock.json",
+      "sha256": "3b7f7e3cf52b93287546a3756f612c9194b5c9ee032f63ccf5cf48b9f0178904",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/selection_lock.json"
+    },
+    {
+      "id": "layer1",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/layer1_table.csv",
+      "local_path": "submission/evidence/base/reports/review/layer1_table.csv",
+      "sha256": "4d97c1c64d306a56480ec343b02b70d69adc76b9a4616419a7913c2532fe358c",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/layer1_table.csv"
+    },
+    {
+      "id": "official_eval",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/harmonization_eval.csv",
+      "local_path": "submission/evidence/base/reports/harmonization_eval.csv",
+      "sha256": "976d23d94a68769028c3d1af2ea002d17206992fbca1e759fbbb3b7b0509337f",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/harmonization_eval.csv"
+    },
+    {
+      "id": "layer1_years",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/layer1_per_year.csv",
+      "local_path": "submission/evidence/base/reports/review/layer1_per_year.csv",
+      "sha256": "4acd22d29c2f606367d225dde0e78a7ee165d97d54c72bd644e1421c810d127a",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/layer1_per_year.csv"
+    },
+    {
+      "id": "ratio_trend",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/ratio_trend.csv",
+      "local_path": "submission/evidence/base/reports/review/ratio_trend.csv",
+      "sha256": "3278daf70d0734cd5b766c05d37ee9e14d1d514b50219e6c2e715ca17b2419ce",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/ratio_trend.csv"
+    },
+    {
+      "id": "rhythm_gate",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/official/kill_test_gate.json",
+      "local_path": "submission/evidence/base/reports/official/kill_test_gate.json",
+      "sha256": "9818a1950bb2a4eb58943826b83aeaf5b8012cce1557ea417c07537e977fa5c7",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/official/kill_test_gate.json"
+    },
+    {
+      "id": "rhythm_results",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/official/kill_test_results.csv",
+      "local_path": "submission/evidence/base/reports/official/kill_test_results.csv",
+      "sha256": "624dc3b174bdf695218b81a0237d79f9492091cf8bd0892ee7b98cbcd300e05a",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/official/kill_test_results.csv"
+    },
+    {
+      "id": "nepal_power",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/rhythm/b5_nepal_power.csv",
+      "local_path": "submission/evidence/base/reports/review/rhythm/b5_nepal_power.csv",
+      "sha256": "04d732bb0f87f55349ea8d48c4b5f493af0da43a4965da620842a1dea4c79194",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/rhythm/b5_nepal_power.csv"
+    },
+    {
+      "id": "rhythm_review",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/RHYTHM_REVIEW.md",
+      "local_path": "submission/evidence/base/reports/review/RHYTHM_REVIEW.md",
+      "sha256": "94f354c614ec54431f995faa75d33b8c7e0d4a00b147c59f3040a1b03043d1c1",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/RHYTHM_REVIEW.md"
+    },
+    {
+      "id": "ignition_gate",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/ignitions/e1_ignition_gate.json",
+      "local_path": "submission/evidence/base/reports/review/ignitions/e1_ignition_gate.json",
+      "sha256": "ac110bb14546f851d85dfeab46c70c87986c14a149ed63b93364714687848319",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/ignitions/e1_ignition_gate.json"
+    },
+    {
+      "id": "ignition_results",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/ignitions/e1_ignition_results.csv",
+      "local_path": "submission/evidence/base/reports/review/ignitions/e1_ignition_results.csv",
+      "sha256": "e20b8c54f0b6674c70b71d8ed63b6d090527e7f3e9156167cd8bde0160afac42",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/ignitions/e1_ignition_results.csv"
+    },
+    {
+      "id": "controls",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/controls/control_recheck.csv",
+      "local_path": "submission/evidence/base/reports/review/controls/control_recheck.csv",
+      "sha256": "67df8c2df5e81b283aaf329942c16ec582bd47d4e31b58baae5c77e6d5700151",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/controls/control_recheck.csv"
+    },
+    {
+      "id": "volcano_controls",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/controls/us_volcano_by_area_tests.csv",
+      "local_path": "submission/evidence/base/reports/review/controls/us_volcano_by_area_tests.csv",
+      "sha256": "b02df320e7b2d9fda229e21d8e803d66b4b30bc3fe8f1d86933a03b5f587f74c",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/controls/us_volcano_by_area_tests.csv"
+    },
+    {
+      "id": "northeast",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/northeast_india/c_summary.json",
+      "local_path": "submission/evidence/base/reports/review/northeast_india/c_summary.json",
+      "sha256": "3440ad5e435d2de35cddb1daf63aa18835a7541c6aeec050622884f3dac07965",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/northeast_india/c_summary.json"
+    },
+    {
+      "id": "bangladesh_hills",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/bangladesh_hills/tested_Sun/rhythm_cells.csv",
+      "local_path": "submission/evidence/base/reports/review/bangladesh_hills/tested_Sun/rhythm_cells.csv",
+      "sha256": "37827172067dcf7bcf69360e8fc12e8e96055bbda585e0282486f4d78b4af9f0",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/bangladesh_hills/tested_Sun/rhythm_cells.csv"
+    },
+    {
+      "id": "bangladesh_prediction",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/bangladesh_hills/RESULT.md",
+      "local_path": "submission/evidence/base/reports/review/bangladesh_hills/RESULT.md",
+      "sha256": "425d3da7a4266233933bca8a7118e906e3a10e9a92e903e5d2646076cf851b15",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/bangladesh_hills/RESULT.md"
+    },
+    {
+      "id": "outages",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/no_observation_summary.json",
+      "local_path": "submission/evidence/base/reports/review/no_observation_summary.json",
+      "sha256": "238e068d545e131e2519dad4d9aee05f85e66ee1c798d3077596c30e74e14b0d",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/no_observation_summary.json"
+    },
+    {
+      "id": "noaa20_conversion",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/noaa20/noaa20_conversion_check.csv",
+      "local_path": "submission/evidence/base/reports/review/noaa20/noaa20_conversion_check.csv",
+      "sha256": "2436816ac4ae2d52ae8066bfdda60dd07b6c6ff18d8a3e473520f5e97c99ebf3",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/noaa20/noaa20_conversion_check.csv"
+    },
+    {
+      "id": "noaa20_rhythm",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "reports/review/noaa20/noaa20_rhythm_stream.csv",
+      "local_path": "submission/evidence/base/reports/review/noaa20/noaa20_rhythm_stream.csv",
+      "sha256": "560f367c6883bd28dba34098efc170f7904e6d25b6ef08e83a75e07331a010e4",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/reports/review/noaa20/noaa20_rhythm_stream.csv"
+    },
+    {
+      "id": "methods",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "METHODS.md",
+      "local_path": "submission/evidence/base/METHODS.md",
+      "sha256": "68c0d35d604293187bdeebdc12954b832de4bfcd838856b2e4e63badee1ca058",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/METHODS.md"
+    },
+    {
+      "id": "decisions",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "DECISIONS.md",
+      "local_path": "submission/evidence/base/DECISIONS.md",
+      "sha256": "08473f9f21bde7edf9ff5593f2ce574d3c67cb6e32cd945b4a8f1cf2c0da95d6",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/DECISIONS.md"
+    },
+    {
+      "id": "frp_summary",
+      "source_commit": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+      "source_path": "reports/review/frp/summary.csv",
+      "local_path": "submission/evidence/frp/summary.csv",
+      "sha256": "c2e39d111e0706e038f828457ed6cf7a4c8ed60aa88ef5291742e91e53a886bb",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1/reports/review/frp/summary.csv"
+    },
+    {
+      "id": "frp_results",
+      "source_commit": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+      "source_path": "reports/review/frp/results.json",
+      "local_path": "submission/evidence/frp/results.json",
+      "sha256": "4a3fb3c11caa20183c699981400319b75ae67e4c6a49b293eec2a384329d5b14",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1/reports/review/frp/results.json"
+    },
+    {
+      "id": "frp_independent_verification",
+      "source_commit": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+      "source_path": "reports/review/frp/independent_verification.json",
+      "local_path": "submission/evidence/frp/independent_verification.json",
+      "sha256": "0b3806102581e3231e769d03d0edab5faf59fb40bfceb71e80e8e3b23d0ff52e",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1/reports/review/frp/independent_verification.json"
+    },
+    {
+      "id": "frp_source_snapshot",
+      "source_commit": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+      "source_path": "reports/review/frp/source_snapshot.json",
+      "local_path": "submission/evidence/frp/source_snapshot.json",
+      "sha256": "6f801a76c35b5d5b7684d4a1039f0b93f2da7f465ddfc7e8fd9a1f4fbe23bb6f",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1/reports/review/frp/source_snapshot.json"
+    },
+    {
+      "id": "season_whole_year_comparison",
+      "source_commit": "9ee15afe972cca97322ea371b1fdf3a66b45a0b6",
+      "source_path": "reports/review/season/whole_year_comparison.csv",
+      "local_path": "submission/evidence/season/whole_year_comparison.csv",
+      "sha256": "88f740a093840e80ec1d1fe7531b7ce9e251075b7f66e2bc761664a967c7fd19",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/9ee15afe972cca97322ea371b1fdf3a66b45a0b6/reports/review/season/whole_year_comparison.csv"
+    },
+    {
+      "id": "season_country_summary",
+      "source_commit": "9ee15afe972cca97322ea371b1fdf3a66b45a0b6",
+      "source_path": "reports/review/season/country_summary.csv",
+      "local_path": "submission/evidence/season/country_summary.csv",
+      "sha256": "8ec6adf899de6c6d322fb8ea9b2bc4845b87fca9e5056b349e0538c59f42c1c8",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/9ee15afe972cca97322ea371b1fdf3a66b45a0b6/reports/review/season/country_summary.csv"
+    },
+    {
+      "id": "season_summary",
+      "source_commit": "9ee15afe972cca97322ea371b1fdf3a66b45a0b6",
+      "source_path": "reports/review/season/summary.json",
+      "local_path": "submission/evidence/season/summary.json",
+      "sha256": "2bff7dcbd74320d150dbf65dd1ea2adc3d85f2db98bc48b752d7ff4e003b9731",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/9ee15afe972cca97322ea371b1fdf3a66b45a0b6/reports/review/season/summary.json"
+    },
+    {
+      "id": "season_source_snapshot",
+      "source_commit": "9ee15afe972cca97322ea371b1fdf3a66b45a0b6",
+      "source_path": "reports/review/season/source_snapshot.json",
+      "local_path": "submission/evidence/season/source_snapshot.json",
+      "sha256": "9be03226d5d6bc6cdcec2b57b49336435ba31a00a3f718ebd55b6011ce9a8e74",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/9ee15afe972cca97322ea371b1fdf3a66b45a0b6/reports/review/season/source_snapshot.json"
+    },
+    {
+      "id": "season_verification_independent_verification",
+      "source_commit": "9ee15afe972cca97322ea371b1fdf3a66b45a0b6",
+      "source_path": "reports/review/season/verification/independent_verification.json",
+      "local_path": "submission/evidence/season/verification/independent_verification.json",
+      "sha256": "8bb48d68fdaeb0991d1ed9625a7537368a77d80fb26374009939f2dfe292fe87",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/9ee15afe972cca97322ea371b1fdf3a66b45a0b6/reports/review/season/verification/independent_verification.json"
+    },
+    {
+      "id": "frp_report",
+      "source_commit": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+      "source_path": "reports/review/frp/FRP_TEST.md",
+      "local_path": "submission/evidence/frp/FRP_TEST.md",
+      "sha256": "94cf488a436eb0e06e83ad09ad1c6b77a1bfff1895c9a76641477870cabf1cf6",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1/reports/review/frp/FRP_TEST.md"
+    },
+    {
+      "id": "season_report",
+      "source_commit": "9ee15afe972cca97322ea371b1fdf3a66b45a0b6",
+      "source_path": "reports/review/season/SEASON_CHECK.md",
+      "local_path": "submission/evidence/season/SEASON_CHECK.md",
+      "sha256": "4126d99821d7f90ff0fa8fa590ab8929faed545e096bce7e034e6497acef9d50",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/9ee15afe972cca97322ea371b1fdf3a66b45a0b6/reports/review/season/SEASON_CHECK.md"
+    },
+    {
+      "id": "ai_disclosure",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "AI_DISCLOSURE.md",
+      "local_path": "submission/evidence/base/AI_DISCLOSURE.md",
+      "sha256": "ae13bfdb9331330405a80e8a62be27bfbbd644c42686414fc1515f3bbd05cd7d",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/AI_DISCLOSURE.md"
+    },
+    {
+      "id": "product_readme",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "README.md",
+      "local_path": "submission/evidence/base/README.md",
+      "sha256": "3571e4b4a8ded83dbbc6a432488053a6aba6ce485bafab61ef63e7eb177d9353",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/README.md"
+    },
+    {
+      "id": "limitations",
+      "source_commit": "5086d0e50e289168a98e4a9f15190c84aaac46b1",
+      "source_path": "LIMITATIONS.md",
+      "local_path": "submission/evidence/base/LIMITATIONS.md",
+      "sha256": "0547f7c58c3ded49e0ef499d5df3cb731c16b0971a577d322f95611e84fd9818",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/5086d0e50e289168a98e4a9f15190c84aaac46b1/LIMITATIONS.md"
+    },
+    {
+      "id": "frp_chart",
+      "source_commit": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+      "source_path": "reports/review/frp/count_vs_frp_weekdays.png",
+      "local_path": "submission/evidence/frp/count_vs_frp_weekdays.png",
+      "sha256": "f40239b607ff40470eea1532e0d5043744bf0125231427a556fbc7aca7eb15d8",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1/reports/review/frp/count_vs_frp_weekdays.png"
+    },
+    {
+      "id": "frp_protocol",
+      "source_commit": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+      "source_path": "reports/review/frp/original_recorded_protocol.md",
+      "local_path": "submission/evidence/frp/original_recorded_protocol.md",
+      "sha256": "1b88c8b3c7a1225fb2aa10e3b19dd9311cb7f4b022a9795c51552557bb434171",
+      "source_url": "https://github.com/Water-Mal0ne/FIRETRACE/blob/cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1/reports/review/frp/original_recorded_protocol.md"
+    }
+  ],
+  "external_sources": [
+    {
+      "id": "modis_viirs_resolution",
+      "values": {
+        "MODIS_nominal_km": 1,
+        "VIIRS_nadir_m": 375
+      },
+      "url": "https://firms.modaps.eosdis.nasa.gov/alerts/notes.php",
+      "retrieved_utc_date": "2026-11-14",
+      "verified_by": "root primary-source review",
+      "interpretation": "Nominal active-fire product spatial resolution; not guaranteed minimum fire size."
+    },
+    {
+      "id": "viirs_product_and_current_coverage",
+      "values": {
+        "S_NPP_coverage_end": "2026-11-02"
+      },
+      "url": "https://firms.modaps.eosdis.nasa.gov/content/descriptions/FIRMS_VIIRS_Firehotspots.html",
+      "retrieved_utc_date": "2026-11-14",
+      "verified_by": "root primary-source review",
+      "interpretation": "Do not describe S-NPP as continuing operational coverage after the published endpoint."
+    },
+    {
+      "id": "earl_weekly_fire_pattern",
+      "values": {
+        "publication_year": 2015
+      },
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL066383",
+      "retrieved_utc_date": "2026-11-14",
+      "verified_by": "root primary-source review",
+      "interpretation": "Weekly fire patterns predate FIRETRACE; no first-discovery claim."
+    },
+    {
+      "id": "spaceapps_submission_fields",
+      "values": {
+        "fields": [
+          "project title",
+          "high-level summary",
+          "demo link",
+          "final-project link",
+          "detailed description",
+          "NASA resources",
+          "partner and other resources",
+          "AI/SI tools",
+          "terms acceptance"
+        ]
+      },
+      "url": "https://github.com/nasa/spaceapps/discussions/1858",
+      "retrieved_utc_date": "2026-11-14",
+      "verified_by": "Independent submission verifier reopened Global Organizing Team answer",
+      "interpretation": "Checklist covers the listed fields; the team must still inspect the live form and personally accept terms."
+    },
+    {
+      "id": "spaceapps_demo_limits",
+      "values": {
+        "max_slides": 7,
+        "video_seconds_strict_upper_bound": 30
+      },
+      "url": "https://github.com/nasa/spaceapps/discussions/1991",
+      "retrieved_utc_date": "2026-11-14",
+      "verified_by": "Independent submission verifier reopened Navigator answer",
+      "interpretation": "Choose a linked slide demo or a video shorter than 30 seconds; final project and demo are separate accessible links."
+    },
+    {
+      "id": "bhaktapur_local_event",
+      "values": {
+        "name": "NASA Space Apps Challenge 2026 - Bhaktapur Local Event",
+        "venue": "Khwopa Engineering College, Libali 8, Bhaktapur",
+        "start_local": "2026-11-14T00:00:00+05:45",
+        "end_local": "2026-11-15T23:59:00+05:45"
+      },
+      "url": "https://gdg.community.dev/events/details/google-gdg-kathmandu-presents-nasa-space-apps-challenge-2026-bhaktapur-local-event/",
+      "retrieved_utc_date": "2026-11-14",
+      "verified_by": "Independent submission verifier reopened local organizer listing",
+      "interpretation": "This is the published event window, not proof of the local judging cutoff; the team must confirm any earlier cutoff."
+    }
+  ],
+  "repository_access": {
+    "url": "https://github.com/Water-Mal0ne/FIRETRACE",
+    "visibility": "PUBLIC",
+    "isPrivate": false,
+    "verification": "Root ran gh repo view and reported isPrivate:false, visibility:PUBLIC",
+    "recorded_utc": "2026-11-14T20:07:01Z",
+    "anonymous_access_check": "Pending final logged-out check before submission"
+  }
+}
