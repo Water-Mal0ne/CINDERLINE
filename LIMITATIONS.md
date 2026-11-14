@@ -30,6 +30,12 @@ Observed Aqua is used directly for 2003–2012; converted VIIRS is used for 2013
 
 The test set must not be reused for tuning. A negative or inconclusive evaluation is a valid result and must not be hidden by selecting only favorable countries. No forced trend correction is justified. No 2000-present coverage claim is supported without actual early data and a validated instrument bridge.
 
+### Conversion stability and anomaly flags (review A2-A5)
+
+- The VIIRS-to-Aqua detection ratio shows no trend distinguishable from zero in any country over 2013-2024 (year bootstrap; `reports/review/ratio_trend.csv`). But in the 2020-2024 test years the ratio is higher than in training for Egypt (+39%) and the United States (+10%). Aqua's orbit drifted to a later crossing in the early 2020s; these data cannot separate that drift from real changes in fire timing or size. The US weekly test correlation falls from 0.97 (2020) to 0.74 (2024).
+- Bangladesh 2022 is a failed test year for the selected model (weekly bias +114%, correlation 0.18). Egypt is biased high in every test year (+36% to +66%).
+- Converted VIIRS produces far fewer zero weeks than observed Aqua in Egypt (0.6% vs 9.4%). Low-activity anomaly flags before 2013 are therefore unreliable for Egypt (100 low flags in 2003-2012 vs 38 in 2013-2024). In all countries, anomaly flags near the 2013 switch partly reflect the conversion, and flags compare each week with all other years, so long-term trends also shift flags between the two periods.
+
 ## Rhythm statistics and controls
 
 Year resampling preserves each year's aggregate weekday pattern but does not solve confounding, nonstationarity or observation bias. The random-weekday null assumes exchangeable weekday labels within each year. Short records and weak signals can be underpowered. Equal weighting across years describes the average year's normalized pattern, rather than the distribution of all detections pooled together.

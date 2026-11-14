@@ -1,0 +1,15 @@
+country,period,high,low
+Australia,2003-2012 (observed Aqua),66,77
+Australia,2013-2024 (converted VIIRS),90,79
+Bangladesh,2003-2012 (observed Aqua),84,25
+Bangladesh,2013-2024 (converted VIIRS),66,50
+Brazil,2003-2012 (observed Aqua),122,34
+Brazil,2013-2024 (converted VIIRS),34,122
+Egypt,2003-2012 (observed Aqua),41,100
+Egypt,2013-2024 (converted VIIRS),113,38
+India,2003-2012 (observed Aqua),75,73
+India,2013-2024 (converted VIIRS),80,80
+Nepal,2003-2012 (observed Aqua),53,36
+Nepal,2013-2024 (converted VIIRS),97,56
+United_States,2003-2012 (observed Aqua),94,58
+United_States,2013-2024 (converted VIIRS),62,98
