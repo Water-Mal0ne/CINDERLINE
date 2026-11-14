@@ -79,7 +79,8 @@
     },
     "matched_static_controls": {
      "passed": true,
-     "status": "no_detected_rest_day_dip"
+     "status": "no_detected_rest_day_dip",
+     "flagged_streams": []
     },
     "failed": [],
     "all_passed": true
@@ -92,11 +93,12 @@
     "strict_reanalysis": {
      "passed": true,
      "status": "pass",
-     "streams_significant": 2
+     "streams_significant": 3
     },
     "matched_static_controls": {
      "passed": true,
-     "status": "no_detected_rest_day_dip"
+     "status": "no_detected_rest_day_dip",
+     "flagged_streams": []
     },
     "failed": [],
     "all_passed": true
@@ -112,14 +114,36 @@
      "streams_significant": 2
     },
     "matched_static_controls": {
-     "passed": true,
-     "status": "no_detected_rest_day_dip"
+     "passed": false,
+     "status": "flagged",
+     "flagged_streams": [
+      {
+       "stream": "Terra",
+       "rest_day": "Sun",
+       "rest_index": 0.9134953748296444,
+       "p_adjusted": 0.020995800839832032,
+       "years": 23,
+       "first_year": 2002,
+       "last_year": 2024
+      }
+     ]
     },
-    "failed": [],
-    "all_passed": true
+    "failed": [
+     "matched_static_controls"
+    ],
+    "all_passed": false
    }
   },
-  "flagged": {}
+  "flagged": {
+   "Brazil": [
+    "matched_static_controls"
+   ]
+  },
+  "source": "reports/rhythm_results.json",
+  "notes": {
+   "Brazil": "Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-registered result is unchanged (PASS), but Brazil's support is weaker than the US and Australia."
+  },
+  "control_nuance": "A Sunday dip in static sources does not by itself mean a satellite artifact: some type-2 static sources are industrial sites that may also follow the work week. The clean static controls in the US and Australia are what argue against a satellite or processing artifact."
  },
  "countries": [
   {

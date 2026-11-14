@@ -17,7 +17,7 @@ export interface RhythmPayload {
   official: {decision: string; rule: string; source: string; countries_passing: string[];
     per_country: Record<string, {status: string; streams_significant: number; streams_with_data: number; predicted_rest_day: string}>};
   sunday_caveat: string | null;
-  robustness: null | {role: string; descriptions: Record<string, string>; per_country: Record<string, RobustnessCountry>; flagged: Record<string, string[]>};
+  robustness: null | {role: string; descriptions: Record<string, string>; per_country: Record<string, RobustnessCountry>; flagged: Record<string, string[]>; notes?: Record<string, string>; control_nuance?: string | null; source?: string};
   countries: CountryRow[];
   negative_control: {stream: string; status: string; detections: number; max_abs_deviation?: number}[];
   caveats: string[]; wording: string;
@@ -121,7 +121,9 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
     {data.robustness && <section className="panel" aria-labelledby="rh-robust-title">
       <div className="panel-heading"><div><span className="eyebrow">ROBUSTNESS CHECKS · DO NOT CHANGE THE DECISION</span><h2 id="rh-robust-title">Stricter checks on the passing countries</h2></div></div>
       {Object.keys(flagged).length > 0
-        ? <div className="rh-caveat warn" role="note"><AlertTriangle size={18}/><p><strong>Not every robustness check holds.</strong> {Object.entries(flagged).map(([c, f]) => `${nameOf(c)}: ${f.map(k => CHECK_LABELS[k] || k).join(', ')} not met`).join('. ')}. The official decision above is unchanged; these results are reported so readers can weigh them.</p></div>
+        ? <div className="rh-caveat warn" role="note"><AlertTriangle size={18}/><div><p><strong>Not every robustness check holds.</strong> {Object.entries(flagged).map(([c, f]) => `${nameOf(c)}: ${f.map(k => CHECK_LABELS[k] || k).join(', ')} not met`).join('. ')}.</p>
+          {Object.entries(data.robustness.notes || {}).map(([c, note]) => <p key={c}>{note}</p>)}
+          {data.robustness.control_nuance && <p>{data.robustness.control_nuance}</p>}</div></div>
         : <p className="panel-description">All passing countries meet all three stricter checks.</p>}
       <div className="table-scroll"><table className="rh-table"><thead><tr><th>Country</th>{Object.keys(CHECK_LABELS).map(k => <th key={k}>{CHECK_LABELS[k]}</th>)}</tr></thead>
         <tbody>{Object.entries(data.robustness.per_country).map(([c, v]) => <tr key={c}><td>{nameOf(c)}</td>
@@ -129,6 +131,7 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
             const detail = String(check.status ?? (check.streams !== undefined ? `${check.streams} of 3 streams` : '')).replaceAll('_', ' ');
             return <td key={k}><span className={`rh-chip ${check.passed ? 'sig' : 'warn'}`}>{check.passed ? 'holds' : 'not met'}</span><small className="rh-detail">{detail}</small></td>; })}
         </tr>)}</tbody></table></div>
+      {data.robustness.source && <p className="chart-note">Strict re-analysis source: {data.robustness.source}.</p>}
       <ul className="rh-defs">{Object.entries(data.robustness.descriptions).map(([k, d]) => <li key={k}><strong>{CHECK_LABELS[k] || k}:</strong> {d}</li>)}</ul>
     </section>}
 

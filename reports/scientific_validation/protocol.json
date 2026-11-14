@@ -1,0 +1,38 @@
+{
+  "archive_manifest_fingerprint": "4bf6e7635b6cb9b7437fb069e4afb4866c5347dd15d46549288686fb8b21edd7",
+  "model_sha256": "5af1fd6b0595ca7924952aec80fd8a4bd3100706691a75e1f1ab12c09b9b3d69",
+  "grid_selection_years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017
+  ],
+  "grid_validation_years": [
+    2018,
+    2019
+  ],
+  "grid_coarse_cells_per_country": 12,
+  "grid_models": "Frozen released country choice and training ratios; no refit or model selection",
+  "bridge_training_years": [
+    2003,
+    2004,
+    2005,
+    2006,
+    2007
+  ],
+  "bridge_validation_years": [
+    2008,
+    2009,
+    2010,
+    2011
+  ],
+  "bridge_models": [
+    "unscaled Terra",
+    "one per-country training-total Aqua/Terra ratio"
+  ],
+  "bootstrap_draws": 200,
+  "test_2020_2024_evaluated": false,
+  "reconstruction_published": false,
+  "publication_effect": "None; validation reports only"
+}

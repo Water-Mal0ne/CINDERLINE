@@ -1,0 +1,52 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {readFileSync} from 'node:fs';
+import ts from 'typescript';
+
+const source=readFileSync(new URL('../src/globeCells.ts',import.meta.url),'utf8');
+const output=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2021,module:ts.ModuleKind.ES2022}}).outputText;
+const {visibleGlobeCells}=await import('data:text/javascript;base64,'+Buffer.from(output).toString('base64'));
+const globe=JSON.parse(readFileSync(new URL('../public/data/globe.json',import.meta.url),'utf8'));
+const yearIndex=globe.years.indexOf(2024);
+assert.ok(yearIndex>=0);
+const pair=globe.cells.filter(c=>c.lat===23.125&&c.lon===92.375);
+
+test('actual Bangladesh/India border square follows selected country without summation',()=>{
+  assert.deepEqual(pair.map(c=>c.region).sort(),['Bangladesh','India']);
+  for(const region of ['Bangladesh','India']){
+    const expected=pair.find(c=>c.region===region);
+    for(const input of [pair,[...pair].reverse()]){
+      const visible=visibleGlobeCells(input,yearIndex,region);
+      assert.equal(visible.length,1);
+      assert.equal(visible[0],expected);
+      assert.equal(visible[0].values[yearIndex],expected.values[yearIndex]);
+    }
+  }
+});
+
+test('foreign border fallback uses stable country ordering regardless of input order',()=>{
+  assert.equal(visibleGlobeCells(pair,yearIndex,'Australia')[0].region,'Bangladesh');
+  assert.equal(visibleGlobeCells([...pair].reverse(),yearIndex,'Australia')[0].region,'Bangladesh');
+});
+
+test('all published annual geometry has unique centers and retains original records',()=>{
+  const original=new Set(globe.cells);
+  const duplicateCount=globe.cells.length-new Set(globe.cells.map(c=>`${c.lat}:${c.lon}`)).size;
+  assert.equal(duplicateCount,130,'current seven-country overlap inventory');
+  for(const region of globe.coverage_regions.map(r=>r.id)){
+    const visible=visibleGlobeCells(globe.cells,yearIndex,region);
+    assert.equal(new Set(visible.map(c=>`${c.lat}:${c.lon}`)).size,visible.length);
+    assert.ok(visible.every(c=>original.has(c)),'no new combined or fabricated records');
+  }
+});
+
+test('selected-country unknown stays unknown and recorded zero stays visible',()=>{
+  const foreign={id:'A:0:0',region:'A',lat:0.125,lon:0.125,values:[9,9,9]};
+  const selected={id:'B:0:0',region:'B',lat:0.125,lon:0.125,values:[null,0,NaN]};
+  const cells=Object.freeze([Object.freeze(foreign),Object.freeze(selected)]);
+  assert.deepEqual(visibleGlobeCells(cells,0,'B'),[]);
+  assert.deepEqual(visibleGlobeCells(cells,1,'B'),[selected]);
+  assert.deepEqual(visibleGlobeCells(cells,2,'B'),[]);
+  assert.deepEqual(visibleGlobeCells(cells,3,'B'),[]);
+  assert.deepEqual(visibleGlobeCells(cells,0,'A'),[foreign]);
+});

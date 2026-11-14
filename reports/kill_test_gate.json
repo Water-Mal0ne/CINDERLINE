@@ -1,10 +1,15 @@
 {
   "decision": "insufficient_data",
-  "statistical_decision": "insufficient_data",
+  "statistical_decision": "pass",
   "production_allowed": false,
   "label": "REAL FIRMS DATA",
-  "countries_passing": [],
-  "qualified_countries": [],
+  "countries_passing": [
+    "Australia",
+    "Brazil"
+  ],
+  "qualified_countries": [
+    "Australia"
+  ],
   "per_country": {
     "United_States": {
       "status": "pass",
@@ -14,11 +19,11 @@
       "controls_status": "no_detected_rest_day_dip"
     },
     "Australia": {
-      "status": "insufficient_data",
-      "streams_with_data": 0,
-      "streams_significant": 0,
+      "status": "pass",
+      "streams_with_data": 3,
+      "streams_significant": 3,
       "rest_day": "Sun",
-      "controls_status": "insufficient_data"
+      "controls_status": "no_detected_rest_day_dip"
     },
     "Nepal": {
       "status": "fail",
@@ -28,32 +33,32 @@
       "controls_status": "insufficient_data"
     },
     "Bangladesh": {
-      "status": "insufficient_data",
-      "streams_with_data": 0,
-      "streams_significant": 0,
+      "status": "fail",
+      "streams_with_data": 3,
+      "streams_significant": 1,
       "rest_day": "Fri",
       "controls_status": "insufficient_data"
     },
     "Egypt": {
-      "status": "insufficient_data",
-      "streams_with_data": 0,
+      "status": "fail",
+      "streams_with_data": 3,
       "streams_significant": 0,
       "rest_day": "Fri",
       "controls_status": "insufficient_data"
     },
     "India": {
-      "status": "insufficient_data",
-      "streams_with_data": 0,
-      "streams_significant": 0,
+      "status": "fail",
+      "streams_with_data": 3,
+      "streams_significant": 1,
       "rest_day": "Sun",
       "controls_status": "insufficient_data"
     },
     "Brazil": {
-      "status": "insufficient_data",
-      "streams_with_data": 0,
-      "streams_significant": 0,
+      "status": "pass",
+      "streams_with_data": 3,
+      "streams_significant": 2,
       "rest_day": "Sun",
-      "controls_status": "insufficient_data"
+      "controls_status": "flagged"
     }
   },
   "replication_check": {
@@ -61,7 +66,7 @@
     "status": "pass"
   },
   "reasons": [
-    "Need at least five verified years in two streams for the US and two other countries."
+    "Not enough matching, unflagged control results for US plus two other countries."
   ],
   "caveats": [
     "Hotspot detections are not independent fires or ignition events.",

@@ -1,0 +1,24 @@
+{
+  "rows_input": 10142672,
+  "rows_used": 10142672,
+  "invalid_local_dates": 0,
+  "unknown_country_or_stream": 0,
+  "unknown_fire_types": 0,
+  "missing_columns": [],
+  "label": "REAL FIRMS DATA",
+  "settings": {
+    "min_years": 5,
+    "min_detections_per_year": 140,
+    "bootstrap_draws": 2000,
+    "null_draws": 5000,
+    "seed": 42,
+    "alpha": 0.05,
+    "as_of_year": 2026
+  },
+  "observation_coverage": "unknown",
+  "archive_manifest_supplied": true,
+  "main_family_tests": 21,
+  "daytime_family": "separate exploratory sensitivity analysis; not used by gate",
+  "control_family": "separate diagnostic family; no dip is not proof of equivalence",
+  "figure": "rhythm.png"
+}

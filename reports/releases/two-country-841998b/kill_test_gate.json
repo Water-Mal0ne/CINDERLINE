@@ -1,0 +1,76 @@
+{
+  "decision": "insufficient_data",
+  "statistical_decision": "insufficient_data",
+  "production_allowed": false,
+  "label": "REAL FIRMS DATA",
+  "countries_passing": [],
+  "qualified_countries": [],
+  "per_country": {
+    "United_States": {
+      "status": "pass",
+      "streams_with_data": 3,
+      "streams_significant": 3,
+      "rest_day": "Sun",
+      "controls_status": "no_detected_rest_day_dip"
+    },
+    "Australia": {
+      "status": "insufficient_data",
+      "streams_with_data": 0,
+      "streams_significant": 0,
+      "rest_day": "Sun",
+      "controls_status": "insufficient_data"
+    },
+    "Nepal": {
+      "status": "fail",
+      "streams_with_data": 3,
+      "streams_significant": 0,
+      "rest_day": "Sat",
+      "controls_status": "insufficient_data"
+    },
+    "Bangladesh": {
+      "status": "insufficient_data",
+      "streams_with_data": 0,
+      "streams_significant": 0,
+      "rest_day": "Fri",
+      "controls_status": "insufficient_data"
+    },
+    "Egypt": {
+      "status": "insufficient_data",
+      "streams_with_data": 0,
+      "streams_significant": 0,
+      "rest_day": "Fri",
+      "controls_status": "insufficient_data"
+    },
+    "India": {
+      "status": "insufficient_data",
+      "streams_with_data": 0,
+      "streams_significant": 0,
+      "rest_day": "Sun",
+      "controls_status": "insufficient_data"
+    },
+    "Brazil": {
+      "status": "insufficient_data",
+      "streams_with_data": 0,
+      "streams_significant": 0,
+      "rest_day": "Sun",
+      "controls_status": "insufficient_data"
+    }
+  },
+  "replication_check": {
+    "country": "United_States",
+    "status": "pass"
+  },
+  "reasons": [
+    "Need at least five verified years in two streams for the US and two other countries."
+  ],
+  "caveats": [
+    "Hotspot detections are not independent fires or ignition events.",
+    "Cloud cover, satellite outages and overpass exposure are not measured by annual CSV availability.",
+    "A weekly association is consistent with human scheduling; it does not establish ignition cause.",
+    "Absence of a weekly dip does not establish weather-driven fire.",
+    "Terra, Aqua and VIIRS observe overlapping events; agreement is corroboration, not independent replication.",
+    "The null test assumes exchangeable weekday labels within each year under the null.",
+    "Static industrial sources may have real weekly schedules; controls are diagnostic, not a guaranteed natural null."
+  ],
+  "rule": "US and >=2 other countries each require >=2 streams with verified input years, rest day lowest, 95% upper bound <1 and fixed-family adjusted p<0.05; matching controls must be available and unflagged. Synthetic data never enable production."
+}

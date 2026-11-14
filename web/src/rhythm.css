@@ -1,7 +1,7 @@
 .rhythm-page{display:flex;flex-direction:column;gap:22px;max-width:1180px;margin:0 auto;padding:0 0 40px}
 .rhythm-page .section-intro h2 em{color:var(--orange);font-style:normal}
 .rh-caveat{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--orange);background:#f7996314;border-radius:8px;padding:14px 16px;margin:14px 0}
-.rh-caveat svg{color:var(--orange);margin-top:2px}.rh-caveat p{margin:0;line-height:1.6}
+.rh-caveat svg{color:var(--orange);margin-top:2px}.rh-caveat p{margin:0 0 8px;line-height:1.6}.rh-caveat p:last-child{margin-bottom:0}
 .rh-caveat.warn{border-color:#e7c35a;background:#e7c35a14}.rh-caveat.warn svg{color:#e7c35a}
 .rh-table{width:100%;border-collapse:collapse;font-size:14px}
 .rh-table th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);font-weight:500;padding:8px 10px;border-bottom:1px solid var(--line)}

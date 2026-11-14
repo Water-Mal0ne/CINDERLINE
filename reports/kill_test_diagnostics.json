@@ -1,11 +1,6 @@
 {
-  "rows_input": 10142672,
-  "rows_used": 10142672,
-  "invalid_local_dates": 0,
-  "unknown_country_or_stream": 0,
-  "unknown_fire_types": 0,
-  "missing_columns": [],
-  "label": "REAL FIRMS DATA",
+  "representation": "Exact detection counts; n is multiplicity",
+  "rows_used": 67934899,
   "settings": {
     "min_years": 5,
     "min_detections_per_year": 140,
@@ -16,9 +11,15 @@
     "as_of_year": 2026
   },
   "observation_coverage": "unknown",
-  "archive_manifest_supplied": true,
+  "commissioning_guard": {
+    "Terra": 2001,
+    "Aqua": 2003,
+    "VIIRS": 2013
+  },
+  "label": "REAL FIRMS DATA",
+  "figure": "rhythm.png",
   "main_family_tests": 21,
   "daytime_family": "separate exploratory sensitivity analysis; not used by gate",
   "control_family": "separate diagnostic family; no dip is not proof of equivalence",
-  "figure": "rhythm.png"
+  "report_note": "Formatted from saved exact-count inference; no statistical test was rerun."
 }

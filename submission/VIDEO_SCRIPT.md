@@ -1,19 +1,19 @@
 # FIRETRACE: 30-second demo script
 
-Draft. Record only working interactions. Verify the allowed video length in the live submission instructions. No fabricated result is needed to tell this story.
+Draft. Record only verified interactions, and check the allowed video duration in the live submission instructions. Keep the same country, dates and spatial scope through the evidence sequence.
 
 | Time | Screen | Voiceover |
 |---|---|---|
-| 0–5 s | FIRETRACE, region and input-provenance label | “Did fire activity change, or did the satellite camera change?” |
-| 5–12 s | Toggle the same region and dates between raw and harmonized | “FIRETRACE compares NASA FIRMS observations on an Aqua reference scale, keeping the instruments separate.” |
-| 12–21 s | Select a week; open its evidence card | “Explore the burning calendar, then inspect the observations, uncertainty and missing-coverage limits behind each comparison.” |
-| 21–26 s | Show actual held-out evaluation table | “We evaluate against simpler baselines on withheld years.” |
-| 26–30 s | Verified live URL, source link and disclosure | “Follow the evidence before trusting the trend.” |
+| 0–5 s | Earth, Nepal and the real-data label | “Did fire activity change, or did the satellite camera change?” |
+| 5–11 s | One observed week's separate sensor counts, then raw/harmonized comparison | “FIRETRACE keeps NASA's instruments separate, then compares their observations on an Aqua reference scale.” |
+| 11–19 s | Open that week's evidence: scope, source, estimates and bounds | “Follow one week from the calendar to its observations, calibration uncertainty and coverage limits.” |
+| 19–24 s | Held-out evaluation, with the selected model and baseline visible | “Check the result against simpler baselines on withheld years.” |
+| 24–30 s | Copy/reopen the evidence link; live URL and attribution | “Share that exact view. Follow the evidence before trusting the trend.” |
 
-The voiceover is approximately 67 words; rehearse against the actual screen recording and shorten rather than speed up. Use captions. Keep NASA data attribution visible; do not use NASA logos or imply endorsement.
+Use captions and rehearse against the actual recording. The Earth always shows Aqua-equivalent annual activity; the raw/harmonized toggle controls the calendar/comparison. The displayed illustrative week is not an evaluation result. A selected cell must remain identified as a cell rather than a national total.
 
-**Optional substitution only after the rhythm gate passes:** Replace the evaluation segment with a short view of the verified per-stream rhythm result and the line “We also test weekly associations, with controls.” Keep full validation accessible in the project page. If the gate is insufficient or failed, retain the core script.
+**Current numeric anchors:** Seven-country model, 2003–2024. Nepal's selected M1 monthly test MAE is 30.24 versus B1 182.52, with −8.11% bias. The US selects B1 (MAE 1,537.79 versus M1 2,078.57). The full table retains unfavorable results including Egypt's +51.68% bias. Values concern agreement with Aqua detections, not ground truth.
 
-**Verified recording content:** Real Nepal data, 2003–2024; observed Aqua through 2012 and M1-converted VIIRS thereafter. The 2020–2024 monthly evaluation table shows M1 MAE 30.20 versus B1 198.43 Aqua-equivalent detections, with M1 bias −8.08%. The US selects B1 instead. A brief globe view can orient the audience before calendar inspection. Keep the rhythm feature out of the main script: its overall gate is `insufficient_data`.
+The optional rhythm feature stays out of the demonstration because its overall gate is `insufficient_data`. Its results and controls remain available in reports. Do not replace this evidence journey with an unsupported “human fingerprint” claim.
 
-**Live application:** https://firetrace-bhaktapur-2026.pages.dev/ is publicly accessible without sign-in. Supply a public source repository URL before recording the closing card. If any visible example is synthetic, label it within the video itself.
+[Live app](https://firetrace-bhaktapur-2026.pages.dev/) · [Repository](https://github.com/Water-Mal0ne/FIRETRACE), private pending arranged judge access. Verify the deployed revision before recording. Retain NASA data attribution, AI disclosure and “NASA does not endorse this project.” No NASA logo or implied endorsement. Any synthetic example must say “SYNTHETIC DATA” inside the video frame.

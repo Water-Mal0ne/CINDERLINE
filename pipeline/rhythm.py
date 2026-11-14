@@ -23,6 +23,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from pipeline.harmonize import FIRST_COMPLETE_YEAR
+
 DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 STREAMS = ["Terra", "Aqua", "VIIRS"]
 REST_DAYS = {"United_States": "Sun", "Australia": "Sun", "Nepal": "Sat",
@@ -68,6 +70,8 @@ def verified_local_year(manifest: dict, country: str, stream: str, year: int) ->
     require the annual UTC file plus both adjacent UTC years, conservatively
     covering civil dates near year boundaries in multi-zone countries.
     """
+    if stream not in FIRST_COMPLETE_YEAR or year < FIRST_COMPLETE_YEAR[stream]:
+        return False
     for entry in manifest.get("local_periods", []):
         if (entry.get("country") == country and entry.get("stream") == stream
                 and int(entry.get("year", -1)) == year and entry.get("complete") is True):
@@ -272,7 +276,7 @@ def official_gate(official: dict | None, label: str) -> dict:
     return gate
 
 
-def robustness_checks(official: dict | None, strict: dict) -> dict:
+def robustness_checks(official: dict | None, strict: dict, controls: list[dict] | None = None) -> dict:
     """Per officially passing country: which stricter checks hold. Reported, never gating."""
     checks = {}
     gate = (official or {}).get("gate", {})
@@ -294,12 +298,34 @@ def robustness_checks(official: dict | None, strict: dict) -> dict:
             "matched_static_controls": {"passed": strict_row.get("controls_status") == "no_detected_rest_day_dip",
                                         "status": strict_row.get("controls_status", "not_run")},
         }
+        flagged = [{"stream": c["stream"], "rest_day": c.get("rest_day"), "rest_index": c.get("rest_index"),
+                    "p_adjusted": c.get("p_adjusted"), "years": c.get("years"),
+                    "first_year": (c.get("year_list") or [None])[0], "last_year": (c.get("year_list") or [None])[-1]}
+                   for c in (controls or []) if c.get("country") == country and c.get("significant")]
+        country_checks["matched_static_controls"]["flagged_streams"] = flagged
         failed = [name for name, value in country_checks.items() if not value["passed"]]
         checks[country] = {**country_checks, "failed": failed, "all_passed": not failed}
     return {"role": "robustness checks reported next to the official decision; they never change it",
             "descriptions": ROBUSTNESS_DESCRIPTIONS, "per_country": checks,
             "strict_variant": {"decision": strict.get("decision"), "per_country": strict.get("per_country"),
                                "rule": strict.get("rule"), "reasons": strict.get("reasons")}}
+
+
+def robustness_from_saved(official_dir, strict_results_path, output_dir=None) -> dict:
+    """Robustness checks from an existing strict run (e.g. the seven-country streaming release).
+
+    The saved rhythm_results.json supplies the strict gate and per-country controls; nothing is re-estimated.
+    """
+    saved = json.loads(Path(strict_results_path).read_text(encoding="utf-8"))
+    strict = (saved.get("robustness") or {}).get("strict_variant") or saved["gate"]
+    official = load_official(official_dir)
+    result = robustness_checks(official, strict, saved.get("controls"))
+    result["strict_source"] = str(strict_results_path).replace("\\", "/")
+    if output_dir:
+        Path(output_dir).mkdir(parents=True, exist_ok=True)
+        (Path(output_dir) / "robustness_checks.json").write_text(json.dumps(result, indent=2, allow_nan=False),
+                                                                  encoding="utf-8")
+    return result
 
 
 def _plot(rows: list[dict], output: Path, label: str) -> str:
@@ -375,7 +401,8 @@ def run(detections: pd.DataFrame, output_dir, label: str = "REAL FIRMS DATA", ma
     strict = make_gate(main, controls, label)
     official_data = load_official(official) if isinstance(official, (str, Path)) else official
     gate = official_gate(official_data, label)
-    robustness = robustness_checks(official_data if gate.get("decision") != "insufficient_data" else None, strict)
+    robustness = robustness_checks(official_data if gate.get("decision") != "insufficient_data" else None, strict,
+                                   controls)
     diagnostics.update(label=label, settings=settings, observation_coverage="unknown",
                        archive_manifest_supplied=bool(manifest),
                        main_family_tests=len(REST_DAYS) * len(STREAMS),
@@ -407,12 +434,22 @@ def run(detections: pd.DataFrame, output_dir, label: str = "REAL FIRMS DATA", ma
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("detections", help="Cleaned parquet or CSV with local civil dates")
+    parser.add_argument("detections", nargs="?", help="Cleaned parquet or CSV with local civil dates")
+    parser.add_argument("--from-saved", help="Strict rhythm_results.json to derive robustness checks from, "
+                                             "without re-estimating anything")
     parser.add_argument("--manifest")
     parser.add_argument("--output", default="reports")
     parser.add_argument("--label", default="REAL FIRMS DATA")
     parser.add_argument("--official", help="Folder with kill_test.py outputs (the official gate)")
     args = parser.parse_args()
+    if args.from_saved:
+        if not args.official:
+            parser.error("--from-saved needs --official")
+        checks = robustness_from_saved(args.official, args.from_saved, args.output)
+        print(json.dumps({c: v["failed"] for c, v in checks["per_country"].items()}, indent=2))
+        raise SystemExit(0)
+    if not args.detections:
+        parser.error("detections is required unless --from-saved is used")
     path = Path(args.detections)
     data = pd.read_parquet(path) if path.suffix == ".parquet" else pd.read_csv(path)
     result = run(data, args.output, args.label, args.manifest, official=args.official)

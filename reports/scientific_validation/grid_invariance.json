@@ -1,0 +1,358 @@
+{
+  "years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019
+  ],
+  "checks": [
+    {
+      "country": "Nepal",
+      "year": 2013,
+      "fine": 1282.4791233113929,
+      "coarse": 1282.4791233113926,
+      "difference": -2.2737367544323206e-13
+    },
+    {
+      "country": "Nepal",
+      "year": 2014,
+      "fine": 1860.6049281770424,
+      "coarse": 1860.6049281770424,
+      "difference": 0.0
+    },
+    {
+      "country": "Nepal",
+      "year": 2015,
+      "fine": 685.7523586464285,
+      "coarse": 685.7523586464285,
+      "difference": 0.0
+    },
+    {
+      "country": "Nepal",
+      "year": 2016,
+      "fine": 3981.280531516157,
+      "coarse": 3981.280531516157,
+      "difference": 0.0
+    },
+    {
+      "country": "Nepal",
+      "year": 2017,
+      "fine": 1136.112503651475,
+      "coarse": 1136.112503651475,
+      "difference": 0.0
+    },
+    {
+      "country": "Nepal",
+      "year": 2018,
+      "fine": 1686.6002870531818,
+      "coarse": 1686.600287053182,
+      "difference": 2.2737367544323206e-13
+    },
+    {
+      "country": "Nepal",
+      "year": 2019,
+      "fine": 1744.7335600551269,
+      "coarse": 1744.733560055127,
+      "difference": 2.2737367544323206e-13
+    },
+    {
+      "country": "United_States",
+      "year": 2013,
+      "fine": 43187.064498657186,
+      "coarse": 43187.064498657186,
+      "difference": 0.0
+    },
+    {
+      "country": "United_States",
+      "year": 2014,
+      "fine": 40762.30112044573,
+      "coarse": 40762.30112044573,
+      "difference": 0.0
+    },
+    {
+      "country": "United_States",
+      "year": 2015,
+      "fine": 68092.91256064155,
+      "coarse": 68092.91256064156,
+      "difference": 1.4551915228366852e-11
+    },
+    {
+      "country": "United_States",
+      "year": 2016,
+      "fine": 47105.897435251085,
+      "coarse": 47105.897435251085,
+      "difference": 0.0
+    },
+    {
+      "country": "United_States",
+      "year": 2017,
+      "fine": 69431.96315775922,
+      "coarse": 69431.96315775922,
+      "difference": 0.0
+    },
+    {
+      "country": "United_States",
+      "year": 2018,
+      "fine": 65029.07662649575,
+      "coarse": 65029.076626495764,
+      "difference": 1.4551915228366852e-11
+    },
+    {
+      "country": "United_States",
+      "year": 2019,
+      "fine": 51278.79325316945,
+      "coarse": 51278.79325316945,
+      "difference": 0.0
+    },
+    {
+      "country": "Bangladesh",
+      "year": 2013,
+      "fine": 2564.7865098362645,
+      "coarse": 2564.7865098362645,
+      "difference": 0.0
+    },
+    {
+      "country": "Bangladesh",
+      "year": 2014,
+      "fine": 2726.874966907537,
+      "coarse": 2726.874966907537,
+      "difference": 0.0
+    },
+    {
+      "country": "Bangladesh",
+      "year": 2015,
+      "fine": 1090.7857136681905,
+      "coarse": 1090.7857136681905,
+      "difference": 0.0
+    },
+    {
+      "country": "Bangladesh",
+      "year": 2016,
+      "fine": 1521.2074989529851,
+      "coarse": 1521.207498952985,
+      "difference": -2.2737367544323206e-13
+    },
+    {
+      "country": "Bangladesh",
+      "year": 2017,
+      "fine": 1179.1304385739193,
+      "coarse": 1179.1304385739195,
+      "difference": 2.2737367544323206e-13
+    },
+    {
+      "country": "Bangladesh",
+      "year": 2018,
+      "fine": 1952.8369274593174,
+      "coarse": 1952.8369274593176,
+      "difference": 2.2737367544323206e-13
+    },
+    {
+      "country": "Bangladesh",
+      "year": 2019,
+      "fine": 2340.9378637526256,
+      "coarse": 2340.937863752625,
+      "difference": -4.547473508864641e-13
+    },
+    {
+      "country": "Egypt",
+      "year": 2013,
+      "fine": 481.9728877137319,
+      "coarse": 481.9728877137319,
+      "difference": 0.0
+    },
+    {
+      "country": "Egypt",
+      "year": 2014,
+      "fine": 474.00204741821267,
+      "coarse": 474.00204741821267,
+      "difference": 0.0
+    },
+    {
+      "country": "Egypt",
+      "year": 2015,
+      "fine": 389.0424562102842,
+      "coarse": 389.0424562102841,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "country": "Egypt",
+      "year": 2016,
+      "fine": 534.3591822711437,
+      "coarse": 534.3591822711437,
+      "difference": 0.0
+    },
+    {
+      "country": "Egypt",
+      "year": 2017,
+      "fine": 407.2293369974891,
+      "coarse": 407.229336997489,
+      "difference": -1.1368683772161603e-13
+    },
+    {
+      "country": "Egypt",
+      "year": 2018,
+      "fine": 316.7035449425085,
+      "coarse": 316.7035449425085,
+      "difference": 0.0
+    },
+    {
+      "country": "Egypt",
+      "year": 2019,
+      "fine": 324.5596732801659,
+      "coarse": 324.55967328016584,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "country": "Australia",
+      "year": 2013,
+      "fine": 121312.70562347314,
+      "coarse": 121312.70562347314,
+      "difference": 0.0
+    },
+    {
+      "country": "Australia",
+      "year": 2014,
+      "fine": 156572.92121697078,
+      "coarse": 156572.92121697075,
+      "difference": -2.9103830456733704e-11
+    },
+    {
+      "country": "Australia",
+      "year": 2015,
+      "fine": 146378.50309076623,
+      "coarse": 146378.50309076623,
+      "difference": 0.0
+    },
+    {
+      "country": "Australia",
+      "year": 2016,
+      "fine": 100232.44710042763,
+      "coarse": 100232.44710042763,
+      "difference": 0.0
+    },
+    {
+      "country": "Australia",
+      "year": 2017,
+      "fine": 159048.00412704272,
+      "coarse": 159048.00412704272,
+      "difference": 0.0
+    },
+    {
+      "country": "Australia",
+      "year": 2018,
+      "fine": 189981.17501971792,
+      "coarse": 189981.1750197179,
+      "difference": -2.9103830456733704e-11
+    },
+    {
+      "country": "Australia",
+      "year": 2019,
+      "fine": 203832.9675351259,
+      "coarse": 203832.9675351259,
+      "difference": 0.0
+    },
+    {
+      "country": "Brazil",
+      "year": 2013,
+      "fine": 112394.69245241588,
+      "coarse": 112394.69245241588,
+      "difference": 0.0
+    },
+    {
+      "country": "Brazil",
+      "year": 2014,
+      "fine": 161764.53378220898,
+      "coarse": 161764.53378220898,
+      "difference": 0.0
+    },
+    {
+      "country": "Brazil",
+      "year": 2015,
+      "fine": 223322.8678278715,
+      "coarse": 223322.86782787147,
+      "difference": -2.9103830456733704e-11
+    },
+    {
+      "country": "Brazil",
+      "year": 2016,
+      "fine": 170121.3464106146,
+      "coarse": 170121.34641061458,
+      "difference": -2.9103830456733704e-11
+    },
+    {
+      "country": "Brazil",
+      "year": 2017,
+      "fine": 201219.68717876272,
+      "coarse": 201219.68717876272,
+      "difference": 0.0
+    },
+    {
+      "country": "Brazil",
+      "year": 2018,
+      "fine": 118990.03143958382,
+      "coarse": 118990.03143958384,
+      "difference": 1.4551915228366852e-11
+    },
+    {
+      "country": "Brazil",
+      "year": 2019,
+      "fine": 190826.6011601983,
+      "coarse": 190826.6011601983,
+      "difference": 0.0
+    },
+    {
+      "country": "India",
+      "year": 2013,
+      "fine": 47812.13540629258,
+      "coarse": 47812.135406292575,
+      "difference": -7.275957614183426e-12
+    },
+    {
+      "country": "India",
+      "year": 2014,
+      "fine": 52784.425802626254,
+      "coarse": 52784.42580262625,
+      "difference": -7.275957614183426e-12
+    },
+    {
+      "country": "India",
+      "year": 2015,
+      "fine": 45901.560185671,
+      "coarse": 45901.560185671005,
+      "difference": 7.275957614183426e-12
+    },
+    {
+      "country": "India",
+      "year": 2016,
+      "fine": 60191.301549204334,
+      "coarse": 60191.301549204334,
+      "difference": 0.0
+    },
+    {
+      "country": "India",
+      "year": 2017,
+      "fine": 51564.80869159615,
+      "coarse": 51564.80869159615,
+      "difference": 0.0
+    },
+    {
+      "country": "India",
+      "year": 2018,
+      "fine": 54305.58699305616,
+      "coarse": 54305.58699305616,
+      "difference": 0.0
+    },
+    {
+      "country": "India",
+      "year": 2019,
+      "fine": 48125.04865257603,
+      "coarse": 48125.048652576035,
+      "difference": 7.275957614183426e-12
+    }
+  ],
+  "max_absolute_difference": 2.9103830456733704e-11,
+  "meaning": "National invariance follows from linear country/stratum conversion, not evidence of spatial robustness."
+}

@@ -18,7 +18,8 @@
       },
       "matched_static_controls": {
         "passed": true,
-        "status": "no_detected_rest_day_dip"
+        "status": "no_detected_rest_day_dip",
+        "flagged_streams": []
       },
       "failed": [],
       "all_passed": true
@@ -31,11 +32,12 @@
       "strict_reanalysis": {
         "passed": true,
         "status": "pass",
-        "streams_significant": 2
+        "streams_significant": 3
       },
       "matched_static_controls": {
         "passed": true,
-        "status": "no_detected_rest_day_dip"
+        "status": "no_detected_rest_day_dip",
+        "flagged_streams": []
       },
       "failed": [],
       "all_passed": true
@@ -51,15 +53,28 @@
         "streams_significant": 2
       },
       "matched_static_controls": {
-        "passed": true,
-        "status": "no_detected_rest_day_dip"
+        "passed": false,
+        "status": "flagged",
+        "flagged_streams": [
+          {
+            "stream": "Terra",
+            "rest_day": "Sun",
+            "rest_index": 0.9134953748296444,
+            "p_adjusted": 0.020995800839832032,
+            "years": 23,
+            "first_year": 2002,
+            "last_year": 2024
+          }
+        ]
       },
-      "failed": [],
-      "all_passed": true
+      "failed": [
+        "matched_static_controls"
+      ],
+      "all_passed": false
     }
   },
   "strict_variant": {
-    "decision": "pass",
+    "decision": "insufficient_data",
     "per_country": {
       "United_States": {
         "status": "pass",
@@ -71,7 +86,7 @@
       "Australia": {
         "status": "pass",
         "streams_with_data": 3,
-        "streams_significant": 2,
+        "streams_significant": 3,
         "rest_day": "Sun",
         "controls_status": "no_detected_rest_day_dip"
       },
@@ -99,7 +114,7 @@
       "India": {
         "status": "fail",
         "streams_with_data": 3,
-        "streams_significant": 0,
+        "streams_significant": 1,
         "rest_day": "Sun",
         "controls_status": "insufficient_data"
       },
@@ -108,10 +123,13 @@
         "streams_with_data": 3,
         "streams_significant": 2,
         "rest_day": "Sun",
-        "controls_status": "no_detected_rest_day_dip"
+        "controls_status": "flagged"
       }
     },
     "rule": "US and >=2 other countries each require >=2 streams with verified input years, rest day lowest, 95% upper bound <1 and fixed-family adjusted p<0.05; matching controls must be available and unflagged. Synthetic data never enable production.",
-    "reasons": []
-  }
+    "reasons": [
+      "Not enough matching, unflagged control results for US plus two other countries."
+    ]
+  },
+  "strict_source": "reports/rhythm_results.json"
 }

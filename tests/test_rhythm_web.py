@@ -60,5 +60,22 @@ class RhythmWebTests(unittest.TestCase):
                 rhythm_web.build(official, None, out)
 
 
+class ControlNoteTests(unittest.TestCase):
+    def test_flagged_control_note_uses_numbers_and_comparison(self):
+        def country(passed, flagged=()):
+            return {"matched_static_controls": {"passed": passed, "flagged_streams": list(flagged)}}
+        robustness = {"per_country": {
+            "United_States": country(True), "Australia": country(True),
+            "Brazil": country(False, [{"stream": "Terra", "rest_day": "Sun", "rest_index": 0.9134, "p_adjusted": 0.02099}])}}
+        comparison = {"years": "2014-2023", "per_country": {"Brazil": country(True)}}
+        note = rhythm_web.control_notes(robustness, comparison, "pass")["Brazil"]
+        self.assertEqual(note, "Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), "
+                               "so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in "
+                               "industrial heat sources. The control was clean on 2014-2023. The official pre-registered "
+                               "result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.")
+        self.assertIn("the US and Australia", rhythm_web.control_nuance(robustness))
+        self.assertEqual(rhythm_web.control_notes({"per_country": {"United_States": country(True)}}, None, "pass"), {})
+
+
 if __name__ == "__main__":
     unittest.main()

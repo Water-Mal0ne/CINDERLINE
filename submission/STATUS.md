@@ -1,11 +1,23 @@
 # Submission draft status
 
-- Project page populated with actual two-country results; remains under 500 words.
-- Seven-slide outline drafted, with actual-data and synthetic evidence separated.
-- 30-second demonstration script drafted; recording is not produced by this file.
-- Current event formatting limits must be verified before submission.
-- Metrics populated from `reports/harmonization_eval.csv`, selected models from `harmonization_model.json` and gate from `kill_test_gate.json`: Nepal M1, US B1; history now 2003–2024; unchanged 2020–2024 test results; overall rhythm `insufficient_data`.
-- These drafts have not been submitted or sent externally.
-- Public Cloudflare Pages deployment verified on November 14, 2026: https://firetrace-bhaktapur-2026.pages.dev/. A public source repository URL remains a submission blocker.
-- Rhythm test suite: 8 passed using `.venv\Scripts\python.exe -m pytest tests/test_rhythm.py -q`.
-- Methods documentation checked against the current B1/M1 harmonizer: region/daynight/FRP strata, fixed shrinkage, validation daily MAE selection, 200 bootstrap draws, 12 training-selected map cells, no early Terra bridge and no M2.
+## Prepared
+
+- The seven-country app is deployed from commit `e71f214` and verified at the public Cloudflare URL: all 115 files match the build, all seven country workflows pass, and shared evidence reopens correctly. Details are in `DEPLOYMENT.md`.
+
+- A project page under 500 words, seven-slide outline and 30-second demo script describe the seven-country candidate.
+- Metrics come from the locked seven-country evaluation: B1 for Australia/Brazil/US; M1 for Bangladesh/Egypt/India/Nepal. The draft retains Egypt's large bias and regional peak-timing errors.
+- Scope is explicit: seven countries, 2003–2024, 41,986 annual cells and 12 detailed daily cells per country. No worldwide or 2000-present claim is made.
+- The working signature is the observed-week → sensor comparison → conversion evidence → held-out validation → shared-link journey.
+- The rhythm decision remains `insufficient_data` despite all seven countries being evaluated. Brazil's flagged control prevents the required US-plus-two-other-country qualification.
+- Prespecified grid sensitivity and Terra-bridge feasibility reports are complete. Their selected-geography/validation-period limits and unqualified early reconstruction are explicit; 2020–2024 held-out results remain unchanged.
+- AI assistance, NASA data attribution, MIT software licensing and non-endorsement are stated.
+- Independent scientific, payload and decoder evidence is in `reports/PHASE3_AUDIT.md`; browser/release status is owned by the coordinator and `DEPLOYMENT.md`.
+
+## Before submission
+
+- Keep the submission's deployment reference aligned with the verified seven-country release if any later changes are published.
+- Arrange judge access to the private GitHub repository without silently changing the team's visibility choice.
+- Verify the live event's submission fields, deadline and media limits. The seven slides and 30-second duration are team draft formats, not a claim about the official limit.
+- Record and review the actual working demo, including mobile/keyboard behavior where relevant. A video script and slide outline are not completed media files.
+- Retain the grid-sensitivity and early-bridge limitations in the final presentation. An evaluated feasibility experiment is not a published reconstructed series or independent ground-truth validation.
+- Team members must review the scientific interpretation and final submission. These drafts have not been submitted or sent externally.

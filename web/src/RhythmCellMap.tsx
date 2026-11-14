@@ -9,6 +9,8 @@ interface CellProps {
   aqua_rest_index: Num; aqua_q_bh: Num; aqua_significant: boolean | null;
 }
 interface Cells {metadata: {label: string; significant: string; cell: string}; features: {properties: CellProps}[]}
+interface CellTable {metadata: Cells['metadata']; columns: string[]; rows: unknown[][]}
+const decodeCells = (t: CellTable): Cells => ({metadata: t.metadata, features: t.rows.map(r => ({properties: Object.fromEntries(t.columns.map((k, i) => [k, r[i]])) as unknown as CellProps}))});
 interface AquaCheck {cells_with_both: number; corr_rest_index: Num; share_same_side_of_1: Num; viirs_sig_cells_with_aqua: number; of_those_aqua_below_1: number; of_those_aqua_significant: number}
 interface Summary {aqua_check: Record<string, AquaCheck>; per_country: Record<string, Record<string, {cells: number; significant: number}>>}
 type Land = {features: {geometry: {type: string; coordinates: number[][][][] | number[][][]}}[]};
@@ -39,8 +41,8 @@ export default function RhythmCellMap() {
   const [country, setCountry] = useState('India'), [active, setActive] = useState<CellProps | null>(null);
   useEffect(() => {
     const c = new AbortController();
-    Promise.all([loadData<Cells>('rhythm_cells.geojson', c.signal), loadData<Summary>('rhythm_cells_summary.json', c.signal)])
-      .then(([g, s]) => { setCells(g); setSummary(s); })
+    Promise.all([loadData<CellTable>('rhythm_cells.json', c.signal), loadData<Summary>('rhythm_cells_summary.json', c.signal)])
+      .then(([g, s]) => { setCells(decodeCells(g)); setSummary(s); })
       .catch(e => { if (e.name !== 'AbortError') setError('The per-cell results have not been published.'); });
     loadData<Land>('world-land.json', c.signal).then(setLand).catch(() => {});
     return () => c.abort();

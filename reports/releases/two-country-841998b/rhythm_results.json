@@ -1,0 +1,2598 @@
+{
+  "gate": {
+    "decision": "insufficient_data",
+    "statistical_decision": "insufficient_data",
+    "production_allowed": false,
+    "label": "REAL FIRMS DATA",
+    "countries_passing": [],
+    "qualified_countries": [],
+    "per_country": {
+      "United_States": {
+        "status": "pass",
+        "streams_with_data": 3,
+        "streams_significant": 3,
+        "rest_day": "Sun",
+        "controls_status": "no_detected_rest_day_dip"
+      },
+      "Australia": {
+        "status": "insufficient_data",
+        "streams_with_data": 0,
+        "streams_significant": 0,
+        "rest_day": "Sun",
+        "controls_status": "insufficient_data"
+      },
+      "Nepal": {
+        "status": "fail",
+        "streams_with_data": 3,
+        "streams_significant": 0,
+        "rest_day": "Sat",
+        "controls_status": "insufficient_data"
+      },
+      "Bangladesh": {
+        "status": "insufficient_data",
+        "streams_with_data": 0,
+        "streams_significant": 0,
+        "rest_day": "Fri",
+        "controls_status": "insufficient_data"
+      },
+      "Egypt": {
+        "status": "insufficient_data",
+        "streams_with_data": 0,
+        "streams_significant": 0,
+        "rest_day": "Fri",
+        "controls_status": "insufficient_data"
+      },
+      "India": {
+        "status": "insufficient_data",
+        "streams_with_data": 0,
+        "streams_significant": 0,
+        "rest_day": "Sun",
+        "controls_status": "insufficient_data"
+      },
+      "Brazil": {
+        "status": "insufficient_data",
+        "streams_with_data": 0,
+        "streams_significant": 0,
+        "rest_day": "Sun",
+        "controls_status": "insufficient_data"
+      }
+    },
+    "replication_check": {
+      "country": "United_States",
+      "status": "pass"
+    },
+    "reasons": [
+      "Need at least five verified years in two streams for the US and two other countries."
+    ],
+    "caveats": [
+      "Hotspot detections are not independent fires or ignition events.",
+      "Cloud cover, satellite outages and overpass exposure are not measured by annual CSV availability.",
+      "A weekly association is consistent with human scheduling; it does not establish ignition cause.",
+      "Absence of a weekly dip does not establish weather-driven fire.",
+      "Terra, Aqua and VIIRS observe overlapping events; agreement is corroboration, not independent replication.",
+      "The null test assumes exchangeable weekday labels within each year under the null.",
+      "Static industrial sources may have real weekly schedules; controls are diagnostic, not a guaranteed natural null."
+    ],
+    "rule": "US and >=2 other countries each require >=2 streams with verified input years, rest day lowest, 95% upper bound <1 and fixed-family adjusted p<0.05; matching controls must be available and unflagged. Synthetic data never enable production."
+  },
+  "countries": {
+    "United_States": {
+      "rest_day": "Sun",
+      "streams": [
+        {
+          "country": "United_States",
+          "stream": "Terra",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "ok",
+          "years": 22,
+          "year_list": [
+            2003,
+            2004,
+            2005,
+            2006,
+            2007,
+            2008,
+            2009,
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 1277783,
+          "detections_used": 1188043,
+          "period_verified": true,
+          "unverified_years": [
+            2002,
+            2025
+          ],
+          "excluded_years": [],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 1.0273088930902659,
+              "lo": 0.9941450290741123,
+              "hi": 1.058304506652835
+            },
+            {
+              "day": "Tue",
+              "index": 1.1492843893395575,
+              "lo": 1.1103133021329408,
+              "hi": 1.1892916638635487
+            },
+            {
+              "day": "Wed",
+              "index": 1.1289466676240745,
+              "lo": 1.0811381164972662,
+              "hi": 1.1774644008995268
+            },
+            {
+              "day": "Thu",
+              "index": 1.06101632415481,
+              "lo": 1.0208409589814669,
+              "hi": 1.0996807518279217
+            },
+            {
+              "day": "Fri",
+              "index": 1.0280273863480411,
+              "lo": 0.9802976945946782,
+              "hi": 1.0789947382162057
+            },
+            {
+              "day": "Sat",
+              "index": 0.8786289107199774,
+              "lo": 0.8552723989884465,
+              "hi": 0.9017818244239525
+            },
+            {
+              "day": "Sun",
+              "index": 0.7267874287232736,
+              "lo": 0.700957680322165,
+              "hi": 0.7518123606670335
+            }
+          ],
+          "p_null": 0.0001999600079984003,
+          "p_adjusted": 0.004199160167966407,
+          "rest_is_lowest": true,
+          "ci_upper_below_one": true,
+          "significant": true,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Sun",
+          "rest_index": 0.7267874287232736
+        },
+        {
+          "country": "United_States",
+          "stream": "Aqua",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "ok",
+          "years": 22,
+          "year_list": [
+            2003,
+            2004,
+            2005,
+            2006,
+            2007,
+            2008,
+            2009,
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 1423318,
+          "detections_used": 1345878,
+          "period_verified": true,
+          "unverified_years": [
+            2002,
+            2025
+          ],
+          "excluded_years": [],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 1.0737934993907097,
+              "lo": 1.0378513951174655,
+              "hi": 1.110748382036133
+            },
+            {
+              "day": "Tue",
+              "index": 1.112869066392669,
+              "lo": 1.0661852566389947,
+              "hi": 1.1647333010414112
+            },
+            {
+              "day": "Wed",
+              "index": 1.1565277070100002,
+              "lo": 1.1240663884814264,
+              "hi": 1.1899536444726533
+            },
+            {
+              "day": "Thu",
+              "index": 1.115671817587438,
+              "lo": 1.0802174893975256,
+              "hi": 1.1544090395212228
+            },
+            {
+              "day": "Fri",
+              "index": 0.9815187402243134,
+              "lo": 0.9376380119281936,
+              "hi": 1.0255569180029922
+            },
+            {
+              "day": "Sat",
+              "index": 0.8950708828995296,
+              "lo": 0.8591157181614208,
+              "hi": 0.9299205868794509
+            },
+            {
+              "day": "Sun",
+              "index": 0.6645482864953404,
+              "lo": 0.6306369199189522,
+              "hi": 0.6987232400937281
+            }
+          ],
+          "p_null": 0.0001999600079984003,
+          "p_adjusted": 0.004199160167966407,
+          "rest_is_lowest": true,
+          "ci_upper_below_one": true,
+          "significant": true,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Sun",
+          "rest_index": 0.6645482864953404
+        },
+        {
+          "country": "United_States",
+          "stream": "VIIRS",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "ok",
+          "years": 12,
+          "year_list": [
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 5656226,
+          "detections_used": 4881876,
+          "period_verified": true,
+          "unverified_years": [
+            2012,
+            2025
+          ],
+          "excluded_years": [],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 1.007863180625461,
+              "lo": 0.9685860643347903,
+              "hi": 1.04362216126811
+            },
+            {
+              "day": "Tue",
+              "index": 1.0963323877738331,
+              "lo": 1.036600284115548,
+              "hi": 1.1534333527135532
+            },
+            {
+              "day": "Wed",
+              "index": 1.096393985414579,
+              "lo": 1.0541523343521195,
+              "hi": 1.1494492793789919
+            },
+            {
+              "day": "Thu",
+              "index": 1.0912025237042673,
+              "lo": 1.0610021012116977,
+              "hi": 1.1243480302654836
+            },
+            {
+              "day": "Fri",
+              "index": 1.0097790581181958,
+              "lo": 0.9559404458578351,
+              "hi": 1.0662632041711977
+            },
+            {
+              "day": "Sat",
+              "index": 0.9166508706538693,
+              "lo": 0.8809557615682841,
+              "hi": 0.9511366437810923
+            },
+            {
+              "day": "Sun",
+              "index": 0.7817779937097944,
+              "lo": 0.7523466113571965,
+              "hi": 0.8090870710806044
+            }
+          ],
+          "p_null": 0.0001999600079984003,
+          "p_adjusted": 0.004199160167966407,
+          "rest_is_lowest": true,
+          "ci_upper_below_one": true,
+          "significant": true,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Sun",
+          "rest_index": 0.7817779937097944
+        }
+      ],
+      "daytime_streams": [
+        {
+          "country": "United_States",
+          "stream": "Terra",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "ok",
+          "years": 22,
+          "year_list": [
+            2003,
+            2004,
+            2005,
+            2006,
+            2007,
+            2008,
+            2009,
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 946331,
+          "detections_used": 880934,
+          "period_verified": true,
+          "unverified_years": [
+            2002,
+            2025
+          ],
+          "excluded_years": [],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 1.0273568708621907,
+              "lo": 0.9935916564306327,
+              "hi": 1.0616381264231658
+            },
+            {
+              "day": "Tue",
+              "index": 1.185972814026577,
+              "lo": 1.1509982319709577,
+              "hi": 1.221857754402795
+            },
+            {
+              "day": "Wed",
+              "index": 1.1518300102947117,
+              "lo": 1.1080586399850838,
+              "hi": 1.2000729982579446
+            },
+            {
+              "day": "Thu",
+              "index": 1.1015402478593206,
+              "lo": 1.0637592562177898,
+              "hi": 1.140161157031693
+            },
+            {
+              "day": "Fri",
+              "index": 1.0284165124477016,
+              "lo": 0.9836456950982077,
+              "hi": 1.077822301651177
+            },
+            {
+              "day": "Sat",
+              "index": 0.8645984281123676,
+              "lo": 0.8347924504158641,
+              "hi": 0.8945733667308113
+            },
+            {
+              "day": "Sun",
+              "index": 0.640285116397131,
+              "lo": 0.615278241385939,
+              "hi": 0.6672502074230058
+            }
+          ],
+          "p_null": 0.0001999600079984003,
+          "p_adjusted": 0.004199160167966407,
+          "rest_is_lowest": true,
+          "ci_upper_below_one": true,
+          "significant": true,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Sun",
+          "rest_index": 0.640285116397131
+        },
+        {
+          "country": "United_States",
+          "stream": "Aqua",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "ok",
+          "years": 22,
+          "year_list": [
+            2003,
+            2004,
+            2005,
+            2006,
+            2007,
+            2008,
+            2009,
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 1273146,
+          "detections_used": 1202794,
+          "period_verified": true,
+          "unverified_years": [
+            2002,
+            2025
+          ],
+          "excluded_years": [],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 1.070331344382353,
+              "lo": 1.0317495943300397,
+              "hi": 1.1072455204083127
+            },
+            {
+              "day": "Tue",
+              "index": 1.1293530055061867,
+              "lo": 1.0841827627379712,
+              "hi": 1.1791389158933183
+            },
+            {
+              "day": "Wed",
+              "index": 1.1620035711329093,
+              "lo": 1.1255605052512654,
+              "hi": 1.196736424618565
+            },
+            {
+              "day": "Thu",
+              "index": 1.129038215340806,
+              "lo": 1.0884403946006742,
+              "hi": 1.172264662004612
+            },
+            {
+              "day": "Fri",
+              "index": 0.9842368140422365,
+              "lo": 0.9429385324445352,
+              "hi": 1.029017818973315
+            },
+            {
+              "day": "Sat",
+              "index": 0.8833543237036053,
+              "lo": 0.8457802028997942,
+              "hi": 0.9199436128852576
+            },
+            {
+              "day": "Sun",
+              "index": 0.6416827258919034,
+              "lo": 0.6056971374340478,
+              "hi": 0.6774666747244049
+            }
+          ],
+          "p_null": 0.0001999600079984003,
+          "p_adjusted": 0.004199160167966407,
+          "rest_is_lowest": true,
+          "ci_upper_below_one": true,
+          "significant": true,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Sun",
+          "rest_index": 0.6416827258919034
+        },
+        {
+          "country": "United_States",
+          "stream": "VIIRS",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "ok",
+          "years": 12,
+          "year_list": [
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 3235261,
+          "detections_used": 2784451,
+          "period_verified": true,
+          "unverified_years": [
+            2012,
+            2025
+          ],
+          "excluded_years": [],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 1.0569887280701407,
+              "lo": 1.0093177113004117,
+              "hi": 1.0995966830973474
+            },
+            {
+              "day": "Tue",
+              "index": 1.140777310170449,
+              "lo": 1.084189962709054,
+              "hi": 1.1978842059484112
+            },
+            {
+              "day": "Wed",
+              "index": 1.1375176644930216,
+              "lo": 1.0932445157478876,
+              "hi": 1.1808493375810318
+            },
+            {
+              "day": "Thu",
+              "index": 1.1265522482355002,
+              "lo": 1.0838790975674157,
+              "hi": 1.1727115165893005
+            },
+            {
+              "day": "Fri",
+              "index": 1.0078321408282622,
+              "lo": 0.9470120914264103,
+              "hi": 1.0707666853348086
+            },
+            {
+              "day": "Sat",
+              "index": 0.8733713892344191,
+              "lo": 0.843718696951726,
+              "hi": 0.9033903730270731
+            },
+            {
+              "day": "Sun",
+              "index": 0.6569605189682074,
+              "lo": 0.6188552389042908,
+              "hi": 0.6971667944697171
+            }
+          ],
+          "p_null": 0.0001999600079984003,
+          "p_adjusted": 0.004199160167966407,
+          "rest_is_lowest": true,
+          "ci_upper_below_one": true,
+          "significant": true,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Sun",
+          "rest_index": 0.6569605189682074
+        }
+      ],
+      "status": "pass"
+    },
+    "Australia": {
+      "rest_day": "Sun",
+      "streams": [
+        {
+          "country": "Australia",
+          "stream": "Terra",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Australia",
+          "stream": "Aqua",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Australia",
+          "stream": "VIIRS",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        }
+      ],
+      "daytime_streams": [
+        {
+          "country": "Australia",
+          "stream": "Terra",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Australia",
+          "stream": "Aqua",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Australia",
+          "stream": "VIIRS",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        }
+      ],
+      "status": "insufficient_data"
+    },
+    "Nepal": {
+      "rest_day": "Sat",
+      "streams": [
+        {
+          "country": "Nepal",
+          "stream": "Terra",
+          "subset": "all",
+          "rest_day": "Sat",
+          "status": "ok",
+          "years": 22,
+          "year_list": [
+            2003,
+            2004,
+            2005,
+            2006,
+            2007,
+            2008,
+            2009,
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 28139,
+          "detections_used": 27046,
+          "period_verified": true,
+          "unverified_years": [
+            2002,
+            2025
+          ],
+          "excluded_years": [],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 0.9692142595461583,
+              "lo": 0.8204041102637764,
+              "hi": 1.135242329654705
+            },
+            {
+              "day": "Tue",
+              "index": 1.0621040741122114,
+              "lo": 0.879055745733377,
+              "hi": 1.2248425594886272
+            },
+            {
+              "day": "Wed",
+              "index": 0.946297566798508,
+              "lo": 0.8178227953604168,
+              "hi": 1.0723110493212864
+            },
+            {
+              "day": "Thu",
+              "index": 0.9497164747037324,
+              "lo": 0.7921227777522987,
+              "hi": 1.1066456856079099
+            },
+            {
+              "day": "Fri",
+              "index": 1.0787960296112191,
+              "lo": 0.8978463785079691,
+              "hi": 1.2821723444879665
+            },
+            {
+              "day": "Sat",
+              "index": 0.9526726871133678,
+              "lo": 0.7838104155269554,
+              "hi": 1.1382781200866894
+            },
+            {
+              "day": "Sun",
+              "index": 1.041198908114803,
+              "lo": 0.8816311045619533,
+              "hi": 1.2073922265437982
+            }
+          ],
+          "p_null": 0.30553889222155567,
+          "p_adjusted": 1.0,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Wed",
+          "rest_index": 0.9526726871133678
+        },
+        {
+          "country": "Nepal",
+          "stream": "Aqua",
+          "subset": "all",
+          "rest_day": "Sat",
+          "status": "ok",
+          "years": 22,
+          "year_list": [
+            2003,
+            2004,
+            2005,
+            2006,
+            2007,
+            2008,
+            2009,
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 44744,
+          "detections_used": 42653,
+          "period_verified": true,
+          "unverified_years": [
+            2025
+          ],
+          "excluded_years": [
+            {
+              "year": 2002,
+              "detections": 98,
+              "reason": "incomplete current/future year or low count"
+            }
+          ],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 1.0685072182843178,
+              "lo": 0.9100238192299586,
+              "hi": 1.2278182884552524
+            },
+            {
+              "day": "Tue",
+              "index": 0.917331298834127,
+              "lo": 0.7731608347015255,
+              "hi": 1.0639241208876165
+            },
+            {
+              "day": "Wed",
+              "index": 1.0519462104974193,
+              "lo": 0.8818385503226677,
+              "hi": 1.2270640718106358
+            },
+            {
+              "day": "Thu",
+              "index": 0.9603134958579063,
+              "lo": 0.78697112415192,
+              "hi": 1.1409784497578384
+            },
+            {
+              "day": "Fri",
+              "index": 0.9742682636472311,
+              "lo": 0.7944655553706977,
+              "hi": 1.1723391654294688
+            },
+            {
+              "day": "Sat",
+              "index": 1.1170328092340571,
+              "lo": 0.9219148095422379,
+              "hi": 1.3385957148354948
+            },
+            {
+              "day": "Sun",
+              "index": 0.9106007036449413,
+              "lo": 0.7632838286276346,
+              "hi": 1.0713483616177892
+            }
+          ],
+          "p_null": 0.9012197560487902,
+          "p_adjusted": 1.0,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Sun",
+          "rest_index": 1.1170328092340571
+        },
+        {
+          "country": "Nepal",
+          "stream": "VIIRS",
+          "subset": "all",
+          "rest_day": "Sat",
+          "status": "ok",
+          "years": 12,
+          "year_list": [
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 387447,
+          "detections_used": 339023,
+          "period_verified": true,
+          "unverified_years": [
+            2012,
+            2025
+          ],
+          "excluded_years": [],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 1.032107957512544,
+              "lo": 0.9600293323240042,
+              "hi": 1.1002866708983692
+            },
+            {
+              "day": "Tue",
+              "index": 0.9677725844996082,
+              "lo": 0.8858448312420816,
+              "hi": 1.0552190162727062
+            },
+            {
+              "day": "Wed",
+              "index": 0.9697916895848026,
+              "lo": 0.8674632495260375,
+              "hi": 1.071887718302327
+            },
+            {
+              "day": "Thu",
+              "index": 0.9563513726102498,
+              "lo": 0.8714179649770993,
+              "hi": 1.0395145738294649
+            },
+            {
+              "day": "Fri",
+              "index": 0.9855679456263711,
+              "lo": 0.8703122073400451,
+              "hi": 1.1096710708582789
+            },
+            {
+              "day": "Sat",
+              "index": 1.0144732091637267,
+              "lo": 0.9130936408583105,
+              "hi": 1.1237936800368356
+            },
+            {
+              "day": "Sun",
+              "index": 1.0739352410026977,
+              "lo": 1.0127221453923636,
+              "hi": 1.1423061367719225
+            }
+          ],
+          "p_null": 0.6054789042191562,
+          "p_adjusted": 1.0,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Thu",
+          "rest_index": 1.0144732091637267
+        }
+      ],
+      "daytime_streams": [
+        {
+          "country": "Nepal",
+          "stream": "Terra",
+          "subset": "day",
+          "rest_day": "Sat",
+          "status": "ok",
+          "years": 22,
+          "year_list": [
+            2003,
+            2004,
+            2005,
+            2006,
+            2007,
+            2008,
+            2009,
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 18095,
+          "detections_used": 17443,
+          "period_verified": true,
+          "unverified_years": [
+            2002,
+            2025
+          ],
+          "excluded_years": [],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 0.9695315282259916,
+              "lo": 0.8064691581425864,
+              "hi": 1.134489314656937
+            },
+            {
+              "day": "Tue",
+              "index": 1.0684521016419017,
+              "lo": 0.8988535409539384,
+              "hi": 1.2356980843013168
+            },
+            {
+              "day": "Wed",
+              "index": 0.9350782696116625,
+              "lo": 0.7838275734281992,
+              "hi": 1.0939397275442047
+            },
+            {
+              "day": "Thu",
+              "index": 0.9739165988309838,
+              "lo": 0.8035627980565068,
+              "hi": 1.1378486040478575
+            },
+            {
+              "day": "Fri",
+              "index": 1.0680531401554412,
+              "lo": 0.871810521632594,
+              "hi": 1.2854258174977506
+            },
+            {
+              "day": "Sat",
+              "index": 0.9186760913321224,
+              "lo": 0.7503784012815478,
+              "hi": 1.0997014168868209
+            },
+            {
+              "day": "Sun",
+              "index": 1.0662922702018962,
+              "lo": 0.8871478496515417,
+              "hi": 1.2627639423123702
+            }
+          ],
+          "p_null": 0.1869626074785043,
+          "p_adjusted": 1.0,
+          "rest_is_lowest": true,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Sat",
+          "rest_index": 0.9186760913321224
+        },
+        {
+          "country": "Nepal",
+          "stream": "Aqua",
+          "subset": "day",
+          "rest_day": "Sat",
+          "status": "ok",
+          "years": 22,
+          "year_list": [
+            2003,
+            2004,
+            2005,
+            2006,
+            2007,
+            2008,
+            2009,
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 41015,
+          "detections_used": 38993,
+          "period_verified": true,
+          "unverified_years": [
+            2025
+          ],
+          "excluded_years": [
+            {
+              "year": 2002,
+              "detections": 95,
+              "reason": "incomplete current/future year or low count"
+            }
+          ],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 1.0642019599785433,
+              "lo": 0.8780753463562261,
+              "hi": 1.2584437735068632
+            },
+            {
+              "day": "Tue",
+              "index": 0.9205932103275245,
+              "lo": 0.7620235582504088,
+              "hi": 1.0855581427732155
+            },
+            {
+              "day": "Wed",
+              "index": 1.0419562454985263,
+              "lo": 0.8451664268570981,
+              "hi": 1.2448008803377912
+            },
+            {
+              "day": "Thu",
+              "index": 0.9861563561540674,
+              "lo": 0.7983136518714217,
+              "hi": 1.1726536932005192
+            },
+            {
+              "day": "Fri",
+              "index": 0.9562535632643585,
+              "lo": 0.7600867105491702,
+              "hi": 1.1830482976658823
+            },
+            {
+              "day": "Sat",
+              "index": 1.1341398572721402,
+              "lo": 0.9048559908819643,
+              "hi": 1.3576127042712582
+            },
+            {
+              "day": "Sun",
+              "index": 0.8966988075048394,
+              "lo": 0.7262847635093939,
+              "hi": 1.0899231495580697
+            }
+          ],
+          "p_null": 0.8940211957608478,
+          "p_adjusted": 1.0,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Sun",
+          "rest_index": 1.1341398572721402
+        },
+        {
+          "country": "Nepal",
+          "stream": "VIIRS",
+          "subset": "day",
+          "rest_day": "Sat",
+          "status": "ok",
+          "years": 12,
+          "year_list": [
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "detections": 156752,
+          "detections_used": 135949,
+          "period_verified": true,
+          "unverified_years": [
+            2012,
+            2025
+          ],
+          "excluded_years": [],
+          "weekdays": [
+            {
+              "day": "Mon",
+              "index": 0.9954843398469597,
+              "lo": 0.9319678213922501,
+              "hi": 1.0502564051645964
+            },
+            {
+              "day": "Tue",
+              "index": 0.9979549971978989,
+              "lo": 0.9381668535455581,
+              "hi": 1.065929430033814
+            },
+            {
+              "day": "Wed",
+              "index": 0.975953949258201,
+              "lo": 0.8859721444074178,
+              "hi": 1.0729547145156157
+            },
+            {
+              "day": "Thu",
+              "index": 0.9530287160587739,
+              "lo": 0.8786810083201547,
+              "hi": 1.0205472931551025
+            },
+            {
+              "day": "Fri",
+              "index": 0.975420708222483,
+              "lo": 0.887565091861431,
+              "hi": 1.060667086514229
+            },
+            {
+              "day": "Sat",
+              "index": 1.0714101984684383,
+              "lo": 1.000487976627425,
+              "hi": 1.1431811299855894
+            },
+            {
+              "day": "Sun",
+              "index": 1.0307470909472447,
+              "lo": 0.9554283573282573,
+              "hi": 1.1084530124018248
+            }
+          ],
+          "p_null": 0.9642071585682863,
+          "p_adjusted": 1.0,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+          "bonferroni_m": 21,
+          "lowest_day": "Thu",
+          "rest_index": 1.0714101984684383
+        }
+      ],
+      "status": "fail"
+    },
+    "Bangladesh": {
+      "rest_day": "Fri",
+      "streams": [
+        {
+          "country": "Bangladesh",
+          "stream": "Terra",
+          "subset": "all",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Bangladesh",
+          "stream": "Aqua",
+          "subset": "all",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Bangladesh",
+          "stream": "VIIRS",
+          "subset": "all",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        }
+      ],
+      "daytime_streams": [
+        {
+          "country": "Bangladesh",
+          "stream": "Terra",
+          "subset": "day",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Bangladesh",
+          "stream": "Aqua",
+          "subset": "day",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Bangladesh",
+          "stream": "VIIRS",
+          "subset": "day",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        }
+      ],
+      "status": "insufficient_data"
+    },
+    "Egypt": {
+      "rest_day": "Fri",
+      "streams": [
+        {
+          "country": "Egypt",
+          "stream": "Terra",
+          "subset": "all",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Egypt",
+          "stream": "Aqua",
+          "subset": "all",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Egypt",
+          "stream": "VIIRS",
+          "subset": "all",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        }
+      ],
+      "daytime_streams": [
+        {
+          "country": "Egypt",
+          "stream": "Terra",
+          "subset": "day",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Egypt",
+          "stream": "Aqua",
+          "subset": "day",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Egypt",
+          "stream": "VIIRS",
+          "subset": "day",
+          "rest_day": "Fri",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        }
+      ],
+      "status": "insufficient_data"
+    },
+    "India": {
+      "rest_day": "Sun",
+      "streams": [
+        {
+          "country": "India",
+          "stream": "Terra",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "India",
+          "stream": "Aqua",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "India",
+          "stream": "VIIRS",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        }
+      ],
+      "daytime_streams": [
+        {
+          "country": "India",
+          "stream": "Terra",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "India",
+          "stream": "Aqua",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "India",
+          "stream": "VIIRS",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        }
+      ],
+      "status": "insufficient_data"
+    },
+    "Brazil": {
+      "rest_day": "Sun",
+      "streams": [
+        {
+          "country": "Brazil",
+          "stream": "Terra",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Brazil",
+          "stream": "Aqua",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Brazil",
+          "stream": "VIIRS",
+          "subset": "all",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        }
+      ],
+      "daytime_streams": [
+        {
+          "country": "Brazil",
+          "stream": "Terra",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Brazil",
+          "stream": "Aqua",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        },
+        {
+          "country": "Brazil",
+          "stream": "VIIRS",
+          "subset": "day",
+          "rest_day": "Sun",
+          "status": "insufficient_data",
+          "years": 0,
+          "year_list": [],
+          "detections": 0,
+          "detections_used": 0,
+          "period_verified": true,
+          "unverified_years": [],
+          "excluded_years": [],
+          "weekdays": [],
+          "p_null": null,
+          "p_adjusted": null,
+          "rest_is_lowest": false,
+          "ci_upper_below_one": false,
+          "significant": false,
+          "reason": "Fewer than the required years of detections."
+        }
+      ],
+      "status": "insufficient_data"
+    }
+  },
+  "diagnostics": {
+    "rows_input": 10142672,
+    "rows_used": 10142672,
+    "invalid_local_dates": 0,
+    "unknown_country_or_stream": 0,
+    "unknown_fire_types": 0,
+    "missing_columns": [],
+    "label": "REAL FIRMS DATA",
+    "settings": {
+      "min_years": 5,
+      "min_detections_per_year": 140,
+      "bootstrap_draws": 2000,
+      "null_draws": 5000,
+      "seed": 42,
+      "alpha": 0.05,
+      "as_of_year": 2026
+    },
+    "observation_coverage": "unknown",
+    "archive_manifest_supplied": true,
+    "main_family_tests": 21,
+    "daytime_family": "separate exploratory sensitivity analysis; not used by gate",
+    "control_family": "separate diagnostic family; no dip is not proof of equivalence"
+  },
+  "controls": [
+    {
+      "country": "United_States",
+      "stream": "Terra",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "ok",
+      "years": 22,
+      "year_list": [
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "detections": 73437,
+      "detections_used": 66418,
+      "period_verified": true,
+      "unverified_years": [
+        2002,
+        2025
+      ],
+      "excluded_years": [
+        {
+          "year": 2001,
+          "detections": 5,
+          "reason": "incomplete current/future year or low count"
+        }
+      ],
+      "weekdays": [
+        {
+          "day": "Mon",
+          "index": 1.012523771435259,
+          "lo": 0.9862844258260618,
+          "hi": 1.0386744707323106
+        },
+        {
+          "day": "Tue",
+          "index": 1.001514032569896,
+          "lo": 0.9742637735780356,
+          "hi": 1.0290055348062168
+        },
+        {
+          "day": "Wed",
+          "index": 0.980264416845235,
+          "lo": 0.9423345439272726,
+          "hi": 1.0213515951727683
+        },
+        {
+          "day": "Thu",
+          "index": 0.9812055408179912,
+          "lo": 0.9449706595434116,
+          "hi": 1.0170071323085492
+        },
+        {
+          "day": "Fri",
+          "index": 1.0059612640826525,
+          "lo": 0.9737886910526564,
+          "hi": 1.0373425046941454
+        },
+        {
+          "day": "Sat",
+          "index": 1.0166305498518518,
+          "lo": 0.9906928148806825,
+          "hi": 1.0410790489622244
+        },
+        {
+          "day": "Sun",
+          "index": 1.0019004243971148,
+          "lo": 0.9761054479457365,
+          "hi": 1.0281901315252877
+        }
+      ],
+      "p_null": 0.5440911817636472,
+      "p_adjusted": 1.0,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+      "bonferroni_m": 21,
+      "lowest_day": "Wed",
+      "rest_index": 1.0019004243971148
+    },
+    {
+      "country": "United_States",
+      "stream": "Aqua",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "ok",
+      "years": 22,
+      "year_list": [
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "detections": 59189,
+      "detections_used": 55051,
+      "period_verified": true,
+      "unverified_years": [
+        2002,
+        2025
+      ],
+      "excluded_years": [],
+      "weekdays": [
+        {
+          "day": "Mon",
+          "index": 1.0064216741277288,
+          "lo": 0.9698369148554675,
+          "hi": 1.0422199776943768
+        },
+        {
+          "day": "Tue",
+          "index": 1.009790532358722,
+          "lo": 0.9786768165009635,
+          "hi": 1.0401036627380398
+        },
+        {
+          "day": "Wed",
+          "index": 0.9882388987360385,
+          "lo": 0.9528647304091461,
+          "hi": 1.0210510163821191
+        },
+        {
+          "day": "Thu",
+          "index": 0.990533699978668,
+          "lo": 0.9466786600253558,
+          "hi": 1.0315780228247402
+        },
+        {
+          "day": "Fri",
+          "index": 1.0009581908940433,
+          "lo": 0.9675836273710308,
+          "hi": 1.0325194227381178
+        },
+        {
+          "day": "Sat",
+          "index": 0.9696654595591365,
+          "lo": 0.9384211293411132,
+          "hi": 1.0007356075092375
+        },
+        {
+          "day": "Sun",
+          "index": 1.0343915443456635,
+          "lo": 0.9873289647637712,
+          "hi": 1.0889906213640164
+        }
+      ],
+      "p_null": 0.9556088782243551,
+      "p_adjusted": 1.0,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+      "bonferroni_m": 21,
+      "lowest_day": "Sat",
+      "rest_index": 1.0343915443456635
+    },
+    {
+      "country": "United_States",
+      "stream": "VIIRS",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "ok",
+      "years": 12,
+      "year_list": [
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "detections": 1102238,
+      "detections_used": 930014,
+      "period_verified": true,
+      "unverified_years": [
+        2012,
+        2025
+      ],
+      "excluded_years": [],
+      "weekdays": [
+        {
+          "day": "Mon",
+          "index": 0.9886313818612305,
+          "lo": 0.976048577292441,
+          "hi": 1.0015347199662188
+        },
+        {
+          "day": "Tue",
+          "index": 1.002562137482081,
+          "lo": 0.983078670597163,
+          "hi": 1.0242309805314997
+        },
+        {
+          "day": "Wed",
+          "index": 1.0031776148828175,
+          "lo": 0.9901202790191455,
+          "hi": 1.015777978263905
+        },
+        {
+          "day": "Thu",
+          "index": 0.9800815473755126,
+          "lo": 0.9592245477030534,
+          "hi": 1.0026119546169199
+        },
+        {
+          "day": "Fri",
+          "index": 1.0087657826457666,
+          "lo": 0.993242959325129,
+          "hi": 1.024972747704532
+        },
+        {
+          "day": "Sat",
+          "index": 1.011999565510594,
+          "lo": 0.9966149576406255,
+          "hi": 1.0288023400764656
+        },
+        {
+          "day": "Sun",
+          "index": 1.004781970241998,
+          "lo": 0.9970061256312226,
+          "hi": 1.0123941677976005
+        }
+      ],
+      "p_null": 0.7212557488502299,
+      "p_adjusted": 1.0,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Annual archive coverage verified; actual observing exposure remains unknown.",
+      "bonferroni_m": 21,
+      "lowest_day": "Thu",
+      "rest_index": 1.004781970241998
+    },
+    {
+      "country": "Australia",
+      "stream": "Terra",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Australia",
+      "stream": "Aqua",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Australia",
+      "stream": "VIIRS",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Nepal",
+      "stream": "Terra",
+      "subset": "all",
+      "rest_day": "Sat",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 6,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [
+        {
+          "year": 2019,
+          "detections": 1,
+          "reason": "incomplete current/future year or low count"
+        },
+        {
+          "year": 2021,
+          "detections": 3,
+          "reason": "incomplete current/future year or low count"
+        },
+        {
+          "year": 2022,
+          "detections": 1,
+          "reason": "incomplete current/future year or low count"
+        },
+        {
+          "year": 2024,
+          "detections": 1,
+          "reason": "incomplete current/future year or low count"
+        }
+      ],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Nepal",
+      "stream": "Aqua",
+      "subset": "all",
+      "rest_day": "Sat",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 16,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [
+        {
+          "year": 2019,
+          "detections": 4,
+          "reason": "incomplete current/future year or low count"
+        },
+        {
+          "year": 2020,
+          "detections": 1,
+          "reason": "incomplete current/future year or low count"
+        },
+        {
+          "year": 2021,
+          "detections": 2,
+          "reason": "incomplete current/future year or low count"
+        },
+        {
+          "year": 2023,
+          "detections": 3,
+          "reason": "incomplete current/future year or low count"
+        },
+        {
+          "year": 2024,
+          "detections": 2,
+          "reason": "incomplete current/future year or low count"
+        },
+        {
+          "year": 2025,
+          "detections": 4,
+          "reason": "incomplete current/future year or low count"
+        }
+      ],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Nepal",
+      "stream": "VIIRS",
+      "subset": "all",
+      "rest_day": "Sat",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 32,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [
+        {
+          "year": 2023,
+          "detections": 13,
+          "reason": "incomplete current/future year or low count"
+        },
+        {
+          "year": 2024,
+          "detections": 16,
+          "reason": "incomplete current/future year or low count"
+        },
+        {
+          "year": 2025,
+          "detections": 3,
+          "reason": "incomplete current/future year or low count"
+        }
+      ],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Bangladesh",
+      "stream": "Terra",
+      "subset": "all",
+      "rest_day": "Fri",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Bangladesh",
+      "stream": "Aqua",
+      "subset": "all",
+      "rest_day": "Fri",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Bangladesh",
+      "stream": "VIIRS",
+      "subset": "all",
+      "rest_day": "Fri",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Egypt",
+      "stream": "Terra",
+      "subset": "all",
+      "rest_day": "Fri",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Egypt",
+      "stream": "Aqua",
+      "subset": "all",
+      "rest_day": "Fri",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Egypt",
+      "stream": "VIIRS",
+      "subset": "all",
+      "rest_day": "Fri",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "India",
+      "stream": "Terra",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "India",
+      "stream": "Aqua",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "India",
+      "stream": "VIIRS",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Brazil",
+      "stream": "Terra",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Brazil",
+      "stream": "Aqua",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    },
+    {
+      "country": "Brazil",
+      "stream": "VIIRS",
+      "subset": "all",
+      "rest_day": "Sun",
+      "status": "insufficient_data",
+      "years": 0,
+      "year_list": [],
+      "detections": 0,
+      "detections_used": 0,
+      "period_verified": true,
+      "unverified_years": [],
+      "excluded_years": [],
+      "weekdays": [],
+      "p_null": null,
+      "p_adjusted": null,
+      "rest_is_lowest": false,
+      "ci_upper_below_one": false,
+      "significant": false,
+      "reason": "Fewer than the required years of detections."
+    }
+  ]
+}
