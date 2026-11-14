@@ -12,7 +12,7 @@
 ## Before submission
 
 - **Merge PR #1 (`rhythm-integration`) and redeploy.** The live site was deployed from `e71f214` and does not yet include the Human rhythm tab.
-- **Fill the northeast India placeholder** in PROJECT_PAGE.md, SLIDES.md and VIDEO_SCRIPT.md, and have the team review it.
+- The northeast India text (religion shares from the Census of India 2011) is in PROJECT_PAGE.md, SLIDES.md, VIDEO_SCRIPT.md and the app; the team should review it.
 - Verify the live event's submission fields, deadline (15 November 2026, 11:59 pm Nepal time) and media limits.
 - Record and review the actual demo video from the deployed build.
 - Team members must review the scientific interpretation and final text. These drafts have not been submitted or sent externally.

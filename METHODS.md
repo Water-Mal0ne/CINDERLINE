@@ -111,3 +111,7 @@ The official rhythm decision is `pass`: the US passes in 3 of 3 streams, Austral
 - `rhythm.svg` and, when Matplotlib is available, `rhythm.png`: figures labeled with the input provenance.
 
 Synthetic fixtures verify known signal recovery, null behavior, gate logic, period handling and reproducibility. They do not establish performance on real observations. The supplied original reference scripts remain in `reference/` for traceability; the executable implementation is in `pipeline/`.
+
+## Northeast India interpretation (exploratory)
+
+Religion shares in the northeast India text are from the Census of India 2011, religion data by state (Office of the Registrar General and Census Commissioner, India). The per-state Sunday indices are in `reports/official/exploratory_ne_india/ne_india_states.csv` (cells assigned to states by centroid with Natural Earth admin-1 boundaries). The text describes a correlation, not a cause.

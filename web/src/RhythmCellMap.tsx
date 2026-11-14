@@ -17,8 +17,10 @@ type Land = {features: {geometry: {type: string; coordinates: number[][][][] | n
 
 const NAMES: Record<string, string> = {United_States: 'United States', Brazil: 'Brazil', Australia: 'Australia', India: 'India'};
 // A highlighted area is drawn by eye after viewing the maps; every number shown for it is computed from the cells.
-const HIGHLIGHTS: Record<string, {title: string; test: (p: CellProps) => boolean; rest: string; restTest: (p: CellProps) => boolean}> = {
-  India: {title: 'Northeast India (east of 89° E)', test: p => p.cell_lon >= 89, rest: 'rest of India', restTest: p => p.cell_lon < 89},
+// context: team-written interpretation (religion shares: Census of India 2011; see METHODS.md and reports/official/exploratory_ne_india/).
+const HIGHLIGHTS: Record<string, {title: string; test: (p: CellProps) => boolean; rest: string; restTest: (p: CellProps) => boolean; context?: string}> = {
+  India: {title: 'Northeast India (east of 89° E)', test: p => p.cell_lon >= 89, rest: 'rest of India', restTest: p => p.cell_lon < 89,
+    context: "Within India, the Sunday dip is concentrated in the northeast. It is deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day, and it is just as deep in the Indian cells along the border with Myanmar. Nagaland and Mizoram are mostly Christian and Manipur is about 41% Christian, and in many of these communities Sunday is widely kept as a church day. The link is not clean: Meghalaya, also mostly Christian, shows a weaker dip, and Assam, mostly not Christian, still shows one. This is an exploratory correlation, not evidence of what causes the pattern."},
 };
 
 function color(v: number) {
@@ -107,7 +109,7 @@ export default function RhythmCellMap() {
         {check && <div>Aqua check: {check.cells_with_both} cells have both satellites; their Sunday indices correlate at r = {f3(check.corr_rest_index)}. Of {check.viirs_sig_cells_with_aqua} VIIRS-significant cells with Aqua data, {check.of_those_aqua_below_1} are also below 1 in Aqua and {check.of_those_aqua_significant} are significant in Aqua.</div>}
       </div>
     </div>
-    {hl && hlStats && <div className="rh-finding"><strong>{hl.title}.</strong> {hlStats.sig} of {hlStats.n} cells have a significant Sunday dip (median index {f3(hlStats.med)}). Of the {hlStats.aqua} significant cells that Aqua can also measure, {hlStats.aquaBelow} are below 1 in Aqua and {hlStats.aquaSig} are significant in Aqua. In the {hl.rest}, {hlStats.outSig} of {hlStats.outN} cells are significant (median {f3(hlStats.outMed)}). The area boundary was drawn after looking at the map; it is a description, not a test. The pattern is consistent with people scheduling their burning there; it does not show who lit the fires.</div>}
+    {hl && hlStats && <div className="rh-finding"><strong>{hl.title}.</strong> {hlStats.sig} of {hlStats.n} cells have a significant Sunday dip (median index {f3(hlStats.med)}). Of the {hlStats.aqua} significant cells that Aqua can also measure, {hlStats.aquaBelow} are below 1 in Aqua and {hlStats.aquaSig} are significant in Aqua. In the {hl.rest}, {hlStats.outSig} of {hlStats.outN} cells are significant (median {f3(hlStats.outMed)}). The area boundary was drawn after looking at the map; it is a description, not a test. The pattern is consistent with people scheduling their burning there; it does not show who lit the fires.{hl.context && <><br/><br/>{hl.context} <small>(Religion shares: Census of India 2011.)</small></>}</div>}
     {all && <p className="chart-note">All four countries: Aqua and VIIRS Sunday indices correlate at r = {f3(all.corr_rest_index)} across {all.cells_with_both} shared cells. Neighbouring cells share weather and farming practice, so a cluster of significant cells is one regional pattern, not many independent findings. Grey land means too few detections to analyse, not "no dip".</p>}
     <span className="chart-label">{cells.metadata.label} · EXPLORATORY</span>
   </section>;
