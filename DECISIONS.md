@@ -9,6 +9,13 @@
 - Worldwide expansion remains deferred. A complete seven-country manifest does not imply global observation coverage. [Space Apps Navigator guidance](https://github.com/nasa/spaceapps/discussions/2016) supports a selected-area implementation and emphasizes the harmonization method.
 - National totals include all qualifying cells. Daily exploration contains 12 cells per country selected using training-period activity. All 41,986 contributing cells appear in the annual globe, but only 84 have daily drill-down. The accessible fallback lists the 20 highest-activity annual cells for a country/year.
 
+## Overnight UI decisions
+
+- 2026-11-14 19:47 UTC: Move the existing scale control and its exact scope caption above the sidebar rather than introduce a second independent control; preserve readiness during link/data hydration.
+- 2026-11-14 19:47 UTC: Fix the observed phone navigation overflow with two columns and improve scoped Rhythm readability without changing scientific text, values or caveats.
+- 2026-11-14 19:47 UTC: Keep the existing independent rhythm-country picker and shared-URL schema; the requested deep link restores the tab, and broader state redesign exceeds this task.
+- 2026-11-14 19:47 UTC: Reuse the FRP branch's identical web test discovery runner so merging the features cannot omit either suite. All real country/grid assets passed; no speculative data-path rewrite or new dataset is needed.
+
 ## Exact-count processing and payloads
 
 - The additive `pipeline.streaming` route cleans annual archives in bounded chunks, preserves exact count multiplicities and reduces repeated keys on disk. It never expands count rows back into individual detections. The original smaller raw-record `pipeline.run_all` route remains available; it is not the seven-country release command.
@@ -79,9 +86,4 @@ Test, fixed before running: the per-cell method of `reference/rhythm_map.py` (VI
 
 Result (added after the analysis): the prediction did NOT hold. Of the two hill-tract cells, 21N 92E has a significant Sunday dip in VIIRS (0.490, q 0.0004) and Aqua (0.564, q 0.020); 22N 92E does not (0.745, q 0.089). The prediction was committed in `5adb21a90e781ce642b17c9aee9915a600c84dda`. See `reports/review/bangladesh_hills/RESULT.md`.
 
-## Overnight UI decisions
-
-- 2026-11-14 19:47 UTC: Move the existing scale control and its exact scope caption above the sidebar rather than introduce a second independent control; preserve readiness during link/data hydration.
-- 2026-11-14 19:47 UTC: Fix the observed phone navigation overflow with two columns and improve scoped Rhythm readability without changing scientific text, values or caveats.
-- 2026-11-14 19:47 UTC: Keep the existing independent rhythm-country picker and shared-URL schema; the requested deep link restores the tab, and broader state redesign exceeds this task.
-- 2026-11-14 19:47 UTC: Reuse the FRP branch's identical web test discovery runner so merging the features cannot omit either suite. All real country/grid assets passed; no speculative data-path rewrite or new dataset is needed.
+- 2026-11-14 20:20 UTC: During cross-PR review, relocate the unchanged UI decision section away from the shared end-of-file insertion point. Preserve every decision and all application code.
