@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "scope": "All five active feature worktrees vs main290e756, read-only check",
+  "worktrees": [
+    {
+      "worktree": "firetrace",
+      "official_and_locked_paths_diff_from_main": [],
+      "locked_file_sha256_matches": true
+    },
+    {
+      "worktree": "firetrace-story-wording",
+      "official_and_locked_paths_diff_from_main": [],
+      "locked_file_sha256_matches": true
+    },
+    {
+      "worktree": "firetrace-frp-test",
+      "official_and_locked_paths_diff_from_main": [],
+      "locked_file_sha256_matches": true
+    },
+    {
+      "worktree": "firetrace-season-check",
+      "official_and_locked_paths_diff_from_main": [],
+      "locked_file_sha256_matches": true
+    },
+    {
+      "worktree": "firetrace-submission-final",
+      "official_and_locked_paths_diff_from_main": [],
+      "locked_file_sha256_matches": true
+    }
+  ],
+  "locked_sha256": {
+    "reports/harmonization_model.json": "596adf75f544032e1b733f2f85d4fd97120b4514bdd2f2a894e97bf7ab8a303a",
+    "reports/selection_lock.json": "3b7f7e3cf52b93287546a3756f612c9194b5c9ee032f63ccf5cf48b9f0178904",
+    "reports/harmonization_eval.csv": "976d23d94a68769028c3d1af2ea002d17206992fbca1e759fbbb3b7b0509337f",
+    "reports/LOCKED_ARTIFACTS.json": "d8ca1805be8e25d2c19cb95d89c7885122a7aed888952072cd4e138204ffa170"
+  }
+}
