@@ -78,3 +78,23 @@ Prediction: the Chittagong Hill Tracts (hill shifting cultivation, communities m
 Test, fixed before running: the per-cell method of `reference/rhythm_map.py` (VIIRS for the map, Aqua as a check; 1-degree cells with at least 300 detections a year on average and 8 usable years; Benjamini-Hochberg at 5%) applied to Bangladesh with Sunday as the tested day. Cells are counted as Chittagong Hill Tracts if their centroid falls in Rangamati, Khagrachari or Bandarban districts, or otherwise if their centroid lies east of 91.5 E and south of 23.5 N. The prediction holds if no such cell has a significant Sunday dip. No Bangladesh per-cell result had been computed when this was committed.
 
 Result (added after the analysis): the prediction did NOT hold. Of the two hill-tract cells, 21N 92E has a significant Sunday dip in VIIRS (0.490, q 0.0004) and Aqua (0.564, q 0.020); 22N 92E does not (0.745, q 0.089). The prediction was committed in `5adb21a90e781ce642b17c9aee9915a600c84dda`. See `reports/review/bangladesh_hills/RESULT.md`.
+
+
+## Count versus FRP: overnight protocol receipt
+
+Recorded 2026-11-14 19:21:16 UTC. **Chronology exception:** the preceding research session already calculated the FRP outcome. This Git receipt is retrospective packaging and does not predate that result. The original local protocol was frozen at 2026-11-14 18:57:23.284 UTC, before that session calculated the contrasts, with SHA-256 `1B88C8B3C7A1225FB2AA10E3B19DD9311CB7F4B022A9795C51552557BB434171`. Its preserved bytes and timestamp record accompany this branch. The outcome and criteria will not be changed to manufacture a fresh prediction or a prior Git record. This is not external preregistration or a new holdout.
+
+The following protocol and prediction are copied word for word from the overnight brief; the later implementation is a reproducibility exercise of the completed test.
+
+Protocol: United States, 2013-2024, vegetation (type 0), daytime only, the same confidence filters and IANA local civil time conversion as kill_test.py, Terra, Aqua and VIIRS S-NPP analysed separately. Use the cleaned caches or the raw FIRMS CSVs on this machine; reconcile detection counts against the official run and report any mismatch. Exclude outage dates from reports/review/OUTAGES.md, then repeat with the mask padded by 1 day on each side. FRP: keep only finite, non-negative values; missing is not zero.
+
+Data gate: at least 95% valid FRP in every stream-year, and weekday missingness differing by no more than 1 percentage point within any stream-year. If the gate fails, stop and report it as failed.
+
+Analysis: per year, compute exposure-adjusted weekday rates for (a) valid-FRP detection counts and (b) summed FRP; normalise each to its 7-day mean; Sunday delta = FRP index minus count index. Primary estimate: equal-weight mean of the 12 yearly deltas per stream. Bootstrap whole years 50,000 times, seed 20261115, using the same year draws for all streams; 98.33% intervals. Also report all 12 yearly deltas, leave-one-year-out means, and the result after removing each stream-year's single highest-FRP day from both metrics and their denominators.
+
+Prediction: mean delta >= 0.05 with the interval wholly above zero in at least 2 of 3 streams, positive in every leave-one-year-out run and after removing the top-FRP day, under both outage masks.
+
+Kill rule: if any condition fails, the test fails. Do not change the cutoff, switch to nighttime, Florida, other countries or other FRP definitions to rescue it.
+
+
+- 2026-11-14 19:21:16 UTC: Retain the original, more explicit frozen conventions: the same two streams must pass both masks; intervals must exclude zero while the point estimate meets 0.05; exact tie-breaking, local-date masks and bootstrap draws remain fixed. No additional subgroup or new outcome is authorized.

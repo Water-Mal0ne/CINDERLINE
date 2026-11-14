@@ -4,3 +4,5 @@ reports/harmonization_eval.csv -text whitespace=cr-at-eol
 reports/selection_lock.json -text whitespace=cr-at-eol
 reports/LOCKED_ARTIFACTS.json -text whitespace=cr-at-eol
 reports/scientific_validation/model_snapshot.json -text whitespace=cr-at-eol
+
+reports/review/frp/original_recorded_protocol.md -text whitespace=cr-at-eol
