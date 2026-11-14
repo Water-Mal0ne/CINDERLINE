@@ -1,0 +1,55 @@
+{
+  "label": "SYNTHETIC DATA",
+  "fit_years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017
+  ],
+  "validation_years": [
+    2018,
+    2019
+  ],
+  "test_years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "ratios": {
+    "B1": 0.25,
+    "M1": {
+      "Nepal|D:medium": 0.25,
+      "United_States|D:medium": 0.25
+    }
+  },
+  "selection": {
+    "Nepal": {
+      "selected": "B1",
+      "validation_daily_mae": {
+        "B1": 0.0,
+        "M1": 0.0
+      }
+    },
+    "United_States": {
+      "selected": "B1",
+      "validation_daily_mae": {
+        "B1": 0.0,
+        "M1": 0.0
+      }
+    }
+  },
+  "grid_size": 0.25,
+  "map_cells": 12,
+  "uncertainty": "95% training-year bootstrap calibration interval; not total observation/prediction uncertainty",
+  "limitations": [
+    "Counts refer to archived qualifying detections, not fires or burned area.",
+    "Cloud/overpass observation coverage is unknown; zeros mean no archived detections only.",
+    "Full local years require adjacent UTC annual archives.",
+    "No validated pre-Aqua bridge; this build supports dates with Aqua or VIIRS archives.",
+    "M1 matches reported FRP strata empirically, not physically equal pixel-scale energy.",
+    "M2 omitted; map exposes 12 training-period-active cells per country, national totals use all cells."
+  ]
+}

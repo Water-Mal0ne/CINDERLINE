@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FIRETRACE//Seasonal calendar//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:firetrace-United_States-2027-12
+DTSTAMP:20261114T000000Z
+DTSTART;VALUE=DATE:20270319
+DTEND;VALUE=DATE:20270416
+SUMMARY:Historical high fire activity
+DESCRIPTION:Historical seasonal pattern. Not a forecast or safety alert.
+END:VEVENT
+BEGIN:VEVENT
+UID:firetrace-United_States-2027-26
+DTSTAMP:20261114T000000Z
+DTSTART;VALUE=DATE:20270625
+DTEND;VALUE=DATE:20270702
+SUMMARY:Historical high fire activity
+DESCRIPTION:Historical seasonal pattern. Not a forecast or safety alert.
+END:VEVENT
+BEGIN:VEVENT
+UID:firetrace-United_States-2027-29
+DTSTAMP:20261114T000000Z
+DTSTART;VALUE=DATE:20270716
+DTEND;VALUE=DATE:20270917
+SUMMARY:Historical high fire activity
+DESCRIPTION:Historical seasonal pattern. Not a forecast or safety alert.
+END:VEVENT
+END:VCALENDAR

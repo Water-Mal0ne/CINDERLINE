@@ -1,0 +1,25 @@
+region,model,split,aggregation,n_periods,bias_pct,mae,correlation,peak_week_error,label
+Nepal,B0,validation,monthly,24,300.0,502.625,0.9999999999999998,0.0,SYNTHETIC DATA
+Nepal,B0,validation,weekly,106,300.0,113.80188679245283,1.0,0.0,SYNTHETIC DATA
+Nepal,B0,test,monthly,60,300.0,563.85,1.0,0.0,SYNTHETIC DATA
+Nepal,B0,test,weekly,262,300.0,129.1259541984733,1.0,0.0,SYNTHETIC DATA
+Nepal,B1,validation,monthly,24,0.0,0.0,0.9999999999999998,0.0,SYNTHETIC DATA
+Nepal,B1,validation,weekly,106,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+Nepal,B1,test,monthly,60,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+Nepal,B1,test,weekly,262,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+Nepal,M1,validation,monthly,24,0.0,0.0,0.9999999999999998,0.0,SYNTHETIC DATA
+Nepal,M1,validation,weekly,106,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+Nepal,M1,test,monthly,60,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+Nepal,M1,test,weekly,262,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+United_States,B0,validation,monthly,24,300.0,502.625,0.9999999999999998,0.0,SYNTHETIC DATA
+United_States,B0,validation,weekly,106,300.0,113.80188679245283,1.0,0.0,SYNTHETIC DATA
+United_States,B0,test,monthly,60,300.0,563.85,1.0,0.0,SYNTHETIC DATA
+United_States,B0,test,weekly,262,300.0,129.1259541984733,1.0,0.0,SYNTHETIC DATA
+United_States,B1,validation,monthly,24,0.0,0.0,0.9999999999999998,0.0,SYNTHETIC DATA
+United_States,B1,validation,weekly,106,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+United_States,B1,test,monthly,60,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+United_States,B1,test,weekly,262,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+United_States,M1,validation,monthly,24,0.0,0.0,0.9999999999999998,0.0,SYNTHETIC DATA
+United_States,M1,validation,weekly,106,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+United_States,M1,test,monthly,60,0.0,0.0,1.0,0.0,SYNTHETIC DATA
+United_States,M1,test,weekly,262,0.0,0.0,1.0,0.0,SYNTHETIC DATA

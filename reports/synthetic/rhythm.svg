@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1230" viewBox="0 0 1000 1230">
+<rect width="100%" height="100%" fill="#faf8f2"/>
+<text x="28" y="32" font-size="22" font-family="sans-serif">SYNTHETIC DATA — weekly detection patterns</text>
+<text x="28" y="56" font-size="13" font-family="sans-serif">Index 1 = annual weekday-rate average. Whiskers: 95% year-bootstrap intervals. Separate streams.</text>
+<text x="28" y="90" font-size="15" font-family="sans-serif">United_States / Terra / 12 years / ok</text>
+<line x1="28" x2="950" y1="143.6" y2="143.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="143.41" width="72" height="86.59" fill="#557570"/>
+<line x1="86" x2="86" y1="143.15" y2="143.68" stroke="#222"/>
+<text x="66" y="250" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="143.57" width="72" height="86.43" fill="#557570"/>
+<line x1="214" x2="214" y1="143.41" y2="143.74" stroke="#222"/>
+<text x="194" y="250" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="143.61" width="72" height="86.39" fill="#557570"/>
+<line x1="342" x2="342" y1="143.37" y2="143.85" stroke="#222"/>
+<text x="322" y="250" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="143.74" width="72" height="86.26" fill="#557570"/>
+<line x1="470" x2="470" y1="143.49" y2="144.01" stroke="#222"/>
+<text x="450" y="250" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="143.59" width="72" height="86.41" fill="#557570"/>
+<line x1="598" x2="598" y1="143.47" y2="143.70" stroke="#222"/>
+<text x="578" y="250" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="143.74" width="72" height="86.26" fill="#557570"/>
+<line x1="726" x2="726" y1="143.49" y2="144.05" stroke="#222"/>
+<text x="706" y="250" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="143.54" width="72" height="86.46" fill="#c74424"/>
+<line x1="854" x2="854" y1="143.32" y2="143.77" stroke="#222"/>
+<text x="834" y="250" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="280" font-size="15" font-family="sans-serif">United_States / Aqua / 12 years / ok</text>
+<line x1="28" x2="950" y1="333.6" y2="333.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="333.41" width="72" height="86.59" fill="#557570"/>
+<line x1="86" x2="86" y1="333.15" y2="333.68" stroke="#222"/>
+<text x="66" y="440" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="333.57" width="72" height="86.43" fill="#557570"/>
+<line x1="214" x2="214" y1="333.42" y2="333.74" stroke="#222"/>
+<text x="194" y="440" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="333.61" width="72" height="86.39" fill="#557570"/>
+<line x1="342" x2="342" y1="333.36" y2="333.86" stroke="#222"/>
+<text x="322" y="440" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="333.74" width="72" height="86.26" fill="#557570"/>
+<line x1="470" x2="470" y1="333.49" y2="334.00" stroke="#222"/>
+<text x="450" y="440" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="333.59" width="72" height="86.41" fill="#557570"/>
+<line x1="598" x2="598" y1="333.48" y2="333.70" stroke="#222"/>
+<text x="578" y="440" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="333.74" width="72" height="86.26" fill="#557570"/>
+<line x1="726" x2="726" y1="333.48" y2="334.04" stroke="#222"/>
+<text x="706" y="440" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="333.54" width="72" height="86.46" fill="#c74424"/>
+<line x1="854" x2="854" y1="333.31" y2="333.77" stroke="#222"/>
+<text x="834" y="440" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="470" font-size="15" font-family="sans-serif">United_States / VIIRS / 12 years / ok</text>
+<line x1="28" x2="950" y1="523.6" y2="523.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="523.41" width="72" height="86.59" fill="#557570"/>
+<line x1="86" x2="86" y1="523.14" y2="523.67" stroke="#222"/>
+<text x="66" y="630" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="523.57" width="72" height="86.43" fill="#557570"/>
+<line x1="214" x2="214" y1="523.42" y2="523.74" stroke="#222"/>
+<text x="194" y="630" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="523.61" width="72" height="86.39" fill="#557570"/>
+<line x1="342" x2="342" y1="523.37" y2="523.85" stroke="#222"/>
+<text x="322" y="630" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="523.74" width="72" height="86.26" fill="#557570"/>
+<line x1="470" x2="470" y1="523.50" y2="524.00" stroke="#222"/>
+<text x="450" y="630" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="523.59" width="72" height="86.41" fill="#557570"/>
+<line x1="598" x2="598" y1="523.48" y2="523.70" stroke="#222"/>
+<text x="578" y="630" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="523.74" width="72" height="86.26" fill="#557570"/>
+<line x1="726" x2="726" y1="523.48" y2="524.06" stroke="#222"/>
+<text x="706" y="630" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="523.54" width="72" height="86.46" fill="#c74424"/>
+<line x1="854" x2="854" y1="523.31" y2="523.76" stroke="#222"/>
+<text x="834" y="630" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="660" font-size="15" font-family="sans-serif">Nepal / Terra / 12 years / ok</text>
+<line x1="28" x2="950" y1="713.6" y2="713.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="713.41" width="72" height="86.59" fill="#557570"/>
+<line x1="86" x2="86" y1="713.14" y2="713.67" stroke="#222"/>
+<text x="66" y="820" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="713.57" width="72" height="86.43" fill="#557570"/>
+<line x1="214" x2="214" y1="713.41" y2="713.74" stroke="#222"/>
+<text x="194" y="820" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="713.61" width="72" height="86.39" fill="#557570"/>
+<line x1="342" x2="342" y1="713.39" y2="713.86" stroke="#222"/>
+<text x="322" y="820" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="713.74" width="72" height="86.26" fill="#557570"/>
+<line x1="470" x2="470" y1="713.49" y2="714.01" stroke="#222"/>
+<text x="450" y="820" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="713.59" width="72" height="86.41" fill="#557570"/>
+<line x1="598" x2="598" y1="713.47" y2="713.70" stroke="#222"/>
+<text x="578" y="820" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="713.74" width="72" height="86.26" fill="#c74424"/>
+<line x1="726" x2="726" y1="713.48" y2="714.04" stroke="#222"/>
+<text x="706" y="820" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="713.54" width="72" height="86.46" fill="#557570"/>
+<line x1="854" x2="854" y1="713.32" y2="713.75" stroke="#222"/>
+<text x="834" y="820" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="850" font-size="15" font-family="sans-serif">Nepal / Aqua / 12 years / ok</text>
+<line x1="28" x2="950" y1="903.6" y2="903.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="903.41" width="72" height="86.59" fill="#557570"/>
+<line x1="86" x2="86" y1="903.13" y2="903.68" stroke="#222"/>
+<text x="66" y="1010" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="903.57" width="72" height="86.43" fill="#557570"/>
+<line x1="214" x2="214" y1="903.41" y2="903.73" stroke="#222"/>
+<text x="194" y="1010" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="903.61" width="72" height="86.39" fill="#557570"/>
+<line x1="342" x2="342" y1="903.38" y2="903.84" stroke="#222"/>
+<text x="322" y="1010" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="903.74" width="72" height="86.26" fill="#557570"/>
+<line x1="470" x2="470" y1="903.48" y2="904.01" stroke="#222"/>
+<text x="450" y="1010" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="903.59" width="72" height="86.41" fill="#557570"/>
+<line x1="598" x2="598" y1="903.48" y2="903.70" stroke="#222"/>
+<text x="578" y="1010" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="903.74" width="72" height="86.26" fill="#c74424"/>
+<line x1="726" x2="726" y1="903.48" y2="904.06" stroke="#222"/>
+<text x="706" y="1010" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="903.54" width="72" height="86.46" fill="#557570"/>
+<line x1="854" x2="854" y1="903.32" y2="903.75" stroke="#222"/>
+<text x="834" y="1010" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="1040" font-size="15" font-family="sans-serif">Nepal / VIIRS / 12 years / ok</text>
+<line x1="28" x2="950" y1="1093.6" y2="1093.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="1093.41" width="72" height="86.59" fill="#557570"/>
+<line x1="86" x2="86" y1="1093.14" y2="1093.69" stroke="#222"/>
+<text x="66" y="1200" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="1093.57" width="72" height="86.43" fill="#557570"/>
+<line x1="214" x2="214" y1="1093.41" y2="1093.73" stroke="#222"/>
+<text x="194" y="1200" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="1093.61" width="72" height="86.39" fill="#557570"/>
+<line x1="342" x2="342" y1="1093.38" y2="1093.86" stroke="#222"/>
+<text x="322" y="1200" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="1093.74" width="72" height="86.26" fill="#557570"/>
+<line x1="470" x2="470" y1="1093.49" y2="1094.01" stroke="#222"/>
+<text x="450" y="1200" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="1093.59" width="72" height="86.41" fill="#557570"/>
+<line x1="598" x2="598" y1="1093.47" y2="1093.70" stroke="#222"/>
+<text x="578" y="1200" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="1093.74" width="72" height="86.26" fill="#c74424"/>
+<line x1="726" x2="726" y1="1093.48" y2="1094.04" stroke="#222"/>
+<text x="706" y="1200" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="1093.54" width="72" height="86.46" fill="#557570"/>
+<line x1="854" x2="854" y1="1093.30" y2="1093.76" stroke="#222"/>
+<text x="834" y="1200" font-size="13" font-family="sans-serif">Sun</text>
+</svg>

@@ -1,0 +1,65 @@
+{
+  "label": "REAL FIRMS DATA",
+  "fit_years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017
+  ],
+  "validation_years": [
+    2018,
+    2019
+  ],
+  "test_years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "ratios": {
+    "B1": 0.15156156974338791,
+    "M1": {
+      "Nepal|D:high": 1.685887363573314,
+      "Nepal|D:low": 0.050037164620136104,
+      "Nepal|D:medium": 0.6707492572198389,
+      "Nepal|N:high": 0.2715615697433879,
+      "Nepal|N:low": 0.008080155746753507,
+      "Nepal|N:medium": 1.3819799208740164,
+      "United_States|D:high": 1.1280642268753962,
+      "United_States|D:low": 0.07777772979439206,
+      "United_States|D:medium": 0.36823242725353805,
+      "United_States|N:high": 1.2789564070456043,
+      "United_States|N:low": 0.005479680229368897,
+      "United_States|N:medium": 0.3823819466518879
+    }
+  },
+  "selection": {
+    "Nepal": {
+      "selected": "M1",
+      "validation_daily_mae": {
+        "B1": 6.460772701768966,
+        "M1": 3.7341244516326735
+      }
+    },
+    "United_States": {
+      "selected": "B1",
+      "validation_daily_mae": {
+        "B1": 60.17648139324353,
+        "M1": 69.37109342233333
+      }
+    }
+  },
+  "grid_size": 0.25,
+  "map_cells": 12,
+  "uncertainty": "95% training-year bootstrap calibration interval; not total observation/prediction uncertainty",
+  "limitations": [
+    "Counts refer to archived qualifying detections, not fires or burned area.",
+    "Cloud/overpass observation coverage is unknown; zeros mean no archived detections only.",
+    "Full local years require adjacent UTC annual archives.",
+    "No validated pre-Aqua bridge; this build supports dates with Aqua or VIIRS archives.",
+    "M1 matches reported FRP strata empirically, not physically equal pixel-scale energy.",
+    "M2 omitted; map exposes 12 training-period-active cells per country, national totals use all cells."
+  ]
+}
