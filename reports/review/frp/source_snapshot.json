@@ -1,0 +1,611 @@
+{
+  "started_utc": "2026-11-14T18:59:21.588289+00:00",
+  "finished_utc": "2026-11-14T18:59:26.976462+00:00",
+  "code_hash": "54ac9e098d3d4e5c2287f24c69880b8a2ffe31c4fc0b24213feb2ebf030dd315",
+  "historical_code_files": [
+    {
+      "path": "work/phase3/aggregate_archives.py",
+      "sha256": "ae79ba5e390abda67120ad1f01c1dd5101170fa24c6955b814c0b5d0e394ecb8"
+    },
+    {
+      "path": "pipeline/clean.py",
+      "sha256": "bd07c32e0cabccaa802d8a2de36940279c5ff64d4dc01a710d38b32d8a382ec3"
+    },
+    {
+      "path": "pipeline/harmonize.py",
+      "sha256": "844fdda6d23389f13a5afc4f57d15a5e84de124f0f50ad8352e7cb4b88bda280"
+    }
+  ],
+  "current_promoted_aggregate_sha256": "f08b0925cf125f7d17cb71e779303918daa95ae7ae97ad5369df0fb717e4beb4",
+  "inputs": [
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2012_United_States.parquet",
+      "clean_sha256": "7b83ea45de2b24a7cb377ae2515126bfb473f50b1b8d8d42be666904021cd9c9",
+      "bytes": 2657908,
+      "source_path": "data/raw/modis/2012/modis_2012_United_States.csv",
+      "source_sha256": "d11a4d7c204981f27d9d7020b7367be49f64976b8e25464271240602d144295f",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2012/done.json",
+      "done_sha256": "132c6090a50111ddfb3264ed9b23aef00b99ae116355da4228a827d8f1a38369",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2012/counts-00000.parquet",
+          "sha256": "b24c989375f318f9712b8686dd9f8541220009279aad9f8a97141314ba1a6a01",
+          "bytes": 424670
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2013_United_States.parquet",
+      "clean_sha256": "000172c5efb1092498854b9f92e77d3808f47793961c136f126ebac080e8da63",
+      "bytes": 2069453,
+      "source_path": "data/raw/modis/2013/modis_2013_United_States.csv",
+      "source_sha256": "2ce080c702a7381bba6a9d0b2926e608da8b37db8e1b5a1ce8b905499a8aecc7",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2013/done.json",
+      "done_sha256": "dbf78ee936710bfb3cc9e197563381c7e41862d6bdf8a6499520a6bbf635e938",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2013/counts-00000.parquet",
+          "sha256": "656f59621d3667805a8757646b8234704cb4c312f7cb82cec59e26041ddd3204",
+          "bytes": 349348
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2014_United_States.parquet",
+      "clean_sha256": "81fc6253caa7c0c7f530e650619f4203e6bdea2d978f9a478349f4556be06e9c",
+      "bytes": 1991533,
+      "source_path": "data/raw/modis/2014/modis_2014_United_States.csv",
+      "source_sha256": "655279188cce2caa6668f4c671fb5e6ae36259e01c4e9aaa6f0499621c8f96eb",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2014/done.json",
+      "done_sha256": "b7d89067fb6f9956717053a3fd34ed0cbe1a72b4a429585142e114532bbd838a",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2014/counts-00000.parquet",
+          "sha256": "286464bfd5152a60fb8c046060f05b27737266799cc144feb17dfcbec47d593f",
+          "bytes": 349230
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2015_United_States.parquet",
+      "clean_sha256": "bb0462c8f4674aa5e8d1a35e37c0427390ba562557e51e49d681cd107c1988de",
+      "bytes": 2768130,
+      "source_path": "data/raw/modis/2015/modis_2015_United_States.csv",
+      "source_sha256": "67d731cc9e42d4279421040c33f7d23a6458ae5196b0aa445fa3115866390b5b",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2015/done.json",
+      "done_sha256": "45cef00fa579f60b55948af1617a92f2c3e533b62ac3c2a9307fb8072fa080c4",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2015/counts-00000.parquet",
+          "sha256": "8b44bdfaf44fc688a0d06492966786a9d69667d02d9ab7ff5759b91c6ae1a157",
+          "bytes": 431508
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2016_United_States.parquet",
+      "clean_sha256": "5dd14f040b4afdb6b23c3dad4876210a74ea1f368d8b50dca6e2724f71040c25",
+      "bytes": 2244835,
+      "source_path": "data/raw/modis/2016/modis_2016_United_States.csv",
+      "source_sha256": "55f87d1248deb753f3076633809004b136f5937aeab5bb39872b13aad2f03b3a",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2016/done.json",
+      "done_sha256": "7589768d49b7bfaed8f0140736cec991a68699606108877a32efd5fb4fa8c261",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2016/counts-00000.parquet",
+          "sha256": "09acc17397410f4409eebde386a18333a94d9f6afbd1a7a1fce43b5febd2a59d",
+          "bytes": 389273
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2017_United_States.parquet",
+      "clean_sha256": "310698eb51fccc8b24890fb55bd84dfc7af6dfa835373faac20176cfe1877bbb",
+      "bytes": 2925045,
+      "source_path": "data/raw/modis/2017/modis_2017_United_States.csv",
+      "source_sha256": "d5256d2c936c4cc0cf84fc8fdc4aedc3ed5e7bd00e6080e4c377da51fa6b7009",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2017/done.json",
+      "done_sha256": "fefa01bb6c74b47689564f412b4171d68084109fdb863ee4758e7d2376c58d3c",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2017/counts-00000.parquet",
+          "sha256": "076e2d14eee968dfbcd108cceaf31c0423012943eb28d8be4cec7e135caeec2e",
+          "bytes": 453244
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2018_United_States.parquet",
+      "clean_sha256": "cfaeaec9cc50fb98990c5f74f99f83e1977e2ee6b53ddd41c796769be1772b92",
+      "bytes": 2503567,
+      "source_path": "data/raw/modis/2018/modis_2018_United_States.csv",
+      "source_sha256": "5e6bf58957d2735abde985f9bbc205973f2dd5cea8705968b70c6e60afe23855",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2018/done.json",
+      "done_sha256": "b36e5bc28e9cf7b41aec33d8822dc63f50b4a66a7160eeb7089a3b81e3a8deb7",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2018/counts-00000.parquet",
+          "sha256": "bcb145e9f9757d4b2b5dfb174e5c5bfb8d04d0e3e21e36a0025b189e6e4db71a",
+          "bytes": 401729
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2019_United_States.parquet",
+      "clean_sha256": "0683df645867b513e95b193db1224d2802e367071d17d0fd25c10995a2e0d6d9",
+      "bytes": 2151303,
+      "source_path": "data/raw/modis/2019/modis_2019_United_States.csv",
+      "source_sha256": "a478e23cd205e1367aaa3d543da00f15036ee5e0d81071c530ee78cd1368555e",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2019/done.json",
+      "done_sha256": "dfb9a633ca299313f0f66373329334e45396a42b971677f3f2fcc4dbedeba705",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2019/counts-00000.parquet",
+          "sha256": "8d537df9b4ab99d4873372dabaa7d56beab67c2649844d4c6b7e770a72df172e",
+          "bytes": 357482
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2020_United_States.parquet",
+      "clean_sha256": "7f99060b97b9cbff4ce6df36d0935e14bd377b91938f09205af170560eca52e5",
+      "bytes": 2713289,
+      "source_path": "data/raw/modis/2020/modis_2020_United_States.csv",
+      "source_sha256": "466e2c7616fe1d813a7bfa66971160b64d6baf341fab22ffe8fac06dfbf7961a",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2020/done.json",
+      "done_sha256": "b3c52dd2d6f92a66c9909bbfdc3d3d860c5d1673769f15fa9ea71dedeebf12a5",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2020/counts-00000.parquet",
+          "sha256": "a545ca0ae0ab20c99be8f7c454f9368a9fa7e5e92aa3ea0df4d31e24e3c90559",
+          "bytes": 418622
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2021_United_States.parquet",
+      "clean_sha256": "28a074cc24b4f8cc2738727ac50def4366a39717cedb13fdff52e67145d5f409",
+      "bytes": 2908941,
+      "source_path": "data/raw/modis/2021/modis_2021_United_States.csv",
+      "source_sha256": "bc227a3c85f03fe847d5b96da87cc67588774043c0efa4f0c85179c12187f897",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2021/done.json",
+      "done_sha256": "1cf1a1b1a1e6509cf361b9a7b0cf5b157440a62991abf3a7571508558a03eebb",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2021/counts-00000.parquet",
+          "sha256": "fea91fb70601e975714df71dca43eaecabce62f1ede52066d0047e1dde9394ad",
+          "bytes": 451484
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2022_United_States.parquet",
+      "clean_sha256": "df9df2f1a0f9323477afa6ffdb9334f2bae33f0d46f09086c7e5eedcfd1cacff",
+      "bytes": 2519019,
+      "source_path": "data/raw/modis/2022/modis_2022_United_States.csv",
+      "source_sha256": "20710b0b6c1630ca44d39c537abb7c10f9c0050f66770b936edc412ef0e4be76",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2022/done.json",
+      "done_sha256": "3c62ed62d76a2d20ec8c6846d8ff5e5ff3994fb3bb13432f07bf93ebb57e5564",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2022/counts-00000.parquet",
+          "sha256": "c60ae02bfc93b9a7c2ee185c82789d87dbacf71c440625814c7b9b842221f113",
+          "bytes": 407931
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2023_United_States.parquet",
+      "clean_sha256": "4bf485d9b98e1d2dcf5da60528497ef92d363e9350d2cd12d9cd9181fe92d1a4",
+      "bytes": 1959295,
+      "source_path": "data/raw/modis/2023/modis_2023_United_States.csv",
+      "source_sha256": "8f693b80488414db0494deac1081f4c658769618100e402a830fb823f8f6ec1f",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2023/done.json",
+      "done_sha256": "6650317253d988bf814ad4c9d8e974f59e7932672d9765652b21e198f2de9dd2",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2023/counts-00000.parquet",
+          "sha256": "71cd601cdb05cdac77c9557fda8559fc64c2a163782ba516dca4c98836085415",
+          "bytes": 352179
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2024_United_States.parquet",
+      "clean_sha256": "4b9c304fb8da984ad044f49c544f407ee226010f04da55e13add32e11aed6991",
+      "bytes": 2379015,
+      "source_path": "data/raw/modis/2024/modis_2024_United_States.csv",
+      "source_sha256": "26c5f22e9d41bd8d5d22402eaf5293dc7a5bc7415d37da42cd2e0a3b78b95ca4",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2024/done.json",
+      "done_sha256": "4c5024d489b73135a3fc7ca0a2bad15ec83f5e8cb317e5315e2169016985925e",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2024/counts-00000.parquet",
+          "sha256": "1a905655afff6cb1909f3dafc0e3b1084bf580a5e87f06d09ea50d27ae82af23",
+          "bytes": 398562
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/modis_2025_United_States.parquet",
+      "clean_sha256": "8f551f383c5113abe174ef0d87a074d24e58aa281c9d3b1b234c45b28cc98a0c",
+      "bytes": 2225514,
+      "source_path": "data/raw/modis/2025/modis_2025_United_States.csv",
+      "source_sha256": "2b66bf1932202eaa9ddbdf408e2ec590de2bd84abd6c634d68952d4d196c8730",
+      "done_path": "work/phase3/nepal-us/archives/United_States/modis/2025/done.json",
+      "done_sha256": "1388476bb370149a965381caeaae421dccc52c4a53e5c99f2fdf09ec2ea69604",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/modis/2025/counts-00000.parquet",
+          "sha256": "2c0bc6f37445a9a2c463f7700a6e58e694cfa60ebe82d7e5336e19bec371c1ab",
+          "bytes": 376487
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2012_United_States.parquet",
+      "clean_sha256": "a99e3b1051875eafb5f4eb6736dfb4683980ef1817c6aa8bafcf723147e1e767",
+      "bytes": 10715801,
+      "source_path": "data/raw/viirs-snpp/2012/viirs-snpp_2012_United_States.csv",
+      "source_sha256": "a53d3cd248de33920a6eac8bfcb7c6d67642ec4adbf2162427b2021ec4ea8a4d",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2012/done.json",
+      "done_sha256": "9257aedda83b5ea5220bca13766b39f571a34b38ac6568c3fb3cbc80652a7bb9",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2012/counts-00000.parquet",
+          "sha256": "1c5c6d0467212795daac8c8ebac2535444bdfbd8c2aebd37f6a6af39ea3ceb72",
+          "bytes": 477665
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2012/counts-00001.parquet",
+          "sha256": "c51977a3a773f944039c284df83a0efc535912014df0005c42d559ff16e9b2ce",
+          "bytes": 271996
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2012/counts-00002.parquet",
+          "sha256": "de2eb7befedf244162d6acd4ef766c1cf05f95cf01d38864b02d97b5d1fa5e79",
+          "bytes": 340265
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2013_United_States.parquet",
+      "clean_sha256": "27b03d48fce2a0a3446b414f28e87c6de7c22b096b19c0d02b9275293dc49edd",
+      "bytes": 8451794,
+      "source_path": "data/raw/viirs-snpp/2013/viirs-snpp_2013_United_States.csv",
+      "source_sha256": "04a0b6ee7238bf349a2383fcecfa7c07d6df53ae99c4d46d634508b352fe741f",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2013/done.json",
+      "done_sha256": "690a726636c8221365ede1e97e14972f38c6dccd5af8394b47df00b2faf1a3dd",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2013/counts-00000.parquet",
+          "sha256": "7ccf42f0b27dbaa2b21bc2eb2e3fd5f7bdc6130168093d89572b315b133b218d",
+          "bytes": 499969
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2013/counts-00001.parquet",
+          "sha256": "654cb28d34a809bca118401537a8533e64c7a17d0221f9c4cd73e397b977d7be",
+          "bytes": 431241
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2013/counts-00002.parquet",
+          "sha256": "e82c53133923a6db0330ff8e916c2a3acd77228770e6cbed38c2963fa7747f12",
+          "bytes": 33425
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2014_United_States.parquet",
+      "clean_sha256": "6ba141920a2ee37f795d2d403418b5358412c5ed90e0d77e2abb818e6a09b0b3",
+      "bytes": 7958680,
+      "source_path": "data/raw/viirs-snpp/2014/viirs-snpp_2014_United_States.csv",
+      "source_sha256": "f6689df5187d3965dd16483736487bc42f714e683684fdeebddd40733bc5ba18",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2014/done.json",
+      "done_sha256": "ef76ab48638376623bdc441a562fe87b07e4187face1b1b1b2d95afc3e158f2e",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2014/counts-00000.parquet",
+          "sha256": "88a73e605c6cc166063a7cd03e90c3cb664ace48f58648f289decf63714784df",
+          "bytes": 510084
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2014/counts-00001.parquet",
+          "sha256": "66a5cd11a51fad24021e3e4a3a3a740aad1461f9928c31eb138e27489f39a15d",
+          "bytes": 426463
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2015_United_States.parquet",
+      "clean_sha256": "bb0ff6d33762a8b11fd3087bc4e07b8c51891105c08612a6cc3adf693f96766d",
+      "bytes": 11548838,
+      "source_path": "data/raw/viirs-snpp/2015/viirs-snpp_2015_United_States.csv",
+      "source_sha256": "40239627dbcd773dda85e80d4ded6c2ef747c40d9c413cc3755be266f30e08ae",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2015/done.json",
+      "done_sha256": "67641f535a8199bccef62947a0d1f5ffc5173f15a1180f3f0408336ba4f7f7e7",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2015/counts-00000.parquet",
+          "sha256": "1f3be0b639650b5c9bd20ddafe2189b4df82b59e47ebada1079646687b4f6523",
+          "bytes": 464857
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2015/counts-00001.parquet",
+          "sha256": "97f1d2313c8073247ac767d3b5b570ceb486c6448b65ae14d69e235ffcc96a6f",
+          "bytes": 249956
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2015/counts-00002.parquet",
+          "sha256": "b58440224029457cec24fa51af618a50083a35c26fd55394c1395155fdb2a401",
+          "bytes": 384310
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2016_United_States.parquet",
+      "clean_sha256": "114123976a5c749544f444521f42b9a1e78019ea2863bfd0681a49efd53eecd4",
+      "bytes": 9013328,
+      "source_path": "data/raw/viirs-snpp/2016/viirs-snpp_2016_United_States.csv",
+      "source_sha256": "beb561086694f612700a97c093f551a83835c53ab534fe430ddcfd0b4f301820",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2016/done.json",
+      "done_sha256": "09fb84462612e74bcff0b5a6fdc55a15b43abaf65b344f3424d64ecf5ae7ef40",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2016/counts-00000.parquet",
+          "sha256": "6ceb1c736589d064cab0c04e140c5ec6337ccd47fa0f05827ad89e78f6193ab3",
+          "bytes": 504844
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2016/counts-00001.parquet",
+          "sha256": "9fc837d1e694c6005b56d5982619dafca97cd60414373c6f5b23501056fc2d1a",
+          "bytes": 437098
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2016/counts-00002.parquet",
+          "sha256": "3ef09b2373a59a112a1c535e233f5be704fcd1bdbc3f5082d8f48aa2da50c29b",
+          "bytes": 127040
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2017_United_States.parquet",
+      "clean_sha256": "3744771b1b4775dae515bf4afb24481afecb3488dd93edb5f0e44a9d28a29fb9",
+      "bytes": 11989831,
+      "source_path": "data/raw/viirs-snpp/2017/viirs-snpp_2017_United_States.csv",
+      "source_sha256": "72b71216f7d53afd8fd57384f2618e0805807208e9de88a76ea2e80c059ee7f4",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2017/done.json",
+      "done_sha256": "4fad3e666780f9d6963918ac42de2d6aaa8adb2b801f39e4b943096969659541",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2017/counts-00000.parquet",
+          "sha256": "a2224002cf00298574a714e28b793aa07b5bc579804c8b494db1620f572ecaa4",
+          "bytes": 518043
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2017/counts-00001.parquet",
+          "sha256": "6ac74ecf622534155555b1d39354ca65e4d9d71114de7e2b91e9f276040e6bf6",
+          "bytes": 262561
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2017/counts-00002.parquet",
+          "sha256": "9b38290f59ae14583766a69b0b1cdcafb4ada767f02e7484ebdf7013c1ed8b91",
+          "bytes": 393594
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2018_United_States.parquet",
+      "clean_sha256": "8df77c5af3accb657cdf42469370c6d1ed243860e156475989f2cf192cc34dc3",
+      "bytes": 11153168,
+      "source_path": "data/raw/viirs-snpp/2018/viirs-snpp_2018_United_States.csv",
+      "source_sha256": "38963a7315959b2d6db42246c88ba06735e280507e47a70b16ead0620f967b79",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2018/done.json",
+      "done_sha256": "5e75eb39de7284d0d6d17023e4fe41d039b3d3e32dc199c3f6b1e45d8141730d",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2018/counts-00000.parquet",
+          "sha256": "82393329291b2d51c8e952dd6804d0e6eeadfcd925c2e5e5adb62ec484df455a",
+          "bytes": 497762
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2018/counts-00001.parquet",
+          "sha256": "19067d30f4344dda04bb9346754548548303b625cd8d0befdb1fcf5d659991b9",
+          "bytes": 238141
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2018/counts-00002.parquet",
+          "sha256": "ac254c4e44974c03a667b9e5f4ee5330b624f2bed74c59c8815936fc7010223f",
+          "bytes": 338446
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2019_United_States.parquet",
+      "clean_sha256": "94ddbf07647ac19b94a9e1e1cacc7074edadd45e908a37d2501f83282ae47864",
+      "bytes": 9366774,
+      "source_path": "data/raw/viirs-snpp/2019/viirs-snpp_2019_United_States.csv",
+      "source_sha256": "368ddcfce96b63e6a61791809b959ea7e1d0322ff3de04bbd241a8fe75a43eef",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2019/done.json",
+      "done_sha256": "5cabbed80908b39af77ca2e53712ecad1285d39373efe4dd51a7d6e8f0ff48f0",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2019/counts-00000.parquet",
+          "sha256": "a7446a35f6b3001f5479df3dec98d3cde7d35a5d564f755f577f3d05ab3be4dc",
+          "bytes": 459133
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2019/counts-00001.parquet",
+          "sha256": "9fa0d92093999691d6a58ec6a23b565278f39e2d3c4c27a5b3f47a8c079a0d5c",
+          "bytes": 383672
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2019/counts-00002.parquet",
+          "sha256": "d07cf8bcf417b04e7b772f6f3287df1b9463e888c98d53a93d2039fbbfe8fa8e",
+          "bytes": 183292
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2020_United_States.parquet",
+      "clean_sha256": "d10d26503e4dd5f08f90eb49264277df727ea597abf7c335c8e74ab901748cd7",
+      "bytes": 13149927,
+      "source_path": "data/raw/viirs-snpp/2020/viirs-snpp_2020_United_States.csv",
+      "source_sha256": "309c1c97f0d81013a4ed28768c3078aafcf1cd49bc453b4591d66a5227dc8128",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2020/done.json",
+      "done_sha256": "13672dbcb3517fa235291b9474d6a29562359d07e9f6b7bc16b7e53cb8533e29",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2020/counts-00000.parquet",
+          "sha256": "fea08b57bfabf772c4dd2f323b0422c17f6a0a0ce8196dcbef9041e95c585781",
+          "bytes": 527387
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2020/counts-00001.parquet",
+          "sha256": "5024ba89cb4ead14175b3ebba41ac00a17358e2613ddb3611adf1b494e4aafda",
+          "bytes": 170380
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2020/counts-00002.parquet",
+          "sha256": "8d83a35d06cd3ba57e8fc54fc7156b4edf2ff3c095ff408e613bbc0bd416c633",
+          "bytes": 208031
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2020/counts-00003.parquet",
+          "sha256": "493c7c436141a6ab45d63b1258ab8418b42ab66ef23f83767676216972b3ad66",
+          "bytes": 234950
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2021_United_States.parquet",
+      "clean_sha256": "f76545bdbd2bdc0a2d5a4fff20adc9012680064d7f0f212c58367673cb02e5ec",
+      "bytes": 13101024,
+      "source_path": "data/raw/viirs-snpp/2021/viirs-snpp_2021_United_States.csv",
+      "source_sha256": "4130c8ce327424bb9b1a54e09667f56fbe52d20649a09dcdd8f64d5e5689b9a9",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2021/done.json",
+      "done_sha256": "40e59b09ac50849987580e396b7f158e18b46373761d530e2ee3a1dccaf494c9",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2021/counts-00000.parquet",
+          "sha256": "0538df0231fce14981f231ae5c4ac88f4db725bab43176e006bb3d95d1babf2d",
+          "bytes": 514203
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2021/counts-00001.parquet",
+          "sha256": "60f735f1c937e0093ff292c8aa691d0bbf9f46b52b0b077d7bc0795a92f8b38b",
+          "bytes": 187070
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2021/counts-00002.parquet",
+          "sha256": "21ad29abedd04343ff63e52d06b847c1c3da68c97d45611cba9fe0296c7fcc01",
+          "bytes": 237495
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2021/counts-00003.parquet",
+          "sha256": "706669a2e7d7b862e1234a9366e3220bc352c175cbc8006c668496f98b3087ba",
+          "bytes": 229767
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2022_United_States.parquet",
+      "clean_sha256": "bd53d2424a83d9dc5b3cabb5158006133f130b711a405cf9856baa12ddd899d8",
+      "bytes": 10696634,
+      "source_path": "data/raw/viirs-snpp/2022/viirs-snpp_2022_United_States.csv",
+      "source_sha256": "ec3dad0560ac49ae6111bc6981af65cf0debe9379b03737489f6b1e3775ccf6c",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2022/done.json",
+      "done_sha256": "9f2fa6dbc0ebb287d206545bac97845a65a8bfc4831bf048638bb1afc7be907b",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2022/counts-00000.parquet",
+          "sha256": "b5cedab09817c490fbe6fdb998c20daf459ef7d4ea77cc0ddbb7b907f18c0804",
+          "bytes": 478106
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2022/counts-00001.parquet",
+          "sha256": "1cd06edadc1a35c2f1c76587be599f6be5ca022986b263bc3927bc016eec24d3",
+          "bytes": 293216
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2022/counts-00002.parquet",
+          "sha256": "38b479d727b0d4d62e9ae30436beccdee139ed258cd75c2f0d3220b6a1ab9ce7",
+          "bytes": 357310
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2023_United_States.parquet",
+      "clean_sha256": "9df69ff83400e512ee30c08f33a904597c426c46b907821dc4b06a7817675675",
+      "bytes": 8220327,
+      "source_path": "data/raw/viirs-snpp/2023/viirs-snpp_2023_United_States.csv",
+      "source_sha256": "d419abfb7d39d8040fd4487aee7e8003b1940ae5eb0cd95aa244cd7e303d4b4d",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2023/done.json",
+      "done_sha256": "557e0002560c2298c1ce34135be1722426576498e912365f77bd72fc4bb9f8ae",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2023/counts-00000.parquet",
+          "sha256": "5072f8ef401cc38e21a790d133ddfde9eccf4798feaf377fc61467e7e6f6f9f1",
+          "bytes": 549218
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2023/counts-00001.parquet",
+          "sha256": "c05499accf7d61c712953116e349cd0864bdf9f3752e9b6e8032e20248ae42be",
+          "bytes": 474361
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2024_United_States.parquet",
+      "clean_sha256": "10d78bce5180b09e6c5d80763b5b47013501ac3a5864232314d0b94fb49fe785",
+      "bytes": 9956481,
+      "source_path": "data/raw/viirs-snpp/2024/viirs-snpp_2024_United_States.csv",
+      "source_sha256": "b282c996b6929facc1d5726045e2ad14235a8ac10900daff08edaee9a8f2b200",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2024/done.json",
+      "done_sha256": "a5d3e607e6735f99ca0b114735546d2cd3b6d0bd7c19ca076f741aa111da2941",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2024/counts-00000.parquet",
+          "sha256": "4627c4326d14d5248c2da77c27b4e58892a59325dcdb208a6552fcb40298ffb2",
+          "bytes": 527217
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2024/counts-00001.parquet",
+          "sha256": "af5fa1a149e2739e347ca54bb3733c5b0075d15e821a51ad6442718852a60b22",
+          "bytes": 321353
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2024/counts-00002.parquet",
+          "sha256": "8e00efd232259a1a685b731e92113f16c318914ec90f2886eef37bd4528dab37",
+          "bytes": 269724
+        }
+      ]
+    },
+    {
+      "clean_path": "data/processed/clean_cache_v2/viirs-snpp_2025_United_States.parquet",
+      "clean_sha256": "9187dc9b22980b6fd3b842005e26b815374a73082ece114f99e4d2a8ff3bfe42",
+      "bytes": 9625544,
+      "source_path": "data/raw/viirs-snpp/2025/viirs-snpp_2025_United_States.csv",
+      "source_sha256": "e7df11c2739bf4dbec98d15dcc6cd7d5d19c1fc6edfc51750a5e3a1a6dd3102d",
+      "done_path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2025/done.json",
+      "done_sha256": "62b94062d87dcdbb78cbe695fb1389c42cc361321b1092b8d9faf196deb7b712",
+      "partitions": [
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2025/counts-00000.parquet",
+          "sha256": "d01267bc21239ac8e073e228a89814a2dba18dc600bd90a968b4c7a8bc539393",
+          "bytes": 526033
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2025/counts-00001.parquet",
+          "sha256": "833e5c71d1f5540f9e3bd4a5664c9c51ec93a9edd2d4429d5cc60ed9fc41f936",
+          "bytes": 391567
+        },
+        {
+          "path": "work/phase3/nepal-us/archives/United_States/viirs-snpp/2025/counts-00002.parquet",
+          "sha256": "aa354ce2e44c0443d9923d22ddeb7e196e58669871ec1295f83374a30063c93f",
+          "bytes": 240553
+        }
+      ]
+    }
+  ],
+  "meaning": "Frozen input snapshot from the original locally specified analysis; paths are repository-relative, not user paths."
+}

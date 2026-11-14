@@ -1,6 +1,7 @@
 import {useEffect, useMemo, useState} from 'react';
 import {AlertTriangle, ShieldCheck, Waves} from 'lucide-react';
 import {loadData} from './loadData';
+import FrpComparison from './FrpComparison';
 import './rhythm.css';
 
 type Num = number | null;
@@ -144,6 +145,8 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
       <div className="rh-streams">{rows.map(r => <StreamCard key={r.stream} row={r} rest={selected.rest_day}/>)}</div>
       <p className="chart-note">Bars show each weekday's index relative to an average day (1.0). Orange = predicted rest day. Whiskers = 95% intervals from resampling whole years. Terra, Aqua and VIIRS observe many of the same fires, so agreement between them is corroboration, not independent replication.{subset === 'day' ? ' Daytime-only results are a sensitivity check and are not used by the gate.' : ''}</p>
     </section>}
+
+    {country === 'United_States' && <FrpComparison/>}
 
     <section className="panel" aria-labelledby="rh-control-title">
       <div className="panel-heading"><div><span className="eyebrow">NEGATIVE CONTROL</span><h2 id="rh-control-title">Static heat sources stay flat</h2></div></div>

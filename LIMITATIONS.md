@@ -1,5 +1,11 @@
 # FIRETRACE limitations
 
+## Supplemental count versus FRP comparison
+
+summed FRP is sampled radiative power, not energy, emissions, burned area or fire counts.
+
+The US daytime 2013-2024 comparison is a separately evaluated measurement contrast, not a harmonized FRP product or a causal attribution. Its original local protocol was timestamped before calculation; the Git protocol receipt was committed after the outcome was already known and is not a prior Git prediction or external preregistration. See `reports/review/frp/FRP_TEST.md` for the complete result, Terra's uncertainty, the fixed criteria and the independent reproduction.
+
 ## Interpretation
 
 - A hotspot is a detected pixel, not an independent fire or ignition. One event can generate many detections across days, pixels and instruments.

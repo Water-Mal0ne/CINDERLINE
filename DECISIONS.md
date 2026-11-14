@@ -98,3 +98,8 @@ Kill rule: if any condition fails, the test fails. Do not change the cutoff, swi
 
 
 - 2026-11-14 19:21:16 UTC: Retain the original, more explicit frozen conventions: the same two streams must pass both masks; intervals must exclude zero while the point estimate meets 0.05; exact tie-breaking, local-date masks and bootstrap draws remain fixed. No additional subgroup or new outcome is authorized.
+
+- 2026-11-14 19:40 UTC: Publish the verified, fixed US daytime comparison only for the United States; retain Terra's failed interval criterion and the Git-after-results chronology in the visible panel.
+- 2026-11-14 19:40 UTC: Require an independent receipt matching the current scripts and scientific artifacts before public export; preserve exact artifact bytes across Git checkout so line-ending conversion cannot invalidate hashes.
+- 2026-11-14 19:40 UTC: Discover web test files through one shared runner so combining feature branches cannot silently omit either branch's tests; retain the existing three precheck suites.
+- 2026-11-14 19:40 UTC: Desktop and 390-pixel browser checks passed for the new panel, its disclosure controls, country scope, and recovery after a missing payload. Existing page-wide phone overflow is assigned to the UI polish task; the FRP panel itself fits its container.
