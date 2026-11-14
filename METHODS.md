@@ -133,3 +133,7 @@ Anomaly flags already use a leave-one-year-out baseline: for each Jan-1-anchored
 
 The conversion weights depend on country and sensor strata, not on cell identity, so national harmonized totals are identical at 0.25 and 0.5 degrees; the pre-specified check in `reports/scientific_validation/` confirms this for every country and year 2013-2019. Model selection (on national 2018-2019 validation MAE) and the national 2020-2024 test metrics therefore cannot change with grid size. Cell-level agreement does change (selected-cell normalized monthly error falls at 0.5 degrees, partly through aggregation; see `SCIENTIFIC_SENSITIVITY.md`). We did not run a 0.5-degree cell-level evaluation on the 2020-2024 test years, so that the test set is not used to choose a grid.
 
+## No-observation days (review E5)
+
+Days on which the stream supplying the calendar value (observed Aqua before 2013, converted VIIRS from 2013) was in a documented outage, or recorded no detections in any of the seven countries, are marked "no observation" (`pipeline/review/no_observation.py`; dates and sources in `reports/review/OUTAGES.md`). Their calendar values are null, weeks containing them are shown grey, and they are excluded from the typical-season statistics and anomaly flags. Recorded per-stream counts are kept for the evidence card. The held-out evaluation and the globe's annual totals were not recomputed and still include those days.
+
