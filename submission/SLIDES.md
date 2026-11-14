@@ -1,59 +1,67 @@
 # FIRETRACE: seven-slide presentation outline
 
-Draft for adaptation to the verified event submission format. Do not assume a seven-slide allowance without checking the live submission instructions. Every bracketed result must be replaced from the generated report or removed.
+Draft for the event's permitted submission format. Check actual slide/video requirements before submitting. Use the seven-country model revision and retain unfavorable results.
 
 ## 1. The question
 
 **Title:** Did fire activity change—or did our camera change?
 
-Show one actual region's raw series with instrument provenance. Explain that a hotspot is a detection, not a separate fire. Do not label a real rise “fake” before evaluation.
+Show a real regional record with its instrument labels. A hotspot is a detected pixel, not an independent fire. Do not call a real increase artificial before comparing and evaluating it.
 
-**Speaker line:** “An apparent increase can mix environmental change with a change in what the instrument can detect.”
+**Speaker line:** “An apparent increase can mix environmental change with a change in what the instrument detects.”
 
-## 2. The person making the decision
+## 2. The person using it
 
 **Title:** A fire manager needs a comparable history
 
-Show the region selector and the historical calendar. State one task: identify periods of unusually high recorded activity relative to that region's historical season. Make clear this is historical context, not an emergency forecast.
+Orient on the 3D Earth, select Nepal and show the burning-activity calendar. The task is to inspect unusual historical activity against that area's usual season, with observation limits visible. This is not emergency forecasting.
 
-**Evidence:** Nepal and the United States, 2003–2024. Show Nepal first; both have national totals, all-cell annual globe layers and selected daily drill-down cells.
+**Scope:** Seven countries, 2003–2024; 41,986 annual grid cells; national totals plus 12 training-selected daily cells per country. The globe is always Aqua-equivalent; raw/harmonized controls change the calendar/comparison, not the Earth's measurement scale.
 
 ## 3. The method
 
-**Title:** A named reference, separate streams, an untouched test
+**Title:** Separate streams, one named reference, a locked evaluation
 
-Display a simple diagram: FIRMS → civil dates and stream separation → calibration → held-out evaluation → evidence card.
+Show FIRMS → IANA civil dates and stream separation → exact counts → calibration → held-out evaluation → evidence card.
 
-List B0 uncalibrated, B1 global ratio and M1 region/daynight/reported-FRP stratified ratio. Training 2013–2017; validation 2018–2019; test 2020–2024. Validation selects M1 for Nepal and B1 for the US. Do not imply the more complex method always wins.
+B0 is uncalibrated, B1 is a global training ratio, and M1 uses country/day-night/reported-FRP strata. Train 2013–2017; select 2018–2019; test 2020–2024. B1 is selected in Australia/Brazil/US; M1 in Bangladesh/Egypt/India/Nepal. Adding countries changes the training ratio and is recorded as a new model revision.
 
-## 4. The working demonstration
+## 4. The signature demonstration
 
-**Title:** Follow one conclusion back to its evidence
+**Title:** One week, all the way back to its evidence
 
-Demonstrate the raw/calibrated toggle, select one week, then open the evidence card. Show contributing observations, named scale, calibration interval and coverage caveat. A trend that persists is a legitimate result.
+Use the existing evidence journey: inspect the same dates' separate sensor counts, open the converted estimate, compare the full record, then check held-out results. Keep the selected spatial scope visible in the evidence card. End by copying a share link and reopening that exact week.
 
-**On screen:** Real Nepal data, 2003–2024, observed Aqua through 2012 and M1-converted VIIRS afterwards. Orient with the 3D globe, then select a week in the actual calendar and read its evidence card. The demo need not erase a trend. Any synthetic mechanism figure must carry “SYNTHETIC DATA” visibly.
+The week is an illustrative example, not a model-performance test. Exact values and evidence matter more than a dramatic disappearance of a trend. A synthetic sensor-switch figure may explain the mechanism only if “SYNTHETIC DATA” remains visible within it.
 
 ## 5. What the tests say
 
-**Title:** Compare the method with something simpler
+**Title:** Compare the selected model with simpler alternatives
 
-Use the actual report table: model, region, period, aggregation, MAE and bias. Include baseline performance and a relevant failure/sensitivity case. Separate synthetic software verification from real-data evaluation.
+Use the current report table for all seven countries, with B0/B1/M1 monthly and weekly metrics available. Selected examples, 60 held-out months in 2020–2024:
 
-**Result:** Nepal 2020–2024 monthly MAE: M1 30.20, B1 198.43, B0 2,474.43; selected M1 bias −8.08%. US monthly MAE: selected B1 1,606.30, M1 2,078.63, B0 31,835.40. Units are detections on the Aqua reference scale. Each monthly test comparison contains 60 periods. Include the US result to show that the simpler baseline can win.
+| Country | Selected | Selected monthly MAE | Comparator | Remaining limitation |
+|---|---|---:|---:|---|
+| Nepal | M1 | 30.24 | B1: 182.52 | −8.11% bias |
+| United States | B1 | 1,537.79 | M1: 2,078.57 | 10.0-week mean peak timing error |
+| Egypt | M1 | 15.04 | B1: 90.40 | +51.68% bias; 17.6-week peak timing error |
 
-## 6. The optional human-rhythm question
+Units are Aqua-equivalent detections, not real fire counts. Retain Egypt's weakness and the US result where the simpler method wins. Synthetic software checks and real-data evaluation answer different questions.
 
-**Title:** Can we detect a reproducible weekly association?
+## 6. The optional rhythm question
 
-Display the exact gate decision and why. If it passes, show separate streams and uncertainty with cautious interpretation. If it fails or is insufficient, show that result plainly and explain why the feature is disabled.
+**Title:** A research gate that stays closed when evidence is incomplete
 
-**Result:** Overall `insufficient_data`; US criterion passed in 3/3 streams with unflagged matching controls; Nepal criterion passed in 0/3 streams and matching-control qualification was insufficient. The other five configured countries were not evaluated. The production rhythm feature remains disabled. Never turn insufficient data into evidence of no effect.
+All seven countries were tested. US/Australia support the rest-day criterion in three streams each; Brazil in two. Brazil's matched control is flagged, so only Australia qualifies beyond the US. Nepal/Egypt have zero supporting streams; Bangladesh/India have one each.
 
-## 7. What we built, and what comes next
+**Overall:** `insufficient_data`, `production_allowed: false`. The statistical criterion alone is not the production decision. Do not show an enabled rhythm feature or make an ignition-cause claim. This outcome strengthens the evidence discipline, not the substantive rhythm hypothesis.
 
-**Title:** A reproducible comparison that shows its limits
+## 7. What is ready and what remains
 
-Show the NASA source and the public application: https://firetrace-bhaktapur-2026.pages.dev/. A public source repository URL remains required before submission. State the two-country supported scope and measured outcome. Broader coverage, land-cover stratification and early-record calibration remain future work. Include the AI disclosure and “NASA does not endorse this project.”
+**Title:** A reproducible comparison with visible limits
 
-**Closing line:** “FIRETRACE makes a fire trend's evidence inspectable before that trend becomes a decision.”
+Show the [live app](https://firetrace-bhaktapur-2026.pages.dev/), [repository](https://github.com/Water-Mal0ne/FIRETRACE) and NASA data attribution. Source is private by team choice; arrange judge access. State the supported seven-country scope, selected-cell limitation and actual deployed revision from `DEPLOYMENT.md`.
+
+No worldwide coverage or operational forecast is claimed. The 0.25°/0.5° selected-cell diagnostic is complete and exposes high local errors; national performance does not establish cell accuracy. Early Terra-bridge feasibility is documented, but no reconstruction is qualified or published. Arbitrary daily-area exploration remains outside the product scope. A script is not a finished video; record and review the actual demo. Include the AI disclosure and NASA non-endorsement statement.
+
+**Closing line:** “Follow the evidence before trusting the trend.”

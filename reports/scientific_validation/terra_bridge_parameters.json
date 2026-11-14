@@ -1,0 +1,274 @@
+{
+  "parameters": {
+    "Australia": {
+      "ratio": 1.2998602767323486,
+      "ratio_95pct_training_year_bootstrap": [
+        1.2150739072153887,
+        1.39452093177067
+      ],
+      "training_years": [
+        2003,
+        2004,
+        2005,
+        2006,
+        2007
+      ],
+      "validation_years": [
+        2008,
+        2009,
+        2010,
+        2011
+      ],
+      "bootstrap_draws": 200,
+      "annual_observed_ratios": {
+        "2003": 1.3314999533886456,
+        "2004": 1.304265557839656,
+        "2005": 1.4892853652748113,
+        "2006": 1.2981291202002407,
+        "2007": 1.1511662211573706,
+        "2008": 1.419560079985457,
+        "2009": 1.3538052727435583,
+        "2010": 1.6197967197967198,
+        "2011": 1.327505491837069
+      }
+    },
+    "Bangladesh": {
+      "ratio": 10.170923379174853,
+      "ratio_95pct_training_year_bootstrap": [
+        6.8924657548883435,
+        15.745576932858464
+      ],
+      "training_years": [
+        2003,
+        2004,
+        2005,
+        2006,
+        2007
+      ],
+      "validation_years": [
+        2008,
+        2009,
+        2010,
+        2011
+      ],
+      "bootstrap_draws": 200,
+      "annual_observed_ratios": {
+        "2003": 16.175757575757576,
+        "2004": 13.217171717171718,
+        "2005": 17.99473684210526,
+        "2006": 5.175738724727839,
+        "2007": 10.56797583081571,
+        "2008": 14.977272727272727,
+        "2009": 6.627291242362525,
+        "2010": 11.08,
+        "2011": 16.224489795918366
+      }
+    },
+    "Brazil": {
+      "ratio": 1.9847795180709706,
+      "ratio_95pct_training_year_bootstrap": [
+        1.8505223939562194,
+        2.1527585531108215
+      ],
+      "training_years": [
+        2003,
+        2004,
+        2005,
+        2006,
+        2007
+      ],
+      "validation_years": [
+        2008,
+        2009,
+        2010,
+        2011
+      ],
+      "bootstrap_draws": 200,
+      "annual_observed_ratios": {
+        "2003": 2.249715280177102,
+        "2004": 2.090636440289029,
+        "2005": 1.86603655302117,
+        "2006": 2.096076738763886,
+        "2007": 1.7735693338919145,
+        "2008": 1.9312152750606464,
+        "2009": 2.0622636883331396,
+        "2010": 1.6977331448349826,
+        "2011": 1.824623016308523
+      }
+    },
+    "Egypt": {
+      "ratio": 0.7608971646212441,
+      "ratio_95pct_training_year_bootstrap": [
+        0.6863153421164471,
+        0.8461538461538461
+      ],
+      "training_years": [
+        2003,
+        2004,
+        2005,
+        2006,
+        2007
+      ],
+      "validation_years": [
+        2008,
+        2009,
+        2010,
+        2011
+      ],
+      "bootstrap_draws": 200,
+      "annual_observed_ratios": {
+        "2003": 0.6276595744680851,
+        "2004": 0.7931937172774869,
+        "2005": 0.8189134808853119,
+        "2006": 0.6628664495114006,
+        "2007": 0.9008097165991903,
+        "2008": 0.8758029978586723,
+        "2009": 0.8605851979345955,
+        "2010": 0.7650085763293311,
+        "2011": 0.8170974155069582
+      }
+    },
+    "India": {
+      "ratio": 2.9015440323341535,
+      "ratio_95pct_training_year_bootstrap": [
+        2.71894281739855,
+        3.104042604041281
+      ],
+      "training_years": [
+        2003,
+        2004,
+        2005,
+        2006,
+        2007
+      ],
+      "validation_years": [
+        2008,
+        2009,
+        2010,
+        2011
+      ],
+      "bootstrap_draws": 200,
+      "annual_observed_ratios": {
+        "2003": 2.724784165087387,
+        "2004": 3.1972657598563834,
+        "2005": 3.1581508515815084,
+        "2006": 2.9060640587416127,
+        "2007": 2.6183522901936676,
+        "2008": 2.3137420090192773,
+        "2009": 2.58226729506817,
+        "2010": 2.862267325120747,
+        "2011": 2.4745204915925334
+      }
+    },
+    "Nepal": {
+      "ratio": 1.8854816824966079,
+      "ratio_95pct_training_year_bootstrap": [
+        1.7187736484991023,
+        2.088537420934461
+      ],
+      "training_years": [
+        2003,
+        2004,
+        2005,
+        2006,
+        2007
+      ],
+      "validation_years": [
+        2008,
+        2009,
+        2010,
+        2011
+      ],
+      "bootstrap_draws": 200,
+      "annual_observed_ratios": {
+        "2003": 1.867403314917127,
+        "2004": 1.810289389067524,
+        "2005": 1.6280295047418336,
+        "2006": 2.210294117647059,
+        "2007": 2.1528822055137846,
+        "2008": 1.8434959349593496,
+        "2009": 1.9099276791584483,
+        "2010": 1.700354609929078,
+        "2011": 2.0320945945945947
+      }
+    },
+    "United_States": {
+      "ratio": 1.0914694666457714,
+      "ratio_95pct_training_year_bootstrap": [
+        1.0181059076148702,
+        1.1805909811682116
+      ],
+      "training_years": [
+        2003,
+        2004,
+        2005,
+        2006,
+        2007
+      ],
+      "validation_years": [
+        2008,
+        2009,
+        2010,
+        2011
+      ],
+      "bootstrap_draws": 200,
+      "annual_observed_ratios": {
+        "2003": 1.2183202145143153,
+        "2004": 0.996484616682603,
+        "2005": 0.9909375450176142,
+        "2006": 1.1898463112812447,
+        "2007": 1.1478929765886288,
+        "2008": 1.1961519942219725,
+        "2009": 1.182668676813779,
+        "2010": 1.2614573785517873,
+        "2011": 1.2372110424132634
+      }
+    }
+  },
+  "interval_diagnostics": [
+    {
+      "country": "Australia",
+      "active_months": 48,
+      "reference_inside_calibration_interval_pct": 8.333333333333332,
+      "interpretation": "Descriptive reference inclusion only. Calibration intervals are not predictive or total-uncertainty intervals."
+    },
+    {
+      "country": "Bangladesh",
+      "active_months": 45,
+      "reference_inside_calibration_interval_pct": 22.22222222222222,
+      "interpretation": "Descriptive reference inclusion only. Calibration intervals are not predictive or total-uncertainty intervals."
+    },
+    {
+      "country": "Brazil",
+      "active_months": 48,
+      "reference_inside_calibration_interval_pct": 12.5,
+      "interpretation": "Descriptive reference inclusion only. Calibration intervals are not predictive or total-uncertainty intervals."
+    },
+    {
+      "country": "Egypt",
+      "active_months": 48,
+      "reference_inside_calibration_interval_pct": 8.333333333333332,
+      "interpretation": "Descriptive reference inclusion only. Calibration intervals are not predictive or total-uncertainty intervals."
+    },
+    {
+      "country": "India",
+      "active_months": 48,
+      "reference_inside_calibration_interval_pct": 10.416666666666668,
+      "interpretation": "Descriptive reference inclusion only. Calibration intervals are not predictive or total-uncertainty intervals."
+    },
+    {
+      "country": "Nepal",
+      "active_months": 45,
+      "reference_inside_calibration_interval_pct": 20.0,
+      "interpretation": "Descriptive reference inclusion only. Calibration intervals are not predictive or total-uncertainty intervals."
+    },
+    {
+      "country": "United_States",
+      "active_months": 48,
+      "reference_inside_calibration_interval_pct": 10.416666666666668,
+      "interpretation": "Descriptive reference inclusion only. Calibration intervals are not predictive or total-uncertainty intervals."
+    }
+  ],
+  "reconstruction_published": false,
+  "qualification": "Feasibility validation only; no early reconstruction or total-uncertainty claim."
+}

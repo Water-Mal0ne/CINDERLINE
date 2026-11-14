@@ -39,6 +39,13 @@ class RhythmTests(unittest.TestCase):
         self.assertFalse(rhythm.verified_local_year({"files": files}, "Nepal", "Aqua", 2013))
         self.assertFalse(rhythm.verified_local_year({"files": files}, "Nepal", "VIIRS", 2014))
 
+    def test_opening_year_is_not_complete_even_with_attestation(self):
+        for stream, first in [("Terra", 2001), ("Aqua", 2003), ("VIIRS", 2013)]:
+            manifest = {"local_periods": [dict(country="Nepal", stream=stream, year=y, complete=True)
+                                           for y in [first-1, first]]}
+            self.assertFalse(rhythm.verified_local_year(manifest, "Nepal", stream, first-1))
+            self.assertTrue(rhythm.verified_local_year(manifest, "Nepal", stream, first))
+
     def test_dip_detected_and_constant_rate_null(self):
         data, manifest = fixture()
         df, _ = rhythm._prepare(data)

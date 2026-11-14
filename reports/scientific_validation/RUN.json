@@ -1,0 +1,9 @@
+{
+  "status": "completed",
+  "seconds": 44.81,
+  "peak_rss_bytes": 332877824,
+  "grid_metric_rows": 14,
+  "bridge_metric_rows": 28,
+  "model_unchanged": true,
+  "report_note": "Narrative regenerated from saved CSV/JSON to clarify reuse of the original validation block; no numerical recomputation."
+}

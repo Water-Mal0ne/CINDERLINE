@@ -42,6 +42,20 @@ const loader=await import('data:text/javascript;base64,'+Buffer.from(loaderOutpu
 assert.deepEqual(loader.decodeCell({columns:['date','harmonized','source'],rows:[['2009-01-01',null,'observed Aqua']]}),[{date:'2009-01-01',harmonized:null,source:'observed Aqua'}]);
 assert.deepEqual(loader.decodeCell({daily:[paired]}),[paired]);
 assert.throws(()=>loader.decodeCell({}),/Invalid cell/);
+const encoded={encoding:'column-dictionary-v1',columns:['date','harmonized','source'],
+  rows:[['2020-01-01',0,0],['2020-01-02',1,1],['2020-01-03',2,0]],
+  dictionaries:{harmonized:[null,0,1.23456789012345],source:['observed Aqua','converted VIIRS']}};
+const decoded=[{date:'2020-01-01',harmonized:null,source:'observed Aqua'},
+  {date:'2020-01-02',harmonized:0,source:'converted VIIRS'},
+  {date:'2020-01-03',harmonized:1.23456789012345,source:'observed Aqua'}];
+assert.deepEqual(loader.decodeCell(encoded),decoded);
+assert.deepEqual(loader.normalizePublishedData({meta:{region:'Nepal'},daily_compact:encoded}),{meta:{region:'Nepal'},daily:decoded});
+assert.throws(()=>loader.normalizePublishedData({daily:[],daily_compact:encoded}),/Ambiguous/);
+assert.throws(()=>loader.decodeCell({...encoded,encoding:'future'}),/encoding/);
+assert.throws(()=>loader.decodeCell({...encoded,encoding:undefined}),/encoding/);
+for(const bad of [-1,3,.5,null,'0'])assert.throws(()=>loader.decodeCell({...encoded,rows:[['2020-01-01',bad,0]]}),/dictionary index/);
+assert.throws(()=>loader.decodeCell({...encoded,rows:[['2020-01-01']]}),/row/);
+assert.throws(()=>loader.decodeCell({...encoded,columns:['date','date','source']}),/columns/);
 
 let captured;
 const originalURL = URL.createObjectURL;

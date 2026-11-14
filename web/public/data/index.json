@@ -1,1 +1,51 @@
-{"label":"REAL FIRMS DATA","regions":[{"id":"Nepal","name":"Nepal","file":"Nepal.json"},{"id":"United_States","name":"United States","file":"United_States.json"}],"generated_at":"2026-11-14T11:19:05.516961+00:00","limitations":["Hotspots are detections, not independent fires or burned area.","Cloud and overpass coverage are not measured. Missing observations are not zero fire activity.","Historical critical periods are not forecasts. Calendar bins start January 1, not ISO weeks.","The raw baseline switches instruments; it is a constructed comparison."]}
+{
+  "label": "REAL FIRMS DATA",
+  "regions": [
+    {
+      "id": "Australia",
+      "name": "Australia",
+      "file": "Australia.json"
+    },
+    {
+      "id": "Bangladesh",
+      "name": "Bangladesh",
+      "file": "Bangladesh.json"
+    },
+    {
+      "id": "Brazil",
+      "name": "Brazil",
+      "file": "Brazil.json"
+    },
+    {
+      "id": "Egypt",
+      "name": "Egypt",
+      "file": "Egypt.json"
+    },
+    {
+      "id": "India",
+      "name": "India",
+      "file": "India.json"
+    },
+    {
+      "id": "Nepal",
+      "name": "Nepal",
+      "file": "Nepal.json"
+    },
+    {
+      "id": "United_States",
+      "name": "United States",
+      "file": "United_States.json"
+    }
+  ],
+  "generated_at": "2026-11-14T11:38:23.445961+00:00",
+  "limitations": [
+    "Hotspots are detections, not independent fires or burned area.",
+    "Cloud and overpass coverage are not measured. Missing observations are not zero fire activity.",
+    "Historical critical periods are not forecasts. Calendar bins start January 1, not ISO weeks.",
+    "The raw baseline switches instruments; it is a constructed comparison."
+  ],
+  "phase": "prepared-count pipeline",
+  "archive_manifest_fingerprint": "4bf6e7635b6cb9b7437fb069e4afb4866c5347dd15d46549288686fb8b21edd7",
+  "model_revision": "seven-country-v1",
+  "baseline_commit": "841998b"
+}

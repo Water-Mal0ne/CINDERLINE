@@ -9,8 +9,9 @@ const parserUrl=moduleUrl(compiled('explorationState'));
 const parser=await import(parserUrl);
 const api=await import(moduleUrl(compiled('explorationIntegration').replace("'./explorationState'",JSON.stringify(parserUrl))));
 const utils=await import(moduleUrl(compiled('utils')));
+const loader=await import(moduleUrl(compiled('loadData')));
 const index=JSON.parse(readFileSync(new URL('../public/data/index.json',import.meta.url),'utf8'));
-const regions=index.regions.map(entry=>JSON.parse(readFileSync(new URL(`../public/data/${entry.file}`,import.meta.url),'utf8')));
+const regions=index.regions.map(entry=>loader.normalizePublishedData(JSON.parse(readFileSync(new URL(`../public/data/${entry.file}`,import.meta.url),'utf8'))));
 
 test('published country catalogs expose only real detailed cells and actual record bounds',()=>{
   for(const region of regions){

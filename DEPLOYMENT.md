@@ -1,5 +1,9 @@
 # FIRETRACE deployment
 
+## Stop-after-push checkpoint
+
+The `seven-country-v1` source and data update is verified locally and saved in the private GitHub repository. It has **not** been deployed in this cycle: the user's stop-after-commit-and-push instruction leaves Cloudflare on the verified two-country release described below. Seven-country submission drafts therefore remain candidates until that deployment is performed and checked.
+
 Public application: https://firetrace-bhaktapur-2026.pages.dev/
 
 Deployment snapshot: https://8cc6976f.firetrace-bhaktapur-2026.pages.dev/

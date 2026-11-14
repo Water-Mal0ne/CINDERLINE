@@ -14,6 +14,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from pipeline.harmonize import FIRST_COMPLETE_YEAR
+
 DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 STREAMS = ["Terra", "Aqua", "VIIRS"]
 REST_DAYS = {"United_States": "Sun", "Australia": "Sun", "Nepal": "Sat",
@@ -59,6 +61,8 @@ def verified_local_year(manifest: dict, country: str, stream: str, year: int) ->
     require the annual UTC file plus both adjacent UTC years, conservatively
     covering civil dates near year boundaries in multi-zone countries.
     """
+    if stream not in FIRST_COMPLETE_YEAR or year < FIRST_COMPLETE_YEAR[stream]:
+        return False
     for entry in manifest.get("local_periods", []):
         if (entry.get("country") == country and entry.get("stream") == stream
                 and int(entry.get("year", -1)) == year and entry.get("complete") is True):

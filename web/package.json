@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "test": "node tests/data-contract.mjs && node tests/anomalies.mjs && node tests/demand-renderer.mjs && node --test tests/exploration-state.mjs tests/exploration-integration.mjs"
+    "test": "node tests/data-contract.mjs && node tests/anomalies.mjs && node tests/demand-renderer.mjs && node --test tests/exploration-state.mjs tests/exploration-integration.mjs tests/globe-cells.mjs"
   },
   "dependencies": {
     "lucide-react": "0.468.0",

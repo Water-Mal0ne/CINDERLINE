@@ -1,29 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1230" viewBox="0 0 1000 1230">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="4080" viewBox="0 0 1000 4080">
 <rect width="100%" height="100%" fill="#faf8f2"/>
 <text x="28" y="32" font-size="22" font-family="sans-serif">REAL FIRMS DATA — weekly detection patterns</text>
 <text x="28" y="56" font-size="13" font-family="sans-serif">Index 1 = annual weekday-rate average. Whiskers: 95% year-bootstrap intervals. Separate streams.</text>
-<text x="28" y="90" font-size="15" font-family="sans-serif">United_States / Terra / 22 years / ok</text>
+<text x="28" y="90" font-size="15" font-family="sans-serif">United_States / Terra / 23 years / ok</text>
 <line x1="28" x2="950" y1="143.6" y2="143.6" stroke="#777" stroke-dasharray="4 4"/>
-<rect x="50" y="141.24" width="72" height="88.76" fill="#557570"/>
-<line x1="86" x2="86" y1="138.56" y2="144.11" stroke="#222"/>
+<rect x="50" y="140.76" width="72" height="89.24" fill="#557570"/>
+<line x1="86" x2="86" y1="138.18" y2="143.69" stroke="#222"/>
 <text x="66" y="250" font-size="13" font-family="sans-serif">Mon</text>
-<rect x="178" y="130.70" width="72" height="99.30" fill="#557570"/>
-<line x1="214" x2="214" y1="127.25" y2="134.07" stroke="#222"/>
+<rect x="178" y="131.36" width="72" height="98.64" fill="#557570"/>
+<line x1="214" x2="214" y1="127.85" y2="134.97" stroke="#222"/>
 <text x="194" y="250" font-size="13" font-family="sans-serif">Tue</text>
-<rect x="306" y="132.46" width="72" height="97.54" fill="#557570"/>
-<line x1="342" x2="342" y1="128.27" y2="136.59" stroke="#222"/>
+<rect x="306" y="132.34" width="72" height="97.66" fill="#557570"/>
+<line x1="342" x2="342" y1="128.08" y2="136.24" stroke="#222"/>
 <text x="322" y="250" font-size="13" font-family="sans-serif">Wed</text>
-<rect x="434" y="138.33" width="72" height="91.67" fill="#557570"/>
-<line x1="470" x2="470" y1="134.99" y2="141.80" stroke="#222"/>
+<rect x="434" y="138.82" width="72" height="91.18" fill="#557570"/>
+<line x1="470" x2="470" y1="135.46" y2="142.14" stroke="#222"/>
 <text x="450" y="250" font-size="13" font-family="sans-serif">Thu</text>
-<rect x="562" y="141.18" width="72" height="88.82" fill="#557570"/>
-<line x1="598" x2="598" y1="136.77" y2="145.30" stroke="#222"/>
+<rect x="562" y="141.06" width="72" height="88.94" fill="#557570"/>
+<line x1="598" x2="598" y1="136.97" y2="144.86" stroke="#222"/>
 <text x="578" y="250" font-size="13" font-family="sans-serif">Fri</text>
-<rect x="690" y="154.09" width="72" height="75.91" fill="#557570"/>
-<line x1="726" x2="726" y1="152.09" y2="156.10" stroke="#222"/>
+<rect x="690" y="154.00" width="72" height="76.00" fill="#557570"/>
+<line x1="726" x2="726" y1="152.05" y2="155.94" stroke="#222"/>
 <text x="706" y="250" font-size="13" font-family="sans-serif">Sat</text>
-<rect x="818" y="167.21" width="72" height="62.79" fill="#c74424"/>
-<line x1="854" x2="854" y1="165.04" y2="169.44" stroke="#222"/>
+<rect x="818" y="166.86" width="72" height="63.14" fill="#c74424"/>
+<line x1="854" x2="854" y1="164.57" y2="169.13" stroke="#222"/>
 <text x="834" y="250" font-size="13" font-family="sans-serif">Sun</text>
 <text x="28" y="280" font-size="15" font-family="sans-serif">United_States / Aqua / 22 years / ok</text>
 <line x1="28" x2="950" y1="333.6" y2="333.6" stroke="#777" stroke-dasharray="4 4"/>
@@ -71,73 +71,418 @@
 <rect x="818" y="542.45" width="72" height="67.55" fill="#c74424"/>
 <line x1="854" x2="854" y1="540.09" y2="545.00" stroke="#222"/>
 <text x="834" y="630" font-size="13" font-family="sans-serif">Sun</text>
-<text x="28" y="660" font-size="15" font-family="sans-serif">Nepal / Terra / 22 years / ok</text>
-<line x1="28" x2="950" y1="715.7679539226611" y2="715.7679539226611" stroke="#777" stroke-dasharray="4 4"/>
-<rect x="50" y="718.36" width="72" height="81.64" fill="#557570"/>
-<line x1="86" x2="86" y1="704.38" y2="730.90" stroke="#222"/>
+<text x="28" y="660" font-size="15" font-family="sans-serif">Australia / Terra / 23 years / ok</text>
+<line x1="28" x2="950" y1="713.6" y2="713.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="713.40" width="72" height="86.60" fill="#557570"/>
+<line x1="86" x2="86" y1="710.43" y2="716.36" stroke="#222"/>
 <text x="66" y="820" font-size="13" font-family="sans-serif">Mon</text>
-<rect x="178" y="710.54" width="72" height="89.46" fill="#557570"/>
-<line x1="214" x2="214" y1="696.83" y2="725.96" stroke="#222"/>
+<rect x="178" y="711.58" width="72" height="88.42" fill="#557570"/>
+<line x1="214" x2="214" y1="709.23" y2="713.84" stroke="#222"/>
 <text x="194" y="820" font-size="13" font-family="sans-serif">Tue</text>
-<rect x="306" y="720.29" width="72" height="79.71" fill="#557570"/>
-<line x1="342" x2="342" y1="709.68" y2="731.11" stroke="#222"/>
+<rect x="306" y="710.16" width="72" height="89.84" fill="#557570"/>
+<line x1="342" x2="342" y1="707.23" y2="712.95" stroke="#222"/>
 <text x="322" y="820" font-size="13" font-family="sans-serif">Wed</text>
-<rect x="434" y="720.00" width="72" height="80.00" fill="#557570"/>
-<line x1="470" x2="470" y1="706.78" y2="733.28" stroke="#222"/>
+<rect x="434" y="709.89" width="72" height="90.11" fill="#557570"/>
+<line x1="470" x2="470" y1="707.64" y2="712.28" stroke="#222"/>
 <text x="450" y="820" font-size="13" font-family="sans-serif">Thu</text>
-<rect x="562" y="709.13" width="72" height="90.87" fill="#557570"/>
-<line x1="598" x2="598" y1="692.00" y2="724.37" stroke="#222"/>
+<rect x="562" y="714.18" width="72" height="85.82" fill="#557570"/>
+<line x1="598" x2="598" y1="711.69" y2="716.43" stroke="#222"/>
 <text x="578" y="820" font-size="13" font-family="sans-serif">Fri</text>
-<rect x="690" y="719.75" width="72" height="80.25" fill="#c74424"/>
-<line x1="726" x2="726" y1="704.12" y2="733.98" stroke="#222"/>
+<rect x="690" y="716.87" width="72" height="83.13" fill="#557570"/>
+<line x1="726" x2="726" y1="715.11" y2="718.50" stroke="#222"/>
 <text x="706" y="820" font-size="13" font-family="sans-serif">Sat</text>
-<rect x="818" y="712.30" width="72" height="87.70" fill="#557570"/>
-<line x1="854" x2="854" y1="698.30" y2="725.74" stroke="#222"/>
+<rect x="818" y="719.13" width="72" height="80.87" fill="#c74424"/>
+<line x1="854" x2="854" y1="716.50" y2="721.92" stroke="#222"/>
 <text x="834" y="820" font-size="13" font-family="sans-serif">Sun</text>
-<text x="28" y="850" font-size="15" font-family="sans-serif">Nepal / Aqua / 22 years / ok</text>
-<line x1="28" x2="950" y1="909.3184328897448" y2="909.3184328897448" stroke="#777" stroke-dasharray="4 4"/>
-<rect x="50" y="903.79" width="72" height="86.21" fill="#557570"/>
-<line x1="86" x2="86" y1="890.94" y2="916.58" stroke="#222"/>
+<text x="28" y="850" font-size="15" font-family="sans-serif">Australia / Aqua / 22 years / ok</text>
+<line x1="28" x2="950" y1="903.6" y2="903.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="905.57" width="72" height="84.43" fill="#557570"/>
+<line x1="86" x2="86" y1="903.87" y2="907.20" stroke="#222"/>
 <text x="66" y="1010" font-size="13" font-family="sans-serif">Mon</text>
-<rect x="178" y="915.99" width="72" height="74.01" fill="#557570"/>
-<line x1="214" x2="214" y1="904.16" y2="927.62" stroke="#222"/>
+<rect x="178" y="900.09" width="72" height="89.91" fill="#557570"/>
+<line x1="214" x2="214" y1="897.70" y2="902.30" stroke="#222"/>
 <text x="194" y="1010" font-size="13" font-family="sans-serif">Tue</text>
-<rect x="306" y="905.13" width="72" height="84.87" fill="#557570"/>
-<line x1="342" x2="342" y1="891.00" y2="918.85" stroke="#222"/>
+<rect x="306" y="897.75" width="72" height="92.25" fill="#557570"/>
+<line x1="342" x2="342" y1="895.60" y2="900.00" stroke="#222"/>
 <text x="322" y="1010" font-size="13" font-family="sans-serif">Wed</text>
-<rect x="434" y="912.52" width="72" height="77.48" fill="#557570"/>
-<line x1="470" x2="470" y1="897.94" y2="926.51" stroke="#222"/>
+<rect x="434" y="897.33" width="72" height="92.67" fill="#557570"/>
+<line x1="470" x2="470" y1="894.31" y2="900.00" stroke="#222"/>
 <text x="450" y="1010" font-size="13" font-family="sans-serif">Thu</text>
-<rect x="562" y="911.39" width="72" height="78.61" fill="#557570"/>
-<line x1="598" x2="598" y1="895.41" y2="925.90" stroke="#222"/>
+<rect x="562" y="904.48" width="72" height="85.52" fill="#557570"/>
+<line x1="598" x2="598" y1="902.72" y2="906.33" stroke="#222"/>
 <text x="578" y="1010" font-size="13" font-family="sans-serif">Fri</text>
-<rect x="690" y="899.88" width="72" height="90.12" fill="#c74424"/>
-<line x1="726" x2="726" y1="882.00" y2="915.62" stroke="#222"/>
+<rect x="690" y="908.32" width="72" height="81.68" fill="#557570"/>
+<line x1="726" x2="726" y1="905.36" y2="910.77" stroke="#222"/>
 <text x="706" y="1010" font-size="13" font-family="sans-serif">Sat</text>
-<rect x="818" y="916.53" width="72" height="73.47" fill="#557570"/>
-<line x1="854" x2="854" y1="903.56" y2="928.42" stroke="#222"/>
+<rect x="818" y="911.66" width="72" height="78.34" fill="#c74424"/>
+<line x1="854" x2="854" y1="909.26" y2="914.07" stroke="#222"/>
 <text x="834" y="1010" font-size="13" font-family="sans-serif">Sun</text>
-<text x="28" y="1040" font-size="15" font-family="sans-serif">Nepal / VIIRS / 12 years / ok</text>
+<text x="28" y="1040" font-size="15" font-family="sans-serif">Australia / VIIRS / 12 years / ok</text>
 <line x1="28" x2="950" y1="1093.6" y2="1093.6" stroke="#777" stroke-dasharray="4 4"/>
-<rect x="50" y="1090.83" width="72" height="89.17" fill="#557570"/>
-<line x1="86" x2="86" y1="1084.94" y2="1097.05" stroke="#222"/>
+<rect x="50" y="1098.27" width="72" height="81.73" fill="#557570"/>
+<line x1="86" x2="86" y1="1096.56" y2="1100.32" stroke="#222"/>
 <text x="66" y="1200" font-size="13" font-family="sans-serif">Mon</text>
-<rect x="178" y="1096.38" width="72" height="83.62" fill="#557570"/>
-<line x1="214" x2="214" y1="1088.83" y2="1103.46" stroke="#222"/>
+<rect x="178" y="1093.15" width="72" height="86.85" fill="#557570"/>
+<line x1="214" x2="214" y1="1091.47" y2="1094.91" stroke="#222"/>
 <text x="194" y="1200" font-size="13" font-family="sans-serif">Tue</text>
-<rect x="306" y="1096.21" width="72" height="83.79" fill="#557570"/>
-<line x1="342" x2="342" y1="1087.39" y2="1105.05" stroke="#222"/>
+<rect x="306" y="1087.62" width="72" height="92.38" fill="#557570"/>
+<line x1="342" x2="342" y1="1084.62" y2="1090.06" stroke="#222"/>
 <text x="322" y="1200" font-size="13" font-family="sans-serif">Wed</text>
-<rect x="434" y="1097.37" width="72" height="82.63" fill="#557570"/>
-<line x1="470" x2="470" y1="1090.19" y2="1104.71" stroke="#222"/>
+<rect x="434" y="1088.63" width="72" height="91.37" fill="#557570"/>
+<line x1="470" x2="470" y1="1086.03" y2="1091.21" stroke="#222"/>
 <text x="450" y="1200" font-size="13" font-family="sans-serif">Thu</text>
-<rect x="562" y="1094.85" width="72" height="85.15" fill="#557570"/>
-<line x1="598" x2="598" y1="1084.12" y2="1104.81" stroke="#222"/>
+<rect x="562" y="1092.11" width="72" height="87.89" fill="#557570"/>
+<line x1="598" x2="598" y1="1090.85" y2="1093.33" stroke="#222"/>
 <text x="578" y="1200" font-size="13" font-family="sans-serif">Fri</text>
-<rect x="690" y="1092.35" width="72" height="87.65" fill="#c74424"/>
-<line x1="726" x2="726" y1="1082.90" y2="1101.11" stroke="#222"/>
+<rect x="690" y="1096.34" width="72" height="83.66" fill="#557570"/>
+<line x1="726" x2="726" y1="1094.16" y2="1098.07" stroke="#222"/>
 <text x="706" y="1200" font-size="13" font-family="sans-serif">Sat</text>
-<rect x="818" y="1087.21" width="72" height="92.79" fill="#557570"/>
-<line x1="854" x2="854" y1="1081.30" y2="1092.50" stroke="#222"/>
+<rect x="818" y="1099.07" width="72" height="80.93" fill="#c74424"/>
+<line x1="854" x2="854" y1="1097.50" y2="1100.85" stroke="#222"/>
 <text x="834" y="1200" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="1230" font-size="15" font-family="sans-serif">Nepal / Terra / 23 years / ok</text>
+<line x1="28" x2="950" y1="1287.4943631750962" y2="1287.4943631750962" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="1292.41" width="72" height="77.59" fill="#557570"/>
+<line x1="86" x2="86" y1="1279.36" y2="1305.14" stroke="#222"/>
+<text x="66" y="1390" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="1281.80" width="72" height="88.20" fill="#557570"/>
+<line x1="214" x2="214" y1="1267.60" y2="1295.57" stroke="#222"/>
+<text x="194" y="1390" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="1292.24" width="72" height="77.76" fill="#557570"/>
+<line x1="342" x2="342" y1="1281.72" y2="1302.32" stroke="#222"/>
+<text x="322" y="1390" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="1291.61" width="72" height="78.39" fill="#557570"/>
+<line x1="470" x2="470" y1="1278.96" y2="1304.67" stroke="#222"/>
+<text x="450" y="1390" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="1278.34" width="72" height="91.66" fill="#557570"/>
+<line x1="598" x2="598" y1="1262.00" y2="1295.02" stroke="#222"/>
+<text x="578" y="1390" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="1292.18" width="72" height="77.82" fill="#c74424"/>
+<line x1="726" x2="726" y1="1278.05" y2="1305.63" stroke="#222"/>
+<text x="706" y="1390" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="1283.88" width="72" height="86.12" fill="#557570"/>
+<line x1="854" x2="854" y1="1270.14" y2="1296.26" stroke="#222"/>
+<text x="834" y="1390" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="1420" font-size="15" font-family="sans-serif">Nepal / Aqua / 22 years / ok</text>
+<line x1="28" x2="950" y1="1479.3184328897448" y2="1479.3184328897448" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="1473.79" width="72" height="86.21" fill="#557570"/>
+<line x1="86" x2="86" y1="1460.94" y2="1486.58" stroke="#222"/>
+<text x="66" y="1580" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="1485.99" width="72" height="74.01" fill="#557570"/>
+<line x1="214" x2="214" y1="1474.16" y2="1497.62" stroke="#222"/>
+<text x="194" y="1580" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="1475.13" width="72" height="84.87" fill="#557570"/>
+<line x1="342" x2="342" y1="1461.00" y2="1488.85" stroke="#222"/>
+<text x="322" y="1580" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="1482.52" width="72" height="77.48" fill="#557570"/>
+<line x1="470" x2="470" y1="1467.94" y2="1496.51" stroke="#222"/>
+<text x="450" y="1580" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="1481.39" width="72" height="78.61" fill="#557570"/>
+<line x1="598" x2="598" y1="1465.41" y2="1495.90" stroke="#222"/>
+<text x="578" y="1580" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="1469.88" width="72" height="90.12" fill="#c74424"/>
+<line x1="726" x2="726" y1="1452.00" y2="1485.62" stroke="#222"/>
+<text x="706" y="1580" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="1486.53" width="72" height="73.47" fill="#557570"/>
+<line x1="854" x2="854" y1="1473.56" y2="1498.42" stroke="#222"/>
+<text x="834" y="1580" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="1610" font-size="15" font-family="sans-serif">Nepal / VIIRS / 12 years / ok</text>
+<line x1="28" x2="950" y1="1663.6" y2="1663.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="1660.83" width="72" height="89.17" fill="#557570"/>
+<line x1="86" x2="86" y1="1654.94" y2="1667.05" stroke="#222"/>
+<text x="66" y="1770" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="1666.38" width="72" height="83.62" fill="#557570"/>
+<line x1="214" x2="214" y1="1658.83" y2="1673.46" stroke="#222"/>
+<text x="194" y="1770" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="1666.21" width="72" height="83.79" fill="#557570"/>
+<line x1="342" x2="342" y1="1657.39" y2="1675.05" stroke="#222"/>
+<text x="322" y="1770" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="1667.37" width="72" height="82.63" fill="#557570"/>
+<line x1="470" x2="470" y1="1660.19" y2="1674.71" stroke="#222"/>
+<text x="450" y="1770" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="1664.85" width="72" height="85.15" fill="#557570"/>
+<line x1="598" x2="598" y1="1654.12" y2="1674.81" stroke="#222"/>
+<text x="578" y="1770" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="1662.35" width="72" height="87.65" fill="#c74424"/>
+<line x1="726" x2="726" y1="1652.90" y2="1671.11" stroke="#222"/>
+<text x="706" y="1770" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="1657.21" width="72" height="92.79" fill="#557570"/>
+<line x1="854" x2="854" y1="1651.30" y2="1662.50" stroke="#222"/>
+<text x="834" y="1770" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="1800" font-size="15" font-family="sans-serif">Bangladesh / Terra / 20 years / ok</text>
+<line x1="28" x2="950" y1="1866.0196035342078" y2="1866.0196035342078" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="1864.00" width="72" height="76.00" fill="#557570"/>
+<line x1="86" x2="86" y1="1853.78" y2="1873.84" stroke="#222"/>
+<text x="66" y="1960" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="1862.27" width="72" height="77.73" fill="#557570"/>
+<line x1="214" x2="214" y1="1846.54" y2="1878.44" stroke="#222"/>
+<text x="194" y="1960" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="1864.76" width="72" height="75.24" fill="#557570"/>
+<line x1="342" x2="342" y1="1851.58" y2="1877.66" stroke="#222"/>
+<text x="322" y="1960" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="1870.16" width="72" height="69.84" fill="#557570"/>
+<line x1="470" x2="470" y1="1859.55" y2="1880.44" stroke="#222"/>
+<text x="450" y="1960" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="1879.28" width="72" height="60.72" fill="#c74424"/>
+<line x1="598" x2="598" y1="1869.21" y2="1888.80" stroke="#222"/>
+<text x="578" y="1960" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="1847.36" width="72" height="92.64" fill="#557570"/>
+<line x1="726" x2="726" y1="1832.00" y2="1861.28" stroke="#222"/>
+<text x="706" y="1960" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="1874.31" width="72" height="65.69" fill="#557570"/>
+<line x1="854" x2="854" y1="1860.65" y2="1887.64" stroke="#222"/>
+<text x="834" y="1960" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="1990" font-size="15" font-family="sans-serif">Bangladesh / Aqua / 22 years / ok</text>
+<line x1="28" x2="950" y1="2061.7610746654855" y2="2061.7610746654855" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="2057.64" width="72" height="72.36" fill="#557570"/>
+<line x1="86" x2="86" y1="2037.11" y2="2075.94" stroke="#222"/>
+<text x="66" y="2150" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="2039.41" width="72" height="90.59" fill="#557570"/>
+<line x1="214" x2="214" y1="2022.00" y2="2058.18" stroke="#222"/>
+<text x="194" y="2150" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="2071.18" width="72" height="58.82" fill="#557570"/>
+<line x1="342" x2="342" y1="2059.14" y2="2082.37" stroke="#222"/>
+<text x="322" y="2150" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="2081.02" width="72" height="48.98" fill="#557570"/>
+<line x1="470" x2="470" y1="2071.83" y2="2090.24" stroke="#222"/>
+<text x="450" y="2150" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="2070.41" width="72" height="59.59" fill="#c74424"/>
+<line x1="598" x2="598" y1="2059.24" y2="2081.57" stroke="#222"/>
+<text x="578" y="2150" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="2041.76" width="72" height="88.24" fill="#557570"/>
+<line x1="726" x2="726" y1="2022.69" y2="2061.06" stroke="#222"/>
+<text x="706" y="2150" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="2070.91" width="72" height="59.09" fill="#557570"/>
+<line x1="854" x2="854" y1="2057.76" y2="2084.00" stroke="#222"/>
+<text x="834" y="2150" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="2180" font-size="15" font-family="sans-serif">Bangladesh / VIIRS / 12 years / ok</text>
+<line x1="28" x2="950" y1="2256.2607076950803" y2="2256.2607076950803" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="2257.96" width="72" height="62.04" fill="#557570"/>
+<line x1="86" x2="86" y1="2248.53" y2="2266.30" stroke="#222"/>
+<text x="66" y="2340" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="2235.53" width="72" height="84.47" fill="#557570"/>
+<line x1="214" x2="214" y1="2228.56" y2="2243.17" stroke="#222"/>
+<text x="194" y="2340" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="2263.45" width="72" height="56.55" fill="#557570"/>
+<line x1="342" x2="342" y1="2257.57" y2="2268.48" stroke="#222"/>
+<text x="322" y="2340" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="2269.01" width="72" height="50.99" fill="#557570"/>
+<line x1="470" x2="470" y1="2265.18" y2="2272.72" stroke="#222"/>
+<text x="450" y="2340" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="2273.69" width="72" height="46.31" fill="#c74424"/>
+<line x1="598" x2="598" y1="2267.83" y2="2279.28" stroke="#222"/>
+<text x="578" y="2340" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="2222.73" width="72" height="97.27" fill="#557570"/>
+<line x1="726" x2="726" y1="2212.00" y2="2232.39" stroke="#222"/>
+<text x="706" y="2340" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="2271.46" width="72" height="48.54" fill="#557570"/>
+<line x1="854" x2="854" y1="2266.73" y2="2275.78" stroke="#222"/>
+<text x="834" y="2340" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="2370" font-size="15" font-family="sans-serif">Egypt / Terra / 23 years / ok</text>
+<line x1="28" x2="950" y1="2424.3836376872596" y2="2424.3836376872596" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="2422.97" width="72" height="87.03" fill="#557570"/>
+<line x1="86" x2="86" y1="2414.61" y2="2431.54" stroke="#222"/>
+<text x="66" y="2530" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="2426.21" width="72" height="83.79" fill="#557570"/>
+<line x1="214" x2="214" y1="2417.27" y2="2434.33" stroke="#222"/>
+<text x="194" y="2530" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="2423.66" width="72" height="86.34" fill="#557570"/>
+<line x1="342" x2="342" y1="2417.11" y2="2430.02" stroke="#222"/>
+<text x="322" y="2530" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="2428.06" width="72" height="81.94" fill="#557570"/>
+<line x1="470" x2="470" y1="2419.90" y2="2435.67" stroke="#222"/>
+<text x="450" y="2530" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="2415.05" width="72" height="94.95" fill="#c74424"/>
+<line x1="598" x2="598" y1="2402.00" y2="2427.22" stroke="#222"/>
+<text x="578" y="2530" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="2427.98" width="72" height="82.02" fill="#557570"/>
+<line x1="726" x2="726" y1="2419.99" y2="2436.43" stroke="#222"/>
+<text x="706" y="2530" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="2426.75" width="72" height="83.25" fill="#557570"/>
+<line x1="854" x2="854" y1="2418.72" y2="2434.37" stroke="#222"/>
+<text x="834" y="2530" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="2560" font-size="15" font-family="sans-serif">Egypt / Aqua / 22 years / ok</text>
+<line x1="28" x2="950" y1="2613.6" y2="2613.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="2615.10" width="72" height="84.90" fill="#557570"/>
+<line x1="86" x2="86" y1="2600.84" y2="2628.99" stroke="#222"/>
+<text x="66" y="2720" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="2610.93" width="72" height="89.07" fill="#557570"/>
+<line x1="214" x2="214" y1="2593.57" y2="2626.30" stroke="#222"/>
+<text x="194" y="2720" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="2613.41" width="72" height="86.59" fill="#557570"/>
+<line x1="342" x2="342" y1="2592.97" y2="2630.68" stroke="#222"/>
+<text x="322" y="2720" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="2613.39" width="72" height="86.61" fill="#557570"/>
+<line x1="470" x2="470" y1="2600.72" y2="2627.24" stroke="#222"/>
+<text x="450" y="2720" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="2614.60" width="72" height="85.40" fill="#c74424"/>
+<line x1="598" x2="598" y1="2597.01" y2="2629.86" stroke="#222"/>
+<text x="578" y="2720" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="2617.75" width="72" height="82.25" fill="#557570"/>
+<line x1="726" x2="726" y1="2601.50" y2="2633.89" stroke="#222"/>
+<text x="706" y="2720" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="2610.01" width="72" height="89.99" fill="#557570"/>
+<line x1="854" x2="854" y1="2593.80" y2="2625.33" stroke="#222"/>
+<text x="834" y="2720" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="2750" font-size="15" font-family="sans-serif">Egypt / VIIRS / 12 years / ok</text>
+<line x1="28" x2="950" y1="2803.6" y2="2803.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="2803.98" width="72" height="86.02" fill="#557570"/>
+<line x1="86" x2="86" y1="2800.51" y2="2806.88" stroke="#222"/>
+<text x="66" y="2910" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="2802.66" width="72" height="87.34" fill="#557570"/>
+<line x1="214" x2="214" y1="2800.53" y2="2805.07" stroke="#222"/>
+<text x="194" y="2910" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="2803.27" width="72" height="86.73" fill="#557570"/>
+<line x1="342" x2="342" y1="2801.19" y2="2805.70" stroke="#222"/>
+<text x="322" y="2910" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="2804.26" width="72" height="85.74" fill="#557570"/>
+<line x1="470" x2="470" y1="2802.56" y2="2805.79" stroke="#222"/>
+<text x="450" y="2910" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="2800.53" width="72" height="89.47" fill="#c74424"/>
+<line x1="598" x2="598" y1="2795.69" y2="2805.64" stroke="#222"/>
+<text x="578" y="2910" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="2804.28" width="72" height="85.72" fill="#557570"/>
+<line x1="726" x2="726" y1="2802.26" y2="2806.39" stroke="#222"/>
+<text x="706" y="2910" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="2806.22" width="72" height="83.78" fill="#557570"/>
+<line x1="854" x2="854" y1="2804.45" y2="2808.06" stroke="#222"/>
+<text x="834" y="2910" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="2940" font-size="15" font-family="sans-serif">India / Terra / 23 years / ok</text>
+<line x1="28" x2="950" y1="2993.6" y2="2993.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="2994.34" width="72" height="85.66" fill="#557570"/>
+<line x1="86" x2="86" y1="2989.65" y2="2998.77" stroke="#222"/>
+<text x="66" y="3100" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="2991.98" width="72" height="88.02" fill="#557570"/>
+<line x1="214" x2="214" y1="2987.03" y2="2996.16" stroke="#222"/>
+<text x="194" y="3100" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="2994.81" width="72" height="85.19" fill="#557570"/>
+<line x1="342" x2="342" y1="2990.76" y2="2999.24" stroke="#222"/>
+<text x="322" y="3100" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="2995.32" width="72" height="84.68" fill="#557570"/>
+<line x1="470" x2="470" y1="2991.14" y2="2999.31" stroke="#222"/>
+<text x="450" y="3100" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="2994.33" width="72" height="85.67" fill="#557570"/>
+<line x1="598" x2="598" y1="2989.21" y2="2999.07" stroke="#222"/>
+<text x="578" y="3100" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="2991.37" width="72" height="88.63" fill="#557570"/>
+<line x1="726" x2="726" y1="2987.10" y2="2995.58" stroke="#222"/>
+<text x="706" y="3100" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="2993.06" width="72" height="86.94" fill="#c74424"/>
+<line x1="854" x2="854" y1="2988.27" y2="2998.02" stroke="#222"/>
+<text x="834" y="3100" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="3130" font-size="15" font-family="sans-serif">India / Aqua / 22 years / ok</text>
+<line x1="28" x2="950" y1="3183.6" y2="3183.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="3179.86" width="72" height="90.14" fill="#557570"/>
+<line x1="86" x2="86" y1="3174.78" y2="3184.96" stroke="#222"/>
+<text x="66" y="3290" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="3179.12" width="72" height="90.88" fill="#557570"/>
+<line x1="214" x2="214" y1="3172.19" y2="3185.73" stroke="#222"/>
+<text x="194" y="3290" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="3182.08" width="72" height="87.92" fill="#557570"/>
+<line x1="342" x2="342" y1="3176.20" y2="3187.42" stroke="#222"/>
+<text x="322" y="3290" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="3185.13" width="72" height="84.87" fill="#557570"/>
+<line x1="470" x2="470" y1="3179.82" y2="3190.48" stroke="#222"/>
+<text x="450" y="3290" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="3185.20" width="72" height="84.80" fill="#557570"/>
+<line x1="598" x2="598" y1="3179.33" y2="3190.71" stroke="#222"/>
+<text x="578" y="3290" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="3181.22" width="72" height="88.78" fill="#557570"/>
+<line x1="726" x2="726" y1="3175.59" y2="3187.21" stroke="#222"/>
+<text x="706" y="3290" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="3192.59" width="72" height="77.41" fill="#c74424"/>
+<line x1="854" x2="854" y1="3187.10" y2="3198.00" stroke="#222"/>
+<text x="834" y="3290" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="3320" font-size="15" font-family="sans-serif">India / VIIRS / 12 years / ok</text>
+<line x1="28" x2="950" y1="3373.6" y2="3373.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="3373.53" width="72" height="86.47" fill="#557570"/>
+<line x1="86" x2="86" y1="3371.28" y2="3375.89" stroke="#222"/>
+<text x="66" y="3480" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="3372.55" width="72" height="87.45" fill="#557570"/>
+<line x1="214" x2="214" y1="3369.84" y2="3375.00" stroke="#222"/>
+<text x="194" y="3480" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="3374.50" width="72" height="85.50" fill="#557570"/>
+<line x1="342" x2="342" y1="3372.61" y2="3376.27" stroke="#222"/>
+<text x="322" y="3480" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="3375.43" width="72" height="84.57" fill="#557570"/>
+<line x1="470" x2="470" y1="3373.19" y2="3377.72" stroke="#222"/>
+<text x="450" y="3480" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="3375.10" width="72" height="84.90" fill="#557570"/>
+<line x1="598" x2="598" y1="3372.43" y2="3378.03" stroke="#222"/>
+<text x="578" y="3480" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="3370.75" width="72" height="89.25" fill="#557570"/>
+<line x1="726" x2="726" y1="3368.11" y2="3373.42" stroke="#222"/>
+<text x="706" y="3480" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="3373.34" width="72" height="86.66" fill="#c74424"/>
+<line x1="854" x2="854" y1="3370.77" y2="3375.63" stroke="#222"/>
+<text x="834" y="3480" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="3510" font-size="15" font-family="sans-serif">Brazil / Terra / 23 years / ok</text>
+<line x1="28" x2="950" y1="3563.6" y2="3563.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="3567.67" width="72" height="82.33" fill="#557570"/>
+<line x1="86" x2="86" y1="3565.73" y2="3569.91" stroke="#222"/>
+<text x="66" y="3670" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="3562.66" width="72" height="87.34" fill="#557570"/>
+<line x1="214" x2="214" y1="3560.52" y2="3564.87" stroke="#222"/>
+<text x="194" y="3670" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="3559.58" width="72" height="90.42" fill="#557570"/>
+<line x1="342" x2="342" y1="3557.39" y2="3561.76" stroke="#222"/>
+<text x="322" y="3670" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="3562.51" width="72" height="87.49" fill="#557570"/>
+<line x1="470" x2="470" y1="3560.02" y2="3564.88" stroke="#222"/>
+<text x="450" y="3670" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="3558.90" width="72" height="91.10" fill="#557570"/>
+<line x1="598" x2="598" y1="3556.53" y2="3561.07" stroke="#222"/>
+<text x="578" y="3670" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="3561.55" width="72" height="88.45" fill="#557570"/>
+<line x1="726" x2="726" y1="3559.51" y2="3563.54" stroke="#222"/>
+<text x="706" y="3670" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="3572.33" width="72" height="77.67" fill="#c74424"/>
+<line x1="854" x2="854" y1="3568.70" y2="3575.82" stroke="#222"/>
+<text x="834" y="3670" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="3700" font-size="15" font-family="sans-serif">Brazil / Aqua / 22 years / ok</text>
+<line x1="28" x2="950" y1="3753.6" y2="3753.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="3758.23" width="72" height="81.77" fill="#557570"/>
+<line x1="86" x2="86" y1="3755.75" y2="3760.85" stroke="#222"/>
+<text x="66" y="3860" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="3751.68" width="72" height="88.32" fill="#557570"/>
+<line x1="214" x2="214" y1="3749.03" y2="3754.44" stroke="#222"/>
+<text x="194" y="3860" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="3748.56" width="72" height="91.44" fill="#557570"/>
+<line x1="342" x2="342" y1="3746.13" y2="3750.92" stroke="#222"/>
+<text x="322" y="3860" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="3752.49" width="72" height="87.51" fill="#557570"/>
+<line x1="470" x2="470" y1="3749.58" y2="3755.33" stroke="#222"/>
+<text x="450" y="3860" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="3750.98" width="72" height="89.02" fill="#557570"/>
+<line x1="598" x2="598" y1="3747.87" y2="3754.16" stroke="#222"/>
+<text x="578" y="3860" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="3750.80" width="72" height="89.20" fill="#557570"/>
+<line x1="726" x2="726" y1="3748.30" y2="3752.88" stroke="#222"/>
+<text x="706" y="3860" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="3762.47" width="72" height="77.53" fill="#c74424"/>
+<line x1="854" x2="854" y1="3759.84" y2="3765.12" stroke="#222"/>
+<text x="834" y="3860" font-size="13" font-family="sans-serif">Sun</text>
+<text x="28" y="3890" font-size="15" font-family="sans-serif">Brazil / VIIRS / 12 years / ok</text>
+<line x1="28" x2="950" y1="3943.6" y2="3943.6" stroke="#777" stroke-dasharray="4 4"/>
+<rect x="50" y="3949.40" width="72" height="80.60" fill="#557570"/>
+<line x1="86" x2="86" y1="3947.03" y2="3951.64" stroke="#222"/>
+<text x="66" y="4050" font-size="13" font-family="sans-serif">Mon</text>
+<rect x="178" y="3942.93" width="72" height="87.07" fill="#557570"/>
+<line x1="214" x2="214" y1="3940.90" y2="3944.91" stroke="#222"/>
+<text x="194" y="4050" font-size="13" font-family="sans-serif">Tue</text>
+<rect x="306" y="3939.63" width="72" height="90.37" fill="#557570"/>
+<line x1="342" x2="342" y1="3937.59" y2="3941.57" stroke="#222"/>
+<text x="322" y="4050" font-size="13" font-family="sans-serif">Wed</text>
+<rect x="434" y="3940.60" width="72" height="89.40" fill="#557570"/>
+<line x1="470" x2="470" y1="3938.37" y2="3942.70" stroke="#222"/>
+<text x="450" y="4050" font-size="13" font-family="sans-serif">Thu</text>
+<rect x="562" y="3942.37" width="72" height="87.63" fill="#557570"/>
+<line x1="598" x2="598" y1="3939.99" y2="3945.20" stroke="#222"/>
+<text x="578" y="4050" font-size="13" font-family="sans-serif">Fri</text>
+<rect x="690" y="3941.54" width="72" height="88.46" fill="#557570"/>
+<line x1="726" x2="726" y1="3939.47" y2="3943.86" stroke="#222"/>
+<text x="706" y="4050" font-size="13" font-family="sans-serif">Sat</text>
+<rect x="818" y="3948.73" width="72" height="81.27" fill="#c74424"/>
+<line x1="854" x2="854" y1="3946.45" y2="3950.83" stroke="#222"/>
+<text x="834" y="4050" font-size="13" font-family="sans-serif">Sun</text>
 </svg>
