@@ -9,6 +9,7 @@ import AnomalyPanel from './AnomalyPanel';
 import {loadData,decodeCell} from './loadData';
 import ShareView from './ShareView';
 import RhythmView from './RhythmView';
+import RhythmCellMap from './RhythmCellMap';
 import {createShareLink,defaultExploration,linkedRegion} from './explorationState';
 import type {ExplorationState} from './explorationState';
 import {canShareSelection,catalogForRegion,resolveAppExploration,restoreEvidenceWeek} from './explorationIntegration';
@@ -168,7 +169,7 @@ export default function App() {
       {linkNotices.length>0&&<div className="share-notices"><div role="status" aria-live="polite">{linkNotices.map(notice=><p key={notice}>{notice}</p>)}</div><div className="share-notice-actions"><button onClick={resetSharedView} disabled={!catalog||loading}>Reset shared view</button><button onClick={()=>setLinkNotices([])}>Dismiss</button></div></div>}
       {isSynthetic&&<div className="synthetic-banner"><FlaskIcon/><span><strong>Synthetic demonstration.</strong> These observations were generated to test the pipeline. They are not measured fire activity.</span></div>}
       {error&&<div role="alert" className="error-banner"><CircleHelp size={20}/><div><strong>Data not available</strong><p>{error} The interface will never substitute fabricated observations.</p></div></div>}
-      {view==='methods'?<Methods region={region} index={index}/>:view==='rhythm'?<RhythmView/>:<div className="workspace"><aside className="sidebar"><div className="sidebar-title"><SlidersHorizontal size={15}/><span>YOUR VIEW</span></div>
+      {view==='methods'?<Methods region={region} index={index}/>:view==='rhythm'?<RhythmView><RhythmCellMap/></RhythmView>:<div className="workspace"><aside className="sidebar"><div className="sidebar-title"><SlidersHorizontal size={15}/><span>YOUR VIEW</span></div>
         <label className="field-label" htmlFor="region">Region</label><div className="select-wrap region-select"><MapPin size={17}/><select id="region" value={regionId} onChange={e=>changeRegion(e.target.value)} disabled={!index.regions.length||loading}>{!index.regions.length&&<option>No processed regions</option>}{index.regions.map(r=><option key={r.id} value={r.id}>{r.name}</option>)}</select><ChevronDown size={15}/></div>
         <CellMap cells={region?.cells||[]} selected={cell} onSelect={selectDailyCell} name={region?.meta.name||'Region'}/>{region?.meta.cell_scope&&<p className="cell-scope">{region.meta.cell_scope}</p>}
         <label className="field-label" htmlFor="cell">Spatial scope</label><div className="select-wrap"><select id="cell" value={cell} disabled={loading} onChange={e=>selectDailyCell(e.target.value)}><option value="ALL">Whole region</option>{region?.cells.map(c=><option key={c.id} value={c.id}>{c.id} · {c.lat.toFixed(2)}, {c.lon.toFixed(2)}</option>)}</select><ChevronDown size={15}/></div>
