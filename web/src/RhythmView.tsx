@@ -100,7 +100,8 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
   return <div className="rhythm-page">
     <div className="section-intro"><span className="eyebrow">WEEKLY RHYTHM INDEX · PRE-SPECIFIED TEST · 7 COUNTRIES</span>
       <h2>Weekly Rhythm Index: do detections follow the <em>7-day week?</em></h2>
-      <p>We look for places where fire detections follow the 7-day week. Nature has no 7-day cycle, so where detections follow it, the human calendar is shaping fire activity there. We do not identify who burns or why. Each country's rest day was fixed before looking at the data, and a dip on that day is consistent with people scheduling their burning.</p></div>
+      <p>We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration.</p>
+      <p>The test uses a stated expected rest day for each country. These weekday associations do not establish ignition cause or identify who burns or why.</p></div>
 
     <section className="panel rh-verdict" aria-labelledby="rh-verdict-title">
       <div className="panel-heading"><div><span className="eyebrow">OFFICIAL DECISION</span>
@@ -146,8 +147,8 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
     </section>}
 
     <section className="panel" aria-labelledby="rh-control-title">
-      <div className="panel-heading"><div><span className="eyebrow">NEGATIVE CONTROL</span><h2 id="rh-control-title">Static heat sources stay flat</h2></div></div>
-      <p className="panel-description">Gas flares, volcanoes and other static sources should not follow a rest day. Pooled across all seven countries, their largest weekday deviation is shown below. Per-country checks are in the robustness section above.</p>
+      <div className="panel-heading"><div><span className="eyebrow">NEGATIVE CONTROL</span><h2 id="rh-control-title">Compare static heat sources</h2></div></div>
+      <p className="panel-description">Gas flares, volcanoes and other static sources provide a comparison for the weekday pattern. Pooled across all seven countries, their largest weekday deviation is shown below. Per-country checks are in the robustness section above.</p>
       <div className="rh-control">{data.negative_control.map(c => <div key={c.stream}><span>{c.stream}</span><strong>{typeof c.max_abs_deviation === 'number' ? `${(c.max_abs_deviation * 100).toFixed(1)}%` : '—'}</strong><small>{c.detections.toLocaleString()} detections</small></div>)}</div>
     </section>
 

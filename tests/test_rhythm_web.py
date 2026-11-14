@@ -34,6 +34,18 @@ def write_official(folder, statuses, drop_ci=False):
 
 
 class RhythmWebTests(unittest.TestCase):
+    def test_published_payload_preserves_official_results(self):
+        """Regeneration may revise prose, but must preserve every scientific payload field."""
+        root = Path(__file__).resolve().parents[1]
+        published = json.loads((root / "web/public/data/rhythm.json").read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as out:
+            regenerated = rhythm_web.build(root / "reports/official", root / "reports/rhythm_robustness", out,
+                                           root / "reports/rhythm_robustness_2014_2023", root / "reports/review")
+        for key in ("official", "countries", "negative_control", "diagnostics"):
+            self.assertEqual(published[key], regenerated[key], key)
+        for key in ("per_country", "flagged", "descriptions", "role", "source"):
+            self.assertEqual(published["robustness"][key], regenerated["robustness"][key], key)
+
     def test_payload_copies_official_numbers_and_sunday_caveat(self):
         statuses = {"United_States": ("pass", "Sun"), "Australia": ("pass", "Sun"), "Nepal": ("fail", "Sat")}
         with tempfile.TemporaryDirectory() as official, tempfile.TemporaryDirectory() as out:
