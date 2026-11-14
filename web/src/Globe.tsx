@@ -1,0 +1,88 @@
+import {useEffect,useMemo,useRef,useState} from 'react';
+import * as THREE from 'three';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
+import {ArrowUpRight,Globe2,Minus,Plus,RotateCcw} from 'lucide-react';
+import {compact,fmt,geoCoordinate,numeric} from './utils';
+import {createDemandRenderer} from './demandRenderer';
+
+interface GlobeCell {id:string;region:string;lat:number;lon:number;values:(number|null)[]}
+interface GlobeData {years:number[];cell_size:number;label:string;reference:string;coverage_regions:{id:string;name:string;sources?:string[]}[];cells:GlobeCell[]}
+interface Outline {type:string;coordinates:number[][][];geometry?:{type:string;coordinates:number[][][]}}
+interface SceneState {renderer:THREE.WebGLRenderer;scene:THREE.Scene;camera:THREE.PerspectiveCamera;controls:OrbitControls;heat:THREE.Mesh|null;cells:GlobeCell[];max:number;requestRender:()=>void}
+let cachedData:GlobeData|null=null;
+const point=(lat:number,lon:number,r=1)=>{const a=THREE.MathUtils.degToRad(lat),b=THREE.MathUtils.degToRad(lon);return new THREE.Vector3(r*Math.cos(a)*Math.sin(b),r*Math.sin(a),r*Math.cos(a)*Math.cos(b));};
+
+export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCell,availableCells}:{regionId:string;year:number;onYear:(year:number)=>void;onRegion:(id:string)=>void;onCell:(id:string)=>void;availableCells:string[]}) {
+  const [data,setData]=useState<GlobeData|null>(cachedData),[error,setError]=useState(''),[fallback,setFallback]=useState(false),[selected,setSelected]=useState<GlobeCell|null>(null);
+  const [fallbackReason,setFallbackReason]=useState('');
+  const host=useRef<HTMLDivElement>(null),state=useRef<SceneState|null>(null),selectedRef=useRef<(cell:GlobeCell)=>void>(()=>{});
+  const year=data?.years.includes(requestedYear)?requestedYear:data?.years[data.years.length-1]||requestedYear;
+  const yearIndex=data?.years.indexOf(year)??-1;
+  const colorMaximum=useMemo(()=>data?.cells.reduce((max,cell)=>cell.values.reduce<number>((m,v)=>numeric(v)?Math.max(m,v):m,max),1)||1,[data]);
+  selectedRef.current=setSelected;
+  useEffect(()=>{if(cachedData)return;const c=new AbortController();fetch(`${import.meta.env.BASE_URL}data/globe.json`,{signal:c.signal}).then(r=>{if(!r.ok)throw new Error();return r.json();}).then((d:GlobeData)=>{cachedData=d;setData(d);}).catch(e=>{if(e.name!=='AbortError')setError('The annual globe layer is not available yet. The calendar and evidence remain available below.');});return()=>c.abort();},[]);
+  useEffect(()=>{
+    if(!data||!host.current||fallback)return;
+    const element=host.current;let renderer:THREE.WebGLRenderer;
+    try {renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});}catch{setFallbackReason('3D rendering is unavailable on this device. The grid table provides the same annual values.');setFallback(true);return;}
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.75));renderer.setClearColor(0x0d1b23,1);element.appendChild(renderer.domElement);
+    renderer.domElement.setAttribute('aria-label','Interactive three-dimensional Earth. Drag to rotate, scroll to zoom, or use the annual grid table.');renderer.domElement.setAttribute('role','img');
+    const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(39,1,.05,30);camera.position.set(0,0,3.4);
+    const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;controls.enablePan=false;controls.minDistance=1.2;controls.maxDistance=5.5;controls.rotateSpeed=.55;controls.zoomSpeed=.55;
+    const renderLoop=createDemandRenderer(()=>{const changed=controls.update();renderer.render(scene,camera);return changed;},callback=>requestAnimationFrame(callback),id=>cancelAnimationFrame(id));
+    const requestRender=()=>renderLoop.invalidate();
+    controls.addEventListener('change',requestRender);
+    const earth=new THREE.Mesh(new THREE.SphereGeometry(1,96,64),new THREE.MeshPhongMaterial({color:0x39606c,shininess:3,specular:0x16343c}));earth.rotation.y=-Math.PI/2;scene.add(earth);
+    scene.add(new THREE.AmbientLight(0xb8d6d6,1.7));const sun=new THREE.DirectionalLight(0xffe4bb,1.7);sun.position.set(4,3,5);scene.add(sun);
+    const graticule:number[]=[];const pushLine=(coords:THREE.Vector3[])=>{for(let i=1;i<coords.length;i++)graticule.push(...coords[i-1].toArray(),...coords[i].toArray());};
+    for(let lat=-60;lat<=60;lat+=30)pushLine(Array.from({length:181},(_,i)=>point(lat,i*2-180,1.002)));
+    for(let lon=-180;lon<180;lon+=30)pushLine(Array.from({length:91},(_,i)=>point(i*2-90,lon,1.002)));
+    const gridGeometry=new THREE.BufferGeometry();gridGeometry.setAttribute('position',new THREE.Float32BufferAttribute(graticule,3));scene.add(new THREE.LineSegments(gridGeometry,new THREE.LineBasicMaterial({color:0x54727b,transparent:true,opacity:.22})));
+    const controller=new AbortController();fetch(`${import.meta.env.BASE_URL}data/world-outline.json`,{signal:controller.signal}).then(r=>r.ok?r.json():null).then((outline:Outline|null)=>{if(!outline||controller.signal.aborted)return;const lines=outline.geometry?.coordinates||outline.coordinates;const positions:number[]=[];for(const line of lines||[]){for(let i=1;i<line.length;i++){if(Math.abs(line[i][0]-line[i-1][0])>180)continue;positions.push(...point(line[i-1][1],line[i-1][0],1.003).toArray(),...point(line[i][1],line[i][0],1.003).toArray());}}const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));scene.add(new THREE.LineSegments(geometry,new THREE.LineBasicMaterial({color:0x9fc0b9,transparent:true,opacity:.5})));requestRender();}).catch(()=>{});
+    let landTexture:THREE.CanvasTexture|null=null;
+    fetch(`${import.meta.env.BASE_URL}data/world-land.json`,{signal:controller.signal}).then(r=>r.ok?r.json():null).then(raw=>{
+      if(!raw||controller.signal.aborted)return;const canvas=document.createElement('canvas');canvas.width=2048;canvas.height=1024;const ctx=canvas.getContext('2d');if(!ctx)return;
+      ctx.fillStyle='#426b77';ctx.fillRect(0,0,2048,1024);ctx.fillStyle='#526f61';
+      const geometries=raw.type==='FeatureCollection'?raw.features.map((f:{geometry:unknown})=>f.geometry):[raw.geometry||raw];
+      for(const g of geometries){const polygons=g.type==='Polygon'?[g.coordinates]:g.coordinates;if(!Array.isArray(polygons))continue;for(const polygon of polygons){ctx.beginPath();for(const ring of polygon){let lastX:number|null=null;ring.forEach(([lon,lat]:number[],i:number)=>{const x=(lon+180)/360*2048,y=(90-lat)/180*1024;if(i===0||lastX!==null&&Math.abs(x-lastX)>1024)ctx.moveTo(x,y);else ctx.lineTo(x,y);lastX=x;});ctx.closePath();}ctx.fill('evenodd');}}
+      landTexture=new THREE.CanvasTexture(canvas);landTexture.colorSpace=THREE.SRGBColorSpace;earth.material.map=landTexture;earth.material.color.setHex(0xffffff);earth.material.needsUpdate=true;
+      requestRender();
+    }).catch(()=>{});
+    state.current={renderer,scene,camera,controls,heat:null,cells:[],max:1,requestRender};
+    const resize=()=>{const width=Math.max(element.clientWidth,1),height=Math.max(element.clientHeight,1);renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();requestRender();};resize();const observer=new ResizeObserver(resize);observer.observe(element);
+    let inViewport=false;
+    const updateVisibility=()=>renderLoop.setActive(inViewport&&!document.hidden);
+    const intersection=new IntersectionObserver(entries=>{inViewport=entries.some(entry=>entry.isIntersecting);updateVisibility();});intersection.observe(element);
+    document.addEventListener('visibilitychange',updateVisibility);
+    const contextLost=(event:Event)=>{event.preventDefault();renderLoop.setActive(false);setFallbackReason('The 3D view lost its graphics connection. Your data is preserved in the grid table; you can try 3D Earth again.');setFallback(true);};
+    renderer.domElement.addEventListener('webglcontextlost',contextLost);
+    const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();let downX=0,downY=0;
+    const pointerDown=(e:PointerEvent)=>{downX=e.clientX;downY=e.clientY;};
+    const pointerUp=(e:PointerEvent)=>{if(Math.hypot(e.clientX-downX,e.clientY-downY)>6||!state.current?.heat)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);ray.setFromCamera(pointer,camera);const hit=ray.intersectObject(state.current.heat)[0],surface=ray.intersectObject(earth)[0];if(hit&&surface&&hit.distance>surface.distance+.02)return;if(hit?.faceIndex!==undefined&&hit.faceIndex!==null){const cell=state.current.cells[Math.floor(hit.faceIndex/2)];if(cell)selectedRef.current(cell);}};
+    renderer.domElement.addEventListener('pointerdown',pointerDown);renderer.domElement.addEventListener('pointerup',pointerUp);
+    return()=>{controller.abort();renderLoop.dispose();observer.disconnect();intersection.disconnect();document.removeEventListener('visibilitychange',updateVisibility);controls.removeEventListener('change',requestRender);controls.dispose();landTexture?.dispose();renderer.domElement.removeEventListener('webglcontextlost',contextLost);renderer.domElement.removeEventListener('pointerdown',pointerDown);renderer.domElement.removeEventListener('pointerup',pointerUp);scene.traverse(object=>{if(object instanceof THREE.Mesh||object instanceof THREE.LineSegments){object.geometry.dispose();const mats=Array.isArray(object.material)?object.material:[object.material];mats.forEach(m=>m.dispose());}});renderer.dispose();renderer.domElement.remove();state.current=null;};
+  },[data,fallback]);
+  useEffect(()=>{
+    const s=state.current;if(!s||!data||yearIndex<0)return;
+    if(s.heat){s.scene.remove(s.heat);s.heat.geometry.dispose();(s.heat.material as THREE.Material).dispose();}
+    const cells=data.cells.filter(c=>numeric(c.values[yearIndex]));const max=colorMaximum;
+    const positions:number[]=[],colors:number[]=[],half=data.cell_size/2;
+    for(const c of cells){const value=c.values[yearIndex]!,t=Math.log1p(Math.max(0,value))/Math.log1p(max);const color=value===0?new THREE.Color('#52666a'):new THREE.Color().setHSL(.105*(1-t),.47+.42*t,.17+.45*t);const corners=[point(c.lat-half,c.lon-half,1.007),point(c.lat-half,c.lon+half,1.007),point(c.lat+half,c.lon+half,1.007),point(c.lat+half,c.lon-half,1.007)];for(const i of [0,1,2,0,2,3]){positions.push(...corners[i].toArray());colors.push(color.r,color.g,color.b);}}
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+    const heat=new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide}));s.scene.add(heat);s.heat=heat;s.cells=cells;s.max=max;
+    s.requestRender();
+  },[data,yearIndex,fallback,colorMaximum]);
+  function focus(close=false){const s=state.current;if(!s||!data)return;const cells=data.cells.filter(c=>c.region===regionId);if(!cells.length)return;const lat=cells.reduce((v,c)=>v+c.lat,0)/cells.length,lon=cells.reduce((v,c)=>v+c.lon,0)/cells.length;s.camera.position.copy(point(lat,lon,close?(regionId==='Nepal'?1.5:2.3):3.3));s.controls.target.set(0,0,0);s.controls.update();s.requestRender();}
+  useEffect(()=>{focus(false);setSelected(null);},[data,regionId,fallback]);
+  const regionCells=useMemo(()=>data?.cells.filter(c=>c.region===regionId&&numeric(c.values[yearIndex])).sort((a,b)=>b.values[yearIndex]!-a.values[yearIndex]!)||[],[data,regionId,yearIndex]);
+  const regionInfo=data?.coverage_regions.find(r=>r.id===regionId);const chosen=selected&&numeric(selected.values[yearIndex])?selected:null;
+  const chosenId=chosen?.id.startsWith(chosen.region+':')?chosen.id.slice(chosen.region.length+1):chosen?.id;
+  if(error)return <div className="globe-unavailable"><Globe2 size={24}/><p>{error}</p></div>;
+  if(!data)return <div className="globe-unavailable" role="status"><span className="loader"/><p>Loading annual grid observations…</p></div>;
+  return <div className="earth-explorer"><div className="globe-heading"><div><span className="eyebrow">A GEOGRAPHIC VIEW OF THE RECORD</span><h2>Where the signal comes from.</h2></div><div className="globe-view-actions">{!fallback&&<button className="chart-scale-button" onClick={()=>focus(true)}>Focus {regionInfo?.name||regionId}</button>}<button className="chart-scale-button" onClick={()=>{setFallbackReason('' );setFallback(v=>!v);}} aria-pressed={fallback}>{fallback?'Show 3D Earth':'Grid table'}</button></div></div>
+    {fallbackReason&&<p className="chart-note" role="status">{fallbackReason}</p>}<div className="globe-body">{!fallback?<div className="globe-stage"><div className="globe-canvas" ref={host}/><div className="globe-instructions">Drag to orbit · scroll to zoom · select a colored cell</div><div className="globe-buttons"><button aria-label="Zoom into Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(.85);s.requestRender();}}}><Plus size={16}/></button><button aria-label="Zoom out from Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(1.2);s.requestRender();}}}><Minus size={16}/></button><button aria-label="Refocus selected region" onClick={()=>focus(false)}><RotateCcw size={15}/></button><button aria-label="Show global view" onClick={()=>{const s=state.current;if(s){s.camera.position.normalize().multiplyScalar(3.6);s.controls.update();s.requestRender();}}}><Globe2 size={15}/></button></div><div className="globe-coverage">PROCESSED COVERAGE ONLY<br/><strong>{data.coverage_regions.map(r=>r.name).join(' + ')}</strong><span>Uncolored areas are not claims of no fire.</span></div></div>:<div className="globe-table"><p>20 highest-activity grid cells in {regionInfo?.name||regionId}, {year}. Values cover available observations.</p><div className="table-scroll"><table><thead><tr><th>Grid center</th><th>Aqua-equivalent</th><th>Evidence</th></tr></thead><tbody>{regionCells.slice(0,20).map(c=><tr key={c.id}><td>{geoCoordinate(c.lat,'lat')}, {geoCoordinate(c.lon,'lon')}</td><td>{fmt(c.values[yearIndex],1)}</td><td><button className="text-button" onClick={()=>setSelected(c)}>Inspect cell</button></td></tr>)}</tbody></table></div></div>}
+    <div className="globe-detail"><span className="eyebrow">ANNUAL ACTIVITY</span><label className="globe-year" htmlFor="globe-year">{year}</label><input id="globe-year" aria-label="Globe year; updates calendar date range" type="range" min="0" max={data.years.length-1} step="1" value={yearIndex} onChange={e=>onYear(data.years[Number(e.target.value)])}/><div className="year-range"><span>{data.years[0]}</span><span>{data.years[data.years.length-1]}</span></div><p className="globe-year-note">Choosing a year also filters the calendar below.</p><div className="globe-scale"><span>LOW</span><i/><span>HIGH</span></div><small>Fixed all-year log scale · annual Aqua-equivalent detections · {data.cell_size}° cells · maximum {fmt(colorMaximum,1)}</small><div className="globe-zero-key"><i/> 0 recorded <span>Uncolored = no processed value</span></div><div className="globe-source"><span>SOURCE FOR {regionInfo?.name||regionId}</span><strong>{regionInfo?.sources?.[yearIndex]||'See daily evidence for source'}</strong></div>
+      {chosen?<div className="globe-selection"><span>SELECTED GRID CELL</span><strong>{geoCoordinate(chosen.lat,'lat')} / {geoCoordinate(chosen.lon,'lon')}</strong><b>{compact(chosen.values[yearIndex])}</b><small>{fmt(chosen.values[yearIndex],1)} Aqua-equivalent detections in {year}</small>{chosen.region===regionId&&availableCells.includes(chosenId||'')?<button className="button subtle full" onClick={()=>onCell(chosenId!)}>Explore daily cell record <ArrowUpRight size={13}/></button>:<><p>Annual grid summary. Daily drill-down is available for a selected subset of cells.</p><button className="button subtle full" onClick={()=>onRegion(chosen.region)}>Explore this region <ArrowUpRight size={13}/></button></>}</div>:<div className="globe-selection"><span>FOLLOW THE EVIDENCE</span><p>Select a colored cell on Earth, or use the grid table to inspect exact values.</p></div>}
+    </div></div><p className="chart-note">Annual sums are not burned area or distinct fires. Satellite observation coverage remains unknown; the heatmap shows only processed regions.</p><span className="chart-label">{data.label}</span>
+  </div>;
+}

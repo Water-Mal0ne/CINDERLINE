@@ -14,6 +14,6 @@ The voiceover is approximately 67 words; rehearse against the actual screen reco
 
 **Optional substitution only after the rhythm gate passes:** Replace the evaluation segment with a short view of the verified per-stream rhythm result and the line “We also test weekly associations, with controls.” Keep full validation accessible in the project page. If the gate is insufficient or failed, retain the core script.
 
-**Verified recording content:** Real Nepal data, 2013–2024; selected M1 model. The 2020–2024 monthly evaluation table shows M1 MAE 30.20 versus B1 198.43 Aqua-equivalent detections, with M1 bias −8.08%. The US selects B1 instead. Keep the rhythm feature out of the main script: its overall gate is `insufficient_data`.
+**Verified recording content:** Real Nepal data, 2003–2024; observed Aqua through 2012 and M1-converted VIIRS thereafter. The 2020–2024 monthly evaluation table shows M1 MAE 30.20 versus B1 198.43 Aqua-equivalent detections, with M1 bias −8.08%. The US selects B1 instead. A brief globe view can orient the audience before calendar inspection. Keep the rhythm feature out of the main script: its overall gate is `insufficient_data`.
 
 **Live application:** https://firetrace-bhaktapur-2026.pages.dev/ is publicly accessible without sign-in. Supply a public source repository URL before recording the closing card. If any visible example is synthetic, label it within the video itself.

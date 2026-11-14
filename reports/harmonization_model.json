@@ -51,6 +51,20 @@
       }
     }
   },
+  "history": {
+    "Nepal": {
+      "start": "2003-01-01",
+      "end": "2024-12-31",
+      "first_eligible_viirs_year": 2013,
+      "early_source": "Observed MODIS Aqua; no Terra reconstruction"
+    },
+    "United_States": {
+      "start": "2003-01-01",
+      "end": "2024-12-31",
+      "first_eligible_viirs_year": 2013,
+      "early_source": "Observed MODIS Aqua; no Terra reconstruction"
+    }
+  },
   "grid_size": 0.25,
   "map_cells": 12,
   "uncertainty": "95% training-year bootstrap calibration interval; not total observation/prediction uncertainty",
@@ -59,6 +73,7 @@
     "Cloud/overpass observation coverage is unknown; zeros mean no archived detections only.",
     "Full local years require adjacent UTC annual archives.",
     "No validated pre-Aqua bridge; this build supports dates with Aqua or VIIRS archives.",
+    "Early observed-Aqua bounds equal the archived count because no conversion is applied; observation uncertainty remains unknown.",
     "M1 matches reported FRP strata empirically, not physically equal pixel-scale energy.",
     "M2 omitted; map exposes 12 training-period-active cells per country, national totals use all cells."
   ]

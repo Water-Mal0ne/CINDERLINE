@@ -17,7 +17,15 @@ All paths relative to repository. Python 3.11+; precomputed data, no server API.
 ## Web JSON
 `web/public/data/index.json`: {label: string, regions: [{id: 'Nepal', name: 'Nepal', file: 'Nepal.json'}], generated_at: ISO, limitations: string[]}.
 `web/public/data/{region}.json`: {meta: {region, name, label, period_start, period_end, reference:'MODIS Aqua', model, coverage_note, sources: [{name,url}], centroid:[lon,lat]}, daily:[{date,cell_id:'ALL',raw_terra,raw_aqua,raw_viirs,raw, harmonized,lo,hi,coverage,source,model}], weekly_climatology:[{week,median,p10,p90,critical}], anomalies:[{date,week,value,z_score,status}], critical_periods:[{start_week,end_week,label}], rhythm:null|{gate,streams,rest_day}, eval:[{model,region,split,aggregation,bias_pct,mae,correlation,peak_week_error}], cells:[{id,lat,lon,daily:[same daily]}]}.
-Nulls are missing/unknown, not zero. Synthetic label visible throughout. Web should gracefully handle empty datasets and disabled rhythm without inventing results.
+The current publisher keeps only national `daily` inline. Each of the twelve training-selected cells has `{id, lat, lon, file}`; `file` points to a portable relative path under `data/cells/`. Its payload is `{columns: string[], rows: unknown[][]}` and decodes to the same daily records. The reader also accepts legacy inline `daily`. Cell coordinates are grid centers; occupied-cell counts and the selected-cell limitation are explicit in `meta`.
+
+`web/public/data/globe.json` supplies the annual 0.25-degree grid for every published reference-stream cell, independently of the twelve daily drill-down cells. It contains years, scale/unit metadata, country summaries and compact cell records. The frontend uses a fixed all-year logarithmic color scale; unknown values are distinct from zero. Annual sums must reconcile with national daily sums for the same country/year. Land and borders come from public-domain Natural Earth through `world-atlas`.
+
+Nulls are missing/unknown, not zero. Synthetic label visible throughout. Web should gracefully handle empty datasets and disabled rhythm without inventing results. A complete statistics week has seven unique observed dates; the final partial January-1-based week remains inspectable but does not enter seasonal or anomaly statistics.
+
+## Share links
+
+Versioned query parameters restore the published region, date range, selected daily cell, page, raw/harmonized scale and optional evidence week. The globe year follows the end date. Region and cell identifiers are checked against published allowlists; malformed or unavailable values recover with visible notices. Links use the current data publication and are not immutable snapshots. Camera position, annual globe-cell selection and Earth/table preference are not persisted. Clipboard failure exposes a selectable URL.
 
 ## Scope decisions
 Use 3 parallel agents plus coordinator due available concurrency (six workstreams consolidated). Shared checkout with disjoint file ownership avoids merge races; do not change branches or commit while others write. Coordinator commits integrated result. Record deviations in DECISIONS.md.

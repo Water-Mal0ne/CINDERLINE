@@ -12,10 +12,13 @@ This initial implementation uses NASA FIRMS annual country archives for **Nepal 
 - Model selection using 2018–2019 validation data; monthly and weekly evaluation on 2020–2024 test years.
 - Training-year bootstrap calibration intervals, separate from total observation uncertainty.
 - Country calendar, seasonal profile, historical unusual-period flags, evidence drawer, cell selection and CSV/ICS exports.
+- Rotatable 3D Earth with 15,118 real grid cells, annual history, a fixed color scale, exact-value inspection and an accessible table fallback.
+- Three-series monthly comparison, keyboard inspection, monthly CSV export, anomaly filtering and sorting, and calendar exports with concrete dates.
+- Shareable links restore country, dates, daily cell, display scale and open evidence week. The Earth renderer sleeps when idle or offscreen and offers a table fallback.
 - Separate per-stream weekday analysis, corrected null tests and explicit research release gate.
 - Synthetic sensor-switch verification, unit tests and scientific/submission documentation.
 
-The initial supported complete local-calendar years are **2013–2024**. The adjacent 2012 and 2025 UTC archives supply local-date edges. This release does not claim a validated 2000-present record, a Terra-to-Aqua historical bridge, global geographic coverage or a forecasting service.
+The supported complete local-calendar years are **2003–2024**: observed Aqua through 2012, converted VIIRS from 2013. The cached input snapshot contains 76 official annual archives and 10,142,672 cleaned records. Adjacent UTC archives supply local-date edges. This release does not claim a validated 2000-present record, a Terra-to-Aqua historical bridge, worldwide observation coverage or a forecasting service.
 
 ## Run locally
 
@@ -36,7 +39,7 @@ On macOS/Linux, use `.venv/bin/python` instead. Run analysis commands from the r
 .\.venv\Scripts\python.exe -m pipeline.run_all --reuse-clean
 ```
 
-`--reuse-clean` explicitly reuses `data/processed/detections.parquet`; omit it after changing raw files or cleaning logic. `--reuse-analysis` additionally reuses existing analysis results and is appropriate only for rebuilding presentation/export layers without scientific changes.
+`--reuse-clean` explicitly reuses `data/processed/detections.parquet` and its saved source manifest. Newly downloaded archives are not attached to an older cache. Omit this option after changing raw inputs or cleaning logic. `--reuse-analysis` additionally reuses existing analysis results only when input and analysis-code fingerprints match; it is appropriate for rebuilding presentation/export layers without scientific changes.
 
 To reproduce from existing raw archives, run `python -m pipeline.run_all` without download or cache flags. To fetch a different configured set, use `--download --countries Nepal United_States Bangladesh --years 2012 2025`. Rebuild caches after extending the data. Network downloads may take time and require permission in restricted environments.
 
@@ -69,13 +72,15 @@ The release gate requires the US replication check plus at least two other count
 
 Complete archive downloads do not prove complete satellite observation coverage. A zero archived detection count means no qualifying record was present, not that the satellite observed fire-free land. Cloud, acquisition gaps, changing instruments and mismatched FRP measurement scales remain limitations.
 
-Calibration is assessed against Aqua, not independent ground truth. Bootstrap bands describe calibration variability; they omit other uncertainty sources. The cell browser exposes a small training-selected subset of occupied cells, while country totals use all analyzed cells. Critical periods describe historical activity and are not emergency advice or forecasts.
+Calibration is assessed against Aqua, not independent ground truth. Bootstrap bands describe calibration variability; they omit other uncertainty sources. The globe uses annual totals for all 15,118 reference-stream occupied cells. Daily drill-down exposes 12 training-selected cells per country, while country totals use all analyzed cells. Detailed cell files load on demand. Climatology and anomalies use complete seven-day periods only; the final one- or two-day period remains visible in the calendar but is excluded from those comparisons. Critical periods describe historical activity and are not emergency advice or forecasts.
 
 See `METHODS.md`, `LIMITATIONS.md` and `DECISIONS.md` for the complete methodology and scope decisions.
 
 ## Deploy
 
 **Live application:** [FIRETRACE on Cloudflare Pages](https://firetrace-bhaktapur-2026.pages.dev/).
+
+**Source repository:** [Water-Mal0ne/FIRETRACE](https://github.com/Water-Mal0ne/FIRETRACE) — private, as requested by the team.
 
 The application is deployed as static assets on Cloudflare Pages, with no paid compute or database provisioned. The public URL does not require sign-in. See `DEPLOYMENT.md` for the verified deployment and update commands.
 
@@ -86,5 +91,7 @@ The working copy also retains `.openai/hosting.json` for the earlier private Sit
 ## Attribution
 
 Data: [NASA FIRMS](https://firms.modaps.eosdis.nasa.gov/country/). Weekly-cycle research motivation: [Earl, Simmonds and Tapper (2015)](https://doi.org/10.1002/2015GL066383). Software: MIT; external data and dependencies retain their applicable terms. See `AI_DISCLOSURE.md` for AI assistance.
+
+Globe land and borders: public-domain [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/), distributed through world-atlas 2.0.2. The globe is rendered with Three.js. Map shading outside the supported countries does not represent fire observations.
 
 **NASA does not endorse this project.**

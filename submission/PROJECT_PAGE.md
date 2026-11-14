@@ -12,12 +12,14 @@ We use NASA FIRMS records and keep Terra, Aqua and VIIRS observations separate. 
 
 The application connects a burning-activity calendar to typical seasonal patterns, historical anomalies and evidence cards. Users can compare raw and calibrated series, inspect the contributing instruments and uncertainty, and export the displayed data. Missing observation coverage is distinguished from a zero count.
 
-**Verified scope:** Nepal and the United States, 2013–2024.  
+**Verified scope:** Nepal and the United States, 2003–2024: observed Aqua through 2012, converted VIIRS thereafter.
+
+The 3D Earth displays 15,118 real grid cells with an annual timeline, while the calendar connects each selected week to its evidence. Full geographical coverage is not claimed.
 **Selected models:** M1 stratified calibration for Nepal; B1 global ratio for the US, selected using 2018–2019 validation daily MAE.  
 **Held-out result:** On Nepal's 60 test months in 2020–2024, M1 monthly MAE was 30.20 Aqua-equivalent detections versus 198.43 for B1; M1 bias was −8.08%. In the US, the selected simpler B1 model had monthly MAE 1,606.30, versus 2,078.63 for M1. These are comparisons with Aqua observations, not ground-truth fire counts.  
 **Live application:** [FIRETRACE](https://firetrace-bhaktapur-2026.pages.dev/), publicly accessible without sign-in.
 
-**Source and reproducibility:** Public repository URL required before submission; the local source and reports are included in the deliverable.
+**Source and reproducibility:** [GitHub repository](https://github.com/Water-Mal0ne/FIRETRACE), currently private. Judge access is required before submission; source and reports are included in the deliverable.
 
 Our optional research module tests predefined rest-day patterns separately by instrument. It reports year-bootstrap intervals, corrected significance tests and diagnostic controls. **Current release decision: insufficient_data.** The US criterion passed in three streams; Nepal's predefined criterion passed in none. Other countries were not evaluated, so the US-plus-two-other-countries gate cannot pass. The feature stays disabled and the findings remain in the report. A weekly association cannot establish ignition cause.
 

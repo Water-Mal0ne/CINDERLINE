@@ -19,7 +19,7 @@ export function weekStart(year: number, week: number) {
 }
 export function aggregateWeeks(rows: Daily[]): Week[] {
   const map = new Map<string, Daily[]>();
-  for (const row of rows) {const {year, week} = isoWeek(row.date); const key = `${year}-${week}`; map.set(key, [...(map.get(key) || []), row]);}
+  for (const row of rows) {const {year, week} = isoWeek(row.date); const key = `${year}-${week}`; const bucket=map.get(key); if(bucket)bucket.push(row);else map.set(key,[row]);}
   return [...map.entries()].map(([key, list]) => {
     const {year, week} = isoWeek(list[0].date);
     return {key, year, week, date: weekStart(year, week), rows: list, raw: sum(list.map(d => d.raw)), harmonized: sum(list.map(d => d.harmonized))};
@@ -27,8 +27,27 @@ export function aggregateWeeks(rows: Daily[]): Week[] {
 }
 export function monthly(rows: Daily[]) {
   const map = new Map<string, Daily[]>();
-  rows.forEach(row => {const key = row.date.slice(0,7); map.set(key, [...(map.get(key) || []), row]);});
-  return [...map.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([date, list]) => ({date, raw: sum(list.map(d => d.raw)), harmonized: sum(list.map(d => d.harmonized))}));
+  rows.forEach(row => {const key = row.date.slice(0,7);const bucket=map.get(key);if(bucket)bucket.push(row);else map.set(key,[row]);});
+  return [...map.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([date, list]) => ({date, raw: sum(list.map(d => d.raw)), harmonized: sum(list.map(d => d.harmonized)), aqua: sum(list.map(d=>d.raw_aqua)), days:list.length, rawDays:list.filter(d=>numeric(d.raw)).length, harmonizedDays:list.filter(d=>numeric(d.harmonized)).length, aquaDays:list.filter(d=>numeric(d.raw_aqua)).length}));
+}
+
+/** An illustrative peak, never a model-performance selection. Same calendar days only. */
+export function comparisonWeek(weeks: Week[]) {
+  const candidates=weeks.map(week=>{
+    const paired=week.rows.filter(d=>/converted.*viirs/i.test(d.source||'')&&numeric(d.raw_viirs)&&numeric(d.raw_aqua)&&numeric(d.harmonized));
+    return {week,paired,viirs:sum(paired.map(d=>d.raw_viirs)),converted:sum(paired.map(d=>d.harmonized)),aqua:sum(paired.map(d=>d.raw_aqua))};
+  }).filter(c=>c.paired.length>0);
+  return candidates.sort((a,b)=>(b.converted??0)-(a.converted??0)||a.week.date.localeCompare(b.week.date))[0]||null;
+}
+
+export function sourcePeriods(rows: Daily[]) {
+  const observed=rows.filter(d=>/observed aqua/i.test(d.source||'')).map(d=>d.date).sort();
+  const converted=rows.filter(d=>/converted.*viirs/i.test(d.source||'')).map(d=>d.date).sort();
+  return {observed:observed.length?{start:observed[0],end:observed[observed.length-1]}:null,converted:converted.length?{start:converted[0],end:converted[converted.length-1]}:null};
+}
+
+export function geoCoordinate(value:number,axis:'lat'|'lon') {
+  return `${Math.abs(value).toFixed(1)}° ${axis==='lat'?(value<0?'S':'N'):(value<0?'W':'E')}`;
 }
 export function saveFile(filename: string, content: string, type: string) {
   const url = URL.createObjectURL(new Blob([content], {type}));

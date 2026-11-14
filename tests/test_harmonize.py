@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from pipeline.harmonize import fit_ratios, predict_counts, _archive_years, metrics, bootstrap_daily
+from pipeline.harmonize import fit_ratios, predict_counts, _archive_years, metrics, bootstrap_daily, raw_display_series, _daily
 
 
 def test_training_ratio_does_not_read_test_targets():
@@ -45,3 +45,31 @@ def test_vectorized_bootstrap_matches_direct_ratio_sums():
             d = frame.assign(pred=predict_counts(frame, model, fit)).groupby("date").pred.sum().reindex(dates, fill_value=0)
             direct.append(d.to_numpy())
         np.testing.assert_allclose(bootstrap_daily(frame, dates, "Nepal", model, fits), direct, atol=1e-12)
+
+
+def test_partial_instrument_opening_year_is_not_full_aqua_year():
+    df = pd.DataFrame()
+    df.attrs["manifest"] = {"files": [dict(country="Nepal", sensor="modis", year=y, complete=True, status="complete")
+                                      for y in range(2000, 2006)]}
+    assert _archive_years(df, "Nepal", "Aqua") == {2003, 2004}
+    assert _archive_years(df, "Nepal", "Terra") == {2001, 2002, 2003, 2004}
+
+
+def test_historical_raw_baseline_uses_eligible_aqua_before_viirs():
+    daily = pd.DataFrame({"Aqua": [2., 3., 4., np.nan], "VIIRS": [np.nan, np.nan, 16., np.nan]},
+                         index=pd.to_datetime(["2003-01-01", "2012-01-01", "2013-01-01", "2025-01-01"]))
+    np.testing.assert_allclose(raw_display_series(daily).to_numpy(), [2, 3, 16, np.nan], equal_nan=True)
+
+
+def test_extending_history_preserves_heldout_model_predictions():
+    frame = pd.DataFrame([dict(country="Nepal", cell_id="ALL", date=pd.Timestamp(d), stream=s,
+                              stratum="D:medium", n=n) for d, s, n in
+                          [("2003-01-01", "Aqua", 2), ("2012-01-01", "Aqua", 3),
+                           ("2020-01-01", "Aqua", 5), ("2020-01-01", "VIIRS", 20)]])
+    ratios = {"B1": .25, "M1": {"Nepal|D:medium": .2}}
+    availability = {"Terra": set(range(2003, 2025)), "Aqua": set(range(2003, 2025)), "VIIRS": set(range(2013, 2025))}
+    short = _daily(frame, "Nepal", "ALL", pd.date_range("2013-01-01", "2024-12-31"), ratios, availability)
+    long = _daily(frame, "Nepal", "ALL", pd.date_range("2003-01-01", "2024-12-31"), ratios, availability)
+    pd.testing.assert_frame_equal(short.loc["2020":"2024"], long.loc["2020":"2024"])
+    assert long.loc["2003-01-01", "Aqua"] == 2
+    assert np.isnan(long.loc["2003-01-01", "VIIRS"])

@@ -1,0 +1,14 @@
+import {createRequire} from 'node:module';
+import {readFileSync, writeFileSync, mkdirSync} from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const require = createRequire(path.join(root, 'web/package.json'));
+const {feature, mesh} = require('topojson-client');
+const countries = JSON.parse(readFileSync(require.resolve('world-atlas/countries-110m.json'), 'utf8'));
+const land = JSON.parse(readFileSync(require.resolve('world-atlas/land-110m.json'), 'utf8'));
+const target = path.join(root, 'web/public/data');
+mkdirSync(target, {recursive:true});
+writeFileSync(path.join(target, 'world-outline.json'), JSON.stringify(mesh(countries, countries.objects.countries)));
+writeFileSync(path.join(target, 'world-land.json'), JSON.stringify(feature(land, land.objects.land)));
+console.log('Prepared Natural Earth land and borders from world-atlas 2.0.2.');

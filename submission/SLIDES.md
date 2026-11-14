@@ -16,7 +16,7 @@ Show one actual region's raw series with instrument provenance. Explain that a h
 
 Show the region selector and the historical calendar. State one task: identify periods of unusually high recorded activity relative to that region's historical season. Make clear this is historical context, not an emergency forecast.
 
-**Evidence:** Nepal and the United States, 2013–2024. Show Nepal first; both have national totals and selected map cells.
+**Evidence:** Nepal and the United States, 2003–2024. Show Nepal first; both have national totals, all-cell annual globe layers and selected daily drill-down cells.
 
 ## 3. The method
 
@@ -32,7 +32,7 @@ List B0 uncalibrated, B1 global ratio and M1 region/daynight/reported-FRP strati
 
 Demonstrate the raw/calibrated toggle, select one week, then open the evidence card. Show contributing observations, named scale, calibration interval and coverage caveat. A trend that persists is a legitimate result.
 
-**On screen:** Real Nepal data, 2013–2024, M1 calibration. Select a week in the actual app and read its evidence card rather than inventing a local anecdote. The demo need not erase a trend. Any synthetic mechanism figure must carry “SYNTHETIC DATA” visibly.
+**On screen:** Real Nepal data, 2003–2024, observed Aqua through 2012 and M1-converted VIIRS afterwards. Orient with the 3D globe, then select a week in the actual calendar and read its evidence card. The demo need not erase a trend. Any synthetic mechanism figure must carry “SYNTHETIC DATA” visibly.
 
 ## 5. What the tests say
 

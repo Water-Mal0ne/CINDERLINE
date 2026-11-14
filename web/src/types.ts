@@ -12,7 +12,7 @@ export interface Region {
   meta: {region: string; name: string; label: string; period_start: string; period_end: string; reference: string; model: string; coverage_note: string; sources: {name: string; url: string}[]; centroid: [number, number]; cell_scope?: string; cell_count_total?: number; cell_count_displayed?: number};
   daily: Daily[]; weekly_climatology: Climatology[]; anomalies: Anomaly[]; critical_periods: Critical[];
   rhythm: null | {gate: {decision: string; [key: string]: unknown} | string; streams: RhythmStream[]; rest_day: string};
-  eval: Evaluation[]; cells: {id: string; lat: number; lon: number; daily: Daily[]}[];
+  eval: Evaluation[]; cells: {id: string; lat: number; lon: number; daily?: Daily[]; file?: string}[];
 }
 export interface Index {label: string; regions: {id: string; name: string; file: string}[]; generated_at: string; limitations: string[]}
 export interface Week {key: string; year: number; week: number; date: string; rows: Daily[]; raw: Nullable; harmonized: Nullable}

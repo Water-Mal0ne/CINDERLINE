@@ -10,6 +10,8 @@ VALIDATION = [2018, 2019]
 TEST = list(range(2020, 2025))
 N_BOOT = 200
 MAX_CELLS = 12
+# First complete civil years after the instruments' partial opening years.
+FIRST_COMPLETE_YEAR = {"Terra": 2001, "Aqua": 2003, "VIIRS": 2013}
 
 
 def _strata(df):
@@ -51,7 +53,8 @@ def _archive_years(df, country, stream):
                      and r.get("complete") and r.get("status") in ("complete", "ok")}
     # Include only local years bracketed by adjacent annual UTC archives.
     if archive_years:
-        return {y for y in archive_years if y - 1 in archive_years and y + 1 in archive_years}
+        return {y for y in archive_years if y - 1 in archive_years and y + 1 in archive_years
+                and y >= FIRST_COMPLETE_YEAR[stream]}
     return set()  # absence of a manifest does not establish zero-detection days
 
 
@@ -116,6 +119,15 @@ def bootstrap_daily(cell_counts, date_index, country, model, bootstrap):
     return (design.to_numpy(float) @ weights.T).T
 
 
+def raw_display_series(daily):
+    """Construct the display baseline from eligible archives, not a hardcoded switch date.
+
+    Eligibility is already applied by _daily. This function does not change B0/B1/M1
+    predictions or their held-out evaluation. No Terra/Aqua pooling is performed.
+    """
+    return daily.VIIRS.where(daily.VIIRS.notna(), daily.Aqua)
+
+
 def run(detections, output_dir):
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
@@ -140,13 +152,16 @@ def run(detections, output_dir):
         sampled = rng.choice(years, size=len(years), replace=True)
         resampled = pd.concat([fit_input[fit_input.year == y] for y in sampled], ignore_index=True)
         bootstrap.append(fit_ratios(resampled))
-    rows, eval_rows, selections = [], [], {}
+    rows, eval_rows, selections, history = [], [], {}, {}
     for country in sorted(main.country.unique()):
         availability = {s: _archive_years(detections, country, s) for s in ["Terra", "Aqua", "VIIRS"]}
         viable = availability["Aqua"] | availability["VIIRS"]
         if not viable:
             continue
         date_index = pd.date_range(f"{min(viable)}-01-01", f"{max(viable)}-12-31", name="date")
+        history[country] = {"start": str(date_index[0].date()), "end": str(date_index[-1].date()),
+                            "first_eligible_viirs_year": min(availability["VIIRS"]) if availability["VIIRS"] else None,
+                            "early_source": "Observed MODIS Aqua; no Terra reconstruction"}
         whole = _daily(counts, country, "ALL", date_index, ratios, availability)
         validation = {model: metrics(whole.loc[whole.index.year.isin(VALIDATION), "Aqua"],
                                      whole.loc[whole.index.year.isin(VALIDATION), model])["mae"] for model in ["B1", "M1"]}
@@ -164,13 +179,14 @@ def run(detections, output_dir):
             prediction = daily[selected_model].to_numpy()
             source = np.where(np.isfinite(prediction), "converted VIIRS", np.where(daily.Aqua.notna(), "observed Aqua", "unavailable"))
             result = np.where(np.isfinite(prediction), prediction, daily.Aqua)
+            raw = raw_display_series(daily)
             lo = np.where(np.isfinite(prediction), lo, daily.Aqua)
             hi = np.where(np.isfinite(prediction), hi, daily.Aqua)
             for i, date in enumerate(date_index):
                 streams = [s for s in ["Terra", "Aqua", "VIIRS"] if date.year in availability[s]]
                 rows.append(dict(date=date.strftime("%Y-%m-%d"), region=country, cell_id=cell,
                                  raw_terra=daily.Terra.iloc[i], raw_aqua=daily.Aqua.iloc[i], raw_viirs=daily.VIIRS.iloc[i],
-                                 raw=daily.VIIRS.iloc[i] if date.year >= 2012 else daily.Aqua.iloc[i],
+                                 raw=raw.iloc[i],
                                  harmonized=float(result[i]), lo=float(lo[i]), hi=float(hi[i]),
                                  coverage="archive: " + ",".join(streams) + "; observation coverage unknown",
                                  source=source[i], model=selected_model if source[i] == "converted VIIRS" else "Aqua reference",
@@ -180,12 +196,13 @@ def run(detections, output_dir):
     evaluation["label"] = label
     evaluation.to_csv(output / "harmonization_eval.csv", index=False)
     model_card = {"label": label, "fit_years": TRAIN, "validation_years": VALIDATION, "test_years": TEST,
-                  "ratios": ratios, "selection": selections, "grid_size": 0.25, "map_cells": MAX_CELLS,
+                  "ratios": ratios, "selection": selections, "history": history, "grid_size": 0.25, "map_cells": MAX_CELLS,
                   "uncertainty": "95% training-year bootstrap calibration interval; not total observation/prediction uncertainty",
                   "limitations": ["Counts refer to archived qualifying detections, not fires or burned area.",
                                   "Cloud/overpass observation coverage is unknown; zeros mean no archived detections only.",
                                   "Full local years require adjacent UTC annual archives.",
                                   "No validated pre-Aqua bridge; this build supports dates with Aqua or VIIRS archives.",
+                                  "Early observed-Aqua bounds equal the archived count because no conversion is applied; observation uncertainty remains unknown.",
                                   "M1 matches reported FRP strata empirically, not physically equal pixel-scale energy.",
                                   "M2 omitted; map exposes 12 training-period-active cells per country, national totals use all cells."]}
     (output / "harmonization_model.json").write_text(json.dumps(model_card, indent=2), encoding="utf-8")

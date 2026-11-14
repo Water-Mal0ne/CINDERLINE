@@ -8,7 +8,7 @@ Published on November 14, 2026 using Cloudflare Pages Direct Upload, Wrangler 4.
 
 ## Verified release
 
-All 11 public files, including the homepage, scripts, stylesheet, datasets and downloadable exports, returned HTTP 200 without authentication and matched the corresponding local build bytes by SHA-256. The local application had already passed the Python and client checks, data-payload comparisons and browser interaction checks. Supported real-data scope is Nepal and the United States, 2013–2024; the optional rhythm module remains disabled because its release gate is `insufficient_data`.
+The initial 11-file release returned HTTP 200 without authentication and matched its local build bytes by SHA-256. The current source expands the real-data scope to Nepal and the United States, 2003–2024, with a 15,118-cell 3D Earth heatmap and lazy daily-cell loading. The optional rhythm module remains disabled because its release gate is `insufficient_data`. See the release verification record below for the current deployed revision.
 
 ## Publish an update
 
@@ -28,6 +28,12 @@ npx --yes wrangler@4.162.0 login --scopes account:read user:read pages:write
 
 Do not put credentials in source files. Wrangler's local cache is ignored by Git. Direct Upload deploys only when the command runs; committing source does not automatically update this site. The existing Pages project requires no `--force` flag.
 
-The earlier owner-private Sites preview is separate from this public Cloudflare application. Submission drafts now reference the public Pages URL; a public source repository still needs to be supplied.
+## GitHub and coordinated updates
+
+Source repository: https://github.com/Water-Mal0ne/FIRETRACE (private). The public application remains accessible on Cloudflare. Repository visibility is independent of site visibility.
+
+After committing a change, `powershell -File scripts/publish.ps1` runs web tests, Python regressions and the production build, pushes the committed revision through the `github` remote, then deploys it to the existing Cloudflare project. Authentication stays in the local GitHub/Cloudflare credential stores. A failed check prevents publication; a failed GitHub push prevents the subsequent deployment. This is an explicit publish command, not a background watcher or scheduled automation.
+
+The earlier owner-private Sites preview is separate from this public Cloudflare application. Submission drafts now reference the public Pages URL. A judge-accessible source repository remains a team decision before submission.
 
 Cloudflare documentation: [Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/), [Pages limits](https://developers.cloudflare.com/pages/platform/limits/).

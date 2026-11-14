@@ -44,8 +44,8 @@ def write_json(path, value):
 def normalized_daily(frame):
     frame = frame.copy()
     frame["date"] = pd.to_datetime(frame["date"])
-    frame["raw"] = np.where(frame["date"].dt.year >= 2012,
-                             frame["raw_viirs"], frame["raw_aqua"])
+    if "raw" not in frame:
+        frame["raw"] = frame["raw_viirs"].where(frame["raw_viirs"].notna(), frame["raw_aqua"])
     frame["date"] = frame["date"].dt.strftime("%Y-%m-%d")
     for col in DAY_FIELDS:
         if col not in frame:
@@ -67,7 +67,12 @@ def seasonal_tables(daily):
     d["week"] = (dates.dt.dayofyear - 1) // 7 + 1
     weekly = d.groupby(["year", "week"], as_index=False).agg(
         value=("harmonized", lambda x: x.sum(min_count=1)),
-        date=("date", "min"), days_with_values=("harmonized", "count"))
+        date=("date", "min"), days_with_values=("harmonized", "count"),
+        distinct_dates=("date", "nunique"))
+    # Compare complete seven-day bins only. The 1–2 day year-end tail remains
+    # visible in the calendar but cannot be compared to a full weekly total.
+    eligible = (weekly.week <= 52) & (weekly.days_with_values == 7) & (weekly.distinct_dates == 7)
+    weekly.loc[~eligible, "value"] = np.nan
     stats = []
     for week, g in weekly.groupby("week"):
         vals = g.value.dropna()
@@ -120,7 +125,7 @@ def export_ics(periods, path, year):
                   "DESCRIPTION:Historical seasonal pattern. Not a forecast or safety alert.",
                   "END:VEVENT"]
     lines += ["END:VCALENDAR", ""]
-    Path(path).write_text("\r\n".join(lines), encoding="utf-8")
+    Path(path).write_text("\r\n".join(lines), encoding="utf-8", newline="")
 
 
 def build(harmonized, evaluation, rhythm, output_dir, detections=None, label="REAL FIRMS DATA",
@@ -152,11 +157,20 @@ def build(harmonized, evaluation, rhythm, output_dir, detections=None, label="RE
             total_cells = len(locs)
         for cid in selected:
             c = available_cells[available_cells.cell_id == cid]
-            xy = coords.get(cid, {})
+            # Location is the geometric center of the analysis grid, not the
+            # mean location of detections, which moves as observations change.
+            south, west = (float(part) for part in str(cid).split(":"))
+            xy = {"lat": south + .125, "lon": west + .125}
             if not xy:
                 continue
+            cell_daily = normalized_daily(c)
+            # Grid IDs contain ':'; encode it as '_' for ordinary Windows files
+            # rather than NTFS alternate data streams.
+            cell_file = f"cells/{region}_{str(cid).replace(':', '_')}.json"
+            write_json(out / cell_file, dict(columns=DAY_FIELDS,
+                       rows=cell_daily.where(pd.notna(cell_daily), None).values.tolist()))
             cells.append(dict(id=str(cid), lat=float(xy["lat"]), lon=float(xy["lon"]),
-                              daily=normalized_daily(c).to_dict("records")))
+                              file=cell_file))
         region_eval = evaluation[evaluation.region == region].to_dict("records") if not evaluation.empty and "region" in evaluation else []
         country_rhythm = (rhythm or {}).get("countries", {}).get(region)
         gate = (rhythm or {}).get("gate", {"decision": "insufficient_data"})

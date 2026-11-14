@@ -1,6 +1,7 @@
 """Reproduce FIRETRACE from public FIRMS archives or explicitly synthetic test data."""
 from __future__ import annotations
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import shutil
@@ -11,11 +12,19 @@ import pandas as pd
 from pipeline import calendar, clean, download, harmonize, rhythm
 
 
+def manifest_signature(manifest, countries):
+    """Fingerprint the actual inputs; local paths and transfer timestamps are irrelevant."""
+    records = [{k: row.get(k) for k in ("country", "sensor", "year", "sha256", "complete", "status")}
+               for row in manifest.get("files", []) if row.get("country") in countries]
+    records.sort(key=lambda row: (row["country"], row["sensor"], row["year"]))
+    return hashlib.sha256(json.dumps(records, sort_keys=True).encode()).hexdigest()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--download", action="store_true", help="Fetch/verify NASA annual archives first")
     parser.add_argument("--countries", nargs="+", default=["Nepal", "United_States"])
-    parser.add_argument("--years", nargs=2, type=int, default=[2012, 2025])
+    parser.add_argument("--years", nargs=2, type=int, default=[2002, 2025])
     parser.add_argument("--raw-dir", default="data/raw")
     parser.add_argument("--clean-cache", default="data/processed/detections.parquet")
     parser.add_argument("--reuse-clean", action="store_true", help="Explicitly reuse existing cleaned parquet")
@@ -48,19 +57,36 @@ def main():
         cache = root / args.clean_cache
         if args.reuse_clean and cache.exists():
             detections = pd.read_parquet(cache)
+            cached_manifest = detections.attrs.get("manifest")
+            if not cached_manifest or not cached_manifest.get("files"):
+                parser.error("Cleaned cache lacks input provenance. Rebuild without --reuse-clean.")
+            if manifest_signature(cached_manifest, args.countries) != manifest_signature(manifest, args.countries):
+                print("Raw archives changed: --reuse-clean keeps the cached input snapshot; new archives are not included.", flush=True)
+            manifest = cached_manifest
             print(f"Reusing cleaned cache: {len(detections):,} detections", flush=True)
         else:
             detections = clean.load_clean(raw)
             detections.to_parquet(cache, index=False)
         label = manifest.get("label", "UNVERIFIED INPUT")
     detections = detections[detections.country.isin(args.countries)].copy()
+    absent = set(args.countries) - set(detections.country.unique())
+    if absent:
+        parser.error(f"Requested countries are absent from this cleaned input snapshot: {sorted(absent)}. Rebuild the cleaned data before including them.")
     detections.attrs.update(label=label, manifest=manifest)
+    input_signature = manifest_signature(manifest, args.countries)
+    analysis_signature = hashlib.sha256((input_signature + "".join(
+        hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest()
+        for module in (harmonize, rhythm))).encode()).hexdigest()
     calendar.write_json(reports / "data_manifest.json", manifest)
     diagnostic_path = raw / "cleaning_diagnostics.json"
     if diagnostic_path.exists() and not args.synthetic:
         shutil.copyfile(diagnostic_path, reports / "cleaning_diagnostics.json")
     harmonized_path = processed / "harmonized.parquet"
     if args.reuse_analysis and harmonized_path.exists():
+        summary_path = reports / "build_summary.json"
+        previous = json.loads(summary_path.read_text()) if summary_path.exists() else {}
+        if previous.get("analysis_signature") != analysis_signature:
+            parser.error("Analysis cache does not match these inputs and analysis code. Re-run without --reuse-analysis.")
         daily = pd.read_parquet(harmonized_path)
         evaluation = pd.read_csv(reports / "harmonization_eval.csv")
         rhythm_result = json.loads((reports / "rhythm_results.json").read_text(encoding="utf-8"))
@@ -76,10 +102,14 @@ def main():
     save_switch_check(reports)
     regions = calendar.build(daily, evaluation, rhythm_result, public, detections=detections,
                              label=label, max_cells=args.max_cells)
+    from pipeline import globe
+    model_card = json.loads((reports / "harmonization_model.json").read_text(encoding="utf-8"))
+    globe.build(detections, model_card, public / "globe.json")
     summary = dict(label=label, regions=regions, detections=len(detections),
                    harmonized_rows=len(daily), rhythm_gate=rhythm_result["gate"]["decision"],
                    seconds=round(time.time() - started, 1),
-                   web_data_bytes=sum(p.stat().st_size for p in public.glob("*")),
+                   web_data_bytes=sum(p.stat().st_size for p in public.rglob("*") if p.is_file()),
+                   input_signature=input_signature, analysis_signature=analysis_signature,
                    reused_clean=args.reuse_clean, reused_analysis=args.reuse_analysis)
     calendar.write_json(reports / "build_summary.json", summary)
     print(json.dumps(summary, indent=2), flush=True)

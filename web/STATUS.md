@@ -1,5 +1,20 @@
 # Web implementation status
 
+## Phase 2: evidence journey and Earth explorer
+
+Integrated all four landing sections while preserving source labels and the rhythm gate:
+
+- Section 1 now contains a lazy-loaded Three.js Earth with actual spherical grid patches, annual timeline linked to calendar dates, country focus/global view, orbit/zoom, cell picking and accessible grid-table fallback. It uses supplied land/coastline geometry, a fixed all-year logarithmic color scale, and explicit zero versus unprocessed coverage labels. No automatic spinning or invented global fire coverage.
+- A short evidence journey shows a real illustrative week using only shared converted-VIIRS/Aqua daily records. It links to full-record comparison, the exact evidence card and held-out results; its selection is explicitly not a model-performance test.
+- Section 2 integrates the coordinator's enhanced `ComparisonChart`: raw baseline, Aqua-equivalent record, observed Aqua, keyboard month inspection, source-era explanation, monthly table and export.
+- Section 3 integrates the data agent's `SeasonalContext` with keyboard inspection and date-aware critical periods.
+- Section 4 integrates the QA agent's `AnomalyPanel` with filters, sorting and load-more controls.
+- Region and cell JSON are cached in bounded session memory. Per-cell data loads on demand, supporting both object-array and compact column/row formats.
+- Heatmap navigation uses one tab stop with arrow-key movement and Enter to inspect evidence.
+- Evidence cards no longer apply regional anomalies to cells or partial weeks. Direct-Aqua intervals say calibration is not applicable, rather than suggesting zero observation uncertainty.
+
+Phase 2 validation: TypeScript passed; data-contract and anomaly tests passed; Vite 6.4.6 production build passed. The main application is approximately 68 KB gzip and the separate Three.js globe chunk 141 KB gzip. Final browser checks and publication are coordinated by the parent agent. Final rebuild follows any remaining QA fixes or generated-data updates.
+
 Implemented a Vite + React + TypeScript application using the shared precomputed JSON contract. No mock observations are shipped.
 
 ## Working features

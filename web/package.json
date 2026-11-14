@@ -8,18 +8,23 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "test": "node tests/data-contract.mjs"
+    "test": "node tests/data-contract.mjs && node tests/anomalies.mjs && node tests/demand-renderer.mjs && node --test tests/exploration-state.mjs tests/exploration-integration.mjs"
   },
   "dependencies": {
+    "lucide-react": "0.468.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "lucide-react": "0.468.0"
+    "three": "0.187.0",
+    "topojson-client": "3.1.0",
+    "world-atlas": "2.0.2"
   },
   "devDependencies": {
     "@types/react": "18.3.18",
     "@types/react-dom": "18.3.5",
+    "@types/three": "0.187.0",
+    "@types/topojson-client": "3.1.5",
     "@vitejs/plugin-react": "4.3.4",
     "typescript": "5.7.3",
-    "vite": "5.4.14"
+    "vite": "6.4.6"
   }
 }
