@@ -109,7 +109,7 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
       {data.headline && <p className="rh-headline">{data.headline}</p>}
       <p className="panel-description">{passing.map(nameOf).join(', ') || 'No country'} passed: the predicted rest day is the lowest weekday and significant after correction in at least two satellite streams. The United States is the replication check. Source: {official.source}.</p>
       {data.sunday_caveat && <div className="rh-caveat" role="note"><AlertTriangle size={18}/><p><strong>Read this first.</strong> {data.sunday_caveat}</p></div>}
-      <div className="table-scroll"><table className="rh-table"><thead><tr><th>Country</th><th>Rest day</th><th>Result</th><th>Streams significant</th><th>Terra</th><th>Aqua</th><th>VIIRS</th></tr></thead>
+      <div className="table-scroll" role="group" aria-labelledby="rh-verdict-title" tabIndex={0}><table className="rh-table"><thead><tr><th>Country</th><th>Rest day</th><th>Result</th><th>Streams significant</th><th>Terra</th><th>Aqua</th><th>VIIRS</th></tr></thead>
         <tbody>{data.countries.map(c => <tr key={c.country} className={c.country === country ? 'active' : ''}>
           <td><button className="rh-link" onClick={() => setCountry(c.country)}>{c.name}</button></td><td>{c.rest_day}</td>
           <td><span className={`rh-chip ${c.status === 'pass' ? 'sig' : ''}`}>{c.status.replaceAll('_', ' ')}</span></td>
@@ -127,7 +127,7 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
           {Object.entries(data.robustness.notes || {}).map(([c, note]) => <p key={c}>{note}</p>)}
           {data.robustness.control_nuance && <p>{data.robustness.control_nuance}</p>}</div></div>
         : <p className="panel-description">All passing countries meet all three stricter checks.</p>}
-      <div className="table-scroll"><table className="rh-table"><thead><tr><th>Country</th>{Object.keys(CHECK_LABELS).map(k => <th key={k}>{CHECK_LABELS[k]}</th>)}</tr></thead>
+      <div className="table-scroll" role="group" aria-labelledby="rh-robust-title" tabIndex={0}><table className="rh-table"><thead><tr><th>Country</th>{Object.keys(CHECK_LABELS).map(k => <th key={k}>{CHECK_LABELS[k]}</th>)}</tr></thead>
         <tbody>{Object.entries(data.robustness.per_country).map(([c, v]) => <tr key={c}><td>{nameOf(c)}</td>
           {Object.keys(CHECK_LABELS).map(k => { const check = v[k as keyof RobustnessCountry] as Check;
             const detail = String(check.status ?? (check.streams !== undefined ? `${check.streams} of 3 streams` : '')).replaceAll('_', ' ');

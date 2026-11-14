@@ -18,6 +18,12 @@ footer{display:flex;align-items:center;justify-content:space-between;gap:25px;ma
 
 .date-range-error{grid-column:1/-1;margin:10px 0 0;padding:10px 11px;border-left:2px solid #f0b687;border-radius:3px;background:#432d254d;color:#f2c8a9;font-size:11px;line-height:1.6}
 .date-fields input[aria-invalid="true"]{color:#ffd1b0}
+.calendar-scale-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 18px;margin:0 0 22px;border:1px solid #b9875a70;border-radius:6px;background:#202d2f}
+.calendar-scale-control{display:flex;align-items:center;gap:14px;flex-shrink:0}.calendar-scale-control>.field-label{margin:0;font-size:12px;color:var(--text)}
+.calendar-scale-bar .segmented{border-color:#a584626b}.calendar-scale-bar .segmented button{min-height:38px;padding:8px 15px;font-size:12px}.calendar-scale-bar .segmented button.active{background:#4e4435;color:#ffe0bb;box-shadow:0 0 0 1px #b98a5c80}
+.calendar-scale-bar>.chart-note{margin:0;max-width:410px;font-size:11px;line-height:1.6;color:#c0ccca}
+@media(max-width:850px){.calendar-scale-bar{align-items:flex-start;flex-direction:column;gap:10px}.calendar-scale-bar>.chart-note{max-width:none}}
+@media(max-width:640px){.site-header nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));height:auto;gap:0 12px;min-width:0}.site-header nav button{min-height:44px;padding:10px 4px;font-size:12px;white-space:normal;line-height:1.4}.calendar-scale-bar{padding:14px;margin-bottom:18px}.calendar-scale-control{width:100%;min-width:0;flex-direction:column;align-items:stretch;gap:9px}.calendar-scale-control>.field-label{font-size:13px}.calendar-scale-bar .segmented button{min-height:44px;font-size:13px;padding:8px 12px}.calendar-scale-bar>.chart-note{font-size:12px}}
 .calendar-inspector{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:16px;padding:16px;border:1px solid #536d714a;border-radius:5px;background:#182b32}
 .calendar-inspector>div>span{display:block;font-family:var(--mono);font-size:8px;letter-spacing:.8px;color:#a1b9bd}
 .calendar-inspector strong{display:block;color:#eadbc4;font-size:13px;font-weight:500;margin:6px 0}
