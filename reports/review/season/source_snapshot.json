@@ -1,0 +1,16 @@
+{
+  "scope": "Existing retrospective experiment sources; no new model or input data",
+  "input_sha256": {
+    "data/sample/seven_country_national_counts.parquet": "44d45fb13c324b7232d05b2d62552dafd756eed8f355aba56d59607dbd2728d9",
+    "reports/harmonization_model.json": "596adf75f544032e1b733f2f85d4fd97120b4514bdd2f2a894e97bf7ab8a303a",
+    "reports/selection_lock.json": "3b7f7e3cf52b93287546a3756f612c9194b5c9ee032f63ccf5cf48b9f0178904",
+    "reports/harmonization_eval.csv": "976d23d94a68769028c3d1af2ea002d17206992fbca1e759fbbb3b7b0509337f",
+    "reports/LOCKED_ARTIFACTS.json": "d8ca1805be8e25d2c19cb95d89c7885122a7aed888952072cd4e138204ffa170"
+  },
+  "original_protocol_sha256": "c2bceea57d33fea4e6afb5b65ff94da782bae1c9c536dd0f3dca94fd041e6aa4",
+  "original_scenario_sha256": "54fde2a035aadb84bb5843f1b19f0a531052fa1b369a5f323b19a1c88087ea03",
+  "original_whole_year_sha256": "fdd67b5c5375bb3c26de7ab866ef9318d74476ff79cd3fd6540c43c951b8b64a",
+  "frozen_outage_dates_sha256": "28e26fbf38e8fe2abbd9820f2e35aa3e48b00b079f0adf754b5a5ac50a3294be",
+  "mask_protocol_sha256": "1b88c8b3c7a1225fb2aa10e3b19dd9311cb7f4b022a9795c51552557bb434171",
+  "note": "Exact 73/87 exclusion-date lists copied from independently verified FRP outputs; historical source files remain untouched."
+}
