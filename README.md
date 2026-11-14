@@ -36,11 +36,11 @@ Egypt's selected model still has +51.68% test bias, and some countries retain su
 
 The seven-country model is a distinct revision, `seven-country-v1`. Adding countries legitimately changes the global training ratio and M1 shrinkage target. Do not reuse the old two-country metric values for this release. The historical two-country implementation is preserved in Git at commit `841998b`; exact-count processing was checked against all of its daily values, bootstrap bounds and evaluation results before expansion.
 
-## Human rhythm result
+## Weekly Rhythm Index result
 
 **Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.**
 
-Brazil is suggestive rather than clear: Terra and Aqua pass but its VIIRS stream does not (Sunday is not its lowest day), and its Terra static-source control also dips on Sunday. Bangladesh shows a Friday dip in one of three streams only, and Nepal's data are too sparse to detect a modest Saturday dip (`reports/review/RHYTHM_REVIEW.md`).
+Brazil is suggestive rather than clear: Terra and Aqua pass but its VIIRS stream does not (Sunday is not its lowest day), and its Terra industrial-source control dips on Sunday only in 2002-2007 (flat over 2013-2024); on new ignitions all three Brazil streams pass. Bangladesh shows a Friday dip in one of three streams only, and Nepal's data are too sparse to detect a modest Saturday dip (`reports/review/RHYTHM_REVIEW.md`).
 
 The official decision comes from the pre-specified test in `reference/kill_test.py`, run on real FIRMS data for the seven countries, 2013–2024 (outputs in `reports/official/`). The rule, fixed before the data were analysed: the United States replication check must pass and at least two other countries must pass, where a country passes if its predicted rest day is the lowest weekday and significant after Bonferroni correction in at least two of Terra, Aqua and VIIRS.
 
@@ -48,7 +48,7 @@ The official decision comes from the pre-specified test in `reference/kill_test.
 
 The stricter seven-country release analysis (`pipeline/streaming/weighted_rhythm.py`: 2002–2024 MODIS and 2013–2024 VIIRS, upper bound below 1, matched per-country static-source controls) is reported as robustness checks next to the official decision and never changes it. The US and Australia meet all of them. Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-specified result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.
 
-The **Human rhythm** tab shows the official result, weekday charts per country and stream with 95% intervals, the robustness checks and an exploratory per-cell map. The map (`reference/rhythm_map.py`) is not part of the pre-specified test.
+The **Weekly Rhythm Index** tab shows the official result, weekday charts per country and stream with 95% intervals, the robustness checks and an exploratory per-cell map. The map (`reference/rhythm_map.py`) is not part of the pre-specified test.
 
 ## Run the app
 

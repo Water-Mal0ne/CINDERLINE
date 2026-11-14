@@ -12,9 +12,15 @@ the "in our data" columns are from the published national daily series (`web/pub
 | S-NPP VIIRS processing outage from 24 Jul 2024 (one notice: data lost to 1 Aug) | Zero VIIRS in all 7 countries 25-28 Jul 2024 | Yes (2024) | Low flags in Australia (2) and India (1). |
 | Not matched to a notice we checked | Zero VIIRS in all 7 countries 31 May - 2 Jun and 4-5 Nov 2024 | Yes (2024) | Not yet checked. NASA lists separate S-NPP alerts for May 2024 (geolocation) and November 2024. |
 
-So: every outage above falls inside the 2020-2024 test years, and the VIIRS outages show up in the calendar as
-low activity and low-anomaly flags. Planned fix (task E5): mark these weeks as "no observation" and exclude them
-from percentiles and anomalies.
+So: every outage above falls inside the 2020-2024 test years, and before review task E5 the VIIRS outages showed up
+in the calendar as low activity and low-anomaly flags.
+
+**Fixed in E5** (`python -m pipeline.review.no_observation`, summary in `no_observation_summary.json`): 38 days per
+country are now "no observation" (33 documented VIIRS outage days plus 5 days with no VIIRS detections in any of the
+seven countries: 31 May-2 Jun and 4-5 Nov 2024). Weeks containing them are grey in the calendar and excluded from the
+typical-season statistics and anomaly flags (1-3 flags per country removed; critical periods unchanged). The Aqua
+outages fall in years where the calendar uses converted VIIRS, so they mark no calendar days. The held-out
+evaluation and the globe's annual totals are unchanged.
 
 Sources: [Aqua MODIS science data outage (LAADS)](https://ladsweb.modaps.eosdis.nasa.gov/alerts-and-issues/171853),
 [2020-08-16 Aqua MODIS anomaly (LAADS)](https://ladsweb.modaps.eosdis.nasa.gov/alerts-and-issues/171856),

@@ -1,0 +1,65 @@
+{
+  "decision": "pass",
+  "rule": "United_States replication must pass AND >=2 other countries pass; a country passes when its predicted rest day is the lowest weekday with Bonferroni-adjusted null-test p < 0.05/m in >= 2 streams",
+  "replication_check": {
+    "country": "United_States",
+    "status": "pass",
+    "note": "A fail here means investigate data, method and comparability with Earl et al. 2015; it is not by itself proof of a bug."
+  },
+  "countries_passing": [
+    "Australia",
+    "Brazil"
+  ],
+  "per_country": {
+    "United_States": {
+      "status": "pass",
+      "streams_significant": 3,
+      "streams_with_data": 3,
+      "predicted_rest_day": "Sun"
+    },
+    "Australia": {
+      "status": "pass",
+      "streams_significant": 2,
+      "streams_with_data": 3,
+      "predicted_rest_day": "Sun"
+    },
+    "Brazil": {
+      "status": "pass",
+      "streams_significant": 3,
+      "streams_with_data": 3,
+      "predicted_rest_day": "Sun"
+    },
+    "India": {
+      "status": "fail",
+      "streams_significant": 0,
+      "streams_with_data": 3,
+      "predicted_rest_day": "Sun"
+    },
+    "Nepal": {
+      "status": "fail",
+      "streams_significant": 0,
+      "streams_with_data": 3,
+      "predicted_rest_day": "Sat"
+    },
+    "Bangladesh": {
+      "status": "fail",
+      "streams_significant": 1,
+      "streams_with_data": 2,
+      "predicted_rest_day": "Fri"
+    },
+    "Egypt": {
+      "status": "fail",
+      "streams_significant": 0,
+      "streams_with_data": 3,
+      "predicted_rest_day": "Fri"
+    }
+  },
+  "negative_control_static_sources": [],
+  "caveats": [
+    "A robust rest-day dip is consistent with human scheduling of burning; it does not by itself establish ignition cause. Absence of a dip does not establish weather-driven fire.",
+    "Streams observe overlapping fires: agreement is corroboration, not independent replication.",
+    "Observation coverage (cloud, overpass gaps) by weekday is not measured."
+  ],
+  "label": "REAL FIRMS DATA - IGNITION EVENTS (ROBUSTNESS)",
+  "note": "Robustness analysis on ignition events; not the official decision."
+}

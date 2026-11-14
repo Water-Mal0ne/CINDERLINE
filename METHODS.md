@@ -102,7 +102,7 @@ The seven-country model choices were persisted in `selection_lock.json` before t
 
 These measure agreement with archived Aqua detections, not ground truth. The full table includes B0, B1 and M1 for every country at both monthly and weekly aggregation. A favorable monthly error does not erase a remaining seasonal-timing error or a large relative bias on sparse reference counts.
 
-The official rhythm decision is `pass`: the US passes in 3 of 3 streams, Australia in 3 of 3 and Brazil in 2 of 3; India, Nepal, Bangladesh and Egypt do not pass. All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day. In the stricter 2002–2024 analysis, the US and Australia meet all robustness checks; Brazil meets the vegetation criterion in two streams but its Terra matched static control is flagged (index 0.913, adjusted p = 0.021), so Brazil's support is weaker.
+The official rhythm decision is `pass`: the US passes in 3 of 3 streams, Australia in 3 of 3 and Brazil in 2 of 3; India, Nepal, Bangladesh and Egypt do not pass. All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day. In the stricter 2002–2024 analysis, the US and Australia meet all robustness checks; Brazil meets the vegetation criterion in two streams but its Terra matched static control is flagged (index 0.913, adjusted p = 0.021). That dip comes entirely from 2002-2007; over 2013-2024 the control is flat (`reports/review/controls/CONTROLS.md`).
 
 - `kill_test_results.csv`: all country/stream/subset estimates, control results, intervals and adjusted tests.
 - `kill_test_gate.json`: statistical and release decisions with reasons.
@@ -124,4 +124,16 @@ The interval next to each converted-VIIRS daily estimate is the 2.5th-97.5th per
 
 - MODIS: the FIRMS archive MODIS active fire/hotspot product (MCD14ML, 1 km), Terra and Aqua. The `version` field in the country files changes over the record: `6.2` in 2013-2017, `6.03` in 2018-2022 and `61.03` in 2023-2024 (values as recorded; FIRMS describes the field as collection plus processing source). NASA states that Collection 6.1 changed Level-1B calibration, not the fire algorithm. The change crosses the training (2013-2017), validation (2018-2019) and test (2020-2024) windows; see LIMITATIONS.md.
 - VIIRS: the Suomi-NPP VIIRS 375 m active fire product (`version` 2 throughout 2013-2024). The 375 m I-band product is the standard VIIRS active-fire product in the FIRMS country archive and is more sensitive to small fires than the 1 km MODIS product. We did not compare it with the 750 m VIIRS M-band product.
+
+## Anomaly baseline (review E6)
+
+Anomaly flags already use a leave-one-year-out baseline: for each Jan-1-anchored seven-day bin, the 10th and 90th percentile thresholds are computed from the same bin in all other years, never including the year being flagged (`pipeline/calendar.py`, `seasonal_tables`, `weekly.year != row.year`; at least three other years required). The typical-season band shown in the calendar (median and 10th-90th percentile across all years) is descriptive and is not used to flag anomalies.
+
+## Grid sensitivity (review E8)
+
+The conversion weights depend on country and sensor strata, not on cell identity, so national harmonized totals are identical at 0.25 and 0.5 degrees; the pre-specified check in `reports/scientific_validation/` confirms this for every country and year 2013-2019. Model selection (on national 2018-2019 validation MAE) and the national 2020-2024 test metrics therefore cannot change with grid size. Cell-level agreement does change (selected-cell normalized monthly error falls at 0.5 degrees, partly through aggregation; see `SCIENTIFIC_SENSITIVITY.md`). We did not run a 0.5-degree cell-level evaluation on the 2020-2024 test years, so that the test set is not used to choose a grid.
+
+## No-observation days (review E5)
+
+Days on which the stream supplying the calendar value (observed Aqua before 2013, converted VIIRS from 2013) was in a documented outage, or recorded no detections in any of the seven countries, are marked "no observation" (`pipeline/review/no_observation.py`; dates and sources in `reports/review/OUTAGES.md`). Their calendar values are null, weeks containing them are shown grey, and they are excluded from the typical-season statistics and anomaly flags. Recorded per-stream counts are kept for the evidence card. The held-out evaluation and the globe's annual totals were not recomputed and still include those days.
 

@@ -98,6 +98,54 @@ def control_nuance(robustness: dict | None) -> str | None:
     return text
 
 
+def recheck_notes(review_dir, results: pd.DataFrame, decision: str) -> dict:
+    """Control notes from the year-level control recheck (reports/review/controls) and the ignition check
+    (reports/review/ignitions). The wording is team-agreed; every number and every claim in it is checked against
+    those committed outputs here, and a mismatch raises instead of publishing stale text."""
+    review_dir = Path(review_dir)
+    rc = review_dir / "controls" / "control_recheck.csv"
+    areas = review_dir / "controls" / "us_volcano_by_area_tests.csv"
+    ign = review_dir / "ignitions" / "e1_ignition_results.csv"
+    if not (rc.exists() and areas.exists() and ign.exists()):
+        return {}
+    c = pd.read_csv(rc).set_index("control")
+    a = pd.read_csv(areas).set_index("control")
+    g = pd.read_csv(ign)
+    sig = lambda name: bool(c.loc[name, "significant_0.05_over_21"])
+    volcano = c.loc["US type 1 (volcano) VIIRS 2013-2024"]
+    checks = {
+        "US volcano VIIRS dips": sig("US type 1 (volcano) VIIRS 2013-2024"),
+        "US volcano Aqua flat": not sig("US type 1 (volcano) Aqua 2013-2024"),
+        "Alaska flat": not bool(a.loc["VIIRS Alaska only", "significant_0.05_over_21"]),
+        "Hawaii carries it": bool(a.loc["VIIRS Hawaii only", "significant_0.05_over_21"]),
+        "sensitive to 2018": not bool(a.loc["VIIRS without Kilauea 2018", "significant_0.05_over_21"]),
+        "US industrial flat": not any(sig(f"US type 2 (other static) {s} 2002-2024") for s in STREAMS),
+        "Brazil Terra 2002-2024 dips": sig("Brazil type 2 (other static) Terra 2002-2024"),
+        "Brazil Terra 2002-2007 dips": sig("Brazil type 2 (other static) Terra 2002-2007"),
+        "Brazil Terra 2008-2024 flat": not sig("Brazil type 2 (other static) Terra 2008-2024"),
+        "Brazil Terra 2013-2024 flat": not sig("Brazil type 2 (other static) Terra 2013-2024"),
+        "Brazil VIIRS fails officially": not bool(results[(results.country == "Brazil") & (results.stream == "VIIRS")
+                                                         & (results.subset == "all")].significant.iloc[0]),
+        "Brazil ignitions pass 3/3": bool(g[g.country == "Brazil"].significant.astype(bool).sum() == 3),
+    }
+    failed = [k for k, ok in checks.items() if not ok]
+    if failed:
+        raise ValueError(f"control wording no longer matches the committed outputs: {failed}")
+    return {
+        "United_States": (f"US volcano detections show a Sunday dip in VIIRS only ({volcano.sun_index:.3f}), almost "
+                          "entirely from Kilauea and sensitive to the 2018 eruption year; Aqua and Alaska's volcanoes "
+                          "show none, and the larger US industrial-source control is flat in all three satellites over "
+                          "2002-2024. A processing or satellite artifact would be expected to appear across satellites "
+                          "and source types, so we treat this as an unexplained single-volcano, single-satellite result "
+                          "and report it rather than discount it."),
+        "Brazil": ("Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely "
+                   "from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. "
+                   "Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three "
+                   "satellites on new ignitions. Because of the 2002-2024 control, Brazil does not meet the stricter "
+                   f"check; the official pre-specified result is unchanged ({decision.upper()})."),
+    }
+
+
 WEB_CELL_FIELDS = ["country", "cell_lat", "cell_lon", "rest_day", "years", "mean_detections_per_year", "rest_index",
                    "ci_lo", "ci_hi", "q_bh", "significant", "aqua_rest_index", "aqua_significant"]
 
@@ -115,7 +163,7 @@ def write_compact_cells(source, target):
     Path(target).write_text(json.dumps(compact, separators=(",", ":"), allow_nan=False), encoding="utf-8")
 
 
-def build(official_dir, robustness_dir, output_dir, comparison_dir=None) -> dict:
+def build(official_dir, robustness_dir, output_dir, comparison_dir=None, review_dir=None) -> dict:
     official_dir, output_dir = Path(official_dir), Path(output_dir)
     gate = json.loads((official_dir / "kill_test_gate.json").read_text(encoding="utf-8"))
     results = pd.read_csv(official_dir / "kill_test_results.csv")
@@ -135,6 +183,7 @@ def build(official_dir, robustness_dir, output_dir, comparison_dir=None) -> dict
         meta = Path(comparison_dir) / "years.txt"
         comparison["years"] = meta.read_text(encoding="utf-8").strip() if meta.exists() else None
 
+    rechecked = recheck_notes(review_dir, results, str(gate.get("decision"))) if review_dir else {}
     per_country = gate.get("per_country", {})
     passing = [c for c, v in per_country.items() if v.get("status") == "pass"]
     non_sunday = [c for c in per_country if REST_DAYS.get(c) != "Sun"]
@@ -154,8 +203,8 @@ def build(official_dir, robustness_dir, output_dir, comparison_dir=None) -> dict
         "robustness": robustness and {"role": robustness.get("role"), "descriptions": robustness.get("descriptions"),
                                       "per_country": robustness.get("per_country"), "flagged": flagged,
                                       "source": robustness.get("strict_source"),
-                                      "notes": control_notes(robustness, comparison, str(gate.get("decision"))),
-                                      "control_nuance": control_nuance(robustness)},
+                                      "notes": rechecked or control_notes(robustness, comparison, str(gate.get("decision"))),
+                                      "control_nuance": None if rechecked else control_nuance(robustness)},
         "countries": [{"country": c, "name": NAMES.get(c, c), "rest_day": REST_DAYS[c],
                        "status": per_country.get(c, {}).get("status", "insufficient_data"),
                        "streams": _streams(results, c, "all"), "daytime_streams": _streams(results, c, "day")}
@@ -194,8 +243,10 @@ def main():
     parser.add_argument("--output", default="web/public/data")
     parser.add_argument("--compare", default="reports/rhythm_robustness_2014_2023",
                         help="Earlier robustness run, used only to say whether a flagged control was clean there")
+    parser.add_argument("--review", default="reports/review",
+                        help="Review outputs (year-level control recheck, ignitions) used for the control notes")
     args = parser.parse_args()
-    payload = build(args.official, args.robustness, args.output, args.compare)
+    payload = build(args.official, args.robustness, args.output, args.compare, args.review)
     print(json.dumps({"decision": payload["official"]["decision"],
                       "passing": payload["official"]["countries_passing"],
                       "sunday_caveat": bool(payload["sunday_caveat"]),

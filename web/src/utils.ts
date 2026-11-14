@@ -22,7 +22,9 @@ export function aggregateWeeks(rows: Daily[]): Week[] {
   for (const row of rows) {const {year, week} = isoWeek(row.date); const key = `${year}-${week}`; const bucket=map.get(key); if(bucket)bucket.push(row);else map.set(key,[row]);}
   return [...map.entries()].map(([key, list]) => {
     const {year, week} = isoWeek(list[0].date);
-    return {key, year, week, date: weekStart(year, week), rows: list, raw: sum(list.map(d => d.raw)), harmonized: sum(list.map(d => d.harmonized))};
+    // A week containing a satellite-outage / no-data day is shown as no observation, not as low activity.
+    const noObservation = list.some(d => d.source === 'no observation');
+    return {key, year, week, date: weekStart(year, week), rows: list, raw: noObservation ? null : sum(list.map(d => d.raw)), harmonized: noObservation ? null : sum(list.map(d => d.harmonized))};
   }).sort((a, b) => a.date.localeCompare(b.date));
 }
 export function monthly(rows: Daily[]) {

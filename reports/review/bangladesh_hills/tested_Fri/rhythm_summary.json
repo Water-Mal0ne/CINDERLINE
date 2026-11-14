@@ -1,0 +1,60 @@
+{
+  "label": "REAL FIRMS DATA, VIIRS S-NPP 2013-2024 (EXPLORATORY, tested day Fri)",
+  "thresholds": {
+    "min_mean_per_year": 300,
+    "min_detections_usable_year": 140,
+    "min_usable_years": 8
+  },
+  "diagnostics": {
+    "label": "REAL FIRMS DATA, VIIRS S-NPP 2013-2024 (EXPLORATORY, tested day Fri)",
+    "files": 24,
+    "rows_loaded": 149192,
+    "rows_usable_confidence": 134483,
+    "rows_vegetation": 130811,
+    "rows_static_control": 3024,
+    "vegetation": {
+      "invalid_timestamps_dropped": 0,
+      "unresolved_timezone_dropped": 0,
+      "share_date_changed_by_utc_to_local": 0.0827
+    },
+    "study_years": "2013-2024 (12)"
+  },
+  "per_country": {
+    "Bangladesh": {
+      "Aqua": {
+        "cells": 3,
+        "significant": 0,
+        "significant_dip_and_lowest": 0,
+        "cells_below_1": 3,
+        "cells_ci_above_1": 0,
+        "median_rest_index": 0.931
+      },
+      "VIIRS": {
+        "cells": 7,
+        "significant": 5,
+        "significant_dip_and_lowest": 3,
+        "cells_below_1": 7,
+        "cells_ci_above_1": 0,
+        "median_rest_index": 0.812
+      }
+    }
+  },
+  "aqua_check": {
+    "ALL": {
+      "cells_with_both": 3,
+      "corr_rest_index": 0.727,
+      "share_same_side_of_1": 1.0,
+      "viirs_sig_cells_with_aqua": 3,
+      "of_those_aqua_below_1": 3,
+      "of_those_aqua_significant": 0
+    },
+    "Bangladesh": {
+      "cells_with_both": 3,
+      "corr_rest_index": 0.727,
+      "share_same_side_of_1": 1.0,
+      "viirs_sig_cells_with_aqua": 3,
+      "of_those_aqua_below_1": 3,
+      "of_those_aqua_significant": 0
+    }
+  }
+}

@@ -18,7 +18,7 @@ Nature has no seven-day cycle; people do. We fixed each country's rest day (Sund
 
 **Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.**
 
-The US (3 of 3 streams, Sunday 22-33% below an average day) and Australia (3 of 3) pass clearly. Brazil is suggestive: two streams pass, its VIIRS stream does not, and its Terra static-source control also dips on Sunday. All three passing countries rest on Sunday, so this does not show the dip following each country's own rest day. Nepal's data are too sparse to detect a modest Saturday dip.
+The US (3 of 3 streams, Sunday 22-33% below an average day) and Australia (3 of 3) pass clearly. Brazil is suggestive: two streams pass, its VIIRS stream does not, and its Terra industrial-source control dips only in 2002-2007. All three passing countries rest on Sunday, so this does not show the dip following each country's own rest day. Nepal's data are too sparse to detect a modest Saturday dip.
 
 An exploratory one-degree map: in northeast India 19 of 26 cells are significant (14 of 21 cells mostly inside India) and Aqua agrees. Within India, the Sunday dip is concentrated in the northeastern hill states, deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day; the rest of India, including the Punjab crop-burning belt, shows no weekly dip. The cause is unresolved; local scheduling of burning is one possible explanation we have not tested.
 

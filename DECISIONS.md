@@ -49,7 +49,7 @@
 
 ## Human rhythm integration (14 November 2026)
 - Official decision = pre-specified `reference/kill_test.py`, seven countries, 2013–2024, outputs in `reports/official/`. Per-day 95% intervals were added to its CSV as an output-only change; all other numbers are byte-identical.
-- Robustness checks are derived from the stricter seven-country release analysis (`reports/rhythm_results.json`, 2002–2024) with `python -m pipeline.rhythm --from-saved`, without re-estimating anything. The US and Australia meet all checks. Brazil fails the matched static-control check (Terra static-source index 0.913, adjusted p = 0.021); on 2014–2023 alone the same control was clean (`reports/rhythm_robustness_2014_2023/`). The official result is unchanged.
+- Robustness checks are derived from the stricter seven-country release analysis (`reports/rhythm_results.json`, 2002–2024) with `python -m pipeline.rhythm --from-saved`, without re-estimating anything. The US and Australia meet all checks. Brazil fails the matched static-control check (Terra static-source index 0.913, adjusted p = 0.021); on 2014–2023 alone the same control was clean (`reports/rhythm_robustness_2014_2023/`). A year-level recheck shows the dip comes entirely from 2002-2007 and the control is flat over 2013-2024 (`reports/review/controls/CONTROLS.md`). The official result is unchanged.
 - The human rhythm view is a standalone tab for all seven countries. The earlier locked per-region rhythm panel now links to it.
 - The per-cell map is exploratory. A regional finding is featured only if it survives Benjamini-Hochberg correction and Aqua agrees; the northeast India boundary was drawn after viewing the map and is stated as such. No cultural or religious explanation is given in the app or docs.
 - No Terra-to-Aqua bridge is used in the product; the supported calendar record starts in 2003.
@@ -71,3 +71,10 @@ Why the word is "pre-specified", not "pre-registered": no committed record shows
 
 So the rule and rest days were fixed before the data for five of the seven countries were downloaded, but after the US and Nepal data were in hand and around the time the first US and Nepal results were produced. Local file times are not a committed record.
 
+## Out-of-sample prediction: Bangladesh hills (review E2), written before the analysis
+
+Prediction: the Chittagong Hill Tracts (hill shifting cultivation, communities mostly not Christian) will NOT show a significant Sunday dip, unlike India's northeastern hill states.
+
+Test, fixed before running: the per-cell method of `reference/rhythm_map.py` (VIIRS for the map, Aqua as a check; 1-degree cells with at least 300 detections a year on average and 8 usable years; Benjamini-Hochberg at 5%) applied to Bangladesh with Sunday as the tested day. Cells are counted as Chittagong Hill Tracts if their centroid falls in Rangamati, Khagrachari or Bandarban districts, or otherwise if their centroid lies east of 91.5 E and south of 23.5 N. The prediction holds if no such cell has a significant Sunday dip. No Bangladesh per-cell result had been computed when this was committed.
+
+Result (added after the analysis): the prediction did NOT hold. Of the two hill-tract cells, 21N 92E has a significant Sunday dip in VIIRS (0.490, q 0.0004) and Aqua (0.564, q 0.020); 22N 92E does not (0.745, q 0.089). The prediction was committed in `5adb21a90e781ce642b17c9aee9915a600c84dda`. See `reports/review/bangladesh_hills/RESULT.md`.

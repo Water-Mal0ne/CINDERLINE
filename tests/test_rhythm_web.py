@@ -76,6 +76,30 @@ class ControlNoteTests(unittest.TestCase):
         self.assertIn("the US and Australia", rhythm_web.control_nuance(robustness))
         self.assertEqual(rhythm_web.control_notes({"per_country": {"United_States": country(True)}}, None, "pass"), {})
 
+    def test_recheck_notes_match_committed_outputs(self):
+        root = Path(__file__).resolve().parents[1]
+        results = pd.read_csv(root / "reports/official/kill_test_results.csv")
+        notes = rhythm_web.recheck_notes(root / "reports/review", results, "pass")
+        self.assertIn("Sunday dip in VIIRS only (0.861)", notes["United_States"])
+        self.assertIn("comes entirely from 2002-2007", notes["Brazil"])
+        self.assertIn("unchanged (PASS)", notes["Brazil"])
+
+    def test_recheck_notes_refuse_stale_wording(self):
+        root = Path(__file__).resolve().parents[1]
+        results = pd.read_csv(root / "reports/official/kill_test_results.csv")
+        with tempfile.TemporaryDirectory() as tmp:
+            review = Path(tmp)
+            for sub in ("controls", "ignitions"):
+                (review / sub).mkdir()
+            for f in ("controls/control_recheck.csv", "controls/us_volcano_by_area_tests.csv",
+                      "ignitions/e1_ignition_results.csv"):
+                (review / f).write_bytes((root / "reports/review" / f).read_bytes())
+            c = pd.read_csv(review / "controls/control_recheck.csv")
+            c.loc[c.control == "Brazil type 2 (other static) Terra 2013-2024", "significant_0.05_over_21"] = True
+            c.to_csv(review / "controls/control_recheck.csv", index=False)
+            with self.assertRaises(ValueError):
+                rhythm_web.recheck_notes(review, results, "pass")
+
 
 if __name__ == "__main__":
     unittest.main()

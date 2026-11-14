@@ -262,8 +262,12 @@ def main():
     ap.add_argument("--min-mean", type=float, default=300)
     ap.add_argument("--min-year", type=int, default=kt.MIN_DETECTIONS_PER_YEAR)
     ap.add_argument("--min-years", type=int, default=8)
+    ap.add_argument("--rest-day", choices=DAYS, help="test this weekday instead of each country's predicted rest day")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
+    if a.rest_day:
+        for c in a.countries:
+            kt.COUNTRIES[c] = {**kt.COUNTRIES[c], "rest": a.rest_day}
     kt.diag.clear()
     kt.diag["label"] = a.label
 
