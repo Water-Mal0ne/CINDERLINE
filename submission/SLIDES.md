@@ -54,6 +54,6 @@ Display the exact gate decision and why. If it passes, show separate streams and
 
 **Title:** A reproducible comparison that shows its limits
 
-Show the NASA source and the owner-private preview: https://firetrace-bhaktapur-2026.welcomingtulip8.chatgpt.site (deployment confirmation pending; not judge-accessible). A public source URL and judge-accessible hosting remain required before submission. State the two-country supported scope and measured outcome. Broader coverage, land-cover stratification and early-record calibration remain future work. Include the AI disclosure and “NASA does not endorse this project.”
+Show the NASA source and the public application: https://firetrace-bhaktapur-2026.pages.dev/. A public source repository URL remains required before submission. State the two-country supported scope and measured outcome. Broader coverage, land-cover stratification and early-record calibration remain future work. Include the AI disclosure and “NASA does not endorse this project.”
 
 **Closing line:** “FIRETRACE makes a fire trend's evidence inspectable before that trend becomes a decision.”

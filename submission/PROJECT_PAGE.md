@@ -2,7 +2,7 @@
 
 **Challenge:** Harmonization of MODIS and VIIRS Hot Spots  
 **Team location:** Bhaktapur, Nepal  
-**Submission status:** Results populated from generated reports. Public judge-accessible hosting and a public repository are still required before submission.
+**Submission status:** Results populated from generated reports; public hosting verified. A public repository is still required before submission.
 
 ## Did fire activity change—or did our camera change?
 
@@ -15,7 +15,8 @@ The application connects a burning-activity calendar to typical seasonal pattern
 **Verified scope:** Nepal and the United States, 2013–2024.  
 **Selected models:** M1 stratified calibration for Nepal; B1 global ratio for the US, selected using 2018–2019 validation daily MAE.  
 **Held-out result:** On Nepal's 60 test months in 2020–2024, M1 monthly MAE was 30.20 Aqua-equivalent detections versus 198.43 for B1; M1 bias was −8.08%. In the US, the selected simpler B1 model had monthly MAE 1,606.30, versus 2,078.63 for M1. These are comparisons with Aqua observations, not ground-truth fire counts.  
-**Owner-private preview:** [FIRETRACE preview](https://firetrace-bhaktapur-2026.welcomingtulip8.chatgpt.site), deployment confirmation pending. This URL is not judge-accessible.  
+**Live application:** [FIRETRACE](https://firetrace-bhaktapur-2026.pages.dev/), publicly accessible without sign-in.
+
 **Source and reproducibility:** Public repository URL required before submission; the local source and reports are included in the deliverable.
 
 Our optional research module tests predefined rest-day patterns separately by instrument. It reports year-bootstrap intervals, corrected significance tests and diagnostic controls. **Current release decision: insufficient_data.** The US criterion passed in three streams; Nepal's predefined criterion passed in none. Other countries were not evaluated, so the US-plus-two-other-countries gate cannot pass. The feature stays disabled and the findings remain in the report. A weekly association cannot establish ignition cause.

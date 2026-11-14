@@ -11,3 +11,4 @@ data/synthetic_processed/
 work/
 *.part
 .openai/secrets*
+.wrangler/

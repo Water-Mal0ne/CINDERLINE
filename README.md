@@ -75,9 +75,13 @@ See `METHODS.md`, `LIMITATIONS.md` and `DECISIONS.md` for the complete methodolo
 
 ## Deploy
 
-`npm run build` inside `web` generates `web/dist`, a static site. It can be hosted by a compatible static host. This working copy also contains `.openai/hosting.json` for its private Sites deployment, with built assets copied to root `dist` during packaging. Do not reuse its project identity when creating a different team's Site.
+**Live application:** [FIRETRACE on Cloudflare Pages](https://firetrace-bhaktapur-2026.pages.dev/).
 
-The initial hosted preview is owner-private. It is not automatically a judge-accessible submission URL.
+The application is deployed as static assets on Cloudflare Pages, with no paid compute or database provisioned. The public URL does not require sign-in. See `DEPLOYMENT.md` for the verified deployment and update commands.
+
+Run `npm ci --prefix web` once, then `npm run build` from the repository root to generate root `dist`. The included precomputed data supports this build without downloading or rerunning the scientific pipeline. Running `npm run build` inside `web` instead generates `web/dist`.
+
+The working copy also retains `.openai/hosting.json` for the earlier private Sites preview. Do not reuse its project identity when creating a different team's Site.
 
 ## Attribution
 

@@ -16,4 +16,4 @@ The voiceover is approximately 67 words; rehearse against the actual screen reco
 
 **Verified recording content:** Real Nepal data, 2013–2024; selected M1 model. The 2020–2024 monthly evaluation table shows M1 MAE 30.20 versus B1 198.43 Aqua-equivalent detections, with M1 bias −8.08%. The US selects B1 instead. Keep the rhythm feature out of the main script: its overall gate is `insufficient_data`.
 
-**Preview:** https://firetrace-bhaktapur-2026.welcomingtulip8.chatgpt.site is owner-private, with deployment confirmation pending. It is not a judge-accessible submission URL. Before recording the closing card, confirm deployment and supply judge-accessible hosting and a public repository. If any visible example is synthetic, label it within the video itself.
+**Live application:** https://firetrace-bhaktapur-2026.pages.dev/ is publicly accessible without sign-in. Supply a public source repository URL before recording the closing card. If any visible example is synthetic, label it within the video itself.
