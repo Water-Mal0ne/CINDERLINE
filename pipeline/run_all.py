@@ -108,7 +108,8 @@ def main():
     model_card = json.loads((reports / "harmonization_model.json").read_text(encoding="utf-8"))
     globe.build(detections, model_card, public / "globe.json")
     if not args.synthetic and (root / "reports/official/kill_test_gate.json").exists():
-        rhythm_web.build(root / "reports/official", root / "reports/rhythm_robustness", public)
+        rhythm_web.build(root / "reports/official", root / "reports/rhythm_robustness", public,
+                        root / "reports/rhythm_robustness_2014_2023", root / "reports/review")
     summary = dict(label=label, regions=regions, detections=len(detections),
                    harmonized_rows=len(daily), rhythm_gate=rhythm_result["gate"]["decision"],
                    seconds=round(time.time() - started, 1),
