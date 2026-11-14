@@ -1,0 +1,10 @@
+country,stream,min_index,max_index,always_lowest,times_not_lowest
+Australia,Aqua,0.885,0.9035,True,0
+Australia,Terra,0.9277,0.9486,True,0
+Australia,VIIRS,0.9316,0.9439,True,0
+Brazil,Aqua,0.9111,0.9277,True,0
+Brazil,Terra,0.8827,0.9052,True,0
+Brazil,VIIRS,0.9332,0.9463,False,11
+United_States,Aqua,0.6548,0.6849,True,0
+United_States,Terra,0.7088,0.7377,True,0
+United_States,VIIRS,0.7725,0.7892,True,0
