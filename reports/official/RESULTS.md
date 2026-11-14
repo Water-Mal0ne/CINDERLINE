@@ -6,7 +6,7 @@ Run on real NASA FIRMS data, 14 November 2026, with `kill_test.py` version 2. Ch
 
 **Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.**
 
-Brazil is suggestive rather than clear: Terra and Aqua pass but its VIIRS stream does not (Sunday is not its lowest day), and its Terra static-source control also dips on Sunday.
+Brazil is suggestive rather than clear. Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three satellites on new ignitions. Because of the 2002-2024 control, Brazil does not meet the stricter check (Terra index 0.913, adjusted p = 0.021); the official pre-specified result is unchanged (PASS).
 
 The pre-specified test passes. The United States replication check passed, and two other countries (Australia and Brazil) passed. The rule needed the US plus at least two others.
 
@@ -131,6 +131,13 @@ Gas flares, volcanoes and other static hot sources should not follow a rest day 
 | VIIRS | 2,251,469 | 1.7% |
 
 This makes it unlikely that the Sunday dip comes from the satellites or the FIRMS processing behaving differently on some weekdays. (The control is pooled across countries and uses simple counts, not the year-by-year method, so it is a sanity check rather than a formal test.)
+
+Per-country controls, rechecked with the same year-level method as the main test (robustness, not part of the gate):
+
+- US volcano detections show a Sunday dip in VIIRS only (0.861), almost entirely from Kilauea and sensitive to the 2018 eruption year; Aqua and Alaska's volcanoes show none, and the larger US industrial-source control is flat in all three satellites over 2002-2024. A processing or satellite artifact would be expected to appear across satellites and source types, so we treat this as an unexplained single-volcano, single-satellite result and report it rather than discount it.
+- Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three satellites on new ignitions. Because of the 2002-2024 control, Brazil does not meet the stricter check (Terra index 0.913, adjusted p = 0.021); the official pre-specified result is unchanged (PASS).
+
+Year-level recheck: `reports/review/controls/CONTROLS.md`.
 
 ## Data diagnostics
 

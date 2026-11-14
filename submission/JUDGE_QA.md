@@ -30,13 +30,13 @@ The US Sunday dip is large (Sunday 22-33% below an average day in all three sate
 Pre-specified, not pre-registered. The rule and rest days were written before the data for five of the seven countries were downloaded, but after the US and Nepal data were in hand; no committed record predates the first real-data run [DECISIONS.md, gate timeline].
 
 **10. Brazil?**
-Suggestive, not clear. Terra and Aqua pass; VIIRS does not (Sunday is not its lowest day in 11 of 12 leave-one-year-out runs). Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so the vegetation dip cannot be cleanly separated from industrial weekly patterns. On new ignitions instead of raw detections, all three Brazil streams show the Sunday dip [reports/review/RHYTHM_REVIEW.md, reports/review/ignitions/IGNITIONS.md].
+Suggestive, not clear. Terra and Aqua pass; VIIRS does not (Sunday is not its lowest day in 11 of 12 leave-one-year-out runs). Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three satellites on new ignitions. Because of the 2002-2024 control, Brazil does not meet the stricter check (Terra index 0.913, adjusted p = 0.021); the official pre-specified result is unchanged (PASS). [reports/review/controls/CONTROLS.md, reports/review/ignitions/IGNITIONS.md, reports/review/RHYTHM_REVIEW.md]
 
 **11. Nepal shows nothing. Does that mean no human scheduling there?**
 No. Nepal is too small to tell under the country rule: with Nepal's real volume, a planted 20% Saturday dip passes only 12% of the time (VIIRS alone catches it 85% of the time). Nepal's real VIIRS Saturday index is 1.015, so a dip of 20% or more in VIIRS detections is unlikely; a 10% dip could be missed [reports/review/rhythm/b5_nepal_power.csv].
 
 **12. Does a Sunday dip prove people set the fires?**
-No. It is consistent with people scheduling their burning. Supporting checks: the dip is sharper on new ignitions in the US (0.59-0.70) and Brazil; type-2 static sources are flat. A caveat: the US volcano control (type 1) also dips on Sunday in VIIRS (0.861, p = 0.0012) [reports/review/ignitions/IGNITIONS.md, reports/review/rhythm/b4_controls_by_type.csv].
+No. It is consistent with people scheduling their burning. Supporting checks: the dip is sharper on new ignitions in the US (0.59-0.70) and Brazil; the US and Brazil industrial-source controls are flat over 2013-2024. A caveat: US volcano detections show a Sunday dip in VIIRS only (0.861), almost entirely from Kilauea and sensitive to the 2018 eruption year; Aqua and Alaska's volcanoes show none, and the larger US industrial-source control is flat in all three satellites over 2002-2024. A processing or satellite artifact would be expected to appear across satellites and source types, so we treat this as an unexplained single-volcano, single-satellite result and report it rather than discount it. [reports/review/ignitions/IGNITIONS.md, reports/review/controls/CONTROLS.md]
 
 **13. Punjab burns crop residue every year. Why no dip there?**
 Punjab and Haryana cells show no weekly dip (median Sunday index 1.10, none significant); the rest of India outside the northeast is the same (0 of 201 cells mostly inside India significant, median 1.055). We report it as a null result and do not explain it [reports/review/NORTHEAST_INDIA_REVIEW.md].
@@ -49,3 +49,6 @@ Areas: the calendar covers national totals plus 12 daily grid cells per country;
 
 **16. What about satellite outages?**
 Documented Aqua and S-NPP outages and days with no detections in any of the seven countries are marked "no observation" in the calendar (grey) and excluded from statistics and anomaly flags; 38 days per country, all in 2022 and 2024 [reports/review/OUTAGES.md].
+
+**17. Does the conversion hold on another satellite?**
+Yes, in the three countries checked so far, as independent validation. NOAA-20 VIIRS, converted with the saved S-NPP-fitted model and no refitting, matches the released converted S-NPP series in the test years 2020-2024: Nepal +0.6% (weekly r 0.989), Bangladesh -0.5% (r 0.987), Egypt -2.6% (r 0.829). Egypt's high bias against Aqua persists with NOAA-20 (+47.7%), which points at the Egypt ratio rather than at S-NPP. [reports/review/noaa20/NOAA20.md]
