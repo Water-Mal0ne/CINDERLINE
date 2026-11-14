@@ -86,7 +86,7 @@ export default function RhythmCellMap() {
   return <section className="panel" aria-labelledby="rh-map-title">
     <div className="panel-heading"><div><span className="rh-exploratory"><FlaskConical size={11}/> EXPLORATORY</span>
       <h2 id="rh-map-title">Where is the dip? One-degree cells</h2></div></div>
-    <p className="panel-description">Not part of the pre-registered test. The same weekday method run for every 1° cell with enough VIIRS detections (at least 300 a year on average and 8 usable years), with a false-discovery correction (Benjamini-Hochberg, 5%) across all cells. Aqua is computed the same way as a check.</p>
+    <p className="panel-description">Not part of the pre-specified test. The same weekday method run for every 1° cell with enough VIIRS detections (at least 300 a year on average and 8 usable years), with a false-discovery correction (Benjamini-Hochberg, 5%) across all cells. Aqua is computed the same way as a check.</p>
     <div className="rh-country-picker" role="group" aria-label="Country map">{countries.map(c => <button key={c} className={c === country ? 'active' : ''} aria-pressed={c === country} onClick={() => { setCountry(c); setActive(null); }}>{NAMES[c] || c}<small>{cells.features.find(f => f.properties.country === c)?.properties.rest_day}</small></button>)}</div>
     <div className="rh-map-wrap">
       <svg className="rh-map" viewBox={`0 0 ${view.w.toFixed(0)} ${view.h.toFixed(0)}`} role="group" aria-label={`${NAMES[country]}: ${props.length} cells analysed, ${sig.length} with a significant Sunday dip. Select a cell for its values.`}>

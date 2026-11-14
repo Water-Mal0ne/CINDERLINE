@@ -38,13 +38,13 @@ The seven-country model is a distinct revision, `seven-country-v1`. Adding count
 
 ## Human rhythm result
 
-The official decision comes from the pre-registered test in `reference/kill_test.py`, run on real FIRMS data for the seven countries, 2013–2024 (outputs in `reports/official/`). The rule, fixed before the data were analysed: the United States replication check must pass and at least two other countries must pass, where a country passes if its predicted rest day is the lowest weekday and significant after Bonferroni correction in at least two of Terra, Aqua and VIIRS.
+The official decision comes from the pre-specified test in `reference/kill_test.py`, run on real FIRMS data for the seven countries, 2013–2024 (outputs in `reports/official/`). The rule, fixed before the data were analysed: the United States replication check must pass and at least two other countries must pass, where a country passes if its predicted rest day is the lowest weekday and significant after Bonferroni correction in at least two of Terra, Aqua and VIIRS.
 
 **Decision: pass.** The United States (3 of 3 streams), Australia (3 of 3) and Brazil (2 of 3) pass. India, Nepal, Bangladesh and Egypt do not. All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day. A dip is consistent with people scheduling their burning; it is not proof of cause.
 
-The stricter seven-country release analysis (`pipeline/streaming/weighted_rhythm.py`: 2002–2024 MODIS and 2013–2024 VIIRS, upper bound below 1, matched per-country static-source controls) is reported as robustness checks next to the official decision and never changes it. The US and Australia meet all of them. Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-registered result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.
+The stricter seven-country release analysis (`pipeline/streaming/weighted_rhythm.py`: 2002–2024 MODIS and 2013–2024 VIIRS, upper bound below 1, matched per-country static-source controls) is reported as robustness checks next to the official decision and never changes it. The US and Australia meet all of them. Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-specified result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.
 
-The **Human rhythm** tab shows the official result, weekday charts per country and stream with 95% intervals, the robustness checks and an exploratory per-cell map. The map (`reference/rhythm_map.py`) is not part of the pre-registered test.
+The **Human rhythm** tab shows the official result, weekday charts per country and stream with 95% intervals, the robustness checks and an exploratory per-cell map. The map (`reference/rhythm_map.py`) is not part of the pre-specified test.
 
 ## Run the app
 
@@ -98,7 +98,7 @@ Synthetic outputs stay separate under `reports/synthetic` and `work/synthetic-we
 | `reports/harmonization_model.json` | Ratios, country choices, model revision and uncertainty definition |
 | `reports/selection_lock.json` | Training/validation choices frozen before held-out evaluation |
 | `reports/harmonization_eval.csv` | All baselines and selected candidates on monthly/weekly held-out periods |
-| `reports/official/kill_test_gate.json` | **Official** pre-registered rhythm decision (seven countries, 2013–2024) |
+| `reports/official/kill_test_gate.json` | **Official** pre-specified rhythm decision (seven countries, 2013–2024) |
 | `reports/official/kill_test_results.csv` | Official per-country, per-stream weekday estimates with per-day 95% intervals |
 | `reports/official/RESULTS.md` | Plain-language write-up of the rhythm result and the exploratory map |
 | `reports/rhythm_results.json`, `reports/kill_test_gate.json` | Stricter seven-country release analysis (2002–2024), used only for robustness checks |

@@ -1,5 +1,5 @@
 """
-EXPLORATORY: northeast India per-state breakdown of the Sunday dip (not part of the pre-registered test).
+EXPLORATORY: northeast India per-state breakdown of the Sunday dip (not part of the pre-specified test).
 
 python ne_india_states.py data rhythm_cells.csv ADMIN1_GEOJSON OUT_DIR
 

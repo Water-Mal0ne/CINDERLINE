@@ -4,7 +4,7 @@ Run on real NASA FIRMS data, 14 November 2026, with `kill_test.py` version 2. Ch
 
 ## Decision
 
-The pre-registered test passes. The United States replication check passed, and two other countries (Australia and Brazil) passed. The rule needed the US plus at least two others.
+The pre-specified test passes. The United States replication check passed, and two other countries (Australia and Brazil) passed. The rule needed the US plus at least two others.
 
 There is one important limit on what this shows. All three passing countries have Sunday as their rest day. None of the countries that rest on a different day (Nepal on Saturday, Bangladesh and Egypt on Friday) passed. So the data show a Sunday dip in Sunday-rest countries, but they do not yet show the dip moving to whatever day a country rests on. See "Caveats" below.
 
@@ -86,6 +86,36 @@ Egypt shows no Friday dip.
 
 Daytime-only results tell the same story. US Sunday is 0.63 to 0.66 in all three satellites, Australia 0.87 to 0.93, Brazil 0.89 to 0.91 (all three Brazil streams have Sunday lowest in daytime). Nepal, India and Egypt still show nothing; Bangladesh VIIRS Friday is 0.706.
 
+## Daytime-only results (robustness view, not part of the gate)
+
+A night detection can fall on the calendar day after a fire was lit (a fire lit on Saturday evening can still be burning at the 01:30 night overpass on Sunday). Restricting to daytime overpasses removes that spill-over. These results are a robustness view only; the gate uses all detections. Source: `reports/official/kill_test_results.csv`, subset `day`.
+
+| Country | Stream | Rest day | All detections | Daytime only (95% CI) | Daytime lowest day | Daytime significant |
+|---|---|---|---:|---|---|---|
+| United States | Terra | Sun | 0.723 | 0.630 (0.596-0.661) | Sun | yes |
+| United States | Aqua | Sun | 0.667 | 0.646 (0.592-0.695) | Sun | yes |
+| United States | VIIRS | Sun | 0.782 | 0.657 (0.617-0.698) | Sun | yes |
+| Australia | Terra | Sun | 0.936 | 0.926 (0.888-0.960) | Sun | yes |
+| Australia | Aqua | Sun | 0.890 | 0.870 (0.828-0.907) | Sun | yes |
+| Australia | VIIRS | Sun | 0.937 | 0.897 (0.867-0.927) | Sun | yes |
+| Brazil | Terra | Sun | 0.892 | 0.894 (0.848-0.940) | Sun | yes |
+| Brazil | Aqua | Sun | 0.922 | 0.909 (0.878-0.942) | Sun | yes |
+| Brazil | VIIRS | Sun | 0.941 | 0.910 (0.883-0.938) | Sun | yes |
+| India | Terra | Sun | 1.022 | 1.022 (0.921-1.128) | Thu | no |
+| India | Aqua | Sun | 0.949 | 0.950 (0.872-1.042) | Sun | no |
+| India | VIIRS | Sun | 1.003 | 0.988 (0.964-1.015) | Thu | no |
+| Nepal | Terra | Sat | 0.891 | 0.876 (0.647-1.137) | Wed | no |
+| Nepal | Aqua | Sat | 1.264 | 1.295 (1.005-1.621) | Sun | no |
+| Nepal | VIIRS | Sat | 1.015 | 1.071 (1.002-1.139) | Thu | no |
+| Bangladesh | Terra | Fri | 0.814 | 0.848 (0.533-1.183) | Sun | no |
+| Bangladesh | Aqua | Fri | 0.912 | 0.913 (0.746-1.082) | Thu | no |
+| Bangladesh | VIIRS | Fri | 0.727 | 0.706 (0.609-0.805) | Fri | yes |
+| Egypt | Terra | Fri | 1.045 | 1.090 (0.825-1.395) | Tue | no |
+| Egypt | Aqua | Fri | 1.088 | 1.138 (0.831-1.456) | Mon | no |
+| Egypt | VIIRS | Fri | 1.036 | 0.981 (0.879-1.094) | Sun | no |
+
+Daytime only, the Sunday dip is deeper in the US (0.63-0.66) and Australia; in Brazil it is about the same in Terra and deeper in Aqua and VIIRS, and Brazil's VIIRS stream has Sunday as its lowest day (it was Monday with night detections included). Nepal, India and Egypt still show no rest-day dip; Bangladesh VIIRS remains the only Friday dip.
+
 ## Negative control (static sources)
 
 Gas flares, volcanoes and other static hot sources should not follow a rest day the way field burning does. Pooled across all seven countries, their weekday pattern is flat:
@@ -118,7 +148,7 @@ This makes it unlikely that the Sunday dip comes from the satellites or the FIRM
 
 ## Where is the dip? (EXPLORATORY)
 
-This section is exploratory. It was not part of the pre-registered test above, and the regional groupings below were drawn after looking at the maps. Script: `rhythm_map.py`. Outputs: `rhythm_cells.csv`, `rhythm_cells.geojson`, `rhythm_summary.json`, and one map per country, `rhythm_map_<Country>.png`.
+This section is exploratory. It was not part of the pre-specified test above, and the regional groupings below were drawn after looking at the maps. Script: `rhythm_map.py`. Outputs: `rhythm_cells.csv`, `rhythm_cells.geojson`, `rhythm_summary.json`, and one map per country, `rhythm_map_<Country>.png`.
 
 We repeated the weekday analysis for every 1 x 1 degree grid cell in the four Sunday-rest countries that passed or nearly passed (United States, Brazil, Australia, India), with VIIRS for the map and Aqua as a check. Same cleaning, local time, complete years and year bootstrap as the main test. A cell was analysed only if it averaged at least 300 detections a year over 2013-2024 and had at least 8 usable years (a usable year has at least 140 detections in that cell). With hundreds of cells, some would look significant by chance, so we controlled the false discovery rate at 5% (Benjamini-Hochberg) across all VIIRS cells together, and separately across all Aqua cells. The null test used 20,000 draws instead of 5,000 so p-values were fine-grained enough for this correction.
 

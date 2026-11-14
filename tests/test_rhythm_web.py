@@ -23,7 +23,7 @@ def write_official(folder, statuses, drop_ci=False):
                     row[f"{d}_lo"], row[f"{d}_hi"] = row[d] - 0.05, row[d] + 0.05
             rows.append(row)
     pd.DataFrame(rows).to_csv(Path(folder) / "kill_test_results.csv", index=False)
-    gate = {"decision": "pass", "label": "REAL FIRMS DATA", "rule": "pre-registered",
+    gate = {"decision": "pass", "label": "REAL FIRMS DATA", "rule": "pre-specified",
             "countries_passing": [c for c, (s, _) in statuses.items() if s == "pass" and c != "United_States"],
             "per_country": {c: {"status": s, "predicted_rest_day": r, "streams_significant": 3 if s == "pass" else 0,
                                 "streams_with_data": 3} for c, (s, r) in statuses.items()},
@@ -71,7 +71,7 @@ class ControlNoteTests(unittest.TestCase):
         note = rhythm_web.control_notes(robustness, comparison, "pass")["Brazil"]
         self.assertEqual(note, "Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), "
                                "so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in "
-                               "industrial heat sources. The control was clean on 2014-2023. The official pre-registered "
+                               "industrial heat sources. The control was clean on 2014-2023. The official pre-specified "
                                "result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.")
         self.assertIn("the US and Australia", rhythm_web.control_nuance(robustness))
         self.assertEqual(rhythm_web.control_notes({"per_country": {"United_States": country(True)}}, None, "pass"), {})

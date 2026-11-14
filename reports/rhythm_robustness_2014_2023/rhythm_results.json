@@ -61,7 +61,7 @@
       "Observation coverage (cloud, overpass gaps) by weekday is not measured."
     ],
     "label": "REAL FIRMS DATA",
-    "source": "kill_test.py (pre-registered gate; reference/kill_test.py)"
+    "source": "kill_test.py (pre-specified gate; reference/kill_test.py)"
   },
   "robustness": {
     "role": "robustness checks reported next to the official decision; they never change it",

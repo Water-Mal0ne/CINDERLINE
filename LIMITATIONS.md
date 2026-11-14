@@ -45,12 +45,12 @@ Year resampling preserves each year's aggregate weekday pattern but does not sol
 
 Calendar exposure adjusts 52/53 weekday counts but does not measure clear-sky exposure. Inference remains conditional on that unmeasured factor. The displayed 95% intervals are pointwise, while the p-values use a fixed Bonferroni family. Daytime and control analyses are separate diagnostic families; they must not be searched for whichever result happens to look strongest.
 
-Static industrial sources can follow human schedules, and volcanic detections may be scarce. These are imperfect controls. A nonsignificant control does not demonstrate absence of bias. In the official pre-registered test the control is pooled across countries; per-country matched controls are a robustness check, not part of the gate.
+Static industrial sources can follow human schedules, and volcanic detections may be scarce. These are imperfect controls. A nonsignificant control does not demonstrate absence of bias. In the official pre-specified test the control is pooled across countries; per-country matched controls are a robustness check, not part of the gate.
 
 ### What the rhythm result does and does not show
 
-- The official decision (pass) comes from the pre-registered `kill_test.py` gate. All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.
-- Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-registered result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.
+- The official decision (pass) comes from the pre-specified `kill_test.py` gate. All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.
+- Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-specified result is unchanged (PASS), but Brazil's support is weaker than the US and Australia.
 - A Sunday dip in static sources does not by itself mean a satellite artifact: some type-2 static sources are industrial sites that may also follow the work week. The clean static controls in the US and Australia are what argue against a satellite or processing artifact.
 - The official analysis uses 2013–2024 for all streams; the stricter release analysis uses 2002–2024 MODIS. The two can disagree, as Brazil's control shows.
 - Countries are treated as single units with one rest day; large countries mix regions with very different burning practices.

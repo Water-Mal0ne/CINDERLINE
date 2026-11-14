@@ -3,7 +3,7 @@
  "official": {
   "decision": "pass",
   "rule": "United_States replication must pass AND >=2 other countries pass; a country passes when its predicted rest day is the lowest weekday with Bonferroni-adjusted null-test p < 0.05/m in >= 2 streams",
-  "source": "kill_test.py (pre-registered gate; reference/kill_test.py)",
+  "source": "kill_test.py (pre-specified gate; reference/kill_test.py)",
   "replication_check": {
    "country": "United_States",
    "status": "pass",
@@ -141,7 +141,7 @@
   },
   "source": "reports/rhythm_results.json",
   "notes": {
-   "Brazil": "Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-registered result is unchanged (PASS), but Brazil's support is weaker than the US and Australia."
+   "Brazil": "Brazil's Terra static-source control also dips on Sunday (index 0.913, adjusted p = 0.021), so Brazil's vegetation-fire dip cannot be cleanly separated from weekly patterns in industrial heat sources. The control was clean on 2014-2023. The official pre-specified result is unchanged (PASS), but Brazil's support is weaker than the US and Australia."
   },
   "control_nuance": "A Sunday dip in static sources does not by itself mean a satellite artifact: some type-2 static sources are industrial sites that may also follow the work week. The clean static controls in the US and Australia are what argue against a satellite or processing artifact."
  },
