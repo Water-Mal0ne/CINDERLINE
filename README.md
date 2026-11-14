@@ -4,7 +4,7 @@
 
 Compare satellite fire observations on a named reference scale, inspect historical seasons, and follow each displayed week back to its evidence.
 
-FIRETRACE addresses **Harmonization of MODIS and VIIRS Hot Spots** with NASA FIRMS archives for **Australia, Bangladesh, Brazil, Egypt, India, Nepal and the United States**. The supported history is **2003–2024**: observed MODIS Aqua through 2012 and converted VIIRS S-NPP from 2013. Terra, Aqua and VIIRS remain separate during cleaning and evaluation. An Aqua-equivalent detection is an instrument-scale estimate, not the true number of fires.
+FIRETRACE addresses **Harmonization of MODIS and VIIRS Hot Spots** with NASA FIRMS archives for **Australia, Bangladesh, Brazil, Egypt, India, Nepal and the United States**. The supported history is **2003–2024**: observed MODIS Aqua through 2012 and converted VIIRS S-NPP from 2013. Terra, Aqua and VIIRS remain separate during cleaning and evaluation. The harmonized series is an Aqua-reference-equivalent detection record: an instrument-scale estimate, not the true number of fires. The calendar is historical and descriptive. FIRETRACE is a long-term historical calendar, complementary to near-real-time fire alert systems (for example ICIMOD's), not a replacement.
 
 ## The working experience
 
@@ -37,6 +37,10 @@ Egypt's selected model still has +51.68% test bias, and some countries retain su
 The seven-country model is a distinct revision, `seven-country-v1`. Adding countries legitimately changes the global training ratio and M1 shrinkage target. Do not reuse the old two-country metric values for this release. The historical two-country implementation is preserved in Git at commit `841998b`; exact-count processing was checked against all of its daily values, bootstrap bounds and evaluation results before expansion.
 
 ## Human rhythm result
+
+**Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.**
+
+Brazil is suggestive rather than clear: Terra and Aqua pass but its VIIRS stream does not (Sunday is not its lowest day), and its Terra static-source control also dips on Sunday. Bangladesh shows a Friday dip in one of three streams only, and Nepal's data are too sparse to detect a modest Saturday dip (`reports/review/RHYTHM_REVIEW.md`).
 
 The official decision comes from the pre-specified test in `reference/kill_test.py`, run on real FIRMS data for the seven countries, 2013–2024 (outputs in `reports/official/`). The rule, fixed before the data were analysed: the United States replication check must pass and at least two other countries must pass, where a country passes if its predicted rest day is the lowest weekday and significant after Bonferroni correction in at least two of Terra, Aqua and VIIRS.
 

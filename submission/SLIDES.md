@@ -20,7 +20,7 @@ Select a country in the calendar (Australia, Bangladesh, Brazil, Egypt, India, N
 
 **Title:** Separate streams, one reference, a locked evaluation
 
-FIRMS archives, local civil dates, Terra/Aqua/VIIRS kept separate, MODIS-Aqua-equivalent scale. B0 is uncalibrated VIIRS, B1 one training ratio, M1 ratios by country, day/night and fire intensity. Train 2013-2017, select 2018-2019, test once 2020-2024.
+FIRMS archives, local civil dates, Terra/Aqua/VIIRS kept separate, Aqua-reference-equivalent scale. B0 is uncalibrated VIIRS, B1 one training ratio, M1 ratios by country, day/night and fire intensity. Train 2013-2017, select 2018-2019, test once 2020-2024.
 
 | Country | Selected | Selected monthly MAE | Comparator | Remaining limitation |
 |---|---|---:|---:|---|
@@ -28,7 +28,7 @@ FIRMS archives, local civil dates, Terra/Aqua/VIIRS kept separate, MODIS-Aqua-eq
 | United States | B1 | 1,537.79 | M1: 2,078.57 | simpler model wins |
 | Egypt | M1 | 15.04 | B1: 90.40 | +51.68% bias |
 
-Units are Aqua-equivalent detections, not fire counts.
+Units are Aqua-reference-equivalent detections, not fire counts.
 
 ## 4. Act 1: one week, back to its evidence
 
@@ -41,6 +41,8 @@ Open one week: separate sensor counts, the converted estimate and its bounds, th
 **Title:** Nature has no seven-day cycle; people do
 
 Rest days fixed in advance: Sunday (US, Australia, Brazil, India), Saturday (Nepal), Friday (Bangladesh, Egypt). Pass rule fixed in advance: the US replicates the known Sunday dip, and at least two other countries show their rest day as the lowest weekday, significant after correction, in at least two of three satellite streams.
+
+**Headline:** Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.
 
 **Result: pass.** US 3/3 streams (Sunday 22-33% below an average day), Australia 3/3, Brazil 2/3. India, Nepal, Bangladesh and Egypt fail. Show the Human rhythm tab: weekday bars with 95% intervals, rest day highlighted.
 

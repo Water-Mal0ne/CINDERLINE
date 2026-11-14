@@ -25,6 +25,7 @@ STREAMS = ["Terra", "Aqua", "VIIRS"]
 DAY_NAMES = {"Mon": "Monday", "Tue": "Tuesday", "Wed": "Wednesday", "Thu": "Thursday", "Fri": "Friday",
              "Sat": "Saturday", "Sun": "Sunday"}
 SHORT = {"United_States": "the US"}
+HEADLINE = ('Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.')  # team-agreed headline after expert review; numbers behind it are in reports/
 SUNDAY_CAVEAT = ("All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show "
                  "a dip, so this does not show the dip following each country's own rest day.")
 
@@ -148,6 +149,7 @@ def build(official_dir, robustness_dir, output_dir, comparison_dir=None) -> dict
                      "replication_check": gate.get("replication_check"),
                      "countries_passing": gate.get("countries_passing", []),
                      "per_country": per_country},
+        "headline": HEADLINE if gate.get("decision") == "pass" else None,
         "sunday_caveat": SUNDAY_CAVEAT if sunday_only else None,
         "robustness": robustness and {"role": robustness.get("role"), "descriptions": robustness.get("descriptions"),
                                       "per_country": robustness.get("per_country"), "flagged": flagged,

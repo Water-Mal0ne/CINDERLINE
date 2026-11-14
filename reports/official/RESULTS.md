@@ -4,6 +4,10 @@ Run on real NASA FIRMS data, 14 November 2026, with `kill_test.py` version 2. Ch
 
 ## Decision
 
+**Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.**
+
+Brazil is suggestive rather than clear: Terra and Aqua pass but its VIIRS stream does not (Sunday is not its lowest day), and its Terra static-source control also dips on Sunday.
+
 The pre-specified test passes. The United States replication check passed, and two other countries (Australia and Brazil) passed. The rule needed the US plus at least two others.
 
 There is one important limit on what this shows. All three passing countries have Sunday as their rest day. None of the countries that rest on a different day (Nepal on Saturday, Bangladesh and Egypt on Friday) passed. So the data show a Sunday dip in Sunday-rest countries, but they do not yet show the dip moving to whatever day a country rests on. See "Caveats" below.

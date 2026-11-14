@@ -58,6 +58,7 @@
    }
   }
  },
+ "headline": "Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.",
  "sunday_caveat": "All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.",
  "robustness": {
   "role": "robustness checks reported next to the official decision; they never change it",

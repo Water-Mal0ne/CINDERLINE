@@ -57,7 +57,7 @@ export default function SeasonalContext({region,label,selectedYear,onExport,cell
     <div className="seasonal-grid"><div className="seasonal-chart-card">
       <div className="seasonal-chart-heading"><div><span className="seasonal-kicker">TYPICAL WEEKLY ACTIVITY</span><h3>{peak?<>Peak around <span>{dateSpan(selectedYear,peak.week)}</span></>:'Seasonal pattern'}</h3></div>
         {peak&&<div className="seasonal-peak"><strong>{compact(peak.median)}</strong><span>median detections / week</span></div>}</div>
-      <div className="seasonal-legend"><span><i/>Median</span><span><i className="seasonal-band-key"/>10th–90th percentile</span><span className="seasonal-units">Aqua-equivalent scale</span></div>
+      <div className="seasonal-legend"><span><i/>Median</span><span><i className="seasonal-band-key"/>10th–90th percentile</span><span className="seasonal-units">Aqua-reference-equivalent scale</span></div>
       {hasData?<><svg className="seasonal-chart" viewBox={`0 0 ${W} ${H}`} tabIndex={0} role="group" aria-label={`${region.meta.name} national historical weekly activity`} aria-describedby="seasonal-instructions" onKeyDown={keyboard}
         onMouseLeave={()=>setHover(null)} onMouseMove={event=>{const box=event.currentTarget.getBoundingClientRect();const week=Math.round(((event.clientX-box.left)/box.width*W-L)/(W-L-R)*51)+1;setHover(Math.max(1,Math.min(52,week)));}}
         onClick={()=>hover!==null&&select(hover)}>
