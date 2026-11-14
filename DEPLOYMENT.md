@@ -2,13 +2,17 @@
 
 Public application: https://firetrace-bhaktapur-2026.pages.dev/
 
-Deployment snapshot: https://8a4097e6.firetrace-bhaktapur-2026.pages.dev/
+Deployment snapshot: https://8cc6976f.firetrace-bhaktapur-2026.pages.dev/
 
 Published on November 14, 2026 using Cloudflare Pages Direct Upload, Wrangler 4.162.0, project `firetrace-bhaktapur-2026`, production branch `main`. The initial deployment uploaded 11 static files. No Worker functions, paid compute, database, or storage service was provisioned. The scientific pipeline runs locally; the published application serves its precomputed results.
 
 ## Verified release
 
-The initial 11-file release returned HTTP 200 without authentication and matched its local build bytes by SHA-256. The current source expands the real-data scope to Nepal and the United States, 2003–2024, with a 15,118-cell 3D Earth heatmap and lazy daily-cell loading. The optional rhythm module remains disabled because its release gate is `insufficient_data`. See the release verification record below for the current deployed revision.
+The current release was built from source commit `841998b` and deployed on November 14, 2026. All **39 public assets, 39,811,714 bytes**, returned HTTP 200 without authentication and matched their local build bytes by SHA-256 at 11:33 UTC. Machine-readable evidence is in `reports/deployment_verification.json`.
+
+The release covers Nepal and the United States, 2003–2024, with a 15,118-cell 3D Earth heatmap, lazy daily-cell loading, four improved exploration sections and shareable evidence links. The optional rhythm module remains disabled because its release gate is `insufficient_data`. The initial 11-file snapshot remains at https://8a4097e6.firetrace-bhaktapur-2026.pages.dev/ for historical reference.
+
+Public browser verification restored a United States daily-cell link with the raw scale, 2020 date range and week beginning 2020-09-30. Switching to the national harmonized view and using the global Earth control rendered correctly; the console showed no errors. The coordinator also checked local desktop/mobile controls, picking, orbit, year changes, exact-week evidence and keyboard focus recovery. Graphics-context loss was covered by source review and renderer tests, not forced on the live browser.
 
 ## Publish an update
 
@@ -32,7 +36,7 @@ Do not put credentials in source files. Wrangler's local cache is ignored by Git
 
 Source repository: https://github.com/Water-Mal0ne/FIRETRACE (private). The public application remains accessible on Cloudflare. Repository visibility is independent of site visibility.
 
-After committing a change, `powershell -File scripts/publish.ps1` runs web tests, Python regressions and the production build, pushes the committed revision through the `github` remote, then deploys it to the existing Cloudflare project. Authentication stays in the local GitHub/Cloudflare credential stores. A failed check prevents publication; a failed GitHub push prevents the subsequent deployment. This is an explicit publish command, not a background watcher or scheduled automation.
+After committing a change, `powershell -File scripts/publish.ps1` runs web tests, Python regressions and the production build, pushes the committed revision through the `github` remote, then deploys it to the existing Cloudflare project and verifies every public asset. Its latest verification report is saved under ignored `work/`. Authentication stays in the local GitHub/Cloudflare credential stores. A failed check prevents publication; a failed GitHub push prevents the subsequent deployment. This is an explicit publish command, not a background watcher or scheduled automation.
 
 The earlier owner-private Sites preview is separate from this public Cloudflare application. Submission drafts now reference the public Pages URL. A judge-accessible source repository remains a team decision before submission.
 

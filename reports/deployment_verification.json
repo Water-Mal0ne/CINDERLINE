@@ -1,0 +1,282 @@
+{
+  "url": "https://firetrace-bhaktapur-2026.pages.dev/",
+  "verified_at": "2026-11-14T11:33:33.368879+00:00",
+  "status": "passed",
+  "files": 39,
+  "bytes": 39811714,
+  "assets": [
+    {
+      "file": "assets/Globe-DzNxcP3Q.js",
+      "status": 200,
+      "bytes": 563135,
+      "sha256": "8c024acf41f8c90b153e129632c6e4fc46c9cba520cc14397c5c850d3496663b",
+      "matches": true
+    },
+    {
+      "file": "assets/index-C4HaThFP.css",
+      "status": 200,
+      "bytes": 54695,
+      "sha256": "4a42126cf4f2784c7da2003155e35b19f0336fbde8a153a16737a30a4e9a9aa1",
+      "matches": true
+    },
+    {
+      "file": "assets/index-DkULtg6q.js",
+      "status": 200,
+      "bytes": 226945,
+      "sha256": "01a2f7e0d3f1bca17b35ad1041f3fe7d3336a1e0029e454b2c14da6709b7aa84",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_27.00_85.75.json",
+      "status": 200,
+      "bytes": 1131897,
+      "sha256": "6238a81d2639834beda46de6a6d07b5363f358f6f33b24d78382736c1bfbc14d",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_27.25_84.50.json",
+      "status": 200,
+      "bytes": 1132099,
+      "sha256": "8bbc2e3ef03521fcfd0b72fb75531ed66bef6aa24251fbbfcc785932a80c1715",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_27.25_84.75.json",
+      "status": 200,
+      "bytes": 1133015,
+      "sha256": "93b3a6a5e1df23db89834d9c793dba34e3cfce8ce5932b96b2e32e8a6df27722",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_27.50_83.75.json",
+      "status": 200,
+      "bytes": 1132730,
+      "sha256": "d9865165df4f156d1ec9489b34156590f9c0c7900ef022f76ae7cea9be183a06",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_27.75_82.25.json",
+      "status": 200,
+      "bytes": 1133484,
+      "sha256": "6bb62fea2a3b6df3891eadf6330face850f270278ff01d3fe0cf7b91691a49e0",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_28.00_81.75.json",
+      "status": 200,
+      "bytes": 1132553,
+      "sha256": "1c0884a8320bb011d95ac8f4c2b106ea9f8a86eb058370a2766123bbc546be04",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_28.00_82.00.json",
+      "status": 200,
+      "bytes": 1132399,
+      "sha256": "017adf21d46b4add440e0b412cb577254c0179955fc038fe7c8a20e55afc1611",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_28.25_81.50.json",
+      "status": 200,
+      "bytes": 1133355,
+      "sha256": "a2514d811c010555c9226fa24fad36a913d766c9fff899b507dfa13506d2b66d",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_28.25_81.75.json",
+      "status": 200,
+      "bytes": 1133079,
+      "sha256": "3a0f97f2cc1043182f2b08e417da4fde26c25113bf5df81555396e61ab852247",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_28.50_81.25.json",
+      "status": 200,
+      "bytes": 1133642,
+      "sha256": "eaac56907fcc8539acd68a8146f577406ca6b7ec34102bece14842da357e6f90",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_29.00_80.25.json",
+      "status": 200,
+      "bytes": 1132217,
+      "sha256": "d4b0fce1d052c0ecf175bf4e0ea3c7aeafad54a4b876e90cbba644e6dc1e4918",
+      "matches": true
+    },
+    {
+      "file": "data/cells/Nepal_29.00_80.50.json",
+      "status": 200,
+      "bytes": 1132257,
+      "sha256": "58911837c32fb8cdff9780d53444227567ae1f735acbf673f6df525fb0cb8f76",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_19.25_-155.25.json",
+      "status": 200,
+      "bytes": 1158326,
+      "sha256": "96104ffd292318db86b7cb28ab900ce82aa278e1639fab047a80c4df90675fce",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_36.75_-119.00.json",
+      "status": 200,
+      "bytes": 1145597,
+      "sha256": "6fcc1d43755cc8d6803c665a460dbf63f781e664af2dec3312b318b020842c09",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_37.75_-120.00.json",
+      "status": 200,
+      "bytes": 1146053,
+      "sha256": "06edae013fc930b08f67cf8f22fb2f0aaf6e1ec733e663ccad759f4d1ae769aa",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_40.75_-123.50.json",
+      "status": 200,
+      "bytes": 1145913,
+      "sha256": "51600cc548f03c08712220d6472c4f6ad1b2d78d104094b19e8eebe3f48a4957",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_41.25_-123.25.json",
+      "status": 200,
+      "bytes": 1146411,
+      "sha256": "64b70153543907b107f0f95257a46e4f40cd3990745d746f185efdd2063d0ac7",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_41.50_-123.25.json",
+      "status": 200,
+      "bytes": 1145502,
+      "sha256": "5678b767dd21a3358b69cfc94386eb25f72415b32b0e729f15be3d978a1aee6e",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_41.75_-123.25.json",
+      "status": 200,
+      "bytes": 1145881,
+      "sha256": "cab9f14d911341f72b98434922d12fcf219d7ad89b89a04b413a4980dd869266",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_44.00_-115.75.json",
+      "status": 200,
+      "bytes": 1145177,
+      "sha256": "10d19ddea761a76c8ddb570a2f27bedb7a93fc5284cc3b9a341daba8f305a536",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_45.25_-115.25.json",
+      "status": 200,
+      "bytes": 1145341,
+      "sha256": "0e9c12fcf4473c2c4f8b2ad9f4d08be7b0bc3330624b8b1b41a27fec1ecf5a93",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_47.75_-103.00.json",
+      "status": 200,
+      "bytes": 1163007,
+      "sha256": "bd70e7534b5bd0919f59fc859d2250566c7e43656e70a677faf7fe9dcc90a3ac",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_48.25_-119.00.json",
+      "status": 200,
+      "bytes": 1144796,
+      "sha256": "ba07e3c4463f4155d4ada378a5bdc0a3cfa39535a5d5928b3a1cd86afd0efe0e",
+      "matches": true
+    },
+    {
+      "file": "data/cells/United_States_48.75_-120.50.json",
+      "status": 200,
+      "bytes": 1144822,
+      "sha256": "06ba9d0f963c9a8b740e1f9a8f2b856ae032eaaedc66e2fc33fff788cdc6de52",
+      "matches": true
+    },
+    {
+      "file": "data/globe.json",
+      "status": 200,
+      "bytes": 4578497,
+      "sha256": "df5f5b4c09e9fdfd9503e6979baff4d072b008378745c89d67f50fadbdc09038",
+      "matches": true
+    },
+    {
+      "file": "data/index.json",
+      "status": 200,
+      "bytes": 559,
+      "sha256": "af7fcc51beac573d484abcaf0f97922a6293a1996deb87e87e346b94befef001",
+      "matches": true
+    },
+    {
+      "file": "data/Nepal.csv",
+      "status": 200,
+      "bytes": 1108063,
+      "sha256": "8c877ef45732646095999d6610a13d912f59358a2810970fbed337775de3b3e0",
+      "matches": true
+    },
+    {
+      "file": "data/Nepal.ics",
+      "status": 200,
+      "bytes": 857,
+      "sha256": "205f021bf8dc86ae39f7fda5e04a0f7498d6d3a03141c4dd57702089700f343a",
+      "matches": true
+    },
+    {
+      "file": "data/Nepal.json",
+      "status": 200,
+      "bytes": 2028170,
+      "sha256": "7521652741fd18f0273ef02015133bf3f9b0b906e52944cfe3ffb6f31bbcd5a6",
+      "matches": true
+    },
+    {
+      "file": "data/United_States.csv",
+      "status": 200,
+      "bytes": 1230947,
+      "sha256": "a42e1fd731b2883f83e6282a53ca0dd90bd746d04397399449b099098b9dd632",
+      "matches": true
+    },
+    {
+      "file": "data/United_States.ics",
+      "status": 200,
+      "bytes": 1141,
+      "sha256": "cc17b1d95d4d2db09e65e26d9e02d968fbd0b22c0968ecefb751a79a49c71f9d",
+      "matches": true
+    },
+    {
+      "file": "data/United_States.json",
+      "status": 200,
+      "bytes": 2133913,
+      "sha256": "bf9b71a49ee4fd361d37575fc76e7c596d0fbe5498a9eb43e306c64de64d2f32",
+      "matches": true
+    },
+    {
+      "file": "data/world-land.json",
+      "status": 200,
+      "bytes": 202230,
+      "sha256": "837db91532bb2f632eb822ad1159dbe687316d1e63e931327adcdd0a558f8db6",
+      "matches": true
+    },
+    {
+      "file": "data/world-outline.json",
+      "status": 200,
+      "bytes": 312044,
+      "sha256": "ed7d08ee39ac9a702f9bf5ea55baca1b4049ef9bb7eed0e7d24f3ffe99e324fd",
+      "matches": true
+    },
+    {
+      "file": "favicon.svg",
+      "status": 200,
+      "bytes": 254,
+      "sha256": "8ad93d28787ba38296bd539fd07c51da9a6707eb7b9eebe767dbcd3daf5bd558",
+      "matches": true
+    },
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 711,
+      "sha256": "6081dc5a2e7488247e041dc7049219d52b0be06bb69a2b29185748abf1b6b230",
+      "matches": true
+    }
+  ]
+}
