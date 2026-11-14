@@ -10,7 +10,7 @@ FIRETRACE addresses **Harmonization of MODIS and VIIRS Hot Spots** with NASA FIR
 
 Start with one observed week: compare the separate sensor counts, inspect the converted estimate and calibration bounds, open the held-out evaluation, then share a link that reopens the same evidence. This is the core demonstration; a trend does not have to disappear for the comparison to be useful.
 
-- A 3D Earth shows **41,986** occupied 0.25-degree grid cells, annual history, a fixed all-year color scale and exact-value inspection. The renderer sleeps when idle or offscreen and provides a regional top-20 table fallback.
+- A 3D Earth shows **41,986** occupied 0.25-degree grid cells, annual history, a fixed all-year color scale and exact-value inspection. The renderer sleeps when idle or offscreen and provides a ranked regional table fallback.
 - The burning-activity calendar connects weekly history to raw/harmonized comparison, national seasonal patterns, historical unusual-period flags and evidence cards.
 - National totals use all analyzed cells. **Twelve training-selected daily cells per country** load on demand: 84 detailed series, not arbitrary daily-area coverage.
 - CSV exports preserve the selected series and provenance. ICS exports place historical high-activity windows into a selected year; they are not forecasts.

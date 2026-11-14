@@ -27,6 +27,22 @@
 - Cached inputs retain their own source manifests and code hashes. Additional raw files do not silently join an earlier snapshot. Model revisions identify the calibration country scope and archive fingerprint.
 - Geographic context comes from public-domain Natural Earth through world-atlas 2.0.2. Land and outlines are not FIRMS observations or satellite coverage masks.
 
+## Final-night story review, 15 November 2026 Nepal time
+
+- 2026-11-14 19:10 UTC: Work on the named feature branches and open reviewable PRs; preserve main at 290e756, the original UI backup, and the Workers migration worktree. Do not merge, deploy, log in, or rewrite history overnight.
+- 2026-11-14 19:12 UTC: Treat the existing submission/ documents as the canonical slide, video, project-page, status and judge-Q&A paths; do not create duplicate root documents for names absent from this checkout.
+- 2026-11-14 19:12 UTC: Describe rhythm as a separate analysis of original satellite streams, reproducing a known weekly pattern; do not imply harmonization discovered it or identified ignition causes.
+- 2026-11-14 19:12 UTC: The India retrospective example compares the simple B1 conversion with selected M1, not raw VIIRS with conversion. Preserve its unmasked values and identify the pending common-date sensitivity separately; commit a reproduction script using the existing national sufficient statistics and frozen model.
+- 2026-11-14 19:12 UTC: Use newly active grid cells for the recurrence proxy, not verified new ignitions; a nonsignificant country result does not establish absence of a pattern. Preserve every official number and gate decision.
+- 2026-11-14 19:12 UTC: Distinguish NOAA-20 transfer corroboration from ground-truth validation, simulated power from exclusion of an effect, and calendar outage masking from unchanged model-evaluation and globe totals.
+- 2026-11-14 19:12 UTC: The FRP contrast was already calculated before this overnight brief. Preserve the original timestamped protocol and hash; any new Git packaging commit must explicitly state that it follows the known result and cannot serve as a prior Git prediction.
+
+- 2026-11-14 19:18 UTC: Independent review found residual overstatements in METHODS/LIMITATIONS and prior-timing language in README/slides; correct these in an additive follow-up commit, retain all numerical values, and rerun all checks. The initial build required sandbox escalation for esbuild file access; the same source built successfully without code changes.
+
+- 2026-11-14 20:20 UTC: Preserve the original story-review section while moving it before scientific interpretation; mirror the corrected AI chronology and NOAA-20 transfer/coverage qualifications across story and submission, and synchronize the story season answer with the verified masked comparison. No scientific values, official decisions or historical protocol text change.
+
+- 2026-11-14 20:23 UTC: Use historical S-NPP coverage and explicit daily calibration intervals in the story Q&A; describe the ranked regional table without a top-20-only restriction so root documentation remains accurate before and after the separately reviewed UI pagination. Scientific coverage values and frozen submission claims stay unchanged.
+
 ## Scientific interpretation
 
 - A disappearing sensor-era jump is not a success criterion. Models are selected on validation daily MAE; genuine changes may remain. The simpler B1 is selected in Australia, Brazil and the United States; M1 is selected in Bangladesh, Egypt, India and Nepal.
@@ -87,15 +103,3 @@ Prediction: the Chittagong Hill Tracts (hill shifting cultivation, communities m
 Test, fixed before running: the per-cell method of `reference/rhythm_map.py` (VIIRS for the map, Aqua as a check; 1-degree cells with at least 300 detections a year on average and 8 usable years; Benjamini-Hochberg at 5%) applied to Bangladesh with Sunday as the tested day. Cells are counted as Chittagong Hill Tracts if their centroid falls in Rangamati, Khagrachari or Bandarban districts, or otherwise if their centroid lies east of 91.5 E and south of 23.5 N. The prediction holds if no such cell has a significant Sunday dip. No Bangladesh per-cell result had been computed when this was committed.
 
 Result (added after the analysis): the prediction did NOT hold. Of the two hill-tract cells, 21N 92E has a significant Sunday dip in VIIRS (0.490, q 0.0004) and Aqua (0.564, q 0.020); 22N 92E does not (0.745, q 0.089). The prediction was committed in `5adb21a90e781ce642b17c9aee9915a600c84dda`. See `reports/review/bangladesh_hills/RESULT.md`.
-
-## Final-night story review, 15 November 2026 Nepal time
-
-- 2026-11-14 19:10 UTC: Work on the named feature branches and open reviewable PRs; preserve main at 290e756, the original UI backup, and the Workers migration worktree. Do not merge, deploy, log in, or rewrite history overnight.
-- 2026-11-14 19:12 UTC: Treat the existing submission/ documents as the canonical slide, video, project-page, status and judge-Q&A paths; do not create duplicate root documents for names absent from this checkout.
-- 2026-11-14 19:12 UTC: Describe rhythm as a separate analysis of original satellite streams, reproducing a known weekly pattern; do not imply harmonization discovered it or identified ignition causes.
-- 2026-11-14 19:12 UTC: The India retrospective example compares the simple B1 conversion with selected M1, not raw VIIRS with conversion. Preserve its unmasked values and identify the pending common-date sensitivity separately; commit a reproduction script using the existing national sufficient statistics and frozen model.
-- 2026-11-14 19:12 UTC: Use newly active grid cells for the recurrence proxy, not verified new ignitions; a nonsignificant country result does not establish absence of a pattern. Preserve every official number and gate decision.
-- 2026-11-14 19:12 UTC: Distinguish NOAA-20 transfer corroboration from ground-truth validation, simulated power from exclusion of an effect, and calendar outage masking from unchanged model-evaluation and globe totals.
-- 2026-11-14 19:12 UTC: The FRP contrast was already calculated before this overnight brief. Preserve the original timestamped protocol and hash; any new Git packaging commit must explicitly state that it follows the known result and cannot serve as a prior Git prediction.
-
-- 2026-11-14 19:18 UTC: Independent review found residual overstatements in METHODS/LIMITATIONS and prior-timing language in README/slides; correct these in an additive follow-up commit, retain all numerical values, and rerun all checks. The initial build required sandbox escalation for esbuild file access; the same source built successfully without code changes.
