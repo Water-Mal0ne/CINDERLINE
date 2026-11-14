@@ -5,7 +5,7 @@ Every number is from a committed report (path in brackets). "Detections" are sat
 We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration.
 
 **1. Aqua flew the whole time. Why switch to converted VIIRS from 2013?**
-So the record can continue after MODIS. Aqua is past its design life, its orbit drifted later in the early 2020s, and it had outages in 2020 and 2022; VIIRS continues on S-NPP, NOAA-20 and NOAA-21. The cost is shown, not hidden: on the held-out 2020-2024 weeks the converted series tracks Aqua with weekly r = 0.73-0.98 depending on country [reports/review/layer1_table.md], and the overlap charts show both series [reports/review/aqua_vs_converted_viirs_*.png].
+The product tests continuity on Aqua's reference scale; it does not imply Aqua stopped observing. Requiring adjacent UTC archives for complete local years makes 2013 the first eligible VIIRS year in this snapshot, despite observations beginning in 2012. The release uses historical S-NPP data. NASA currently lists S-NPP coverage ending on 2 November 2026; NOAA-20 and NOAA-21 are separate, more recent VIIRS platforms, not substitutes silently added here. On held-out 2020-2024 weeks, converted VIIRS tracks Aqua with weekly r = 0.73-0.98 depending on country [METHODS.md, reports/review/layer1_table.md; NASA FIRMS product coverage: https://firms.modaps.eosdis.nasa.gov/content/descriptions/FIRMS_VIIRS_Firehotspots.html].
 
 **2. Why the 375 m VIIRS product and not the 750 m one?**
 The 375 m I-band product is the standard VIIRS active-fire product in the FIRMS country archive and is more sensitive to small fires. The 750 m product is not in the country archive; we did not compare the two [METHODS.md].
@@ -20,7 +20,7 @@ Yes, by a wide margin, against Aqua on untouched 2020-2024 weeks: raw VIIRS (B0)
 Training 2013-2017, model choice on 2018-2019 validation MAE, test 2020-2024 evaluated once after the choice was locked [reports/selection_lock.json]. Recomputing the weekly test metrics from the published series reproduces the official numbers exactly [reports/review/layer1_reproduction_check.csv].
 
 **6. What does the uncertainty band on a converted week mean?**
-It is the 2.5-97.5 percentile range across 200 bootstrap refits of the conversion ratio over the five training years. It is not a 95% confidence interval for true detections; it ignores cloud, observation and day-to-day conversion error [METHODS.md].
+The evidence card lists daily conversion intervals; it does not sum them into a weekly confidence interval. Each converted daily interval is the 2.5-97.5 percentile range across 200 bootstrap refits of the conversion ratio over the five training years. It is not a 95% confidence interval for true detections; it ignores cloud, observation and day-to-day conversion error. Observed Aqua days need no conversion interval, which does not imply perfect observation [METHODS.md, web/src/App.tsx].
 
 **7. Where does the harmonization fail?**
 Egypt is biased high in every test year (+36% to +66%); Bangladesh 2022 fails (bias +114%, r 0.18); Brazil runs 10-14% low from 2021 [reports/review/HARMONIZATION_REVIEW.md]. The MODIS product version field also changes across the training, validation and test windows (6.2, 6.03, 61.03) [METHODS.md].

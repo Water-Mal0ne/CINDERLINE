@@ -32,6 +32,8 @@
 
 - 2026-11-14 20:20 UTC: Preserve the original story-review section while moving it before scientific interpretation; mirror the corrected AI chronology and NOAA-20 transfer/coverage qualifications across story and submission, and synchronize the story season answer with the verified masked comparison. No scientific values, official decisions or historical protocol text change.
 
+- 2026-11-14 20:23 UTC: Use historical S-NPP coverage and explicit daily calibration intervals in the story Q&A; describe the ranked regional table without a top-20-only restriction so root documentation remains accurate before and after the separately reviewed UI pagination. Scientific coverage values and frozen submission claims stay unchanged.
+
 ## Scientific interpretation
 
 - A disappearing sensor-era jump is not a success criterion. Models are selected on validation daily MAE; genuine changes may remain. The simpler B1 is selected in Australia, Brazil and the United States; M1 is selected in Bangladesh, Egypt, India and Nepal.
