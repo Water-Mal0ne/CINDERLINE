@@ -27,3 +27,13 @@
 ## Publication
 - The initial preview used private Sites hosting. At the user's request the live application is now public on free Cloudflare Pages. The user requested a new GitHub repository named FIRETRACE with private visibility; source publication is separate from the public application.
 - Raw archives, caches, secrets, dependency folders and the Python environment are excluded from Git. Download manifests and reproducible analysis code are included.
+
+## Human rhythm integration (14 November 2026)
+- Official rhythm decision = the gate pre-registered in `reference/kill_test.py` (team reference script), run on real FIRMS data for seven countries, 2013–2024. Result: pass (United States 3/3 streams, Australia 3/3, Brazil 2/3). Its outputs are committed in `reports/official/`.
+- The stricter gate previously implemented in `pipeline/rhythm.py` (verified adjacent-year archives, 95% upper bound below 1, fixed 21-test family, matched per-country static controls) changed the pre-registered rule after the fact. It is kept unchanged as code but reported only as robustness checks next to the official decision; it never replaces or overrides it. On the same data all three passing countries meet all three checks.
+- Per-day 95% intervals were added to `kill_test_results.csv` as an output-only change; every other number, the gate and the diagnostics are byte-identical to the earlier run.
+- The human rhythm view is standalone and covers all seven countries. It is not tied to the calendar region picker, because the harmonized calendar covers Nepal and the United States only. The old per-region rhythm panel now links to it.
+- The per-cell map is exploratory. Regional findings are featured only if they survive Benjamini-Hochberg correction and Aqua agrees; the area boundary for northeast India was drawn after viewing the map and is stated as such.
+- Harmonization is frozen at two countries (Nepal, United States) for this submission. Extending it would need the full pipeline rerun and would push the web data past the ~50 MB budget; the other five countries are used only for the rhythm analysis.
+- No Terra-to-Aqua bridge was attempted. The supported calendar record starts in 2003 (first complete Aqua year) and makes no 2000-present claim.
+- The top-level `reports/kill_test_gate.json`, `reports/kill_test_results.csv` and `reports/rhythm_results.json` are from the earlier Nepal/US-only run and are superseded by `reports/official/`. They are kept for traceability until the next full pipeline rebuild.
