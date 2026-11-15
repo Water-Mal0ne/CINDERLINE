@@ -2,7 +2,7 @@
 
 ## Live deployment
 
-**Public application:** https://cinderline-spaceapps.pages.dev/ (Cloudflare Pages project `cinderline-spaceapps`, production branch `main`). **Status: deployed from `main` on 15 November 2026.** The live build uses source commit `027a1a69d4f8336bbc32a4ac9e3f6eecc2ee6ba6`. Nothing in this repository deploys automatically.
+**Public application:** https://cinderline-spaceapps.pages.dev/ (Cloudflare Pages project `cinderline-spaceapps`, production branch `main`). **Status: deployed from `main` on 15 November 2026.** The live build uses source commit `8f95f640eab914fa355839135f1dde621e6ca3b6`. Nothing in this repository deploys automatically.
 
 The previous seven-country release was published on 14 November 2026 under the project's former name. It used Cloudflare Pages Direct Upload with Wrangler 4.162.0, from source commit `e71f2147ef08e77c14c23f43a946cff30c7d3c0b`. All 115 public assets (51,977,020 bytes) were verified by SHA-256 at 18:01 Nepal time; the record is `reports/deployment_verification.json`, which keeps the URL that was actually verified. That release predates the month calendar, area selection, 2025 extension, FRP panel and rename, so it is not the current product.
 
