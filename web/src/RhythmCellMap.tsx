@@ -112,7 +112,8 @@ export default function RhythmCellMap() {
     <div className="panel-heading"><div><span className="rh-exploratory"><FlaskConical size={11}/> EXPLORATORY</span>
       <h2 id="rh-map-title">Where is the dip? One-degree cells</h2></div></div>
     <p className="panel-description">Not part of the pre-specified test. The same weekday method run for every 1° cell with enough VIIRS detections (at least 300 a year on average and 8 usable years), with a false-discovery correction (Benjamini-Hochberg, 5%) across all cells. Aqua is computed the same way as a check.</p>
-    <div className="rh-country-picker" role="group" aria-label="Country map">{countries.map(c => <button key={c} className={c === country ? 'active' : ''} aria-pressed={c === country} onClick={() => { setCountry(c); setActive(null); setFocusIndex(0); }}>{NAMES[c] || c}<small>{cells.features.find(f => f.properties.country === c)?.properties.rest_day}</small></button>)}</div>
+    <p className="rh-picker-label" id="rh-map-picker-label">Country for this map</p>
+    <div className="rh-country-picker" role="group" aria-labelledby="rh-map-picker-label">{countries.map(c => <button key={c} className={c === country ? 'active' : ''} aria-pressed={c === country} onClick={() => { setCountry(c); setActive(null); setFocusIndex(0); }}>{NAMES[c] || c}<small>{cells.features.find(f => f.properties.country === c)?.properties.rest_day}</small></button>)}</div>
     <p className="rh-map-help" id="rh-map-help">Use Left and Right arrow keys to move between cells; Home and End jump to the first or last. Press Enter or Space to select. An orange outline marks the cell being inspected.</p>
     {landError && <div className="rh-map-outline-error" role="status"><span>The map outline could not be loaded.</span><button type="button" className="button" onClick={() => { invalidateData('world-land.json'); setOutlineAttempt(n => n + 1); }}>Retry map outline</button></div>}
     <div className="rh-map-wrap">
