@@ -10,5 +10,7 @@ import './section-polish-shell.css';
 import './section-polish-explore.css';
 import './section-polish-evidence.css';
 import './section-polish-rhythm-earth.css';
+import './modern-foundations.css';
+import './workspace-redesign.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);

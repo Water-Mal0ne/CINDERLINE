@@ -23,7 +23,7 @@ const validation = moduleFrom('rhythmData.ts');
 
 // Run the actual component and event handlers with controlled effects/promises.
 // DOM focus/layout is checked separately in the browser; no extra test package is needed.
-function mount(name, loadData) {
+function mount(name, loadData, props = {}) {
   const slots = [], cleanups = new Map();
   const invalidations = [];
   let cursor = 0, dirty = false, queued = [], tree;
@@ -61,7 +61,7 @@ function mount(name, loadData) {
     do {
       assert.ok(passes++ < 10, 'component effects settle');
       cursor = 0; dirty = false;
-      tree = Component({});
+      tree = Component(props);
       const effects = queued; queued = [];
       effects.forEach(effect => effect());
     } while (dirty);
@@ -81,6 +81,7 @@ function nodes(value, match) {
 }
 const text = value => Array.isArray(value) ? value.map(text).join('') : (value && typeof value === 'object' ? text(value.props?.children) : String(value ?? ''));
 const button = (tree, label) => nodes(tree, n => n.type === 'button' && text(n) === label)[0];
+const select = (tree, id) => nodes(tree, n => n.type === 'select' && n.props.id === id)[0];
 const mapCells = tree => nodes(tree, n => n.type === 'rect' && n.props.role === 'button');
 const realMap = {'rhythm_cells.json': fixture('rhythm_cells.json'), 'rhythm_cells_summary.json': fixture('rhythm_cells_summary.json'), 'world-land.json': {features: []}};
 
@@ -100,8 +101,9 @@ test('weekday data failure exposes a retry that recovers the actual seven-countr
   await app.settle();
   assert.equal(calls, 2);
   assert.deepEqual(app.invalidations, ['rhythm.json']);
-  const picker = nodes(app.tree, n => n.props?.['aria-labelledby'] === 'rh-country-picker-label')[0];
-  assert.equal(nodes(picker, n => n.type === 'button').length, 7);
+  const picker = select(app.tree, 'rh-country-select');
+  assert.equal(nodes(picker, n => n.type === 'option').length, 7);
+  assert.deepEqual(nodes(picker, n => n.type === 'option').map(n => n.props.value), payload.countries.map(c => c.country));
   assert.equal(nodes(app.tree, n => n.props?.role === 'alert').length, 0);
   app.unmount();
 });
@@ -134,7 +136,7 @@ test('loaded empty map data exits loading, and a missing default country selects
   const fallback = mount('RhythmCellMap.tsx', async file => file === 'rhythm_cells.json' ? usa : realMap[file]);
   await fallback.settle();
   assert.ok(mapCells(fallback.tree).length > 1);
-  assert.equal(button(fallback.tree, 'United StatesSun').props['aria-pressed'], true);
+  assert.equal(select(fallback.tree, 'rh-map-country-select').props.value, 'United_States');
   fallback.unmount();
 });
 
@@ -158,7 +160,7 @@ test('each map has one tab stop; arrow keys, End, Space and country changes keep
   app.render();
   assert.equal(prevented, 3);
   assert.equal(mapCells(app.tree).at(-1).props['aria-pressed'], true);
-  button(app.tree, 'BrazilSun').props.onClick(); app.render();
+  select(app.tree, 'rh-map-country-select').props.onChange({target: {value: 'Brazil'}}); app.render();
   cells = mapCells(app.tree);
   assert.equal(cells[0].props.tabIndex, 0);
   assert.equal(cells.filter(cell => cell.props['aria-pressed']).length, 0);
@@ -197,7 +199,7 @@ test('malformed HTTP-200 analysis and map summary data reach recoverable errors'
   assert.equal(analysis.tree.props.role, 'alert');
   button(analysis.tree, 'Retry weekday analysis').props.onClick(); analysis.render();
   await analysis.settle();
-  assert.equal(analysis.tree.props.className, 'rhythm-page');
+  assert.ok(analysis.tree.props.className.split(' ').includes('rhythm-page'));
   assert.deepEqual(analysis.invalidations, ['rhythm.json']);
   analysis.unmount();
   let summaries = 0, outlines = 0;
@@ -260,7 +262,7 @@ test('verdict country links focus the updated detail heading, including repeated
   assert.equal(link('Brazil').props['aria-pressed'], true);
   link('Brazil').props.onClick(); app.render();
   assert.deepEqual(focused, ['Brazil', 'Brazil']);
-  button(app.tree, 'IndiaSun').props.onClick(); app.render();
+  select(app.tree, 'rh-country-select').props.onChange({target: {value: 'India'}}); app.render();
   assert.equal(text(heading()), 'India');
   button(app.tree, 'Daytime only').props.onClick(); app.render();
   assert.deepEqual(focused, ['Brazil', 'Brazil'], 'in-panel controls keep their own focus and scroll position');
@@ -282,6 +284,55 @@ test('rhythm tables expose country row headers and named detection controls', as
     }
   }
   assert.equal(nodes(app.tree, n => n.props?.['aria-label'] === 'Detections included')[0].props.role, 'group');
+  app.unmount();
+});
+
+test('focused rhythm views preserve country and defer the map until requested', async () => {
+  const child = {type: 'div', props: {id: 'map-sentinel', children: 'Map content'}};
+  const app = mount('RhythmView.tsx', async () => fixture('rhythm.json'), {children: child});
+  await app.settle();
+  const panel = id => nodes(app.tree, n => n.props?.id === `rh-analysis-${id}`)[0];
+  const map = () => nodes(app.tree, n => n.props?.id === 'map-sentinel');
+  assert.equal(panel('charts').props.hidden, false);
+  assert.equal(panel('results').props.hidden, true);
+  assert.equal(panel('map').props.hidden, true);
+  assert.equal(map().length, 0, 'the spatial data component is not mounted on entry');
+  select(app.tree, 'rh-country-select').props.onChange({target: {value: 'Brazil'}}); app.render();
+  button(app.tree, 'Country results').props.onClick(); app.render();
+  assert.equal(panel('results').props.hidden, false);
+  assert.equal(panel('charts').props.hidden, true);
+  button(app.tree, 'Spatial patterns').props.onClick(); app.render();
+  assert.equal(panel('map').props.hidden, false);
+  assert.equal(map().length, 1);
+  button(app.tree, 'Weekday charts').props.onClick(); app.render();
+  assert.equal(select(app.tree, 'rh-country-select').props.value, 'Brazil');
+  assert.equal(map().length, 1, 'the previously opened map remains mounted to preserve its selection');
+  assert.equal(panel('map').props.hidden, true);
+  const link = nodes(app.tree, n => n.type === 'button' && n.props.className === 'rh-link' && text(n) === 'India')[0];
+  button(app.tree, 'Country results').props.onClick(); app.render();
+  link.props.onClick(); app.render();
+  assert.equal(panel('charts').props.hidden, false);
+  assert.equal(select(app.tree, 'rh-country-select').props.value, 'India');
+  app.unmount();
+});
+
+test('FRP is an explicit disclosure and all seven weekday selectors retain the published profiles', async () => {
+  const payload = fixture('rhythm.json');
+  const app = mount('RhythmView.tsx', async () => payload);
+  await app.settle();
+  const frp = () => nodes(app.tree, n => typeof n.type === 'function' && n.type.name === 'FrpComparison');
+  const disclosure = () => nodes(app.tree, n => n.type === 'details' && n.props.className.includes('rh-frp-disclosure'))[0];
+  assert.equal(frp().length, 0, 'separate FRP data is not fetched until opened');
+  disclosure().props.onToggle({currentTarget: {open: true}}); app.render();
+  assert.equal(frp().length, 1);
+  disclosure().props.onToggle({currentTarget: {open: false}}); app.render();
+  assert.equal(frp().length, 0);
+  for (const country of payload.countries) {
+    select(app.tree, 'rh-country-select').props.onChange({target: {value: country.country}}); app.render();
+    const streams = nodes(app.tree, n => typeof n.type === 'function' && n.type.name === 'StreamCard');
+    assert.deepEqual(streams.map(n => n.props.row), country.streams);
+    assert.ok(streams.every(n => n.props.rest === country.rest_day));
+  }
   app.unmount();
 });
 

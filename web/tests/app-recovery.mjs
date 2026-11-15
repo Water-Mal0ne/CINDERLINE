@@ -28,7 +28,7 @@ function text(node){
   return text(node.props?.children);
 }
 const namedChild=(tree,name)=>elements(tree,node=>node.type?.name===name)[0];
-function button(tree,label){return elements(tree,node=>node.type==='button'&&text(node)===label)[0];}
+function button(tree,label){return elements(tree,node=>node.type==='button'&&text(node).trim()===label)[0];}
 
 // Run the actual App hooks, event handlers and promise continuations. Child views
 // are inert elements: these tests cover App state transitions, not browser layout.
@@ -50,7 +50,7 @@ function appHarness(search,resource,indexResource=()=>Promise.resolve(index)){
     matchMedia:()=>({matches:true}),scrollTo(){}};
   const document={getElementById:id=>({focus(){focus.push(id);},scrollIntoView(){}})};
   const fetch=async url=>{assert.match(url,/data\/index\.json$/);return {ok:true,json:indexResource};};
-  const realModules=new Set(['App','utils','explorationState','explorationIntegration','calendarView','loadData']);
+  const realModules=new Set(['App','utils','explorationState','explorationIntegration','calendarView','loadData','workspaceNavigation']);
   function load(file){
     if(modules.has(file))return modules.get(file);
     const source=readFileSync(file,'utf8').replaceAll('import.meta.env.BASE_URL',JSON.stringify('/'));
@@ -209,7 +209,7 @@ test('journey: observed Earth mode and month survive country loading and section
   const app=appHarness('?region=Nepal',file=>file==='India.json'?pendingIndia.promise:Promise.resolve(journeyRegions.Nepal),()=>Promise.resolve(journeyIndex));
   const earth=()=>elements(app.tree,node=>typeof node.props?.onEarthMode==='function')[0];
   try{
-    await app.settle();press(app,'Open the 3D Earth view');await app.settle();
+    await app.settle();press(app,'Earth');await app.settle();
     assert.equal(earth().props.earthMode,'harmonized');
     earth().props.onEarthMode('observations');earth().props.onObservationMonth('2024-11');await app.settle();
     assert.equal(app.url.searchParams.get('start'),'2023-01-01','observation months must not alter the historical calendar');
@@ -252,7 +252,7 @@ test('journey: country, dates, cell, evidence, close and history restore the sam
 test('journey: same-country annual drilldown returns to Whole region and retains the chosen year',async()=>{
   const app=journeyApp(`?region=Nepal&cell=${encodeURIComponent(cellId)}&scale=raw`);
   try{
-    await app.settle();press(app,'Open the 3D Earth view');await app.settle();
+    await app.settle();press(app,'Earth');await app.settle();
     assert.ok(globe(app));globe(app).props.onRegion('Nepal',2023);await app.settle();
     assert.equal(app.url.searchParams.get('cell'),null,'regional exploration must clear the previous daily cell');
     assert.equal(app.url.searchParams.get('start'),'2023-01-01');
@@ -265,11 +265,13 @@ test('journey: same-country annual drilldown returns to Whole region and retains
 test('journey: cross-country annual exploration retains year and scale, and direct daily drilldown sets its year',async()=>{
   const app=journeyApp('?region=Nepal&scale=raw');
   try{
-    await app.settle();press(app,'Open the 3D Earth view');await app.settle();
+    await app.settle();press(app,'Earth');await app.settle();
     globe(app).props.onRegion('India',2023);await app.settle();
     assert.equal(app.url.searchParams.get('region'),'India');assert.equal(app.url.searchParams.get('scale'),'raw');
     assert.equal(app.url.searchParams.get('start'),'2023-01-01');assert.equal(app.url.searchParams.get('end'),'2023-12-31');
     assert.equal(app.url.searchParams.get('cell'),null);
+    assert.ok(calendar(app),'regional drilldown opens the calendar workspace');
+    press(app,'Earth');await app.settle();
     globe(app).props.onCell(journeyRegions.India.cells[0].id,2024);await app.settle();
     assert.equal(app.url.searchParams.get('cell'),journeyRegions.India.cells[0].id);
     assert.equal(app.url.searchParams.get('start'),'2024-01-01');assert.equal(app.url.searchParams.get('end'),'2024-12-31');
@@ -293,8 +295,9 @@ test('journey: changing dates after a failed shared cell cancels the old pending
 test('journey: a week evidence action opens its annual Earth context without treating it as a weekly layer',async()=>{
   const app=journeyApp('?region=Nepal&scale=raw');
   try{
-    await app.settle();press(app,'Open the 3D Earth view');await app.settle();
+    await app.settle();press(app,'Earth');await app.settle();
     globe(app).props.onEarthMode('observations');globe(app).props.onObservationMonth('2024-11');await app.settle();
+    press(app,'Calendar');await app.settle();
     const week=calendar(app).props.weeks.find(week=>week.year===2023);
     calendar(app).props.onSelect(week);await app.settle();
     const drawer=namedChild(app.tree,'EvidenceDrawer');assert.equal(typeof drawer.props.onViewEarth,'function');
@@ -305,5 +308,70 @@ test('journey: a week evidence action opens its annual Earth context without tre
     assert.equal(globe(app).props.observationMonth,'2024-11','returning to annual mode does not erase the independent observation month');
     assert.equal(app.url.searchParams.get('start'),'2023-01-01');assert.equal(app.url.searchParams.get('end'),'2023-12-31');
     assert.equal(app.url.searchParams.get('scale'),'raw');assert.equal(app.url.searchParams.has('week'),false);
+  }finally{app.dispose();}
+});
+
+
+test('workspace choices show one calendar detail and analysis at a time without changing the data selection',async()=>{
+  const app=journeyApp('?region=Nepal&scale=raw');
+  const month=()=>elements(app.tree,node=>node.props?.scopeId==='ALL'&&Array.isArray(node.props?.rows))[0];
+  const earth=()=>elements(app.tree,node=>typeof node.props?.onEarthMode==='function')[0];
+  try{
+    await app.settle();
+    const original=calendar(app).props.weeks.flatMap(week=>week.rows);
+    assert.ok(calendar(app));assert.equal(month(),undefined);assert.equal(earth(),undefined);
+    press(app,'Monthly');await app.settle();
+    assert.equal(calendar(app),undefined,'weekly calendar is not duplicated under monthly');
+    assert.deepEqual(month().props.rows.map(row=>row.date),original.map(row=>row.date));
+    assert.equal(month().props.mode,'raw');
+    press(app,'Patterns');await app.settle();
+    assert.equal(calendar(app),undefined);assert.equal(month(),undefined);assert.equal(earth(),undefined);
+    assert.ok(elements(app.tree,node=>typeof node.props?.onCompare==='function').length,'instrument comparison is available');
+    press(app,'Unusual weeks');await app.settle();
+    assert.equal(elements(app.tree,node=>typeof node.props?.onCompare==='function').length,0,'inactive analysis is not stacked under the selection');
+    assert.ok(elements(app.tree,node=>node.props?.id==='anomalies-panel').length);
+    press(app,'Earth');await app.settle();assert.ok(earth());assert.equal(calendar(app),undefined);assert.equal(month(),undefined);
+    press(app,'Calendar');await app.settle();
+    assert.ok(month(),'the selected calendar detail survives switching tasks');assert.equal(earth(),undefined);
+    press(app,'Weekly');await app.settle();
+    assert.deepEqual(calendar(app).props.weeks.flatMap(week=>week.rows).map(row=>row.date),original.map(row=>row.date));
+    assert.equal(app.url.searchParams.get('scale'),'raw');
+    assert.equal(app.url.searchParams.get('start'),'2023-01-01');assert.equal(app.url.searchParams.get('end'),'2024-12-31');
+  }finally{app.dispose();}
+});
+
+
+test('workspace share links and history restore monthly, pattern and Earth choices with scientific filters intact',async()=>{
+  const app=journeyApp('?region=Nepal&scale=raw&start=2024-01-03&end=2024-01-10');
+  const month=tree=>elements(tree,node=>node.props?.scopeId==='ALL'&&Array.isArray(node.props?.rows))[0];
+  const earth=tree=>elements(tree,node=>typeof node.props?.onEarthMode==='function')[0];
+  const snapshots=[];
+  try{
+    await app.settle();press(app,'Monthly');await app.settle();
+    snapshots.push({url:app.url.toString(),check:tree=>{assert.ok(month(tree));assert.equal(namedChild(tree,'Heatmap'),undefined);}});
+    press(app,'Patterns');await app.settle();press(app,'Seasons');await app.settle();
+    snapshots.push({url:app.url.toString(),check:tree=>{assert.equal(button(tree,'Patterns').props['aria-pressed'],true);assert.equal(button(tree,'Seasons').props['aria-pressed'],true);}});
+    press(app,'Earth');await app.settle();
+    snapshots.push({url:app.url.toString(),check:tree=>{assert.ok(earth(tree));assert.equal(month(tree),undefined);}});
+    for(const snapshot of snapshots){
+      const url=new URL(snapshot.url);
+      assert.equal(url.searchParams.get('region'),'Nepal');assert.equal(url.searchParams.get('scale'),'raw');
+      assert.equal(url.searchParams.get('start'),'2024-01-03');assert.equal(url.searchParams.get('end'),'2024-01-10');
+      const reopened=journeyApp(url.search);
+      try{await reopened.settle();snapshot.check(reopened.tree);}finally{reopened.dispose();}
+      app.pop(snapshot.url);await app.settle();snapshot.check(app.tree);
+    }
+  }finally{app.dispose();}
+});
+
+test('the evidence page calendar action returns to a weekly calendar after an Earth visit',async()=>{
+  const app=journeyApp();
+  try{
+    await app.settle();press(app,'Monthly');await app.settle();press(app,'Earth');await app.settle();
+    press(app,'Evidence & validation');await app.settle();
+    press(app,'Open a calendar week to inspect evidence');await app.settle();
+    assert.ok(calendar(app));assert.equal(button(app.tree,'Weekly').props['aria-pressed'],true);
+    assert.equal(elements(app.tree,node=>typeof node.props?.onEarthMode==='function').length,0);
+    assert.ok(app.focus.includes('calendar-panel'));
   }finally{app.dispose();}
 });

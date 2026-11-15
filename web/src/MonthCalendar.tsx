@@ -48,6 +48,8 @@ export default function MonthCalendar({rows, matrix: supplied, mode, label, regi
   const span = history && numeric(history.p10) && numeric(history.p90) ? {left: position(history.p10), width: `calc(${position(history.p90)} - ${position(history.p10)})`} : null;
 
   return <div className="month-calendar">
+    <div className="month-calendar-columns">
+    <div className="month-overview">
     <div className="month-highlights">
       <div><span>BUSIEST MONTH</span><strong>{matrix.busiestMonth ? `${MONTHS[matrix.busiestMonth.month - 1]} ${matrix.busiestMonth.year}` : '—'}</strong><small>{matrix.busiestMonth ? `${fmt(matrix.busiestMonth.value, 0)} ${unit(mode)}` : 'No fully observed month'}</small></div>
       <div><span>BUSIEST FULLY OBSERVED YEAR</span><strong>{matrix.busiestYear ? matrix.busiestYear.year : '—'}</strong><small>{matrix.busiestYear ? `${compact(matrix.busiestYear.total)} ${unit(mode)}; years with an outage month are not ranked` : 'No year with all 12 months observed'}</small></div>
@@ -82,6 +84,8 @@ export default function MonthCalendar({rows, matrix: supplied, mode, label, regi
       <span className="month-key"><Star size={9} aria-hidden="true"/>Busiest month / fully observed year</span>
     </div>
 
+    </div>
+    <div className="month-detail">
     <section className="month-history" aria-labelledby={`${captionId}-history`}>
       <h3 id={`${captionId}-history`}>Month vs history</h3>
       <p className="chart-note">{HISTORY_NOTE}</p>
@@ -102,5 +106,7 @@ export default function MonthCalendar({rows, matrix: supplied, mode, label, regi
       </div>}
     </section>
     <button type="button" className="button subtle" onClick={download}><ArrowDownToLine size={14}/> Download month calendar CSV</button>
+    </div>
+    </div>
   </div>;
 }

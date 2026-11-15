@@ -1,0 +1,286 @@
+/* Content-first Earth workspace. Unslop guidance by Damir Sokolovsky
+ * (@heydamir), https://github.com/heydamir/unslop — CC BY 4.0.
+ * Preserve scientific palettes; put the map before optional explanation. */
+#earth-panel .earth-workspace {
+  container: earth-workspace / inline-size;
+  min-width: 0;
+  margin: 0;
+  border-radius: 12px;
+  background: var(--panel);
+}
+#earth-panel .earth-workspace .globe-heading {
+  padding: 20px 24px;
+  align-items: center;
+  gap: 16px 24px;
+}
+#earth-panel .earth-workspace .globe-heading h2 {
+  margin: 4px 0 0;
+  font-size: clamp(1.125rem, 2cqi, 1.5rem);
+  font-weight: 500;
+  text-wrap: balance;
+}
+#earth-panel .earth-workspace .globe-heading .eyebrow {
+  text-transform: none;
+  font-family: inherit;
+  letter-spacing: 0;
+}
+#earth-panel .earth-workspace .globe-view-actions { gap: 8px; }
+#earth-panel .earth-workspace .observation-controls {
+  padding: 16px 24px;
+  border-bottom: 0;
+}
+#earth-panel .earth-workspace .observation-mode {
+  padding: 0;
+  gap: 4px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+#earth-panel .earth-workspace .observation-mode button {
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  border-color: var(--line);
+}
+#earth-panel .earth-workspace .observation-mode button[aria-pressed=true] {
+  border-color: var(--orange);
+  background: var(--raised);
+  color: var(--orange);
+}
+#earth-panel .earth-workspace .globe-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px 40px;
+  padding: 4px 24px 20px;
+  border: 0;
+  background: transparent;
+}
+#earth-panel .earth-workspace .globe-year-control {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 4px 20px;
+}
+#earth-panel .earth-workspace .globe-year-control > .eyebrow {
+  grid-column: 1 / -1;
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: inherit;
+}
+#earth-panel .earth-workspace .globe-year {
+  grid-column: 1;
+  grid-row: 2 / 4;
+  font-size: 2rem;
+  line-height: 1;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+#earth-panel .earth-workspace .globe-year-control input[type=range] {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+  margin: 0;
+}
+#earth-panel .earth-workspace .year-range {
+  grid-column: 2;
+  grid-row: 3;
+  margin: 0;
+  font-size: 0.75rem;
+}
+#earth-panel .earth-workspace .globe-year-note {
+  grid-column: 1 / -1;
+  margin: 8px 0 0;
+  font-size: 0.75rem;
+}
+#earth-panel .earth-workspace .globe-legend { min-width: 0; }
+#earth-panel .earth-workspace .globe-scale { max-width: 360px; }
+#earth-panel .earth-workspace .globe-legend > small {
+  margin-top: 8px;
+  line-height: 1.5;
+}
+#earth-panel .earth-workspace .globe-zero-key { margin: 8px 0; }
+#earth-panel .earth-workspace .globe-zero-key > span { width: auto; }
+#earth-panel .earth-workspace .globe-source {
+  border: 0;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 4px 8px;
+  flex-wrap: wrap;
+}
+#earth-panel .earth-workspace .globe-source > span {
+  font-family: inherit;
+  text-transform: none;
+  font-size: 0.75rem;
+}
+#earth-panel .earth-workspace .globe-source strong { font-size: 0.75rem; margin: 0; }
+#earth-panel .earth-workspace .globe-body { display: block; }
+#earth-panel .earth-workspace .globe-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 480px auto;
+  border-top: 1px solid var(--line);
+  min-height: 0;
+}
+#earth-panel .earth-workspace .globe-canvas {
+  grid-row: 2;
+  position: relative;
+  inset: auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: 480px;
+}
+#earth-panel .earth-workspace .globe-instructions {
+  grid-row: 1;
+  position: static;
+  text-align: start;
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  background: var(--panel);
+}
+#earth-panel .earth-workspace .globe-buttons { top: 60px; left: 16px; gap: 8px; }
+#earth-panel .earth-workspace .globe-buttons button { width: 44px; height: 44px; }
+#earth-panel .earth-workspace .globe-coverage {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  padding: 12px 24px;
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  font-family: inherit;
+}
+#earth-panel .earth-workspace .globe-coverage strong { font-size: 0.75rem; }
+#earth-panel .earth-workspace .globe-coverage > span { margin: 0; }
+#earth-panel .earth-workspace .globe-coverage .globe-selection-shortcut { margin: 0 0 0 auto; }
+#earth-panel .earth-workspace .globe-selection-empty {
+  display: flex;
+  gap: 8px 16px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding: 16px 24px;
+}
+#earth-panel .earth-workspace .globe-selection-empty > span {
+  font-family: inherit;
+  text-transform: none;
+  color: var(--orange);
+}
+#earth-panel .earth-workspace .globe-selection-empty > p { margin: 0; font-size: 0.8125rem; }
+#earth-panel .earth-workspace .globe-body > .globe-selection:not(.globe-selection-empty) {
+  padding: 24px;
+  gap: 24px;
+  border-left: 3px solid var(--orange);
+}
+#earth-panel .earth-workspace .earth-provenance,
+#earth-panel .earth-workspace > details.globe-outage-notice {
+  border-top: 1px solid var(--line);
+  padding: 12px 24px;
+  margin: 0;
+  color: var(--secondary);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+#earth-panel .earth-workspace .earth-provenance > summary,
+#earth-panel .earth-workspace > details.globe-outage-notice > summary {
+  min-height: 32px;
+  padding: 4px 0;
+  cursor: pointer;
+}
+#earth-panel .earth-workspace .earth-provenance p { max-width: 90ch; }
+#earth-panel .earth-workspace .earth-provenance .globe-outage-notice { margin: 12px 0; padding: 0; border: 0; }
+#earth-panel .earth-workspace .earth-provenance .chart-note { font-size: 0.8125rem; line-height: 1.6; color: var(--secondary); }
+#earth-panel .earth-workspace > .chart-note { margin: 12px 0; padding: 0 24px; }
+#earth-panel .earth-workspace > .chart-label { padding: 0 24px 16px; }
+#earth-panel .earth-workspace .observation-context { margin-top: 16px; }
+#earth-panel .earth-workspace .observation-context-row { align-items: center; gap: 16px 24px; }
+#earth-panel .earth-workspace .observation-context-row strong { font-size: 0.875rem; font-weight: 500; }
+#earth-panel .earth-workspace .observation-context-row p { margin-bottom: 0; }
+#earth-panel .earth-workspace .observation-context-row label { gap: 4px; flex-basis: 192px; }
+#earth-panel .earth-workspace .observation-context > .observation-scope {
+  max-width: 100ch;
+  margin: 12px 0 16px;
+  line-height: 1.6;
+  font-size: 0.75rem;
+}
+#earth-panel .earth-workspace.observation-earth .observation-stage {
+  margin-inline: -24px;
+  width: calc(100% + 48px);
+  grid-template-rows: auto 480px auto;
+}
+#earth-panel .earth-workspace .observation-map-key {
+  position: static;
+  grid-row: 3;
+  max-width: none;
+  margin: 0;
+  padding: 12px 24px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.8125rem;
+}
+#earth-panel .earth-workspace .observation-map-key > span { font-size: 0.75rem; color: var(--secondary); }
+#earth-panel .earth-workspace .observation-status { margin: 16px 0; }
+#earth-panel .earth-workspace .observation-selection {
+  margin: 16px 0;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--orange);
+  border-radius: 8px;
+  background: var(--raised);
+}
+#earth-panel .earth-workspace .observation-selection dl { gap: 16px 24px; }
+#earth-panel .earth-workspace .observation-limits { padding: 12px 0 0; }
+#earth-panel .earth-workspace .observation-limits summary { min-height: 32px; padding: 4px 0; font-size: 0.8125rem; }
+#earth-panel .earth-workspace .observation-limits p { font-size: 0.8125rem; }
+#earth-panel .earth-workspace .observation-grid-table { padding: 16px 0; }
+#earth-panel .earth-workspace .globe-table { max-height: 600px; padding: 16px 24px; }
+#earth-panel .earth-workspace .globe-pagination { position: static; }
+#earth-panel .earth-workspace :where(button, select, input, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+@container earth-workspace (width < 640px) {
+  #earth-panel .earth-workspace .globe-heading { padding: 16px; align-items: start; flex-wrap: wrap; }
+  #earth-panel .earth-workspace .globe-heading > div { min-width: 0; }
+  #earth-panel .earth-workspace .globe-heading h2 { font-size: 1.25rem; }
+  #earth-panel .earth-workspace .globe-view-actions { width: 100%; }
+  #earth-panel .earth-workspace .globe-view-actions > button { flex: 1; }
+  #earth-panel .earth-workspace .observation-controls { padding: 12px 16px; }
+  #earth-panel .earth-workspace .observation-mode { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #earth-panel .earth-workspace .observation-mode button { font-size: 0.8125rem; padding: 8px; white-space: normal; }
+  #earth-panel .earth-workspace .globe-detail { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 4px 16px 16px; }
+  #earth-panel .earth-workspace .globe-year-control { gap: 4px 24px; }
+  #earth-panel .earth-workspace .globe-legend { border-top: 1px solid var(--line); padding-top: 12px; }
+  #earth-panel .earth-workspace .globe-stage,
+  #earth-panel .earth-workspace.observation-earth .observation-stage { grid-template-rows: auto 400px auto; }
+  #earth-panel .earth-workspace .globe-canvas { height: 400px; }
+  #earth-panel .earth-workspace.observation-earth .observation-stage { margin-inline: -16px; width: calc(100% + 32px); }
+  #earth-panel .earth-workspace .globe-instructions { padding: 12px 16px; }
+  #earth-panel .earth-workspace .globe-buttons { top: 84px; left: 12px; }
+  #earth-panel .earth-workspace .globe-coverage,
+  #earth-panel .earth-workspace .observation-map-key { padding: 12px 16px; }
+  #earth-panel .earth-workspace .globe-coverage .globe-selection-shortcut { margin-left: 0; }
+  #earth-panel .earth-workspace .globe-body > .globe-selection:not(.globe-selection-empty) { grid-template-columns: minmax(0, 1fr); padding: 16px; }
+  #earth-panel .earth-workspace .globe-selection-empty { padding: 16px; }
+  #earth-panel .earth-workspace .earth-provenance,
+  #earth-panel .earth-workspace > details.globe-outage-notice { padding: 12px 16px; }
+  #earth-panel .earth-workspace > .chart-note { padding-inline: 16px; }
+  #earth-panel .earth-workspace > .chart-label { padding-inline: 16px; }
+  #earth-panel .earth-workspace .observation-context-row { flex-direction: column; align-items: stretch; gap: 12px; }
+  #earth-panel .earth-workspace .observation-context-row label { flex-basis: auto; }
+  #earth-panel .earth-workspace .observation-context-row select { min-height: 44px; font-size: 1rem; }
+  #earth-panel .earth-workspace .observation-selection { padding: 16px; }
+  #earth-panel .earth-workspace .observation-selection dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  #earth-panel .earth-workspace .globe-table { padding: 16px; }
+}
+@media (pointer: coarse) {
+  #earth-panel .earth-workspace :where(button, select, summary) { min-height: 44px; }
+  #earth-panel .earth-workspace .globe-year-control input[type=range] { min-height: 44px; }
+}

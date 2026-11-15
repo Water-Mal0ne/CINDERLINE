@@ -1,0 +1,156 @@
+/* Content-first preview. Keeps CINDERLINE's existing charcoal / ember palette.
+ * Craft guidance: Unslop by Damir Sokolovsky, CC BY 4.0.
+ * https://github.com/heydamir/unslop
+ * https://developer.chrome.com/docs/modern-web-guidance/guides
+ */
+html { scrollbar-gutter: stable; }
+html:has(.content-first-app dialog:modal) { overflow: hidden; }
+.content-first-app {
+  color-scheme: dark;
+  font-variant-numeric: tabular-nums;
+  --preview-radius: 8px;
+}
+.content-first-app :is(h1, h2, h3) { text-wrap: balance; }
+.content-first-app :is(p, li) { text-wrap: pretty; }
+.content-first-app :is(button, input, select, summary, a) {
+  -webkit-tap-highlight-color: transparent;
+}
+.content-first-app :is(button, input, select, summary, a, [tabindex]):focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+.content-first-app :is(button, select, summary) { min-block-size: 36px; }
+.content-first-app :is(button, select, input) { max-inline-size: 100%; }
+.content-first-app :is(button, a, summary) {
+  transition: color 160ms var(--ease), background-color 160ms var(--ease), border-color 160ms var(--ease);
+}
+.content-first-app :is(button, summary):active { background-color: var(--raised); }
+.content-first-app .segmented button[aria-pressed='true'] { position: relative; }
+.content-first-app .segmented button[aria-pressed='true']::after {
+  content: '';
+  position: absolute;
+  inset-inline: 12px;
+  inset-block-end: 2px;
+  border-block-end: 2px solid currentColor;
+}
+.content-first-app summary { cursor: pointer; }
+.content-first-app :is(.panel-description, .chart-note) { max-width: 85ch; }
+.content-first-app :is(.chart-note, .panel-description, .muted) { line-height: 1.65; }
+.content-first-app .panel-heading { margin-bottom: 16px; }
+.content-first-app .panel-heading h2 { font-size: clamp(1.35rem, 1.1rem + .6vw, 1.75rem); line-height: 1.3; font-weight: 500; }
+.content-first-app :is(.svg-chart, .calendar-scroller, .table-scroll) { max-width: 100%; }
+.content-first-app .calendar-scroller { overscroll-behavior-inline: contain; }
+.content-first-app .week-cell { min-block-size: 20px; }
+.content-first-app .calendar-row { margin-bottom: 4px; }
+.content-first-app .calendar-months { margin-bottom: 12px; }
+.content-first-app .calendar-inspector {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+}
+.content-first-app .chart-bottom { padding-block: 16px 8px; gap: 16px; }
+.content-first-app .chart-label { margin-top: 12px; }
+
+/* One monthly matrix, with its selected month's reading beside it. */
+.content-first-app .month-calendar { container: month-calendar / inline-size; }
+.content-first-app .month-calendar-columns { display: grid; gap: 32px; }
+.content-first-app :is(.month-overview, .month-detail) { min-width: 0; }
+.content-first-app .month-overview .month-highlights {
+  gap: 24px;
+  margin: 0 0 24px;
+}
+.content-first-app .month-highlights > div { border-color: var(--line); padding-left: 12px; }
+.content-first-app .month-highlights span { font-size: 0.6875rem; letter-spacing: 0; color: var(--muted); }
+.content-first-app .month-highlights strong { font-size: 1.5rem; color: var(--text); margin: 8px 0 4px; }
+.content-first-app .month-highlights small { font-size: 0.75rem; color: var(--secondary); }
+.content-first-app .month-caption { font-size: 0.8125rem; color: var(--secondary); margin-bottom: 16px; }
+.content-first-app .month-table th { font-size: 0.75rem; letter-spacing: 0; color: var(--muted); }
+.content-first-app .month-table { border-spacing: 4px; }
+.content-first-app .month-table tbody th { width: 52px; }
+.content-first-app .month-table .month-cell { height: 24px; min-block-size: 24px; }
+.content-first-app .month-table thead th { padding-bottom: 12px; }
+.content-first-app .month-legend { font-size: 0.75rem; color: var(--muted); gap: 12px 16px; margin-block: 20px; }
+.content-first-app .month-ramp small { font-size: 0.625rem; color: var(--muted); }
+.content-first-app .month-ramp i { height: 12px; width: 32px; }
+.content-first-app .month-detail {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--preview-radius);
+  background: var(--panel);
+  align-self: start;
+}
+.content-first-app .month-history { padding-top: 0; border-top: 0; margin-bottom: 24px; }
+.content-first-app .month-history h3 { font-size: 1.125rem; line-height: 1.4; margin-bottom: 12px; }
+.content-first-app .month-history-controls { gap: 12px; margin-block: 20px; }
+.content-first-app .month-history-controls label { flex: 1 1 100px; font-size: 0.75rem; gap: 8px; color: var(--secondary); }
+.content-first-app .month-history-controls select { min-width: 0; width: 100%; min-height: 44px; font-size: 0.875rem; background: var(--raised); border-color: var(--line); border-radius: 6px; }
+.content-first-app .month-history-result dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
+.content-first-app .month-history-result dt { color: var(--muted); font-size: 0.75rem; letter-spacing: 0; line-height: 1.5; }
+.content-first-app .month-history-result dd { font-size: 1.375rem; color: var(--text); margin-top: 8px; overflow-wrap: anywhere; }
+.content-first-app .month-range { margin-block: 24px 16px; }
+.content-first-app .month-relation { font-size: 0.875rem; line-height: 1.6; color: var(--text); margin-bottom: 12px; }
+.content-first-app .month-detail > .button { white-space: normal; line-height: 1.5; width: 100%; }
+@container month-calendar (min-width: 900px) {
+  .month-calendar-columns { grid-template-columns: minmax(0, 1fr) 308px; }
+}
+
+/* Tables retain all values; quieter rules and aligned numbers aid comparison. */
+.content-first-app .table-scroll { border: 1px solid var(--line); border-radius: 8px; }
+.content-first-app .table-scroll :is(th, td) { padding: 16px 12px; line-height: 1.5; }
+.content-first-app .table-scroll thead { background: var(--panel); }
+.content-first-app .table-scroll thead th { text-transform: none; letter-spacing: 0; }
+.content-first-app .table-scroll tbody tr:hover { background: #ffffff04; }
+.content-first-app .evaluation-table table :is(th, td):first-child { padding-left: 16px; }
+.content-first-app .evaluation-table table :is(th, td):last-child { padding-right: 16px; }
+.content-first-app :is(.comparison-actions, .evidence-actions) { gap: 12px; }
+.content-first-app .month-inspector { padding: 20px; border-radius: 8px; background: var(--panel); }
+.content-first-app .month-readout { gap: 24px; }
+.content-first-app .source-timeline { margin-top: 24px; gap: 12px 24px; }
+.content-first-app .source-timeline + .chart-note { margin-top: 16px; }
+.content-first-app .season-compare-plot { background: transparent; }
+.content-first-app .season-compare-details { padding-block: 8px; border-color: var(--line); }
+
+/* Evidence and methods share the same readable document rhythm. */
+.content-first-app .evidence-drawer { width: min(620px, 100%); max-height: 100dvh; padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+.content-first-app .evidence-drawer .drawer-head { min-height: 64px; }
+.content-first-app .evidence-drawer .evidence-section { margin-top: 28px; padding-top: 24px; }
+.content-first-app .evidence-drawer :is(.drawer-date, .evidence-section p) { font-size: 0.875rem; line-height: 1.65; }
+.content-first-app .evidence-drawer h3 { font-size: 1rem; }
+.content-first-app .methods-page { max-width: 1120px; margin-inline: auto; }
+.content-first-app .methods-page .section-intro { max-width: 760px; margin-bottom: 32px; }
+.content-first-app .method-jump-nav { gap: 8px; padding-block: 16px; border-bottom: 1px solid var(--line); margin-bottom: 32px; }
+.content-first-app .method-jump-nav a { display: inline-flex; align-items: center; padding: 8px 16px; min-height: 40px; border-radius: 6px; }
+.content-first-app .method-jump-nav a:hover { background: var(--raised); }
+.content-first-app .methods-page .limitations li { padding-block: 12px; line-height: 1.7; }
+.content-first-app .sources-panel > a { padding-block: 16px; }
+
+@media (max-width: 640px) {
+  .content-first-app .panel-heading h2 { font-size: 1.375rem; }
+  .content-first-app .month-detail { padding: 20px 16px; margin-top: 24px; }
+  .content-first-app .month-overview .month-highlights { grid-template-columns: 1fr; gap: 16px; }
+  .content-first-app .month-highlights > div { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; }
+  .content-first-app .month-highlights strong { font-size: 1.25rem; margin: 0; }
+  .content-first-app .month-highlights small { grid-column: 1 / -1; margin-top: 4px; }
+  .content-first-app .month-history-result dd { font-size: 1.25rem; }
+  .content-first-app .evidence-drawer { padding-inline: 20px; }
+  .content-first-app .methods-page .section-intro h2 { font-size: 1.75rem; }
+}
+@media (pointer: coarse) {
+  .content-first-app :is(button, select, summary, input:not([type='range'])) { min-block-size: 44px; }
+  .content-first-app :is(.week-cell, .month-cell) { min-inline-size: 24px; min-block-size: 28px; }
+  .content-first-app .calendar-scroller .calendar-grid { min-width: 1500px !important; }
+  .content-first-app .month-table { min-width: 650px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .content-first-app *, .content-first-app *::before, .content-first-app *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (forced-colors: active) {
+  .content-first-app :is(button, select, summary, input) { border: 1px solid ButtonText; }
+  .content-first-app :is(button, a, summary, input, select):focus-visible { outline-color: Highlight; }
+}

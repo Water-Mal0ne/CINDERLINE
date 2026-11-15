@@ -1,0 +1,247 @@
+/* CINDERLINE content-first experiment. Unslop by Damir Sokolovsky
+   (@heydamir), https://github.com/heydamir/unslop, CC BY 4.0.
+   Existing scientific palettes remain in their chart components. */
+.content-first-app { min-width: 0; --workspace-width: 1480px; }
+.content-first-app .site-header {
+  position: relative; height: auto; min-height: 64px; padding: 8px max(24px, calc((100% - var(--workspace-width)) / 2));
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: none;
+}
+.content-first-app .site-header .brand { flex: 0 0 auto; font-size: 1.0625rem; gap: 8px; }
+.content-first-app .site-header .brand-symbol { width: 24px; height: 28px; }
+.content-first-app .site-header nav { display: flex; align-items: center; gap: 24px; height: auto; margin: 0; }
+.content-first-app .site-header nav button { min-height: 44px; padding: 8px 0; font-size: 0.8125rem; line-height: 1.4; white-space: nowrap; border-radius: 0; }
+.content-first-app .site-header nav button.active { color: var(--text); background: none; }
+.content-first-app .site-header .header-source { font-size: 0.75rem; display: inline-flex; }
+.content-first-app .mobile-navigation { display: none; }
+.content-first-app main { width: min(calc(100% - 48px), var(--workspace-width)); max-width: var(--workspace-width); margin: 0 auto; min-width: 0; }
+.content-first-app .workspace-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px 0 24px; }
+.content-first-app .workspace-kicker { color: var(--muted); font: 0.75rem/1.5 var(--mono); }
+.content-first-app .workspace-heading h1 { font-size: clamp(1.75rem, 2.6vw, 2.25rem); line-height: 1.15; font-weight: 400; letter-spacing: -.02em; margin: 8px 0; text-wrap: balance; }
+.content-first-app .workspace-heading p { margin: 0; color: var(--secondary); font-size: 0.875rem; line-height: 1.5; }
+.content-first-app .workspace-tools { display: flex; flex-direction: row; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: flex-end; }
+.content-first-app .data-badge { border: 0; padding: 0; background: none; color: var(--muted); font-size: 0.6875rem; }
+.content-first-app .workspace { display: block; padding: 0; border: 0; min-width: 0; }
+.content-first-app .main-column { min-width: 0; width: 100%; }
+.content-first-app .selection-bar { position: relative; display: grid; grid-template-columns: minmax(180px,240px) minmax(0,1fr) auto; gap: 24px; align-items: center; padding: 16px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.content-first-app .selection-country { display: grid; gap: 4px; }
+.content-first-app .selection-country > .field-label { margin: 0; font-size: 0.6875rem; color: var(--muted); }
+.content-first-app .selection-country .select-wrap { margin: 0; background: transparent; border: 0; min-height: 36px; padding: 0; }
+.content-first-app .selection-country .select-wrap > svg { color: var(--muted); }
+.content-first-app .selection-country select { padding-left: 28px; min-height: 36px; font-size: 1rem; color: var(--text); background: transparent; font-weight: 500; }
+.content-first-app .selection-context { display: grid; gap: 4px; border-left: 1px solid var(--line); padding-left: 24px; }
+.content-first-app .selection-context span { font-size: 0.75rem; color: var(--muted); }
+.content-first-app .selection-context strong { font-size: 0.875rem; font-weight: 400; color: var(--text); }
+.content-first-app summary { cursor: pointer; }
+.content-first-app summary:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; border-radius: 4px; }
+.content-first-app .selection-options > summary { display: flex; align-items: center; gap: 8px; list-style: none; min-height: 44px; font-size: 0.8125rem; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; color: var(--text); background: var(--raised); }
+.content-first-app .selection-options > summary::-webkit-details-marker,
+.content-first-app .mobile-navigation > summary::-webkit-details-marker,
+.content-first-app .area-workspace > summary::-webkit-details-marker { display: none; }
+.content-first-app .selection-options[open] > summary { color: var(--orange); }
+.content-first-app .selection-options > summary svg:last-child { margin-left: 8px; }
+.content-first-app .selection-options[open] > summary svg:last-child { transform: rotate(180deg); }
+.content-first-app .selection-options-body { position: absolute; z-index: 12; inset-inline: 0; top: calc(100% + 8px); border: 1px solid var(--line); border-radius: 12px; padding: 24px; background: var(--panel); box-shadow: 0 16px 32px #0005; }
+.content-first-app .selection-fields { display: grid; grid-template-columns: minmax(220px,1fr) minmax(0,2fr); gap: 32px; }
+.content-first-app .selection-fields .field-label { margin: 0 0 8px; font-size: 0.75rem; }
+.content-first-app .selection-fields .select-wrap { margin: 0; min-height: 44px; }
+.content-first-app .selection-fields .date-fields { display: grid; grid-template-columns: 1fr 1fr; min-width: 0; }
+.content-first-app .selection-fields .date-fields label { width: auto; display: flex; align-items: center; gap: 8px; min-width: 0; padding: 8px 12px; }
+.content-first-app .selection-fields .date-fields label + label { border-top: 0; border-left: 1px solid var(--line); }
+.content-first-app .selection-fields .date-fields input { width: 100%; min-width: 0; min-height: 28px; font-size: 0.8125rem; }
+.content-first-app .selection-fields .date-fields span { font-size: 0.75rem; flex: 0 0 auto; width: auto; }
+.content-first-app .selection-fields .text-button { min-height: 36px; margin: 8px 0 0; font-size: 0.75rem; }
+.content-first-app .selection-help { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; }
+.content-first-app .selection-help .grid-preview { margin: 0; border: 0; }
+.content-first-app .selection-help .grid-preview .map-wrap { max-width: 340px; }
+.content-first-app .selection-help .cell-scope { margin: 8px 0 0; font-size: 0.75rem; color: var(--secondary); }
+.content-first-app .stream-disclosure > summary { min-height: 44px; display: flex; gap: 8px; align-items: center; justify-content: space-between; font-size: 0.8125rem; color: var(--secondary); list-style: none; }
+.content-first-app .stream-disclosure > .field-label { display: none; }
+.content-first-app .stream-list { display: flex; gap: 24px; margin: 12px 0; }
+.content-first-app .stream-list > div { display: flex; gap: 8px; align-items: center; }
+.content-first-app .stream-list small { display: block; margin: 0; }
+.content-first-app .sidebar-note { padding: 16px 0 0; background: none; border: 0; border-top: 1px solid var(--line); margin-top: 16px; }
+.content-first-app .sidebar-note > svg { display: none; }
+.content-first-app .sidebar-note h3 { margin: 0 0 8px; }
+.content-first-app .record-context { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--muted); min-height: 44px; font-size: 0.75rem; padding: 4px 0; }
+.content-first-app .record-context > span { display: flex; flex-wrap: wrap; gap: 8px; }
+.content-first-app .record-context .text-button { margin: 0; font-size: 0.75rem; min-height: 36px; }
+.content-first-app .explore-navigation { display: flex; align-items: stretch; gap: 32px; border-bottom: 1px solid var(--line); margin: 0; }
+.content-first-app .explore-navigation button { display: flex; gap: 8px; align-items: center; justify-content: center; background: none; color: var(--muted); min-height: 48px; padding: 8px 0 12px; border-radius: 0; border: 0; border-bottom: 2px solid transparent; font-size: 0.9375rem; font-weight: 500; }
+.content-first-app .explore-navigation button[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--orange); }
+.content-first-app .explore-navigation button:hover { color: var(--text); }
+.content-first-app .calendar-workspace-controls { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 20px 0; }
+.content-first-app .calendar-reference { display: flex; gap: 12px; align-items: center; }
+.content-first-app .calendar-reference > span { font-size: 0.75rem; color: var(--muted); }
+.content-first-app .segmented { width: auto; background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 4px; gap: 4px; }
+.content-first-app .segmented button { min-height: 36px; padding: 8px 16px; color: var(--secondary); font-size: 0.8125rem; border-radius: 4px; flex: 0 1 auto; }
+.content-first-app .segmented button.active { background: var(--raised); color: var(--text); box-shadow: none; }
+.content-first-app .panel { padding: 24px; margin-bottom: 24px; border-radius: 12px; border: 1px solid var(--line); background: var(--panel); }
+.content-first-app .panel-heading { margin-bottom: 12px; }
+.content-first-app .panel-heading h2 { font-size: 1.375rem; line-height: 1.3; font-weight: 400; margin: 4px 0 0; }
+.content-first-app .panel-heading .eyebrow { font-size: 0.75rem; color: var(--muted); letter-spacing: 0; text-transform: none; }
+.content-first-app .panel-description { max-width: 80ch; font-size: 0.8125rem; line-height: 1.65; margin: 0 0 20px; }
+.content-first-app .calendar-panel { margin-bottom: 0; }
+.content-first-app .calendar-grid { min-width: 700px !important; }
+.content-first-app .calendar-scroller { margin: 0; }
+.content-first-app .calendar-inspector { padding: 16px; margin-top: 20px; background: var(--bg); border-color: var(--line); border-radius: 8px; }
+.content-first-app .calendar-inspector strong { font-size: 0.875rem; }
+.content-first-app .calendar-inspector small { font-size: 0.75rem; }
+.content-first-app .calendar-inspector-value strong { font-size: 1.5rem; }
+.content-first-app .scale-context { margin: 12px 0 0; color: var(--muted); font-size: 0.75rem; }
+.content-first-app .metric-strip { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 32px; padding: 24px 0; margin: 0; border: 0; }
+.content-first-app .metric-strip > div { border-color: var(--line); padding-right: 24px; }
+.content-first-app .metric-strip > div > span { display: block; font-size: 0.6875rem; letter-spacing: 0; color: var(--muted); line-height: 1.5; min-height: 0; }
+.content-first-app .metric-strip strong { font-size: 1.75rem; margin: 8px 0; line-height: 1.1; font-weight: 400; }
+.content-first-app .metric-strip small { font-size: 0.75rem; }
+.content-first-app .metric-strip .text-button { margin-top: 8px; font-size: 0.75rem; }
+.content-first-app .reliability-notice { margin-top: 16px; margin-bottom: 24px; }
+.content-first-app .area-workspace { border: 1px solid var(--line); border-radius: 12px; margin: 24px 0; background: var(--panel); }
+.content-first-app .area-workspace > summary { display: flex; align-items: center; gap: 12px; list-style: none; padding: 16px 20px; min-height: 64px; font-size: 0.9375rem; color: var(--text); }
+.content-first-app .area-workspace > summary > span { display: grid; gap: 4px; }
+.content-first-app .area-workspace > summary > span > span { font-size: 0.75rem; color: var(--muted); }
+.content-first-app .area-workspace > summary > svg:last-child { margin-left: auto; }
+.content-first-app .area-workspace[open] > summary > svg:last-child { transform: rotate(180deg); }
+.content-first-app .area-workspace .panel { border: 0; border-top: 1px solid var(--line); border-radius: 0; margin: 0; }
+.content-first-app .patterns-workspace { padding-top: 24px; }
+.content-first-app .pattern-navigation { width: fit-content; margin-bottom: 24px; }
+.content-first-app .patterns-workspace .seasonal-context { margin-top: 0; }
+.content-first-app .earth-workspace { padding-top: 24px; }
+.content-first-app .bottom-note { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); }
+.content-first-app .bottom-note p { font-size: 0.75rem; line-height: 1.6; }
+.content-first-app footer { width: min(calc(100% - 48px),var(--workspace-width)); max-width: var(--workspace-width); margin: 40px auto 0; padding: 24px 0; }
+.content-first-app footer p { font-size: 0.6875rem; }
+.content-first-app #main { scroll-margin-top: 16px; }
+.content-first-app .loading-state { min-height: 440px; }
+@media (min-width: 1700px) { .content-first-app { --workspace-width: 1520px; } }
+@media (max-width: 1100px) {
+  .content-first-app .site-header { gap: 24px; }
+  .content-first-app .site-header .header-source { display: none; }
+  .content-first-app .site-header nav { gap: 20px; }
+  .content-first-app .selection-bar { gap: 20px; }
+}
+@media (max-width: 800px) {
+  .content-first-app .site-header { min-height: 56px; padding: 4px 20px; gap: 16px; flex-wrap: nowrap; justify-content: space-between; }
+  .content-first-app .site-header .desktop-navigation { display: none; }
+  .content-first-app .mobile-navigation { display: block; position: relative; }
+  .content-first-app .mobile-navigation > summary { display: flex; align-items: center; gap: 12px; min-height: 44px; list-style: none; font-size: 0.8125rem; color: var(--text); }
+  .content-first-app .mobile-navigation nav { position: absolute; inset-inline-end: 0; top: calc(100% + 8px); width: min(280px,calc(100vw - 40px)); z-index: 20; display: grid; grid-template-columns: 1fr; gap: 0; padding: 8px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); box-shadow: 0 12px 32px #0005; }
+  .content-first-app .mobile-navigation nav button { text-align: left; padding: 12px; border: 0; border-radius: 8px; min-height: 44px; font-size: 0.875rem; white-space: normal; }
+  .content-first-app .mobile-navigation nav button.active { color: var(--orange); background: var(--raised); }
+  .content-first-app main, .content-first-app footer { width: calc(100% - 40px); }
+  .content-first-app .workspace-heading { align-items: flex-start; padding: 24px 0; gap: 16px; }
+  .content-first-app .workspace-tools { flex-direction: column; align-items: flex-end; gap: 12px; }
+  .content-first-app .workspace-kicker { font-size: 0.6875rem; }
+  .content-first-app .workspace-heading p { max-width: 34ch; }
+  .content-first-app .selection-bar { grid-template-columns: minmax(0,1fr) auto; padding: 16px; gap: 12px 16px; }
+  .content-first-app .selection-context { grid-column: 1/-1; grid-row: 2; border-left: 0; border-top: 1px solid var(--line); padding: 12px 0 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .content-first-app .selection-options { grid-column: 2; grid-row: 1; }
+  .content-first-app .selection-options-body { padding: 20px; }
+  .content-first-app .selection-fields { grid-template-columns: 1fr; gap: 20px; }
+  .content-first-app .selection-help { grid-template-columns: 1fr; gap: 8px; }
+  .content-first-app .calendar-reference > span { display: none; }
+  .content-first-app .metric-strip { gap: 20px; }
+  .content-first-app .metric-strip > div { padding-right: 16px; }
+}
+@media (max-width: 540px) {
+  .content-first-app .site-header { padding-inline: 16px; }
+  .content-first-app main, .content-first-app footer { width: calc(100% - 32px); }
+  .content-first-app .workspace-heading { display: grid; gap: 16px; padding: 24px 0 20px; }
+  .content-first-app .workspace-heading h1 { font-size: 1.75rem; }
+  .content-first-app .workspace-heading p { max-width: none; font-size: 0.8125rem; }
+  .content-first-app .workspace-tools { flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
+  .content-first-app .selection-bar { padding: 12px; gap: 12px; }
+  .content-first-app .selection-context strong { font-size: 0.75rem; }
+  .content-first-app .selection-country select { font-size: 0.9375rem; }
+  .content-first-app .selection-options > summary { gap: 8px; padding-inline: 8px; font-size: 0.75rem; }
+  .content-first-app .selection-options > summary svg:first-child { display: none; }
+  .content-first-app .selection-options > summary svg:last-child { margin: 0; }
+  .content-first-app .selection-options-body { padding: 16px; max-height: min(620px, 75dvh); overflow-y: auto; }
+  .content-first-app .selection-fields .date-fields { grid-template-columns: 1fr; }
+  .content-first-app .selection-fields .date-fields label + label { border-left: 0; border-top: 1px solid var(--line); }
+  .content-first-app .selection-fields .date-fields input { min-height: 36px; font-size: 1rem; }
+  .content-first-app .stream-list { flex-wrap: wrap; gap: 16px; }
+  .content-first-app .record-context { gap: 12px; padding: 8px 0; }
+  .content-first-app .record-context > span { max-width: 60%; font-size: 0.6875rem; gap: 4px; }
+  .content-first-app .explore-navigation { justify-content: space-between; gap: 20px; }
+  .content-first-app .explore-navigation button { font-size: 0.875rem; gap: 8px; }
+  .content-first-app .calendar-workspace-controls { flex-wrap: wrap; gap: 12px; padding: 16px 0; }
+  .content-first-app .calendar-reference { gap: 8px; }
+  .content-first-app .segmented { padding: 4px; gap: 4px; }
+  .content-first-app .segmented button { font-size: 0.75rem; min-height: 36px; padding: 8px 12px; }
+  .content-first-app .panel { padding: 20px 16px; margin-bottom: 20px; }
+  .content-first-app .panel-heading h2 { font-size: 1.25rem; }
+  .content-first-app .panel-description { font-size: 0.75rem; line-height: 1.65; }
+  .content-first-app .calendar-panel { margin: 0; }
+  .content-first-app .calendar-inspector { padding: 12px; gap: 12px; }
+  .content-first-app .calendar-inspector small { font-size: 0.6875rem; }
+  .content-first-app .calendar-inspector-value strong { font-size: 1.375rem; }
+  .content-first-app .metric-strip { grid-template-columns: 1fr; gap: 0; padding: 12px 0; }
+  .content-first-app .metric-strip > div { padding: 16px 0; border: 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 16px; }
+  .content-first-app .metric-strip > div > span { grid-column: 1; font-size: 0.6875rem; }
+  .content-first-app .metric-strip strong { grid-column: 2; grid-row: 1/3; font-size: 1.5rem; margin: 0; text-align: right; }
+  .content-first-app .metric-strip small { grid-column: 1; font-size: 0.6875rem; }
+  .content-first-app .metric-strip .peak-jump { grid-column: 1/-1; width: fit-content; margin: 4px 0 0; }
+  .content-first-app .pattern-navigation { display: flex; flex-wrap: wrap; width: 100%; }
+  .content-first-app .pattern-navigation button { flex: 1 1 auto; }
+  .content-first-app .area-workspace > summary { padding: 16px; }
+  .content-first-app .area-workspace > summary > span > span { font-size: 0.6875rem; }
+}
+@media (pointer: coarse) {
+  .content-first-app .segmented button, .content-first-app .text-button,
+  .content-first-app .selection-country select { min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .content-first-app *, .content-first-app *::before, .content-first-app *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+}
+/* Filters expand in the document flow: opening them never covers the chart. */
+.content-first-app .selection-bar { display: block; }
+.content-first-app .selection-top { display: grid; grid-template-columns: minmax(180px,240px) minmax(0,1fr); gap: 24px; align-items: center; padding-right: 172px; }
+.content-first-app .selection-options > summary { position: absolute; right: 20px; top: 22px; }
+.content-first-app .selection-options-body { position: static; margin-top: 20px; padding: 20px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; box-shadow: none; }
+@media (max-width: 800px) {
+  .content-first-app .selection-top { grid-template-columns: minmax(0,1fr); padding-right: 0; gap: 12px; }
+  .content-first-app .selection-country { padding-right: 164px; }
+  .content-first-app .selection-context { grid-column: auto; grid-row: auto; }
+  .content-first-app .selection-options > summary { right: 16px; top: 20px; }
+}
+@media (max-width: 540px) {
+  .content-first-app .selection-country { padding-right: 124px; }
+  .content-first-app .selection-options > summary { top: 20px; right: 12px; }
+  .content-first-app .selection-options-body { max-height: none; overflow: visible; }
+}
+/* Let the data reach the first screen, not a stack of introductory bars. */
+.content-first-app .workspace-heading { padding: 20px 0; }
+.content-first-app .workspace-heading h1 { font-size: clamp(1.75rem,2.4vw,2rem); margin: 0 0 8px; }
+.content-first-app .workspace-tools .text-button { margin: 0; min-height: 40px; font-size: 0.75rem; }
+.content-first-app .selection-bar { padding-block: 12px; }
+.content-first-app .selection-options > summary { top: 16px; }
+.content-first-app .explore-navigation { margin-top: 12px; }
+.content-first-app .calendar-workspace-controls { padding-block: 12px; }
+.content-first-app .calendar-panel .panel-description { margin-bottom: 12px; }
+.content-first-app .calendar-panel .beyond-validation { font-size: 0.75rem; line-height: 1.6; margin: 8px 0 16px; padding: 8px 12px; }
+@media(max-width:540px) {
+  .content-first-app .workspace-heading { padding-block: 20px; gap: 12px; }
+  .content-first-app .workspace-tools { gap: 8px; }
+  .content-first-app .workspace-tools .data-badge { flex-basis: 100%; }
+  .content-first-app .selection-options > summary { top: 20px; }
+}
+.content-first-app dialog.evidence-drawer { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(520px,100%); max-width: 100%; height: 100dvh; max-height: 100dvh; border: 0; border-left: 1px solid var(--line); border-radius: 0; color: var(--text); background: var(--panel); padding: 24px; overflow-y: auto; overscroll-behavior: contain; }
+.content-first-app dialog.evidence-drawer::backdrop { background: #080a0db8; }
+@media(max-width:540px) { .content-first-app dialog.evidence-drawer { padding: 20px 16px; } }
+.content-first-app dialog.evidence-drawer:modal { overscroll-behavior: contain; }
+.content-first-app dialog.evidence-drawer::backdrop { overflow: hidden; overscroll-behavior: contain; }
+.content-first-app .selection-summary-context { display: none; }
+.content-first-app .selection-summary-action { display: flex; gap: 8px; align-items: center; }
+@media(max-width:540px) {
+  .content-first-app .workspace-heading h1 { font-size: 1.5rem; }
+  .content-first-app .workspace-tools .data-badge:not(.synthetic) { display: none; }
+  .content-first-app .selection-country { padding-right: 0; }
+  .content-first-app .selection-context { display: none; }
+  .content-first-app .selection-top { gap: 0; }
+  .content-first-app .selection-options > summary { position: static; width: 100%; margin-top: 8px; padding: 12px 0 0; min-height: 56px; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+  .content-first-app .selection-summary-context { display: grid; gap: 4px; min-width: 0; font-size: 0.6875rem; color: var(--muted); }
+  .content-first-app .selection-summary-context > span:last-child { color: var(--text); font-size: 0.75rem; line-height: 1.5; }
+  .content-first-app .selection-summary-action { flex: 0 0 auto; font-size: 0.75rem; }
+  .content-first-app .selection-summary-action > svg:first-child { display: none; }
+}

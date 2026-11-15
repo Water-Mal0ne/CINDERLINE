@@ -53,7 +53,7 @@ export default function SeasonalContext({region,label,selectedYear,onExport,cell
   };
   const lineSegments=contiguous(points,p=>numeric(p.median));
   const bandSegments=contiguous(points,p=>numeric(p.p10)&&numeric(p.p90));
-  return <section className="seasonal-context" id="seasonal-context" aria-labelledby="seasonal-title">
+  return <section className="seasonal-context" id="seasonal-context" tabIndex={-1} aria-labelledby="seasonal-title">
     <div className="seasonal-intro"><div><span className="eyebrow">03 / SEASONAL CONTEXT</span><h2 id="seasonal-title">The season behind the signal.</h2>
       <p>Explore when activity has typically been highest across {region.meta.name}. These patterns describe the historical record.</p></div>
       <span className="seasonal-scope"><Waves size={14}/> National baseline · {SEASONAL_BASELINE}</span></div>
