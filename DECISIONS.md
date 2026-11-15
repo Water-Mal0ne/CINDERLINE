@@ -199,3 +199,10 @@ Kill rule: if any condition fails, the test fails. Do not change the cutoff, swi
 - Before publishing, the sum over all cells is reconciled with the published national monthly series (`reports/review/area/reconciliation.csv`).
 - Follows `reports/review/CUSTOM_AREA.md` where sensible: lazily loaded per-country files and a user-drawn rectangle, with a typed point-and-radius alternative. It departs from that note in two ways. The grid stays at 0.25 degrees, as requested, rather than 0.5, and the storage is monthly sparse JSON (tenths of a detection) rather than weekly binary. The site budget for this branch is 80 MiB, with every file under 25 MiB. The globe file is unchanged.
 - A visible note says: "Area values use national calibration; local accuracy has not been validated."
+
+## 2025 extension (15 November 2026)
+
+- 2025 FIRMS country archives exist (S-NPP VIIRS and MODIS, dated 10 October 2026). Apply the frozen per-country model to 2025 VIIRS with no refitting and append 2025 to the national series and the 12 published cells, labelled "converted VIIRS, beyond the validation period". Script: `python -m pipeline.extend_2025`.
+- Leave lo/hi empty for 2025: the 200-draw calibration interval needs the full training bootstrap, which is not re-run. Weekly climatology, anomaly flags, critical periods, evaluation and rhythm results stay on 2003-2024.
+- Mark 12 November 2025 as no observation in Australia, Bangladesh, Egypt, India and Nepal: VIIRS has zero detections there while MODIS recorded hundreds (a partial-day S-NPP gap). No day had zero VIIRS in all seven countries.
+- Report the out-of-sample continuity check (2025 weekly converted VIIRS against observed Aqua) whatever the result, in JUDGE_QA question 3 and the Layer 1 section.

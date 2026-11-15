@@ -1,0 +1,8 @@
+label,country,model,weeks,aqua_detections,converted_viirs,bias_pct_2025,weekly_r_2025,weekly_mae_2025,raw_viirs_per_aqua_2025,bias_pct_test_2020_2024,weekly_r_test_2020_2024
+"REAL FIRMS DATA - 2025 EXTENSION (frozen model, beyond the validation period)",Australia,B1,53,140480,163561.4,16.4,0.982,549.3,8.03,11.0,0.962
+"REAL FIRMS DATA - 2025 EXTENSION (frozen model, beyond the validation period)",Bangladesh,M1,53,1958,1828.2,-6.6,0.987,7.7,4.0,6.8,0.921
+"REAL FIRMS DATA - 2025 EXTENSION (frozen model, beyond the validation period)",Brazil,B1,53,140750,110642.8,-21.4,0.962,578.3,5.42,-10.5,0.979
+"REAL FIRMS DATA - 2025 EXTENSION (frozen model, beyond the validation period)",Egypt,M1,53,237,355.4,50.0,0.305,4.3,25.35,51.7,0.729
+"REAL FIRMS DATA - 2025 EXTENSION (frozen model, beyond the validation period)",India,M1,53,60641,53881.6,-11.1,0.942,365.4,7.58,-2.4,0.93
+"REAL FIRMS DATA - 2025 EXTENSION (frozen model, beyond the validation period)",Nepal,M1,53,1993,1642.4,-17.6,0.987,11.0,10.56,-8.1,0.977
+"REAL FIRMS DATA - 2025 EXTENSION (frozen model, beyond the validation period)",United_States,B1,53,55779,51899.7,-7.0,0.845,256.3,6.42,1.7,0.905

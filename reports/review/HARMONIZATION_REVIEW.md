@@ -15,6 +15,20 @@ Brazil and the United States; M1 for Bangladesh, Egypt, India and Nepal.
 
 **Independent validation on NOAA-20 (review E3).** NOAA-20 VIIRS, converted with the saved S-NPP-fitted model and no refitting, matches the released converted S-NPP series in the test years 2020-2024: United States +1.3% (weekly r 0.984), Nepal +0.6% (r 0.989), Bangladesh -0.5% (r 0.987), Egypt -2.6% (r 0.829). Egypt's high bias against Aqua persists with NOAA-20 (+47.7%), which points at the Egypt ratio rather than at S-NPP. Details: `reports/review/noaa20/NOAA20.md`.
 
+**Out-of-sample continuity check, 2025 (beyond the validation period).** The frozen model, with no refitting, was applied to 2025 S-NPP VIIRS and compared with observed MODIS Aqua as weekly national totals, with no-observation days excluded:
+
+| Country | Model | 2025 bias | 2025 weekly r | 2020-2024 bias | 2020-2024 weekly r |
+|---|---|---:|---:|---:|---:|
+| Australia | B1 | +16.4% | 0.982 | +11.0% | 0.962 |
+| Bangladesh | M1 | -6.6% | 0.987 | +6.8% | 0.921 |
+| Brazil | B1 | -21.4% | 0.962 | -10.5% | 0.979 |
+| Egypt | M1 | +50.0% | 0.305 | +51.7% | 0.729 |
+| India | M1 | -11.1% | 0.942 | -2.4% | 0.930 |
+| Nepal | M1 | -17.6% | 0.987 | -8.1% | 0.977 |
+| United States | B1 | -7.0% | 0.845 | +1.7% | 0.905 |
+
+Weekly timing holds, but country totals drifted further from Aqua than in the held-out years, most in Brazil and Nepal. Orbit drift, product changes and real change are not separated. Details: `reports/review/extend2025/CONTINUITY.md`.
+
 ## A2. Per test year, selected model (weekly bias %, weekly correlation)
 
 | Country | 2020 | 2021 | 2022 | 2023 | 2024 |

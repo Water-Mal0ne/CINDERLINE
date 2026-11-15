@@ -69,7 +69,7 @@ test('colour bins cover the ramp and the legend edges start at zero', () => {
 test('real Nepal data: 2022 S-NPP outage months are marked, history and CSV are complete', () => {
   const m = stats.monthMatrix(nepal.daily, 'harmonized');
   assert.equal(m.years[0], 2003);
-  assert.equal(m.years.at(-1), 2024);
+  assert.equal(m.years.at(-1), Number(nepal.meta.period_end.slice(0, 4)));
   for (const key of ['2022-07', '2022-08', '2024-07']) assert.equal(m.cells.get(key).status, 'no-observation', key);
   assert.ok(m.busiestMonth && m.busiestYear);
   assert.ok(m.busiestYear.year !== 2022 && m.busiestYear.year !== 2024);
@@ -77,7 +77,7 @@ test('real Nepal data: 2022 S-NPP outage months are marked, history and CSV are 
   assert.ok(h.years >= 15 && h.median > 0 && h.p10 <= h.median && h.median <= h.p90);
   const csv = stats.monthCalendarCSV(m, 'Nepal', 'Region total', nepal.meta.label).replace('﻿', '').split('\r\n');
   assert.match(csv[0], /same_month_other_years_median/);
-  assert.equal(csv.length, 1 + 22 * 12);
+  assert.equal(csv.length, 1 + m.years.length * 12);
   assert.ok(csv.some(line => line.includes('"2022","7",""') && line.includes('no-observation')));
   assert.ok(csv.every((line, i) => i === 0 || line.includes('not a forecast')));
 });
