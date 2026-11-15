@@ -3,19 +3,19 @@ import type {KeyboardEvent} from 'react';
 import {ArrowDownToLine, Star} from 'lucide-react';
 import type {Daily} from './types';
 import {binEdges, colorBin, HISTORY_NOTE, MONTH_NAMES, MONTHS, monthCalendarCSV, monthHistory, monthKey, monthMatrix, RAMP} from './monthStats';
-import type {MonthCell, MonthMode} from './monthStats';
+import type {MonthCell, MonthMatrix, MonthMode} from './monthStats';
 import {compact, fmt, numeric, saveFile} from './utils';
 import './monthCalendar.css';
 
-interface Props {rows: Daily[]; mode: MonthMode; label: string; regionId: string; regionName: string; scopeName: string; scopeId: string}
+interface Props {rows?: Daily[]; matrix?: MonthMatrix; mode: MonthMode; label: string; regionId: string; regionName: string; scopeName: string; scopeId: string; fileScope?: string}
 
 const unit = (mode: MonthMode) => mode === 'raw' ? 'raw baseline detections' : 'Aqua-reference-equivalent detections';
 const statusText: Record<MonthCell['status'], string> = {
   ok: '', partial: 'partial month in the selected range', 'no-observation': 'no observation (satellite outage)', missing: 'no available estimate',
 };
 
-export default function MonthCalendar({rows, mode, label, regionId, regionName, scopeName, scopeId}: Props) {
-  const matrix = useMemo(() => monthMatrix(rows, mode), [rows, mode]);
+export default function MonthCalendar({rows, matrix: supplied, mode, label, regionId, regionName, scopeName, scopeId, fileScope}: Props) {
+  const matrix = useMemo(() => supplied ?? monthMatrix(rows ?? [], mode), [supplied, rows, mode]);
   const captionId = useId(), monthId = useId(), yearId = useId();
   const defaultCell = useMemo(() => [...matrix.cells.values()].filter(c => c.status === 'ok').sort((a, b) => b.key.localeCompare(a.key))[0] ?? null, [matrix]);
   const [picked, setPicked] = useState<{year: number; month: number} | null>(null);
@@ -40,7 +40,7 @@ export default function MonthCalendar({rows, mode, label, regionId, regionName, 
     if (next >= 0 && next < buttons.length) buttons[next].focus();
   }
   function download() {
-    const safe = regionId.replace(/[^A-Za-z0-9_-]/g, '_'), scope = scopeId === 'ALL' ? 'whole-region' : `cell_${scopeId.replace(/[^A-Za-z0-9._-]/g, '_')}`;
+    const safe = regionId.replace(/[^A-Za-z0-9_-]/g, '_'), scope = fileScope ?? (scopeId === 'ALL' ? 'whole-region' : `cell_${scopeId.replace(/[^A-Za-z0-9._-]/g, '_')}`);
     saveFile(`FIRETRACE_${safe}_${scope}_month-calendar_${mode}.csv`, monthCalendarCSV(matrix, regionId, scopeName, label), 'text/csv;charset=utf-8');
   }
 

@@ -52,6 +52,22 @@ export function monthMatrix(rows: Daily[], mode: MonthMode): MonthMatrix {
     const value = status === 'no-observation' || status === 'missing' ? null : values.reduce((a, b) => a + b, 0);
     cells.set(key, {key, year, month, value, status, recordDays, availableDays: values.length, calendarDays});
   }
+  return finalize(cells, mode);
+}
+
+/** Build the matrix from monthly totals already summed elsewhere (area of interest). Index 0 = January of firstYear. */
+export function monthMatrixFromMonthly(values: ArrayLike<number>, firstYear: number, outageMonths: readonly string[], mode: MonthMode): MonthMatrix {
+  const outage = new Set(outageMonths), cells = new Map<string, MonthCell>();
+  for (let i = 0; i < values.length; i++) {
+    const year = firstYear + Math.floor(i / 12), month = i % 12 + 1, key = monthKey(year, month), calendarDays = daysIn(year, month);
+    const blocked = outage.has(key);
+    cells.set(key, {key, year, month, value: blocked ? null : values[i], status: blocked ? 'no-observation' : 'ok',
+      recordDays: calendarDays, availableDays: blocked ? 0 : calendarDays, calendarDays});
+  }
+  return finalize(cells, mode);
+}
+
+function finalize(cells: Map<string, MonthCell>, mode: MonthMode): MonthMatrix {
   const years = [...new Set([...cells.values()].map(cell => cell.year))].sort((a, b) => a - b);
   const yearTotals = years.map(year => {
     const months = Array.from({length: 12}, (_, i) => cells.get(monthKey(year, i + 1)));

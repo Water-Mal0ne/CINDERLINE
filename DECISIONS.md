@@ -191,3 +191,11 @@ Kill rule: if any condition fails, the test fails. Do not change the cutoff, swi
 - Busiest month uses fully observed months only; busiest year uses only years with all 12 months observed, so years with an outage month (2022, 2024) are not ranked.
 - Month vs history compares a month with the median and 10th-90th percentile (linear interpolation) of the same month in the other fully observed years in view. It is labelled as a historical comparison, not a forecast.
 - Viridis seven-step ramp on the square-root scale used by the weekly calendar. The month CSV carries every month with its history columns; the evidence brief adds the comparison for the month containing the week's first day.
+
+## Area of interest (15 November 2026)
+
+- Build monthly Aqua-reference-equivalent series for every 0.25-degree cell with vegetation detections in the seven countries, using the frozen per-country selection and ratios (no refitting): observed Aqua 2003-2012, converted S-NPP VIIRS 2013-2024, the same split as the national series. Cleaning is the official `pipeline.clean.clean_frame` (confidence filter, exact-coordinate civil time, 0.25-degree cells). Script: `python -m pipeline.area_cells count|build`.
+- Months the published national series marks as "no observation" are listed once per country and are never cell values or zeros.
+- Before publishing, the sum over all cells is reconciled with the published national monthly series (`reports/review/area/reconciliation.csv`).
+- Follows `reports/review/CUSTOM_AREA.md` where sensible: lazily loaded per-country files and a user-drawn rectangle, with a typed point-and-radius alternative. It departs from that note in two ways. The grid stays at 0.25 degrees, as requested, rather than 0.5, and the storage is monthly sparse JSON (tenths of a detection) rather than weekly binary. The site budget for this branch is 80 MiB, with every file under 25 MiB. The globe file is unchanged.
+- A visible note says: "Area values use national calibration; local accuracy has not been validated."
