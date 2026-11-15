@@ -1,6 +1,6 @@
 # Judge Q&A: the hardest questions, with honest answers
 
-Every number is from a committed report (path in brackets). "Detections" are satellite hotspot detections, not fires. Questions 9 and 19-22 cite the source index at the end ([S..] codes).
+Every number is from a committed report (path in brackets). "Detections" are satellite hotspot detections, not fires. Questions 8, 9, 15, 19 and 20 cite the source index at the end ([S..] codes).
 
 We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration.
 
@@ -25,8 +25,8 @@ The evidence card lists daily conversion intervals; it does not sum them into a 
 **7. Where does the harmonization fail?**
 Egypt is biased high in every test year (+36% to +66%); Bangladesh 2022 fails (bias +114%, r 0.18); Brazil runs 10-14% low from 2021 [reports/review/HARMONIZATION_REVIEW.md]. The MODIS product version field also changes across the training, validation and test windows (6.2, 6.03, 61.03) [METHODS.md].
 
-**8. Is the weekly-rhythm result stable under the reported checks?**
-The US Sunday dip is large (Sunday 22-33% below an average day in all three satellites) and stable: leaving out any one year never changes the lowest day. Re-running the null test with 200,000 draws instead of 5,000 changes no significance call [reports/review/RHYTHM_REVIEW.md].
+**8. Was the Sunday pattern already known, and is the result stable under the reported checks?**
+Yes: Earl, Simmonds and Tapper reported weekly fire cycles in 2015. We reproduce a known association separately in raw satellite streams. Our contribution is an inspectable calendar with baseline comparisons, explicit failures, retrospective tests of count versus seasonal agreement, and the fixed count-versus-FRP comparison. We do not claim first discovery or promise a prize. The official country rule passes US 3/3, Australia 3/3 and Brazil 2/3 streams; India, Nepal, Bangladesh and Egypt do not pass. [S04, S10–S11, S13] The US Sunday dip is large (Sunday 22-33% below an average day in all three satellites) and stable: leaving out any one year never changes the lowest day. Re-running the null test with 200,000 draws instead of 5,000 changes no significance call [reports/review/RHYTHM_REVIEW.md].
 
 **9. Was any of this preregistered?**
 No. For the original rhythm gate, US and Nepal data were already in hand, and no Git record predates the first real-data run. For FRP, the local protocol was frozen before its first calculation, but Git receipt `92626ed2f76fc6ab1bcefa6254d49609b7c6b982` was created after the original result was known. It is an honest later record of the earlier local specification, not proof that the Git commit preceded results. Both use already-inspected historical records. [S12, S11]
@@ -46,8 +46,8 @@ Punjab and Haryana cells show no weekly dip (median Sunday index 1.10, none sign
 **14. What explains the northeast India dip?**
 Unresolved. It is consistent across time (Nagaland, Mizoram and Manipur cells below 1 in 12 of 12 years in VIIRS and Aqua) but partly a border effect: the five deepest cells lie mostly outside India; cells mostly inside India give 14 of 21 significant (median 0.717). A pre-committed out-of-sample prediction that Bangladesh's Chittagong Hill Tracts would show no Sunday dip failed in one of two cells [reports/review/NORTHEAST_INDIA_REVIEW.md, reports/review/bangladesh_hills/RESULT.md].
 
-**15. Can I pick my own area, and can this forecast fire?**
-Areas: the calendar covers national totals plus 12 daily grid cells per country; drawing an arbitrary area is not supported in this release (it would exceed the site's size budget). Forecasting: no. The calendar is historical and descriptive, complementary to near-real-time alert systems such as ICIMOD's, not a replacement [README.md].
+**15. Can I pick my own area, and can this forecast fire or replace alerts?**
+Areas: the calendar covers national totals plus 12 daily grid cells per country; drawing an arbitrary area is not supported in this release (it would exceed the site's size budget). Forecasting: no. The calendar is historical and descriptive, complementary to near-real-time alert systems such as ICIMOD's, not a replacement [README.md]. Anomaly flags and exported ICS windows are descriptive references, not predictions, risk scores, emergency warnings or safe-burning advice. User impact and operational suitability have not been validated. NASA does not approve or endorse this conversion. [S08]
 
 **16. What about satellite outages?**
 The calendar masks outages of the stream supplying its value, plus flagged days with no detections in any of the seven countries: 38 days per country, all in 2022 and 2024, are marked "no observation" (grey) and excluded from typical-season statistics and anomaly flags. The documented Aqua outages fall in years supplied by converted VIIRS and therefore do not remove calendar values. Held-out evaluation and annual globe totals were not recomputed with these masks. [reports/review/OUTAGES.md]
@@ -60,18 +60,12 @@ No. In the original retrospective, unmasked whole-year replacement experiment fo
 
 The direction survives both common-date outage masks. India's B1-to-M1 count error is **13.83% to 4.05%** with the primary mask and **13.94% to 4.51%** with one-day padding; seasonal TV worsens **12.31 to 15.57** and **12.28 to 15.42** respectively. Nepal's seasonal TV improves **13.82 to 5.75** and **13.79 to 5.69**. These compare totals and monthly shares over commonly retained dates, not reconstructed full-year activity. They are descriptive means of previously examined years, not new significance tests or guarantees for every cut/year. Sources: `reports/review/season/whole_year_comparison.csv`, `SEASON_CHECK.md` and independent verification. Reproduce with `python -m pipeline.review.season_check` and `python scripts/verify_season_check.py`. Production models and official results remain unchanged.
 
-**19. Was the Sunday pattern already known, and what is new here?**
-Yes: Earl, Simmonds and Tapper reported weekly fire cycles in 2015. We reproduce a known association separately in raw satellite streams. Our contribution is an inspectable calendar with baseline comparisons, explicit failures, retrospective tests of count versus seasonal agreement, and the fixed count-versus-FRP comparison. We do not claim first discovery or promise a prize. The official country rule passes US 3/3, Australia 3/3 and Brazil 2/3 streams; India, Nepal, Bangladesh and Egypt do not pass. [S04, S10–S11, S13]
-
-**20. What exactly passed in the count-versus-FRP test?**
+**19. What exactly passed in the count-versus-FRP test?**
 “In US daytime observations from 2013-2024, the Sunday deficit was stronger in detection counts than in summed fire radiative power in MODIS Aqua and VIIRS S-NPP, under a pre-specified test.”
 
 The same finite, nonnegative-FRP observations enter both measures. Aqua and S-NPP meet all fixed contrast and sensitivity criteria under both masks; Terra fails because its adjusted interval includes zero. Twelve year blocks drive uncertainty, not millions of independent detections. Independent recomputation passed. Summed FRP is sampled radiative power, not energy, emissions, burned area or distinct fire counts. The Git receipt is after the original result, as explained in question 9. [S11]
 
-**21. Can FIRETRACE forecast fires or replace alerts?**
-No. It is a historical exploration prototype for comparing measurement records and inspecting seasons. Anomaly flags and exported ICS windows are descriptive references, not predictions, risk scores, emergency warnings or safe-burning advice. It may complement near-real-time monitoring, but user impact and operational suitability have not been validated. NASA does not approve or endorse this conversion. [S08]
-
-**22. What did AI do, and how can judges reproduce the work?**
+**20. What did AI do, and how can judges reproduce the work?**
 Codex and Claude Code assisted with analysis implementation, UI, testing, documentation and submission drafts. NASA FIRMS supplies the observations; synthetic fixtures are labelled and separate. The team must review all claims before submitting. Core commands and fixed model sources are in README/METHODS; season and FRP scripts, CSVs, input hashes and independent verification receipts are linked in the evidence ledger. Repository access must be confirmed for judges, and new branch results are not automatically deployed. [S01, S10–S12]
 
 ## Source index
