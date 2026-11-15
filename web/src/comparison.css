@@ -1,7 +1,7 @@
 .month-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px}.month-navigation>div{display:flex;gap:5px}.comparison-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.comparison-partial{font-size:.76rem;color:#edc389;line-height:1.6;margin:9px 0 0}.comparison-table{max-height:360px;border:1px solid var(--border,#334147);border-radius:8px;margin-bottom:16px}.comparison-table caption{padding:12px;text-align:left;color:#aebec3;font-size:.75rem}.comparison-table thead{position:sticky;top:0;background:#1b292f;z-index:1}.comparison-table th[scope=row]{font-weight:500;text-align:left}.month-navigation .icon-button:disabled{opacity:.3;cursor:not-allowed}
 .comparison-table:focus-visible{outline:2px solid var(--orange);outline-offset:4px}
 @media(min-width:641px){
-  .month-inspector{grid-template-columns:max-content minmax(0,1fr)}
+  .panel .month-inspector{grid-template-columns:max-content minmax(0,1fr)}
   .month-navigation>label{white-space:nowrap}
   .month-navigation>div{flex-shrink:0}
 }
