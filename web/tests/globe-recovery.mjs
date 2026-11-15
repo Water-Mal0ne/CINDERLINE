@@ -85,3 +85,40 @@ test('the inspected annual cell survives Earth/table round trips and resets on c
     assert.equal(selection(app.tree),undefined);
   }finally{app.dispose();}
 });
+
+test('annual regional drill-down forwards its displayed year even when the country is already selected',async()=>{
+  const requests=[],app=mount([data]);
+  try{
+    app.changeProps({year:2020,onRegion:(...args)=>requests.push(args)});
+    await app.settle();app.click('Grid table');await app.settle();
+    nodes(app.tree,node=>node.type==='button'&&String(node.props?.['aria-label']).startsWith('Inspect grid cell'))[0].props.onClick();
+    await app.settle();
+    const action=nodes(selection(app.tree),node=>node.type==='button')[0];
+    action.props.onClick();
+    assert.deepEqual(requests,[['Nepal',2020]],'regional navigation must carry the inspected annual context');
+    assert.equal(text(action).trim(),'Open 2020 region calendar');
+    app.changeProps({year:2019});await app.settle();
+    const changedYearAction=nodes(selection(app.tree),node=>node.type==='button')[0];
+    changedYearAction.props.onClick();
+    assert.deepEqual(requests,[['Nepal',2020],['Nepal',2019]],'a retained cell must use the newly displayed year');
+    assert.equal(text(changedYearAction).trim(),'Open 2019 region calendar');
+  }finally{app.dispose();}
+});
+
+test('annual daily drill-down forwards the local published cell ID and the selected year',async()=>{
+  const country=JSON.parse(readFileSync(new URL('../public/data/Nepal.json',import.meta.url),'utf8'));
+  const id=country.cells[0].id;
+  const annual=shipped.cells.find(cell=>cell.id===`Nepal:${id}`);
+  assert.ok(annual);
+  const requests=[],app=mount([{...shipped,cells:[annual]}]);
+  try{
+    app.changeProps({year:2020,availableCells:[id],onCell:(...args)=>requests.push(args)});
+    await app.settle();app.click('Grid table');await app.settle();
+    nodes(app.tree,node=>node.type==='button'&&String(node.props?.['aria-label']).startsWith('Inspect grid cell'))[0].props.onClick();
+    await app.settle();
+    const action=nodes(selection(app.tree),node=>node.type==='button')[0];
+    action.props.onClick();
+    assert.deepEqual(requests,[[id,2020]],'country-qualified annual IDs must become the existing local daily ID');
+    assert.equal(text(action).trim(),'Open 2020 daily record');
+  }finally{app.dispose();}
+});

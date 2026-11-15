@@ -176,3 +176,109 @@ test('history and Methods anchors preserve index retry when the catalog is unava
     assert.deepEqual(app.requests,['Nepal.json']);
   }finally{app.dispose();}
 });
+
+// Multi-step journeys use small deterministic state fixtures, never published output edits.
+const journeyRegions=Object.fromEntries(['Nepal','India'].map((id,countryIndex)=>{
+  const idForCell=countryIndex?'25.25:86.75':cellId;
+  const observations=[2023,2024].flatMap(year=>daily.map(row=>({...row,date:row.date.replace('2024',String(year)),cell_id:'ALL'})));
+  return [id,{...region,meta:{...region.meta,region:id,name:id,label:'SYNTHETIC STATE TEST DATA',period_start:'2023-01-01',period_end:'2024-12-31'},daily:observations,
+    cells:[{id:idForCell,file:`${id}-journey-cell.json`,lat:countryIndex?25.25:27.25,lon:countryIndex?86.75:84.75}]}];
+}));
+const journeyIndex={...index,regions:Object.keys(journeyRegions).map(id=>({id,name:id,file:`${id}.json`}))};
+function journeyApp(search='?region=Nepal'){
+  return appHarness(search,file=>{
+    const id=file.split(/[.-]/)[0],data=journeyRegions[id];
+    assert.ok(data,`known fixture ${file}`);
+    return Promise.resolve(file.endsWith('-journey-cell.json')?{daily:data.daily.map(row=>({...row,cell_id:data.cells[0].id}))}:data);
+  },()=>Promise.resolve(journeyIndex));
+}
+function choose(app,id,value){
+  const control=elements(app.tree,node=>node.props?.id===id)[0];
+  assert.ok(control,`control ${id} exists`);assert.ok(!control.props.disabled,`control ${id} is enabled`);
+  control.props.onChange({target:{value}});
+}
+function press(app,label){
+  const target=elements(app.tree,node=>node.type==='button'&&text(node).trim()===label)[0];
+  assert.ok(target,`button ${label} exists`);assert.ok(!target.props.disabled,`button ${label} is enabled`);target.props.onClick();
+}
+const calendar=app=>namedChild(app.tree,'Heatmap');
+const globe=app=>namedChild(app.tree,'LazyChild');
+
+test('journey: country, dates, cell, evidence, close and history restore the same filtered records',async()=>{
+  const app=journeyApp();
+  try{
+    await app.settle();choose(app,'region','India');await app.settle();
+    choose(app,'start','2024-01-03');
+    elements(app.tree,node=>node.props?.['aria-label']==='End date')[0].props.onChange({target:{value:'2024-01-10'}});
+    await app.settle();choose(app,'cell',journeyRegions.India.cells[0].id);await app.settle();
+    press(app,'Raw baseline');await app.settle();
+    const week=calendar(app).props.weeks[0];
+    calendar(app).props.onSelect(week);await app.settle();
+    const drawer=namedChild(app.tree,'EvidenceDrawer');
+    assert.equal(drawer.props.region.meta.region,'India');assert.equal(drawer.props.cellId,journeyRegions.India.cells[0].id);
+    assert.deepEqual(drawer.props.week.rows.map(row=>row.date),['2024-01-03','2024-01-04','2024-01-05','2024-01-06','2024-01-07']);
+    const shared=drawer.props.shareUrl;assert.ok(shared);
+    for(const [key,value] of Object.entries({region:'India',start:'2024-01-03',end:'2024-01-10',cell:journeyRegions.India.cells[0].id,scale:'raw',week:'2024-01-01'}))
+      assert.equal(new URL(shared).searchParams.get(key),value,key);
+    drawer.props.onClose();await app.settle();
+    assert.equal(namedChild(app.tree,'EvidenceDrawer'),undefined);assert.equal(app.url.searchParams.has('week'),false);
+    app.pop(shared);await app.settle();
+    assert.equal(namedChild(app.tree,'EvidenceDrawer').props.cellId,journeyRegions.India.cells[0].id);
+    assert.deepEqual(namedChild(app.tree,'EvidenceDrawer').props.week.rows.map(row=>row.date),week.rows.map(row=>row.date));
+  }finally{app.dispose();}
+});
+
+test('journey: same-country annual drilldown returns to Whole region and retains the chosen year',async()=>{
+  const app=journeyApp(`?region=Nepal&cell=${encodeURIComponent(cellId)}&scale=raw`);
+  try{
+    await app.settle();press(app,'Open the 3D Earth view');await app.settle();
+    assert.ok(globe(app));globe(app).props.onRegion('Nepal',2023);await app.settle();
+    assert.equal(app.url.searchParams.get('cell'),null,'regional exploration must clear the previous daily cell');
+    assert.equal(app.url.searchParams.get('start'),'2023-01-01');
+    assert.equal(app.url.searchParams.get('end'),'2023-12-31');
+    assert.equal(app.url.searchParams.get('scale'),'raw');
+    assert.ok(calendar(app).props.weeks.every(week=>week.year===2023));
+  }finally{app.dispose();}
+});
+
+test('journey: cross-country annual exploration retains year and scale, and direct daily drilldown sets its year',async()=>{
+  const app=journeyApp('?region=Nepal&scale=raw');
+  try{
+    await app.settle();press(app,'Open the 3D Earth view');await app.settle();
+    globe(app).props.onRegion('India',2023);await app.settle();
+    assert.equal(app.url.searchParams.get('region'),'India');assert.equal(app.url.searchParams.get('scale'),'raw');
+    assert.equal(app.url.searchParams.get('start'),'2023-01-01');assert.equal(app.url.searchParams.get('end'),'2023-12-31');
+    assert.equal(app.url.searchParams.get('cell'),null);
+    globe(app).props.onCell(journeyRegions.India.cells[0].id,2024);await app.settle();
+    assert.equal(app.url.searchParams.get('cell'),journeyRegions.India.cells[0].id);
+    assert.equal(app.url.searchParams.get('start'),'2024-01-01');assert.equal(app.url.searchParams.get('end'),'2024-12-31');
+    assert.ok(calendar(app).props.weeks.every(week=>week.rows.every(row=>row.cell_id===journeyRegions.India.cells[0].id)));
+  }finally{app.dispose();}
+});
+
+test('journey: changing dates after a failed shared cell cancels the old pending evidence week',async()=>{
+  const app=failingCellApp();
+  try{
+    await app.settle();assert.equal(namedChild(app.tree,'EvidenceDrawer'),undefined);
+    choose(app,'start','2024-01-02');await app.settle();
+    app.click('Retry loading');await app.settle();
+    assert.equal(!!namedChild(app.tree,'EvidenceDrawer'),false,'retry must not reopen the prior week after deliberate filter changes');
+    assert.equal(app.url.searchParams.get('start'),'2024-01-02');assert.equal(app.url.searchParams.has('week'),false);
+    assert.doesNotMatch(text(app.tree),/linked evidence panel could not be restored/,'a deliberately cancelled week must not retain its failure notice');
+    assert.deepEqual(app.invalidated,[cellFile]);
+  }finally{app.dispose();}
+});
+
+test('journey: a week evidence action opens its annual Earth context without treating it as a weekly layer',async()=>{
+  const app=journeyApp('?region=Nepal&scale=raw');
+  try{
+    await app.settle();const week=calendar(app).props.weeks.find(week=>week.year===2023);
+    calendar(app).props.onSelect(week);await app.settle();
+    const drawer=namedChild(app.tree,'EvidenceDrawer');assert.equal(typeof drawer.props.onViewEarth,'function');
+    drawer.props.onViewEarth();await app.settle();
+    assert.equal(namedChild(app.tree,'EvidenceDrawer'),undefined);
+    assert.ok(globe(app));assert.equal(globe(app).props.year,2023);
+    assert.equal(app.url.searchParams.get('start'),'2023-01-01');assert.equal(app.url.searchParams.get('end'),'2023-12-31');
+    assert.equal(app.url.searchParams.get('scale'),'raw');assert.equal(app.url.searchParams.has('week'),false);
+  }finally{app.dispose();}
+});

@@ -105,3 +105,12 @@ Result (added after the analysis): the prediction did NOT hold. Of the two hill-
 - Draw isolated existing values and break lines across absent months without filling gaps, recomputing values or changing exports. Keep scientific wording/captions/caveats unchanged.
 - Require cross-review plus the full tests/build after the commit; document results and verification limits in reports/SECTION_REVIEW_ROUND2_QA.md.
 - 2026-11-15 09:29 Nepal time: Fix the observed desktop month-label wrapping with CSS only; retain phone layout and all chart content.
+
+## Full-flow review and Unslop UI pass (15 November 2026)
+
+- Use the user-requested Unslop skill by Damir Sokolovsky (@heydamir), credited in reports/UNSLOP_UI_QA.md and the new stylesheets. Keep all four views and their section order, existing scientific text, published data and chart encodings.
+- Use neutral graphite controls and readable labels; let the calendar, real charts and Earth provide the visual emphasis. Preserve the existing brand fonts and semantic palette. Keep the globe lazy-loaded and demand-rendered.
+- Export selected daily evidence as a Markdown brief with its existing caveats and source links. Keep CSV export available and label annual Earth navigation explicitly.
+- Preserve the displayed year through geographic drill-down, restore Whole region scope when requested, and let explicit date edits supersede stale evidence-link hydration.
+- Add only the user-approved annual/daily outage-handling notice. The pre-existing annual/daily discrepancy is disclosed, not corrected; no data or scientific pipeline change is authorized in this UI pass.
+- Keep changes on ui-polish-v2 and update its existing review. Do not merge or deploy. Require independent review, desktop/phone inspection, and the full tests/build after the commit.

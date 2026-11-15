@@ -1,0 +1,148 @@
+/* Earth and Rhythm chrome, informed by Unslop by Damir Sokolovsky (@heydamir),
+ * https://github.com/heydamir/unslop — CC BY 4.0.
+ * Scientific palettes remain local to their charts. Scope Earth rules above
+ * the lazily loaded globe stylesheet so opening the globe cannot reset them. */
+.rhythm-page { gap: 24px; padding-bottom: 40px; }
+.rhythm-page .section-intro h2 em { color: inherit; font: inherit; }
+.rhythm-page .panel-heading .eyebrow,
+.rhythm-page .chart-label { font-size: 12px; letter-spacing: 0; line-height: 1.6; }
+.rhythm-page .panel-description,
+.rhythm-page .rh-defs,
+.rhythm-page .limitations li { font-size: 14px; line-height: 1.7; color: var(--secondary); }
+.rhythm-page .chart-note { font-size: 13px; line-height: 1.7; color: var(--muted); }
+.rhythm-page .rh-headline { font-size: 17px; line-height: 1.6; margin: 4px 0 16px; }
+.rhythm-page .rh-caveat { padding: 16px; gap: 12px; margin: 16px 0; background: var(--raised); border-color: var(--line); border-left: 3px solid var(--orange); border-radius: 8px; font-size: 14px; }
+.rhythm-page .rh-caveat.warn { background: var(--raised); border-color: var(--line); border-left-color: #e7c35a; }
+.rhythm-page .rh-caveat p { line-height: 1.7; }
+.rhythm-page .table-scroll { border-radius: 8px; scrollbar-color: #757b7b var(--panel); }
+.rhythm-page .rh-table th { padding: 12px; font-size: 12px; letter-spacing: 0; }
+.rhythm-page .rh-table td,
+.rhythm-page .rh-table tbody th { padding: 12px; font-size: 14px; line-height: 1.6; }
+.rhythm-page .rh-table tr.active td,
+.rhythm-page .rh-table tr.active th { background: var(--raised); }
+.rhythm-page .rh-link { min-height: 44px; text-align: left; text-decoration-color: var(--muted); }
+.rhythm-page .rh-chip { font-size: 12px; border-radius: 4px; padding: 4px 8px; letter-spacing: 0; }
+.rhythm-page .rh-detail { font-size: 12px; line-height: 1.6; margin-top: 4px; }
+.rhythm-page .rh-country-picker { gap: 8px; margin: 4px 0 24px; }
+.rhythm-page .rh-country-picker button { min-height: 44px; padding: 8px 12px; gap: 8px; font-size: 14px; border-radius: 8px; background: var(--raised); }
+.rhythm-page .rh-country-picker button small { font-size: 12px; }
+.rhythm-page .rh-country-picker button.active { background: var(--raised); border-color: var(--orange); }
+.rhythm-page .rh-country-picker button:hover { border-color: var(--muted); }
+.rhythm-page .rh-country-picker button.active:hover { border-color: var(--orange); }
+.rhythm-page .rh-streams { gap: 16px; grid-template-columns: repeat(auto-fit,minmax(min(100%,300px),1fr)); }
+.rhythm-page .rh-stream { background: var(--panel); border-radius: 12px; padding: 16px; }
+.rhythm-page .rh-stream-head { margin-bottom: 12px; gap: 8px; }
+.rhythm-page .rh-stream h4 { font-size: 16px; }
+/* Keep the original rest-day bars, whiskers and map selection colors. */
+.rhythm-page .rh-chart { --orange: #f79963; --text: #e9e8de; --muted: #9faeb2; --line: #324148; }
+.rhythm-page .rh-map { --orange: #f79963; background: var(--bg); border-radius: 8px; }
+.rhythm-page .rh-tick,
+.rhythm-page .rh-day { font-size: 13px; }
+.rhythm-page .rh-facts { gap: 12px 16px; margin: 12px 0 8px; }
+.rhythm-page .rh-facts dt { font-size: 12px; line-height: 1.6; letter-spacing: 0; }
+.rhythm-page .rh-facts dd { font-size: 15px; line-height: 1.6; }
+.rhythm-page .rh-facts small { font-size: 12px; }
+.rhythm-page .rh-small { font-size: 12px; line-height: 1.7; }
+.rhythm-page .rh-control { gap: 12px; }
+.rhythm-page .rh-control > div { background: var(--panel); border-radius: 12px; padding: 16px; gap: 4px; }
+.rhythm-page .rh-control span,
+.rhythm-page .rh-control small { font-size: 12px; line-height: 1.6; }
+.rhythm-page .rh-control strong { font-size: 24px; font-weight: 500; }
+.rhythm-page .rh-map-wrap { gap: 24px; }
+.rhythm-page .rh-map-help,
+.rhythm-page .rh-legend,
+.rhythm-page .rh-tooltip,
+.rhythm-page .rh-finding { font-size: 14px; line-height: 1.7; }
+.rhythm-page .rh-ramp-labels,
+.rhythm-page .rh-legend small { font-size: 12px; }
+.rhythm-page .rh-exploratory { display: inline-flex; align-items: center; gap: 8px; background: var(--raised); color: var(--secondary); border: 1px solid var(--line); border-radius: 4px; font-size: 12px; font-weight: 500; padding: 4px 8px; letter-spacing: 0; }
+.rhythm-page .rh-exploratory svg { width: 16px; height: 16px; }
+.rhythm-page .rh-tooltip { background: var(--raised); border-radius: 8px; padding: 12px; }
+.rhythm-page .rh-finding { border-left-width: 2px; }
+
+#earth-panel .earth-explorer { background: var(--panel); border-color: var(--line); border-radius: 12px; margin-bottom: 24px; }
+#earth-panel .globe-heading { padding: 20px; gap: 16px; border-color: var(--line); }
+#earth-panel .globe-heading h2 { font-size: 20px; line-height: 1.3; font-weight: 500; margin: 8px 0 0; letter-spacing: 0; }
+#earth-panel .globe-heading .eyebrow,
+#earth-panel .globe-detail .eyebrow { color: var(--muted); font-size: 12px; letter-spacing: 0; line-height: 1.6; }
+#earth-panel .globe-view-actions { gap: 8px; }
+#earth-panel .chart-scale-button { background: var(--raised); color: var(--text); border-color: var(--line); border-radius: 8px; min-height: 44px; padding: 8px 12px; font-size: 13px; white-space: normal; }
+#earth-panel .chart-scale-button:hover:not(:disabled),
+#earth-panel .globe-buttons button:hover { background: #2c3033; border-color: var(--muted); }
+#earth-panel .globe-body { grid-template-columns: minmax(0,1fr) 264px; }
+#earth-panel .globe-stage { min-height: 390px; }
+#earth-panel .globe-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#earth-panel .globe-instructions { top: 16px; left: 16px; right: 16px; font-size: 12px; line-height: 1.5; letter-spacing: 0; text-shadow: none; color: var(--secondary); }
+#earth-panel .globe-buttons { left: 16px; top: 64px; gap: 8px; }
+#earth-panel .globe-buttons button { width: 44px; height: 44px; background: #232629e6; color: var(--text); border-color: var(--line); border-radius: 8px; }
+#earth-panel .globe-coverage { left: auto; right: 16px; bottom: 16px; max-width: calc(100% - 92px); padding: 8px 12px; background: #151719e6; border-radius: 8px; color: var(--muted); font-size: 11px; line-height: 1.6; letter-spacing: 0; }
+#earth-panel .globe-coverage strong { font-size: 14px; color: var(--text); letter-spacing: 0; margin-top: 4px; }
+#earth-panel .globe-coverage > span { font-size: 12px; color: var(--secondary); margin-top: 4px; }
+#earth-panel .globe-detail { background: var(--panel); border-color: var(--line); padding: 20px; }
+#earth-panel .globe-year { color: var(--text); font-size: 32px; letter-spacing: 0; margin: 12px 0; }
+#earth-panel .globe-detail input[type=range] { height: 32px; accent-color: var(--orange); }
+#earth-panel .year-range { font-size: 12px; color: var(--muted); margin-top: 4px; }
+#earth-panel .globe-year-note { font-size: 14px; color: var(--secondary); line-height: 1.6; margin: 12px 0 20px; }
+#earth-panel .globe-scale { gap: 8px; font-size: 11px; color: var(--muted); }
+#earth-panel .globe-detail > small { font-size: 12px; color: var(--muted); line-height: 1.7; margin-top: 8px; }
+#earth-panel .globe-zero-key { gap: 8px; font-size: 12px; color: var(--secondary); margin: 12px 0; }
+#earth-panel .globe-zero-key > span { color: var(--muted); }
+#earth-panel .globe-source,
+#earth-panel .globe-selection { border-color: var(--line); padding-top: 16px; margin-top: 20px; }
+#earth-panel .globe-source > span,
+#earth-panel .globe-selection > span { font-size: 12px; letter-spacing: 0; color: var(--muted); line-height: 1.6; }
+#earth-panel .globe-source strong { font-size: 14px; color: var(--secondary); margin-top: 8px; }
+#earth-panel .globe-selection > strong { font-size: 13px; line-height: 1.7; margin-top: 8px; overflow-wrap: anywhere; }
+#earth-panel .globe-selection > b { font-size: 28px; letter-spacing: 0; color: var(--text); margin: 12px 0 4px; }
+#earth-panel .globe-selection > small { font-size: 12px; line-height: 1.7; color: var(--secondary); }
+#earth-panel .globe-selection > p { font-size: 14px; color: var(--secondary); line-height: 1.7; margin: 12px 0; }
+#earth-panel .globe-selection > .globe-outage-notice { border-left: 2px solid var(--orange); padding-left: 12px; }
+#earth-panel .globe-selection .button { min-height: 44px; padding: 12px; margin-top: 12px; font-size: 13px; border-radius: 8px; }
+#earth-panel .globe-selection:focus { outline-color: var(--orange); }
+#earth-panel .earth-explorer > .chart-note { padding: 0 20px; margin: 12px 0; font-size: 13px; color: var(--muted); line-height: 1.7; }
+#earth-panel .globe-regions strong { color: var(--secondary); }
+#earth-panel .earth-explorer > .chart-label { padding: 0 20px 16px; font-size: 11px; line-height: 1.6; letter-spacing: 0; }
+#earth-panel .globe-unavailable { font-size: 14px; line-height: 1.7; color: var(--secondary); padding: 32px; border-color: var(--line); border-radius: 12px; }
+#earth-panel .globe-table { padding: 16px; }
+#earth-panel .globe-table > p { font-size: 14px; line-height: 1.7; color: var(--secondary); margin: 12px 0; }
+#earth-panel .globe-table-filters { gap: 12px; margin: 16px 0; }
+#earth-panel .globe-table-filters > label { gap: 8px; color: var(--secondary); font-size: 13px; }
+#earth-panel .globe-table-filters input[type=search] { padding: 12px; min-height: 44px; background: var(--raised); color: var(--text); border-color: var(--line); border-radius: 8px; font-size: 14px; }
+#earth-panel .globe-daily-filter input { accent-color: var(--orange); }
+#earth-panel .globe-table .globe-table-count { color: var(--muted); font-size: 12px; }
+#earth-panel .globe-table table th { padding: 12px 8px; font-size: 12px; color: var(--muted); letter-spacing: 0; }
+#earth-panel .globe-table table td { padding: 12px 8px; font-size: 13px; line-height: 1.6; }
+#earth-panel .globe-table .text-button { min-height: 44px; font-size: 13px; }
+#earth-panel .globe-daily-badge { color: var(--secondary); font-size: 12px; }
+#earth-panel .globe-table tr.globe-row-selected { background: var(--raised); box-shadow: inset 3px 0 var(--orange); }
+#earth-panel .globe-table tr.globe-row-selected .text-button { color: var(--orange); }
+#earth-panel .globe-table .table-scroll:focus-visible { outline-color: var(--orange); }
+#earth-panel .globe-table-empty { font-size: 14px; color: var(--secondary); }
+#earth-panel .globe-pagination { gap: 8px; padding: 16px 0 4px; bottom: -16px; background: var(--panel); border-color: var(--line); }
+#earth-panel .globe-pagination > span { color: var(--muted); font-size: 12px; }
+
+@media (max-width: 800px) {
+  #earth-panel .globe-body { grid-template-columns: 1fr; }
+  #earth-panel .globe-stage { min-height: 360px; }
+  #earth-panel .globe-detail { gap: 8px 16px; padding: 16px; }
+  #earth-panel .globe-year { margin: 4px 0 8px; }
+  #earth-panel .globe-year-note { margin: 4px 0 0; }
+  #earth-panel .globe-source { margin-top: 4px; padding-top: 12px; }
+  #earth-panel .globe-selection { margin-top: 8px; }
+}
+@media (max-width: 640px) {
+  .rhythm-page { gap: 24px; }
+  .rhythm-page .rh-caveat { padding: 12px; }
+  .rhythm-page .rh-country-picker button { font-size: 13px; padding: 8px 12px; }
+  .rhythm-page .rh-streams { grid-template-columns: minmax(0,1fr); }
+  .rhythm-page .rh-stream { padding: 12px; }
+  .rhythm-page .rh-map-wrap { gap: 16px; }
+  #earth-panel .globe-heading { padding: 16px; }
+  #earth-panel .globe-heading h2 { font-size: 19px; }
+  #earth-panel .globe-table { padding: 12px; }
+  #earth-panel .globe-table table th,
+  #earth-panel .globe-table table td { padding: 12px 8px; }
+  #earth-panel .earth-explorer > .chart-note { padding: 0 16px; }
+  #earth-panel .earth-explorer > .chart-label { padding: 0 16px 16px; }
+  #earth-panel .globe-pagination { bottom: -12px; }
+}
