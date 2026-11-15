@@ -58,7 +58,7 @@
    }
   }
  },
- "headline": "Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.",
+ "headline": "Sunday dip clear in the US and Australia, weaker in Brazil, and not established where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.",
  "sunday_caveat": "All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.",
  "robustness": {
   "role": "robustness checks reported next to the official decision; they never change it",
@@ -143,7 +143,7 @@
   "source": "reports/rhythm_results.json",
   "notes": {
    "United_States": "US volcano detections show a Sunday dip in VIIRS only (0.861), almost entirely from Kilauea and sensitive to the 2018 eruption year; Aqua and Alaska's volcanoes show none, and the larger US industrial-source control is flat in all three satellites over 2002-2024. A processing or satellite artifact would be expected to appear across satellites and source types, so we treat this as an unexplained single-volcano, single-satellite result and report it rather than discount it.",
-   "Brazil": "Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three satellites on new ignitions. Because of the 2002-2024 control, Brazil does not meet the stricter check; the official pre-specified result is unchanged (PASS)."
+   "Brazil": "Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three satellites on newly active grid cells (not verified ignitions). Because of the 2002-2024 control, Brazil does not meet the stricter check; the official pre-specified result is unchanged (PASS)."
   },
   "control_nuance": null
  },

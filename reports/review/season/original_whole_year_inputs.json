@@ -1,0 +1,302 @@
+{
+  "scope": "Reproduction of existing whole-year substitution example; unmasked retrospective 2020-2024",
+  "countries": [
+    "India",
+    "Nepal"
+  ],
+  "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "reference": "Observed MODIS Aqua detections; not ground truth",
+  "comparison": "B1 global ratio versus frozen selected model (M1 for India and Nepal); raw is also retained",
+  "units": "mean_tv and mean_abs_annual_error are fractions; multiply each by 100 for the story numbers",
+  "averaging": "Equal arithmetic mean across five annual comparisons; peak_agreement is a count of years",
+  "outage_mask": "None: preserves the original example. Separate outage sensitivity is required.",
+  "archive_manifest_fingerprint": "4bf6e7635b6cb9b7437fb069e4afb4866c5347dd15d46549288686fb8b21edd7",
+  "selected_models": {
+    "India": "M1",
+    "Nepal": "M1"
+  },
+  "input_sha256": {
+    "data/sample/seven_country_national_counts.parquet": "44d45fb13c324b7232d05b2d62552dafd756eed8f355aba56d59607dbd2728d9",
+    "reports/harmonization_model.json": "596adf75f544032e1b733f2f85d4fd97120b4514bdd2f2a894e97bf7ab8a303a",
+    "reports/selection_lock.json": "3b7f7e3cf52b93287546a3756f612c9194b5c9ee032f63ccf5cf48b9f0178904"
+  },
+  "script_sha256_lf": "a2d4b12665feee1b5120d36aa5b6cd47d073e04b513ca43ec01c8efcd21205d0",
+  "annual_metrics": [
+    {
+      "country": "India",
+      "year": 2020,
+      "alternative": "raw",
+      "tv": 0.17422606863150197,
+      "abs_annual_error": 6.249481572733806,
+      "monthly_mae": 25365.083333333332,
+      "peak_agreement": 0
+    },
+    {
+      "country": "India",
+      "year": 2020,
+      "alternative": "B1",
+      "tv": 0.17422606863150192,
+      "abs_annual_error": 0.05126950712180922,
+      "monthly_mae": 1427.6288176369515,
+      "peak_agreement": 0
+    },
+    {
+      "country": "India",
+      "year": 2020,
+      "alternative": "selected",
+      "tv": 0.160777737423853,
+      "abs_annual_error": 0.0006458977566370046,
+      "monthly_mae": 1305.66393072043,
+      "peak_agreement": 0
+    },
+    {
+      "country": "India",
+      "year": 2021,
+      "alternative": "raw",
+      "tv": 0.10221136607715568,
+      "abs_annual_error": 6.934216269300016,
+      "monthly_mae": 42365.75,
+      "peak_agreement": 1
+    },
+    {
+      "country": "India",
+      "year": 2021,
+      "alternative": "B1",
+      "tv": 0.10221136607715563,
+      "abs_annual_error": 0.1505649808389607,
+      "monthly_mae": 1691.9603018261696,
+      "peak_agreement": 1
+    },
+    {
+      "country": "India",
+      "year": 2021,
+      "alternative": "selected",
+      "tv": 0.09581948027378674,
+      "abs_annual_error": 0.0598197783201844,
+      "monthly_mae": 1047.819818090321,
+      "peak_agreement": 1
+    },
+    {
+      "country": "India",
+      "year": 2022,
+      "alternative": "raw",
+      "tv": 0.16571137871868288,
+      "abs_annual_error": 7.38018656790319,
+      "monthly_mae": 31052.75,
+      "peak_agreement": 1
+    },
+    {
+      "country": "India",
+      "year": 2022,
+      "alternative": "B1",
+      "tv": 0.16571137871868288,
+      "abs_annual_error": 0.21523649856056845,
+      "monthly_mae": 1389.8215234097836,
+      "peak_agreement": 1
+    },
+    {
+      "country": "India",
+      "year": 2022,
+      "alternative": "selected",
+      "tv": 0.17038873699352933,
+      "abs_annual_error": 0.04318814024220876,
+      "monthly_mae": 1517.8404590469524,
+      "peak_agreement": 1
+    },
+    {
+      "country": "India",
+      "year": 2023,
+      "alternative": "raw",
+      "tv": 0.11676312676971469,
+      "abs_annual_error": 7.228929224708034,
+      "monthly_mae": 29969.333333333332,
+      "peak_agreement": 1
+    },
+    {
+      "country": "India",
+      "year": 2023,
+      "alternative": "B1",
+      "tv": 0.11676312676971468,
+      "abs_annual_error": 0.19330220835871598,
+      "monthly_mae": 1351.086411057642,
+      "peak_agreement": 1
+    },
+    {
+      "country": "India",
+      "year": 2023,
+      "alternative": "selected",
+      "tv": 0.18951836126295424,
+      "abs_annual_error": 0.06564236714699072,
+      "monthly_mae": 1486.0471272238544,
+      "peak_agreement": 0
+    },
+    {
+      "country": "India",
+      "year": 2024,
+      "alternative": "raw",
+      "tv": 0.12043788960943128,
+      "abs_annual_error": 7.3608175386496635,
+      "monthly_mae": 28091.333333333332,
+      "peak_agreement": 1
+    },
+    {
+      "country": "India",
+      "year": 2024,
+      "alternative": "B1",
+      "tv": 0.12043788960943125,
+      "abs_annual_error": 0.21242773635702453,
+      "monthly_mae": 1285.1570792500668,
+      "peak_agreement": 1
+    },
+    {
+      "country": "India",
+      "year": 2024,
+      "alternative": "selected",
+      "tv": 0.19820924062039133,
+      "abs_annual_error": 0.020768119669165835,
+      "monthly_mae": 1472.5699224481625,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2020,
+      "alternative": "raw",
+      "tv": 0.19501800390517698,
+      "abs_annual_error": 9.602258469259723,
+      "monthly_mae": 637.75,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2020,
+      "alternative": "B1",
+      "tv": 0.19501800390517704,
+      "abs_annual_error": 0.5374659447756298,
+      "monthly_mae": 38.680750467273654,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2020,
+      "alternative": "selected",
+      "tv": 0.06462810283092357,
+      "abs_annual_error": 0.044942997890623886,
+      "monthly_mae": 8.667226225162066,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2021,
+      "alternative": "raw",
+      "tv": 0.054829773695554494,
+      "abs_annual_error": 11.791335903833069,
+      "monthly_mae": 4332.333333333333,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2021,
+      "alternative": "B1",
+      "tv": 0.054829773695554467,
+      "abs_annual_error": 0.8549107623955415,
+      "monthly_mae": 315.00490257068907,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2021,
+      "alternative": "selected",
+      "tv": 0.042920373884073215,
+      "abs_annual_error": 0.14611274152611656,
+      "monthly_mae": 70.14676793950683,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2022,
+      "alternative": "raw",
+      "tv": 0.21819969462215683,
+      "abs_annual_error": 13.762034514078112,
+      "monthly_mae": 1262.6666666666667,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2022,
+      "alternative": "B1",
+      "tv": 0.21819969462215685,
+      "abs_annual_error": 1.1406877984349177,
+      "monthly_mae": 108.0132052965153,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2022,
+      "alternative": "selected",
+      "tv": 0.041002652952400416,
+      "abs_annual_error": 0.04906210815517619,
+      "monthly_mae": 9.206417776177274,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2023,
+      "alternative": "raw",
+      "tv": 0.15288523924315547,
+      "abs_annual_error": 11.716447630426124,
+      "monthly_mae": 2451.6666666666665,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2023,
+      "alternative": "B1",
+      "tv": 0.15288523924315547,
+      "abs_annual_error": 0.8440509847019442,
+      "monthly_mae": 187.1273262862488,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2023,
+      "alternative": "selected",
+      "tv": 0.050230947896361094,
+      "abs_annual_error": 0.09221443764828699,
+      "monthly_mae": 30.013129656158473,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2024,
+      "alternative": "raw",
+      "tv": 0.10671620531306641,
+      "abs_annual_error": 11.342988977185337,
+      "monthly_mae": 3687.75,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2024,
+      "alternative": "B1",
+      "tv": 0.10671620531306633,
+      "abs_annual_error": 0.7898946025684334,
+      "monthly_mae": 263.79329195821146,
+      "peak_agreement": 1
+    },
+    {
+      "country": "Nepal",
+      "year": 2024,
+      "alternative": "selected",
+      "tv": 0.026763863189092796,
+      "abs_annual_error": 0.06309140275772167,
+      "monthly_mae": 33.16429738881751,
+      "peak_agreement": 1
+    }
+  ]
+}

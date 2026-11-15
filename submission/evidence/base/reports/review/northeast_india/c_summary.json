@@ -1,0 +1,41 @@
+{
+  "northeast_cells_tested": 26,
+  "northeast_mostly_india": {
+    "cells": 21,
+    "significant": 14,
+    "median_sunday_index": 0.717
+  },
+  "northeast_cross_border": {
+    "cells": 5,
+    "significant": 5,
+    "median_sunday_index": 0.383
+  },
+  "rest_of_india_mostly_india": {
+    "cells": 201,
+    "significant": 0,
+    "median_sunday_index": 1.055
+  },
+  "india_cells_not_mostly_india_outside_northeast": 7,
+  "assam_cells": {
+    "cells": 9,
+    "mostly_assam_cells": 8,
+    "mostly_assam_significant": 5,
+    "mostly_assam_median_sunday_index": 0.806
+  },
+  "hill_cells_used": [
+    "23N 92E (Mizoram)",
+    "24N 93E (Manipur)",
+    "25N 94E (Nagaland)",
+    "26N 94E (Nagaland)"
+  ],
+  "hill_VIIRS_years_below_1": "12 of 12",
+  "hill_VIIRS_min_max": [
+    0.189,
+    0.462
+  ],
+  "hill_Aqua_years_below_1": "12 of 12",
+  "hill_Aqua_min_max": [
+    0.098,
+    0.629
+  ]
+}

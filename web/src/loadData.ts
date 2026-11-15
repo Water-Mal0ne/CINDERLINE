@@ -1,10 +1,23 @@
 import type {Daily} from './types';
 const cache=new Map<string,unknown>();
+const refreshPending=new Set<string>();
+const generations=new Map<string,number>();
+const dataKey=(file:string)=>`${import.meta.env.BASE_URL}data/${file}`;
+/** Retry one failed resource without evicting the rest of the loaded record. */
+export function invalidateData(file:string):void {
+  const key=dataKey(file);
+  cache.delete(key);
+  refreshPending.add(key);
+  generations.set(key,(generations.get(key)??0)+1);
+}
 export async function loadData<T>(file:string,signal?:AbortSignal):Promise<T>{
-  const key=`${import.meta.env.BASE_URL}data/${file}`;
+  const key=dataKey(file),generation=generations.get(key)??0;
   if(cache.has(key))return cache.get(key) as T;
-  const response=await fetch(key,{signal});if(!response.ok)throw new Error('Processed data unavailable');
-  const value=normalizePublishedData<T>(await response.json());cache.set(key,value);
+  const response=await fetch(key,{signal,...(refreshPending.has(key)?{cache:'reload' as const}:{})});if(!response.ok)throw new Error('Processed data unavailable');
+  const value=normalizePublishedData<T>(await response.json());
+  if(signal?.aborted)throw new DOMException('The data request was aborted.','AbortError');
+  // An older request must not repopulate or clear a newer resource refresh.
+  if(generation===(generations.get(key)??0)){cache.set(key,value);refreshPending.delete(key);}
   // Bound memory while keeping the last few region and cell views instantaneous.
   if(cache.size>18)cache.delete(cache.keys().next().value!);
   return value as T;

@@ -1,5 +1,14 @@
 # Implementation decisions
 
+## Submission package decisions, 15 November 2026 Nepal time
+
+- 2026-11-14 20:05 UTC: Keep seven authored slides, each title plus authored content within 40 words and notes within 60–90. Preserve real chart and screenshot labels separately as evidence; do not erase scientific labels to satisfy a literal OCR word count.
+- 2026-11-14 20:07 UTC: Preserve exact source snapshots from the reviewed FRP and season branches, pin their source commits and hashes, and distinguish them from the deployed baseline. Repository visibility was checked with GitHub CLI and is PUBLIC; repeat public-link access checks before submission.
+- 2026-11-14 20:08 UTC: The bundled presentation engine can export editable PPTX and render slides, but its native PDF exporter lacks a standard-font dependency. Produce the PDF from the same verified high-resolution slide renders using bundled ReportLab; no library installation or scientific-chart alteration is needed.
+- 2026-11-14 20:10 UTC: Use NASA's current Global Organizing Team submission-field answer because the main guide URL returns HTTP 502. Leave registered team identity and the official project URL as explicit placeholders; no login, acceptance of terms or submission is performed.
+- 2026-11-14 20:10 UTC: Real live evidence screenshots show the deployed baseline. The Nepal 2016 example is from training, and the India rhythm map is exploratory. Do not present these screenshots as validation of new branch results.
+- 2026-11-14 20:10 UTC: Correct the judge explanation of uncertainty to match the app: daily conversion intervals are displayed separately, not summed into a weekly confidence interval. This is a documentation correction only.
+
 ## Scope and delivery
 
 - The user requested continued implementation, distinct builder/checker/creative roles and successive independent reviews. Up to three agents work alongside the coordinator, with separate file ownership; additional roles rotate through those slots. The coordinator integrates and publishes tested changes.
@@ -9,6 +18,15 @@
 - Worldwide expansion remains deferred. A complete seven-country manifest does not imply global observation coverage. [Space Apps Navigator guidance](https://github.com/nasa/spaceapps/discussions/2016) supports a selected-area implementation and emphasizes the harmonization method.
 - National totals include all qualifying cells. Daily exploration contains 12 cells per country selected using training-period activity. All 41,986 contributing cells appear in the annual globe, but only 84 have daily drill-down. The accessible fallback lists the 20 highest-activity annual cells for a country/year.
 
+## Overnight UI decisions
+
+- 2026-11-14 19:47 UTC: Move the existing scale control and its exact scope caption above the sidebar rather than introduce a second independent control; preserve readiness during link/data hydration.
+- 2026-11-14 19:47 UTC: Fix the observed phone navigation overflow with two columns and improve scoped Rhythm readability without changing scientific text, values or caveats.
+- 2026-11-14 19:47 UTC: Keep the existing independent rhythm-country picker and shared-URL schema; the requested deep link restores the tab, and broader state redesign exceeds this task.
+- 2026-11-14 19:47 UTC: Reuse the FRP branch's identical web test discovery runner so merging the features cannot omit either suite. All real country/grid assets passed; no speculative data-path rewrite or new dataset is needed.
+
+- 2026-11-14 20:20 UTC: During cross-PR review, relocate the unchanged UI decision section away from the shared end-of-file insertion point. Preserve every decision and all application code.
+
 ## Exact-count processing and payloads
 
 - The additive `pipeline.streaming` route cleans annual archives in bounded chunks, preserves exact count multiplicities and reduces repeated keys on disk. It never expands count rows back into individual detections. The original smaller raw-record `pipeline.run_all` route remains available; it is not the seven-country release command.
@@ -17,6 +35,22 @@
 - The original seven-country static projection was 133,213,075 bytes. `column-dictionary-v1` reduces repeated daily fields without rounding, truncating dates, discarding cells or changing scientific values. The actual frontend decoder matched all 731,276 original records exactly. The projected site is 51,973,329 bytes (49.57 MiB); the final compiled build must remain under the 50 MiB target. CSV/ICS and the full annual globe are retained.
 - Cached inputs retain their own source manifests and code hashes. Additional raw files do not silently join an earlier snapshot. Model revisions identify the calibration country scope and archive fingerprint.
 - Geographic context comes from public-domain Natural Earth through world-atlas 2.0.2. Land and outlines are not FIRMS observations or satellite coverage masks.
+
+## Final-night story review, 15 November 2026 Nepal time
+
+- 2026-11-14 19:10 UTC: Work on the named feature branches and open reviewable PRs; preserve main at 290e756, the original UI backup, and the Workers migration worktree. Do not merge, deploy, log in, or rewrite history overnight.
+- 2026-11-14 19:12 UTC: Treat the existing submission/ documents as the canonical slide, video, project-page, status and judge-Q&A paths; do not create duplicate root documents for names absent from this checkout.
+- 2026-11-14 19:12 UTC: Describe rhythm as a separate analysis of original satellite streams, reproducing a known weekly pattern; do not imply harmonization discovered it or identified ignition causes.
+- 2026-11-14 19:12 UTC: The India retrospective example compares the simple B1 conversion with selected M1, not raw VIIRS with conversion. Preserve its unmasked values and identify the pending common-date sensitivity separately; commit a reproduction script using the existing national sufficient statistics and frozen model.
+- 2026-11-14 19:12 UTC: Use newly active grid cells for the recurrence proxy, not verified new ignitions; a nonsignificant country result does not establish absence of a pattern. Preserve every official number and gate decision.
+- 2026-11-14 19:12 UTC: Distinguish NOAA-20 transfer corroboration from ground-truth validation, simulated power from exclusion of an effect, and calendar outage masking from unchanged model-evaluation and globe totals.
+- 2026-11-14 19:12 UTC: The FRP contrast was already calculated before this overnight brief. Preserve the original timestamped protocol and hash; any new Git packaging commit must explicitly state that it follows the known result and cannot serve as a prior Git prediction.
+
+- 2026-11-14 19:18 UTC: Independent review found residual overstatements in METHODS/LIMITATIONS and prior-timing language in README/slides; correct these in an additive follow-up commit, retain all numerical values, and rerun all checks. The initial build required sandbox escalation for esbuild file access; the same source built successfully without code changes.
+
+- 2026-11-14 20:20 UTC: Preserve the original story-review section while moving it before scientific interpretation; mirror the corrected AI chronology and NOAA-20 transfer/coverage qualifications across story and submission, and synchronize the story season answer with the verified masked comparison. No scientific values, official decisions or historical protocol text change.
+
+- 2026-11-14 20:23 UTC: Use historical S-NPP coverage and explicit daily calibration intervals in the story Q&A; describe the ranked regional table without a top-20-only restriction so root documentation remains accurate before and after the separately reviewed UI pagination. Scientific coverage values and frozen submission claims stay unchanged.
 
 ## Scientific interpretation
 
@@ -30,6 +64,13 @@
 - Agreement among instruments observing overlapping events is corroboration, not independent replication. Weekly associations do not establish ignition cause. Static controls can themselves follow human schedules; a nonsignificant control is not proof of no bias.
 - Synthetic fixtures and figures are visibly labeled and kept separate. They cannot enable a real-data rhythm claim.
 - Calendar weeks begin January 1. Seasonal/anomaly statistics require seven distinct observed dates in bins 1–52 and exclude the target year from its anomaly history. The final one- or two-day bin remains inspectable but is not compared with complete weeks. ICS windows describe historical seasonality, not forecasts.
+
+## Overnight season-preservation sensitivity
+
+- 2026-11-14 19:55 UTC: Preserve the complete original retrospective scenario matrix and frozen models; rerun all seven countries and every original cut under the exact common 73-date mask and its 87-date padded sensitivity.
+- 2026-11-14 19:55 UTC: Apply each mask to the same Aqua and VIIRS dates, retain monthly coverage counts, and describe count errors as agreement over retained dates rather than reconstructed full-year activity.
+- 2026-11-14 19:55 UTC: Keep the January whole-year controls distinct from the February-to-December switch scenarios; report the India B1-to-M1 tradeoff and Nepal improvement descriptively, with no new significance or fresh-holdout claim.
+- 2026-11-14 19:55 UTC: Preserve the all-country original summary under a distinct filename so it cannot collide with the separate India/Nepal reproduction fixture in story-wording; keep hash-pinned baseline bytes unchanged.
 
 ## Partial scope retained explicitly
 
@@ -78,3 +119,68 @@ Prediction: the Chittagong Hill Tracts (hill shifting cultivation, communities m
 Test, fixed before running: the per-cell method of `reference/rhythm_map.py` (VIIRS for the map, Aqua as a check; 1-degree cells with at least 300 detections a year on average and 8 usable years; Benjamini-Hochberg at 5%) applied to Bangladesh with Sunday as the tested day. Cells are counted as Chittagong Hill Tracts if their centroid falls in Rangamati, Khagrachari or Bandarban districts, or otherwise if their centroid lies east of 91.5 E and south of 23.5 N. The prediction holds if no such cell has a significant Sunday dip. No Bangladesh per-cell result had been computed when this was committed.
 
 Result (added after the analysis): the prediction did NOT hold. Of the two hill-tract cells, 21N 92E has a significant Sunday dip in VIIRS (0.490, q 0.0004) and Aqua (0.564, q 0.020); 22N 92E does not (0.745, q 0.089). The prediction was committed in `5adb21a90e781ce642b17c9aee9915a600c84dda`. See `reports/review/bangladesh_hills/RESULT.md`.
+
+## Count versus FRP: overnight protocol receipt
+
+Recorded 2026-11-14 19:21:16 UTC. **Chronology exception:** the preceding research session already calculated the FRP outcome. This Git receipt is retrospective packaging and does not predate that result. The original local protocol was frozen at 2026-11-14 18:57:23.284 UTC, before that session calculated the contrasts, with SHA-256 `1B88C8B3C7A1225FB2AA10E3B19DD9311CB7F4B022A9795C51552557BB434171`. Its preserved bytes and timestamp record accompany this branch. The outcome and criteria will not be changed to manufacture a fresh prediction or a prior Git record. This is not external preregistration or a new holdout.
+
+The following protocol and prediction are copied word for word from the overnight brief; the later implementation is a reproducibility exercise of the completed test.
+
+Protocol: United States, 2013-2024, vegetation (type 0), daytime only, the same confidence filters and IANA local civil time conversion as kill_test.py, Terra, Aqua and VIIRS S-NPP analysed separately. Use the cleaned caches or the raw FIRMS CSVs on this machine; reconcile detection counts against the official run and report any mismatch. Exclude outage dates from reports/review/OUTAGES.md, then repeat with the mask padded by 1 day on each side. FRP: keep only finite, non-negative values; missing is not zero.
+
+Data gate: at least 95% valid FRP in every stream-year, and weekday missingness differing by no more than 1 percentage point within any stream-year. If the gate fails, stop and report it as failed.
+
+Analysis: per year, compute exposure-adjusted weekday rates for (a) valid-FRP detection counts and (b) summed FRP; normalise each to its 7-day mean; Sunday delta = FRP index minus count index. Primary estimate: equal-weight mean of the 12 yearly deltas per stream. Bootstrap whole years 50,000 times, seed 20261115, using the same year draws for all streams; 98.33% intervals. Also report all 12 yearly deltas, leave-one-year-out means, and the result after removing each stream-year's single highest-FRP day from both metrics and their denominators.
+
+Prediction: mean delta >= 0.05 with the interval wholly above zero in at least 2 of 3 streams, positive in every leave-one-year-out run and after removing the top-FRP day, under both outage masks.
+
+Kill rule: if any condition fails, the test fails. Do not change the cutoff, switch to nighttime, Florida, other countries or other FRP definitions to rescue it.
+
+
+- 2026-11-14 19:21:16 UTC: Retain the original, more explicit frozen conventions: the same two streams must pass both masks; intervals must exclude zero while the point estimate meets 0.05; exact tie-breaking, local-date masks and bootstrap draws remain fixed. No additional subgroup or new outcome is authorized.
+
+- 2026-11-14 19:40 UTC: Publish the verified, fixed US daytime comparison only for the United States; retain Terra's failed interval criterion and the Git-after-results chronology in the visible panel.
+- 2026-11-14 19:40 UTC: Require an independent receipt matching the current scripts and scientific artifacts before public export; preserve exact artifact bytes across Git checkout so line-ending conversion cannot invalidate hashes.
+- 2026-11-14 19:40 UTC: Discover web test files through one shared runner so combining feature branches cannot silently omit either branch's tests; retain the existing three precheck suites.
+- 2026-11-14 19:40 UTC: Desktop and 390-pixel browser checks passed for the new panel, its disclosure controls, country scope, and recovery after a missing payload. Existing page-wide phone overflow is assigned to the UI polish task; the FRP panel itself fits its container.
+
+## Overnight integration and morning handoff
+
+- 2026-11-14 20:40 UTC: Preserve the combined audit as an exported, exact-source simulation rather than merging any real branch. Record its source heads and tree separately from the old checkout commit reported by the legacy check helper.
+- 2026-11-14 20:40 UTC: Resolve the morning Q&A conflicts in stages: corrected story questions 1–17 plus season Q18, followed by the final twenty-answer submission. Preserve the union of every DECISIONS section and the unchanged FRP protocol; no wholesale ours/theirs choice.
+- 2026-11-14 20:40 UTC: Treat esbuild sandbox-read failures and archive line-ending conversion as environment/export issues, retaining failed receipts and using permission-only build retry or exact-byte export; do not change product code to hide them.
+- 2026-11-14 20:40 UTC: Report the FRP task as partial against the impossible Git-before-result requirement, despite passing numerical/reproducibility gates. The old local protocol is evidence of local timing, not externally certified preregistration.
+- 2026-11-14 20:40 UTC: Preserve the existing Rhythm-country/share-link limitations and large lazy-globe warning. Browser QA establishes the exercised flows, not a promise of universal faultlessness.
+- 2026-11-14 20:40 UTC: Keep the frozen, reviewed briefing and twenty judge answers after a separate wording recheck found no material error. Leave genuine team identity and official project fields for the team, with no invented names or account actions.
+- 2026-11-14 20:40 UTC: If morning time is short, UI polish is optional first; any smaller PR combination still needs its own validation. Do not present branch-only FRP/season evidence as already deployed or compromise story corrections to rush release.
+- 2026-11-14 20:40 UTC: Re-run all five branch suites/builds once at their final source heads, then run submission checks again after the report commit. Publish only named feature branches and stop after the bounded handoff; no new analysis, feature, login, merge or deployment.
+- 2026-11-14 20:40 UTC: Give the team exact PowerShell release commands with clean-tree/unpublished-commit stops, fast-forward-only pull, fresh pytest temporary/cache directories and final asset hashes. Run these only after approved morning merges, not as overnight actions.
+- 2026-11-14 20:40 UTC: Use the supplied 14:00 feature freeze and 20:00 submission target, but require confirmation of any earlier local judging cutoff. Keep the seven-slide PDF as the ready demo option; the short script still needs an actual timed recording if used.
+- 2026-11-14 20:42 UTC: Independent handoff reviewers confirmed the claims and requested precise calculation/receipt timestamp labels and a pre-deploy HEAD identity guard. Preserve copied audit bytes with scoped Git attributes; keep frozen source audit receipts unchanged.
+
+## Section-by-section UI review (15 November 2026, 02:37 UTC)
+
+- Keep this cycle on ui-polish-v2; do not merge or deploy. The existing main, backup branch and Workers migration worktree remain unchanged.
+- Preserve scientific wording and all published/model/official artifacts. Limit edits to interaction, accessibility, validation of response structure, and recoverable loading.
+- Treat retries as resource-specific refreshes. Keep a failed shared evidence week available for retry, but let explicit navigation supersede delayed link hydration.
+- Keep land-outline retry independent of scientific map data. Use one keyboard tab stop for the exploratory map and require an unambiguous primary-pointer tap to select a globe cell.
+- Record the section findings, regression evidence and browser limits in reports/SECTION_REVIEW_QA.md; run all Python and web tests plus the build after the commit.
+
+## Section review round two (15 November 2026, 09:25 Nepal time)
+
+- Keep new fixes on ui-polish-v2 and update its existing review; no merge or deployment. Preserve the backup branch and Workers worktree.
+- Restore independent page selection before calendar data arrives; retain full URL validation, exact data-scope restoration and the delayed-navigation guard.
+- Treat malformed globe payloads as recoverable failures; preserve null/zero and dataset values, and bind compass search terms to their coordinate axes.
+- Preserve keyboard context during observation expansion and country-detail navigation. Separate Earth/table presentation changes from scientific cell selection.
+- Draw isolated existing values and break lines across absent months without filling gaps, recomputing values or changing exports. Keep scientific wording/captions/caveats unchanged.
+- Require cross-review plus the full tests/build after the commit; document results and verification limits in reports/SECTION_REVIEW_ROUND2_QA.md.
+- 2026-11-15 09:29 Nepal time: Fix the observed desktop month-label wrapping with CSS only; retain phone layout and all chart content.
+
+## Full-flow review and Unslop UI pass (15 November 2026)
+
+- Use the user-requested Unslop skill by Damir Sokolovsky (@heydamir), credited in reports/UNSLOP_UI_QA.md and the new stylesheets. Keep all four views and their section order, existing scientific text, published data and chart encodings.
+- Use neutral graphite controls and readable labels; let the calendar, real charts and Earth provide the visual emphasis. Preserve the existing brand fonts and semantic palette. Keep the globe lazy-loaded and demand-rendered.
+- Export selected daily evidence as a Markdown brief with its existing caveats and source links. Keep CSV export available and label annual Earth navigation explicitly.
+- Preserve the displayed year through geographic drill-down, restore Whole region scope when requested, and let explicit date edits supersede stale evidence-link hydration.
+- Add only the user-approved annual/daily outage-handling notice. The pre-existing annual/daily discrepancy is disclosed, not corrected; no data or scientific pipeline change is authorized in this UI pass.
+- Keep changes on ui-polish-v2 and update its existing review. Do not merge or deploy. Require independent review, desktop/phone inspection, and the full tests/build after the commit.

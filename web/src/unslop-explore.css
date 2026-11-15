@@ -1,0 +1,304 @@
+/* FIRETRACE observation workspace: quiet chrome, readable evidence, original data colors.
+   Design pass informed by unslop by Damir Sokolovsky (@heydamir), CC BY 4.0.
+   https://heydamir.design/unslop — retain this attribution in adaptations. */
+
+/* 1–3. Shared spacing, neutral surfaces and existing line icons. */
+:is(.calendar-scale-bar,.calendar-inspector,.comparison-journey,.seasonal-chart-card,.seasonal-period-card){
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:none;
+}
+:is(.comparison-journey,.seasonal-chart-card,.seasonal-period-card){padding:24px}
+:is(.calendar-scale-bar,.calendar-inspector){padding:16px;gap:16px}
+:is(.comparison-journey,.seasonal-context,.ft-anomalies,.evidence-drawer){color:var(--text)}
+:is(.comparison-journey,.seasonal-context,.ft-anomalies,.evidence-drawer) svg.lucide{
+  width:16px;height:16px;stroke-width:1.5;flex-shrink:0;
+}
+:is(.month-navigation,.comparison-actions,.seasonal-steppers,.evidence-actions){gap:8px}
+:is(.comparison-actions,.evidence-actions) .button{border-radius:8px;min-height:44px;font-size:14px;line-height:1.5}
+
+/* 4–5. Existing copy and values are retained; hierarchy comes from readable type. */
+:is(.comparison-journey,.seasonal-context,.ft-anomalies,.evidence-drawer) :is(.eyebrow,.chart-label),
+.metric-strip>div>span,.calendar-inspector>div>span,.calendar-months>div,
+.journey-values>div>span,.journey-duration,.seasonal-kicker,.seasonal-period-heading>span,
+.seasonal-readout>div>span,.seasonal-data-label,.evidence-number>span{
+  font-size:12px;line-height:1.5;letter-spacing:0;text-transform:none;color:var(--muted);
+}
+:is(.comparison-journey,.seasonal-context,.ft-anomalies,.evidence-drawer) :is(strong,b),
+.metric-strip strong,.calendar-inspector strong,.month-readout strong{font-variant-numeric:tabular-nums}
+.calendar-panel>.panel-description,#comparison-panel>.chart-note{
+  font-size:14px;line-height:1.6;color:var(--muted);
+}
+.calendar-panel>.chart-label,#comparison-panel>.chart-label{font-size:12px;line-height:1.5;letter-spacing:0;color:var(--muted);margin-top:16px}
+
+/* Calendar: preserve every heat color and its missing/partial-week indicator. */
+.calendar-scale-bar{margin-bottom:24px}
+.calendar-scale-control{gap:16px;min-width:0}
+.calendar-scale-control>.field-label{font-size:14px;line-height:1.5;color:var(--text)}
+.calendar-scale-bar .segmented{padding:4px;gap:4px;background:#232629;border:1px solid var(--line);border-radius:8px}
+.calendar-scale-bar .segmented button{min-height:40px;padding:8px 16px;border-radius:4px;font-size:14px;line-height:1.5}
+.calendar-scale-bar .segmented button.active{background:var(--panel);color:var(--orange);box-shadow:inset 0 0 0 1px var(--line)}
+.calendar-scale-bar>.chart-note{max-width:440px;font-size:13px;line-height:1.6;color:var(--muted)}
+.calendar-scroller{max-width:100%;margin-right:0;padding-bottom:8px;scrollbar-color:#565b5e transparent}
+.calendar-scroller .calendar-grid{min-width:900px!important}
+.calendar-months,.calendar-row{grid-template-columns:44px minmax(0,1fr);gap:12px}
+.calendar-months{margin-bottom:12px}
+.calendar-months>.year-label,.calendar-row>.year-label{font-size:12px;line-height:1.5;color:var(--muted);letter-spacing:0}
+.calendar-row{margin-bottom:4px}
+.week-cells{gap:4px}
+.week-cell{min-height:12px;max-height:20px;border-radius:2px;transition:none}
+.week-cell:hover:not(:disabled){transform:none;outline:1px solid var(--text)}
+.calendar-inspector{margin-top:16px}
+.calendar-inspector>div{min-width:0}
+.calendar-inspector strong{font-size:15px;line-height:1.5;color:var(--text);margin:8px 0;font-weight:500;letter-spacing:0}
+.calendar-inspector small{font-size:12px;line-height:1.6;color:var(--muted)}
+.calendar-inspector-value>strong{font-size:24px;color:var(--orange)}
+.calendar-inspector>.text-button{min-height:44px;font-size:14px;line-height:1.5}
+.calendar-panel>.chart-bottom{font-size:12px;line-height:1.6;margin-top:16px;gap:16px;flex-wrap:wrap;color:var(--muted)}
+.calendar-panel>.chart-bottom>span{gap:8px;flex:1 1 280px}
+.calendar-panel .heat-legend{font-size:11px;line-height:1.5;gap:4px;letter-spacing:0;flex-wrap:wrap}
+.calendar-panel .heat-legend span{margin:0 4px}
+.calendar-panel .heat-legend i{width:12px;height:12px;border-radius:2px}
+.calendar-panel .heat-legend i.missing{margin-left:8px}
+
+/* The sensor example remains a single content moment, without a colored card. */
+.comparison-journey{margin-bottom:24px}
+.journey-heading{gap:16px}
+.journey-heading h2{font-size:22px;line-height:1.35;letter-spacing:0;font-weight:500;margin:8px 0 0}
+.journey-duration{white-space:normal;text-align:right;margin:0}
+.journey-context,.journey-caveat{font-size:14px;line-height:1.6;color:var(--muted);margin:16px 0}
+.journey-values{grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr) minmax(0,1fr);gap:16px}
+.journey-values>div{min-width:0}
+.journey-values strong{font-size:32px;line-height:1.2;font-weight:500;letter-spacing:0;color:var(--text);margin:8px 0}
+.journey-values>div:nth-of-type(2) strong{color:var(--orange)}
+.journey-reference{border-color:var(--line);padding-left:16px}
+.journey-reference strong{color:#8fc8d2}
+.journey-values small{font-size:12px;line-height:1.6;color:var(--muted)}
+.journey-values>svg{color:var(--muted)}
+.journey-actions{border-color:var(--line);padding-top:16px;gap:16px}
+.journey-actions button{min-height:44px;font-size:14px;line-height:1.5;gap:8px;color:var(--text);padding:8px 0}
+.journey-actions button>span{font-size:12px;letter-spacing:0;color:var(--muted);margin:0}
+.journey-actions button:hover{color:var(--orange)}
+
+/* Figures stay compact; labels and units no longer depend on fine print. */
+.metric-strip{gap:24px;padding:24px 0;margin-bottom:24px;border-color:var(--line)}
+.metric-strip>div{min-width:0;padding-right:24px;border-color:var(--line)}
+.metric-strip>div>span{min-height:0}
+.metric-strip strong{font-size:32px;line-height:1.2;font-weight:500;letter-spacing:0;margin:8px 0;color:var(--text)}
+.metric-strip>div:first-child strong{color:var(--orange)}
+.metric-strip strong i{font-size:14px;letter-spacing:0;color:var(--muted);font-style:normal}
+.metric-strip small{font-size:12px;line-height:1.6;color:var(--muted)}
+.metric-strip .peak-jump{font-size:12px!important;line-height:1.5;min-height:40px;margin-top:8px}
+
+/* 6–8. Charts retain their series colors and get a readable scrolling viewport. */
+#comparison-panel .comparison-controls{gap:16px;margin-bottom:16px}
+#comparison-panel .trace-legend{font-size:12px;line-height:1.6;gap:12px;color:var(--muted)}
+#comparison-panel .chart-scale-button{background:#232629;color:var(--text);border-color:var(--line);border-radius:8px;min-height:40px;padding:8px 12px;font-size:14px}
+#comparison-panel .chart-scale-button:hover{background:var(--panel)}
+#comparison-panel .svg-chart{max-width:100%;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#565b5e transparent;padding-bottom:8px}
+#comparison-panel .svg-chart svg{display:block;min-width:680px;width:100%;height:auto}
+#comparison-panel .svg-axis{font-size:14px;fill:var(--muted);letter-spacing:0}
+#comparison-panel .svg-chart line[stroke="#334147"]{stroke:var(--line)}
+#comparison-panel .month-inspector{grid-template-columns:max-content minmax(0,1fr);gap:16px;margin-top:16px;padding-top:16px;border-color:var(--line)}
+.month-navigation{gap:12px}
+.month-navigation>label{font-size:14px;line-height:1.5;color:var(--muted);white-space:nowrap}
+.month-navigation>label strong{font-family:var(--mono);font-weight:500;font-size:14px;color:var(--text)}
+.month-navigation>div{flex-shrink:0}
+.month-navigation .icon-button{width:40px;min-width:40px;height:40px;min-height:40px;border-radius:8px;background:#232629;border-color:var(--line);color:var(--text)}
+#comparison-panel .month-inspector>input{min-width:0;min-height:40px;accent-color:var(--orange)}
+.month-inspector .month-readout{gap:16px;margin-top:0}
+.month-inspector .month-readout>span{font-size:12px;line-height:1.5;color:var(--muted)}
+.month-inspector .month-readout strong{font-size:20px;line-height:1.4;margin:8px 0;color:var(--text);font-weight:500}
+.month-inspector .month-readout small{font-size:12px;line-height:1.5;color:var(--muted)}
+.comparison-partial{grid-column:1/-1;font-size:13px;line-height:1.6;color:var(--muted);margin:0}
+.comparison-actions{margin:16px 0}
+.comparison-table{max-width:100%;border-color:var(--line);border-radius:8px}
+.comparison-table table{min-width:720px}
+.comparison-table caption{font-size:13px;line-height:1.6;color:var(--muted);padding:16px}
+.comparison-table thead{background:#232629}
+.comparison-table table :is(th,td){padding:12px;font-size:14px;line-height:1.6;border-color:var(--line);color:var(--text)}
+.comparison-table table thead th{font-size:12px;letter-spacing:0;text-transform:none;color:var(--muted)}
+#comparison-panel .source-timeline{border-color:var(--line);gap:12px 24px;margin-top:16px;padding-top:16px}
+#comparison-panel .source-timeline>span{font-size:12px;line-height:1.6;gap:8px;flex-wrap:wrap;color:var(--muted)}
+#comparison-panel .source-timeline strong{font-size:12px;color:var(--text)}
+
+/* National seasonal context and its date guide. */
+.seasonal-context{margin:40px 0 32px;min-width:0}
+.seasonal-intro{margin-bottom:24px;gap:24px}
+.seasonal-intro h2{font-size:32px;line-height:1.25;font-weight:500;letter-spacing:0;margin:8px 0 12px}
+.seasonal-intro p,.seasonal-national,.seasonal-period-card>p,.seasonal-no-periods,.seasonal-empty p{font-size:14px;line-height:1.6;color:var(--muted)}
+.seasonal-scope{font-size:12px;line-height:1.6;white-space:normal;color:var(--muted)}
+.seasonal-national{background:var(--panel);border-color:var(--line);border-radius:8px;padding:16px;margin-bottom:16px;gap:8px}
+.seasonal-national strong{color:var(--text);font-weight:500}
+.seasonal-grid{grid-template-columns:minmax(0,1.8fr) minmax(280px,1fr);gap:24px}
+.seasonal-chart-card{overflow-x:auto;scrollbar-width:thin;scrollbar-color:#565b5e transparent}
+.seasonal-chart-heading{gap:16px;flex-wrap:wrap}
+.seasonal-chart-heading h3{font-size:16px;line-height:1.5;color:var(--text);margin:8px 0 0;font-weight:500}
+.seasonal-chart-heading h3 span{color:var(--muted)}
+.seasonal-peak strong{font-size:28px;line-height:1.25;font-weight:500;letter-spacing:0;color:var(--orange)}
+.seasonal-peak span{font-size:12px;line-height:1.5;color:var(--muted)}
+.seasonal-legend{margin:24px 0 12px;gap:16px;font-size:12px;line-height:1.6;color:var(--muted)}
+.seasonal-legend>span{gap:8px}
+.seasonal-legend .seasonal-units{font-size:12px;line-height:1.6;color:var(--muted)}
+.seasonal-chart{min-width:608px;width:100%;margin-bottom:12px}
+.seasonal-axis{font-size:14px;fill:var(--muted);letter-spacing:0}
+.seasonal-gridline{stroke:var(--line)}
+.seasonal-tooltip rect{fill:var(--panel);stroke:var(--line)}
+.seasonal-tooltip text{font-size:14px;fill:var(--text)}
+.seasonal-tooltip text:last-child{font-size:13px;fill:var(--muted)}
+.seasonal-readout{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,1.2fr) auto;gap:16px;background:#232629;border-color:var(--line);border-radius:8px;padding:16px;min-height:0}
+.seasonal-readout>div{min-width:0}
+.seasonal-readout>div>span{margin-bottom:8px;font-size:12px;line-height:1.6}
+.seasonal-readout strong{font-size:14px;line-height:1.6;font-weight:500;color:var(--text);overflow-wrap:anywhere}
+.seasonal-steppers button{width:40px;height:40px;border-radius:8px;background:var(--panel);border-color:var(--line);color:var(--text)}
+.seasonal-steppers button:hover:not(:disabled){background:#303438}
+.seasonal-week-control{margin-top:16px;padding-top:16px;border-color:var(--line)}
+.seasonal-week-control label,.seasonal-week-control>div{font-size:13px;line-height:1.6;color:var(--muted)}
+.seasonal-week-control label strong{color:var(--text)}
+.seasonal-week-control input{margin:8px 0;min-height:40px;accent-color:var(--orange)}
+.seasonal-instructions,.seasonal-method-note,.seasonal-period-card>.seasonal-export-note{font-size:13px;line-height:1.6;color:var(--muted)}
+.seasonal-instructions{margin:12px 0}
+.seasonal-method-note{margin:16px 0 0;padding-top:16px;border-color:var(--line)}
+.seasonal-data-label{margin-top:16px;overflow-wrap:anywhere}
+.seasonal-period-heading{gap:16px;color:var(--muted)}
+.seasonal-period-card>h3{font-size:24px;line-height:1.35;font-weight:500;letter-spacing:0;margin:24px 0 12px;max-width:none}
+.seasonal-period-list{margin:24px 0;gap:8px;max-height:320px}
+.seasonal-period-list>button{padding:12px;gap:12px;border-radius:8px;color:var(--text)}
+.seasonal-period-list>button.is-selected{background:#232629;border-color:var(--line)}
+.seasonal-period-list>button:hover{background:#232629}
+.seasonal-period-number{font-size:12px;line-height:1.5;padding-top:0;color:var(--muted)}
+.seasonal-period-list strong{font-size:15px;line-height:1.5;font-weight:500;color:var(--text)}
+.seasonal-period-list small{font-size:12px;line-height:1.6;color:var(--muted);margin-top:4px}
+.seasonal-period-list>button>svg{color:var(--muted)}
+.seasonal-export{min-height:44px;padding:12px 16px;background:#232629;border-color:var(--line);border-radius:8px;color:var(--text);font-size:14px;line-height:1.5}
+.seasonal-export:hover:not(:disabled){background:#303438}
+.seasonal-period-card>.seasonal-export-note{margin-top:12px}
+.seasonal-empty h3{font-size:20px;font-weight:500;color:var(--text)}
+
+/* Anomalies: list hierarchy and direction semantics, without colored tiles. */
+.ft-anomaly-intro{font-size:14px;line-height:1.6;color:var(--muted);margin-bottom:24px}
+.ft-anomaly-controls{gap:16px}
+.ft-anomaly-filters{gap:4px;padding:4px;background:#232629;border-color:var(--line);border-radius:8px}
+.ft-anomaly-filters button{min-height:40px;padding:8px 12px;gap:8px;border-radius:4px;color:var(--muted);font-size:14px;line-height:1.5}
+.ft-anomaly-filters button:hover{background:var(--panel);color:var(--text)}
+.ft-anomaly-filters button.active{background:var(--panel);border-color:var(--line);color:var(--orange)}
+.ft-anomaly-filter-count{font-size:12px;color:var(--muted)}
+.ft-anomaly-sort,.ft-anomaly-sort select{font-size:14px;line-height:1.5;color:var(--muted)}
+.ft-anomaly-sort select{min-height:40px;padding:8px 32px 8px 12px;background:#232629;border-color:var(--line);border-radius:8px;color:var(--text)}
+.ft-anomaly-sort>svg{right:8px}
+.ft-anomaly-result-count{font-size:12px;line-height:1.6;color:var(--muted);margin:16px 0 8px}
+.ft-anomaly-results{gap:0 24px}
+.ft-anomaly-result{min-height:88px;padding:16px 0;gap:12px;border-color:var(--line)}
+.ft-anomalies .ft-anomaly-result .ft-anomaly-direction{width:32px;height:32px;background:none;border-radius:0}
+.ft-anomaly-direction{color:var(--orange)}
+.ft-anomaly-date strong,.ft-anomaly-value strong{font-size:15px;line-height:1.5;font-weight:500;color:var(--text)}
+.ft-anomaly-date small,.ft-anomaly-value small{font-size:12px;line-height:1.6;color:var(--muted);margin-top:4px}
+.ft-anomaly-open{color:var(--muted);transition:none}
+.ft-anomaly-result:hover .ft-anomaly-open{color:var(--orange);transform:none}
+.ft-anomaly-more{margin:16px auto 0;min-height:44px;font-size:14px}
+.ft-anomaly-explainer{margin-top:24px;padding-top:16px;gap:8px;border-color:var(--line);color:var(--muted)}
+.ft-anomaly-explainer p,.ft-anomaly-empty p{font-size:14px;line-height:1.6;color:var(--muted)}
+.ft-anomaly-empty{padding:24px 16px;gap:16px;margin:16px 0;background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--muted)}
+.ft-anomaly-empty h3{font-size:18px;line-height:1.4;font-weight:500;color:var(--text)}
+.ft-anomalies .count-badge{font-size:12px;line-height:1.6;letter-spacing:0;color:var(--muted);background:none;border:0;padding:0}
+
+/* Evidence drawer: the readable, portable source of every selected week. */
+.drawer-backdrop{background:#0009;backdrop-filter:none}
+.evidence-drawer{width:min(560px,100%);padding:24px;background:var(--panel);border-color:var(--line);box-shadow:none;animation:none}
+.drawer-head{margin-bottom:24px;gap:16px}
+.evidence-drawer>h2{font-size:32px;line-height:1.25;letter-spacing:0;font-weight:500;margin:0 0 12px}
+.evidence-drawer .drawer-date{font-size:14px;line-height:1.6;color:var(--muted);margin-bottom:16px}
+.drawer-date strong{font-weight:500;color:var(--text)}
+.evidence-drawer .chart-note,.evidence-drawer .callout p{font-size:14px;line-height:1.6;color:var(--muted)}
+.evidence-number{margin:24px 0;padding:24px 0;border-color:var(--line)}
+.evidence-number strong{font-size:40px;line-height:1.2;font-weight:500;letter-spacing:0;color:var(--orange);margin:12px 0}
+.evidence-number small{font-size:12px;line-height:1.6;color:var(--muted)}
+.evidence-section{margin:24px 0}
+.evidence-drawer .evidence-section h3{font-size:18px;line-height:1.4;font-weight:500;color:var(--text);margin:0 0 16px}
+.evidence-drawer .evidence-section p{font-size:14px;line-height:1.6;color:var(--muted);margin:12px 0 0}
+.evidence-drawer .key-value{padding:12px 0;gap:16px;border-color:var(--line);font-size:14px}
+.evidence-drawer .key-value>span{gap:8px;color:var(--muted)}
+.evidence-drawer .key-value strong{font-size:14px;color:var(--text);font-weight:500}
+.evidence-section dl{grid-template-columns:88px minmax(0,1fr);gap:16px;font-size:14px;line-height:1.6}
+.evidence-section dt{color:var(--muted)}
+.evidence-section dd{color:var(--text)}
+.evidence-drawer .callout{background:var(--bg);border-color:var(--line);border-radius:8px;padding:16px;gap:8px}
+.evidence-drawer .partial-week-note{font-size:14px;line-height:1.6;color:var(--muted);background:var(--bg);border-left-color:var(--orange);border-radius:8px;padding:12px 16px}
+.evidence-drawer .evidence-table-scroll{max-width:100%;border:1px solid var(--line);border-radius:8px}
+.evidence-drawer .evidence-table-scroll table{min-width:440px}
+.evidence-drawer .evidence-table-scroll :is(th,td){font-size:14px;line-height:1.6;padding:12px;border-color:var(--line);color:var(--text)}
+.evidence-drawer .evidence-table-scroll thead th{font-size:12px;letter-spacing:0;text-transform:none;color:var(--muted);background:#232629}
+.evidence-drawer>.button{margin-top:24px;font-size:14px;border-radius:8px;min-height:44px}
+.evidence-actions{margin-top:8px}
+.evidence-drawer .icon-button{min-height:44px;min-width:44px;border-radius:8px;background:#232629;border-color:var(--line);color:var(--text)}
+
+/* 9. Focus is explicit; there are no new entrances, glows or looping motion. */
+:is(.seasonal-context,.ft-anomalies,.month-navigation,.evidence-drawer) :is(button,input,select):focus-visible,
+.seasonal-chart:focus-visible,.comparison-table:focus-visible,.evidence-drawer .evidence-table-scroll:focus-visible{
+  outline:2px solid var(--orange);outline-offset:4px;
+}
+
+@media(max-width:1200px){
+  .seasonal-grid{grid-template-columns:minmax(0,1fr)}
+  .seasonal-readout{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,1.2fr) auto}
+  .ft-anomaly-results{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:850px){
+  .calendar-scale-bar{align-items:stretch;gap:16px}
+  .calendar-scale-control{flex-wrap:wrap;flex-shrink:1}
+  .calendar-scale-bar>.chart-note{max-width:none}
+  .metric-strip{gap:16px}
+  .metric-strip>div{padding-right:16px}
+}
+@media(max-width:640px){
+  :is(.comparison-journey,.seasonal-chart-card,.seasonal-period-card){padding:16px}
+  :is(.calendar-scale-bar,.calendar-inspector){padding:16px;gap:16px}
+  .calendar-scale-control{gap:12px}
+  .calendar-scale-bar .segmented button{font-size:14px;min-height:44px;padding:8px 12px}
+  .calendar-inspector>div:first-child{flex-basis:100%}
+  .calendar-inspector-value{text-align:left;margin:0}
+  .calendar-inspector>.text-button{margin-left:0;flex-basis:100%;justify-content:flex-start}
+  .journey-heading{flex-wrap:wrap}
+  .journey-heading h2{font-size:20px}
+  .journey-duration{text-align:left}
+  .journey-values{grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);gap:12px}
+  .journey-values strong{font-size:28px}
+  .journey-reference{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);padding:16px 0 0}
+  .journey-actions{grid-template-columns:minmax(0,1fr);gap:4px}
+  .metric-strip{grid-template-columns:minmax(0,1fr);gap:16px;padding:24px 0}
+  .metric-strip>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;border-right:0;border-bottom:1px solid var(--line);padding:0 0 16px}
+  .metric-strip>div:last-child{padding-bottom:0}
+  .metric-strip>div>span,.metric-strip small,.metric-strip .peak-jump{grid-column:1}
+  .metric-strip strong{grid-column:2;grid-row:1/3;align-self:center;font-size:28px;margin:0}
+  .metric-strip .peak-jump{margin-top:0;text-align:left}
+  #comparison-panel .month-inspector{grid-template-columns:minmax(0,1fr)}
+  .month-navigation{flex-wrap:wrap;gap:8px}
+  .month-navigation>label{font-size:14px;white-space:normal}
+  .month-navigation>label strong{display:block}
+  .month-navigation .icon-button{width:44px;height:44px;min-width:44px;min-height:44px}
+  #comparison-panel .chart-scale-button,#comparison-panel .month-inspector>input{min-height:44px}
+  .month-inspector .month-readout{gap:12px}
+  .month-inspector .month-readout strong{font-size:18px}
+  .month-inspector .month-readout small{font-size:11px}
+  .seasonal-context{margin:32px 0}
+  .seasonal-intro{gap:16px}
+  .seasonal-intro h2{font-size:28px}
+  .seasonal-readout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:12px}
+  .seasonal-readout>div>span{font-size:11px}
+  .seasonal-readout strong{font-size:13px}
+  .seasonal-steppers{justify-content:flex-end}
+  .seasonal-steppers button{width:44px;height:44px}
+  .seasonal-week-control input{min-height:44px}
+  .seasonal-period-list{grid-template-columns:minmax(0,1fr)}
+  .seasonal-legend .seasonal-units{margin-left:0;width:100%}
+  .seasonal-export{width:100%;align-self:stretch}
+  .ft-anomaly-filters{justify-content:flex-start;gap:4px;width:100%;box-sizing:border-box}
+  .ft-anomaly-filters button{min-height:44px;font-size:13px;padding:8px;flex:1 1 auto;justify-content:center;gap:8px}
+  .ft-anomaly-sort{margin-top:16px;justify-content:flex-start}
+  .ft-anomaly-sort select{min-height:44px;min-width:0;max-width:100%}
+  .ft-anomaly-result{gap:12px;flex-wrap:wrap}
+  .ft-anomaly-date{flex:1 1 132px;min-width:0}
+  .ft-anomaly-value{margin-left:auto}
+  .ft-anomaly-more{width:100%}
+  .evidence-drawer{padding:20px}
+  .evidence-drawer>h2{font-size:28px}
+  .evidence-section dl{grid-template-columns:80px minmax(0,1fr);gap:12px}
+}

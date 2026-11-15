@@ -1,0 +1,208 @@
+{
+  "created_utc": "2026-11-14T20:27:34.084249+00:00",
+  "mode": "DRY RUN ONLY; no ref update, checkout, real merge, push or deployment",
+  "heads": {
+    "story-wording": "ff4a64e8a78fdf6a1bb37dc3f0cb37a0bceaab2b",
+    "frp-test": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+    "ui-polish-v2": "cb54eaca2f5a857cfe541dcb0509495413c2f120",
+    "season-check": "9ee15afe972cca97322ea371b1fdf3a66b45a0b6",
+    "submission-final": "e2568365ac6e0c7166ba305c2546177bded8917c"
+  },
+  "merge_order": [
+    "story-wording",
+    "frp-test",
+    "ui-polish-v2",
+    "season-check",
+    "submission-final"
+  ],
+  "stages": [
+    {
+      "branch": "frp-test",
+      "left": "ff4a64e8a78fdf6a1bb37dc3f0cb37a0bceaab2b",
+      "right": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+      "automatic_tree": "c9383d429acd5adc1a5317ba76ad2b60166cf8c1",
+      "conflict_paths": [],
+      "resolved_tree": "c9383d429acd5adc1a5317ba76ad2b60166cf8c1",
+      "synthetic_unreferenced_commit": "d45b5a47c3632479b73b61a8f051427beac44282",
+      "resolutions": [],
+      "reasons": []
+    },
+    {
+      "branch": "ui-polish-v2",
+      "left": "d45b5a47c3632479b73b61a8f051427beac44282",
+      "right": "cb54eaca2f5a857cfe541dcb0509495413c2f120",
+      "automatic_tree": "27a0542e3e825271b9573f13a6923609d4efbc36",
+      "conflict_paths": [],
+      "resolved_tree": "27a0542e3e825271b9573f13a6923609d4efbc36",
+      "synthetic_unreferenced_commit": "31f0f494731711bcef7158545fd8a478e2df7de8",
+      "resolutions": [],
+      "reasons": []
+    },
+    {
+      "branch": "season-check",
+      "left": "31f0f494731711bcef7158545fd8a478e2df7de8",
+      "right": "9ee15afe972cca97322ea371b1fdf3a66b45a0b6",
+      "automatic_tree": "7a6e44e4b1a5d9fae367dd1c926cf60a4e912c22",
+      "conflict_paths": [
+        "submission/JUDGE_QA.md"
+      ],
+      "resolved_tree": "5070aa70c298ee87da6c2e167e0f2804c11a493f",
+      "synthetic_unreferenced_commit": "6a25ed7f0a21b7b27d148ccc0b3c678046c5773c",
+      "resolutions": [
+        {
+          "path": "submission/JUDGE_QA.md",
+          "blob": "7aa02279ee760866a7584d735be590eec50ee772",
+          "sha256": "933e123b2d8c47a71ac5bd721bd91e3fd6d1d221374421f29823458b4fd54f29"
+        }
+      ],
+      "reasons": [
+        "submission/JUDGE_QA.md: use the complete final submission document, including all 20 QA answers and verified common-mask results."
+      ]
+    },
+    {
+      "branch": "submission-final",
+      "left": "6a25ed7f0a21b7b27d148ccc0b3c678046c5773c",
+      "right": "e2568365ac6e0c7166ba305c2546177bded8917c",
+      "automatic_tree": "b8e4b28c2acd37ff3b411e743d7be0624022b12c",
+      "conflict_paths": [
+        "DECISIONS.md"
+      ],
+      "resolved_tree": "d908acdbca8d5bf20a033f7cac77946636be59b3",
+      "synthetic_unreferenced_commit": "0653ed5278798459d765144f8303101f23a20f1b",
+      "resolutions": [
+        {
+          "path": "DECISIONS.md",
+          "blob": "d9822bed97c499ca1da30e5ccc685d6ef413b5b0",
+          "sha256": "5cdb3e0b635a0e463b6bfc4754f4503c4cdfb739259bc480a1441c8b61a0ed9f"
+        }
+      ],
+      "reasons": [
+        "Union all named decision sections from every pinned branch, preserving additive content; no branch file is edited."
+      ]
+    }
+  ],
+  "final_tree": "d908acdbca8d5bf20a033f7cac77946636be59b3",
+  "synthetic_unreferenced_commit": "0653ed5278798459d765144f8303101f23a20f1b",
+  "archive_sha256": "13078a78015d604e0b445711fdf30217366d178b9b76f7b71250e2105b64a0df",
+  "snapshot": "outputs/firetrace-integration-audit/combined",
+  "source_heads_file": "final_heads.json",
+  "decision_heading_provenance": {
+    "## Submission package decisions, 15 November 2026 Nepal time": [
+      "submission-final"
+    ],
+    "## Scope and delivery": [
+      "submission-final",
+      "story-wording",
+      "frp-test",
+      "ui-polish-v2",
+      "season-check"
+    ],
+    "## Exact-count processing and payloads": [
+      "submission-final",
+      "story-wording",
+      "frp-test",
+      "ui-polish-v2",
+      "season-check"
+    ],
+    "## Final-night story review, 15 November 2026 Nepal time": [
+      "submission-final",
+      "story-wording"
+    ],
+    "## Scientific interpretation": [
+      "submission-final",
+      "story-wording",
+      "frp-test",
+      "ui-polish-v2",
+      "season-check"
+    ],
+    "## Partial scope retained explicitly": [
+      "submission-final",
+      "story-wording",
+      "frp-test",
+      "ui-polish-v2",
+      "season-check"
+    ],
+    "## Publication": [
+      "submission-final",
+      "story-wording",
+      "frp-test",
+      "ui-polish-v2",
+      "season-check"
+    ],
+    "## Human rhythm integration (14 November 2026)": [
+      "submission-final",
+      "story-wording",
+      "frp-test",
+      "ui-polish-v2",
+      "season-check"
+    ],
+    "## Gate timeline (review B6, 14 November 2026, Nepal time)": [
+      "submission-final",
+      "story-wording",
+      "frp-test",
+      "ui-polish-v2",
+      "season-check"
+    ],
+    "## Out-of-sample prediction: Bangladesh hills (review E2), written before the analysis": [
+      "submission-final",
+      "story-wording",
+      "frp-test",
+      "ui-polish-v2",
+      "season-check"
+    ],
+    "## Count versus FRP: overnight protocol receipt": [
+      "frp-test"
+    ],
+    "## Overnight UI decisions": [
+      "ui-polish-v2"
+    ],
+    "## Overnight season-preservation sensitivity": [
+      "season-check"
+    ]
+  },
+  "baseline_main_commit": "290e7569ee1c7334f1161dc45daf4b02dc5c06ea",
+  "official_source_checks": [
+    {
+      "path": "data/sample/seven_country_national_counts.parquet",
+      "sha256": "44d45fb13c324b7232d05b2d62552dafd756eed8f355aba56d59607dbd2728d9",
+      "matches_main": true
+    },
+    {
+      "path": "data/sample/seven_country_manifest.json",
+      "sha256": "27e1c1b1e0778082eb603bad0fded745d50a79375b22f94f8b8f172e989d71f6",
+      "matches_main": true
+    },
+    {
+      "path": "reports/harmonization_model.json",
+      "sha256": "596adf75f544032e1b733f2f85d4fd97120b4514bdd2f2a894e97bf7ab8a303a",
+      "matches_main": true
+    },
+    {
+      "path": "reports/harmonization_eval.csv",
+      "sha256": "976d23d94a68769028c3d1af2ea002d17206992fbca1e759fbbb3b7b0509337f",
+      "matches_main": true
+    },
+    {
+      "path": "reports/selection_lock.json",
+      "sha256": "3b7f7e3cf52b93287546a3756f612c9194b5c9ee032f63ccf5cf48b9f0178904",
+      "matches_main": true
+    },
+    {
+      "path": "reports/LOCKED_ARTIFACTS.json",
+      "sha256": "d8ca1805be8e25d2c19cb95d89c7885122a7aed888952072cd4e138204ffa170",
+      "matches_main": true
+    },
+    {
+      "path": "reports/official/kill_test_results.csv",
+      "sha256": "624dc3b174bdf695218b81a0237d79f9492091cf8bd0892ee7b98cbcd300e05a",
+      "matches_main": true
+    },
+    {
+      "path": "reports/official/kill_test_gate.json",
+      "sha256": "9818a1950bb2a4eb58943826b83aeaf5b8012cce1557ea417c07537e977fa5c7",
+      "matches_main": true
+    }
+  ],
+  "refs_unchanged": true,
+  "note": "The existing check-branch script may report an enclosing workspace HEAD; this source-head map and final tree identify the tested snapshot."
+}

@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="792pt" height="828pt" viewBox="0 0 792 828" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-15T01:13:25.467347</dc:date>
+    <dc:description>Independently verified primary weekday count and observed FRP indices; original outcome known before portable packaging.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>FIRETRACE scripts/plot_frp_test.py</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 828 
+L 792 828 
+L 792 0 
+L 0 0 
+z
+" style="fill: #fafcfd"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 83.16 301.32 
+L 681.12 301.32 
+L 681.12 157.32 
+L 83.16 157.32 
+z
+" style="fill: #fafcfd"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 83.16 211.32 
+L 681.12 211.32 
+" clip-path="url(#p61c9637396)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #9aabb6"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 625.235888 301.32 
+L 681.12 301.32 
+L 681.12 157.32 
+L 625.235888 157.32 
+z
+" clip-path="url(#p61c9637396)" style="fill: #eaf0f3; stroke: #eaf0f3; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_2"/>
+     <g id="text_1">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="94.336822" y="315.677422" transform="rotate(-0 94.336822 315.677422)">Mon</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3"/>
+     <g id="text_2">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="187.477009" y="315.677422" transform="rotate(-0 187.477009 315.677422)">Tue</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_4"/>
+     <g id="text_3">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="280.617196" y="315.678281" transform="rotate(-0 280.617196 315.678281)">Wed</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_5"/>
+     <g id="text_4">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="373.757383" y="315.678281" transform="rotate(-0 373.757383 315.678281)">Thu</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_6"/>
+     <g id="text_5">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="466.89757" y="315.678281" transform="rotate(-0 466.89757 315.678281)">Fri</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_7"/>
+     <g id="text_6">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="560.037757" y="315.677422" transform="rotate(-0 560.037757 315.677422)">Sat</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_8"/>
+     <g id="text_7">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="653.177944" y="315.677422" transform="rotate(-0 653.177944 315.677422)">Sun</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_9">
+      <path d="M 83.16 283.32 
+L 681.12 283.32 
+" clip-path="url(#p61c9637396)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_8">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="287.498711" transform="rotate(-0 79.66 287.498711)">0.6</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_11">
+      <path d="M 83.16 247.32 
+L 681.12 247.32 
+" clip-path="url(#p61c9637396)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12"/>
+     <g id="text_9">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="251.498711" transform="rotate(-0 79.66 251.498711)">0.8</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_13">
+      <path d="M 83.16 211.32 
+L 681.12 211.32 
+" clip-path="url(#p61c9637396)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14"/>
+     <g id="text_10">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="215.498711" transform="rotate(-0 79.66 215.498711)">1.0</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_15">
+      <path d="M 83.16 175.32 
+L 681.12 175.32 
+" clip-path="url(#p61c9637396)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_16"/>
+     <g id="text_11">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="179.498711" transform="rotate(-0 79.66 179.498711)">1.2</text>
+     </g>
+    </g>
+    <g id="text_12">
+     <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #152f40" x="47.523984" y="229.32" transform="rotate(-90 47.523984 229.32)">Weekday index</text>
+    </g>
+   </g>
+   <g id="line2d_17">
+    <path d="M 94.336822 205.791064 
+L 187.477009 178.281374 
+L 280.617196 186.279622 
+L 373.757383 189.634168 
+L 466.89757 200.995731 
+L 560.037757 239.972402 
+L 653.177944 278.285639 
+" clip-path="url(#p61c9637396)" style="fill: none; stroke: #315e89; stroke-width: 2.3; stroke-linecap: square"/>
+    <defs>
+     <path id="m42a4ada2cc" d="M 0 2.5 
+C 0.663008 2.5 1.29895 2.236584 1.767767 1.767767 
+C 2.236584 1.29895 2.5 0.663008 2.5 0 
+C 2.5 -0.663008 2.236584 -1.29895 1.767767 -1.767767 
+C 1.29895 -2.236584 0.663008 -2.5 0 -2.5 
+C -0.663008 -2.5 -1.29895 -2.236584 -1.767767 -1.767767 
+C -2.236584 -1.29895 -2.5 -0.663008 -2.5 0 
+C -2.5 0.663008 -2.236584 1.29895 -1.767767 1.767767 
+C -1.29895 2.236584 -0.663008 2.5 0 2.5 
+z
+" style="stroke: #315e89"/>
+    </defs>
+    <g clip-path="url(#p61c9637396)">
+     <use xlink:href="#m42a4ada2cc" x="94.336822" y="205.791064" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="187.477009" y="178.281374" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="280.617196" y="186.279622" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="373.757383" y="189.634168" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="466.89757" y="200.995731" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="560.037757" y="239.972402" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="653.177944" y="278.285639" style="fill: #315e89; stroke: #315e89"/>
+    </g>
+   </g>
+   <g id="line2d_18">
+    <path d="M 94.336822 210.178959 
+L 187.477009 183.312965 
+L 280.617196 207.565734 
+L 373.757383 185.619628 
+L 466.89757 204.091274 
+L 560.037757 227.048902 
+L 653.177944 261.422538 
+" clip-path="url(#p61c9637396)" style="fill: none; stroke: #c36828; stroke-width: 2.3; stroke-linecap: square"/>
+    <defs>
+     <path id="mb59c0828e6" d="M -2.25 2.25 
+L 2.25 2.25 
+L 2.25 -2.25 
+L -2.25 -2.25 
+z
+" style="stroke: #c36828; stroke-linejoin: miter"/>
+    </defs>
+    <g clip-path="url(#p61c9637396)">
+     <use xlink:href="#mb59c0828e6" x="94.336822" y="210.178959" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="187.477009" y="183.312965" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="280.617196" y="207.565734" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="373.757383" y="185.619628" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="466.89757" y="204.091274" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="560.037757" y="227.048902" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="653.177944" y="261.422538" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="patch_4">
+    <path d="M 83.16 301.32 
+L 681.12 301.32 
+" style="fill: none; stroke: #b6c4cb; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #315e89" x="672.177944" y="281.143061" transform="rotate(-0 672.177944 281.143061)">0.628</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #c36828" x="672.177944" y="264.279959" transform="rotate(-0 672.177944 264.279959)">0.722</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #152f40" x="83.16" y="148.32" transform="rotate(-0 83.16 148.32)">Terra MODIS  ·  Sunday contrast interval includes zero</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_5">
+    <path d="M 83.16 494.28 
+L 681.12 494.28 
+L 681.12 350.28 
+L 83.16 350.28 
+z
+" style="fill: #fafcfd"/>
+   </g>
+   <g id="line2d_19">
+    <path d="M 83.16 404.28 
+L 681.12 404.28 
+" clip-path="url(#p6cbd5d65e1)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #9aabb6"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 625.235888 494.28 
+L 681.12 494.28 
+L 681.12 350.28 
+L 625.235888 350.28 
+z
+" clip-path="url(#p6cbd5d65e1)" style="fill: #eaf0f3; stroke: #eaf0f3; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_8">
+     <g id="line2d_20"/>
+     <g id="text_16">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="94.336822" y="508.637422" transform="rotate(-0 94.336822 508.637422)">Mon</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_21"/>
+     <g id="text_17">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="187.477009" y="508.637422" transform="rotate(-0 187.477009 508.637422)">Tue</text>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_22"/>
+     <g id="text_18">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="280.617196" y="508.638281" transform="rotate(-0 280.617196 508.638281)">Wed</text>
+     </g>
+    </g>
+    <g id="xtick_11">
+     <g id="line2d_23"/>
+     <g id="text_19">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="373.757383" y="508.638281" transform="rotate(-0 373.757383 508.638281)">Thu</text>
+     </g>
+    </g>
+    <g id="xtick_12">
+     <g id="line2d_24"/>
+     <g id="text_20">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="466.89757" y="508.638281" transform="rotate(-0 466.89757 508.638281)">Fri</text>
+     </g>
+    </g>
+    <g id="xtick_13">
+     <g id="line2d_25"/>
+     <g id="text_21">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="560.037757" y="508.637422" transform="rotate(-0 560.037757 508.637422)">Sat</text>
+     </g>
+    </g>
+    <g id="xtick_14">
+     <g id="line2d_26"/>
+     <g id="text_22">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="653.177944" y="508.637422" transform="rotate(-0 653.177944 508.637422)">Sun</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_5">
+     <g id="line2d_27">
+      <path d="M 83.16 476.28 
+L 681.12 476.28 
+" clip-path="url(#p6cbd5d65e1)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_28"/>
+     <g id="text_23">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="480.458711" transform="rotate(-0 79.66 480.458711)">0.6</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_29">
+      <path d="M 83.16 440.28 
+L 681.12 440.28 
+" clip-path="url(#p6cbd5d65e1)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_30"/>
+     <g id="text_24">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="444.458711" transform="rotate(-0 79.66 444.458711)">0.8</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_31">
+      <path d="M 83.16 404.28 
+L 681.12 404.28 
+" clip-path="url(#p6cbd5d65e1)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_32"/>
+     <g id="text_25">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="408.458711" transform="rotate(-0 79.66 408.458711)">1.0</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_33">
+      <path d="M 83.16 368.28 
+L 681.12 368.28 
+" clip-path="url(#p6cbd5d65e1)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_34"/>
+     <g id="text_26">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="372.458711" transform="rotate(-0 79.66 372.458711)">1.2</text>
+     </g>
+    </g>
+    <g id="text_27">
+     <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #152f40" x="47.523984" y="422.28" transform="rotate(-90 47.523984 422.28)">Weekday index</text>
+    </g>
+   </g>
+   <g id="line2d_35">
+    <path d="M 94.336822 388.894531 
+L 187.477009 383.669111 
+L 280.617196 378.381207 
+L 373.757383 378.141976 
+L 466.89757 405.845421 
+L 560.037757 426.718941 
+L 653.177944 468.308813 
+" clip-path="url(#p6cbd5d65e1)" style="fill: none; stroke: #315e89; stroke-width: 2.3; stroke-linecap: square"/>
+    <g clip-path="url(#p6cbd5d65e1)">
+     <use xlink:href="#m42a4ada2cc" x="94.336822" y="388.894531" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="187.477009" y="383.669111" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="280.617196" y="378.381207" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="373.757383" y="378.141976" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="466.89757" y="405.845421" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="560.037757" y="426.718941" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="653.177944" y="468.308813" style="fill: #315e89; stroke: #315e89"/>
+    </g>
+   </g>
+   <g id="line2d_36">
+    <path d="M 94.336822 404.666427 
+L 187.477009 380.824143 
+L 280.617196 390.327851 
+L 373.757383 395.026239 
+L 466.89757 400.940476 
+L 560.037757 420.511881 
+L 653.177944 437.662983 
+" clip-path="url(#p6cbd5d65e1)" style="fill: none; stroke: #c36828; stroke-width: 2.3; stroke-linecap: square"/>
+    <g clip-path="url(#p6cbd5d65e1)">
+     <use xlink:href="#mb59c0828e6" x="94.336822" y="404.666427" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="187.477009" y="380.824143" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="280.617196" y="390.327851" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="373.757383" y="395.026239" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="466.89757" y="400.940476" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="560.037757" y="420.511881" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="653.177944" y="437.662983" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="patch_7">
+    <path d="M 83.16 494.28 
+L 681.12 494.28 
+" style="fill: none; stroke: #b6c4cb; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #315e89" x="672.177944" y="471.166235" transform="rotate(-0 672.177944 471.166235)">0.644</text>
+   </g>
+   <g id="text_29">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #c36828" x="672.177944" y="440.520405" transform="rotate(-0 672.177944 440.520405)">0.815</text>
+   </g>
+   <g id="text_30">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #152f40" x="83.16" y="341.28" transform="rotate(-0 83.16 341.28)">Aqua MODIS  ·  Sunday contrast passes the fixed test</text>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_8">
+    <path d="M 83.16 687.24 
+L 681.12 687.24 
+L 681.12 543.24 
+L 83.16 543.24 
+z
+" style="fill: #fafcfd"/>
+   </g>
+   <g id="line2d_37">
+    <path d="M 83.16 597.24 
+L 681.12 597.24 
+" clip-path="url(#pa4f9403cde)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #9aabb6"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 625.235888 687.24 
+L 681.12 687.24 
+L 681.12 543.24 
+L 625.235888 543.24 
+z
+" clip-path="url(#pa4f9403cde)" style="fill: #eaf0f3; stroke: #eaf0f3; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_5">
+    <g id="xtick_15">
+     <g id="line2d_38"/>
+     <g id="text_31">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="94.336822" y="701.597422" transform="rotate(-0 94.336822 701.597422)">Mon</text>
+     </g>
+    </g>
+    <g id="xtick_16">
+     <g id="line2d_39"/>
+     <g id="text_32">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="187.477009" y="701.597422" transform="rotate(-0 187.477009 701.597422)">Tue</text>
+     </g>
+    </g>
+    <g id="xtick_17">
+     <g id="line2d_40"/>
+     <g id="text_33">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="280.617196" y="701.598281" transform="rotate(-0 280.617196 701.598281)">Wed</text>
+     </g>
+    </g>
+    <g id="xtick_18">
+     <g id="line2d_41"/>
+     <g id="text_34">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="373.757383" y="701.598281" transform="rotate(-0 373.757383 701.598281)">Thu</text>
+     </g>
+    </g>
+    <g id="xtick_19">
+     <g id="line2d_42"/>
+     <g id="text_35">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="466.89757" y="701.598281" transform="rotate(-0 466.89757 701.598281)">Fri</text>
+     </g>
+    </g>
+    <g id="xtick_20">
+     <g id="line2d_43"/>
+     <g id="text_36">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="560.037757" y="701.597422" transform="rotate(-0 560.037757 701.597422)">Sat</text>
+     </g>
+    </g>
+    <g id="xtick_21">
+     <g id="line2d_44"/>
+     <g id="text_37">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #425b6c" x="653.177944" y="701.597422" transform="rotate(-0 653.177944 701.597422)">Sun</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_6">
+    <g id="ytick_9">
+     <g id="line2d_45">
+      <path d="M 83.16 669.24 
+L 681.12 669.24 
+" clip-path="url(#pa4f9403cde)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_46"/>
+     <g id="text_38">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="673.418711" transform="rotate(-0 79.66 673.418711)">0.6</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_47">
+      <path d="M 83.16 633.24 
+L 681.12 633.24 
+" clip-path="url(#pa4f9403cde)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_48"/>
+     <g id="text_39">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="637.418711" transform="rotate(-0 79.66 637.418711)">0.8</text>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_49">
+      <path d="M 83.16 597.24 
+L 681.12 597.24 
+" clip-path="url(#pa4f9403cde)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_50"/>
+     <g id="text_40">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="601.418711" transform="rotate(-0 79.66 601.418711)">1.0</text>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_51">
+      <path d="M 83.16 561.24 
+L 681.12 561.24 
+" clip-path="url(#pa4f9403cde)" style="fill: none; stroke: #e3e9ed; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_52"/>
+     <g id="text_41">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #425b6c" x="79.66" y="565.418711" transform="rotate(-0 79.66 565.418711)">1.2</text>
+     </g>
+    </g>
+    <g id="text_42">
+     <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #152f40" x="47.523984" y="615.24" transform="rotate(-90 47.523984 615.24)">Weekday index</text>
+    </g>
+   </g>
+   <g id="line2d_53">
+    <path d="M 94.336822 587.300288 
+L 187.477009 570.61757 
+L 280.617196 572.728615 
+L 373.757383 574.336208 
+L 466.89757 595.542601 
+L 560.037757 620.728335 
+L 653.177944 659.426383 
+" clip-path="url(#pa4f9403cde)" style="fill: none; stroke: #315e89; stroke-width: 2.3; stroke-linecap: square"/>
+    <g clip-path="url(#pa4f9403cde)">
+     <use xlink:href="#m42a4ada2cc" x="94.336822" y="587.300288" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="187.477009" y="570.61757" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="280.617196" y="572.728615" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="373.757383" y="574.336208" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="466.89757" y="595.542601" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="560.037757" y="620.728335" style="fill: #315e89; stroke: #315e89"/>
+     <use xlink:href="#m42a4ada2cc" x="653.177944" y="659.426383" style="fill: #315e89; stroke: #315e89"/>
+    </g>
+   </g>
+   <g id="line2d_54">
+    <path d="M 94.336822 591.544387 
+L 187.477009 574.067369 
+L 280.617196 580.666572 
+L 373.757383 576.290806 
+L 466.89757 596.341223 
+L 560.037757 618.712794 
+L 653.177944 643.056849 
+" clip-path="url(#pa4f9403cde)" style="fill: none; stroke: #c36828; stroke-width: 2.3; stroke-linecap: square"/>
+    <g clip-path="url(#pa4f9403cde)">
+     <use xlink:href="#mb59c0828e6" x="94.336822" y="591.544387" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="187.477009" y="574.067369" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="280.617196" y="580.666572" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="373.757383" y="576.290806" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="466.89757" y="596.341223" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="560.037757" y="618.712794" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+     <use xlink:href="#mb59c0828e6" x="653.177944" y="643.056849" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="patch_10">
+    <path d="M 83.16 687.24 
+L 681.12 687.24 
+" style="fill: none; stroke: #b6c4cb; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_43">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #315e89" x="672.177944" y="662.283805" transform="rotate(-0 672.177944 662.283805)">0.655</text>
+   </g>
+   <g id="text_44">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #c36828" x="672.177944" y="645.914271" transform="rotate(-0 672.177944 645.914271)">0.745</text>
+   </g>
+   <g id="text_45">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #152f40" x="83.16" y="534.24" transform="rotate(-0 83.16 534.24)">S-NPP VIIRS  ·  Sunday contrast passes the fixed test</text>
+   </g>
+  </g>
+  <g id="text_46">
+   <text style="font-weight: 700; font-size: 21px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #152f40" x="51.48" y="38.916" transform="rotate(-0 51.48 38.916)">The weekday pattern depends on the measure</text>
+  </g>
+  <g id="text_47">
+   <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #152f40" x="51.48" y="72.036" transform="rotate(-0 51.48 72.036)">REAL FIRMS DATA, US daytime 2013-2024</text>
+  </g>
+  <g id="text_48">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #425b6c" x="51.48" y="102.672" transform="rotate(-0 51.48 102.672)">Vegetation detections · primary common-date outage mask · average weekday = 1.0</text>
+  </g>
+  <g id="text_49">
+   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #425b6c" transform="translate(51.48 757.736406)">Profiles are equal-weight means of 12 annual weekday indices; the prespecified test concerns Sunday only.</text>
+   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #425b6c" transform="translate(51.48 771.986406)">All included detections have valid FRP. FRP is sampled radiative power, not energy, emissions or fire counts.</text>
+   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #425b6c" transform="translate(51.48 786.236406)">The related satellite streams corroborate one another; they are not independent experiments.</text>
+  </g>
+  <g id="legend_1">
+   <g id="line2d_55">
+    <path d="M 61.38 732.947422 
+L 72.38 732.947422 
+L 83.38 732.947422 
+" style="fill: none; stroke: #315e89; stroke-width: 2.3; stroke-linecap: square"/>
+    <g>
+     <use xlink:href="#m42a4ada2cc" x="72.38" y="732.947422" style="fill: #315e89; stroke: #315e89"/>
+    </g>
+   </g>
+   <g id="text_50">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #152f40" x="92.18" y="736.797422" transform="rotate(-0 92.18 736.797422)">Detection count (valid FRP)</text>
+   </g>
+   <g id="line2d_56">
+    <path d="M 264.672031 732.947422 
+L 275.672031 732.947422 
+L 286.672031 732.947422 
+" style="fill: none; stroke: #c36828; stroke-width: 2.3; stroke-linecap: square"/>
+    <g>
+     <use xlink:href="#mb59c0828e6" x="275.672031" y="732.947422" style="fill: #c36828; stroke: #c36828; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="text_51">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #152f40" x="295.472031" y="736.797422" transform="rotate(-0 295.472031 736.797422)">Summed observed FRP</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p61c9637396">
+   <rect x="83.16" y="157.32" width="597.96" height="144"/>
+  </clipPath>
+  <clipPath id="p6cbd5d65e1">
+   <rect x="83.16" y="350.28" width="597.96" height="144"/>
+  </clipPath>
+  <clipPath id="pa4f9403cde">
+   <rect x="83.16" y="543.24" width="597.96" height="144"/>
+  </clipPath>
+ </defs>
+</svg>

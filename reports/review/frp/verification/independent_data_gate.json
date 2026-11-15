@@ -1,0 +1,581 @@
+{
+  "gate_pass": true,
+  "checks": [
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2013,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2014,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2015,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2016,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2017,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2018,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2019,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2020,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2021,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2022,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2023,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "year": 2024,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2013,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2014,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2015,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2016,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2017,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2018,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2019,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2020,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2021,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2022,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2023,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "year": 2024,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2013,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2014,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2015,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2016,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2017,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2018,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2019,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2020,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2021,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2022,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2023,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "year": 2024,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2013,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2014,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2015,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2016,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2017,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2018,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2019,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2020,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2021,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2022,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2023,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "year": 2024,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2013,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2014,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2015,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2016,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2017,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2018,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2019,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2020,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2021,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2022,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2023,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "year": 2024,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2013,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2014,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2015,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2016,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2017,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2018,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2019,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2020,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2021,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2022,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2023,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "year": 2024,
+      "valid_fraction": 1.0,
+      "weekday_invalid_fraction_spread": 0.0,
+      "pass": true
+    }
+  ]
+}

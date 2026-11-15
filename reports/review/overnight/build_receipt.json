@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "build_exit_code": 0,
+  "index_exists": true,
+  "files": 126,
+  "bytes": 52271113.0,
+  "oversized_files": 0,
+  "largest": {
+    "Name": "globe.json",
+    "Length": 12999487
+  },
+  "note": "Build-only retry after sandbox ancestor-directory access error; Python81 and web45 already passed",
+  "finished_utc": "2026-11-14T20:29:50.0483667Z"
+}

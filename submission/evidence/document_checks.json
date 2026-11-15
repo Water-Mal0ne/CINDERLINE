@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "project_page_words": 419,
+  "document_sha256_lf": {
+    "SLIDES.md": "73c7f86c5da3b3a82ed02f045e4de84be61e9037c02a31e3bf79a8200a9db806",
+    "PROJECT_PAGE.md": "0e266cd23942e7370ffad584c2ad08e824f1d25a53020debee1c50071d4b9e4c",
+    "JUDGE_QA.md": "6cb61f6a78d3162c3f33d6eda348dcf82902f04b19e8eeca3c0c64bc0f8b3118",
+    "TEAM_BRIEFING.md": "1b0afbffb3df45805ac353a50884633aed49618ac403eb24ebcb7cdefb6b8ced",
+    "VIDEO_SCRIPT.md": "5ff742916a7b026cc29d62b86d880ad2d1bf0435ef7fcd2efaabe7f049d8b084",
+    "SUBMISSION_CHECKLIST.md": "4a2956ba8a0d4523dbc51f13ac0a815961f277d304d3d99fd68c0bafa2534f9f",
+    "../AI_DISCLOSURE.md": "b157b6f77ced670cc103bff012983b92a4265a43ccb1898b24d5ffecf7b8ff9f"
+  },
+  "judge_question_numbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "slides": [
+    {
+      "slide": 1,
+      "title_and_slide_words": 17,
+      "speaker_note_words": 70,
+      "passed": true
+    },
+    {
+      "slide": 2,
+      "title_and_slide_words": 20,
+      "speaker_note_words": 72,
+      "passed": true
+    },
+    {
+      "slide": 3,
+      "title_and_slide_words": 26,
+      "speaker_note_words": 77,
+      "passed": true
+    },
+    {
+      "slide": 4,
+      "title_and_slide_words": 35,
+      "speaker_note_words": 80,
+      "passed": true
+    },
+    {
+      "slide": 5,
+      "title_and_slide_words": 25,
+      "speaker_note_words": 78,
+      "passed": true
+    },
+    {
+      "slide": 6,
+      "title_and_slide_words": 28,
+      "speaker_note_words": 82,
+      "passed": true
+    },
+    {
+      "slide": 7,
+      "title_and_slide_words": 22,
+      "speaker_note_words": 81,
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "scope": "Delivery limits only. Scientific claims require source review; this is not a semantic fact-checker."
+}

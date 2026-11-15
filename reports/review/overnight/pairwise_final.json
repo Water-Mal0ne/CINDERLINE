@@ -1,0 +1,108 @@
+{
+  "recorded_utc": "2026-11-14T20:25:49.550632+00:00",
+  "heads": {
+    "story-wording": "ff4a64e8a78fdf6a1bb37dc3f0cb37a0bceaab2b",
+    "frp-test": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+    "ui-polish-v2": "cb54eaca2f5a857cfe541dcb0509495413c2f120",
+    "season-check": "9ee15afe972cca97322ea371b1fdf3a66b45a0b6",
+    "submission-final": "e2568365ac6e0c7166ba305c2546177bded8917c"
+  },
+  "merges": [
+    {
+      "left": "story-wording",
+      "right": "frp-test",
+      "exit_code": 0,
+      "result_tree": "c9383d429acd5adc1a5317ba76ad2b60166cf8c1",
+      "conflicts": [],
+      "stdout": "c9383d429acd5adc1a5317ba76ad2b60166cf8c1\n",
+      "stderr": ""
+    },
+    {
+      "left": "story-wording",
+      "right": "ui-polish-v2",
+      "exit_code": 0,
+      "result_tree": "27a8e8f42d1514846fecf30ca96da0b4883d6877",
+      "conflicts": [],
+      "stdout": "27a8e8f42d1514846fecf30ca96da0b4883d6877\n",
+      "stderr": ""
+    },
+    {
+      "left": "story-wording",
+      "right": "season-check",
+      "exit_code": 1,
+      "result_tree": "5d117e10053b4d9c0d311462a3c69948ab4fb84c",
+      "conflicts": [
+        "submission/JUDGE_QA.md"
+      ],
+      "stdout": "5d117e10053b4d9c0d311462a3c69948ab4fb84c\nsubmission/JUDGE_QA.md\n\nAuto-merging DECISIONS.md\nAuto-merging submission/JUDGE_QA.md\nCONFLICT (content): Merge conflict in submission/JUDGE_QA.md\n",
+      "stderr": ""
+    },
+    {
+      "left": "story-wording",
+      "right": "submission-final",
+      "exit_code": 1,
+      "result_tree": "4aa19d2e5e5f0d50fba2cafb1bfc11e1ef9f955f",
+      "conflicts": [
+        "submission/JUDGE_QA.md"
+      ],
+      "stdout": "4aa19d2e5e5f0d50fba2cafb1bfc11e1ef9f955f\nsubmission/JUDGE_QA.md\n\nAuto-merging DECISIONS.md\nAuto-merging submission/JUDGE_QA.md\nCONFLICT (content): Merge conflict in submission/JUDGE_QA.md\n",
+      "stderr": ""
+    },
+    {
+      "left": "frp-test",
+      "right": "ui-polish-v2",
+      "exit_code": 0,
+      "result_tree": "b24a50864c1be37909b16432b871349a9a719311",
+      "conflicts": [],
+      "stdout": "b24a50864c1be37909b16432b871349a9a719311\n",
+      "stderr": ""
+    },
+    {
+      "left": "frp-test",
+      "right": "season-check",
+      "exit_code": 0,
+      "result_tree": "e82f462d8cd7985bcecd8ca8fb231819c299d699",
+      "conflicts": [],
+      "stdout": "e82f462d8cd7985bcecd8ca8fb231819c299d699\n",
+      "stderr": ""
+    },
+    {
+      "left": "frp-test",
+      "right": "submission-final",
+      "exit_code": 0,
+      "result_tree": "8b4a7ecd62496efc3a7d5bc4ff7d2faed4f15796",
+      "conflicts": [],
+      "stdout": "8b4a7ecd62496efc3a7d5bc4ff7d2faed4f15796\n",
+      "stderr": ""
+    },
+    {
+      "left": "ui-polish-v2",
+      "right": "season-check",
+      "exit_code": 0,
+      "result_tree": "2c6270e887754d0fc09129c431da9cc7e321e654",
+      "conflicts": [],
+      "stdout": "2c6270e887754d0fc09129c431da9cc7e321e654\n",
+      "stderr": ""
+    },
+    {
+      "left": "ui-polish-v2",
+      "right": "submission-final",
+      "exit_code": 0,
+      "result_tree": "81039055419929476ef843fafe6b9e68e481438f",
+      "conflicts": [],
+      "stdout": "81039055419929476ef843fafe6b9e68e481438f\n",
+      "stderr": ""
+    },
+    {
+      "left": "season-check",
+      "right": "submission-final",
+      "exit_code": 1,
+      "result_tree": "9d7f4b8721dce0e7ba6962c06d8ea4aca64806f3",
+      "conflicts": [
+        "submission/JUDGE_QA.md"
+      ],
+      "stdout": "9d7f4b8721dce0e7ba6962c06d8ea4aca64806f3\nsubmission/JUDGE_QA.md\n\nAuto-merging .gitattributes\nAuto-merging DECISIONS.md\nAuto-merging submission/JUDGE_QA.md\nCONFLICT (content): Merge conflict in submission/JUDGE_QA.md\n",
+      "stderr": ""
+    }
+  ]
+}

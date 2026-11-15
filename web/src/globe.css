@@ -1,0 +1,38 @@
+.globe-table-filters{display:flex;align-items:flex-end;flex-wrap:wrap;gap:12px;margin:14px 0}
+.globe-table-filters label{display:flex;flex-direction:column;gap:7px;font-size:10px;color:#c1d0cc;min-width:0}
+.globe-table-filters input[type=search]{width:210px;max-width:100%;box-sizing:border-box;border:1px solid #7b999b70;border-radius:4px;background:#10242c;color:#edf0e4;padding:9px 10px;font:inherit;font-size:12px}
+.globe-table-filters input::placeholder{color:#9fb7bb}
+.globe-table-filters .globe-daily-filter{flex-direction:row;align-items:center;gap:7px;min-height:35px;cursor:pointer}
+.globe-daily-filter input{accent-color:#f0b381;width:16px;height:16px;margin:0}
+.earth-explorer .globe-table-count{color:#b9cdcc;font-size:10px;line-height:1.7}
+.globe-table .globe-daily-badge{display:block;margin-top:5px;color:#e9bd8e;font-size:9px}
+.globe-table .globe-row-selected{background:#35504c80;box-shadow:inset 3px 0 #f2b27c}
+.globe-table .globe-row-selected .text-button{color:#f5c69f}
+.globe-pagination{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:14px 0 4px;position:sticky;bottom:-12px;background:#14242c;border-top:1px solid #8ba3a32b}
+.globe-pagination span{font-size:10px;color:#b5c9c8;text-align:center}
+.globe-pagination button{min-height:34px;font-size:10px}
+.globe-pagination button:disabled{opacity:.4;cursor:default}
+.globe-pagination button:disabled:hover{background:#21383f}
+.globe-table-empty{padding:15px 0 22px;color:#b7cccb;font-size:11px;line-height:1.7}
+.globe-table caption.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.globe-selection:focus{outline:2px solid #edbc8a;outline-offset:5px;border-radius:2px}
+.globe-table .table-scroll:focus-visible{outline:2px solid #edbc8a;outline-offset:-2px;border-radius:2px}
+.globe-view-actions{display:flex;flex-wrap:wrap;gap:7px}
+@media(max-width:640px){.globe-table-filters{align-items:stretch;gap:9px}.globe-table-filters>label:first-child{flex:1 1 100%}.globe-table-filters input[type=search]{width:100%;font-size:16px}.globe-pagination{bottom:-11px;gap:5px}.globe-pagination button{font-size:9px;padding:7px;min-height:36px}.globe-pagination span{font-size:9px}.globe-table .globe-daily-badge{font-size:8px}.globe-table table td:first-child{min-width:104px;line-height:1.6}}
+@media(max-width:640px){
+  .globe-table-filters label,.earth-explorer .globe-table-count,.globe-table>p{font-size:12px}
+  .globe-table table td,.globe-table .text-button{font-size:11px}
+  .globe-table table th,.globe-table .globe-daily-badge{font-size:9px}
+  .globe-pagination button,.globe-pagination span{font-size:11px}
+  .globe-table .text-button,.globe-pagination button,.globe-view-actions .chart-scale-button{min-height:44px}
+  .globe-selection>strong{font-size:12px}
+  .globe-selection>small,.globe-selection>p,.globe-selection .button,.globe-year-note{font-size:11px}
+  .globe-source>span,.globe-selection>span,.globe-detail>.eyebrow,.year-range{font-size:9px}
+  .globe-detail>small,.globe-zero-key,.earth-explorer>.chart-note{font-size:10px}
+  .globe-detail input[type=range]{min-height:36px}
+}
+@media(max-width:400px){
+  .globe-pagination{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .globe-pagination span{grid-column:1/-1;grid-row:1}
+  .globe-pagination button{white-space:normal}
+}

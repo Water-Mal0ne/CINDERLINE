@@ -1,6 +1,8 @@
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import {FlaskConical} from 'lucide-react';
-import {loadData} from './loadData';
+import {invalidateData, loadData} from './loadData';
+import {nextRhythmCell} from './rhythmMapNavigation';
+import {validRhythmCellSummary, validRhythmCellTable, validRhythmLand} from './rhythmData';
 
 type Num = number | null;
 interface CellProps {
@@ -22,7 +24,7 @@ const NAMES: Record<string, string> = {United_States: 'United States', Brazil: '
 // context: team-written description (see METHODS.md and reports/review/northeast_india/).
 const HIGHLIGHTS: Record<string, {title: string; test: (p: CellProps) => boolean; rest: string; restTest: (p: CellProps) => boolean; context?: string}> = {
   India: {title: 'Northeast India (east of 89° E)', test: p => p.cell_lon >= 89, rest: 'rest of India', restTest: p => p.cell_lon < 89,
-    context: "Within India, the Sunday dip is concentrated in the northeastern hill states, deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day; the rest of India, including the Punjab crop-burning belt, shows no weekly dip. The cause is unresolved; local scheduling of burning is one possible explanation we have not tested."},
+    context: "Within India, the Sunday dip is concentrated in the northeastern hill states, deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day; the rest of India, including the Punjab crop-burning belt, shows no weekly dip. This is an exploratory association; these data do not establish its cause."},
 };
 
 function color(v: number) {
@@ -42,17 +44,37 @@ const median = (xs: number[]) => { const s = [...xs].sort((a, b) => a - b); retu
 export default function RhythmCellMap() {
   const [cells, setCells] = useState<Cells | null>(null), [summary, setSummary] = useState<Summary | null>(null);
   const [land, setLand] = useState<Land | null>(null), [error, setError] = useState('');
-  const [country, setCountry] = useState('India'), [active, setActive] = useState<CellProps | null>(null);
+  const [attempt, setAttempt] = useState(0), [landError, setLandError] = useState(false);
+  const [outlineAttempt, setOutlineAttempt] = useState(0);
+  const [requestedCountry, setCountry] = useState('India'), [activeCell, setActive] = useState<CellProps | null>(null);
+  const [focusIndex, setFocusIndex] = useState(0);
+  const cellRefs = useRef<(SVGRectElement | null)[]>([]);
   useEffect(() => {
     const c = new AbortController();
+    setError('');
     Promise.all([loadData<CellTable>('rhythm_cells.json', c.signal), loadData<Summary>('rhythm_cells_summary.json', c.signal)])
-      .then(([g, s]) => { setCells(decodeCells(g)); setSummary(s); })
-      .catch(e => { if (e.name !== 'AbortError') setError('The per-cell results have not been published.'); });
-    loadData<Land>('world-land.json', c.signal).then(setLand).catch(() => {});
+      .then(([g, s]) => {
+        if (!validRhythmCellTable(g) || !validRhythmCellSummary(s)) throw new Error('Invalid per-cell data');
+        if (!c.signal.aborted) { setCells(decodeCells(g)); setSummary(s); }
+      })
+      .catch(() => { if (!c.signal.aborted) setError('The per-cell results could not be loaded. Please try again.'); });
     return () => c.abort();
-  }, []);
-  const props = useMemo(() => (cells?.features || []).map(f => f.properties).filter(p => p.country === country), [cells, country]);
+  }, [attempt]);
+  useEffect(() => {
+    const c = new AbortController();
+    setLandError(false);
+    loadData<Land>('world-land.json', c.signal)
+      .then(value => {
+        if (!validRhythmLand(value)) throw new Error('Invalid map outline');
+        if (!c.signal.aborted) setLand(value);
+      })
+      .catch(() => { if (!c.signal.aborted) setLandError(true); });
+    return () => c.abort();
+  }, [outlineAttempt]);
   const countries = useMemo(() => [...new Set((cells?.features || []).map(f => f.properties.country))], [cells]);
+  const country = countries.includes(requestedCountry) ? requestedCountry : (countries[0] || requestedCountry);
+  const props = useMemo(() => (cells?.features || []).map(f => f.properties).filter(p => p.country === country), [cells, country]);
+  const active = props.find(p => p.country === activeCell?.country && p.cell_lat === activeCell.cell_lat && p.cell_lon === activeCell.cell_lon) || null;
   const view = useMemo(() => {
     if (!props.length) return null;
     const minLon = Math.min(...props.map(p => p.cell_lon)) - 2, maxLon = Math.max(...props.map(p => p.cell_lon)) + 3;
@@ -72,8 +94,9 @@ export default function RhythmCellMap() {
     return {x, y, w: (maxLon - minLon) * k * s, h: (maxLat - minLat) * s, cw: k * s, ch: s, land: landPath.join('')};
   }, [props, land]);
 
-  if (error) return <section className="panel"><p className="panel-description">{error}</p></section>;
-  if (!cells || !summary || !view) return <section className="panel"><div className="loading-state" role="status"><span className="loader"/><h2>Loading the per-cell map…</h2></div></section>;
+  if (error) return <section className="panel rh-load-error" role="alert"><p className="panel-description">{error}</p><button type="button" className="button" onClick={() => { invalidateData('rhythm_cells.json'); invalidateData('rhythm_cells_summary.json'); setAttempt(n => n + 1); }}>Retry per-cell map</button></section>;
+  if (!cells || !summary) return <section className="panel"><div className="loading-state" role="status"><span className="loader"/><h2>Loading the per-cell map…</h2></div></section>;
+  if (!view) return <section className="panel" role="status"><h2>Where is the dip? One-degree cells</h2><p className="panel-description">No per-cell results are available.</p></section>;
   const sig = props.filter(p => p.significant);
   const check = summary.aqua_check[country], all = summary.aqua_check.ALL;
   const hl = HIGHLIGHTS[country];
@@ -89,14 +112,21 @@ export default function RhythmCellMap() {
     <div className="panel-heading"><div><span className="rh-exploratory"><FlaskConical size={11}/> EXPLORATORY</span>
       <h2 id="rh-map-title">Where is the dip? One-degree cells</h2></div></div>
     <p className="panel-description">Not part of the pre-specified test. The same weekday method run for every 1° cell with enough VIIRS detections (at least 300 a year on average and 8 usable years), with a false-discovery correction (Benjamini-Hochberg, 5%) across all cells. Aqua is computed the same way as a check.</p>
-    <div className="rh-country-picker" role="group" aria-label="Country map">{countries.map(c => <button key={c} className={c === country ? 'active' : ''} aria-pressed={c === country} onClick={() => { setCountry(c); setActive(null); }}>{NAMES[c] || c}<small>{cells.features.find(f => f.properties.country === c)?.properties.rest_day}</small></button>)}</div>
+    <div className="rh-country-picker" role="group" aria-label="Country map">{countries.map(c => <button key={c} className={c === country ? 'active' : ''} aria-pressed={c === country} onClick={() => { setCountry(c); setActive(null); setFocusIndex(0); }}>{NAMES[c] || c}<small>{cells.features.find(f => f.properties.country === c)?.properties.rest_day}</small></button>)}</div>
+    <p className="rh-map-help" id="rh-map-help">Use Left and Right arrow keys to move between cells; Home and End jump to the first or last. Press Enter or Space to select. An orange outline marks the cell being inspected.</p>
+    {landError && <div className="rh-map-outline-error" role="status"><span>The map outline could not be loaded.</span><button type="button" className="button" onClick={() => { invalidateData('world-land.json'); setOutlineAttempt(n => n + 1); }}>Retry map outline</button></div>}
     <div className="rh-map-wrap">
-      <svg className="rh-map" viewBox={`0 0 ${view.w.toFixed(0)} ${view.h.toFixed(0)}`} role="group" aria-label={`${NAMES[country]}: ${props.length} cells analysed, ${sig.length} with a significant Sunday dip. Select a cell for its values.`}>
+      <svg className="rh-map" viewBox={`0 0 ${view.w.toFixed(0)} ${view.h.toFixed(0)}`} role="group" aria-describedby="rh-map-help" aria-label={`${NAMES[country]}: ${props.length} cells analysed, ${sig.length} with a significant Sunday dip. Select a cell for its values.`}>
         <path d={view.land} fill="#22333a" stroke="#3a4d55" strokeWidth={0.6}/>
-        {props.map(p => <rect key={`${p.cell_lat}:${p.cell_lon}`} x={view.x(p.cell_lon)} y={view.y(p.cell_lat + 1)} width={view.cw} height={view.ch}
-          fill={color(p.rest_index)} className={`rh-cell ${p.significant ? 'sig' : ''}`} tabIndex={0}
+        {props.map((p, i) => <rect key={`${p.cell_lat}:${p.cell_lon}`} ref={node => { cellRefs.current[i] = node; }} x={view.x(p.cell_lon)} y={view.y(p.cell_lat + 1)} width={view.cw} height={view.ch}
+          fill={color(p.rest_index)} className={`rh-cell ${p.significant ? 'sig' : ''} ${active === p ? 'selected' : ''}`} role="button" aria-pressed={active === p} tabIndex={i === Math.min(focusIndex, props.length - 1) ? 0 : -1}
           aria-label={`Cell ${lat(p.cell_lat)} to ${lat(p.cell_lat + 1)}, ${lon(p.cell_lon)} to ${lon(p.cell_lon + 1)}: Sunday index ${f3(p.rest_index)}${p.significant ? ', significant' : ''}`}
-          onMouseEnter={() => setActive(p)} onFocus={() => setActive(p)} onClick={() => setActive(p)}/>)}
+          onMouseEnter={() => setActive(p)} onFocus={() => { setFocusIndex(i); setActive(p); }} onClick={() => { setFocusIndex(i); setActive(p); }}
+          onKeyDown={e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(p); return; }
+            const next = nextRhythmCell(e.key, i, props.length);
+            if (next !== null) { e.preventDefault(); setFocusIndex(next); setActive(props[next]); cellRefs.current[next]?.focus(); }
+          }}/>)}
       </svg>
       <div className="rh-legend">
         <div><div className="rh-ramp"/><div className="rh-ramp-labels"><span>0.7</span><span>1.0</span><span>1.3+</span></div>
@@ -111,7 +141,7 @@ export default function RhythmCellMap() {
         {check && <div>Aqua check: {check.cells_with_both} cells have both satellites; their Sunday indices correlate at r = {f3(check.corr_rest_index)}. Of {check.viirs_sig_cells_with_aqua} VIIRS-significant cells with Aqua data, {check.of_those_aqua_below_1} are also below 1 in Aqua and {check.of_those_aqua_significant} are significant in Aqua.</div>}
       </div>
     </div>
-    {hl && hlStats && <div className="rh-finding"><strong>{hl.title}.</strong> {hlStats.sig} of {hlStats.n} cells have a significant Sunday dip (median index {f3(hlStats.med)}). Of the {hlStats.aqua} significant cells that Aqua can also measure, {hlStats.aquaBelow} are below 1 in Aqua and {hlStats.aquaSig} are significant in Aqua. In the {hl.rest}, {hlStats.outSig} of {hlStats.outN} cells are significant (median {f3(hlStats.outMed)}). {country === 'India' && summary.northeast_india_area && <>Of the {hlStats.n} northeast cells, {summary.northeast_india_area.northeast_cross_border.cells} lie mostly outside India (their detections come from the Indian side of the border); using only the {summary.northeast_india_area.northeast_mostly_india.cells} cells mostly inside India, {summary.northeast_india_area.northeast_mostly_india.significant} are significant (median {f3(summary.northeast_india_area.northeast_mostly_india.median_sunday_index)}). </>}The area boundary was drawn after looking at the map; it is a description, not a test. The pattern is consistent with people scheduling their burning there; it does not show who lit the fires.{hl.context && <><br/><br/>{hl.context}</>}</div>}
+    {hl && hlStats && <div className="rh-finding"><strong>{hl.title}.</strong> {hlStats.sig} of {hlStats.n} cells have a significant Sunday dip (median index {f3(hlStats.med)}). Of the {hlStats.aqua} significant cells that Aqua can also measure, {hlStats.aquaBelow} are below 1 in Aqua and {hlStats.aquaSig} are significant in Aqua. In the {hl.rest}, {hlStats.outSig} of {hlStats.outN} cells are significant (median {f3(hlStats.outMed)}). {country === 'India' && summary.northeast_india_area && <>Of the {hlStats.n} northeast cells, {summary.northeast_india_area.northeast_cross_border.cells} lie mostly outside India (their detections come from the Indian side of the border); using only the {summary.northeast_india_area.northeast_mostly_india.cells} cells mostly inside India, {summary.northeast_india_area.northeast_mostly_india.significant} are significant (median {f3(summary.northeast_india_area.northeast_mostly_india.median_sunday_index)}). </>}The area boundary was drawn after looking at the map; it is a description, not a test. This descriptive pattern does not establish ignition cause.{hl.context && <><br/><br/>{hl.context}</>}</div>}
     {all && <p className="chart-note">All four countries: Aqua and VIIRS Sunday indices correlate at r = {f3(all.corr_rest_index)} across {all.cells_with_both} shared cells. Neighbouring cells share weather and farming practice, so a cluster of significant cells is one regional pattern, not many independent findings. Grey land means too few detections to analyse, not "no dip".</p>}
     <span className="chart-label">{cells.metadata.label} · EXPLORATORY</span>
   </section>;

@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "mode": "dry_run_only",
+  "recorded_utc": "2026-11-14T20:32:42.570649+00:00",
+  "source_heads": {
+    "story-wording": "ff4a64e8a78fdf6a1bb37dc3f0cb37a0bceaab2b",
+    "frp-test": "cf2f4d364fa8dc3fdd2e51108b4a76466f7f51c1",
+    "ui-polish-v2": "cb54eaca2f5a857cfe541dcb0509495413c2f120",
+    "season-check": "9ee15afe972cca97322ea371b1fdf3a66b45a0b6",
+    "submission-final": "e2568365ac6e0c7166ba305c2546177bded8917c"
+  },
+  "final_tree": "d908acdbca8d5bf20a033f7cac77946636be59b3",
+  "refs_unchanged": true,
+  "python_tests_passed": 81,
+  "web_tests_passed": 45,
+  "web_prechecks": 3,
+  "build": {
+    "pass": true,
+    "build_exit_code": 0,
+    "index_exists": true,
+    "files": 126,
+    "bytes": 52271113.0,
+    "oversized_files": 0,
+    "largest": {
+      "Name": "globe.json",
+      "Length": 12999487
+    },
+    "note": "Build-only retry after sandbox ancestor-directory access error; Python81 and web45 already passed",
+    "finished_utc": "2026-11-14T20:29:50.0483667Z"
+  },
+  "tracked_source_files_unchanged": 524,
+  "official_results_unchanged": 15,
+  "sample_files_unchanged": 4,
+  "original_public_data_numeric_leaves_unchanged": true,
+  "documentation_conflicts_only": true,
+  "actual_merge_or_push": false,
+  "browser_qa": "Coordinator owns separate live inspection",
+  "first_attempts": "Sandbox-only build failure and CRLF archive conversion preserved transparently in audit artifacts"
+}

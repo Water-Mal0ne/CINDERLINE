@@ -62,7 +62,7 @@ The seasonal section remains a national summary when a daily grid cell is select
 
 ## Weekly rhythm analysis
 
-The hypothesis is motivated by [Earl, Simmonds and Tapper (2015)](https://doi.org/10.1002/2015GL066383). Rest days are fixed before inspecting results: Sunday for the United States, Australia, India and Brazil; Saturday for Nepal; Friday for Bangladesh and Egypt. These are analysis hypotheses, not a claim that everyone in a country follows one schedule.
+The hypothesis is motivated by [Earl, Simmonds and Tapper (2015)](https://doi.org/10.1002/2015GL066383). The test uses stated rest-day hypotheses: Sunday for the United States, Australia, India and Brazil; Saturday for Nepal; Friday for Bangladesh and Egypt. These are analysis hypotheses, not a claim that everyone in a country follows one schedule. The chronology and limits of the pre-specified claim are recorded in DECISIONS.md.
 
 **Official decision.** The published decision is the gate pre-specified in `reference/kill_test.py`, run on the seven countries' archives for 2013–2024 (outputs in `reports/official/`): per complete year, weekday rate divided by the number of times that weekday occurs, normalised to a mean of 1; years averaged; 95% intervals from 2,000 whole-year bootstrap draws; one-sided null test from 5,000 draws of a random weekday per year; Bonferroni across all country × stream tests. A country passes when its predicted rest day is the lowest weekday and significant in at least two streams; the overall decision passes when the United States and at least two other countries pass. Static sources (types 1/2) are a pooled negative control.
 

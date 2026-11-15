@@ -1,0 +1,222 @@
+{
+  "phase": "prepared-count pipeline",
+  "fit_years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017
+  ],
+  "validation_years": [
+    2018,
+    2019
+  ],
+  "test_years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "ratios": {
+    "B1": 0.1450130601167073,
+    "M1": {
+      "Australia|D:high": 1.4244062274453604,
+      "Australia|D:low": 0.02441375521021166,
+      "Australia|D:medium": 0.2891456119152875,
+      "Australia|N:high": 1.460805655749039,
+      "Australia|N:low": 0.010840626249168595,
+      "Australia|N:medium": 0.52642179476565,
+      "Bangladesh|D:high": 1.2690738894068974,
+      "Bangladesh|D:low": 0.06001372795363315,
+      "Bangladesh|D:medium": 0.4186774966294314,
+      "Bangladesh|N:high": 0.1750130601167073,
+      "Bangladesh|N:low": 0.009520758347830451,
+      "Bangladesh|N:medium": 0.30992814885678294,
+      "Brazil|D:high": 1.3237232881009209,
+      "Brazil|D:low": 0.035898924111565075,
+      "Brazil|D:medium": 0.3638195240416814,
+      "Brazil|N:high": 2.573489369783426,
+      "Brazil|N:low": 0.020751583448531122,
+      "Brazil|N:medium": 0.8226119311049145,
+      "Egypt|D:high": 0.32676011408627514,
+      "Egypt|D:low": 0.03521251882717115,
+      "Egypt|D:medium": 0.4399291459205673,
+      "Egypt|N:high": 0.28637550919700666,
+      "Egypt|N:low": 0.008615376111639683,
+      "Egypt|N:medium": 0.6771265904489695,
+      "India|D:high": 1.3573740639459644,
+      "India|D:low": 0.053297841139375884,
+      "India|D:medium": 0.5416941820500598,
+      "India|N:high": 1.1806832437955523,
+      "India|N:low": 0.006234414085575515,
+      "India|N:medium": 1.2784782617807617,
+      "Nepal|D:high": 1.6842783931490681,
+      "Nepal|D:low": 0.050021525267760575,
+      "Nepal|D:medium": 0.6706694265526845,
+      "Nepal|N:high": 0.26501306011670733,
+      "Nepal|N:low": 0.008071928665799852,
+      "Nepal|N:medium": 1.3797295739232671,
+      "United_States|D:high": 1.1280540876662384,
+      "United_States|D:low": 0.07777676981491147,
+      "United_States|D:medium": 0.3682306547080905,
+      "United_States|N:high": 1.2788510069228507,
+      "United_States|N:low": 0.00547872336951477,
+      "United_States|N:medium": 0.3823676934096219
+    }
+  },
+  "selection": {
+    "Australia": {
+      "selected": "B1",
+      "validation_daily_mae": {
+        "B1": 134.18509180237535,
+        "M1": 173.40331923832827
+      }
+    },
+    "Bangladesh": {
+      "selected": "M1",
+      "validation_daily_mae": {
+        "B1": 4.278281899374828,
+        "M1": 4.270197364174743
+      }
+    },
+    "Brazil": {
+      "selected": "B1",
+      "validation_daily_mae": {
+        "B1": 119.42667340410343,
+        "M1": 122.66678146599803
+      }
+    },
+    "Egypt": {
+      "selected": "M1",
+      "validation_daily_mae": {
+        "B1": 3.0856446044871944,
+        "M1": 0.8740921686831986
+      }
+    },
+    "India": {
+      "selected": "M1",
+      "validation_daily_mae": {
+        "B1": 82.49401800193057,
+        "M1": 70.91690694184852
+      }
+    },
+    "Nepal": {
+      "selected": "M1",
+      "validation_daily_mae": {
+        "B1": 6.158101311655551,
+        "M1": 3.7338381608229185
+      }
+    },
+    "United_States": {
+      "selected": "B1",
+      "validation_daily_mae": {
+        "B1": 57.429650729874446,
+        "M1": 69.36952977661261
+      }
+    }
+  },
+  "archive_files": 273,
+  "archive_manifest_fingerprint": "4bf6e7635b6cb9b7437fb069e4afb4866c5347dd15d46549288686fb8b21edd7",
+  "seconds": 1.22,
+  "peak_rss_bytes": 275222528,
+  "policy": "Country selection uses validation daily MAE only; the test split is reported without changing the selection rule.",
+  "label": "REAL FIRMS DATA",
+  "model_revision": "seven-country-v1",
+  "baseline_commit": "841998b",
+  "calibration_countries": [
+    "Australia",
+    "Bangladesh",
+    "Brazil",
+    "Egypt",
+    "India",
+    "Nepal",
+    "United_States"
+  ],
+  "grid_size": 0.25,
+  "map_cells": 12,
+  "history": {
+    "Australia": {
+      "start": "2003-01-01",
+      "end": "2024-12-31",
+      "first_eligible_viirs_year": 2013,
+      "early_source": "Observed MODIS Aqua; no Terra reconstruction"
+    },
+    "Bangladesh": {
+      "start": "2003-01-01",
+      "end": "2024-12-31",
+      "first_eligible_viirs_year": 2013,
+      "early_source": "Observed MODIS Aqua; no Terra reconstruction"
+    },
+    "Brazil": {
+      "start": "2003-01-01",
+      "end": "2024-12-31",
+      "first_eligible_viirs_year": 2013,
+      "early_source": "Observed MODIS Aqua; no Terra reconstruction"
+    },
+    "Egypt": {
+      "start": "2003-01-01",
+      "end": "2024-12-31",
+      "first_eligible_viirs_year": 2013,
+      "early_source": "Observed MODIS Aqua; no Terra reconstruction"
+    },
+    "India": {
+      "start": "2003-01-01",
+      "end": "2024-12-31",
+      "first_eligible_viirs_year": 2013,
+      "early_source": "Observed MODIS Aqua; no Terra reconstruction"
+    },
+    "Nepal": {
+      "start": "2003-01-01",
+      "end": "2024-12-31",
+      "first_eligible_viirs_year": 2013,
+      "early_source": "Observed MODIS Aqua; no Terra reconstruction"
+    },
+    "United_States": {
+      "start": "2003-01-01",
+      "end": "2024-12-31",
+      "first_eligible_viirs_year": 2013,
+      "early_source": "Observed MODIS Aqua; no Terra reconstruction"
+    }
+  },
+  "uncertainty": "95% training-year bootstrap calibration interval; not total observation/prediction uncertainty",
+  "limitations": [
+    "Counts refer to archived qualifying detections, not fires or burned area.",
+    "Cloud/overpass observation coverage is unknown; zeros mean no archived detections only.",
+    "Full local years require adjacent UTC annual archives.",
+    "No validated pre-Aqua bridge; this build supports dates with Aqua or VIIRS archives.",
+    "Early observed-Aqua bounds equal the archived count because no conversion is applied; observation uncertainty remains unknown.",
+    "M1 matches reported FRP strata empirically, not physically equal pixel-scale energy.",
+    "M2 omitted; map exposes 12 training-period-active cells per country, national totals use all cells."
+  ],
+  "revision_note": "Expanded country scope changes the global training ratio. The 2013\u201317 fit, 2018\u201319 validation selection and locked 2020\u201324 evaluation rules are unchanged.",
+  "implementation": {
+    "hash_method": "SHA256 of UTF-8 source bytes with CRLF normalized to LF",
+    "source_sha256": {
+      "pipeline/__init__.py": "2381eab8ed361d9c1165d62a84ed56078a56819e6b6ae1d098a79dbb4f65aff1",
+      "pipeline/calendar.py": "0a5ce80402c946e1cfc87ed6876918fa955e604ac8283995eeb1b641a32c0ebd",
+      "pipeline/clean.py": "bd07c32e0cabccaa802d8a2de36940279c5ff64d4dc01a710d38b32d8a382ec3",
+      "pipeline/download.py": "54d54eb851ab327f80e99965a568f1da228f0091c106f3a5b7542529e44193b7",
+      "pipeline/globe.py": "ed756bcc899873833145c041fbb9a495e31622d43365ede3f60462b0a8ca5045",
+      "pipeline/harmonize.py": "844fdda6d23389f13a5afc4f57d15a5e84de124f0f50ad8352e7cb4b88bda280",
+      "pipeline/rhythm.py": "cd1d05092e9bbe388fa2ee32785c9082d81d44d479e116e97f63cae72b0c57e6",
+      "pipeline/run_all.py": "10b02acbd19fbb4acc185ad25a8205521224e0fa3b052d02d2bb1f4463d73654",
+      "pipeline/streaming/__init__.py": "a426ede0425b1ecba19fe77efaffee2a4ce9b0e05160200293cbff6b1b6d2c85",
+      "pipeline/streaming/__main__.py": "e571895b79267a9f52b62b05632903816dfe704be7957c15eb39579a9f274fd6",
+      "pipeline/streaming/aggregate_archives.py": "407749b8b66a02e45b55c7918ff3efc8dca9610454b919e001f7e85c9eb42771",
+      "pipeline/streaming/download_guarded.py": "fdd9de49a7eff2101b5068f83ba6d0e4d6161d91a549696922a63690bd35deb8",
+      "pipeline/streaming/estimate_dictionary.py": "3c9c317a691f76f9e9905750656bdaf0f534e78535a17610e3814f2870470e22",
+      "pipeline/streaming/evaluate_counts.py": "5f78bdda67f702d96a3d604f1023667032a7e2de8f801f48540748111048d223",
+      "pipeline/streaming/prepare_analysis.py": "fe3a278f83d488a436ff1537f022278815e1950296367f2cb11118297b38ca48",
+      "pipeline/streaming/prepared_globe.py": "3b0535f407fc05d6b4fc8ca6b3cdf1202c67058f801fae4b607bfb7d692b18d9",
+      "pipeline/streaming/prepared_runtime.py": "d7b56c2e23003d755512ecc0e9c9a6f66c039124323712de6096e1c7231c56b4",
+      "pipeline/streaming/reproduce.py": "a61cdcc8450a6b423fbce6a55befbe43ebbfc263bb17ee3df298d420c8ceb1a7",
+      "pipeline/streaming/stage_calendars.py": "3ee0bac38649ca59741ddcc702c568f043ed7c2791e1f614f8644463092724e2",
+      "pipeline/streaming/summarize_regions.py": "80fa546158e1ca8292d7c62ce50943355ce4809b3dbbd57134ec9e0a8b4549c0",
+      "pipeline/streaming/weighted_rhythm.py": "1a48c63728f19ab6fee45437eb7f3a57167a88b562e17bb36c5f43385f2d382b",
+      "pipeline/synthetic.py": "c7e1ad9007ff6400749b02d59528bdf89080537ad4b6620fdf7fa9c2a171b435",
+      "pipeline/validation/__init__.py": "ca3cf23b012a528fa80911141f767e396b01b7885fd6d9725504f091337fbdc1",
+      "pipeline/validation/science_checks.py": "9ba6538b3752d7a3efb0e2dac075558009d1baf6733ff53e573593592ab6b605"
+    }
+  }
+}

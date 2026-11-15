@@ -1,0 +1,4 @@
+stream,official_detections,clean_unmasked_detections,difference,matches
+Terra,460657,460657,0,True
+Aqua,631342,631342,0,True
+VIIRS,2784451,2784451,0,True

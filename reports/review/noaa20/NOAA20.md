@@ -1,4 +1,4 @@
-# NOAA-20 VIIRS as an independent check (review E3)
+# NOAA-20 VIIRS as a separate-platform transfer check (review E3)
 
 Data: REAL FIRMS DATA, NOAA-20 VIIRS 375 m, 2018-2024 (FIRMS archive name `viirs-jpss1`). This check is not part of the official decision or the released model.
 Script: `python -m pipeline.review.noaa20_check NOAA20_DATA_DIR`.
@@ -20,7 +20,9 @@ NOAA-20 detections are converted to the Aqua reference scale with the saved mode
 
 The S-NPP-vs-Aqua column is recomputed here on the same weeks as the NOAA-20 comparison. Days marked "no observation" (review E5) count as missing in this column, so it can differ slightly from the Layer 1 table (United States +2.2% here, +1.7% there).
 
-The saved conversion carries over to a second VIIRS satellite without refitting. Egypt's high bias against Aqua appears with NOAA-20 too, which points at the Egypt ratio rather than at S-NPP.
+The saved conversion transfers to a separate VIIRS platform without refitting in the reported countries. This is corroboration between related measurement products, not independent ground-truth validation. Egypt's high bias against Aqua appears with NOAA-20 too, but the shared discrepancy does not diagnose its cause.
+
+A strict common-date outage sensitivity is still unfinished: a partly masked S-NPP week can be compared with a fuller NOAA-20 week. The separate season-preservation sensitivity does not resolve this NOAA-20 comparison's coverage limitation.
 
 ## (b) Fourth rhythm stream (reported separately, not in the gate)
 

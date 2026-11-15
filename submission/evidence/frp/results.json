@@ -1,0 +1,455 @@
+{
+  "status": "PASS",
+  "passing_streams_both_masks": [
+    "Aqua",
+    "VIIRS"
+  ],
+  "independently_verified": false,
+  "scientific_interpretation_pending": true,
+  "summaries": [
+    {
+      "mask": "primary",
+      "stream": "Terra",
+      "count_sunday": 0.6279686740037239,
+      "valid_count_sunday": 0.6279686740037239,
+      "frp_sunday": 0.7216525689051948,
+      "mean_delta": 0.093683894901471,
+      "ci_lower": -0.0016570225521303384,
+      "ci_upper": 0.20463350525659452,
+      "ci_coverage": 0.9833333333333333,
+      "loyo_min": 0.06629991081675593,
+      "loyo_max": 0.11207118762875173,
+      "max_day_removal_mean_delta": 0.0672637996591234,
+      "count_sunday_below_one": true,
+      "pass": false,
+      "criteria": {
+        "effect_at_least_0_05": true,
+        "adjusted_CI_above_zero": false,
+        "all_LOYO_positive": true,
+        "maximum_day_removal_positive": true
+      },
+      "mean_weekday_profiles": {
+        "C": [
+          1.0307163121152,
+          1.1835479210274522,
+          1.1391132089086546,
+          1.120476843369092,
+          1.0573570507191088,
+          0.8408199898567686,
+          0.6279686740037239
+        ],
+        "V": [
+          1.0307163121152,
+          1.1835479210274522,
+          1.1391132089086546,
+          1.120476843369092,
+          1.0573570507191088,
+          0.8408199898567686,
+          0.6279686740037239
+        ],
+        "F": [
+          1.0063391143193416,
+          1.1555946364240153,
+          1.0208570307156848,
+          1.1427798467003594,
+          1.0401595916456117,
+          0.9126172112897918,
+          0.7216525689051948
+        ]
+      }
+    },
+    {
+      "mask": "primary",
+      "stream": "Aqua",
+      "count_sunday": 0.6442843732052473,
+      "valid_count_sunday": 0.6442843732052473,
+      "frp_sunday": 0.8145389826494204,
+      "mean_delta": 0.17025460944417317,
+      "ci_lower": 0.10186440642303496,
+      "ci_upper": 0.2438192008564154,
+      "ci_coverage": 0.9833333333333333,
+      "loyo_min": 0.15009199645051238,
+      "loyo_max": 0.18677072050198892,
+      "max_day_removal_mean_delta": 0.19838798832864146,
+      "count_sunday_below_one": true,
+      "pass": true,
+      "criteria": {
+        "effect_at_least_0_05": true,
+        "adjusted_CI_above_zero": true,
+        "all_LOYO_positive": true,
+        "maximum_day_removal_positive": true
+      },
+      "mean_weekday_profiles": {
+        "C": [
+          1.0854748279048165,
+          1.1145049414155,
+          1.143882181843438,
+          1.145211244357552,
+          0.9913032143102095,
+          0.8753392169632374,
+          0.6442843732052473
+        ],
+        "V": [
+          1.0854748279048165,
+          1.1145049414155,
+          1.143882181843438,
+          1.145211244357552,
+          0.9913032143102095,
+          0.8753392169632374,
+          0.6442843732052473
+        ],
+        "F": [
+          0.9978531859828929,
+          1.1303103139513742,
+          1.0775119392052714,
+          1.0514097842112358,
+          1.0185529128270316,
+          0.9098228811727737,
+          0.8145389826494204
+        ]
+      }
+    },
+    {
+      "mask": "primary",
+      "stream": "VIIRS",
+      "count_sunday": 0.654520096294548,
+      "valid_count_sunday": 0.654520096294548,
+      "frp_sunday": 0.7454619503370177,
+      "mean_delta": 0.09094185404246975,
+      "ci_lower": 0.045115120865427086,
+      "ci_upper": 0.13698426230718083,
+      "ci_coverage": 0.9833333333333333,
+      "loyo_min": 0.07882433844373817,
+      "loyo_max": 0.1032801340884331,
+      "max_day_removal_mean_delta": 0.08923945607141921,
+      "count_sunday_below_one": true,
+      "pass": true,
+      "criteria": {
+        "effect_at_least_0_05": true,
+        "adjusted_CI_above_zero": true,
+        "all_LOYO_positive": true,
+        "maximum_day_removal_positive": true
+      },
+      "mean_weekday_profiles": {
+        "C": [
+          1.0552206247347349,
+          1.1479023868690181,
+          1.1361743597289398,
+          1.1272432906103544,
+          1.009429991765381,
+          0.8695092499970235,
+          0.654520096294548
+        ],
+        "V": [
+          1.0552206247347349,
+          1.1479023868690181,
+          1.1361743597289398,
+          1.1272432906103544,
+          1.009429991765381,
+          0.8695092499970235,
+          0.654520096294548
+        ],
+        "F": [
+          1.0316422918458439,
+          1.128736840966007,
+          1.0920746006877542,
+          1.1163844110444334,
+          1.00499320521234,
+          0.8807066999066039,
+          0.7454619503370177
+        ]
+      }
+    },
+    {
+      "mask": "padded",
+      "stream": "Terra",
+      "count_sunday": 0.6286737489305624,
+      "valid_count_sunday": 0.6286737489305624,
+      "frp_sunday": 0.7239317649900481,
+      "mean_delta": 0.0952580160594857,
+      "ci_lower": -0.001334414377379739,
+      "ci_upper": 0.2083223590131737,
+      "ci_coverage": 0.9833333333333333,
+      "loyo_min": 0.06666830547078567,
+      "loyo_max": 0.11378841071022232,
+      "max_day_removal_mean_delta": 0.0685495966949055,
+      "count_sunday_below_one": true,
+      "pass": false,
+      "criteria": {
+        "effect_at_least_0_05": true,
+        "adjusted_CI_above_zero": false,
+        "all_LOYO_positive": true,
+        "maximum_day_removal_positive": true
+      },
+      "mean_weekday_profiles": {
+        "C": [
+          1.032468426823818,
+          1.1813352225983789,
+          1.1410669265326152,
+          1.119371296693988,
+          1.0566937100729958,
+          0.8403906683476419,
+          0.6286737489305624
+        ],
+        "V": [
+          1.032468426823818,
+          1.1813352225983789,
+          1.1410669265326152,
+          1.119371296693988,
+          1.0566937100729958,
+          0.8403906683476419,
+          0.6286737489305624
+        ],
+        "F": [
+          1.0075348003583702,
+          1.1543254157001617,
+          1.0220399218766294,
+          1.1399121177925664,
+          1.0398114790188506,
+          0.9124445002633733,
+          0.7239317649900481
+        ]
+      }
+    },
+    {
+      "mask": "padded",
+      "stream": "Aqua",
+      "count_sunday": 0.645867462059564,
+      "valid_count_sunday": 0.645867462059564,
+      "frp_sunday": 0.8198998865613638,
+      "mean_delta": 0.1740324245017998,
+      "ci_lower": 0.10551463725920782,
+      "ci_upper": 0.24646384584240574,
+      "ci_coverage": 0.9833333333333333,
+      "loyo_min": 0.15421324924065052,
+      "loyo_max": 0.19089197329212704,
+      "max_day_removal_mean_delta": 0.20275906718064207,
+      "count_sunday_below_one": true,
+      "pass": true,
+      "criteria": {
+        "effect_at_least_0_05": true,
+        "adjusted_CI_above_zero": true,
+        "all_LOYO_positive": true,
+        "maximum_day_removal_positive": true
+      },
+      "mean_weekday_profiles": {
+        "C": [
+          1.0877958447758125,
+          1.1115939987831662,
+          1.146049733507103,
+          1.1445789817957568,
+          0.9898421935987417,
+          0.8742717854798564,
+          0.645867462059564
+        ],
+        "V": [
+          1.0877958447758125,
+          1.1115939987831662,
+          1.146049733507103,
+          1.1445789817957568,
+          0.9898421935987417,
+          0.8742717854798564,
+          0.645867462059564
+        ],
+        "F": [
+          1.0016255371458478,
+          1.130271305162642,
+          1.0821222439306561,
+          1.0530911200503998,
+          1.0108013033690473,
+          0.902188603780043,
+          0.8198998865613638
+        ]
+      }
+    },
+    {
+      "mask": "padded",
+      "stream": "VIIRS",
+      "count_sunday": 0.6562983454797084,
+      "valid_count_sunday": 0.6562983454797084,
+      "frp_sunday": 0.7493243914841613,
+      "mean_delta": 0.09302604600445268,
+      "ci_lower": 0.046202108762633774,
+      "ci_upper": 0.13952011168204428,
+      "ci_coverage": 0.9833333333333333,
+      "loyo_min": 0.081098002402265,
+      "loyo_max": 0.10555379804695991,
+      "max_day_removal_mean_delta": 0.09162957379744736,
+      "count_sunday_below_one": true,
+      "pass": true,
+      "criteria": {
+        "effect_at_least_0_05": true,
+        "adjusted_CI_above_zero": true,
+        "all_LOYO_positive": true,
+        "maximum_day_removal_positive": true
+      },
+      "mean_weekday_profiles": {
+        "C": [
+          1.0577951843457511,
+          1.1451019654779089,
+          1.1366281453176428,
+          1.126934697668038,
+          1.0084804310370763,
+          0.8687612306738742,
+          0.6562983454797084
+        ],
+        "V": [
+          1.0577951843457511,
+          1.1451019654779089,
+          1.1366281453176428,
+          1.126934697668038,
+          1.0084804310370763,
+          0.8687612306738742,
+          0.6562983454797084
+        ],
+        "F": [
+          1.0337028982176169,
+          1.1253218900711908,
+          1.0934757118499019,
+          1.115456213510805,
+          1.0043611774384253,
+          0.878357717427899,
+          0.7493243914841613
+        ]
+      }
+    }
+  ],
+  "protocol_sha256": "1B88C8B3C7A1225FB2AA10E3B19DD9311CB7F4B022A9795C51552557BB434171",
+  "protocol_frozen_utc": "2026-11-14T18:57:23.284Z",
+  "analysis_started_utc": "2026-11-14T19:31:21.574135+00:00",
+  "analysis_finished_utc": "2026-11-14T19:31:23.139640+00:00",
+  "gate_sha256": "e9a6d7ea4ba64509e88be0d7e1a8619ce7aab85772661e477258267aa4c3b94d",
+  "input_manifest_sha256": "807c70803df09d9e58c33b02db7e0cf65fbc975bafe447f1b82b2c9d59f8652f",
+  "script_sha256": "94e99b6375bce295f0c79094005871a38ab8ff144271f59024b0d583bbf79ea7",
+  "bootstrap_draws_npy_sha256": "bf5991fd06667bd37cef1ce66b3ec1322755c47d38a1a54b086745ab65228aaa",
+  "bootstrap_draws_array_sha256": "1b19808faa458fe204271ff26bd9fab55a769d427b01388ca38e27b685c2353e",
+  "runtime_versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1"
+  },
+  "synthetic_checks": {
+    "constant_FRP_has_zero_contrast": true,
+    "calendar_occurrence_adjusted_constant_rates_equal_one": true,
+    "weekday_indices_sum_seven": true
+  },
+  "input_hashes_reverified": [
+    {
+      "path": "data/processed/clean_cache_v2/modis_2012_United_States.parquet",
+      "sha256": "7b83ea45de2b24a7cb377ae2515126bfb473f50b1b8d8d42be666904021cd9c9"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2013_United_States.parquet",
+      "sha256": "000172c5efb1092498854b9f92e77d3808f47793961c136f126ebac080e8da63"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2014_United_States.parquet",
+      "sha256": "81fc6253caa7c0c7f530e650619f4203e6bdea2d978f9a478349f4556be06e9c"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2015_United_States.parquet",
+      "sha256": "bb0462c8f4674aa5e8d1a35e37c0427390ba562557e51e49d681cd107c1988de"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2016_United_States.parquet",
+      "sha256": "5dd14f040b4afdb6b23c3dad4876210a74ea1f368d8b50dca6e2724f71040c25"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2017_United_States.parquet",
+      "sha256": "310698eb51fccc8b24890fb55bd84dfc7af6dfa835373faac20176cfe1877bbb"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2018_United_States.parquet",
+      "sha256": "cfaeaec9cc50fb98990c5f74f99f83e1977e2ee6b53ddd41c796769be1772b92"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2019_United_States.parquet",
+      "sha256": "0683df645867b513e95b193db1224d2802e367071d17d0fd25c10995a2e0d6d9"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2020_United_States.parquet",
+      "sha256": "7f99060b97b9cbff4ce6df36d0935e14bd377b91938f09205af170560eca52e5"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2021_United_States.parquet",
+      "sha256": "28a074cc24b4f8cc2738727ac50def4366a39717cedb13fdff52e67145d5f409"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2022_United_States.parquet",
+      "sha256": "df9df2f1a0f9323477afa6ffdb9334f2bae33f0d46f09086c7e5eedcfd1cacff"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2023_United_States.parquet",
+      "sha256": "4bf485d9b98e1d2dcf5da60528497ef92d363e9350d2cd12d9cd9181fe92d1a4"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2024_United_States.parquet",
+      "sha256": "4b9c304fb8da984ad044f49c544f407ee226010f04da55e13add32e11aed6991"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/modis_2025_United_States.parquet",
+      "sha256": "8f551f383c5113abe174ef0d87a074d24e58aa281c9d3b1b234c45b28cc98a0c"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2012_United_States.parquet",
+      "sha256": "a99e3b1051875eafb5f4eb6736dfb4683980ef1817c6aa8bafcf723147e1e767"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2013_United_States.parquet",
+      "sha256": "27b03d48fce2a0a3446b414f28e87c6de7c22b096b19c0d02b9275293dc49edd"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2014_United_States.parquet",
+      "sha256": "6ba141920a2ee37f795d2d403418b5358412c5ed90e0d77e2abb818e6a09b0b3"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2015_United_States.parquet",
+      "sha256": "bb0ff6d33762a8b11fd3087bc4e07b8c51891105c08612a6cc3adf693f96766d"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2016_United_States.parquet",
+      "sha256": "114123976a5c749544f444521f42b9a1e78019ea2863bfd0681a49efd53eecd4"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2017_United_States.parquet",
+      "sha256": "3744771b1b4775dae515bf4afb24481afecb3488dd93edb5f0e44a9d28a29fb9"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2018_United_States.parquet",
+      "sha256": "8df77c5af3accb657cdf42469370c6d1ed243860e156475989f2cf192cc34dc3"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2019_United_States.parquet",
+      "sha256": "94ddbf07647ac19b94a9e1e1cacc7074edadd45e908a37d2501f83282ae47864"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2020_United_States.parquet",
+      "sha256": "d10d26503e4dd5f08f90eb49264277df727ea597abf7c335c8e74ab901748cd7"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2021_United_States.parquet",
+      "sha256": "f76545bdbd2bdc0a2d5a4fff20adc9012680064d7f0f212c58367673cb02e5ec"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2022_United_States.parquet",
+      "sha256": "bd53d2424a83d9dc5b3cabb5158006133f130b711a405cf9856baa12ddd899d8"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2023_United_States.parquet",
+      "sha256": "9df69ff83400e512ee30c08f33a904597c426c46b907821dc4b06a7817675675"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2024_United_States.parquet",
+      "sha256": "10d78bce5180b09e6c5d80763b5b47013501ac3a5864232314d0b94fb49fe785"
+    },
+    {
+      "path": "data/processed/clean_cache_v2/viirs-snpp_2025_United_States.parquet",
+      "sha256": "9187dc9b22980b6fd3b842005e26b815374a73082ece114f99e4d2a8ff3bfe42"
+    }
+  ],
+  "limitations": [
+    "12 year blocks; no clear-sky coverage or weather controls",
+    "Corroborating, correlated satellite streams; not independent experiments",
+    "Summed snapshot radiative power is not energy, emissions, severity, burned area or causal evidence",
+    "Prospectively specified new analysis of already inspected historical data; no new holdout"
+  ]
+}
