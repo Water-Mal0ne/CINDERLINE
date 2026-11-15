@@ -1,5 +1,5 @@
 import {lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {ArrowDownToLine, ArrowRight, ArrowUpRight, CalendarDays, Check, ChevronDown, CircleHelp, Database, Flame, Globe2, House, Layers3, MapPin, Radio, ScanLine, ShieldCheck, SlidersHorizontal, Waves, X} from 'lucide-react';
+import {ArrowDownToLine, ArrowRight, ArrowUpRight, CalendarDays, Check, ChevronDown, CircleHelp, Database, Flame, Github, Globe2, House, Layers3, MapPin, Radio, ScanLine, ShieldCheck, SlidersHorizontal, Waves, X} from 'lucide-react';
 import type {Anomaly, Climatology, Daily, Evaluation, Index, Region, Week} from './types';
 import {aggregateWeeks, compact, exportCSV, exportICS, fmt, geoCoordinate, isoWeek, monthly, numeric, prettyDate, saveFile, sum} from './utils';
 import {buildEvidenceBrief} from './evidenceBrief';
@@ -299,7 +299,7 @@ export default function App() {
     <header className="site-header">
       <a href="#" className="brand" onClick={e=>{e.preventDefault();navigateToView('explore',exploreSection!=='home');chooseExploreSection('home');}}><span className="brand-symbol"><Flame size={24}/></span><span>CINDER<span className="brand-light">LINE</span></span></a>
       <nav className="desktop-navigation" aria-label="Main navigation"><div className="nav-group">{sectionLinks}</div><div className="nav-group">{researchLinks}</div></nav>
-      <div className="rail-source"><DataBadge label={label}/><a className="header-source" href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noreferrer">NASA FIRMS <ArrowUpRight size={14}/></a></div>
+      <div className="rail-source"><DataBadge label={label}/><a className="header-source" href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noreferrer">NASA FIRMS <ArrowUpRight size={14}/></a><a className="github-link" href="https://github.com/Water-Mal0ne/CINDERLINE" target="_blank" rel="noopener noreferrer" aria-label="CINDERLINE on GitHub (opens in a new tab)" title="View CINDERLINE on GitHub"><Github size={16} aria-hidden="true"/><span>GitHub</span></a></div>
       <details className="mobile-navigation" ref={mobileNav}><summary>Menu <ChevronDown size={16}/></summary><nav aria-label="Mobile navigation">{sectionLinks}{researchLinks}</nav></details>
     </header>
     <main id="main" tabIndex={-1} aria-labelledby="workspace-title">

@@ -23,6 +23,9 @@ body { font-size: .9375rem; line-height: 1.6; }
 .atlas-app .rail-source { margin-top: auto; padding: 16px 8px 0; display: grid; gap: 12px; }
 .atlas-app .data-badge { padding: 0; background: none; border: 0; border-radius: 0; color: var(--muted); font-size: .625rem; letter-spacing: .03em; }
 .atlas-app .header-source { font-size: .75rem; font-family: inherit; color: var(--secondary); }
+.atlas-app .github-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; justify-self: start; min-height: 36px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; color: var(--secondary); font-size: .8125rem; line-height: 1.4; text-decoration: none; }
+.atlas-app .github-link:hover { color: var(--text); background: var(--raised); border-color: var(--control-line); }
+.atlas-app .github-link svg { flex-shrink: 0; }
 .atlas-app .mobile-navigation { display: none; }
 .atlas-app main { width: auto; max-width: 1600px; margin: 0 0 0 var(--rail-width); padding: 32px 40px 0; border: 0; min-width: 0; }
 .atlas-app .workspace-heading { display: flex; justify-content: space-between; gap: 24px; align-items: center; margin-bottom: 28px; }
@@ -195,7 +198,10 @@ body { font-size: .9375rem; line-height: 1.6; }
 @media (max-width: 800px) {
   :root { --rail-width: 0px; }
   .atlas-app .site-header { position: relative; inset: auto; width: 100%; height: auto; min-height: 64px; padding: 12px 24px; flex-direction: row; justify-content: space-between; align-items: center; border-right: 0; border-bottom: 1px solid var(--line); gap: 16px; overflow: visible; }
-  .atlas-app .site-header .desktop-navigation, .atlas-app .rail-source { display: none; }
+  .atlas-app .site-header .desktop-navigation, .atlas-app .rail-source .data-badge, .atlas-app .rail-source .header-source { display: none; }
+  .atlas-app .rail-source { display: flex; margin: 0 0 0 auto; padding: 0; }
+  .atlas-app .github-link { min-width: 44px; min-height: 44px; padding: 10px; }
+  .atlas-app .github-link span { display: none; }
   .atlas-app .mobile-navigation { display: block; position: relative; }
   .atlas-app .mobile-navigation > summary { display: flex; gap: 8px; align-items: center; min-height: 40px; list-style: none; font-size: .875rem; }
   .atlas-app .mobile-navigation nav { position: absolute; top: calc(100% + 8px); inset-inline-end: 0; z-index: 30; display: grid; gap: 4px; width: min(280px,calc(100vw - 40px)); background: var(--panel); border: 1px solid var(--control-line); padding: 8px; border-radius: 8px; }
