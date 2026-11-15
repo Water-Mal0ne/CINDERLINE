@@ -13,6 +13,15 @@ const loader=await import(moduleUrl(compiled('loadData')));
 const index=JSON.parse(readFileSync(new URL('../public/data/index.json',import.meta.url),'utf8'));
 const regions=index.regions.map(entry=>loader.normalizePublishedData(JSON.parse(readFileSync(new URL(`../public/data/${entry.file}`,import.meta.url),'utf8'))));
 
+test('early page restoration agrees with full link validation without requiring data',()=>{
+  const catalog=api.catalogForRegion(regions[0]);
+  for(const query of ['', '?view=rhythm', '?view=methods', '?view=evidence', '?view=invalid',
+    '?view=rhythm&view=methods', '?v=99&view=rhythm', '?v=99&v=1&view=rhythm',
+    '?view=methods&region=missing', '?view=rhythm&padding='+'.'.repeat(2048)]){
+    assert.equal(parser.linkedView(query),parser.resolveExploration(query,catalog).state.view,query);
+  }
+});
+
 test('index failures stay recoverable instead of publishing unusable render state',()=>{
   assert.equal(api.isPublishedIndex(index),true);
   assert.equal(api.isPublishedIndex({...index,regions:[]}),true);

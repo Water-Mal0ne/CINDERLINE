@@ -3,12 +3,13 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import {ArrowUpRight,Globe2,Minus,Plus,RotateCcw} from 'lucide-react';
 import {compact,fmt,numeric} from './utils';
+import {invalidateData,loadData} from './loadData';
+import {validGlobeData} from './globeData';
+import type {GlobeCell,GlobeData} from './globeData';
 import {createDemandRenderer} from './demandRenderer';
 import {createGlobeCellSelection,filterGlobeTableCells,globeTablePage,localGlobeCellId,visibleGlobeCells} from './globeCells';
 import './globe.css';
 
-interface GlobeCell {id:string;region:string;lat:number;lon:number;values:(number|null)[]}
-interface GlobeData {years:number[];cell_size:number;label:string;reference:string;coverage_regions:{id:string;name:string;sources?:string[]}[];cells:GlobeCell[]}
 interface Outline {type:string;coordinates:number[][][];geometry?:{type:string;coordinates:number[][][]}}
 interface SceneState {renderer:THREE.WebGLRenderer;scene:THREE.Scene;camera:THREE.PerspectiveCamera;controls:OrbitControls;heat:THREE.Mesh|null;cells:GlobeCell[];max:number;requestRender:()=>void}
 let cachedData:GlobeData|null=null;
@@ -24,7 +25,7 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
   const yearIndex=data?.years.indexOf(year)??-1;
   const colorMaximum=useMemo(()=>data?.cells.reduce((max,cell)=>cell.values.reduce<number>((m,v)=>numeric(v)?Math.max(m,v):m,max),1)||1,[data]);
   selectedRef.current=setSelected;
-  useEffect(()=>{if(cachedData){setData(cachedData);return;}setError('');const c=new AbortController();fetch(`${import.meta.env.BASE_URL}data/globe.json`,{signal:c.signal}).then(r=>{if(!r.ok)throw new Error();return r.json();}).then((d:GlobeData)=>{if(c.signal.aborted)return;cachedData=d;setData(d);}).catch(e=>{if(!c.signal.aborted&&e.name!=='AbortError')setError('The annual globe layer could not be loaded. The calendar and evidence remain available below.');});return()=>c.abort();},[loadAttempt]);
+  useEffect(()=>{if(cachedData){setData(cachedData);return;}setError('');const c=new AbortController();loadData<unknown>('globe.json',c.signal).then(d=>{if(c.signal.aborted)return;if(!validGlobeData(d))throw new Error('Invalid annual globe data');cachedData=d;setData(d);}).catch(()=>{if(!c.signal.aborted)setError('The annual globe layer could not be loaded. The calendar and evidence remain available below.');});return()=>c.abort();},[loadAttempt]);
   useEffect(()=>{
     if(!data||!host.current||fallback)return;
     const element=host.current;let renderer:THREE.WebGLRenderer;
@@ -101,7 +102,8 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
     }
     s.camera.position.copy(direction.multiplyScalar(distance));s.controls.target.set(0,0,0);s.controls.update();s.requestRender();
   }
-  useEffect(()=>{focus(false);setSelected(null);},[data,regionId,fallback]);
+  useEffect(()=>{focus(false);},[data,regionId,fallback]);
+  useEffect(()=>{setSelected(null);},[data,regionId]);
   const regionCells=useMemo(()=>filterGlobeTableCells(data?.cells||[],yearIndex,regionId,availableCells,dailyOnly,tableQuery),[data,regionId,yearIndex,availableCells,dailyOnly,tableQuery]);
   const table=globeTablePage(regionCells,tablePage);
   useEffect(()=>setTablePage(0),[regionId,yearIndex,dailyOnly,tableQuery]);
@@ -112,7 +114,7 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
   const chosenId=chosen?localGlobeCellId(chosen):undefined;
   const exactCenter=(cell:GlobeCell)=>`${Math.abs(cell.lat).toFixed(3)}° ${cell.lat<0?'S':'N'}, ${Math.abs(cell.lon).toFixed(3)}° ${cell.lon<0?'W':'E'}`;
   const inspectTableCell=(cell:GlobeCell)=>{setSelected(cell);requestAnimationFrame(()=>selectionPanel.current?.focus());};
-  if(error)return <div className="globe-unavailable"><Globe2 size={24}/><p role="alert">{error}</p><button className="button subtle" onClick={()=>setLoadAttempt(attempt=>attempt+1)}>Retry annual globe layer</button></div>;
+  if(error)return <div className="globe-unavailable"><Globe2 size={24}/><p role="alert">{error}</p><button className="button subtle" onClick={()=>{invalidateData('globe.json');setLoadAttempt(attempt=>attempt+1);}}>Retry annual globe layer</button></div>;
   if(!data)return <div className="globe-unavailable" role="status"><span className="loader"/><p>Loading annual grid observations…</p></div>;
   return <div className="earth-explorer"><div className="globe-heading"><div><span className="eyebrow">A GEOGRAPHIC VIEW OF THE RECORD</span><h2>Where the signal comes from.</h2></div><div className="globe-view-actions">{!fallback&&<button className="chart-scale-button" onClick={()=>focus(true)}>Focus {regionInfo?.name||regionId}</button>}<button className="chart-scale-button" onClick={()=>{setFallbackReason('' );setFallback(v=>!v);}} aria-pressed={fallback}>{fallback?'Show 3D Earth':'Grid table'}</button></div></div>
     {fallbackReason&&<p className="chart-note" role="status">{fallbackReason}</p>}<div className="globe-body">{!fallback?<div className="globe-stage"><div className="globe-canvas" ref={host}/><div className="globe-instructions">Drag to orbit · scroll to zoom · select a colored cell</div><div className="globe-buttons"><button aria-label="Zoom into Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(.85);s.requestRender();}}}><Plus size={16}/></button><button aria-label="Zoom out from Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(1.2);s.requestRender();}}}><Minus size={16}/></button><button aria-label="Refocus selected region" onClick={()=>focus(false)}><RotateCcw size={15}/></button><button aria-label="Show global view" onClick={()=>{const s=state.current;if(s){s.camera.position.normalize().multiplyScalar(3.6);s.controls.update();s.requestRender();}}}><Globe2 size={15}/></button></div><div className="globe-coverage">PROCESSED COVERAGE ONLY<br/><strong>{coverageSummary}</strong><span>Uncolored areas are not claims of no fire.</span></div></div>:<div className="globe-table">

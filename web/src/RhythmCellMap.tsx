@@ -125,7 +125,7 @@ export default function RhythmCellMap() {
           onKeyDown={e => {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(p); return; }
             const next = nextRhythmCell(e.key, i, props.length);
-            if (next !== null) { e.preventDefault(); setFocusIndex(next); cellRefs.current[next]?.focus(); }
+            if (next !== null) { e.preventDefault(); setFocusIndex(next); setActive(props[next]); cellRefs.current[next]?.focus(); }
           }}/>)}
       </svg>
       <div className="rh-legend">

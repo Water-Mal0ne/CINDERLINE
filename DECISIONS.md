@@ -95,3 +95,12 @@ Result (added after the analysis): the prediction did NOT hold. Of the two hill-
 - Treat retries as resource-specific refreshes. Keep a failed shared evidence week available for retry, but let explicit navigation supersede delayed link hydration.
 - Keep land-outline retry independent of scientific map data. Use one keyboard tab stop for the exploratory map and require an unambiguous primary-pointer tap to select a globe cell.
 - Record the section findings, regression evidence and browser limits in reports/SECTION_REVIEW_QA.md; run all Python and web tests plus the build after the commit.
+
+## Section review round two (15 November 2026, 09:25 Nepal time)
+
+- Keep new fixes on ui-polish-v2 and update its existing review; no merge or deployment. Preserve the backup branch and Workers worktree.
+- Restore independent page selection before calendar data arrives; retain full URL validation, exact data-scope restoration and the delayed-navigation guard.
+- Treat malformed globe payloads as recoverable failures; preserve null/zero and dataset values, and bind compass search terms to their coordinate axes.
+- Preserve keyboard context during observation expansion and country-detail navigation. Separate Earth/table presentation changes from scientific cell selection.
+- Draw isolated existing values and break lines across absent months without filling gaps, recomputing values or changing exports. Keep scientific wording/captions/caveats unchanged.
+- Require cross-review plus the full tests/build after the commit; document results and verification limits in reports/SECTION_REVIEW_ROUND2_QA.md.

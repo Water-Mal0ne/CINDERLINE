@@ -66,6 +66,7 @@ export default function SeasonalContext({region,label,selectedYear,onExport,cell
         {points.filter(p=>p.critical).map(p=><rect key={p.week} x={x(p.week)-5} y={T} width={(W-L-R)/52+1} height={H-T-B} className="seasonal-critical-shade"/>)}
         {bandSegments.map((segment,i)=><path key={i} d={segment.map((p,j)=>`${j?'L':'M'}${x(p.week)},${y(p.p90!)}`).join(' ')+[...segment].reverse().map(p=>`L${x(p.week)},${y(p.p10!)}`).join(' ')+' Z'} className="seasonal-band"/>)}
         {lineSegments.map((segment,i)=><path key={i} d={segment.map((p,j)=>`${j?'L':'M'}${x(p.week)},${y(p.median!)}`).join(' ')} className="seasonal-median"/>)}
+        {lineSegments.filter(segment=>segment.length===1&&segment[0].week!==active.week).map(([p])=><circle key={p.week} cx={x(p.week)} cy={y(p.median!)} r={3} className="seasonal-point seasonal-isolated-point"/>)}
         {[1,14,27,40,52].map(week=><text key={week} x={x(week)} y={H-9} textAnchor="middle" className="seasonal-axis">{new Date(Date.UTC(selectedYear,0,1+(week-1)*7)).toLocaleDateString('en',{month:'short',timeZone:'UTC'}).toUpperCase()}</text>)}
         <line x1={x(active.week)} x2={x(active.week)} y1={T} y2={H-B} className="seasonal-cursor"/>
         {numeric(active.median)&&<circle cx={x(active.week)} cy={y(active.median)} r={5} className="seasonal-point"/>}

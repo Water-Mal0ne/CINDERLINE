@@ -33,15 +33,39 @@ export function createGlobeCellSelection() {
 
 export const localGlobeCellId=(cell:AnnualCell)=>cell.id.startsWith(`${cell.region}:`)?cell.id.slice(cell.region.length+1):cell.id;
 
+/** Compass labels bind a number to its axis, including copied display coordinates. */
+function coordinateQuery(query:string):(cell:AnnualCell)=>boolean {
+  const terms=query.toLowerCase().trim().split(/[\s,°/]+/).filter(Boolean);
+  const checks:((cell:AnnualCell)=>boolean)[]=[];
+  const isNumber=(term:string)=>/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(term);
+  const isDirection=(term:string)=>/^[nsew]$/.test(term);
+  const directed=(term:string,direction:string)=>(cell:AnnualCell)=>{
+    const negative=direction==='s'||direction==='w';
+    if((term.startsWith('-')&&!negative)||(term.startsWith('+')&&negative))return false;
+    const value=direction==='n'||direction==='s'?cell.lat:cell.lon;
+    const magnitude=term.replace(/^[+-]/,'').replace(/^\./,'0.');
+    return (value<0)===negative&&Math.abs(value).toFixed(3).startsWith(magnitude);
+  };
+  for(let i=0;i<terms.length;i++){
+    const term=terms[i],next=terms[i+1]||'';
+    if(isNumber(term)&&isDirection(next)){checks.push(directed(term,next));i++;}
+    else if(isDirection(term)&&isNumber(next)){checks.push(directed(next,term));i++;}
+    else checks.push(cell=>{
+      const coordinates=[cell.lat.toFixed(3),cell.lon.toFixed(3),Math.abs(cell.lat).toFixed(3),cell.lat<0?'s':'n',Math.abs(cell.lon).toFixed(3),cell.lon<0?'w':'e'];
+      return coordinates.some(coordinate=>coordinate.startsWith(term));
+    });
+  }
+  return cell=>checks.every(check=>check(cell));
+}
+
 /** Annual table rows remain country-specific, including shared border centers. */
 export function filterGlobeTableCells<T extends AnnualCell>(cells:readonly T[],yearIndex:number,region:string,dailyIds:readonly string[],dailyOnly=false,query=''):T[] {
-  const available=new Set(dailyIds),terms=query.toLowerCase().trim().split(/[\s,°/]+/).filter(Boolean);
+  const available=new Set(dailyIds),matches=coordinateQuery(query);
   return cells.filter(cell=>{
     const value=cell.values[yearIndex];
     if(cell.region!==region||typeof value!=='number'||!Number.isFinite(value))return false;
     if(dailyOnly&&!available.has(localGlobeCellId(cell)))return false;
-    const coordinates=[cell.lat.toFixed(3),cell.lon.toFixed(3),Math.abs(cell.lat).toFixed(3),cell.lat<0?'s':'n',Math.abs(cell.lon).toFixed(3),cell.lon<0?'w':'e'];
-    return terms.every(term=>coordinates.some(coordinate=>coordinate.startsWith(term)));
+    return matches(cell);
   }).sort((a,b)=>b.values[yearIndex]!-a.values[yearIndex]!||a.id.localeCompare(b.id));
 }
 

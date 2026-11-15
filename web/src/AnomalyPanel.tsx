@@ -1,4 +1,4 @@
-import {useEffect, useId, useMemo, useState} from 'react';
+import {useEffect, useId, useMemo, useRef, useState} from 'react';
 import {ArrowDown, ArrowUp, ArrowUpRight, ChevronDown, CircleHelp, ListFilter, MapPin} from 'lucide-react';
 import type {Anomaly} from './types';
 import {fmt, numeric, prettyDate} from './utils';
@@ -40,9 +40,17 @@ export default function AnomalyPanel({anomalies, cell, onSelect, label}: Anomaly
   const [sort, setSort] = useState<AnomalySort>('latest');
   const [limit, setLimit] = useState(8);
   const id = useId();
+  const resultList = useRef<HTMLUListElement>(null);
+  const pendingBatchFocus = useRef<{selection: string; index: number} | null>(null);
   const selected = useMemo(() => selectAnomalies(anomalies, filter, sort), [anomalies, filter, sort]);
   const selectionKey = selected.map(a => `${a.date}/${a.week}/${a.status}`).join('|');
   useEffect(() => setLimit(8), [selectionKey, filter, sort, cell]);
+  useEffect(() => {
+    const pending = pendingBatchFocus.current;
+    if (!pending) return;
+    pendingBatchFocus.current = null;
+    if (pending.selection === selectionKey) resultList.current?.querySelectorAll<HTMLButtonElement>('button.ft-anomaly-result')[pending.index]?.focus();
+  }, [limit, selectionKey]);
   const highCount = anomalies.filter(a => anomalyDirection(a) === 'high').length;
   const lowCount = anomalies.filter(a => anomalyDirection(a) === 'low').length;
   const visible = selected.slice(0, limit);
@@ -73,7 +81,7 @@ export default function AnomalyPanel({anomalies, cell, onSelect, label}: Anomaly
         </label>
       </div>
       <p className="ft-anomaly-result-count" role="status" aria-live="polite" aria-atomic="true">{selected.length ? `Showing ${Math.min(limit, selected.length)} of ${fmt(selected.length)} ${filter === 'all' ? 'flagged' : filter === 'high' ? 'higher-activity' : 'lower-activity'} weeks.` : `No ${filter === 'all' ? 'flagged' : filter === 'high' ? 'higher-activity' : 'lower-activity'} weeks in this selection.`}</p>
-      {visible.length ? <ul className="ft-anomaly-results">{visible.map(anomaly => {
+      {visible.length ? <ul className="ft-anomaly-results" ref={resultList}>{visible.map(anomaly => {
         const direction = anomalyDirection(anomaly);
         const directionText = direction === 'high' ? 'Higher than historical range' : direction === 'low' ? 'Lower than historical range' : 'Flagged observation';
         const signedZ = numeric(anomaly.z_score) ? `${anomaly.z_score >= 0 ? '+' : ''}${fmt(anomaly.z_score, 2)}` : null;
@@ -86,7 +94,7 @@ export default function AnomalyPanel({anomalies, cell, onSelect, label}: Anomaly
           </button>
         </li>;
       })}</ul> : <div className="ft-anomaly-empty"><CircleHelp size={25} aria-hidden="true"/><div><h3>{anomalies.length ? 'No weeks match this filter.' : 'No flagged weeks in the selected dates.'}</h3><p>Missing or incomplete records cannot establish normal conditions. The one- or two-day year-end bin is excluded from weekly anomaly comparisons.</p></div></div>}
-      {selected.length > limit && <button type="button" className="button subtle ft-anomaly-more" onClick={() => setLimit(current => current + 8)}><ChevronDown size={15} aria-hidden="true"/> Show {Math.min(8, selected.length - limit)} more weeks</button>}
+      {selected.length > limit && <button type="button" className="button subtle ft-anomaly-more" onClick={() => {pendingBatchFocus.current = {selection: selectionKey, index: visible.length};setLimit(current => current + 8);}}><ChevronDown size={15} aria-hidden="true"/> Show {Math.min(8, selected.length - limit)} more weeks</button>}
       <div className="ft-anomaly-explainer"><CircleHelp size={14} aria-hidden="true"/><p>Values are weekly Aqua-reference-equivalent detections, not distinct fires. {sort === 'strongest' ? 'Largest |z-score| ranks standardized deviations, not hazard severity. ' : ''}{hasUnknownZ ? 'Unavailable z-scores stay last in that sort and are never treated as zero; a reference with no variation can still produce a percentile flag. ' : ''}Cloud and overpass coverage remain unknown.</p></div>
     </>}
     <span className="chart-label">{label}</span>

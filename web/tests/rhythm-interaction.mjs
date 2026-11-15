@@ -239,3 +239,65 @@ test('cell keyboard navigation respects boundaries and leaves Tab to the browser
   assert.equal(next('Tab', 0, 3), null);
   assert.equal(next('End', 0, 0), null);
 });
+
+test('verdict country links focus the updated detail heading, including repeated selection, without hijacking in-panel controls', async () => {
+  const app = mount('RhythmView.tsx', async () => fixture('rhythm.json'));
+  await app.settle();
+  const heading = () => nodes(app.tree, n => n.props?.id === 'rh-country-title')[0];
+  const link = name => nodes(app.tree, n => n.type === 'button' && n.props.className === 'rh-link' && text(n) === name)[0];
+  assert.equal(link('United States').props['aria-pressed'], true);
+  assert.equal(link('Brazil').props['aria-controls'], 'rh-country-panel');
+  const focused = [], scrolled = [];
+  heading().ref.current = {
+    focus(options) { assert.equal(options.preventScroll, true); focused.push(text(heading())); },
+    scrollIntoView(options) { assert.equal(options.block, 'start'); scrolled.push(text(heading())); },
+  };
+  link('Brazil').props.onClick(); app.render();
+  assert.deepEqual(focused, ['Brazil']);
+  assert.deepEqual(scrolled, ['Brazil']);
+  assert.equal(link('Brazil').props['aria-pressed'], true);
+  link('Brazil').props.onClick(); app.render();
+  assert.deepEqual(focused, ['Brazil', 'Brazil']);
+  button(app.tree, 'IndiaSun').props.onClick(); app.render();
+  assert.equal(text(heading()), 'India');
+  button(app.tree, 'Daytime only').props.onClick(); app.render();
+  assert.deepEqual(focused, ['Brazil', 'Brazil'], 'in-panel controls keep their own focus and scroll position');
+  app.unmount();
+});
+
+test('rhythm tables expose country row headers and named detection controls', async () => {
+  const app = mount('RhythmView.tsx', async () => fixture('rhythm.json'));
+  await app.settle();
+  const tables = nodes(app.tree, n => n.type === 'table');
+  assert.equal(tables.length, 2);
+  for (const table of tables) {
+    const head = nodes(table, n => n.type === 'thead')[0], body = nodes(table, n => n.type === 'tbody')[0];
+    assert.ok(nodes(head, n => n.type === 'th').every(header => header.props.scope === 'col'));
+    for (const row of nodes(body, n => n.type === 'tr')) {
+      const headers = nodes(row, n => n.type === 'th' && n.props.scope === 'row');
+      assert.equal(headers.length, 1);
+      assert.ok(text(headers[0]).trim());
+    }
+  }
+  assert.equal(nodes(app.tree, n => n.props?.['aria-label'] === 'Detections included')[0].props.role, 'group');
+  app.unmount();
+});
+
+test('map boundary keys restore the focused cell after pointer hover without relying on a new focus event', async () => {
+  const app = mount('RhythmCellMap.tsx', async file => realMap[file]);
+  await app.settle();
+  let focused = 0, cells = mapCells(app.tree);
+  const attachRefs = () => cells.forEach((cell, i) => cell.ref({focus() {
+    if (i !== focused) { focused = i; cell.props.onFocus(); }
+  }}));
+  cells[0].props.onFocus(); app.render();
+  for (const key of ['Home', 'ArrowLeft']) {
+    cells = mapCells(app.tree); cells[1].props.onMouseEnter(); app.render();
+    cells = mapCells(app.tree); attachRefs();
+    assert.equal(cells[1].props['aria-pressed'], true);
+    cells[0].props.onKeyDown({key, preventDefault() {}}); app.render();
+    assert.equal(mapCells(app.tree)[0].props['aria-pressed'], true, key);
+    assert.equal(mapCells(app.tree)[1].props['aria-pressed'], false, key);
+  }
+  app.unmount();
+});

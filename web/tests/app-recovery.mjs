@@ -32,7 +32,7 @@ function button(tree,label){return elements(tree,node=>node.type==='button'&&tex
 
 // Run the actual App hooks, event handlers and promise continuations. Child views
 // are inert elements: these tests cover App state transitions, not browser layout.
-function appHarness(search,resource){
+function appHarness(search,resource,indexResource=()=>Promise.resolve(index)){
   const slots=[],modules=new Map(),invalidated=[],requests=[],focus=[];
   let cursor=0,effects=[],dirty=true,tree,location=new URL(`https://firetrace.test/${search}`);
   const same=(a,b)=>a&&b&&a.length===b.length&&a.every((value,i)=>Object.is(value,b[i]));
@@ -49,7 +49,7 @@ function appHarness(search,resource){
     addEventListener(name,fn){listeners.set(name,fn);},removeEventListener(name,fn){if(listeners.get(name)===fn)listeners.delete(name);},
     matchMedia:()=>({matches:true}),scrollTo(){}};
   const document={getElementById:id=>({focus(){focus.push(id);},scrollIntoView(){}})};
-  const fetch=async url=>{assert.match(url,/data\/index\.json$/);return {ok:true,json:async()=>index};};
+  const fetch=async url=>{assert.match(url,/data\/index\.json$/);return {ok:true,json:indexResource};};
   const realModules=new Set(['App','utils','explorationState','explorationIntegration','calendarView','loadData']);
   function load(file){
     if(modules.has(file))return modules.get(file);
@@ -78,6 +78,7 @@ function appHarness(search,resource){
     assert.equal(dirty,false,'App effects must reach a stable render');return tree;
   }
   return {settle,click(label){const target=button(tree,label);assert.ok(target,`button '${label}' exists`);assert.ok(!target.props.disabled,`button '${label}' is enabled`);target.props.onClick();},
+    pop(search){location=new URL(search,location);listeners.get('popstate')?.();},
     get tree(){return tree;},get url(){return location;},invalidated,requests,focus,
     dispose(){for(const slot of slots)slot?.cleanup?.();}};
 }
@@ -135,5 +136,43 @@ test('deliberate navigation cancels a retained evidence week before a later retr
     assert.equal(app.url.searchParams.get('view'),'methods');
     assert.equal(app.url.searchParams.has('week'),false);
     assert.deepEqual(app.invalidated,[cellFile]);
+  }finally{app.dispose();}
+});
+
+test('independent shared pages open even when the calendar country fails',async()=>{
+  for(const [view,label] of [['rhythm','Weekly Rhythm Index'],['methods','Methods']]){
+    const app=appHarness(`?view=${view}`,()=>Promise.reject(new Error('country unavailable')));
+    try{
+      await app.settle();
+      assert.equal(button(app.tree,label).props['aria-current'],'page');
+      assert.match(text(app.tree),/This region has no readable processed data/);
+    }finally{app.dispose();}
+  }
+});
+
+test('independent shared pages open without waiting for the calendar index',async()=>{
+  for(const [view,label] of [['rhythm','Weekly Rhythm Index'],['methods','Methods']]){
+    const pending=deferred(),app=appHarness(`?view=${view}`,()=>Promise.resolve(region),()=>pending.promise);
+    try{
+      await app.settle();
+      assert.equal(button(app.tree,label).props['aria-current'],'page');
+      assert.deepEqual(app.requests,[]);
+      pending.resolve(null);await app.settle();
+      assert.equal(button(app.tree,label).props['aria-current'],'page','index failure cannot hide the independent page');
+    }finally{app.dispose();}
+  }
+});
+
+test('history and Methods anchors preserve index retry when the catalog is unavailable',async()=>{
+  let calls=0;
+  const app=appHarness('?view=methods',()=>Promise.resolve(region),()=>Promise.resolve(++calls===1?null:index));
+  try{
+    await app.settle();
+    app.pop('?view=methods#method-limitations');await app.settle();
+    assert.equal(button(app.tree,'Methods').props['aria-current'],'page');
+    app.click('Retry loading');await app.settle();
+    assert.equal(button(app.tree,'Methods').props['aria-current'],'page');
+    assert.equal(button(app.tree,'Retry loading'),undefined,'catalog retry must recover after a hash/history transition');
+    assert.deepEqual(app.requests,['Nepal.json']);
   }finally{app.dispose();}
 });

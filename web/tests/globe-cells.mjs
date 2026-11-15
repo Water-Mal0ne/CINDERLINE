@@ -93,3 +93,24 @@ test('grid search accepts exact signed centers and compass coordinates without l
   assert.equal(globeTablePage([north],-1).page,0);
   assert.equal(globeTablePage([north],NaN).page,0);
 });
+
+test('compass searches bind each number to its latitude or longitude in the published data',()=>{
+  const cell=globe.cells.find(c=>c.id==='United_States:18.75:-155.75');
+  assert.ok(cell);
+  const search=query=>filterGlobeTableCells([cell],yearIndex,'United_States',[],false,query);
+  assert.deepEqual(search('18.875 N, 155.625 W'),[cell]);
+  assert.deepEqual(search('W 155.625 / N 18.875'),[cell]);
+  assert.deepEqual(search('155.625 N, 18.875 W'),[],'longitude magnitude must not satisfy a northward latitude');
+  assert.deepEqual(search('18.875 W'),[],'a north latitude is not a west longitude');
+  assert.deepEqual(search('155.625'),[cell],'single-coordinate search remains supported');
+});
+
+test('signed compass terms cannot contradict their hemisphere or swap valid axes',()=>{
+  const cell={id:'A:12:-45',region:'A',lat:12.125,lon:-45.125,values:[0]};
+  const search=query=>filterGlobeTableCells([cell],0,'A',[],false,query);
+  assert.deepEqual(search('12.125 N, -45.125 W'),[cell]);
+  assert.deepEqual(search('45.125 N, 12.125 W'),[]);
+  assert.deepEqual(search('-12.125 N'),[]);
+  assert.deepEqual(search('+45.125 W'),[]);
+  assert.deepEqual(search('12 N, 45 W'),[cell],'partial coordinate searches still work');
+});
