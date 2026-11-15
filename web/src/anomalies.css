@@ -1,18 +1,48 @@
-.ft-anomalies .panel-heading{align-items:flex-start}.ft-anomaly-intro{font-size:11px;line-height:1.8;color:#a7babf;max-width:760px;margin:0 0 20px}.ft-anomaly-controls{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.ft-anomaly-filters{display:flex;flex-wrap:wrap;gap:5px;padding:4px;border:1px solid #40545a;border-radius:6px;background:#142127}.ft-anomaly-filters button{display:flex;align-items:center;gap:6px;padding:8px 9px;border:1px solid transparent;border-radius:3px;background:none;font-size:10px;line-height:1.4;color:#acc0c6;min-height:35px}.ft-anomaly-filters button:hover{color:#fff0dc;background:#26383d}.ft-anomaly-filters button.active{border-color:#b8a77b55;color:#f4cfad;background:#3a413a}.ft-anomaly-filter-count{font-family:var(--mono);font-size:8px;min-width:15px;text-align:center;color:#d1d9d7}.ft-anomaly-sort{display:flex;align-items:center;gap:8px;position:relative;font-size:10px;color:#9eb3bb}.ft-anomaly-sort select{appearance:none;background:#142127;color:#d5dfdf;border:1px solid #40545a;border-radius:4px;padding:9px 27px 9px 10px;font-size:10px;min-height:37px}.ft-anomaly-sort>svg{position:absolute;right:8px;pointer-events:none}.ft-anomaly-result-count{font-family:var(--mono);font-size:9px;color:#9fb4ba;margin:18px 0 7px;min-height:15px}.ft-anomaly-results{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0 24px}.ft-anomaly-results>li{min-width:0}.ft-anomaly-result{width:100%;display:flex;align-items:center;gap:10px;background:transparent;border-top:1px solid #ffffff0e;padding:16px 0;text-align:left;min-height:78px}.ft-anomaly-result:hover .ft-anomaly-date strong{color:var(--orange)}.ft-anomaly-result:hover .ft-anomaly-open{color:#e7c3a0;transform:translate(1px,-1px)}.ft-anomaly-direction{width:32px;height:35px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#f0b289;background:#db98531a}.ft-anomaly-result.low .ft-anomaly-direction{color:#9ed4e0;background:#7cbdd31a}.ft-anomaly-date{min-width:0}.ft-anomaly-date strong{font-size:12px;font-weight:500;display:block;line-height:1.6;color:#dfe6e4}.ft-anomaly-date small{display:block;font-size:9px;line-height:1.55;color:#9cb2b9;margin-top:4px}.ft-anomaly-value{font-family:var(--mono);margin-left:auto;text-align:right;flex-shrink:0}.ft-anomaly-value strong{display:block;font-size:12px;font-weight:400;line-height:1.6;color:#e0dfd1}.ft-anomaly-value small{display:block;font-size:8px;color:#9aadb3;line-height:1.6;margin-top:4px}.ft-anomaly-open{flex-shrink:0;color:#73959e;transition:transform .15s}.ft-anomaly-more{margin:14px auto 0;display:flex;min-width:180px;min-height:40px}.ft-anomaly-explainer{display:flex;align-items:flex-start;gap:8px;margin-top:19px;padding-top:14px;border-top:1px solid #ffffff0e;color:#8faab2}.ft-anomaly-explainer>svg{flex-shrink:0;margin-top:2px}.ft-anomaly-explainer p{font-size:9px;line-height:1.8;margin:0}.ft-anomaly-empty{display:flex;align-items:flex-start;gap:13px;padding:24px 16px;background:#11212788;border:1px dashed #415a62;border-radius:5px;color:#92adb7;margin:10px 0}.ft-anomaly-empty>svg{flex-shrink:0}.ft-anomaly-empty h3{color:#d6e0e0;font-size:13px;font-weight:500;margin:0 0 8px}.ft-anomaly-empty p{font-size:11px;line-height:1.8;margin:0;max-width:650px}.ft-anomaly-scope{margin-top:7px}.ft-anomalies button:focus-visible,.ft-anomalies select:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
-@media(max-width:1100px){.ft-anomaly-results{grid-template-columns:1fr}.ft-anomaly-controls{gap:10px}.ft-anomaly-intro{font-size:11px}}
-@media(max-width:640px){.ft-anomalies .panel-heading{flex-wrap:wrap}.ft-anomaly-controls{display:block}.ft-anomaly-filters{width:100%;justify-content:space-between;gap:2px}.ft-anomaly-filters button{font-size:9px;padding:8px 6px;gap:4px;min-height:39px}.ft-anomaly-filter-count{font-size:8px}.ft-anomaly-sort{margin-top:12px;justify-content:flex-end}.ft-anomaly-sort select{min-width:160px}.ft-anomaly-intro{font-size:10px;margin-bottom:15px}.ft-anomaly-result{gap:8px;padding:14px 0}.ft-anomaly-direction{width:27px;height:31px}.ft-anomaly-date strong{font-size:11px}.ft-anomaly-date small{font-size:8px}.ft-anomaly-value strong{font-size:11px}.ft-anomaly-value small{font-size:7px}.ft-anomaly-result-count{font-size:8px}.ft-anomaly-more{width:100%}.ft-anomaly-explainer p{font-size:9px}.ft-anomaly-empty{padding:19px 12px}.ft-anomaly-empty p{font-size:10px}}
-@media(prefers-reduced-motion:reduce){.ft-anomaly-open{transition:none}}
-@media(max-width:640px){
-  .ft-anomaly-filters{justify-content:flex-start;gap:4px}
-  .ft-anomaly-filters button{min-height:44px;font-size:11px;padding:8px;flex:1 1 auto;justify-content:center}
-  .ft-anomaly-filter-count{font-size:10px}
-  .ft-anomaly-sort,.ft-anomaly-sort select{font-size:12px}
-  .ft-anomaly-sort select{min-height:44px}
-  .ft-anomaly-intro,.ft-anomaly-empty p,.ft-anomaly-explainer p{font-size:12px;line-height:1.8}
-  .ft-anomaly-result-count{font-size:10px;line-height:1.7}
-  .ft-anomaly-result{flex-wrap:wrap;gap:8px 10px}
-  .ft-anomaly-date{flex:1;min-width:140px}
-  .ft-anomaly-date strong,.ft-anomaly-value strong{font-size:13px}
-  .ft-anomaly-date small,.ft-anomaly-value small{font-size:11px}
-  .ft-anomaly-more{min-height:44px;font-size:12px}
+/* Unusual weeks: readable full-width rows and one set of filter controls. */
+.atlas-app .ft-anomalies { container: anomalies / inline-size; }
+.atlas-app .ft-anomalies .panel-heading { align-items: start; }
+.atlas-app .ft-anomaly-intro { max-inline-size: 80ch; font-size: .875rem; line-height: 1.7; color: var(--secondary); margin: 0 0 24px; }
+.atlas-app .ft-anomaly-controls { display: flex; justify-content: space-between; align-items: center; gap: 16px 24px; flex-wrap: wrap; }
+.atlas-app .ft-anomaly-filters { display: flex; flex-wrap: wrap; gap: 4px; padding: 0; border: 0; background: transparent; }
+.atlas-app .ft-anomaly-filters button { display: flex; align-items: center; gap: 8px; min-block-size: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; background: transparent; font-size: .8125rem; line-height: 1.5; color: var(--secondary); }
+.atlas-app .ft-anomaly-filters button:hover { color: var(--text); background: var(--raised); }
+.atlas-app .ft-anomaly-filters button.active { border-block-end: 3px solid var(--orange); color: var(--text); background: var(--panel); }
+.atlas-app .ft-anomaly-filters button:active { background: var(--raised); }
+.atlas-app .ft-anomaly-filter-count { font-family: var(--mono); font-size: .75rem; color: var(--muted); }
+.atlas-app .ft-anomaly-sort { display: flex; align-items: center; gap: 8px; position: relative; font-size: .8125rem; color: var(--muted); }
+.atlas-app .ft-anomaly-sort select { appearance: none; background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 8px 32px 8px 12px; font: inherit; min-block-size: 44px; }
+.atlas-app .ft-anomaly-sort > svg { position: absolute; inset-inline-end: 12px; pointer-events: none; }
+.atlas-app .ft-anomaly-result-count { font-size: .75rem; line-height: 1.7; color: var(--muted); margin: 24px 0 8px; }
+.atlas-app .ft-anomaly-results { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: minmax(0,1fr); gap: 0; }
+.atlas-app .ft-anomaly-results > li { min-inline-size: 0; }
+.atlas-app .ft-anomaly-result { inline-size: 100%; display: grid; grid-template-columns: 24px minmax(0,1fr) auto 20px; align-items: center; gap: 20px; background: transparent; border: 0; border-block-start: 1px solid var(--line); border-radius: 0; padding: 20px 0; text-align: start; min-block-size: 72px; }
+.atlas-app .ft-anomaly-result:hover { background: var(--panel); }
+.atlas-app .ft-anomaly-result:active { background: var(--raised); }
+.atlas-app .ft-anomaly-result:hover .ft-anomaly-date strong { color: var(--orange); }
+.atlas-app .ft-anomaly-direction { inline-size: 24px; display: flex; align-items: center; justify-content: center; color: #f0b289; background: transparent; }
+.atlas-app .ft-anomaly-result.low .ft-anomaly-direction { color: #9ed4e0; background: transparent; }
+.atlas-app .ft-anomaly-date { min-inline-size: 0; }
+.atlas-app .ft-anomaly-date strong { font-size: 1rem; font-weight: 500; display: block; line-height: 1.5; color: var(--text); }
+.atlas-app .ft-anomaly-date small { display: block; font-size: .8125rem; line-height: 1.6; color: var(--muted); margin-block-start: 4px; }
+.atlas-app .ft-anomaly-value { font-family: var(--mono); text-align: end; }
+.atlas-app .ft-anomaly-value strong { display: block; font-size: 1.125rem; font-weight: 400; line-height: 1.5; color: var(--text); }
+.atlas-app .ft-anomaly-value small { display: block; font-size: .75rem; color: var(--muted); line-height: 1.6; margin-block-start: 4px; }
+.atlas-app .ft-anomaly-open { color: var(--muted); }
+.atlas-app .ft-anomaly-more { margin: 24px 0 0; display: flex; min-block-size: 44px; font-size: .8125rem; }
+.atlas-app .ft-anomaly-explainer { display: flex; align-items: start; gap: 12px; margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--line); color: var(--secondary); }
+.atlas-app .ft-anomaly-explainer > svg { flex-shrink: 0; margin-block-start: 4px; }
+.atlas-app .ft-anomaly-explainer p { max-inline-size: 80ch; font-size: .875rem; line-height: 1.7; margin: 0; }
+.atlas-app .ft-anomaly-empty { display: flex; align-items: start; gap: 16px; padding: 24px 0; background: transparent; border: 0; color: var(--muted); margin: 12px 0; }
+.atlas-app .ft-anomaly-empty > svg { flex-shrink: 0; }
+.atlas-app .ft-anomaly-empty h3 { color: var(--text); font-size: 1rem; line-height: 1.5; font-weight: 500; margin: 0 0 8px; }
+.atlas-app .ft-anomaly-empty p { font-size: .875rem; line-height: 1.7; margin: 0; max-inline-size: 76ch; }
+.atlas-app .ft-anomalies :is(button,select):focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+@container anomalies (max-width: 560px) {
+  .atlas-app .ft-anomaly-sort select { font-size: 1rem; }
+  .atlas-app .ft-anomaly-result { grid-template-columns: 20px minmax(0,1fr) 20px; gap: 8px 12px; }
+  .atlas-app .ft-anomaly-date { grid-column: 2; }
+  .atlas-app .ft-anomaly-value { grid-column: 2; text-align: start; display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
+  .atlas-app .ft-anomaly-value strong { font-size: 1rem; }
+  .atlas-app .ft-anomaly-open { grid-column: 3; grid-row: 1; }
+  .atlas-app .ft-anomaly-direction { grid-column: 1; grid-row: 1; }
 }

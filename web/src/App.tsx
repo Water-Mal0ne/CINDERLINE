@@ -1,14 +1,14 @@
 import {lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {ArrowDownToLine, ArrowRight, ArrowUpRight, CalendarDays, Check, ChevronDown, CircleHelp, Database, Flame, Globe2, Layers3, MapPin, Radio, ScanLine, ShieldCheck, SlidersHorizontal, Waves, X} from 'lucide-react';
+import {ArrowDownToLine, ArrowRight, ArrowUpRight, CalendarDays, Check, ChevronDown, CircleHelp, Database, Flame, Globe2, House, Layers3, MapPin, Radio, ScanLine, ShieldCheck, SlidersHorizontal, Waves, X} from 'lucide-react';
 import type {Anomaly, Climatology, Daily, Evaluation, Index, Region, Week} from './types';
 import {aggregateWeeks, compact, exportCSV, exportICS, fmt, geoCoordinate, isoWeek, monthly, numeric, prettyDate, saveFile, sum} from './utils';
 import {buildEvidenceBrief} from './evidenceBrief';
 import MonthCalendar from './MonthCalendar';
 import AreaOfInterest from './AreaOfInterest';
 import ReliabilityNotice from './ReliabilityNotice';
-import ExplorationGuide from './ExplorationGuide';
 import {monthHistory, monthMatrix} from './monthStats';
 import ComparisonJourney from './ComparisonJourney';
+import HarmonizationIntro from './HarmonizationIntro';
 import ComparisonChart from './ComparisonChart';
 import SeasonalContext from './SeasonalContext';
 import AnomalyPanel from './AnomalyPanel';
@@ -19,6 +19,7 @@ import RhythmCellMap from './RhythmCellMap';
 import {createShareLink,defaultExploration,linkedRegion,linkedView} from './explorationState';
 import type {ExplorationState} from './explorationState';
 import type {ObservationMode} from './ObservationControls';
+import {parseWorkspaceNavigation,withWorkspaceNavigation} from './workspaceNavigation';
 import {canShareSelection,catalogForRegion,GLOBE_LAST_YEAR,isPublishedIndex,resolveAppExploration,restoreEvidenceWeek} from './explorationIntegration';
 import {dateRangeError,weekCoverage} from './calendarView';
 const Globe=lazy(()=>import('./Globe'));
@@ -26,6 +27,8 @@ const SeasonComparison=lazy(()=>import('./SeasonComparison'));
 
 type View = 'explore' | 'evidence' | 'rhythm' | 'methods';
 type Mode = 'harmonized' | 'raw';
+type ExploreSection = 'home' | 'calendar' | 'patterns' | 'earth';
+type JourneyTarget = 'calendar-panel' | 'earth-panel' | 'area-panel' | 'comparison-panel' | 'seasonal-context' | 'anomalies-panel';
 const COLORS = ['#26353b','#4e4b3d','#786040','#a86c3d','#d77945','#f89965','#ffd4ad'];
 const BLANK_INDEX: Index = {label:'DATA NOT LOADED',regions:[],generated_at:'',limitations:[]};
 const EVIDENCE_LOAD_NOTICE='The linked evidence panel could not be restored because its grid data was unavailable.';
@@ -37,8 +40,8 @@ function DataBadge({label}:{label:string}) {
 function Empty({title,children}:{title:string;children?:React.ReactNode}) {
   return <div className="empty-state"><Database size={28}/><h3>{title}</h3><p>{children || 'No values are available for this selection. Missing observations are never displayed as zero.'}</p></div>;
 }
-function PanelTitle({eyebrow,title,children}:{eyebrow:string;title:string;children?:React.ReactNode}) {
-  return <div className="panel-heading"><div><span className="eyebrow">{eyebrow}</span><h2>{title}</h2></div>{children}</div>;
+function PanelTitle({title,children}:{eyebrow?:string;title:string;children?:React.ReactNode}) {
+  return <div className="panel-heading"><h2>{title}</h2>{children}</div>;
 }
 function ChartLabel({label}:{label:string}) {return <span className="chart-label">{label}</span>;}
 
@@ -59,25 +62,40 @@ function CellMap({cells,selected,onSelect,name}:{cells:Region['cells'];selected:
   </svg><div className="map-caption"><span><span className="map-dot"/> {fmt(valid.length)} grid centers</span><button onClick={()=>onSelect('ALL')} disabled={selected==='ALL'}>Reset</button></div></div>;
 }
 
-function Heatmap({weeks,mode,label,onSelect}:{weeks:Week[];mode:Mode;label:string;onSelect:(w:Week)=>void}) {
+function Heatmap({weeks,mode,label,onSelect,focusDate,onWeek}:{weeks:Week[];mode:Mode;label:string;onSelect:(w:Week)=>void;focusDate?:string;onWeek?:(date:string)=>void}) {
   const [focusKey,setFocusKey]=useState(''),[hoverKey,setHoverKey]=useState('');
-  const years = [...new Set(weeks.map(w=>w.year))].sort((a,b)=>b-a);
-  const indexed = new Map(weeks.map(w=>[w.key,w]));
-  const vals = weeks.flatMap(w=>[w.raw,w.harmonized]).filter(numeric);
-  const max = Math.max(...vals, 1);
+  const years=[...new Set(weeks.map(w=>w.year))].sort((a,b)=>b-a);
+  const indexed=new Map(weeks.map(w=>[w.key,w]));
+  const vals=weeks.flatMap(w=>[w.raw,w.harmonized]).filter(numeric);
+  const max=Math.max(...vals,1);
   const details=useMemo(()=>new Map(weeks.map(week=>{const days=weekCoverage(week,mode);return [week.key,{...days,dateLabel:`${prettyDate(days.start)} to ${prettyDate(days.end)}`,valueLabel:fmt(week[mode],1)}];})),[weeks,mode]);
-  const activeKey=indexed.has(focusKey)?focusKey:weeks.find(w=>w.year===years[0])?.key;
-  const preview=indexed.get(hoverKey)||indexed.get(activeKey||'');
+  const activeKey=indexed.has(focusKey)?focusKey:weeks.find(w=>w.date===focusDate)?.key??weeks.find(w=>w.year===years[0])?.key;
+  const activeWeek=indexed.get(activeKey||'');
+  const preview=indexed.get(hoverKey)||activeWeek;
   const coverage=preview?weekCoverage(preview,mode):null;
-  if (!years.length) return <Empty title="No calendar data in this range"/>;
-  return <><div className="calendar-scroller"><div className="calendar-grid" style={{minWidth:700}}>
-    <div className="calendar-months"><span className="year-label">YEAR</span><div>{['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'].map(m=><span key={m}>{m}</span>)}</div></div>
-    {years.map(year=><div className="calendar-row" key={year}><span className="year-label">{year}</span><div className="week-cells">{Array.from({length:53},(_,i)=>{
-      const w=indexed.get(`${year}-${i+1}`); const v=w?.[mode]; const known=numeric(v);const days=w?details.get(w.key):null;
-      const color=known?COLORS[Math.min(6,Math.floor(Math.sqrt(Math.max(v,0)/max)*6))]:undefined;
-      return <button key={i} className={`week-cell ${known?'':'missing'} ${days?.partial?'partial-week':''}`} style={{backgroundColor:color}} disabled={!w} tabIndex={w?.key===activeKey?0:-1} onMouseEnter={()=>w&&setHoverKey(w.key)} onFocus={()=>{if(w)setFocusKey(w.key);setHoverKey('');}} onKeyDown={event=>{const step=({ArrowLeft:-1,ArrowRight:1,ArrowUp:-53,ArrowDown:53} as Record<string,number>)[event.key];if(!step)return;setHoverKey('');event.preventDefault();const buttons=Array.from(event.currentTarget.closest('.calendar-grid')?.querySelectorAll<HTMLButtonElement>('.week-cell')||[]);let next=buttons.indexOf(event.currentTarget)+step;while(next>=0&&next<buttons.length&&buttons[next].disabled)next+=step;if(next>=0&&next<buttons.length)buttons[next].focus();}} onClick={()=>w&&onSelect(w)} aria-label={`${year}, calendar week ${i+1}: ${known?days?.valueLabel+' '+(mode==='raw'?'raw detections':'Aqua-reference-equivalent detections'):'unavailable'}.${days?` ${days.dateLabel}. ${days.partial?'Partial week: ':''}${days.recordDays} of ${days.expectedDays} calendar days included; ${days.availableDays} available daily values.`:''} Arrow keys move between weeks; Enter opens evidence.`} title={`Week ${i+1} · ${known?days?.valueLabel:'No value'}${days?` · ${days.recordDays}/${days.expectedDays} days${days.partial?' · partial week':''}`:''}`}/>;
-    })}</div></div>)}
-  </div></div>{preview&&coverage&&<div className="calendar-inspector"><div><span>WEEK {preview.week} · {preview.year}</span><strong>{prettyDate(coverage.start)} – {prettyDate(coverage.end)}</strong><small>{coverage.partial?'Partial week · ':''}{coverage.recordDays} of {coverage.expectedDays} calendar days included · {coverage.availableDays} available daily values</small></div><div className="calendar-inspector-value"><strong>{fmt(preview[mode],1)}</strong><small>{mode==='raw'?'raw baseline detections':'Aqua-reference-equivalent detections'}</small></div><button className="text-button" onClick={()=>onSelect(preview)}>Open week evidence <ArrowUpRight size={13}/></button></div>}<div className="chart-bottom"><span><ScanLine size={13}/> Arrow keys explore · Enter opens evidence · 7-day bins start Jan 1</span><div className="heat-legend"><span>LOW</span>{COLORS.map(c=><i key={c} style={{background:c}}/>)}<span>HIGH</span><i className="missing"/><span>NO OBSERVATION / UNKNOWN</span></div></div><ChartLabel label={label}/></>;
+  const chooseWeek=(week:Week|undefined)=>{if(!week)return;setFocusKey(week.key);setHoverKey('');onWeek?.(week.date);};
+  if(!years.length)return <Empty title="No calendar data in this range"/>;
+  return <div className="weekly-calendar">
+    {preview&&coverage&&<div className="calendar-inspector">
+      <div className="week-picker" role="group" aria-label="Choose a week to inspect">
+        <label htmlFor="calendar-year">Year<select id="calendar-year" value={activeWeek?.year} onChange={event=>{const candidates=weeks.filter(w=>w.year===Number(event.target.value));chooseWeek(candidates.find(w=>w.week===activeWeek?.week)??candidates[0]);}}>{years.map(year=><option key={year} value={year}>{year}</option>)}</select></label>
+        <label htmlFor="calendar-week">Week<select id="calendar-week" value={activeKey} onChange={event=>chooseWeek(indexed.get(event.target.value))}>{weeks.filter(w=>w.year===activeWeek?.year).map(w=><option key={w.key} value={w.key}>Week {w.week} · {prettyDate(w.date).replace(/,? \d{4}$/, '')}</option>)}</select></label>
+      </div>
+      <div className="week-inspection-copy" aria-live="polite"><span>WEEK {preview.week} · {preview.year}</span><strong>{prettyDate(coverage.start)} – {prettyDate(coverage.end)}</strong><small>{coverage.partial?'Partial week · ':''}{coverage.recordDays} of {coverage.expectedDays} calendar days included · {coverage.availableDays} available daily values</small></div>
+      <div className="calendar-inspector-value"><strong>{fmt(preview[mode],1)}</strong><small>{mode==='raw'?'raw baseline detections':'Aqua-reference-equivalent detections'}</small></div>
+      <button className="button primary" onClick={()=>onSelect(preview)}>Open week evidence <ArrowUpRight size={16} aria-hidden="true"/></button>
+    </div>}
+    <div className="calendar-overview-label"><span>Each row is a year. Select a week to open its daily evidence.</span><div className="heat-legend" aria-label="Weekly activity colour scale"><span>Low</span>{COLORS.map(c=><i key={c} style={{background:c}} aria-hidden="true"/>)}<span>High</span><i className="missing" aria-hidden="true"/><span>No observation / unknown</span></div></div>
+    <div className="calendar-scroller calendar-overview-scroll" role="region" aria-label="Weekly fire activity calendar, scroll across weeks and down years" tabIndex={0}><div className="calendar-grid">
+      <div className="calendar-months"><span className="year-label">Year</span><div>{['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].map(m=><span key={m}>{m}</span>)}</div></div>
+      {years.map(year=><div className="calendar-row" key={year}><span className="year-label">{year}</span><div className="week-cells">{Array.from({length:53},(_,i)=>{
+        const w=indexed.get(`${year}-${i+1}`),v=w?.[mode],known=numeric(v),days=w?details.get(w.key):null;
+        const color=known?COLORS[Math.min(6,Math.floor(Math.sqrt(Math.max(v,0)/max)*6))]:undefined;
+        return <button key={i} id={w?`calendar-week-${w.date}`:undefined} aria-current={w?.key===activeKey?'date':undefined} className={`week-cell ${known?'':'missing'} ${days?.partial?'partial-week':''}`} style={{backgroundColor:color}} disabled={!w} tabIndex={w?.key===activeKey?0:-1} onMouseEnter={()=>w&&setHoverKey(w.key)} onMouseLeave={()=>setHoverKey('')} onFocus={()=>{if(w)setFocusKey(w.key);setHoverKey('');}} onKeyDown={event=>{const step=({ArrowLeft:-1,ArrowRight:1,ArrowUp:-53,ArrowDown:53} as Record<string,number>)[event.key];if(!step)return;setHoverKey('');event.preventDefault();const buttons=Array.from(event.currentTarget.closest('.calendar-grid')?.querySelectorAll<HTMLButtonElement>('.week-cell')||[]);let next=buttons.indexOf(event.currentTarget)+step;while(next>=0&&next<buttons.length&&buttons[next].disabled)next+=step;if(next>=0&&next<buttons.length)buttons[next].focus();}} onClick={()=>{if(w){chooseWeek(w);onSelect(w);}}} aria-label={`${year}, calendar week ${i+1}: ${known?days?.valueLabel+' '+(mode==='raw'?'raw detections':'Aqua-reference-equivalent detections'):'unavailable'}.${days?` ${days.dateLabel}. ${days.partial?'Partial week: ':''}${days.recordDays} of ${days.expectedDays} calendar days included; ${days.availableDays} available daily values.`:''} Arrow keys move between weeks; Enter opens evidence.`} title={`Week ${i+1} · ${known?days?.valueLabel:'No value'}${days?` · ${days.recordDays}/${days.expectedDays} days${days.partial?' · partial week':''}`:''}`}/>;
+      })}</div></div>)}
+    </div></div>
+    <p className="calendar-scroll-help">Scroll across for later weeks and down for earlier years. Arrow keys explore · Enter opens evidence · 7-day bins start Jan 1.</p>
+  </div>;
 }
 
 function EvaluationTable({rows}:{rows:Evaluation[]}) {
@@ -86,8 +104,17 @@ function EvaluationTable({rows}:{rows:Evaluation[]}) {
 }
 
 function EvidenceDrawer({week,onClose,onViewEarth,label,region,shareUrl,cellId,monthRows}:{week:Week;onClose:()=>void;onViewEarth:()=>void;label:string;region:Region;shareUrl:string|null;cellId:string;monthRows:Daily[]}) {
-  const ref=useRef<HTMLElement>(null);
-  useEffect(()=>{const old=document.activeElement as HTMLElement;const oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';ref.current?.querySelector<HTMLButtonElement>('button')?.focus();const onKey=(e:KeyboardEvent)=>{if(e.key==='Escape')onClose();if(e.key==='Tab'){const list=ref.current?.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],input:not([disabled]),[tabindex="0"]');if(!list?.length)return;const first=list[0],last=list[list.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}};document.addEventListener('keydown',onKey);return()=>{document.removeEventListener('keydown',onKey);document.body.style.overflow=oldOverflow;old?.focus();};},[onClose]);
+  const ref=useRef<HTMLDialogElement>(null);
+  const pressedBackdrop=useRef(false);
+  useEffect(()=>{
+    const dialog=ref.current;
+    if(dialog){dialog.setAttribute('closedby','any');if(!dialog.open)dialog.showModal();}
+    return()=>{if(dialog?.open)dialog.close();};
+  },[]);
+  function outsideDialog(event:React.PointerEvent<HTMLDialogElement>){
+    const bounds=event.currentTarget.getBoundingClientRect();
+    return event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom;
+  }
   const streams=[['Terra',sum(week.rows.map(r=>r.raw_terra))],['Aqua',sum(week.rows.map(r=>r.raw_aqua))],['VIIRS',sum(week.rows.map(r=>r.raw_viirs))]] as const;
   const sources=[...new Set(week.rows.map(r=>r.source).filter(Boolean))];
   const coverage=[...new Set(week.rows.map(r=>r.coverage).filter(Boolean))];
@@ -109,8 +136,10 @@ function EvidenceDrawer({week,onClose,onViewEarth,label,region,shareUrl,cellId,m
     const brief=buildEvidenceBrief({week,region,label,cellId,shareUrl,caveats,monthHistory:history});
     saveFile(brief.filename,brief.content,'text/markdown;charset=utf-8');
   }
-  return <div className="drawer-backdrop" onMouseDown={e=>e.target===e.currentTarget&&onClose()}><aside ref={ref} className="evidence-drawer" role="dialog" aria-modal="true" aria-labelledby="evidence-title">
-    <div className="drawer-head"><span className="eyebrow">FOLLOW THE EVIDENCE</span><button className="icon-button" onClick={onClose} aria-label="Close evidence"><X size={20}/></button></div>
+  return <dialog ref={ref} className="evidence-drawer" aria-labelledby="evidence-title" onClose={event=>{if(!event.currentTarget.open)onClose();}}
+    onPointerDown={event=>{if(!('closedBy' in event.currentTarget))pressedBackdrop.current=outsideDialog(event);}}
+    onPointerUp={event=>{if(!('closedBy' in event.currentTarget)&&pressedBackdrop.current&&outsideDialog(event))event.currentTarget.close();pressedBackdrop.current=false;}}>
+    <div className="drawer-head"><span>Week evidence</span><button autoFocus className="icon-button" onClick={()=>ref.current?.close()} aria-label="Close evidence"><X size={20}/></button></div>
     <h2 id="evidence-title">Week {week.week}, {week.year}</h2><p className="drawer-date">{prettyDate(days.start)} – {prettyDate(days.end)} · {region.meta.name}<br/><strong>{spatialScope}</strong></p><DataBadge label={label}/>
     {days.partial&&<p className="partial-week-note"><strong>Partial week in this view.</strong> Records cover {prettyDate(days.firstRecord)} – {prettyDate(days.lastRecord)} ({days.recordDays} of {days.expectedDays} calendar days). Totals include only these records.</p>}
     {cellId!=='ALL'&&<p className="chart-note">This cell uses a nationally selected calibration. Its bands omit spatial model error, and cell agreement can be much poorer than national agreement.</p>}
@@ -123,15 +152,15 @@ function EvidenceDrawer({week,onClose,onViewEarth,label,region,shareUrl,cellId,m
     <button className="button primary full" onClick={()=>exportCSV(week.rows,region.meta.region,label)}><ArrowDownToLine size={16}/> Download daily CSV</button>
     <div className="evidence-actions"><button className="button subtle full" onClick={downloadBrief}><ArrowDownToLine size={16}/> Download evidence brief</button><button className="button subtle full" onClick={onViewEarth}><Globe2 size={16}/> View {week.year} on Earth (annual)</button></div>
     <div className="evidence-share"><ShareView url={shareUrl}/></div>
-  </aside></div>;
+  </dialog>;
 }
 
 function Methods({region,index}:{region:Region|null;index:Index}) {
-  return <div className="methods-page"><div className="section-intro"><span className="eyebrow">OPEN METHODS</span><h2>A clearer record.<br/><em>Not a perfect one.</em></h2><p>CINDERLINE compares satellite observations on a named reference scale. Each conclusion should be traceable to a source, an assumption and a test.</p></div>
+  return <div className="methods-page"><div className="section-intro"><p>CINDERLINE compares satellite observations on a named reference scale. Each conclusion should be traceable to a source, an assumption and a test.</p></div>
     <nav className="method-jump-nav" aria-label="Methods sections"><a href="#method-steps">Process</a><a href="#method-limitations">Limitations</a><a href="#method-sources">Data sources</a></nav>
-    <div className="method-grid" id="method-steps" tabIndex={-1}><article className="panel method-card"><span className="step">01 / OBSERVE</span><h3>Keep the instruments separate</h3><p>MODIS Terra, MODIS Aqua and VIIRS S-NPP observe fire activity at different resolutions and times. Their detection counts cannot be treated as interchangeable.</p><p>Dates are assigned using local civil time. Low-confidence observations and non-vegetation sources are handled explicitly by the pipeline.</p></article>
-    <article className="panel method-card"><span className="step">02 / COMPARE</span><h3>Use Aqua as a reference</h3><p>The pipeline compares a raw baseline, a single conversion ratio and stratified conversion ratios. Models are selected using validation years; held-out test years are reserved for evaluation.</p><p>Output is expressed as Aqua-reference-equivalent detections. This is not a reconstruction of the true number of fires.</p></article>
-    <article className="panel method-card"><span className="step">03 / CHECK</span><h3>Let the evidence set the story</h3><p>A real trend may remain after harmonization. Simulated sensor-switch tests check behavior under known conditions and are labeled separately from real observations.</p><p>The weekly rhythm test uses each raw satellite stream separately and reports its predefined gate. A rest-day dip alone does not establish ignition cause.</p></article></div>
+    <div className="method-grid" id="method-steps" tabIndex={-1}><article className="panel method-card"><span className="step">01 / OBSERVE</span><h2>Keep the instruments separate</h2><p>MODIS Terra, MODIS Aqua and VIIRS S-NPP observe fire activity at different resolutions and times. Their detection counts cannot be treated as interchangeable.</p><p>Dates are assigned using local civil time. Low-confidence observations and non-vegetation sources are handled explicitly by the pipeline.</p></article>
+    <article className="panel method-card"><span className="step">02 / COMPARE</span><h2>Use Aqua as a reference</h2><p>The pipeline compares a raw baseline, a single conversion ratio and stratified conversion ratios. Models are selected using validation years; held-out test years are reserved for evaluation.</p><p>Output is expressed as Aqua-reference-equivalent detections. This is not a reconstruction of the true number of fires.</p></article>
+    <article className="panel method-card"><span className="step">03 / CHECK</span><h2>Let the evidence set the story</h2><p>A real trend may remain after harmonization. Simulated sensor-switch tests check behavior under known conditions and are labeled separately from real observations.</p><p>The weekly rhythm test uses each raw satellite stream separately and reports its predefined gate. A rest-day dip alone does not establish ignition cause.</p></article></div>
     <section className="panel limitations" id="method-limitations" tabIndex={-1}><PanelTitle eyebrow="READ BEFORE INTERPRETING" title="What the record cannot tell you"/><ul><li><strong>No detection is not “no fire.”</strong> Cloud, missed overpasses and detection limits affect the record.</li><li><strong>Intervals are conditional.</strong> Calibration uncertainty does not cover every observational or modeling error.</li><li><strong>Historical patterns are not forecasts.</strong> Calendar exports are planning context, not warnings or emergency advice.</li><li><strong>Independent instruments do not mean independent events.</strong> Sensors can observe the same fires.</li>{index.limitations.map((l,i)=><li key={i}>{l}</li>)}</ul>{region?.meta.coverage_note&&<div className="callout"><ShieldCheck size={18}/><p>{region.meta.coverage_note}</p></div>}</section>
     <section className="panel sources-panel" id="method-sources" tabIndex={-1}><PanelTitle eyebrow="PROVENANCE" title="Data sources"/>{(region?.meta.sources?.length?region.meta.sources:[{name:'NASA FIRMS — active fire data',url:'https://firms.modaps.eosdis.nasa.gov/'}]).map(s=><a key={s.url} href={s.url} target="_blank" rel="noreferrer"><Database size={18}/><span>{s.name}<small>{new URL(s.url).hostname}</small></span><ArrowUpRight size={17}/></a>)}<p>Generated: {index.generated_at?new Date(index.generated_at).toLocaleString():'not yet available'}. Source files and analysis scripts accompany the project repository.</p></section>
   </div>;
@@ -140,9 +169,15 @@ function Methods({region,index}:{region:Region|null;index:Index}) {
 export default function App() {
   const [index,setIndex]=useState<Index>(BLANK_INDEX),[regionId,setRegionId]=useState(''),[region,setRegion]=useState<Region|null>(null);
   const [loading,setLoading]=useState(true),[error,setError]=useState(''),[view,setView]=useState<View>(()=>linkedView(window.location.search)),[mode,setMode]=useState<Mode>('harmonized');
-  const [showGlobe,setShowGlobe]=useState(false);
+  const [showGlobe,setShowGlobe]=useState(()=>parseWorkspaceNavigation(window.location.search).section==='earth');
+  const [exploreSection,setExploreSection]=useState<ExploreSection>(()=>parseWorkspaceNavigation(window.location.search).section);
+  const [calendarPeriod,setCalendarPeriod]=useState<'weekly'|'monthly'>(()=>parseWorkspaceNavigation(window.location.search).calendar);
+  const [patternSection,setPatternSection]=useState<'instruments'|'seasons'|'anomalies'>(()=>parseWorkspaceNavigation(window.location.search).pattern);
+  const [homeWeek,setHomeWeek]=useState<string|undefined>(()=>parseWorkspaceNavigation(window.location.search).homeWeek);
+  const [areaExpanded,setAreaExpanded]=useState(false);
+  const mobileNav=useRef<HTMLDetailsElement>(null);
   const [earthMode,setEarthMode]=useState<ObservationMode>('harmonized'),[observationMonth,setObservationMonth]=useState('2024-04');
-  const [journeyTarget,setJourneyTarget]=useState<'calendar-panel'|'earth-panel'|null>(null);
+  const [journeyTarget,setJourneyTarget]=useState<JourneyTarget|null>(null);
   const [start,setStart]=useState(''),[end,setEnd]=useState(''),[cell,setCell]=useState('ALL'),[selected,setSelected]=useState<Week|null>(null),[toast,setToast]=useState('');
   const closeEvidence=useCallback(()=>setSelected(null),[]);
   const [cellData,setCellData]=useState<{key:string;rows:Daily[]}|null>(null),[cellLoading,setCellLoading]=useState(false);
@@ -151,9 +186,16 @@ export default function App() {
   const [navigation,setNavigation]=useState(0),[hydrating,setHydrating]=useState(true),[linkNotices,setLinkNotices]=useState<string[]>([]);
   const [indexAttempt,setIndexAttempt]=useState(0),[cellAttempt,setCellAttempt]=useState(0);
   const sectionFocus=useRef(false);
-  useEffect(()=>{if(!sectionFocus.current)return;sectionFocus.current=false;const target=document.getElementById('main');target?.focus({preventScroll:true});target?.scrollIntoView({block:'start',behavior:'auto'});},[view]);
+  useEffect(()=>{
+    const onEscape=(event:KeyboardEvent)=>{
+      if(event.key==='Escape'&&mobileNav.current?.open){mobileNav.current.open=false;mobileNav.current.querySelector('summary')?.focus();}
+    };
+    window.addEventListener('keydown',onEscape);
+    return()=>window.removeEventListener('keydown',onEscape);
+  },[]);
+  useEffect(()=>{if(!sectionFocus.current)return;sectionFocus.current=false;const target=document.getElementById('main');target?.focus({preventScroll:true});target?.scrollIntoView({block:'start',behavior:'auto'});},[view,exploreSection]);
   useEffect(()=>{const controller=new AbortController();fetch(`${import.meta.env.BASE_URL}data/index.json`,{signal:controller.signal,cache:indexAttempt?'reload':'default'}).then(r=>{if(!r.ok)throw new Error('The processed data index has not been published yet.');return r.json();}).then((data:Index)=>{if(controller.signal.aborted)return;if(!isPublishedIndex(data))throw new Error('Invalid published index');setIndex(data);const id=linkedRegion(pendingLink.current?.search||'',data.regions.map(r=>r.id),'Nepal');if(id)setRegionId(id);else{setLoading(false);setHydrating(false);}}).catch(e=>{if(e.name!=='AbortError'){setError('Processed data is not available yet. Run the data pipeline or reload once processing completes.');setLoading(false);setHydrating(false);}});return()=>controller.abort();},[indexAttempt]);
-  useEffect(()=>{const onPop=()=>{setJourneyTarget(null);setView(linkedView(window.location.search));pendingLink.current={search:window.location.search,revision:++viewRevision.current};pendingWeek.current=null;setHydrating(true);setLoading(true);setSelected(null);const id=linkedRegion(window.location.search,index.regions.map(r=>r.id),'Nepal');if(id){setRegionId(id);setNavigation(n=>n+1);}else{setLoading(false);setHydrating(false);}};window.addEventListener('popstate',onPop);return()=>window.removeEventListener('popstate',onPop);},[index]);
+  useEffect(()=>{const onPop=()=>{const workspace=parseWorkspaceNavigation(window.location.search);setJourneyTarget(null);setExploreSection(workspace.section);setCalendarPeriod(workspace.calendar);setPatternSection(workspace.pattern);setHomeWeek(workspace.homeWeek);if(workspace.section==='earth')setShowGlobe(true);setView(linkedView(window.location.search));pendingLink.current={search:window.location.search,revision:++viewRevision.current};pendingWeek.current=null;setHydrating(true);setLoading(true);setSelected(null);const id=linkedRegion(window.location.search,index.regions.map(r=>r.id),'Nepal');if(id){setRegionId(id);setNavigation(n=>n+1);}else{setLoading(false);setHydrating(false);}};window.addEventListener('popstate',onPop);return()=>window.removeEventListener('popstate',onPop);},[index]);
   useEffect(()=>{
     if(!regionId)return;
     const controller=new AbortController(),entry=index.regions.find(r=>r.id===regionId),request=pendingLink.current;
@@ -181,11 +223,12 @@ export default function App() {
   useEffect(()=>{
     if(!journeyTarget||view!=='explore')return;
     if(!error&&(loading||hydrating||cellLoading||!dailySeriesReady||dateError))return;
-    const target=document.getElementById(error?'data-load-error':journeyTarget);
+    const target=document.getElementById(error?'data-load-error':journeyTarget==='calendar-panel'&&homeWeek&&weeks.some(week=>week.date===homeWeek)?`calendar-week-${homeWeek}`:journeyTarget);
     if(!target)return;
+    if(target.tagName!=='BUTTON')target.tabIndex=-1;
     target.focus({preventScroll:true});target.scrollIntoView({block:'start',behavior:'auto'});
     if(!error)setJourneyTarget(null);
-  },[journeyTarget,view,error,loading,hydrating,cellLoading,dailySeriesReady,dateError,showGlobe]);
+  },[journeyTarget,view,error,loading,hydrating,cellLoading,dailySeriesReady,dateError,showGlobe,exploreSection,calendarPeriod,patternSection,areaExpanded]);
   useEffect(()=>{
     if(!pendingWeek.current||loading||!region)return;
     if(!dailySeriesReady){if(error){setHydrating(false);setLinkNotices(n=>n.includes(EVIDENCE_LOAD_NOTICE)?n:[...n,EVIDENCE_LOAD_NOTICE]);}return;}
@@ -196,7 +239,7 @@ export default function App() {
   },[weeks,loading,region,dailySeriesReady,error]);
   const catalog=useMemo(()=>region?catalogForRegion(region):null,[region]);
   const currentExploration:ExplorationState={region:regionId,start,end,cell,view,scale:mode,globeYear:Math.min(Number(end.slice(0,4)),GLOBE_LAST_YEAR),globeCell:null,globeView:'earth',evidenceWeek:selected?.date||null};
-  const shareUrl=!loading&&!hydrating&&dailySeriesReady&&catalog&&region?.meta.region===regionId&&canShareSelection(currentExploration,catalog)?createShareLink(window.location.href,currentExploration,catalog).url:null;
+  const shareUrl=!loading&&!hydrating&&dailySeriesReady&&catalog&&region?.meta.region===regionId&&canShareSelection(currentExploration,catalog)?withWorkspaceNavigation(createShareLink(window.location.href,currentExploration,catalog).url,{section:exploreSection,calendar:calendarPeriod,pattern:patternSection,homeWeek}):null;
   useEffect(()=>{if(!shareUrl||pendingLink.current)return;const url=new URL(shareUrl);if(window.location.search!==url.search)window.history.replaceState(window.history.state,'',url.pathname+url.search+window.location.hash);},[shareUrl]);
   const label=region?.meta.label||index.label;
   const values=rows.map(r=>r[mode]).filter(numeric);const total=sum(values);
@@ -207,23 +250,32 @@ export default function App() {
   const isSynthetic=/synthetic|demo|simulat/i.test(label);
   const completeWeekKeys=new Set(weeks.filter(w=>w.week<53&&new Set(w.rows.map(r=>r.date.slice(0,10))).size===7&&w.rows.every(r=>numeric(r.harmonized))).map(w=>w.key));
   const selectedAnomalies=region?.anomalies.filter(a=>{const w=isoWeek(a.date);return completeWeekKeys.has(`${w.year}-${w.week}`);})||[];
-  function focusSection(id:string){
-    const target=document.getElementById(id);
-    if(!target)return;
-    if(!target.hasAttribute('tabindex')&&!['SELECT','INPUT','BUTTON'].includes(target.tagName))target.setAttribute('tabindex','-1');
-    target.focus({preventScroll:true});
-    target.scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  function focusSection(id:JourneyTarget){
+    if(id==='earth-panel'){setExploreSection('earth');setShowGlobe(true);}
+    else if(id==='calendar-panel'||id==='area-panel'){
+      setExploreSection('calendar');
+      if(id==='calendar-panel')setCalendarPeriod('weekly');
+      if(id==='area-panel')setAreaExpanded(true);
+    }else{
+      setExploreSection('patterns');
+      setPatternSection(id==='comparison-panel'?'instruments':id==='seasonal-context'?'seasons':'anomalies');
+    }
+    setJourneyTarget(id);
+  }
+  function chooseExploreSection(section:ExploreSection){
+    setJourneyTarget(null);setExploreSection(section);
+    if(section==='earth')setShowGlobe(true);
   }
   function openAnomaly(a:Anomaly){const {year,week}=isoWeek(a.date);const found=weeks.find(w=>w.year===year&&w.week===week);if(found)setSelected(found);}
-  function navigateToView(next:View){setJourneyTarget(null);viewRevision.current++;pendingWeek.current=null;setHydrating(false);setLinkNotices(n=>n.filter(notice=>notice!==EVIDENCE_LOAD_NOTICE));setSelected(null);if(next===view){const target=document.getElementById('main');target?.focus({preventScroll:true});target?.scrollIntoView({block:'start',behavior:'auto'});}else{sectionFocus.current=true;setView(next);}}
+  function navigateToView(next:View,deferFocus=false){if(mobileNav.current)mobileNav.current.open=false;setJourneyTarget(null);viewRevision.current++;pendingWeek.current=null;setHydrating(false);setLinkNotices(n=>n.filter(notice=>notice!==EVIDENCE_LOAD_NOTICE));setSelected(null);if(next===view&&!deferFocus){const target=document.getElementById('main');target?.focus({preventScroll:true});target?.scrollIntoView({block:'start',behavior:'auto'});}else{sectionFocus.current=true;setView(next);}}
   function retryData(){setError('');if(pendingWeek.current)setHydrating(true);if(!index.regions.length){setLoading(true);setHydrating(true);setIndexAttempt(n=>n+1);}else if(!region){const entry=index.regions.find(r=>r.id===regionId);if(entry)invalidateData(entry.file);setLoading(true);setNavigation(n=>n+1);}else{const file=region.cells.find(c=>c.id===cell)?.file;if(file)invalidateData(file);setCellLoading(true);setCellAttempt(n=>n+1);}}
   function changeRegion(id:string){if(id===regionId)return;setJourneyTarget(null);pendingLink.current=null;pendingWeek.current=null;setHydrating(false);setLoading(true);setSelected(null);setRegionId(id);}
   function selectDailyCell(id:string){if(loading)return;setJourneyTarget(null);pendingWeek.current=null;setHydrating(false);setError('');setCell(id);setSelected(null);}
-  function resetSharedView(){if(!catalog)return;setJourneyTarget(null);const state=defaultExploration(catalog,regionId);pendingLink.current=null;pendingWeek.current=null;setStart(state.start);setEnd(state.end);setCell(state.cell);setView(state.view);setMode(state.scale);setSelected(null);setHydrating(false);setLinkNotices([]);}
-  function compareRecord(){document.getElementById('comparison-panel')?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});document.getElementById('comparison-panel')?.focus({preventScroll:true});}
+  function resetSharedView(){if(!catalog)return;setJourneyTarget(null);const state=defaultExploration(catalog,regionId);pendingLink.current=null;pendingWeek.current=null;setStart(state.start);setEnd(state.end);setCell(state.cell);setView(state.view);setExploreSection('calendar');setCalendarPeriod('weekly');setPatternSection('instruments');setHomeWeek(undefined);setMode(state.scale);setSelected(null);setHydrating(false);setLinkNotices([]);}
+  function compareRecord(){focusSection('comparison-panel');}
   function selectGlobeYear(year:number){if(!region)return;cancelEvidenceRestore();setStart(`${year}-01-01`<region.meta.period_start?region.meta.period_start:`${year}-01-01`);setEnd(`${year}-12-31`>region.meta.period_end?region.meta.period_end:`${year}-12-31`);setSelected(null);}
   function cancelEvidenceRestore(){pendingWeek.current=null;setHydrating(false);setSelected(null);setJourneyTarget(null);setLinkNotices(n=>n.filter(notice=>notice!==EVIDENCE_LOAD_NOTICE));}
-  function selectGlobeCell(id:string,year:number){selectDailyCell(id);selectGlobeYear(year);setJourneyTarget('calendar-panel');}
+  function selectGlobeCell(id:string,year:number){selectDailyCell(id);selectGlobeYear(year);setExploreSection('calendar');setCalendarPeriod('weekly');setJourneyTarget('calendar-panel');}
   function exploreGlobeRegion(id:string,year:number){
     if(!index.regions.some(r=>r.id===id))return;
     cancelEvidenceRestore();setError('');
@@ -232,45 +284,97 @@ export default function App() {
       pendingLink.current={search:new URLSearchParams({region:id,start:`${year}-01-01`,end:`${year}-12-31`,view:'explore',scale:mode}).toString(),revision:++viewRevision.current};
       setLoading(true);setHydrating(true);setRegionId(id);
     }
-    setJourneyTarget('calendar-panel');
+    setExploreSection('calendar');setCalendarPeriod('weekly');setJourneyTarget('calendar-panel');
   }
-  function viewEvidenceOnEarth(week:Week){navigateToView('explore');selectGlobeYear(week.year);setEarthMode('harmonized');setShowGlobe(true);setJourneyTarget('earth-panel');}
+  function viewEvidenceOnEarth(week:Week){navigateToView('explore');selectGlobeYear(week.year);setEarthMode('harmonized');setShowGlobe(true);setExploreSection('earth');setJourneyTarget('earth-panel');}
   function useFullRecord(){if(!region)return;cancelEvidenceRestore();setStart(region.meta.period_start.slice(0,10));setEnd(region.meta.period_end.slice(0,10));setSelected(null);}
   function download(kind:'csv'|'ics'){if(!region)return;if(kind==='csv')exportCSV(rows,region.meta.region,label);else exportICS(region.critical_periods,Number(end.slice(0,4))||new Date().getFullYear(),region.meta.name,label);setToast(`${kind.toUpperCase()} export downloaded`);}
 
-  return <><a className="skip-link" href="#main">Skip to content</a><header className="site-header"><a href="#" className="brand" onClick={e=>{e.preventDefault();navigateToView('explore');}}><span className="brand-symbol"><Flame size={24}/></span><span>CINDER<span className="brand-light">LINE</span></span></a><nav aria-label="Main navigation">{(['explore','evidence','rhythm','methods'] as const).map(v=><button key={v} className={view===v?'active':''} aria-current={view===v?'page':undefined} onClick={()=>navigateToView(v)}>{v==='explore'?'Explore the record':v==='evidence'?'Evidence & validation':v==='rhythm'?'Weekly Rhythm Index':'Methods'}</button>)}</nav><a className="header-source" href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noreferrer">NASA FIRMS <ArrowUpRight size={14}/></a></header>
-    <div className="masthead"><div><div className="eyebrow masthead-eyebrow">Satellite fire observatory <span className="masthead-separator">/</span> MODIS × VIIRS</div><h1>Two satellites.<br className="mobile-break"/> One unbroken <em>fire record.</em></h1><p>A changing signal doesn’t always mean a changing planet.<br/>Trace fire activity across instruments, seasons and years.</p></div></div>
-    <main id="main" tabIndex={-1} aria-labelledby="workspace-title"><div className="workspace-toolbar"><div className="workspace-title" id="workspace-title"><span className="live-dot"/><span>{view==='explore'?'Explore the fire record':view==='evidence'?'Inspect the evidence':view==='rhythm'?'Weekly rhythm across seven countries':'Understand the methods'}</span></div><div className="workspace-tools"><DataBadge label={label}/><ShareView url={shareUrl} disabledReason={loading||hydrating||!dailySeriesReady?'Wait for the selected observations to load.':'Choose a valid date range within the published record.'}/></div></div>
-      {view==='explore'&&<div className="calendar-scale-bar"><div className="calendar-scale-control"><span className="field-label">Calendar reference scale</span><div className="segmented" role="group" aria-label="Calendar reference scale">{(['harmonized','raw'] as const).map(m=><button key={m} className={mode===m?'active':''} onClick={()=>setMode(m)} disabled={loading||hydrating||cellLoading} aria-pressed={mode===m}>{m==='harmonized'?<Layers3 size={13}/>:<Radio size={13}/>} {m==='harmonized'?'Harmonized':'Raw baseline'}</button>)}</div></div><p className="chart-note">The scale switch changes the calendar and summary totals. Earth has separate harmonized and observed layers.</p></div>}
+  const isIntroduction=view==='explore'&&exploreSection==='home';
+  const workspaceNames={home:'Home',calendar:'Fire calendar',patterns:'Patterns',earth:'Earth'};
+  const sectionLinks=([['home','Home',House],['calendar','Calendar',CalendarDays],['patterns','Patterns',Waves],['earth','Earth',Globe2]] as const).map(([section,title,Icon])=><button key={section} className={view==='explore'&&exploreSection===section?'active':''} aria-current={view==='explore'&&exploreSection===section?'page':undefined} onClick={()=>{navigateToView('explore',section!==exploreSection);chooseExploreSection(section);}}><Icon size={18}/><span>{title}</span></button>);
+  const researchLinks=([['rhythm','Weekly Rhythm Index',Waves],['evidence','Evidence & validation',ShieldCheck],['methods','Methods',Layers3]] as const).map(([page,title,Icon])=><button key={page} className={view===page?'active':''} aria-current={view===page?'page':undefined} onClick={()=>navigateToView(page)}><Icon size={18}/><span>{title}</span></button>);
+
+  return <div className="content-first-app atlas-app"><a className="skip-link" href="#main">Skip to content</a>
+    <header className="site-header">
+      <a href="#" className="brand" onClick={e=>{e.preventDefault();navigateToView('explore',exploreSection!=='home');chooseExploreSection('home');}}><span className="brand-symbol"><Flame size={24}/></span><span>CINDER<span className="brand-light">LINE</span></span></a>
+      <nav className="desktop-navigation" aria-label="Main navigation"><div className="nav-group">{sectionLinks}</div><div className="nav-group">{researchLinks}</div></nav>
+      <div className="rail-source"><DataBadge label={label}/><a className="header-source" href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noreferrer">NASA FIRMS <ArrowUpRight size={14}/></a></div>
+      <details className="mobile-navigation" ref={mobileNav}><summary>Menu <ChevronDown size={16}/></summary><nav aria-label="Mobile navigation">{sectionLinks}{researchLinks}</nav></details>
+    </header>
+    <main id="main" tabIndex={-1} aria-labelledby="workspace-title">
+      {!isIntroduction&&<div className="workspace-heading">
+        <h1 id="workspace-title">{view==='explore'?workspaceNames[exploreSection]:view==='evidence'?'Evidence & validation':view==='rhythm'?'Weekly Rhythm Index':'Methods'}</h1>
+        <div className="workspace-tools">{view==='explore'&&exploreSection==='calendar'&&<button className="text-button calendar-area-action" onClick={()=>focusSection('area-panel')}>Draw an area <MapPin size={16} aria-hidden="true"/></button>}{view!=='rhythm'&&view!=='methods'&&<ShareView url={shareUrl} disabledReason={loading||hydrating||!dailySeriesReady?'Wait for the selected observations to load.':'Choose a valid date range within the published record.'}/>}</div>
+      </div>}
       {linkNotices.length>0&&<div className="share-notices"><div role="status" aria-live="polite">{linkNotices.map(notice=><p key={notice}>{notice}</p>)}</div><div className="share-notice-actions"><button onClick={resetSharedView} disabled={!catalog||loading}>Reset shared view</button><button onClick={()=>setLinkNotices([])}>Dismiss</button></div></div>}
       {isSynthetic&&<div className="synthetic-banner"><FlaskIcon/><span><strong>Synthetic demonstration.</strong> These observations were generated to test the pipeline. They are not measured fire activity.</span></div>}
       {error&&<div role="alert" className="error-banner" id="data-load-error" tabIndex={-1}><CircleHelp size={20}/><div><strong>Data not available</strong><p>{error} The interface will never substitute fabricated observations.</p></div><button className="button subtle" onClick={retryData} disabled={loading||cellLoading||hydrating}>Retry loading</button></div>}
-      {view==='methods'?<Methods region={region} index={index}/>:view==='rhythm'?<RhythmView><RhythmCellMap/></RhythmView>:<div className="workspace"><aside className="sidebar"><div className="sidebar-title"><SlidersHorizontal size={15}/><span>Your view</span></div>
-        <label className="field-label" htmlFor="region">Region</label><div className="select-wrap region-select"><MapPin size={17}/><select id="region" value={regionId} onChange={e=>changeRegion(e.target.value)} disabled={!index.regions.length||loading}>{!index.regions.length&&<option>No processed regions</option>}{index.regions.map(r=><option key={r.id} value={r.id}>{r.name}</option>)}</select><ChevronDown size={15}/></div>
-        <details className="grid-preview"><summary>Grid preview <ChevronDown size={16}/></summary><CellMap cells={region?.cells||[]} selected={cell} onSelect={selectDailyCell} name={region?.meta.name||'Region'}/></details>{region?.meta.cell_scope&&<p className="cell-scope">{region.meta.cell_scope}</p>}
-        <label className="field-label" htmlFor="cell">Spatial scope</label><div className="select-wrap"><select id="cell" value={cell} disabled={loading} onChange={e=>selectDailyCell(e.target.value)}><option value="ALL">Whole region</option>{region?.cells.map(c=><option key={c.id} value={c.id}>{c.id} · {c.lat.toFixed(2)}, {c.lon.toFixed(2)}</option>)}</select><ChevronDown size={15}/></div>
-        <div className="sidebar-divider"/><label className="field-label" htmlFor="start">Observation period</label><div className="date-fields"><label><span>From</span><input id="start" aria-label="Start date" type="date" value={start} aria-invalid={!!dateError} aria-describedby={dateError?'date-range-error':undefined} disabled={loading||hydrating} min={region?.meta.period_start} max={end||region?.meta.period_end} onChange={e=>{cancelEvidenceRestore();setStart(e.target.value);}}/></label><label><span>To</span><input aria-label="End date" type="date" value={end} aria-invalid={!!dateError} aria-describedby={dateError?'date-range-error':undefined} disabled={loading||hydrating} min={start||region?.meta.period_start} max={region?.meta.period_end} onChange={e=>{cancelEvidenceRestore();setEnd(e.target.value);}}/></label></div><button className="text-button" disabled={loading||hydrating} onClick={useFullRecord}>Use full available record <ArrowRight size={13}/></button>{dateError&&!loading&&!hydrating&&<p id="date-range-error" className="date-range-error" role="alert">{dateError}</p>}
-        <div className="sidebar-divider"/><span className="field-label">Observation streams</span><div className="stream-list">{['Terra','Aqua','VIIRS'].map((s,i)=><div key={s}><span className={`sensor-dot ${s.toLowerCase()}`}/><span>{s}<small>{i===2?'S-NPP · VIIRS':'MODIS'}</small></span></div>)}</div><p className="sidebar-caption">Streams are analyzed separately. Available values appear in each evidence card.</p>
-        <div className="sidebar-note"><ShieldCheck size={20}/><h3>Evidence before conclusions.</h3><p>A hotspot is an observation, not a distinct fire. Unknown coverage remains unknown.</p><button onClick={()=>navigateToView('methods')}>How to read this record <ArrowUpRight size={13}/></button></div>
-      </aside><div className="main-column">
+
+      {view==='methods'?<Methods region={region} index={index}/>:view==='rhythm'?<RhythmView><RhythmCellMap/></RhythmView>:isIntroduction?<HarmonizationIntro weeks={!loading&&!hydrating&&dailySeriesReady&&!error?weeks:[]} context={`${region?.meta.name||'Selected region'} · ${cell==='ALL'?'Whole region':`Cell ${cell}`}`} loading={!error&&(loading||hydrating||cellLoading)} unavailable={!!error} countries={index.regions} country={regionId} onCountry={changeRegion} selectedDate={homeWeek} onWeek={setHomeWeek} onExplore={week=>{navigateToView('explore',true);if(week){setHomeWeek(week.date);focusSection('calendar-panel');}else chooseExploreSection('calendar');}} onInspect={setSelected} onCompare={()=>{navigateToView('explore',true);compareRecord();}} onValidate={()=>navigateToView('evidence')}/>:<div className="workspace">
+        <section className={`selection-bar ${view==='explore'&&exploreSection==='earth'?'earth-selection':' '}`} aria-label="Area and observation period">
+          <div className="selection-top"><div className="selection-country"><label className="field-label" htmlFor="region">Region</label><div className="select-wrap region-select"><MapPin size={17}/><select id="region" value={regionId} onChange={e=>changeRegion(e.target.value)} disabled={!index.regions.length||loading}>{!index.regions.length&&<option>No processed regions</option>}{index.regions.map(r=><option key={r.id} value={r.id}>{r.name}</option>)}</select><ChevronDown size={15}/></div>
+        </div>
+          {!(view==='explore'&&exploreSection==='earth')&&<div className="selection-context"><span>{cell==='ALL'?'Whole region':`Cell ${cell}`}</span><strong>{start&&end?`${prettyDate(start)} – ${prettyDate(end)}`:'Loading observation period'}</strong></div>}</div>
+          {(!(view==='explore'&&exploreSection==='earth')||!!dateError||!dailySeriesReady)&&<details className="selection-options"><summary><span className="selection-summary-context">{cell!=='ALL'&&<span>{`Cell ${cell}`}</span>}<span>{start&&end?`${prettyDate(start)} – ${prettyDate(end)}`:'Loading observation period'}</span></span><span className="selection-summary-action"><SlidersHorizontal size={16}/> Area & dates <ChevronDown size={16}/></span></summary>
+            <div className="selection-options-body"><div className="selection-export">{!(view==='explore'&&exploreSection==='earth')&&region&&!loading&&!hydrating&&dailySeriesReady&&<button className="text-button" onClick={()=>download('csv')} disabled={!rows.length}><ArrowDownToLine size={15}/> Export data</button>}</div>
+              <div className="selection-fields"><div><label className="field-label" htmlFor="cell">Spatial scope</label><div className="select-wrap"><select id="cell" value={cell} disabled={loading} onChange={e=>selectDailyCell(e.target.value)}><option value="ALL">Whole region</option>{region?.cells.map(c=><option key={c.id} value={c.id}>{c.id} · {c.lat.toFixed(2)}, {c.lon.toFixed(2)}</option>)}</select><ChevronDown size={15}/></div>
+        </div><div><label className="field-label" htmlFor="start">Observation period</label><div className="date-fields"><label><span>From</span><input id="start" aria-label="Start date" type="date" value={start} aria-invalid={!!dateError} aria-describedby={dateError?'date-range-error':undefined} disabled={loading||hydrating} min={region?.meta.period_start} max={end||region?.meta.period_end} onChange={e=>{cancelEvidenceRestore();setStart(e.target.value);}}/></label><label><span>To</span><input aria-label="End date" type="date" value={end} aria-invalid={!!dateError} aria-describedby={dateError?'date-range-error':undefined} disabled={loading||hydrating} min={start||region?.meta.period_start} max={region?.meta.period_end} onChange={e=>{cancelEvidenceRestore();setEnd(e.target.value);}}/></label></div><button className="text-button" disabled={loading||hydrating} onClick={useFullRecord}>Use full available record <ArrowRight size={13}/></button>{dateError&&!loading&&!hydrating&&<p id="date-range-error" className="date-range-error" role="alert">{dateError}</p>}
+        </div></div>
+              <div className="selection-help"><div><details className="grid-preview"><summary>Grid preview <ChevronDown size={16}/></summary><CellMap cells={region?.cells||[]} selected={cell} onSelect={selectDailyCell} name={region?.meta.name||'Region'}/></details>{region?.meta.cell_scope&&<p className="cell-scope">{region.meta.cell_scope}</p>}
+        </div><details className="stream-disclosure"><summary>About the observations <ChevronDown size={16}/></summary><span className="field-label">Observation streams</span><div className="stream-list">{['Terra','Aqua','VIIRS'].map((s,i)=><div key={s}><span className={`sensor-dot ${s.toLowerCase()}`}/><span>{s}<small>{i===2?'S-NPP · VIIRS':'MODIS'}</small></span></div>)}</div><p className="sidebar-caption">Streams are analyzed separately. Available values appear in each evidence card.</p>
+        <div className="sidebar-note"><ShieldCheck size={20}/><p>A hotspot is an observation, not a distinct fire. Unknown coverage remains unknown.</p><button onClick={()=>navigateToView('methods')}>How to read this record <ArrowUpRight size={13}/></button></div>
+      </details></div>
+            </div>
+          </details>}
+        </section>
+        <div className="main-column">
         {(loading||cellLoading||hydrating||(region&&!dailySeriesReady&&!error))?<div className="loading-state" role="status"><span className="loader"/><h2>Tracing the observations…</h2><p>Loading the processed record and its evidence.</p></div>:!region?<Empty title="Ready for the first observations">Run the reproducible data pipeline to publish a region. The calendar, comparisons and evidence cards will populate from its output.</Empty>:dateError?<Empty title="Choose a valid observation period">{dateError} Your entries are preserved so you can correct them, or use the full available record.</Empty>:!dailySeriesReady?<Empty title="Daily records are unavailable">Select another grid cell or choose Whole region in the spatial scope control.</Empty>:<>
-          <div className="region-heading"><div><span className="eyebrow">{scopeName} <span className="heading-slash">/</span> {start&&end?`${start.slice(0,4)}–${end.slice(0,4)}`:'Available record'}</span><h2>{region.meta.name}<span className="region-coordinate">{numeric(region.meta.centroid?.[1])?`${geoCoordinate(region.meta.centroid[1],'lat')} / ${geoCoordinate(region.meta.centroid[0],'lon')}`:''}</span></h2></div><button className="button subtle" onClick={()=>download('csv')} disabled={!rows.length}><ArrowDownToLine size={15}/> Export data</button></div>
-          {view==='explore'&&<><ExplorationGuide regionName={region.meta.name} onChooseArea={()=>focusSection('area-panel')} onSeason={()=>focusSection('seasonal-context')} onAnomalies={()=>focusSection('anomalies-panel')} onEvidence={()=>navigateToView('evidence')}/><ReliabilityNotice regionName={region.meta.name} regionId={region.meta.region} cellId={cell} model={region.meta.model} evaluations={region.eval} rows={rows} start={start} end={end} mode={mode} showPeriodNote={false} onValidation={()=>navigateToView('evidence')}/></>}
-          {view==='explore'?<><section className="panel calendar-panel" id="calendar-panel" tabIndex={-1}><PanelTitle eyebrow="01 / THE LONG VIEW" title="Burning activity calendar"></PanelTitle><p className="panel-description">{mode==='harmonized'?'Each square is a week of Aqua-reference-equivalent activity. Follow a season across years, then inspect the observations behind it.':'A deliberately naive sensor-switch baseline, shown for comparison. Counts from different instruments are not directly equivalent.'}</p>{rows.some(r=>/beyond the validation period/i.test(r.source||''))&&<p className="chart-note beyond-validation" role="note"><strong>2025: {mode==='harmonized'?'converted':'raw'} VIIRS, beyond the validation period.</strong> Harmonized values use the frozen model with no refitting; no calibration interval is shown for 2025, and seasonal statistics and anomaly flags still use 2003–2024.</p>}<Heatmap weeks={weeks} mode={mode} label={label} onSelect={setSelected}/>{showGlobe?<div id="earth-panel" tabIndex={-1}>{Number(end.slice(0,4))>GLOBE_LAST_YEAR&&<p className="chart-note globe-year-limit" role="note">Earth view annual totals run through {GLOBE_LAST_YEAR}. It shows {GLOBE_LAST_YEAR} while the calendar includes later years.</p>}<Suspense fallback={<div className="globe-unavailable" role="status">Loading Earth explorer…</div>}><Globe regionId={regionId} year={Math.min(Number(end.slice(0,4)),GLOBE_LAST_YEAR)} onYear={selectGlobeYear} onRegion={exploreGlobeRegion} onCell={selectGlobeCell} availableCells={region.cells.map(c=>c.id)} earthMode={earthMode} onEarthMode={setEarthMode} observationMonth={observationMonth} onObservationMonth={setObservationMonth}/></Suspense></div>:<button className="button subtle globe-open" onClick={()=>{setShowGlobe(true);setJourneyTarget('earth-panel');}}><Globe2 size={15}/> Open the 3D Earth view</button>}</section>
-          <section className="panel" id="month-panel" tabIndex={-1}><PanelTitle eyebrow="01B / MONTH BY YEAR" title="Monthly calendar"/><p className="panel-description">Each square sums the published daily values for one month. Rows are years and columns are months; months containing a satellite outage are marked, not shown as zero.</p><MonthCalendar rows={rows} mode={mode} label={label} regionId={region.meta.region} regionName={region.meta.name} scopeName={scopeName} scopeId={cell}/></section>
-          <section className="panel" id="area-panel" tabIndex={-1}><PanelTitle eyebrow="01C / AREA OF INTEREST" title="Choose your own area"/><AreaOfInterest regionId={region.meta.region} regionName={region.meta.name} label={label}/></section>
-          <ComparisonJourney weeks={weeks} onInspect={setSelected} onCompare={compareRecord} onValidate={()=>navigateToView('evidence')}/><div className="metric-strip"><div><span>{mode==='harmonized'?'AQUA-REFERENCE-EQUIVALENT ACTIVITY':'RAW BASELINE ACTIVITY'}</span><strong>{compact(total)}</strong><small>Sum of available values</small></div><div><span>RECORD IN VIEW</span><strong>{years}<i>{years===1?' year':' years'}</i></strong><small>{fmt(rows.length)} day records · {scopeName.toLowerCase()}</small></div><div><span>PEAK OBSERVED WEEK</span><strong>{peak?String(peak.week).padStart(2,'0'):'—'}<i>{peak?` / ${peak.year}`:''}</i></strong><small>{peak?prettyDate(peak.date):'No estimate available'}</small>{peak&&<button className="text-button peak-jump" onClick={()=>setSelected(peak)}>Inspect peak week <ArrowUpRight size={12}/></button>}</div></div>
-          <section className="panel" id="comparison-panel" tabIndex={-1}><PanelTitle eyebrow="02 / QUESTION THE CHANGE" title="Did activity change—or the instrument?"/><ComparisonChart rows={rows} mode={mode} label={label} regionId={region.meta.region} regionName={region.meta.name} cellId={cell}/></section>
+
+          {view==='explore'?<>
+            {exploreSection==='calendar'&&<div className="calendar-workspace">
+              <div className="calendar-workspace-controls">
+                <div className="segmented" role="group" aria-label="Calendar detail"><button aria-pressed={calendarPeriod==='weekly'} className={calendarPeriod==='weekly'?'active':''} onClick={()=>setCalendarPeriod('weekly')}>Weekly</button><button aria-pressed={calendarPeriod==='monthly'} className={calendarPeriod==='monthly'?'active':''} onClick={()=>setCalendarPeriod('monthly')}>Monthly</button></div>
+                <div className="calendar-reference"><span>Reference scale</span><div className="segmented" role="group" aria-label="Calendar reference scale">{(['harmonized','raw'] as const).map(m=><button key={m} className={mode===m?'active':''} onClick={()=>setMode(m)} disabled={loading||hydrating||cellLoading} aria-pressed={mode===m}>{m==='harmonized'?'Harmonized':'Raw baseline'}</button>)}</div></div>
+              </div>
+              <section className="panel calendar-panel" id={calendarPeriod==='weekly'?'calendar-panel':'month-panel'} tabIndex={-1} aria-label={calendarPeriod==='weekly'?'Weekly burning activity':'Monthly burning activity'}>
+                <div className="calendar-reading">
+                  <span>{mode==='harmonized'?'Aqua-reference-equivalent detections':'Raw baseline detections'} · {calendarPeriod==='weekly'?'weekly':'monthly'}</span>
+                  <details className="reading-guide"><summary>How to read <CircleHelp size={15}/></summary><div>
+                    <p>{calendarPeriod==='weekly'?(mode==='harmonized'?'Each square is a week of Aqua-reference-equivalent activity. Follow a season across years, then inspect the observations behind it.':'A deliberately naive sensor-switch baseline, shown for comparison. Counts from different instruments are not directly equivalent.'):'Each square sums the published daily values for one month. Rows are years and columns are months; months containing a satellite outage are marked, not shown as zero.'}</p>
+                    <p>The scale switch changes the calendar and summary totals. Earth has separate harmonized and observed layers.</p>
+                  </div></details>
+                </div>
+                {rows.some(r=>/beyond the validation period/i.test(r.source||''))&&<details className="validation-disclosure"><summary>2025: {mode==='harmonized'?'converted':'raw'} VIIRS, beyond the validation period.</summary><p>Harmonized values use the frozen model with no refitting; no calibration interval is shown for 2025, and seasonal statistics and anomaly flags still use 2003–2024.</p></details>}
+                {calendarPeriod==='weekly'?<Heatmap weeks={weeks} mode={mode} label={label} onSelect={setSelected} focusDate={homeWeek} onWeek={setHomeWeek}/>:<MonthCalendar rows={rows} mode={mode} label={label} regionId={region.meta.region} regionName={region.meta.name} scopeName={scopeName} scopeId={cell}/>}
+              </section>
+              <details className="record-summary"><summary>Record summary</summary><div className="metric-strip"><div><span>{mode==='harmonized'?'Aqua-reference-equivalent activity':'Raw baseline activity'}</span><strong>{compact(total)}</strong><small>Sum of available values</small></div><div><span>Record in view</span><strong>{years}<i>{years===1?' year':' years'}</i></strong><small>{fmt(rows.length)} day records · {scopeName.toLowerCase()}</small></div><div><span>Peak observed week</span><strong>{peak?String(peak.week).padStart(2,'0'):'—'}<i>{peak?` / ${peak.year}`:''}</i></strong><small>{peak?prettyDate(peak.date):'No estimate available'}</small>{peak&&<button className="text-button peak-jump" onClick={()=>setSelected(peak)}>Inspect peak week <ArrowUpRight size={12}/></button>}</div></div></details>
+
+              <ReliabilityNotice regionName={region.meta.name} regionId={region.meta.region} cellId={cell} model={region.meta.model} evaluations={region.eval} rows={rows} start={start} end={end} mode={mode} showPeriodNote={calendarPeriod==='monthly'} onValidation={()=>navigateToView('evidence')}/>
+              <details className="area-workspace" open={areaExpanded} onToggle={event=>setAreaExpanded(event.currentTarget.open)}><summary><MapPin size={17}/><span>Draw an area in {region.meta.name}</span><ChevronDown size={16}/></summary><section className="panel" id="area-panel" tabIndex={-1}><AreaOfInterest regionId={region.meta.region} regionName={region.meta.name} label={label}/></section>
+          </details>
+            </div>}
+            {exploreSection==='patterns'&&<div className="patterns-workspace">
+              <div className="pattern-navigation segmented" role="group" aria-label="Pattern analysis"><button className={patternSection==='instruments'?'active':''} aria-pressed={patternSection==='instruments'} onClick={()=>setPatternSection('instruments')}>Instrument comparison</button><button className={patternSection==='seasons'?'active':''} aria-pressed={patternSection==='seasons'} onClick={()=>setPatternSection('seasons')}>Seasons</button><button className={patternSection==='anomalies'?'active':''} aria-pressed={patternSection==='anomalies'} onClick={()=>setPatternSection('anomalies')}>Unusual weeks</button></div>
+              {patternSection==='instruments'&&<><section className="panel" id="comparison-panel" tabIndex={-1}><ComparisonChart rows={rows} mode={mode} label={label} regionId={region.meta.region} regionName={region.meta.name} cellId={cell}/></section><details className="example-disclosure"><summary>See one conversion, step by step</summary><ComparisonJourney weeks={weeks} onInspect={setSelected} onCompare={compareRecord} onValidate={()=>navigateToView('evidence')}/></details>
+          </>}
+              {patternSection==='seasons'&&<><SeasonalContext region={region} label={label} selectedYear={Number(end.slice(0,4))||new Date().getFullYear()} onExport={()=>download('ics')} cell={cell}/>
           <Suspense fallback={<p role="status">Loading seasonal comparison…</p>}><SeasonComparison regionId={region.meta.region} regionName={region.meta.name} cellId={cell}/></Suspense>
-          <SeasonalContext region={region} label={label} selectedYear={Number(end.slice(0,4))||new Date().getFullYear()} onExport={()=>download('ics')} cell={cell}/>
-          <div id="anomalies-panel" tabIndex={-1}><AnomalyPanel anomalies={selectedAnomalies} cell={cell} onSelect={openAnomaly} label={label}/></div>
-          </>:<><section className="panel"><PanelTitle eyebrow="HELD-OUT COMPARISON" title="Let the baselines compete"/><p className="panel-description">Performance against the Aqua reference. A more complex model is useful only if it improves validation performance; test results remain visible even when they disappoint.</p><EvaluationTable rows={region.eval}/><ChartLabel label={label}/></section><section className="panel rhythm-panel"><PanelTitle eyebrow="WEEKLY RHYTHM INDEX" title="Weekly pattern: see the 7-country test"/><p className="panel-description">The weekday analysis covers seven countries, not only the regions in this calendar, so it has its own page with the official pre-specified decision, robustness checks and an exploratory per-cell map.</p><button className="text-button" onClick={()=>navigateToView('rhythm')}>Open the Weekly Rhythm Index <ArrowRight size={14}/></button></section><section className="panel"><PanelTitle eyebrow="TRACEABILITY" title="What every estimate carries"/><div className="provenance-grid"><div><Database size={19}/><h3>Source observations</h3><p>Separate Terra, Aqua and VIIRS counts, without silently treating missing records as zero.</p></div><div><Layers3 size={19}/><h3>Transformation</h3><p>The selected calibration model and whether the value was observed, converted or reconstructed.</p></div><div><ShieldCheck size={19}/><h3>Uncertainty</h3><p>Reported intervals and coverage limitations accompany the estimate.</p></div></div><button className="text-button" onClick={()=>navigateToView('explore')}>Open a calendar week to inspect evidence <ArrowRight size={14}/></button></section></>}
+          </>}
+              {patternSection==='anomalies'&&<><div id="anomalies-panel" tabIndex={-1}><AnomalyPanel anomalies={selectedAnomalies} cell={cell} onSelect={openAnomaly} label={label}/></div>
+</>}
+              <ReliabilityNotice regionName={region.meta.name} regionId={region.meta.region} cellId={cell} model={region.meta.model} evaluations={region.eval} rows={rows} start={start} end={end} mode={mode} onValidation={()=>navigateToView('evidence')}/>
+            </div>}
+            {exploreSection==='earth'&&showGlobe&&<div className="earth-workspace"><div id="earth-panel" tabIndex={-1}>{Number(end.slice(0,4))>GLOBE_LAST_YEAR&&<p className="chart-note globe-year-limit" role="note">Earth view annual totals run through {GLOBE_LAST_YEAR}. It shows {GLOBE_LAST_YEAR} while the calendar includes later years.</p>}<Suspense fallback={<div className="globe-unavailable" role="status">Loading Earth explorer…</div>}><Globe regionId={regionId} year={Math.min(Number(end.slice(0,4)),GLOBE_LAST_YEAR)} onYear={selectGlobeYear} onRegion={exploreGlobeRegion} onCell={selectGlobeCell} availableCells={region.cells.map(c=>c.id)} earthMode={earthMode} onEarthMode={setEarthMode} observationMonth={observationMonth} onObservationMonth={setObservationMonth}/></Suspense></div></div>}
+          </>:<><section className="panel"><PanelTitle eyebrow="HELD-OUT COMPARISON" title="Held-out model comparison"/><p className="panel-description">Performance against the Aqua reference. A more complex model is useful only if it improves validation performance; test results remain visible even when they disappoint.</p><EvaluationTable rows={region.eval}/><ChartLabel label={label}/></section><section className="panel"><PanelTitle eyebrow="TRACEABILITY" title="What every estimate carries"/><div className="provenance-grid"><div><Database size={19}/><h3>Source observations</h3><p>Separate Terra, Aqua and VIIRS counts, without silently treating missing records as zero.</p></div><div><Layers3 size={19}/><h3>Transformation</h3><p>The selected calibration model and whether the value was observed, converted or reconstructed.</p></div><div><ShieldCheck size={19}/><h3>Uncertainty</h3><p>Reported intervals and coverage limitations accompany the estimate.</p></div></div><button className="text-button" onClick={()=>{navigateToView('explore');focusSection('calendar-panel');}}>Open a calendar week to inspect evidence <ArrowRight size={14}/></button></section></>}
           <div className="bottom-note"><CircleHelp size={15}/><p>{region.meta.coverage_note||'Cloud and overpass coverage may be unknown. These observations are not a complete inventory of fires.'}</p></div>
         </>}
-      </div></div>}
-    </main><footer><a className="brand footer-brand" href="#" onClick={e=>{e.preventDefault();window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}}><Flame size={18}/> CINDERLINE</a><p>Built for NASA Space Apps · Kathmandu, Nepal local event<br/><span>NASA does not endorse this project.</span></p><button onClick={()=>navigateToView('methods')}>Sources & limitations <ArrowUpRight size={13}/></button></footer>
+        </div>
+      </div>}
+    </main>
+    <footer><a className="brand footer-brand" href="#" onClick={e=>{e.preventDefault();window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}}><Flame size={18}/> CINDERLINE</a><p>Built for NASA Space Apps · Kathmandu, Nepal local event<br/><span>NASA does not endorse this project.</span></p><button onClick={()=>navigateToView('methods')}>Sources & limitations <ArrowUpRight size={13}/></button></footer>
     {selected&&region&&<EvidenceDrawer week={selected} onClose={closeEvidence} onViewEarth={()=>viewEvidenceOnEarth(selected)} label={label} region={region} shareUrl={shareUrl} cellId={cell} monthRows={rows}/>}{toast&&<div role="status" className="toast"><Check size={16}/>{toast}</div>}
-  </>;
+  </div>;
 }
 
 function FlaskIcon(){return <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M9 3h6M10 3v7L4 20h16l-6-10V3M7 15h10"/></svg>;}

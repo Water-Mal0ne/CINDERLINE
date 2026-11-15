@@ -85,7 +85,7 @@ export function parseFrpPayload(value: unknown): FrpPayload {
 }
 
 function FrpHeading() {
-  return <div className="panel-heading frp-heading"><div><span className="eyebrow">PRE-SPECIFIED ROBUSTNESS TEST · US DAYTIME</span><h2 id="frp-title">Count the detections. Compare their power.</h2></div></div>;
+  return <div className="panel-heading frp-heading"><div><h2 id="frp-title">Count the detections. Compare their power.</h2></div></div>;
 }
 
 function Profile({row, data, bounds}: {row: FrpStream; data: FrpPayload; bounds: [number, number]}) {

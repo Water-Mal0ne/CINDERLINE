@@ -1,22 +1,28 @@
-.area-start{display:flex;flex-direction:column;align-items:flex-start;gap:6px;font-size:11px;color:#9cafb3}
-.area-note{display:flex;gap:9px;align-items:flex-start;background:#3a2b1c;border:1px solid #b9885d66;border-radius:5px;padding:10px 12px;margin-bottom:16px}
-.area-note svg{flex-shrink:0;color:#f0b182;margin-top:1px}
-.area-note p{margin:0;font-size:10px;line-height:1.65;color:#e5d6c3}
-.area-note strong{color:#ffd4ad;font-weight:600}
-.area-layout{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:18px;align-items:start}
-.area-map{position:relative;width:100%;background:#0f1a1f;border:1px solid #34444a88;border-radius:5px;overflow:hidden}
-.area-map canvas,.area-map svg{position:absolute;inset:0;width:100%;height:100%}
-.area-map svg{touch-action:none;cursor:crosshair}
-.area-land{fill:none;stroke:#9cb0b4aa;stroke-width:.7}
-.area-rect{fill:#f7996322;stroke:#f79963;stroke-width:1.6}
-.area-rect.drawing{stroke-dasharray:4 3}
-.area-form{display:flex;flex-direction:column;gap:9px}
-.area-form h3{font-size:13px;font-weight:500;margin:0 0 2px}
-.area-form label{display:flex;flex-direction:column;gap:4px;font-size:9px;color:#91a5aa}
-.area-form input{background:#142026;color:#e0dfd2;border:1px solid #43555c;border-radius:4px;padding:8px 9px;font-size:12px}
-.area-form input:focus-visible{outline:2px solid #f79963;outline-offset:1px}
-.area-error{font-size:10px;color:#ffb3a1;margin:0}
-.area-summary p{font-size:11px;color:#c9cfc6;margin:14px 0}
-@media (max-width:720px){.area-layout{grid-template-columns:1fr}}
-.area-period-note{font-size:10px;color:#cfd8d4;margin:-6px 0 14px}
-.area-period-note strong{font-weight:600}
+/* Area selection: one map surface and a compact, accessible coordinate form. */
+.atlas-app .area-start { display: flex; flex-direction: column; align-items: start; gap: 12px; font-size: .875rem; line-height: 1.7; color: var(--secondary); }
+.atlas-app .area-tool { container: area-tool / inline-size; min-inline-size: 0; }
+.atlas-app .area-note { display: flex; gap: 12px; align-items: start; background: transparent; border: 0; border-inline-start: 2px solid var(--orange); border-radius: 0; padding: 0 16px; margin-block-end: 20px; }
+.atlas-app .area-note svg { flex-shrink: 0; color: var(--orange); margin-block-start: 4px; }
+.atlas-app .area-note p { margin: 0; max-inline-size: 80ch; font-size: .875rem; line-height: 1.7; color: var(--secondary); }
+.atlas-app .area-note strong { color: var(--text); font-weight: 500; }
+.atlas-app .area-layout { display: grid; grid-template-columns: minmax(0,1fr) minmax(200px,240px); gap: 32px; align-items: start; margin-block: 24px; }
+.atlas-app .area-map-wrap { min-inline-size: 0; }
+.atlas-app .area-map { position: relative; inline-size: 100%; background: #0f1a1f; border: 0; border-radius: 0; overflow: hidden; }
+.atlas-app .area-map canvas,.atlas-app .area-map svg { display: block; position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
+.atlas-app .area-map svg { touch-action: none; cursor: crosshair; }
+.atlas-app .area-land { fill: none; stroke: #9cb0b4aa; stroke-width: .7; }
+.atlas-app .area-rect { fill: #f7996322; stroke: #f79963; stroke-width: 1.6; }
+.atlas-app .area-rect.drawing { stroke-dasharray: 4 3; }
+.atlas-app .area-form { display: flex; flex-direction: column; gap: 16px; min-inline-size: 0; }
+.atlas-app .area-form h3 { font-size: 1rem; font-weight: 500; line-height: 1.5; margin: 0; }
+.atlas-app .area-form label { display: flex; flex-direction: column; gap: 8px; font-size: .8125rem; line-height: 1.5; color: var(--secondary); }
+.atlas-app .area-form input { inline-size: 100%; min-inline-size: 0; min-block-size: 44px; background: var(--panel); color: var(--text); border: 1px solid var(--control-line,#737978); border-radius: 6px; padding: 8px 12px; font: inherit; font-size: 1rem; line-height: 1.5; }
+.atlas-app .area-form input::placeholder { color: var(--muted); opacity: 1; }
+.atlas-app .area-form :is(input,button):focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+.atlas-app .area-form .button,.atlas-app .area-start .button { min-block-size: 44px; font-size: .8125rem; line-height: 1.5; white-space: normal; }
+.atlas-app .area-error { font-size: .875rem; line-height: 1.7; color: #ffb3a1; margin: 0; }
+.atlas-app .area-summary p { font-size: .875rem; line-height: 1.7; color: var(--secondary); margin-block: 20px; }
+.atlas-app .area-period-note { font-size: .875rem; line-height: 1.7; color: var(--secondary); margin: 0 0 16px; max-inline-size: 80ch; }
+.atlas-app .area-period-note strong { font-weight: 500; }
+.atlas-app .area-tool .chart-note { max-inline-size: 80ch; font-size: .875rem; line-height: 1.7; color: var(--secondary); }
+@container area-tool (max-width: 760px) { .atlas-app .area-layout { grid-template-columns: minmax(0,1fr); } .atlas-app .area-form { max-inline-size: 480px; } }

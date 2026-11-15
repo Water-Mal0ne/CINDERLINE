@@ -2,11 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="text-scale" content="scale"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#111b20" />
-    <meta name="description" content="CINDERLINE: Two satellites. One unbroken fire record. An evidence-led MODIS and VIIRS fire calendar with transparent uncertainty." />
-    <title>CINDERLINE — Two satellites. One unbroken fire record.</title>
+    <meta name="description" content="Explore historical burning activity, compare satellite records, and inspect the evidence behind each estimate." />
+    <title>CINDERLINE — Fire activity atlas</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/dm-sans-latin-400-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/fonts.css" />
   </head>
-  <body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <main class="no-script">
+        <h1>CINDERLINE</h1>
+        <p>Enable JavaScript to use the fire calendar, evidence panels and Earth view.</p>
+        <p>You can still <a href="./data/index.json">open the published data index</a> or visit <a href="https://firms.modaps.eosdis.nasa.gov/" rel="noreferrer">NASA FIRMS</a>.</p>
+      </main>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

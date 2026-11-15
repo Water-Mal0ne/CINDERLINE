@@ -1,18 +1,42 @@
-.month-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px}.month-navigation>div{display:flex;gap:5px}.comparison-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.comparison-partial{font-size:.76rem;color:#edc389;line-height:1.6;margin:9px 0 0}.comparison-table{max-height:360px;border:1px solid var(--border,#334147);border-radius:8px;margin-bottom:16px}.comparison-table caption{padding:12px;text-align:left;color:#aebec3;font-size:.75rem}.comparison-table thead{position:sticky;top:0;background:#1b292f;z-index:1}.comparison-table th[scope=row]{font-weight:500;text-align:left}.month-navigation .icon-button:disabled{opacity:.3;cursor:not-allowed}
-.comparison-table:focus-visible{outline:2px solid var(--orange);outline-offset:4px}
-@media(min-width:641px){
-  .panel .month-inspector{grid-template-columns:max-content minmax(0,1fr)}
-  .month-navigation>label{white-space:nowrap}
-  .month-navigation>div{flex-shrink:0}
-}
-@media(max-width:640px){
-  .month-inspector .month-readout>span{font-size:11px;line-height:1.6}
-  .month-inspector .month-readout strong{font-size:16px}
-  .month-inspector .month-readout small{font-size:10px}
-  .month-inspector>input{min-height:36px}
-  .month-navigation .icon-button{min-width:44px;min-height:44px}
-  .comparison-table table td,.comparison-table th[scope=row]{font-size:12px}
-  .comparison-table thead th{font-size:10px}
-  .comparison-actions .button,.comparison-controls .chart-scale-button{min-height:44px;font-size:12px}
-  .comparison-controls .trace-legend{font-size:11px;line-height:1.6}
+/* Monthly instrument comparison: chart first, inspection and evidence below. */
+.comparison-surface { min-inline-size: 0; container: comparison / inline-size; }
+.atlas-app .comparison-surface .comparison-controls { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; margin-block-end: 24px; }
+.atlas-app .comparison-surface .trace-legend { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; font-size: .8125rem; line-height: 1.6; color: var(--secondary); }
+.atlas-app .comparison-surface .trace-legend > span { display: flex; align-items: center; gap: 8px; }
+.atlas-app .comparison-surface .chart-scale-button { min-block-size: 44px; padding: 8px 12px; font-size: .8125rem; line-height: 1.5; background: transparent; color: var(--text); border: 1px solid var(--line); border-radius: 6px; white-space: normal; }
+.atlas-app .comparison-surface .chart-scale-button[aria-pressed=true] { border-block-end: 3px solid var(--orange); }
+.atlas-app .comparison-surface .chart-scale-button:hover { background: var(--raised); }
+.atlas-app .comparison-surface .chart-scale-button:active { background: var(--panel); }
+.atlas-app .comparison-surface .svg-chart { max-inline-size: 100%; overflow-x: auto; overscroll-behavior-x: contain; margin-block: 0 24px; }
+.atlas-app .comparison-surface .svg-chart svg { display: block; inline-size: 100%; block-size: auto; min-inline-size: 640px; }
+.atlas-app .comparison-surface .svg-axis { font-size: 1rem; }
+.atlas-app .comparison-surface .month-inspector { display: grid; grid-template-columns: minmax(0,1fr); gap: 16px; background: transparent; border: 0; border-block: 1px solid var(--line); border-radius: 0; padding: 20px 0; margin: 0; }
+.atlas-app .comparison-surface .month-navigation { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.atlas-app .comparison-surface .month-navigation label { color: var(--muted); font-size: .8125rem; line-height: 1.5; }
+.atlas-app .comparison-surface .month-navigation label strong { color: var(--text); font-family: var(--mono); font-size: 1rem; font-weight: 500; margin-inline-start: 12px; }
+.atlas-app .comparison-surface .month-navigation > div { display: flex; gap: 8px; }
+.atlas-app .comparison-surface .month-navigation .icon-button { min-inline-size: 44px; min-block-size: 44px; }
+.atlas-app .comparison-surface .month-navigation .icon-button:disabled { opacity: .35; cursor: not-allowed; }
+.atlas-app .comparison-surface .month-inspector > input { inline-size: 100%; min-block-size: 44px; margin: 0; accent-color: var(--orange); }
+.atlas-app .comparison-surface .month-readout { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px 24px; }
+.atlas-app .comparison-surface .month-readout > span { display: flex; flex-direction: column; color: var(--muted); font-size: .75rem; line-height: 1.6; }
+.atlas-app .comparison-surface .month-readout strong { font-family: var(--mono); font-size: 1.375rem; font-weight: 400; margin-block: 4px; color: var(--text); overflow-wrap: anywhere; }
+.atlas-app .comparison-surface .month-readout small { font-size: .75rem; }
+.atlas-app .comparison-surface .comparison-partial { margin: 0; color: #edc389; font-size: .8125rem; line-height: 1.7; max-inline-size: 80ch; }
+.atlas-app .comparison-surface .comparison-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-block: 20px; }
+.atlas-app .comparison-surface .comparison-actions .button { min-block-size: 44px; font-size: .8125rem; }
+.atlas-app .comparison-surface .comparison-table { max-block-size: 400px; border: 0; border-radius: 0; margin-block-end: 24px; }
+.atlas-app .comparison-surface .comparison-table caption { padding: 12px; text-align: start; color: var(--muted); font-size: .8125rem; }
+.atlas-app .comparison-surface .comparison-table thead { position: sticky; inset-block-start: 0; background: var(--panel); z-index: 1; }
+.atlas-app .comparison-surface .comparison-table th[scope=row] { font-weight: 500; text-align: start; }
+.atlas-app .comparison-surface .source-timeline { display: flex; flex-wrap: wrap; gap: 12px 32px; padding: 0; margin: 24px 0 16px; border: 0; font-size: .8125rem; line-height: 1.7; }
+.atlas-app .comparison-surface .source-timeline span { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.atlas-app .comparison-surface .source-timeline strong { font-weight: 500; }
+.atlas-app .comparison-surface .chart-note { max-inline-size: 80ch; font-size: .875rem; line-height: 1.7; margin: 0; }
+.atlas-app .comparison-surface :is(button,input,[tabindex]):focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+@container comparison (max-width: 440px) {
+  .atlas-app .comparison-surface .month-readout { grid-template-columns: minmax(0,1fr); }
+  .atlas-app .comparison-surface .month-readout > span { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 4px 16px; align-items: baseline; }
+  .atlas-app .comparison-surface .month-readout strong { margin: 0; font-size: 1.125rem; }
+  .atlas-app .comparison-surface .month-readout small { grid-column: 1 / -1; }
 }

@@ -1,0 +1,265 @@
+/* Scientific atlas experiment. Chrome Modern Web Guidance is the design contract.
+   Craft credit: Unslop by Damir Sokolovsky, CC BY 4.0, https://github.com/heydamir/unslop.
+   The legacy layer retains old component foundations; this file owns the shell. */
+:root {
+  --bg: #151719; --panel: #1b1d20; --raised: #24272a; --line: #35393c;
+  --control-line: #737978; --text: #f1efe8; --secondary: #bcc0bd; --muted: #a2aaa6;
+  --orange: #f79963; --rail-width: 208px;
+}
+body { font-size: .9375rem; line-height: 1.6; }
+.atlas-app { min-width: 0; min-height: 100dvh; }
+.atlas-app .site-header { position: fixed; inset: 0 auto 0 0; width: var(--rail-width); height: 100dvh; padding: 32px 16px 24px; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 40px; background: #111315; border: 0; border-right: 1px solid var(--line); z-index: 10; overflow-y: auto; }
+.atlas-app .brand { font-size: 1rem; letter-spacing: .02em; font-weight: 500; gap: 8px; padding-inline: 8px; }
+.atlas-app .brand-symbol { width: 24px; height: 28px; }
+.atlas-app .brand-light { font-weight: 500; }
+.atlas-app .site-header nav { display: flex; flex-direction: column; gap: 28px; width: 100%; align-self: auto; margin: 0; height: auto; }
+.atlas-app .nav-group { display: grid; gap: 4px; }
+.atlas-app .nav-group + .nav-group { border-top: 1px solid var(--line); padding-top: 24px; }
+.atlas-app .site-header nav button { min-height: 44px; padding: 10px 12px; display: flex; align-items: center; gap: 12px; border-radius: 6px; color: var(--muted); text-align: left; line-height: 1.4; font-size: .8125rem; background: transparent; border: 1px solid transparent; white-space: normal; }
+.atlas-app .site-header nav button svg { width: 18px; height: 18px; flex-shrink: 0; }
+.atlas-app .site-header nav button:hover { background: var(--panel); color: var(--text); }
+.atlas-app .site-header nav button.active { color: var(--text); background: var(--raised); border-inline-start: 2px solid var(--orange); }
+.atlas-app .site-header nav button.active::after { content: none; }
+.atlas-app .rail-source { margin-top: auto; padding: 16px 8px 0; display: grid; gap: 12px; }
+.atlas-app .data-badge { padding: 0; background: none; border: 0; border-radius: 0; color: var(--muted); font-size: .625rem; letter-spacing: .03em; }
+.atlas-app .header-source { font-size: .75rem; font-family: inherit; color: var(--secondary); }
+.atlas-app .mobile-navigation { display: none; }
+.atlas-app main { width: auto; max-width: 1600px; margin: 0 0 0 var(--rail-width); padding: 32px 40px 0; border: 0; min-width: 0; }
+.atlas-app .workspace-heading { display: flex; justify-content: space-between; gap: 24px; align-items: center; margin-bottom: 28px; }
+.atlas-app .workspace-heading h1 { font-size: clamp(1.75rem,1.3rem + 1.4vw,2.5rem); line-height: 1.15; font-weight: 400; letter-spacing: -.035em; margin: 0; }
+.atlas-app .workspace-tools { display: flex; align-items: center; gap: 20px; width: auto; }
+.atlas-app .workspace-tools .button { min-height: 40px; padding: 8px 12px; font-size: .8125rem; border-radius: 6px; background: transparent; border: 1px solid var(--control-line); }
+.atlas-app .workspace-tools .text-button { margin: 0; min-height: 40px; font-size: .8125rem; color: var(--secondary); }
+.atlas-app .workspace { display: block; padding: 0; }
+.atlas-app .main-column { padding-bottom: 0; min-width: 0; }
+.atlas-app .selection-bar { position: relative; border-block: 1px solid var(--line); padding: 12px 0; margin-bottom: 24px; }
+.atlas-app .selection-top { display: flex; align-items: center; gap: 24px; padding-right: 160px; }
+.atlas-app .selection-country { display: flex; align-items: center; gap: 12px; flex: 0 0 min(240px,40%); }
+.atlas-app .selection-country > .field-label { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
+.atlas-app .select-wrap { border: 1px solid var(--control-line); min-height: 44px; height: auto; background: var(--bg); border-radius: 6px; }
+.atlas-app .select-wrap select { min-height: 44px; font-size: .875rem; padding-block: 8px; }
+.atlas-app .selection-country .select-wrap { width: 100%; border: 0; background: transparent; }
+.atlas-app .selection-country select { font-size: 1rem; padding-left: 28px; }
+.atlas-app .selection-country .select-wrap > svg:first-child { left: 0; color: var(--muted); }
+.atlas-app .selection-context { display: flex; flex-direction: column; gap: 0; color: var(--muted); font-size: .75rem; }
+.atlas-app .selection-context strong { font-size: .8125rem; font-weight: 400; color: var(--secondary); }
+.atlas-app summary { cursor: pointer; }
+.atlas-app .selection-options > summary { position: absolute; right: 0; top: 12px; list-style: none; min-height: 44px; display: flex; align-items: center; color: var(--secondary); font-size: .8125rem; border: 1px solid var(--control-line); border-radius: 6px; padding: 8px 12px; }
+.atlas-app .selection-summary-action { display: flex; align-items: center; gap: 8px; }
+.atlas-app .selection-summary-context { display: none; }
+.atlas-app .selection-options[open] > summary { color: var(--orange); border-color: var(--orange); }
+.atlas-app .selection-options-body { padding: 24px 0 8px; margin-top: 12px; border-top: 1px solid var(--line); }
+.atlas-app .selection-export { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+.atlas-app .earth-selection .selection-top { padding-right: 0; }
+.atlas-app .selection-fields { display: grid; grid-template-columns: minmax(180px,1fr) minmax(0,2fr); gap: 24px; }
+.atlas-app .selection-fields .field-label { font-size: .8125rem; margin-bottom: 8px; }
+.atlas-app .date-fields { display: flex; background: var(--bg); border: 1px solid var(--control-line); border-radius: 6px; }
+.atlas-app .date-fields label { display: flex; width: 50%; gap: 8px; padding: 8px 12px; }
+.atlas-app .date-fields label + label { border-top: 0; border-left: 1px solid var(--line); }
+.atlas-app .date-fields span { font-size: .75rem; width: auto; }
+.atlas-app .date-fields input { min-height: 28px; font-size: .8125rem; }
+.atlas-app .selection-fields .text-button { min-height: 36px; margin-top: 8px; }
+.atlas-app .selection-help { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-top: 24px; }
+.atlas-app .grid-preview { margin: 0; border: 0; }
+.atlas-app .grid-preview .map-wrap { max-width: 300px; }
+.atlas-app .cell-scope { margin: 8px 0; font-size: .75rem; }
+.atlas-app .stream-disclosure > summary { font-size: .875rem; }
+.atlas-app .stream-list { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 12px; }
+.atlas-app .stream-list > div { font-size: .8125rem; }
+.atlas-app .stream-list small { font-size: .75rem; margin-left: 8px; }
+.atlas-app .sidebar-caption, .atlas-app .sidebar-note p { font-size: .8125rem; line-height: 1.6; }
+.atlas-app .sidebar-note { border: 0; border-top: 1px solid var(--line); padding: 16px 0 0; background: none; border-radius: 0; margin-top: 16px; }
+.atlas-app .sidebar-note > svg { display: none; }
+.atlas-app .calendar-workspace-controls { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 20px; }
+.atlas-app .calendar-reference { display: flex; align-items: center; gap: 12px; }
+.atlas-app .calendar-reference > span { font-size: .75rem; color: var(--muted); }
+.atlas-app .segmented { display: flex; width: fit-content; flex-wrap: wrap; gap: 0; padding: 0; border: 1px solid var(--control-line); border-radius: 6px; background: transparent; }
+.atlas-app .segmented button { min-height: 40px; padding: 8px 16px; font-size: .8125rem; color: var(--secondary); border: 0; border-radius: 4px; background: transparent; white-space: normal; }
+.atlas-app .segmented button.active, .atlas-app .segmented button[aria-pressed='true'] { color: var(--text); background: var(--raised); box-shadow: none; }
+.atlas-app .panel { background: transparent; border: 0; border-radius: 0; padding: 0; margin: 0 0 32px; }
+.atlas-app .panel-heading { margin-bottom: 16px; }
+.atlas-app .panel-heading h2 { font-size: 1.375rem; font-weight: 400; line-height: 1.3; margin: 0; letter-spacing: -.02em; }
+.atlas-app .panel-description { font-size: .875rem; line-height: 1.65; color: var(--secondary); max-width: 76ch; }
+.atlas-app .calendar-panel { margin-bottom: 0; }
+.atlas-app .calendar-reading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; color: var(--muted); font-size: .75rem; margin-bottom: 12px; }
+.atlas-app .reading-guide { margin-left: auto; flex: 0 1 auto; }
+.atlas-app .reading-guide summary { display: flex; justify-content: flex-end; gap: 8px; align-items: center; min-height: 28px; color: var(--secondary); list-style: none; }
+.atlas-app .reading-guide[open] { flex-basis: 100%; padding: 12px 16px; border: 1px solid var(--line); border-radius: 6px; }
+.atlas-app .reading-guide[open] summary { justify-content: flex-start; margin-bottom: 12px; }
+.atlas-app .reading-guide p { max-width: 76ch; margin: 0 0 8px; font-size: .875rem; }
+.atlas-app .validation-disclosure { border-left: 2px solid var(--orange); padding: 4px 12px; margin: 0 0 20px; color: var(--secondary); font-size: .75rem; }
+.atlas-app .validation-disclosure summary { min-height: 24px; }
+.atlas-app .validation-disclosure p { margin: 12px 0 4px; max-width: 76ch; }
+.atlas-app .calendar-scroller { padding: 0 0 8px; margin: 0; }
+.atlas-app .calendar-grid { min-width: 1488px; }
+.atlas-app .calendar-row, .atlas-app .calendar-months { grid-template-columns: 48px 1fr; gap: 12px; }
+.atlas-app .calendar-row { margin-bottom: 4px; }
+.atlas-app .week-cells { gap: 3px; }
+.atlas-app .week-cell { min-width: 24px; min-height: 24px; max-height: none; aspect-ratio: 1; border-radius: 2px; }
+.atlas-app .calendar-months > div, .atlas-app .year-label { font-size: .6875rem; color: var(--muted); letter-spacing: 0; }
+.atlas-app .calendar-months { margin-bottom: 16px; }
+.atlas-app .week-cell:hover:not(:disabled) { transform: none; outline: 2px solid var(--text); outline-offset: 1px; }
+.atlas-app .chart-bottom { flex-wrap: wrap; justify-content: space-between; padding: 12px 0 0; margin: 0; font-size: .6875rem; }
+.atlas-app .heat-legend { font-size: .625rem; flex-wrap: wrap; row-gap: 8px; }
+.atlas-app .heat-legend i { width: 12px; height: 12px; }
+.atlas-app .calendar-inspector { display: flex; justify-content: space-between; gap: 24px; align-items: center; margin-top: 16px; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0; padding: 20px 0; background: none; }
+.atlas-app .calendar-inspector > div { display: grid; gap: 4px; }
+.atlas-app .calendar-inspector span { font-size: .6875rem; color: var(--muted); }
+.atlas-app .calendar-inspector strong { font-size: .9375rem; font-weight: 500; }
+.atlas-app .calendar-inspector small { font-size: .75rem; color: var(--secondary); }
+.atlas-app .calendar-inspector-value strong { font-size: 1.5rem; }
+.atlas-app .metric-strip { border: 0; padding: 28px 0; margin: 0; gap: 28px; }
+.atlas-app .metric-strip > div { border-color: var(--line); }
+.atlas-app .metric-strip > div > span { font-size: .75rem; letter-spacing: 0; font-family: inherit; line-height: 1.5; min-height: 0; color: var(--muted); }
+.atlas-app .metric-strip strong { font-size: 2rem; font-weight: 400; margin: 8px 0 4px; color: var(--text); }
+.atlas-app .metric-strip strong i { font-size: .875rem; }
+.atlas-app .metric-strip small { font-size: .75rem; }
+.atlas-app .peak-jump { font-size: .75rem; }
+.atlas-app .text-button { font-size: .8125rem; min-height: 36px; }
+.atlas-app .chart-note { font-size: .8125rem; color: var(--secondary); line-height: 1.65; }
+.atlas-app .chart-label { font-size: .625rem; letter-spacing: 0; }
+.atlas-app .area-workspace, .atlas-app .example-disclosure { border-block: 1px solid var(--line); padding: 0; margin-block: 28px; }
+.atlas-app .area-workspace > summary, .atlas-app .example-disclosure > summary { display: flex; align-items: center; gap: 12px; min-height: 56px; font-size: .9375rem; list-style: none; }
+.atlas-app .area-workspace > summary > svg:last-child { margin-left: auto; }
+.atlas-app .area-workspace .panel { margin: 0; padding: 0 0 24px; }
+.atlas-app .pattern-navigation { margin-bottom: 28px; }
+.atlas-app .patterns-workspace, .atlas-app .earth-workspace { padding-top: 0; }
+.atlas-app .example-disclosure > summary { list-style: disclosure-closed; display: list-item; padding-block: 16px; }
+.atlas-app .example-disclosure[open] > summary { list-style: disclosure-open; }
+.atlas-app .comparison-journey { border: 0; padding: 0 0 24px; background: none; margin: 0; }
+.atlas-app .journey-heading h2 { font-size: 1.25rem; margin-top: 8px; }
+.atlas-app .journey-context, .atlas-app .journey-caveat { font-size: .8125rem; color: var(--secondary); }
+.atlas-app .journey-values strong { font-size: 2rem; }
+.atlas-app .journey-values > div > span, .atlas-app .journey-values small, .atlas-app .journey-actions button { font-size: .75rem; }
+.atlas-app .month-calendar-columns { gap: 24px; }
+.atlas-app .month-detail { border: 0; border-left: 1px solid var(--line); padding: 0 0 0 24px; border-radius: 0; background: transparent; }
+.atlas-app .month-overview .month-highlights { order: 3; margin: 24px 0 0; padding-top: 20px; border-top: 1px solid var(--line); }
+.atlas-app .month-overview { display: flex; flex-direction: column; }
+.atlas-app .month-caption { display: none; }
+.atlas-app .month-table { min-width: 600px; }
+.atlas-app .month-table .month-cell { min-height: 24px; height: 24px; }
+.atlas-app .month-legend { font-size: .6875rem; }
+.atlas-app .month-history h3 { font-size: 1.125rem; font-weight: 400; }
+.atlas-app .table-scroll { border: 0; border-radius: 0; border-block: 1px solid var(--line); }
+.atlas-app .table-scroll :is(th,td) { font-size: .8125rem; padding: 16px 12px; }
+.atlas-app .table-scroll th { color: var(--muted); }
+.atlas-app .provenance-grid { border-top: 1px solid var(--line); gap: 24px; }
+.atlas-app .provenance-grid > div { border: 0; background: none; padding: 24px 0; }
+.atlas-app .provenance-grid h3 { font-size: 1rem; margin-top: 12px; }
+.atlas-app .provenance-grid p { font-size: .875rem; }
+.atlas-app .methods-page { max-width: 1040px; margin: 0; padding: 0; }
+.atlas-app .section-intro { margin: 0 0 24px; max-width: 76ch; display: block; }
+.atlas-app .section-intro p { font-size: 1rem; line-height: 1.7; margin: 0; }
+.atlas-app .method-jump-nav { display: flex; flex-wrap: wrap; gap: 24px; padding: 0 0 20px; margin: 0 0 32px; }
+.atlas-app .method-jump-nav a { background: none; padding: 8px 0; border-radius: 0; border-bottom: 1px solid var(--control-line); font-size: .875rem; }
+.atlas-app .method-grid { display: block; }
+.atlas-app .method-card { min-height: 0; display: grid; grid-template-columns: 160px minmax(0,1fr); gap: 0 24px; padding-block: 24px; border-bottom: 1px solid var(--line); margin: 0; }
+.atlas-app .method-card .step { font-size: .75rem; color: var(--muted); grid-row: 1/4; padding-top: 4px; letter-spacing: 0; }
+.atlas-app .method-card h2 { margin: 0 0 12px; font-size: 1.125rem; font-weight: 400; }
+.atlas-app .method-card p { grid-column: 2; font-size: .875rem; line-height: 1.7; max-width: 72ch; }
+.atlas-app .limitations { margin-top: 40px; }
+.atlas-app .limitations li { font-size: .875rem; line-height: 1.75; padding-block: 8px; max-width: 80ch; }
+.atlas-app .sources-panel > a { font-size: .875rem; }
+.atlas-app .sources-panel small, .atlas-app .sources-panel > p { font-size: .75rem; }
+.atlas-app .callout { padding: 16px; background: var(--panel); border: 0; border-left: 2px solid var(--line); border-radius: 0; }
+.atlas-app .callout p { font-size: .8125rem; line-height: 1.65; }
+.atlas-app .bottom-note { padding: 16px 0; border-top: 1px solid var(--line); margin-top: 24px; }
+.atlas-app .bottom-note p { font-size: .75rem; line-height: 1.65; max-width: 85ch; }
+.atlas-app footer { margin: 40px 40px 0 calc(var(--rail-width) + 40px); padding: 24px 0; max-width: none; width: auto; border-top: 1px solid var(--line); }
+.atlas-app .footer-brand { display: none; }
+.atlas-app footer p { font-size: .6875rem; text-align: left; }
+.atlas-app footer button { font-size: .75rem; }
+.atlas-app .loading-state { min-height: 520px; }
+.atlas-app dialog.evidence-drawer { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(560px,100%); max-width: 100%; height: 100dvh; max-height: 100dvh; border: 0; border-left: 1px solid var(--line); border-radius: 0; color: var(--text); background: var(--panel); padding: 24px; overflow-y: auto; overscroll-behavior: contain; }
+.atlas-app dialog.evidence-drawer::backdrop { background: #080a0db8; overflow: hidden; overscroll-behavior: contain; }
+.atlas-app .evidence-drawer .drawer-head { min-height: 36px; margin-bottom: 24px; font-size: .875rem; color: var(--muted); }
+.atlas-app .evidence-drawer .data-badge { margin-block: 8px; }
+.atlas-app .evidence-number { border-radius: 0; background: transparent; padding: 24px 0; border-block: 1px solid var(--line); }
+.atlas-app .evidence-number strong { font-size: 2.5rem; font-weight: 400; }
+.atlas-app .evidence-number :is(span,small), .atlas-app .evidence-section :is(dt,dd), .atlas-app .key-value { font-size: .8125rem; }
+.atlas-app .evidence-actions { display: grid; gap: 8px; }
+.atlas-app .evidence-drawer .button { min-height: 44px; font-size: .8125rem; white-space: normal; }
+.atlas-app .icon-button { min-width: 36px; min-height: 36px; }
+.atlas-app .toast { white-space: normal; max-width: calc(100vw - 32px); font-size: .875rem; }
+@media (min-width: 1800px) { .atlas-app main { margin-inline: calc(var(--rail-width) + (100vw - var(--rail-width) - 1600px)/2) auto; } }
+@media (max-width: 1100px) {
+  :root { --rail-width: 184px; }
+  .atlas-app .site-header { padding-inline: 12px; }
+  .atlas-app .site-header nav button { padding-inline: 8px; gap: 8px; }
+  .atlas-app main { padding-inline: 28px; }
+  .atlas-app footer { margin-inline: calc(var(--rail-width) + 28px) 28px; }
+  .atlas-app .selection-top { gap: 16px; }
+  .atlas-app .selection-context strong { font-size: .75rem; }
+  .atlas-app .calendar-reference > span { display: none; }
+}
+@media (max-width: 800px) {
+  :root { --rail-width: 0px; }
+  .atlas-app .site-header { position: relative; inset: auto; width: 100%; height: auto; min-height: 64px; padding: 12px 24px; flex-direction: row; justify-content: space-between; align-items: center; border-right: 0; border-bottom: 1px solid var(--line); gap: 16px; overflow: visible; }
+  .atlas-app .site-header .desktop-navigation, .atlas-app .rail-source { display: none; }
+  .atlas-app .mobile-navigation { display: block; position: relative; }
+  .atlas-app .mobile-navigation > summary { display: flex; gap: 8px; align-items: center; min-height: 40px; list-style: none; font-size: .875rem; }
+  .atlas-app .mobile-navigation nav { position: absolute; top: calc(100% + 8px); inset-inline-end: 0; z-index: 30; display: grid; gap: 4px; width: min(280px,calc(100vw - 40px)); background: var(--panel); border: 1px solid var(--control-line); padding: 8px; border-radius: 8px; }
+  .atlas-app main { padding: 28px 24px 0; margin: 0; }
+  .atlas-app footer { margin-inline: 24px; }
+  .atlas-app .workspace-heading { margin-bottom: 24px; }
+  .atlas-app .selection-fields { grid-template-columns: 1fr; }
+  .atlas-app .selection-help { grid-template-columns: 1fr; }
+  .atlas-app .month-detail { border-left: 0; border-top: 1px solid var(--line); padding: 24px 0 0; }
+  .atlas-app .method-card { grid-template-columns: 120px minmax(0,1fr); }
+}
+@media (max-width: 540px) {
+  .atlas-app .site-header { padding-inline: 16px; }
+  .atlas-app .brand { padding: 0; }
+  .atlas-app main { padding: 24px 16px 0; }
+  .atlas-app .workspace-heading { display: flex; flex-wrap: wrap; gap: 12px; }
+  .atlas-app .workspace-heading h1 { font-size: 1.75rem; }
+  .atlas-app .workspace-tools { gap: 20px; }
+  .atlas-app .workspace-tools .text-button, .atlas-app .workspace-tools .button { font-size: .75rem; }
+  .atlas-app .selection-bar { margin-bottom: 20px; }
+  .atlas-app .selection-top { padding: 0; display: block; }
+  .atlas-app .selection-country { width: 100%; }
+  .atlas-app .selection-context { display: none; }
+  .atlas-app .selection-options > summary { position: static; display: flex; justify-content: space-between; gap: 12px; width: 100%; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 12px 0 0; margin-top: 8px; }
+  .atlas-app .selection-summary-context { display: grid; gap: 4px; font-size: .6875rem; }
+  .atlas-app .selection-summary-action { font-size: .75rem; flex: 0 0 auto; }
+  .atlas-app .selection-summary-action > svg:first-child { display: none; }
+  .atlas-app .date-fields { display: grid; }
+  .atlas-app .date-fields label { width: 100%; }
+  .atlas-app .date-fields label + label { border-left: 0; border-top: 1px solid var(--line); }
+  .atlas-app .date-fields input { font-size: 1rem; }
+  .atlas-app .calendar-workspace-controls { flex-wrap: wrap; gap: 12px; }
+  .atlas-app .segmented button { font-size: .75rem; padding-inline: 8px; }
+  .atlas-app .calendar-reading > span { flex-basis: 100%; }
+  .atlas-app .reading-guide { margin-left: 0; }
+  .atlas-app .calendar-inspector { flex-wrap: wrap; gap: 16px; }
+  .atlas-app .calendar-inspector > div:first-child { flex-basis: 100%; }
+  .atlas-app .calendar-inspector > .text-button { flex: 1; justify-content: flex-end; }
+  .atlas-app .metric-strip { grid-template-columns: 1fr; gap: 0; padding: 12px 0; }
+  .atlas-app .metric-strip > div { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 16px 0; border: 0; border-bottom: 1px solid var(--line); }
+  .atlas-app .metric-strip strong { grid-row: 1/3; grid-column: 2; font-size: 1.5rem; margin: 0; }
+  .atlas-app .metric-strip small, .atlas-app .metric-strip > div > span { grid-column: 1; }
+  .atlas-app .metric-strip .peak-jump { grid-column: 1/-1; }
+  .atlas-app .method-card { display: block; }
+  .atlas-app .method-card .step { display: block; margin-bottom: 12px; }
+  .atlas-app .provenance-grid { grid-template-columns: 1fr; gap: 0; }
+  .atlas-app .provenance-grid > div + div { border-top: 1px solid var(--line); }
+  .atlas-app .journey-values { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .atlas-app .journey-values > svg { display: none; }
+  .atlas-app .journey-reference { grid-column: 1/-1; padding-left: 0; border-left: 0; }
+  .atlas-app .journey-actions { grid-template-columns: 1fr; gap: 12px; }
+  .atlas-app footer { margin-inline: 16px; margin-top: 24px; }
+  .atlas-app footer p { order: 0; width: auto; }
+  .atlas-app dialog.evidence-drawer { padding: 20px 16px; }
+}
+@media (pointer: coarse) {
+  .atlas-app :is(button, select, summary, input:not([type='range'])) { min-block-size: 44px; }
+  .atlas-app .calendar-scroller .calendar-grid { min-width: 2550px !important; }
+  .atlas-app .week-cell { min-width: 44px; min-height: 44px; }
+  .atlas-app .month-table { min-width: 660px; }
+  .atlas-app .month-table .month-cell { height: 44px; min-height: 44px; min-width: 44px; }
+}
+@media (forced-colors: active) {
+  .atlas-app .site-header nav button.active { border: 2px solid Highlight; }
+  .atlas-app .segmented button[aria-pressed='true'] { border-bottom: 3px solid Highlight; }
+  .atlas-app .week-cell { border: 1px solid CanvasText; forced-color-adjust: none; }
+}

@@ -1,3 +1,47 @@
-.season-compare{min-width:0}.season-compare-heading h2{font-size:1.4rem;font-weight:500;margin:8px 0 12px}.season-compare-kicker{font-size:.75rem;color:var(--muted,#9eabad)}.season-compare-intro{max-width:72ch;color:var(--text,#dce4e6);font-size:.9rem;line-height:1.65}.season-compare-scope{font-size:.8rem;line-height:1.65;margin:16px 0 4px}.season-compare-controls{display:flex;align-items:end;flex-wrap:wrap;gap:16px;margin:20px 0}.season-compare-controls label{display:grid;gap:8px;font-size:.75rem;color:var(--muted,#9eabad)}.season-compare-controls select{min-height:44px;background:var(--panel,#1b292f);color:var(--text,#dce4e6);border:1px solid var(--border,#344147);padding:8px 12px;border-radius:6px;font:inherit}.season-compare-switch{display:flex;gap:4px;flex-wrap:wrap}.season-compare-switch button{min-height:44px;border:1px solid var(--border,#344147);background:transparent;color:var(--muted,#9eabad);padding:8px 12px;border-radius:6px;font:inherit;font-size:.75rem;cursor:pointer}.season-compare-switch button[aria-pressed=true]{background:#27343a;color:#f1e4d1;border-color:#8c7156}.season-compare-controls :focus-visible,.season-compare-details summary:focus-visible{outline:2px solid var(--orange,#ed9562);outline-offset:3px}.season-compare-legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin:8px 0;font-size:.75rem;color:var(--muted,#9eabad)}.season-compare-legend span{display:flex;align-items:center;gap:8px}.season-compare-legend i{width:20px;height:3px;display:inline-block}.season-compare-axis-label{font-size:.75rem;color:var(--muted,#9eabad);margin:16px 0 4px}.season-compare-plot svg{display:block;width:100%;height:auto;min-width:460px}.season-compare-plot{overflow-x:auto}.season-compare-plot text{fill:#a5b3b9;font:12px ui-monospace,monospace}.season-compare-grid{stroke:var(--border,#344147);stroke-width:1}.season-compare-table{margin-top:20px}.season-compare table{width:100%;border-collapse:collapse;font-size:.8rem;font-variant-numeric:tabular-nums}.season-compare table th,.season-compare table td{padding:12px;line-height:1.5}.season-compare table td{text-align:right;white-space:nowrap}.season-compare table th[scope=row]{text-align:left;font-weight:500}.season-compare table thead th{text-align:right;font-size:.75rem;font-weight:500;white-space:normal}.season-compare table thead th:first-child{text-align:left}.season-compare table caption{text-align:left;font-size:.75rem;color:var(--muted,#9eabad);padding:0 0 12px;line-height:1.6}.season-compare-details{border-top:1px solid var(--border,#344147);margin-top:16px;padding-top:12px;font-size:.8rem;line-height:1.7}.season-compare-details summary{cursor:pointer;min-height:32px}.season-compare-details .table-scroll{margin-top:12px}.season-compare-details code{overflow-wrap:anywhere}.season-compare-details a{color:var(--orange,#ed9562)}
-.season-compare-plot:focus-visible{outline:2px solid var(--orange,#ed9562);outline-offset:3px}
-@media(max-width:640px){.season-compare-heading h2{font-size:1.2rem}.season-compare-controls{gap:12px}.season-compare-controls label{flex:1 1 160px;min-width:0}.season-compare-controls select{width:100%}.season-compare-controls .season-compare-switch{width:100%}.season-compare-switch button{flex:1}.season-compare table{min-width:440px}.season-compare table th,.season-compare table td{padding:8px}.season-compare-legend{gap:8px 12px}}
+/* Retrospective season study. Values and scientific palette are unchanged. */
+.atlas-app .season-compare { min-inline-size: 0; container: season-study / inline-size; }
+.atlas-app .season-compare-heading h2 { font-size: 1.375rem; font-weight: 500; line-height: 1.4; margin: 8px 0 16px; text-wrap: balance; }
+.atlas-app .season-compare-kicker { font-size: .75rem; line-height: 1.6; color: var(--muted); }
+.atlas-app .season-compare-intro { max-inline-size: 76ch; color: var(--text); font-size: .9375rem; line-height: 1.7; margin: 0 0 24px; }
+.atlas-app .season-compare-scope { font-size: .875rem; line-height: 1.7; margin: 16px 0 8px; }
+.atlas-app .season-compare .chart-note { font-size: .875rem; line-height: 1.7; max-inline-size: 80ch; margin-block: 16px; color: var(--secondary); }
+.atlas-app .season-compare-controls { display: flex; align-items: end; flex-wrap: wrap; gap: 16px 24px; margin-block: 24px; }
+.atlas-app .season-compare-controls label { display: grid; gap: 8px; font-size: .75rem; line-height: 1.5; color: var(--muted); }
+.atlas-app .season-compare-controls select { min-block-size: 44px; max-inline-size: 100%; background: var(--panel); color: var(--text); border: 1px solid var(--line); padding: 8px 12px; border-radius: 6px; font: inherit; font-size: .875rem; }
+.atlas-app .season-compare-switch { display: flex; flex-wrap: wrap; gap: 4px; }
+.atlas-app .season-compare-switch button { min-block-size: 44px; border: 1px solid var(--line); background: transparent; color: var(--muted); padding: 8px 12px; border-radius: 6px; font: inherit; font-size: .8125rem; line-height: 1.5; cursor: pointer; }
+.atlas-app .season-compare-switch button[aria-pressed=true] { background: var(--panel); color: var(--text); border-block-end: 3px solid var(--orange); }
+.atlas-app .season-compare-switch button:hover { background: var(--raised); color: var(--text); }
+.atlas-app .season-compare-switch button:active { border-color: var(--muted); }
+.atlas-app .season-compare :is(button,select,summary,a,[tabindex]):focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+.atlas-app .season-compare-legend { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-block: 24px 16px; font-size: .8125rem; line-height: 1.6; color: var(--secondary); }
+.atlas-app .season-compare-legend span { display: flex; align-items: center; gap: 8px; }
+.atlas-app .season-compare-legend i { inline-size: 20px; block-size: 3px; display: inline-block; }
+.atlas-app .season-compare-axis-label { font-size: .75rem; line-height: 1.6; color: var(--muted); margin-block: 16px 8px; }
+.atlas-app .season-compare-plot svg { display: block; inline-size: 100%; block-size: auto; min-inline-size: 560px; }
+.atlas-app .season-compare-plot { overflow-x: auto; max-inline-size: 100%; overscroll-behavior-x: contain; }
+.atlas-app .season-compare-plot text { fill: #a5b3b9; font: 1rem var(--mono); }
+.atlas-app .season-compare-grid { stroke: var(--line); stroke-width: 1; }
+.atlas-app .season-compare-table { margin-block-start: 24px; }
+.atlas-app .season-compare table { inline-size: 100%; border-collapse: collapse; font-size: .875rem; font-variant-numeric: tabular-nums; }
+.atlas-app .season-compare table th,.atlas-app .season-compare table td { padding: 12px; line-height: 1.6; }
+.atlas-app .season-compare table td { text-align: end; }
+.atlas-app .season-compare table th[scope=row] { text-align: start; font-weight: 500; }
+.atlas-app .season-compare table thead th { text-align: end; font-size: .75rem; font-weight: 500; white-space: normal; }
+.atlas-app .season-compare table thead th:first-child { text-align: start; }
+.atlas-app .season-compare table caption { text-align: start; font-size: .8125rem; color: var(--muted); padding-block-end: 16px; line-height: 1.6; }
+.atlas-app .season-compare-details { border-block-start: 1px solid var(--line); margin-block-start: 20px; padding: 0; font-size: .875rem; line-height: 1.7; }
+.atlas-app .season-compare-details summary { cursor: pointer; min-block-size: 48px; padding-block: 12px; color: var(--text); list-style-position: inside; }
+.atlas-app .season-compare-details summary:hover { color: var(--orange); }
+.atlas-app .season-compare-details summary:active { background: var(--raised); }
+.atlas-app .season-compare-details p { max-inline-size: 80ch; }
+.atlas-app .season-compare-details .table-scroll { margin-block-start: 16px; }
+.atlas-app .season-compare-details code { overflow-wrap: anywhere; }
+.atlas-app .season-compare-details a { color: var(--orange); text-underline-offset: 3px; }
+@container season-study (max-width: 560px) {
+  .atlas-app .season-compare-controls label { flex: 1 1 180px; min-inline-size: 0; }
+  .atlas-app .season-compare-controls select { inline-size: 100%; font-size: 1rem; }
+  .atlas-app .season-compare-controls .season-compare-switch { inline-size: 100%; }
+  .atlas-app .season-compare-switch button { flex: 1; }
+  .atlas-app .season-compare table { min-inline-size: 440px; }
+}
