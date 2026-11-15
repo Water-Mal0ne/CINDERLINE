@@ -53,6 +53,8 @@ function mount(name, loadData) {
   const Component = moduleFrom(name, {react: hooks,
     './loadData': {loadData, invalidateData: file => invalidations.push(file)},
     './rhythmMapNavigation': navigation, './rhythmData': validation,
+    // The FRP panel has its own suite (frp-comparison.mjs); here it is an inert child element.
+    './FrpComparison': {default: function FrpComparison() { return null; }},
   }).default;
   function render() {
     let passes = 0;
