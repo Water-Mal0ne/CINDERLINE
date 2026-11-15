@@ -1,50 +1,54 @@
-/* The first visit explains the calibration before opening the analysis workspace. */
-.atlas-app .harmonization-intro { padding-block: 24px 16px; }
-.atlas-app .intro-opening { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 48px; margin-bottom: 48px; }
-.atlas-app .intro-kicker { color: var(--muted); font: .8125rem/1.5 var(--mono); margin: 0 0 20px; }
-.atlas-app .intro-title h1 { color: var(--text); font-size: clamp(2.25rem,3.5vw,3.75rem); font-weight: 400; letter-spacing: -.045em; line-height: 1.08; margin: 0; }
-.atlas-app .intro-copy p { color: var(--secondary); font-size: 1rem; line-height: 1.7; margin: 0 0 12px; max-width: 50ch; }
-.atlas-app .intro-explore { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 16px; min-height: 48px; margin-top: 12px; border: 1px solid var(--text); border-radius: 6px; background: var(--text); color: var(--bg); font-size: .875rem; font-weight: 500; cursor: pointer; }
-.atlas-app .intro-explore:hover { background: var(--secondary); border-color: var(--secondary); }
-.atlas-app .intro-explore:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
-.atlas-app .intro-example { border-block: 1px solid var(--line); padding-block: 28px; }
-.atlas-app .intro-loading { min-height: 260px; display: grid; align-content: center; color: var(--secondary); }
-.atlas-app .intro-example .comparison-journey { padding: 0; }
-.atlas-app .intro-example .journey-heading h2 { font-size: 1.25rem; line-height: 1.4; letter-spacing: -.015em; margin: 0; }
-.atlas-app .intro-example .journey-context { font-size: .8125rem; line-height: 1.6; margin: 12px 0 28px; }
-.atlas-app .intro-example .journey-values { display: grid; grid-template-columns: 1fr 24px 1.15fr 1fr; gap: 24px; align-items: center; }
-.atlas-app .intro-example .journey-values > div > span { color: var(--muted); font: .8125rem/1.5 var(--sans); letter-spacing: 0; }
-.atlas-app .intro-example .journey-values strong { color: var(--text); font-size: clamp(2rem,3vw,3rem); font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: -.035em; line-height: 1.2; margin: 8px 0; }
-.atlas-app .intro-example .journey-values > div:nth-of-type(2) strong { color: var(--orange); }
-.atlas-app .intro-example .journey-values .journey-reference strong { color: #91cbd5; }
-.atlas-app .intro-example .journey-values small { color: var(--secondary); font-size: .8125rem; line-height: 1.6; }
-.atlas-app .intro-example .journey-values > svg { display: block; width: 24px; color: var(--muted); }
-.atlas-app .intro-example .journey-reference { padding-left: 24px; border-left: 1px solid var(--line); }
-.atlas-app .intro-example .journey-caveat { max-width: 100ch; line-height: 1.7; margin: 24px 0; }
-.atlas-app .intro-example .journey-actions { display: flex; flex-wrap: wrap; gap: 8px 32px; padding-top: 16px; border-color: var(--line); }
-.atlas-app .intro-example .journey-actions button { flex: 1 1 180px; min-height: 44px; color: var(--text); font-size: .8125rem; line-height: 1.5; gap: 12px; }
-.atlas-app .intro-example .journey-actions button > span { display: none; }
-.atlas-app .intro-example .journey-actions button > svg { margin-left: auto; flex-shrink: 0; }
-.atlas-app .intro-example .journey-actions button:hover { color: var(--orange); }
+/* Home: one explanation, one selectable observed-week comparison. */
+.atlas-app .home-page { padding-block: 8px 16px; }
+.atlas-app .home-opening { margin-bottom: 32px; }
+.atlas-app .home-kicker { color: var(--muted); font: .8125rem/1.5 var(--sans); margin: 0 0 12px; }
+.atlas-app .home-opening h1 { color: var(--text); font-size: clamp(2rem,3.4vw,3rem); font-weight: 400; letter-spacing: -.035em; line-height: 1.15; text-wrap: balance; margin: 0 0 20px; }
+.atlas-app .home-summary { display: flex; align-items: center; gap: 40px; }
+.atlas-app .home-summary p { color: var(--secondary); font-size: .9375rem; line-height: 1.75; max-width: 72ch; margin: 0; flex: 1; }
+.atlas-app .home-explore { flex-shrink: 0; display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 16px; min-height: 48px; border: 1px solid var(--text); border-radius: 6px; background: var(--text); color: var(--bg); font-size: .875rem; font-weight: 500; cursor: pointer; }
+.atlas-app .home-explore:hover { background: var(--secondary); border-color: var(--secondary); }
+.atlas-app .home-page :is(button,select):focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+.atlas-app .home-example { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 24px 28px 8px; }
+.atlas-app .home-example-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.atlas-app .home-example-header h2 { font-size: 1.125rem; line-height: 1.4; font-weight: 500; letter-spacing: -.015em; margin: 0; }
+.atlas-app .home-country { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.atlas-app .home-country label { color: var(--muted); font-size: .8125rem; }
+.atlas-app .home-country select { min-height: 44px; width: 200px; max-width: 100%; border: 1px solid var(--control-line); border-radius: 6px; padding: 8px 12px; background: var(--bg); color: var(--text); font: .9375rem/1.5 var(--sans); }
+.atlas-app .home-example-state { min-height: 300px; display: grid; align-content: center; color: var(--secondary); font-size: .9375rem; }
+.atlas-app .home-example .comparison-journey { margin: 0; padding: 0; border: 0; background: none; }
+.atlas-app .home-example .journey-context { font-size: .8125rem; line-height: 1.6; color: var(--muted); margin: 16px 0 28px; }
+.atlas-app .home-example .journey-values { display: grid; grid-template-columns: 1fr 24px 1.2fr 1fr; gap: 24px; align-items: center; }
+.atlas-app .home-example .journey-values > div > span { color: var(--secondary); font: .8125rem/1.5 var(--sans); letter-spacing: 0; }
+.atlas-app .home-example .journey-values strong { color: var(--text); font-size: clamp(2rem,3.1vw,3rem); font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: -.035em; line-height: 1.2; margin: 8px 0; }
+.atlas-app .home-example .journey-values > div:nth-of-type(2) strong { color: var(--orange); }
+.atlas-app .home-example .journey-values .journey-reference strong { color: #91cbd5; }
+.atlas-app .home-example .journey-values small { color: var(--muted); font-size: .8125rem; line-height: 1.6; }
+.atlas-app .home-example .journey-values > svg { display: block; width: 24px; color: var(--muted); }
+.atlas-app .home-example .journey-reference { padding-left: 24px; border-left: 1px solid var(--line); }
+.atlas-app .home-example .journey-caveat { max-width: 104ch; line-height: 1.7; margin: 24px 0 20px; color: var(--muted); font-size: .8125rem; }
+.atlas-app .home-example .journey-actions { display: flex; flex-wrap: wrap; gap: 4px 32px; padding-top: 8px; border-color: var(--line); }
+.atlas-app .home-example .journey-actions button { flex: 1 1 180px; min-height: 52px; color: var(--text); font-size: .8125rem; line-height: 1.5; gap: 12px; }
+.atlas-app .home-example .journey-actions button > span { display: none; }
+.atlas-app .home-example .journey-actions button > svg { margin-left: auto; flex-shrink: 0; }
+.atlas-app .home-example .journey-actions button:hover { color: var(--orange); }
 @media (max-width: 1100px) {
-  .atlas-app .intro-opening { gap: 28px; }
-  .atlas-app .intro-title h1 { font-size: 2.5rem; }
-  .atlas-app .intro-example .journey-values { gap: 16px; }
+  .atlas-app .home-summary { align-items: flex-start; flex-direction: column; gap: 20px; }
+  .atlas-app .home-example { padding-inline: 24px; }
+  .atlas-app .home-example .journey-values { gap: 16px; }
+  .atlas-app .home-country select { width: 176px; }
 }
-@media (max-width: 900px) {
-  .atlas-app .intro-opening { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
-  .atlas-app .intro-copy p { max-width: 64ch; }
-  .atlas-app .intro-title h1 { font-size: clamp(2.25rem,5vw,3rem); }
-}
-@media (max-width: 540px) {
-  .atlas-app .harmonization-intro { padding-top: 8px; }
-  .atlas-app .intro-kicker { font-size: .75rem; margin-bottom: 16px; }
-  .atlas-app .intro-copy p { font-size: .9375rem; }
-  .atlas-app .intro-example { padding-block: 24px; }
-  .atlas-app .intro-example .journey-values { grid-template-columns: 1fr 24px 1fr; gap: 12px; align-items: start; }
-  .atlas-app .intro-example .journey-values > svg { margin-top: 36px; }
-  .atlas-app .intro-example .journey-values strong { font-size: 2rem; }
-  .atlas-app .intro-example .journey-values small { font-size: .75rem; }
-  .atlas-app .intro-example .journey-reference { grid-column: 1/-1; border-left: 0; border-top: 1px solid var(--line); padding: 20px 0 0; margin-top: 8px; }
-  .atlas-app .intro-example .journey-actions { display: grid; gap: 8px; }
+@media (max-width: 640px) {
+  .atlas-app .home-page { padding-top: 0; }
+  .atlas-app .home-opening h1 { max-width: 20ch; text-wrap: initial; }
+  .atlas-app .home-example { padding: 20px 16px 4px; }
+  .atlas-app .home-example-header { align-items: stretch; flex-direction: column; gap: 16px; }
+  .atlas-app .home-country { justify-content: space-between; }
+  .atlas-app .home-country select { width: min(220px,72%); font-size: 1rem; }
+  .atlas-app .home-example .journey-values { grid-template-columns: minmax(0,1fr) 16px minmax(0,1fr); gap: 8px; align-items: start; }
+  .atlas-app .home-example .journey-values > svg { width: 16px; margin-top: 36px; }
+  .atlas-app .home-example .journey-values strong { font-size: clamp(1.5rem,6vw,2rem); overflow-wrap: anywhere; }
+  .atlas-app .home-example .journey-values small { font-size: .75rem; overflow-wrap: anywhere; }
+  .atlas-app .home-example .journey-reference { grid-column: 1/-1; border-left: 0; border-top: 1px solid var(--line); padding: 16px 0 0; margin-top: 8px; }
+  .atlas-app .home-example .journey-actions { display: grid; gap: 0; }
+  .atlas-app .home-example .journey-actions button { min-height: 48px; }
 }

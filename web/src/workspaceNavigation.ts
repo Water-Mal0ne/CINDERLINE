@@ -1,6 +1,6 @@
 /** Presentation-only state; scientific date, sensor and spatial filters stay in explorationState. */
 export interface WorkspaceNavigation {
-  section: 'introduction' | 'calendar' | 'patterns' | 'earth';
+  section: 'home' | 'calendar' | 'patterns' | 'earth';
   calendar: 'weekly' | 'monthly';
   pattern: 'instruments' | 'seasons' | 'anomalies';
 }
@@ -10,7 +10,8 @@ export function parseWorkspaceNavigation(search: string): WorkspaceNavigation {
   const section = params.get('workspace');
   const pattern = params.get('pattern');
   return {
-    section: section === 'introduction' || section === 'patterns' || section === 'earth' ? section : params.size === 0 ? 'introduction' : 'calendar',
+    // Keep previously shared Introduction links working after the Home rename.
+    section: section === 'home' || section === 'introduction' || params.size === 0 ? 'home' : section === 'patterns' || section === 'earth' ? section : 'calendar',
     // The month overview is legible on first arrival; existing shared links retain their weekly default.
     calendar: params.get('calendar') === 'monthly' || params.size === 0 ? 'monthly' : 'weekly',
     pattern: pattern === 'seasons' || pattern === 'anomalies' ? pattern : 'instruments',

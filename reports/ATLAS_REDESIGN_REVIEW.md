@@ -44,3 +44,13 @@ The next review requested a first page that explains the project's central purpo
 Introduction is also reachable from navigation and the brand link. Existing shared calendar, evidence and rhythm URLs keep their original destinations. The three example actions open the full instrument comparison, the actual week evidence and held-out results. Returning to Introduction preserves the current country, date and spatial selection; its example names that context. The monthly calendar remains the default detail reached from a fresh introduction.
 
 Follow-up verification: 180 web tests passed, including first arrival, example actions, saved selection and history restoration. Browser checks covered 320px reflow, evidence close/focus return and all three evidence destinations. Source data and pipeline files remain unchanged. Public preview checks for this follow-up are recorded under `work/intro-preview`; production is not a deployment target.
+
+## Home and seven-country examples
+
+The subsequent review renamed Introduction to Home and requested a neater first page with country selection. Home now presents one compact explanation, a calendar action and a single comparison panel with a native Country selector. It uses a house icon, a quieter heading hierarchy and grouped actions. The existing calibration numbers, comparison-week selection and scientific caveat are unchanged.
+
+All seven catalogue countries are available. The selector uses the application's existing country-loading flow, so the example, evidence and onward calendar share the same country. While loading, the old country's numbers are hidden. Failed loads show an unavailable state and allow selecting another country. Home preserves current calendar filters when revisited; selecting a different country loads that country's full region record, as in the calendar selector.
+
+Fresh URLs use `workspace=home`. Previously saved `workspace=introduction` URLs remain valid and canonicalize to Home. Existing calendar and research links keep their destinations.
+
+Verification: 183 web tests passed, including delayed country loading, failure recovery, evidence/calendar consistency and legacy URL handling. Browser checks exercised every country and its weekly evidence at 320px, with no page overflow or wrapped numeric values. The desktop and full mobile page were visually reviewed. Release receipts for this update are under `work/home-preview`. No production deployment, Git push or merge is authorized by this review.

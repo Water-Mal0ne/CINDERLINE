@@ -9,7 +9,7 @@ const {parseWorkspaceNavigation, withWorkspaceNavigation} = await import('data:t
 
 test('workspace links restore each presentation choice without changing scientific filters', () => {
   const original = new URL('https://preview.example/?v=1&region=Egypt&start=2024-01-01&end=2024-12-31&scale=raw&week=2024-04-08#main');
-  for (const section of ['introduction', 'calendar', 'patterns', 'earth']) {
+  for (const section of ['home', 'calendar', 'patterns', 'earth']) {
     for (const calendar of ['weekly', 'monthly']) {
       for (const pattern of ['instruments', 'seasons', 'anomalies']) {
         const state = {section, calendar, pattern};
@@ -24,10 +24,16 @@ test('workspace links restore each presentation choice without changing scientif
 
 test('old and malformed workspace links use a safe calendar view', () => {
   assert.equal(parseWorkspaceNavigation('').calendar, 'monthly');
-  assert.equal(parseWorkspaceNavigation('').section, 'introduction');
+  assert.equal(parseWorkspaceNavigation('').section, 'home');
   const defaults = {section: 'calendar', calendar: 'weekly', pattern: 'instruments'};
   assert.deepEqual(parseWorkspaceNavigation('?view=rhythm&region=Nepal'), defaults);
   assert.deepEqual(parseWorkspaceNavigation('?workspace=unknown&calendar=hourly&pattern=forecast'), defaults);
   const cleaned = new URL(withWorkspaceNavigation('https://preview.example/?workspace=earth&calendar=monthly&pattern=seasons&view=rhythm', defaults));
   assert.equal(cleaned.search, '?view=rhythm');
+});
+
+test('old introduction URLs resolve to Home and are written back canonically', () => {
+  const state = parseWorkspaceNavigation('?workspace=introduction&calendar=monthly');
+  assert.equal(state.section, 'home');
+  assert.equal(new URL(withWorkspaceNavigation('https://preview.example/?workspace=introduction&region=Nepal', state)).searchParams.get('workspace'), 'home');
 });

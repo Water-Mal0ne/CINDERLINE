@@ -210,7 +210,7 @@ test('first arrival explains harmonization and its actions open the actual recor
   try{
     await app.settle();
     assert.ok(introduction());assert.equal(calendar(app),undefined);assert.equal(globe(app),undefined);
-    assert.equal(app.url.searchParams.get('workspace'),'introduction');
+    assert.equal(app.url.searchParams.get('workspace'),'home');
     assert.equal(introduction().props.loading,false);
     const week=introduction().props.weeks[0];
     introduction().props.onInspect(week);await app.settle();
@@ -219,10 +219,10 @@ test('first arrival explains harmonization and its actions open the actual recor
     introduction().props.onCompare();await app.settle();
     assert.equal(app.url.searchParams.get('workspace'),'patterns');
     assert.ok(elements(app.tree,node=>node.props?.id==='comparison-panel').length);
-    press(app,'Introduction');await app.settle();
+    press(app,'Home');await app.settle();
     introduction().props.onValidate();await app.settle();
     assert.equal(app.url.searchParams.get('view'),'evidence');
-    press(app,'Introduction');await app.settle();
+    press(app,'Home');await app.settle();
     introduction().props.onExplore();await app.settle();
     assert.ok(elements(app.tree,node=>node.props?.scopeId==='ALL'&&Array.isArray(node.props?.rows)).length);
     assert.equal(app.url.searchParams.has('workspace'),false);
@@ -237,17 +237,55 @@ test('introduction reload and history preserve the saved selection without inter
   try{
     await app.settle();
     const original=app.url.toString();
-    assert.equal(button(app.tree,'Introduction').props['aria-current'],'page');
+    assert.equal(button(app.tree,'Home').props['aria-current'],'page');
     press(app,'Calendar');await app.settle();
     assert.ok(calendar(app));assert.equal(calendar(app).props.mode,'raw');
     assert.ok(calendar(app).props.weeks.flatMap(w=>w.rows).every(row=>row.date>='2024-01-03'&&row.date<='2024-01-10'));
     app.pop(original);await app.settle();
-    assert.equal(button(app.tree,'Introduction').props['aria-current'],'page');
+    assert.equal(button(app.tree,'Home').props['aria-current'],'page');
     app.pop('?view=rhythm');await app.settle();
     assert.equal(button(app.tree,'Weekly Rhythm Index').props['aria-current'],'page');
     app.pop('?region=Nepal');await app.settle();
     assert.equal(button(app.tree,'Calendar').props['aria-current'],'page');
     assert.ok(calendar(app));
+  }finally{app.dispose();}
+});
+
+test('Home country changes hide stale examples while loading and carry the new country into evidence and calendar',async()=>{
+  const pendingIndia=deferred();
+  const app=appHarness('?workspace=home&region=Nepal',file=>file==='India.json'?pendingIndia.promise:Promise.resolve(journeyRegions.Nepal),()=>Promise.resolve(journeyIndex));
+  const home=()=>elements(app.tree,node=>typeof node.props?.onCountry==='function')[0];
+  try{
+    await app.settle();
+    assert.deepEqual(home().props.countries.map(c=>c.id),['Nepal','India']);
+    assert.ok(home().props.weeks.length);
+    home().props.onCountry('India');await app.settle();
+    assert.equal(home().props.country,'India');assert.equal(home().props.loading,true);
+    assert.deepEqual(home().props.weeks,[],'old country numbers must not appear under the new country');
+    pendingIndia.resolve(journeyRegions.India);await app.settle();
+    assert.equal(home().props.loading,false);assert.equal(home().props.unavailable,false);
+    assert.match(home().props.context,/^India/);
+    assert.equal(app.url.searchParams.get('region'),'India');
+    const week=home().props.weeks[0];
+    home().props.onInspect(week);await app.settle();
+    assert.equal(namedChild(app.tree,'EvidenceDrawer').props.region.meta.region,'India');
+    namedChild(app.tree,'EvidenceDrawer').props.onClose();await app.settle();
+    home().props.onExplore();await app.settle();
+    assert.equal(app.url.searchParams.get('region'),'India');
+    assert.ok(calendar(app));
+  }finally{app.dispose();}
+});
+
+test('Home country failure never shows a stale example and another country can recover',async()=>{
+  const app=appHarness('?workspace=home&region=Nepal',file=>file==='India.json'?Promise.reject(new Error('temporary country failure')):Promise.resolve(journeyRegions.Nepal),()=>Promise.resolve(journeyIndex));
+  const home=()=>elements(app.tree,node=>typeof node.props?.onCountry==='function')[0];
+  try{
+    await app.settle();home().props.onCountry('India');await app.settle();
+    assert.equal(home().props.loading,false);assert.equal(home().props.unavailable,true);
+    assert.deepEqual(home().props.weeks,[]);
+    home().props.onCountry('Nepal');await app.settle();
+    assert.equal(home().props.unavailable,false);assert.ok(home().props.weeks.length);
+    assert.equal(app.url.searchParams.get('region'),'Nepal');
   }finally{app.dispose();}
 });
 
