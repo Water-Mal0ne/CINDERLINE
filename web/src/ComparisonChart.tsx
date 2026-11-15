@@ -34,13 +34,18 @@ export default function ComparisonChart({rows,mode,label,regionId,regionName,cel
   const max=Math.max(1,...points.flatMap(p=>series.map(s=>p[s])).filter(numeric))*1.06;
   const x=(i:number)=>L+i/Math.max(points.length-1,1)*(W-L-R);
   const y=(v:number)=>H-B-v/max*(H-T-B);
+  const selectAt=(clientX:number,chart:SVGSVGElement)=>{
+    const box=chart.getBoundingClientRect();
+    if(box.width<=0)return;
+    setActive(Math.min(points.length-1,Math.max(0,Math.round(((clientX-box.left)/box.width*W-L)/(W-L-R)*(points.length-1)))));
+  };
   const color=(s:Series)=>s==='aqua'?'#8fc8d2':s==='harmonized'?'#f79963':'#bac5c7';
   const monthOrdinals=points.map(p=>Number(p.date.slice(0,4))*12+Number(p.date.slice(5,7)));
   const adjacent=(left:number,right:number)=>monthOrdinals[right]-monthOrdinals[left]===1;
   const path=(key:Series)=>{let prior=false;return points.map((p,i)=>{if(!numeric(p[key])){prior=false;return '';}const cmd=prior&&adjacent(i-1,i)?'L':'M';prior=true;return `${cmd}${x(i)},${y(p[key]!)}`;}).join(' ');};
   const ticks=[0,Math.floor((points.length-1)/3),Math.floor((points.length-1)*2/3),points.length-1].filter((n,i,a)=>a.indexOf(n)===i);
   return <><div className="comparison-controls"><div className="trace-legend"><span><i className="line-key orange"/>Aqua-reference-equivalent record</span><span><i className="line-key aqua"/>Aqua observed</span>{!referenceOnly&&<span><i className="line-key dashed"/>Raw sensor-switch baseline</span>}</div><button className="chart-scale-button" aria-pressed={referenceOnly} onClick={()=>setReferenceOnly(v=>!v)}>{referenceOnly?'Show raw baseline':'Focus on the Aqua scale'}</button></div>
-    <div className="svg-chart"><svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Monthly comparison of raw sensor-switch baseline, Aqua-reference-equivalent record and observed Aqua reference" onPointerMove={e=>{const r=e.currentTarget.getBoundingClientRect();setActive(Math.min(points.length-1,Math.max(0,Math.round(((e.clientX-r.left)/r.width*W-L)/(W-L-R)*(points.length-1)))));}}>
+    <div className="svg-chart"><svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Monthly comparison of raw sensor-switch baseline, Aqua-reference-equivalent record and observed Aqua reference" onPointerMove={e=>{if(e.pointerType!=='touch'&&!e.buttons)selectAt(e.clientX,e.currentTarget);}} onClick={e=>{if(e.detail>0)selectAt(e.clientX,e.currentTarget);}}>
       {[0,1,2,3].map(i=><g key={i}><line x1={L} x2={W-R} y1={y(max*i/3)} y2={y(max*i/3)} stroke="#334147" strokeDasharray="3 5"/><text x={L-9} y={y(max*i/3)+4} textAnchor="end" className="svg-axis">{compact(max*i/3)}</text></g>)}
       {ticks.map(i=><text key={i} x={x(i)} y={H-6} textAnchor={i===0?'start':i===points.length-1?'end':'middle'} className="svg-axis">{points[i].date}</text>)}
       {!referenceOnly&&<path d={path('raw')} stroke="#92a2a8" strokeWidth={mode==='raw'?2.3:1.5} strokeDasharray="5 4" fill="none" opacity=".65"/>}

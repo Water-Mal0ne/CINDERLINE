@@ -105,6 +105,25 @@ test('monthly inspection starts within the new country or cell scope', () => {
   assert.equal(input(tree), undefined, 'empty selections keep their explicit empty state');
 });
 
+test('panning the monthly chart preserves selection while hover and intentional taps inspect a month', () => {
+  const render = componentHarness('ComparisonChart.tsx');
+  const props = {rows: days(['2023-01', '2023-02', '2023-03']), mode: 'harmonized', label: 'REAL FIRMS DATA', regionId: 'Nepal', regionName: 'Nepal', cellId: 'ALL'};
+  let tree = render(props);
+  const chart = () => elements(tree, item => item.type === 'svg')[0];
+  const currentTarget = {getBoundingClientRect: () => ({left: 20, width: 850})};
+  for (const event of [{pointerType: 'touch', buttons: 1}, {pointerType: 'touch', buttons: 0}, {pointerType: 'mouse', buttons: 1}]) {
+    chart().props.onPointerMove({...event, clientX: 855, currentTarget});
+    tree = render(props);
+    assert.match(input(tree).props['aria-valuetext'], /^2023-01,/, 'a pan or drag must not change the inspected month');
+  }
+  chart().props.onPointerMove({pointerType: 'mouse', buttons: 0, clientX: 855, currentTarget});
+  tree = render(props);
+  assert.match(input(tree).props['aria-valuetext'], /^2023-03,/, 'mouse hover still previews the month under the pointer');
+  chart().props.onClick({detail: 1, clientX: 465, currentTarget});
+  tree = render(props);
+  assert.match(input(tree).props['aria-valuetext'], /^2023-02,/, 'a deliberate tap selects the month at the tapped coordinate');
+});
+
 test('anomaly expansion survives an evidence-panel parent rerender but resets for a changed selection', () => {
   const render = componentHarness('AnomalyPanel.tsx');
   const anomalies = Array.from({length: 12}, (_, i) => ({date: `2023-${String(i + 1).padStart(2, '0')}-01`, week: i + 1, status: i % 2 ? 'high' : 'low', value: i * 10, z_score: i / 2}));

@@ -122,3 +122,27 @@ test('annual daily drill-down forwards the local published cell ID and the selec
     assert.equal(text(action).trim(),'Open 2020 daily record');
   }finally{app.dispose();}
 });
+
+test('the Earth selection shortcut targets the selected evidence without moving focus until requested',async()=>{
+  const app=mount([data]);
+  try{
+    await app.settle();
+    assert.equal(button(app.tree,'Inspect selected cell'),undefined);
+    app.click('Grid table');await app.settle();
+    nodes(app.tree,node=>node.type==='button'&&String(node.props?.['aria-label']).startsWith('Inspect grid cell'))[0].props.onClick();
+    await app.settle();
+    assert.equal(button(app.tree,'Inspect selected cell'),undefined,'table inspection already focuses the evidence directly');
+    let focused=0;
+    selection(app.tree).ref.current={focus(){focused++;}};
+    app.click('Show 3D Earth');await app.settle();
+    const shortcut=button(app.tree,'Inspect selected cell'),panel=selection(app.tree);
+    assert.ok(shortcut);
+    assert.equal(shortcut.props['aria-controls'],panel.props.id);
+    assert.equal(shortcut.props['aria-label'].replace('Inspect selected cell ','Selected grid cell '),panel.props['aria-label']);
+    assert.equal(focused,0,'opening the globe does not jump away from it');
+    app.click('Inspect selected cell');
+    assert.equal(focused,1,'explicit inspection focuses the matching below-globe panel');
+    app.changeProps({regionId:'India'});await app.settle();
+    assert.equal(button(app.tree,'Inspect selected cell'),undefined,'clearing selection removes the shortcut');
+  }finally{app.dispose();}
+});

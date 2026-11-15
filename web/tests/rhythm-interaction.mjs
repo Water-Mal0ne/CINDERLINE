@@ -98,7 +98,7 @@ test('weekday data failure exposes a retry that recovers the actual seven-countr
   await app.settle();
   assert.equal(calls, 2);
   assert.deepEqual(app.invalidations, ['rhythm.json']);
-  const picker = nodes(app.tree, n => n.props?.['aria-label'] === 'Country')[0];
+  const picker = nodes(app.tree, n => n.props?.['aria-labelledby'] === 'rh-country-picker-label')[0];
   assert.equal(nodes(picker, n => n.type === 'button').length, 7);
   assert.equal(nodes(app.tree, n => n.props?.role === 'alert').length, 0);
   app.unmount();

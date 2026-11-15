@@ -114,3 +114,12 @@ Result (added after the analysis): the prediction did NOT hold. Of the two hill-
 - Preserve the displayed year through geographic drill-down, restore Whole region scope when requested, and let explicit date edits supersede stale evidence-link hydration.
 - Add only the user-approved annual/daily outage-handling notice. The pre-existing annual/daily discrepancy is disclosed, not corrected; no data or scientific pipeline change is authorized in this UI pass.
 - Keep changes on ui-polish-v2 and update its existing review. Do not merge or deploy. Require independent review, desktop/phone inspection, and the full tests/build after the commit.
+
+## Section polish after collaborator handoff (15 November 2026)
+
+- Isolate this follow-up on local branch ui/section-polish from cf6e20b. Leave the collaborator's ui-polish-v2 checkout/PR, main, backup and Workers migration worktree untouched. Do not push, merge or deploy this round.
+- Apply the requested Unslop skill in focused polish mode across all sections, with separate implementation and cross-review agents. Keep the established palette, typography, scientific text, values, captions, caveats and published data.
+- Make optional grid context a native disclosure; keep its scope caveat visible. Keep scientific plots and Earth prominent by quieting decoration and grouping controls.
+- Preserve deliberate chart inspection while avoiding selection during touch scrolling. Confine seasonal horizontal scrolling to the plot and retain evidence close/share controls during navigation.
+- Keep the Earth canvas independent of selected evidence height, fit global framing to the viewport, and offer an explicit route to selected-cell evidence without auto-scrolling during orbiting.
+- Record section findings, preserved areas, browser checks and limits in reports/SECTION_POLISH_QA.md. Run all Python/web tests and the production build after the local commit.

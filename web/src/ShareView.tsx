@@ -4,10 +4,20 @@ import './ShareView.css';
 
 export default function ShareView({url,disabledReason}:{url:string|null;disabledReason?:string}) {
   const [open,setOpen]=useState(false),[status,setStatus]=useState(''),[copied,setCopied]=useState(false);
-  const field=useRef<HTMLInputElement>(null),trigger=useRef<HTMLButtonElement>(null),id=useId(),attempt=useRef(0);
+  const root=useRef<HTMLDivElement>(null),field=useRef<HTMLInputElement>(null),trigger=useRef<HTMLButtonElement>(null),id=useId(),attempt=useRef(0);
   useEffect(()=>{attempt.current++;setOpen(false);setCopied(false);setStatus('');},[url]);
   useEffect(()=>()=>{attempt.current++;},[]);
   useEffect(()=>{if(open&&status.startsWith('Copy was unavailable')){field.current?.focus();field.current?.select();}},[open,status]);
+  useEffect(()=>{
+    if(!open)return;
+    const dismissOutside=(event:Event)=>{
+      if(root.current?.contains(event.target as Node))return;
+      attempt.current++;setOpen(false);
+    };
+    document.addEventListener('pointerdown',dismissOutside);
+    document.addEventListener('focusin',dismissOutside);
+    return()=>{document.removeEventListener('pointerdown',dismissOutside);document.removeEventListener('focusin',dismissOutside);};
+  },[open]);
   function close(){attempt.current++;setOpen(false);trigger.current?.focus();}
   async function copy() {
     if(!url)return;
@@ -21,11 +31,11 @@ export default function ShareView({url,disabledReason}:{url:string|null;disabled
       if(current===attempt.current){setStatus('Copy was unavailable. Select and copy the link below.');field.current?.focus();field.current?.select();}
     }
   }
-  return <div className="share-view" onKeyDown={event=>{if(event.key==='Escape'&&open){event.preventDefault();event.stopPropagation();close();}}}>
+  return <div ref={root} className="share-view" onKeyDown={event=>{if(event.key==='Escape'&&open){event.preventDefault();event.stopPropagation();close();}}}>
     <button ref={trigger} className="button subtle" onClick={copy} disabled={!url} title={url?'Copy a link to these filters and evidence':disabledReason||'Wait for the selected observations to load.'} aria-expanded={open} aria-controls={id}>
-      {copied?<Check size={15}/>:<Link2 size={15}/>} Share this view
+      {copied?<Check size={16}/>:<Link2 size={16}/>} Share this view
     </button>
-    {open&&url&&<div className="share-panel" id={id}>
+    {open&&url&&<div className="share-panel" id={id} role="region" aria-label="Share details">
       <div className="share-panel-heading"><strong>Link to this exploration</strong><button className="icon-button" onClick={close} aria-label="Close share details"><X size={16}/></button></div>
       <p role="status" aria-live="polite">{status}</p>
       <label htmlFor={`${id}-link`}>Shareable link</label>

@@ -59,7 +59,7 @@ export default function SeasonalContext({region,label,selectedYear,onExport,cell
       <div className="seasonal-chart-heading"><div><span className="seasonal-kicker">TYPICAL WEEKLY ACTIVITY</span><h3>{peak?<>Peak around <span>{dateSpan(selectedYear,peak.week)}</span></>:'Seasonal pattern'}</h3></div>
         {peak&&<div className="seasonal-peak"><strong>{compact(peak.median)}</strong><span>median detections / week</span></div>}</div>
       <div className="seasonal-legend"><span><i/>Median</span><span><i className="seasonal-band-key"/>10th–90th percentile</span><span className="seasonal-units">Aqua-reference-equivalent scale</span></div>
-      {hasData?<><svg className="seasonal-chart" viewBox={`0 0 ${W} ${H}`} tabIndex={0} role="group" aria-label={`${region.meta.name} national historical weekly activity`} aria-describedby="seasonal-instructions" onKeyDown={keyboard}
+      {hasData?<><div className="seasonal-plot-scroller"><svg className="seasonal-chart" viewBox={`0 0 ${W} ${H}`} tabIndex={0} role="group" aria-label={`${region.meta.name} national historical weekly activity`} aria-describedby="seasonal-instructions" onKeyDown={keyboard}
         onMouseLeave={()=>setHover(null)} onMouseMove={event=>{const box=event.currentTarget.getBoundingClientRect();const week=Math.round(((event.clientX-box.left)/box.width*W-L)/(W-L-R)*51)+1;setHover(Math.max(1,Math.min(52,week)));}}
         onClick={()=>hover!==null&&select(hover)}>
         {[0,.5,1].map(f=><g key={f}><line x1={L} x2={W-R} y1={y(max*f)} y2={y(max*f)} className="seasonal-gridline"/><text x={L-10} y={y(max*f)+4} textAnchor="end" className="seasonal-axis">{compact(max*f)}</text></g>)}
@@ -74,7 +74,7 @@ export default function SeasonalContext({region,label,selectedYear,onExport,cell
           <rect width={216} height={60} rx={5}/><text x={12} y={20}>{dateSpan(selectedYear,active.week)}</text>
           <text x={12} y={42}>Median {fmt(active.median,1)} · Week {active.week}</text>
         </g>}
-      </svg><div className="seasonal-readout" aria-live="polite" aria-atomic="true"><div><span>WEEK {String(active.week).padStart(2,'0')}</span><strong>{dateSpan(selectedYear,active.week)}</strong></div>
+      </svg></div><div className="seasonal-readout" aria-live="polite" aria-atomic="true"><div><span>WEEK {String(active.week).padStart(2,'0')}</span><strong>{dateSpan(selectedYear,active.week)}</strong></div>
         <div><span>HISTORICAL MEDIAN</span><strong>{fmt(active.median,1)}</strong></div><div><span>10TH–90TH PERCENTILE</span><strong>{numeric(active.p10)&&numeric(active.p90)?`${fmt(active.p10,1)}–${fmt(active.p90,1)}`:'Unavailable'}</strong></div>
         <div className="seasonal-steppers"><button type="button" aria-label="Previous week" onClick={()=>select(selected-1)} disabled={selected<=1}><ChevronLeft size={16}/></button><button type="button" aria-label="Next week" onClick={()=>select(selected+1)} disabled={selected>=52}><ChevronRight size={16}/></button></div></div>
       <div className="seasonal-week-control"><label htmlFor={weekControlId}>Explore a historical week <strong>{String(selected).padStart(2,'0')} / 52</strong></label><input id={weekControlId} type="range" min={1} max={52} step={1} value={selected} onChange={event=>select(Number(event.target.value))} aria-valuetext={`Week ${selected}, ${dateSpan(selectedYear,selected)}, historical median ${fmt(points[selected-1].median,1)} Aqua-reference-equivalent detections`} aria-describedby="seasonal-instructions"/><div aria-hidden="true"><span>January</span><span>December</span></div></div>
