@@ -36,3 +36,11 @@ The build's existing lazy Globe bundle exceeds Vite's advisory 500 kB chunk thre
 [CHROME_GUIDES_V2.md](CHROME_GUIDES_V2.md) accounts for all 208 entries in the requested Chrome collection. It separates applicable requirements from optional recipes, experimental APIs and absent features. This is an implementation and verification record, not a claim of universal guideline compliance.
 
 Public-preview asset verification, screenshots, response-header checks and production-boundary confirmation are saved in `work/atlas-preview` after deployment. The hosting-only `_headers` file is checked through response headers, not treated as a downloadable public asset.
+
+## Introduction follow-up
+
+The next review requested a first page that explains the project's central purpose. A dedicated Introduction now opens on a fresh URL, with the existing charcoal theme, a short harmonization explanation, the real selected-region conversion example and a primary link to the calendar. The example retains its selection/overpass caveat and identifies Aqua as a reference, not ground truth. It uses the existing comparison-week calculation without changing numbers or scientific data.
+
+Introduction is also reachable from navigation and the brand link. Existing shared calendar, evidence and rhythm URLs keep their original destinations. The three example actions open the full instrument comparison, the actual week evidence and held-out results. Returning to Introduction preserves the current country, date and spatial selection; its example names that context. The monthly calendar remains the default detail reached from a fresh introduction.
+
+Follow-up verification: 180 web tests passed, including first arrival, example actions, saved selection and history restoration. Browser checks covered 320px reflow, evidence close/focus return and all three evidence destinations. Source data and pipeline files remain unchanged. Public preview checks for this follow-up are recorded under `work/intro-preview`; production is not a deployment target.

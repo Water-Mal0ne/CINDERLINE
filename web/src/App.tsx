@@ -8,6 +8,7 @@ import AreaOfInterest from './AreaOfInterest';
 import ReliabilityNotice from './ReliabilityNotice';
 import {monthHistory, monthMatrix} from './monthStats';
 import ComparisonJourney from './ComparisonJourney';
+import HarmonizationIntro from './HarmonizationIntro';
 import ComparisonChart from './ComparisonChart';
 import SeasonalContext from './SeasonalContext';
 import AnomalyPanel from './AnomalyPanel';
@@ -26,7 +27,7 @@ const SeasonComparison=lazy(()=>import('./SeasonComparison'));
 
 type View = 'explore' | 'evidence' | 'rhythm' | 'methods';
 type Mode = 'harmonized' | 'raw';
-type ExploreSection = 'calendar' | 'patterns' | 'earth';
+type ExploreSection = 'introduction' | 'calendar' | 'patterns' | 'earth';
 type JourneyTarget = 'calendar-panel' | 'earth-panel' | 'area-panel' | 'comparison-panel' | 'seasonal-context' | 'anomalies-panel';
 const COLORS = ['#26353b','#4e4b3d','#786040','#a86c3d','#d77945','#f89965','#ffd4ad'];
 const BLANK_INDEX: Index = {label:'DATA NOT LOADED',regions:[],generated_at:'',limitations:[]};
@@ -272,27 +273,28 @@ export default function App() {
   function useFullRecord(){if(!region)return;cancelEvidenceRestore();setStart(region.meta.period_start.slice(0,10));setEnd(region.meta.period_end.slice(0,10));setSelected(null);}
   function download(kind:'csv'|'ics'){if(!region)return;if(kind==='csv')exportCSV(rows,region.meta.region,label);else exportICS(region.critical_periods,Number(end.slice(0,4))||new Date().getFullYear(),region.meta.name,label);setToast(`${kind.toUpperCase()} export downloaded`);}
 
-  const workspaceNames={calendar:'Fire calendar',patterns:'Patterns',earth:'Earth'};
-  const sectionLinks=([['calendar','Calendar',CalendarDays],['patterns','Patterns',Waves],['earth','Earth',Globe2]] as const).map(([section,title,Icon])=><button key={section} className={view==='explore'&&exploreSection===section?'active':''} aria-current={view==='explore'&&exploreSection===section?'page':undefined} onClick={()=>{navigateToView('explore',section!==exploreSection);chooseExploreSection(section);}}><Icon size={18}/><span>{title}</span></button>);
+  const isIntroduction=view==='explore'&&exploreSection==='introduction';
+  const workspaceNames={introduction:'Introduction',calendar:'Fire calendar',patterns:'Patterns',earth:'Earth'};
+  const sectionLinks=([['introduction','Introduction',Radio],['calendar','Calendar',CalendarDays],['patterns','Patterns',Waves],['earth','Earth',Globe2]] as const).map(([section,title,Icon])=><button key={section} className={view==='explore'&&exploreSection===section?'active':''} aria-current={view==='explore'&&exploreSection===section?'page':undefined} onClick={()=>{navigateToView('explore',section!==exploreSection);chooseExploreSection(section);}}><Icon size={18}/><span>{title}</span></button>);
   const researchLinks=([['rhythm','Weekly Rhythm Index',Waves],['evidence','Evidence & validation',ShieldCheck],['methods','Methods',Layers3]] as const).map(([page,title,Icon])=><button key={page} className={view===page?'active':''} aria-current={view===page?'page':undefined} onClick={()=>navigateToView(page)}><Icon size={18}/><span>{title}</span></button>);
 
   return <div className="content-first-app atlas-app"><a className="skip-link" href="#main">Skip to content</a>
     <header className="site-header">
-      <a href="#" className="brand" onClick={e=>{e.preventDefault();navigateToView('explore');}}><span className="brand-symbol"><Flame size={24}/></span><span>CINDER<span className="brand-light">LINE</span></span></a>
+      <a href="#" className="brand" onClick={e=>{e.preventDefault();navigateToView('explore',exploreSection!=='introduction');chooseExploreSection('introduction');}}><span className="brand-symbol"><Flame size={24}/></span><span>CINDER<span className="brand-light">LINE</span></span></a>
       <nav className="desktop-navigation" aria-label="Main navigation"><div className="nav-group">{sectionLinks}</div><div className="nav-group">{researchLinks}</div></nav>
       <div className="rail-source"><DataBadge label={label}/><a className="header-source" href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noreferrer">NASA FIRMS <ArrowUpRight size={14}/></a></div>
       <details className="mobile-navigation" ref={mobileNav}><summary>Menu <ChevronDown size={16}/></summary><nav aria-label="Mobile navigation">{sectionLinks}{researchLinks}</nav></details>
     </header>
     <main id="main" tabIndex={-1} aria-labelledby="workspace-title">
-      <div className="workspace-heading">
+      {!isIntroduction&&<div className="workspace-heading">
         <h1 id="workspace-title">{view==='explore'?workspaceNames[exploreSection]:view==='evidence'?'Evidence & validation':view==='rhythm'?'Weekly Rhythm Index':'Methods'}</h1>
         <div className="workspace-tools">{view!=='rhythm'&&view!=='methods'&&<ShareView url={shareUrl} disabledReason={loading||hydrating||!dailySeriesReady?'Wait for the selected observations to load.':'Choose a valid date range within the published record.'}/>}</div>
-      </div>
+      </div>}
       {linkNotices.length>0&&<div className="share-notices"><div role="status" aria-live="polite">{linkNotices.map(notice=><p key={notice}>{notice}</p>)}</div><div className="share-notice-actions"><button onClick={resetSharedView} disabled={!catalog||loading}>Reset shared view</button><button onClick={()=>setLinkNotices([])}>Dismiss</button></div></div>}
       {isSynthetic&&<div className="synthetic-banner"><FlaskIcon/><span><strong>Synthetic demonstration.</strong> These observations were generated to test the pipeline. They are not measured fire activity.</span></div>}
       {error&&<div role="alert" className="error-banner" id="data-load-error" tabIndex={-1}><CircleHelp size={20}/><div><strong>Data not available</strong><p>{error} The interface will never substitute fabricated observations.</p></div><button className="button subtle" onClick={retryData} disabled={loading||cellLoading||hydrating}>Retry loading</button></div>}
 
-      {view==='methods'?<Methods region={region} index={index}/>:view==='rhythm'?<RhythmView><RhythmCellMap/></RhythmView>:<div className="workspace">
+      {view==='methods'?<Methods region={region} index={index}/>:view==='rhythm'?<RhythmView><RhythmCellMap/></RhythmView>:isIntroduction?<HarmonizationIntro weeks={!loading&&!hydrating&&dailySeriesReady&&!error?weeks:[]} context={`${region?.meta.name||'Selected region'} · ${cell==='ALL'?'Whole region':`Cell ${cell}`}`} loading={!error&&(loading||hydrating||cellLoading)} onExplore={()=>{navigateToView('explore',true);chooseExploreSection('calendar');}} onInspect={setSelected} onCompare={()=>{navigateToView('explore',true);compareRecord();}} onValidate={()=>navigateToView('evidence')}/>:<div className="workspace">
         <section className={`selection-bar ${view==='explore'&&exploreSection==='earth'?'earth-selection':' '}`} aria-label="Area and observation period">
           <div className="selection-top"><div className="selection-country"><label className="field-label" htmlFor="region">Region</label><div className="select-wrap region-select"><MapPin size={17}/><select id="region" value={regionId} onChange={e=>changeRegion(e.target.value)} disabled={!index.regions.length||loading}>{!index.regions.length&&<option>No processed regions</option>}{index.regions.map(r=><option key={r.id} value={r.id}>{r.name}</option>)}</select><ChevronDown size={15}/></div>
         </div>

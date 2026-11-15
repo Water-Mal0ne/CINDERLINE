@@ -204,6 +204,53 @@ function press(app,label){
 const calendar=app=>namedChild(app.tree,'Heatmap');
 const globe=app=>namedChild(app.tree,'LazyChild');
 
+test('first arrival explains harmonization and its actions open the actual record and evidence',async()=>{
+  const app=journeyApp('');
+  const introduction=()=>elements(app.tree,node=>typeof node.props?.onExplore==='function')[0];
+  try{
+    await app.settle();
+    assert.ok(introduction());assert.equal(calendar(app),undefined);assert.equal(globe(app),undefined);
+    assert.equal(app.url.searchParams.get('workspace'),'introduction');
+    assert.equal(introduction().props.loading,false);
+    const week=introduction().props.weeks[0];
+    introduction().props.onInspect(week);await app.settle();
+    assert.equal(namedChild(app.tree,'EvidenceDrawer').props.week,week);
+    namedChild(app.tree,'EvidenceDrawer').props.onClose();await app.settle();
+    introduction().props.onCompare();await app.settle();
+    assert.equal(app.url.searchParams.get('workspace'),'patterns');
+    assert.ok(elements(app.tree,node=>node.props?.id==='comparison-panel').length);
+    press(app,'Introduction');await app.settle();
+    introduction().props.onValidate();await app.settle();
+    assert.equal(app.url.searchParams.get('view'),'evidence');
+    press(app,'Introduction');await app.settle();
+    introduction().props.onExplore();await app.settle();
+    assert.ok(elements(app.tree,node=>node.props?.scopeId==='ALL'&&Array.isArray(node.props?.rows)).length);
+    assert.equal(app.url.searchParams.has('workspace'),false);
+    assert.equal(app.url.searchParams.get('calendar'),'monthly');
+    assert.equal(app.url.searchParams.get('start'),'2023-01-01');
+    assert.equal(app.url.searchParams.get('end'),'2024-12-31');
+  }finally{app.dispose();}
+});
+
+test('introduction reload and history preserve the saved selection without intercepting calendar links',async()=>{
+  const app=journeyApp('?region=Nepal&scale=raw&start=2024-01-03&end=2024-01-10&workspace=introduction');
+  try{
+    await app.settle();
+    const original=app.url.toString();
+    assert.equal(button(app.tree,'Introduction').props['aria-current'],'page');
+    press(app,'Calendar');await app.settle();
+    assert.ok(calendar(app));assert.equal(calendar(app).props.mode,'raw');
+    assert.ok(calendar(app).props.weeks.flatMap(w=>w.rows).every(row=>row.date>='2024-01-03'&&row.date<='2024-01-10'));
+    app.pop(original);await app.settle();
+    assert.equal(button(app.tree,'Introduction').props['aria-current'],'page');
+    app.pop('?view=rhythm');await app.settle();
+    assert.equal(button(app.tree,'Weekly Rhythm Index').props['aria-current'],'page');
+    app.pop('?region=Nepal');await app.settle();
+    assert.equal(button(app.tree,'Calendar').props['aria-current'],'page');
+    assert.ok(calendar(app));
+  }finally{app.dispose();}
+});
+
 test('journey: observed Earth mode and month survive country loading and section navigation',async()=>{
   const pendingIndia=deferred();
   const app=appHarness('?region=Nepal',file=>file==='India.json'?pendingIndia.promise:Promise.resolve(journeyRegions.Nepal),()=>Promise.resolve(journeyIndex));
