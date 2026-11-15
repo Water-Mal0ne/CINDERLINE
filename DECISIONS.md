@@ -104,3 +104,4 @@ Result (added after the analysis): the prediction did NOT hold. Of the two hill-
 - Preserve keyboard context during observation expansion and country-detail navigation. Separate Earth/table presentation changes from scientific cell selection.
 - Draw isolated existing values and break lines across absent months without filling gaps, recomputing values or changing exports. Keep scientific wording/captions/caveats unchanged.
 - Require cross-review plus the full tests/build after the commit; document results and verification limits in reports/SECTION_REVIEW_ROUND2_QA.md.
+- 2026-11-15 09:29 Nepal time: Fix the observed desktop month-label wrapping with CSS only; retain phone layout and all chart content.

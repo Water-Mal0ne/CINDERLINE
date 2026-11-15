@@ -6,6 +6,7 @@
 
 - Expanding unusual observations now focuses the first new result, including the final batch where the expansion button disappears. At phone width, expanding eight results to sixteen focused result nine; opening and closing its evidence drawer returned focus to that same result and retained all sixteen.
 - Calendar boundary-arrow input now clears a competing hover preview even when the focused week cannot move. Moving the pointer toward the evidence action still retains the hovered week.
+- Final desktop inspection found the month/date label wrapping inside a fixed-width column. A desktop-only intrinsic-width column now gives that label and its arrow controls enough room while the slider fills the remaining width; phone rules are unchanged.
 - Isolated monthly and seasonal values, including zero, now get visible point marks. Missing values remain missing. Independent review additionally reproduced a monthly line spanning an entirely absent February; line segments and isolated markers now respect calendar-month adjacency, including December to January. Seasonal slots already preserve missing-week gaps in both lines and bands. Aggregation and exports are unchanged.
 
 ## Evidence and Methods
