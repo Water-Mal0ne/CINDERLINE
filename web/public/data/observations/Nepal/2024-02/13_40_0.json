@@ -1,0 +1,1 @@
+{"schema":"observations-v1","sensor":"VIIRS S-NPP","country":"Nepal","month":"2024-02","id":"13_40_0","time_basis":"UTC","columns":["lat","lon","utc","confidence","scan","track","frp","daynight"],"count":1,"bounds":[80,26,82,28],"rows":[[27.93949,81.91552,"2024-02-27T20:02:00Z","n",0.46,0.39,0.59,"N"]]}

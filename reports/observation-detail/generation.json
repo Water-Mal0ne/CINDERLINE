@@ -1,0 +1,131 @@
+{
+  "schema": "observations-v1",
+  "source_manifest_sha256": "cf7baeac940daee36f944a5a278402d12cd8ed6beca116b36bdca0fbadb0184b",
+  "countries": [
+    {
+      "id": "Australia",
+      "source_sha256": "5a99b9dcd82cd6d51df36da06eb4b7f504b3d80efeb1c4b2c4789153251983e0",
+      "diagnostics": {
+        "raw_rows": 979867,
+        "retained_rows": 881613,
+        "unexpected_satellite": 0,
+        "excluded_confidence": 87533,
+        "non_vegetation_or_unknown_type": 11127,
+        "invalid_coordinates": 0,
+        "invalid_or_outside_year_timestamp": 0,
+        "unknown_frp_retained": 0,
+        "unknown_footprint_retained": 0
+      },
+      "count": 881613,
+      "tiles": 1889
+    },
+    {
+      "id": "Bangladesh",
+      "source_sha256": "529d46bcb849dbc6b1056be8d97cd39cc67e2b30f0cd1796b7fd29dbf447ddc6",
+      "diagnostics": {
+        "raw_rows": 8083,
+        "retained_rows": 6877,
+        "unexpected_satellite": 0,
+        "excluded_confidence": 895,
+        "non_vegetation_or_unknown_type": 326,
+        "invalid_coordinates": 0,
+        "invalid_or_outside_year_timestamp": 0,
+        "unknown_frp_retained": 0,
+        "unknown_footprint_retained": 0
+      },
+      "count": 6877,
+      "tiles": 74
+    },
+    {
+      "id": "Brazil",
+      "source_sha256": "70bddaf02d8eb883a1ef69c724176a4d9fd5b5ba94d57286fa409a69f6213882",
+      "diagnostics": {
+        "raw_rows": 1935740,
+        "retained_rows": 1767650,
+        "unexpected_satellite": 0,
+        "excluded_confidence": 149399,
+        "non_vegetation_or_unknown_type": 19464,
+        "invalid_coordinates": 0,
+        "invalid_or_outside_year_timestamp": 0,
+        "unknown_frp_retained": 0,
+        "unknown_footprint_retained": 0
+      },
+      "count": 1767650,
+      "tiles": 2599
+    },
+    {
+      "id": "Egypt",
+      "source_sha256": "79b8179bd3870290f947ee8a053fd586b52193fb70ec845af946cf9d67eead1d",
+      "diagnostics": {
+        "raw_rows": 27178,
+        "retained_rows": 7931,
+        "unexpected_satellite": 0,
+        "excluded_confidence": 1901,
+        "non_vegetation_or_unknown_type": 18005,
+        "invalid_coordinates": 0,
+        "invalid_or_outside_year_timestamp": 0,
+        "unknown_frp_retained": 0,
+        "unknown_footprint_retained": 0
+      },
+      "count": 7931,
+      "tiles": 246
+    },
+    {
+      "id": "India",
+      "source_sha256": "561c85c5eb63441bae042d6be8b79fd1052be154e3445f355ac5e1fb0451b48f",
+      "diagnostics": {
+        "raw_rows": 552312,
+        "retained_rows": 382884,
+        "unexpected_satellite": 0,
+        "excluded_confidence": 103437,
+        "non_vegetation_or_unknown_type": 68698,
+        "invalid_coordinates": 0,
+        "invalid_or_outside_year_timestamp": 0,
+        "unknown_frp_retained": 0,
+        "unknown_footprint_retained": 0
+      },
+      "count": 382884,
+      "tiles": 1051
+    },
+    {
+      "id": "Nepal",
+      "source_sha256": "e493b5c9c7f9afa6539083e0d85c5effa273d7e934b7cf9256e535bc3d63709d",
+      "diagnostics": {
+        "raw_rows": 53913,
+        "retained_rows": 48157,
+        "unexpected_satellite": 0,
+        "excluded_confidence": 5735,
+        "non_vegetation_or_unknown_type": 21,
+        "invalid_coordinates": 0,
+        "invalid_or_outside_year_timestamp": 0,
+        "unknown_frp_retained": 0,
+        "unknown_footprint_retained": 0
+      },
+      "count": 48157,
+      "tiles": 76
+    },
+    {
+      "id": "United_States",
+      "source_sha256": "b282c996b6929facc1d5726045e2ad14235a8ac10900daff08edaee9a8f2b200",
+      "diagnostics": {
+        "raw_rows": 484736,
+        "retained_rows": 387620,
+        "unexpected_satellite": 0,
+        "excluded_confidence": 20659,
+        "non_vegetation_or_unknown_type": 77942,
+        "invalid_coordinates": 0,
+        "invalid_or_outside_year_timestamp": 0,
+        "unknown_frp_retained": 0,
+        "unknown_footprint_retained": 0
+      },
+      "count": 387620,
+      "tiles": 2846
+    }
+  ],
+  "index_sha256": "3379a22ad49bc0041721a1bc2b93bb71f2d0bfce95e8deefa60acf0879c0f2d6",
+  "files": 8866,
+  "bytes": 244970711,
+  "largest_file_bytes": 686483,
+  "seconds": 291.844,
+  "total_detections": 3482732
+}

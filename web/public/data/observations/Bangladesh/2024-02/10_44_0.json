@@ -1,0 +1,1 @@
+{"schema":"observations-v1","sensor":"VIIRS S-NPP","country":"Bangladesh","month":"2024-02","id":"10_44_0","time_basis":"UTC","columns":["lat","lon","utc","confidence","scan","track","frp","daynight"],"count":1,"bounds":[88,20,90,22],"rows":[[21.76836,89.21084,"2024-02-26T20:22:00Z","n",0.38,0.58,1.21,"N"]]}

@@ -204,6 +204,27 @@ function press(app,label){
 const calendar=app=>namedChild(app.tree,'Heatmap');
 const globe=app=>namedChild(app.tree,'LazyChild');
 
+test('journey: observed Earth mode and month survive country loading and section navigation',async()=>{
+  const pendingIndia=deferred();
+  const app=appHarness('?region=Nepal',file=>file==='India.json'?pendingIndia.promise:Promise.resolve(journeyRegions.Nepal),()=>Promise.resolve(journeyIndex));
+  const earth=()=>elements(app.tree,node=>typeof node.props?.onEarthMode==='function')[0];
+  try{
+    await app.settle();press(app,'Open the 3D Earth view');await app.settle();
+    assert.equal(earth().props.earthMode,'harmonized');
+    earth().props.onEarthMode('observations');earth().props.onObservationMonth('2024-11');await app.settle();
+    assert.equal(app.url.searchParams.get('start'),'2023-01-01','observation months must not alter the historical calendar');
+    assert.equal(app.url.searchParams.get('end'),'2024-12-31');
+    choose(app,'region','India');await app.settle();
+    assert.equal(earth(),undefined,'the country loading state temporarily unmounts the globe');
+    pendingIndia.resolve(journeyRegions.India);await app.settle();
+    assert.equal(earth().props.regionId,'India');
+    assert.equal(earth().props.earthMode,'observations');assert.equal(earth().props.observationMonth,'2024-11');
+    press(app,'Methods');await app.settle();assert.equal(earth(),undefined);
+    press(app,'Explore the record');await app.settle();
+    assert.equal(earth().props.earthMode,'observations');assert.equal(earth().props.observationMonth,'2024-11');
+  }finally{app.dispose();}
+});
+
 test('journey: country, dates, cell, evidence, close and history restore the same filtered records',async()=>{
   const app=journeyApp();
   try{
@@ -272,12 +293,16 @@ test('journey: changing dates after a failed shared cell cancels the old pending
 test('journey: a week evidence action opens its annual Earth context without treating it as a weekly layer',async()=>{
   const app=journeyApp('?region=Nepal&scale=raw');
   try{
-    await app.settle();const week=calendar(app).props.weeks.find(week=>week.year===2023);
+    await app.settle();press(app,'Open the 3D Earth view');await app.settle();
+    globe(app).props.onEarthMode('observations');globe(app).props.onObservationMonth('2024-11');await app.settle();
+    const week=calendar(app).props.weeks.find(week=>week.year===2023);
     calendar(app).props.onSelect(week);await app.settle();
     const drawer=namedChild(app.tree,'EvidenceDrawer');assert.equal(typeof drawer.props.onViewEarth,'function');
     drawer.props.onViewEarth();await app.settle();
     assert.equal(namedChild(app.tree,'EvidenceDrawer'),undefined);
     assert.ok(globe(app));assert.equal(globe(app).props.year,2023);
+    assert.equal(globe(app).props.earthMode,'harmonized','the explicit annual evidence action returns to the calibrated overview');
+    assert.equal(globe(app).props.observationMonth,'2024-11','returning to annual mode does not erase the independent observation month');
     assert.equal(app.url.searchParams.get('start'),'2023-01-01');assert.equal(app.url.searchParams.get('end'),'2023-12-31');
     assert.equal(app.url.searchParams.get('scale'),'raw');assert.equal(app.url.searchParams.has('week'),false);
   }finally{app.dispose();}
