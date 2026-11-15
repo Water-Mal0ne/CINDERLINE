@@ -23,4 +23,5 @@ web/public/evidence/frp/*.svg whitespace=cr-at-eol,-blank-at-eol
 pipeline/review/frp_test.py whitespace=cr-at-eol,-blank-at-eof
 web/public/data/calendar-alignment.json -text whitespace=cr-at-eol
 web/public/data/season-comparison.json -text whitespace=cr-at-eol
+web/public/data/observations/** -text
 reports/calendar-confidence/*.json -text whitespace=cr-at-eol
