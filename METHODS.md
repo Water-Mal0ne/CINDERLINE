@@ -1,6 +1,6 @@
-# FIRETRACE methods
+# CINDERLINE methods
 
-FIRETRACE compares recorded fire detections on a named instrument scale. It does not estimate the true number of fires or classify ignition causes. Read the generated reports for the actual datasets, supported periods, selected model and measured results of a particular run.
+CINDERLINE compares recorded fire detections on a named instrument scale. It does not estimate the true number of fires or classify ignition causes. Read the generated reports for the actual datasets, supported periods, selected model and measured results of a particular run.
 
 ## Data and provenance
 

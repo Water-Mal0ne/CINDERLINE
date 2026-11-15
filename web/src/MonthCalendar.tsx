@@ -41,7 +41,7 @@ export default function MonthCalendar({rows, matrix: supplied, mode, label, regi
   }
   function download() {
     const safe = regionId.replace(/[^A-Za-z0-9_-]/g, '_'), scope = fileScope ?? (scopeId === 'ALL' ? 'whole-region' : `cell_${scopeId.replace(/[^A-Za-z0-9._-]/g, '_')}`);
-    saveFile(`FIRETRACE_${safe}_${scope}_month-calendar_${mode}.csv`, monthCalendarCSV(matrix, regionId, scopeName, label), 'text/csv;charset=utf-8');
+    saveFile(`CINDERLINE_${safe}_${scope}_month-calendar_${mode}.csv`, monthCalendarCSV(matrix, regionId, scopeName, label), 'text/csv;charset=utf-8');
   }
 
   const position = (value: number | null) => numeric(value) && matrix.max > 0 ? `${Math.min(100, value / matrix.max * 100)}%` : '0%';

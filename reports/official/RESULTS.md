@@ -1,4 +1,4 @@
-# FIRETRACE "human rhythm" kill test: results
+# CINDERLINE "human rhythm" kill test: results
 
 Run on real NASA FIRMS data, 14 November 2026, with `kill_test.py` version 2. Chart: `kill_test.png`. Raw numbers: `kill_test_results.csv`, `kill_test_gate.json`, `kill_test_diagnostics.json`.
 

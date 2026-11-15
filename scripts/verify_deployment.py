@@ -13,7 +13,7 @@ from urllib.request import Request, urlopen
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--url", default="https://firetrace-bhaktapur-2026.pages.dev/")
+    parser.add_argument("--url", default="https://cinderline-spaceapps.pages.dev/")
     parser.add_argument("--dist", type=Path, default=Path("dist"))
     parser.add_argument("--report", type=Path, default=Path("reports/deployment_verification.json"))
     args = parser.parse_args()
@@ -28,7 +28,7 @@ def main() -> None:
         url = args.url.rstrip("/") + "/" + ("" if relative == "index.html" else quote(relative))
         expected = hashlib.sha256(path.read_bytes()).hexdigest()
         try:
-            with urlopen(Request(url, headers={"User-Agent": "FIRETRACE-release-check/1.0"}), timeout=60) as response:
+            with urlopen(Request(url, headers={"User-Agent": "CINDERLINE-release-check/1.0"}), timeout=60) as response:
                 body = response.read()
                 actual = hashlib.sha256(body).hexdigest()
                 return {"file": relative, "status": response.status, "bytes": len(body),

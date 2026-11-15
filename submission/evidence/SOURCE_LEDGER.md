@@ -84,14 +84,14 @@ Repository visibility was verified as PUBLIC by `gh repo view` (reported by the 
 
 ## S13: External source constants
 
-These are attributed source statements, not values calculated from FIRETRACE data.
+These are attributed source statements, not values calculated from CINDERLINE data.
 
-- `modis_viirs_resolution`: [primary source](https://firms.modaps.eosdis.nasa.gov/alerts/notes.php); checked 2026-11-14 UTC by the primary-source reviewer. Nominal active-fire product spatial resolution; not guaranteed minimum fire size.
-- `viirs_product_and_current_coverage`: [primary source](https://firms.modaps.eosdis.nasa.gov/content/descriptions/FIRMS_VIIRS_Firehotspots.html); checked 2026-11-14 UTC by the primary-source reviewer. Do not describe S-NPP as continuing operational coverage after the published endpoint.
-- `earl_weekly_fire_pattern`: [primary source](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL066383); checked 2026-11-14 UTC by the primary-source reviewer. Weekly fire patterns predate FIRETRACE; no first-discovery claim.
-- `spaceapps_submission_fields`: [primary source](https://github.com/nasa/spaceapps/discussions/1858); checked 2026-11-14 UTC by the primary-source reviewer. Checklist covers the listed fields; the team must still inspect the live form and personally accept terms.
-- `spaceapps_demo_limits`: [primary source](https://github.com/nasa/spaceapps/discussions/1991); checked 2026-11-14 UTC by the primary-source reviewer. Choose a linked slide demo or a video shorter than 30 seconds; final project and demo are separate accessible links.
-- `bhaktapur_local_event`: [primary source](https://gdg.community.dev/events/details/google-gdg-kathmandu-presents-nasa-space-apps-challenge-2026-bhaktapur-local-event/); checked 2026-11-14 UTC by the primary-source reviewer. This is the published event window, not proof of the local judging cutoff; the team must confirm any earlier cutoff.
+- `modis_viirs_resolution`: [source](https://firms.modaps.eosdis.nasa.gov/alerts/notes.php); 2026-11-14 UTC; root primary-source review. Nominal active-fire product spatial resolution; not guaranteed minimum fire size.
+- `viirs_product_and_current_coverage`: [source](https://firms.modaps.eosdis.nasa.gov/content/descriptions/FIRMS_VIIRS_Firehotspots.html); 2026-11-14 UTC; root primary-source review. Do not describe S-NPP as continuing operational coverage after the published endpoint.
+- `earl_weekly_fire_pattern`: [source](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL066383); 2026-11-14 UTC; root primary-source review. Weekly fire patterns predate CINDERLINE; no first-discovery claim.
+- `spaceapps_submission_fields`: [source](https://github.com/nasa/spaceapps/discussions/1858); 2026-11-14 UTC; Independent submission verifier reopened Global Organizing Team answer. Checklist covers the listed fields; the team must still inspect the live form and personally accept terms.
+- `spaceapps_demo_limits`: [source](https://github.com/nasa/spaceapps/discussions/1991); 2026-11-14 UTC; Independent submission verifier reopened Navigator answer. Choose a linked slide demo or a video shorter than 30 seconds; final project and demo are separate accessible links.
+- `kathmandu_local_event`: [source](https://www.spaceappschallenge.org/); 2026-11-15 UTC; Team statement: the team participates in the Kathmandu, Nepal local event; venue and listing to be filled in. Event name from the team. Venue and local judging cutoff are not verified here; the team must fill in the venue and confirm any earlier cutoff.
 
 ## Interpretation controls
 

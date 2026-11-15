@@ -113,7 +113,7 @@ def seasonal_tables(daily):
 
 
 def export_ics(periods, path, year):
-    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//FIRETRACE//Seasonal calendar//EN",
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//CINDERLINE//Seasonal calendar//EN",
              "CALSCALE:GREGORIAN"]
     for p in periods:
         start = dt.date(year, 1, 1) + dt.timedelta(days=(p["start_week"] - 1) * 7)

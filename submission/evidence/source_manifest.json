@@ -336,7 +336,7 @@
       "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL066383",
       "retrieved_utc_date": "2026-11-14",
       "verified_by": "root primary-source review",
-      "interpretation": "Weekly fire patterns predate FIRETRACE; no first-discovery claim."
+      "interpretation": "Weekly fire patterns predate CINDERLINE; no first-discovery claim."
     },
     {
       "id": "spaceapps_submission_fields",
@@ -370,17 +370,17 @@
       "interpretation": "Choose a linked slide demo or a video shorter than 30 seconds; final project and demo are separate accessible links."
     },
     {
-      "id": "bhaktapur_local_event",
+      "id": "kathmandu_local_event",
       "values": {
-        "name": "NASA Space Apps Challenge 2026 - Bhaktapur Local Event",
-        "venue": "Khwopa Engineering College, Libali 8, Bhaktapur",
+        "name": "NASA Space Apps Challenge 2026 - Kathmandu, Nepal local event",
+        "venue": "[VENUE: fill in]",
         "start_local": "2026-11-14T00:00:00+05:45",
         "end_local": "2026-11-15T23:59:00+05:45"
       },
-      "url": "https://gdg.community.dev/events/details/google-gdg-kathmandu-presents-nasa-space-apps-challenge-2026-bhaktapur-local-event/",
-      "retrieved_utc_date": "2026-11-14",
-      "verified_by": "Independent submission verifier reopened local organizer listing",
-      "interpretation": "This is the published event window, not proof of the local judging cutoff; the team must confirm any earlier cutoff."
+      "url": "https://www.spaceappschallenge.org/",
+      "retrieved_utc_date": "2026-11-15",
+      "verified_by": "Team statement: the team participates in the Kathmandu, Nepal local event; venue and listing to be filled in",
+      "interpretation": "Event name from the team. Venue and local judging cutoff are not verified here; the team must fill in the venue and confirm any earlier cutoff."
     }
   ],
   "repository_access": {

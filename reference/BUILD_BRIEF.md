@@ -1,6 +1,6 @@
-# FIRETRACE: build brief for Codex
+# CINDERLINE: build brief for Codex
 
-You are building our team's entry for the NASA Space Apps Challenge 2026, challenge "Harmonization of MODIS and VIIRS Hot Spots". We are a team of six at the Bhaktapur, Nepal local event. The hackathon runs 14-15 November 2026 and the submission is due 15 November, 11:59 pm Nepal time (UTC+05:45). Read this whole brief before writing code.
+You are building our team's entry for the NASA Space Apps Challenge 2026, challenge "Harmonization of MODIS and VIIRS Hot Spots". We are a team of six at the Kathmandu, Nepal local event. The hackathon runs 14-15 November 2026 and the submission is due 15 November, 11:59 pm Nepal time (UTC+05:45). Read this whole brief before writing code.
 
 ## 1. The challenge in one paragraph
 
@@ -8,7 +8,7 @@ NASA's FIRMS service publishes every satellite fire detection ("hotspot") as a r
 
 ## 2. What we are building
 
-Product name: FIRETRACE. Two layers.
+Product name: CINDERLINE. Two layers.
 
 Layer 1, required and must be excellent: a harmonized MODIS-VIIRS record and calendar web app, with honest evaluation against baselines.
 

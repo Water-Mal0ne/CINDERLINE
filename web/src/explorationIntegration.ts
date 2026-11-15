@@ -31,6 +31,9 @@ export function catalogForRegion(region: Region): ExplorationCatalog {
 export function resolveAppExploration(search:string,catalog:ExplorationCatalog) {
   const result=resolveExploration(search,catalog);
   result.notices=result.notices.map(notice=>notice==='That annual grid cell is not published. The globe selection was cleared.'?'Annual globe-cell selection is not restored by this release. Use the globe to select a cell.':notice);
+  // The Earth view shows its own note when the calendar runs past the annual globe data (GLOBE_LAST_YEAR); a link
+  // notice on every load would repeat it.
+  if(Number(result.state.end.slice(0,4))>GLOBE_LAST_YEAR) result.notices=result.notices.filter(notice=>notice!=='The calendar end year has no annual globe layer. The nearest supported globe year is shown.');
   if(result.state.globeView!=='earth') result.notices.push('The Earth/table display preference is not restored by this release.');
   result.state.globeView='earth';
   result.state.globeCell=null;

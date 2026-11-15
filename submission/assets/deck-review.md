@@ -1,21 +1,20 @@
-# FIRETRACE slide artifact checks
+# CINDERLINE slide artifact checks
 
-Reviewed 2026-11-14 20:16 UTC. The PDF and PowerPoint each contain exactly seven slides, matching `submission/SLIDES.md`.
+Rebuilt 2026-11-15 09:19 UTC for the CINDERLINE rename and the Kathmandu, Nepal local event. The PDF and PowerPoint each contain exactly seven slides, matching `submission/SLIDES.md`.
 
-- All seven final PowerPoint slide renders were inspected; all seven PDF pages were rendered with Poppler and inspected. The final metadata-only rebuild is pixel-identical to the independently approved slide renders.
-- Native authored word counts, including titles, table cells and the cover brand: **18, 20, 27, 34, 28, 28, 22**. Original screenshot and scientific-figure labels remain intact as source evidence and are excluded from this authored-prose limit.
-- Spoken speaker-note counts: **70, 72, 74, 80, 78, 82, 81**. Documentary source and visual-provenance references follow the spoken text under separate, unspoken labels.
-- Package integrity, slide geometry, font policy and Artifact Tool re-import checks pass. The installed design font is Arial. The held-out results table on slide 4 is a native editable table.
-- Existing source screenshots and the Nepal comparison chart are embedded without changing their observations. Evidence-card crops retain the visible caveat text. The map is explicitly described as exploratory, and the season finding as retrospective.
-- Titles, body text, the results table and speaker notes remain editable in the PPTX. Embedded source screenshots and figures remain images.
-- **The PDF contains raster slide pages, so its text is not selectable and it is not a tagged accessible PDF.** Use `submission/SLIDES.md` for selectable text and complete notes, or the editable PowerPoint. The PDF uses verified high-resolution renders because the bundled native PDF exporter could not resolve `#standard-fonts/Helvetica`.
-- PowerPoint desktop save/reopen was not performed. Structural checks and renderer checks do not replace testing in that application.
+- **Generator:** `submission/build_deck_fallback.py`. The original `generate_slides.mjs` needs `@oai/artifact-tool` and a presentation-skill finalizer that exist only in the Codex runtime, so they could not be run here. The fallback reads the same `SLIDES.md`, applies the same word limits, and reproduces the same positions, colours and Arial font. It uses python-pptx for the PPTX and Pillow renders for the PDF, which `submission/render_slides_pdf.py` packages.
+- **Word counts:** authored words per slide, including titles, table cells and the cover brand: **22, 20, 27, 38, 32, 28, 22** (limit 40). Spoken speaker-note words: **70, 72, 74, 81, 75, 82, 81** (60-90). Source and visual-provenance references follow the spoken notes under separate, unspoken labels.
+- **Editable content:** titles, body text, speaker notes and the slide-4 results table are native and editable in the PPTX. Screenshots and the Nepal comparison chart are embedded unchanged as images; the evidence-card crops keep their caveat text.
+- **Screenshots:** the five application screenshots are the original captures (`CAPTURE_PROVENANCE.json`). None of the cropped views shows the old product name.
+- **Checked:** all seven Pillow renders were inspected, and the PDF page count, title, author and links were checked. Its links go to the repository and https://cinderline-spaceapps.pages.dev/.
+- **PDF limits:** the PDF contains raster pages drawn by Pillow from the same layout, not renders of the PPTX file. Its text is not selectable and it is not a tagged accessible PDF. Use `submission/SLIDES.md` or the PPTX for text.
+- **Not done:** PowerPoint desktop save/reopen and the original Artifact Tool package and layout validators were not run.
 
-`submission/assets/deck-manifest.json` records the LF-normalized Markdown hash, exact image and output hashes, runtime versions, word counts, editability limits and reproduction command. It contains no personal filesystem paths. The scientific evidence and source commits are recorded separately in `submission/evidence/SOURCE_LEDGER.md`.
+`submission/assets/deck-manifest.json` records the LF-normalized Markdown hash, image and output hashes, word counts, generator and editability limits.
 
-Final artifacts:
+Final artifacts (file names kept unchanged):
 
-- `submission/FIRETRACE_slides.pptx`: 576,251 bytes; SHA-256 `55cfdf62a1e1904df94772af8af52ee1aa635e7b797322a964c32442df313a1e`.
-- `submission/FIRETRACE_slides.pdf`: 3,356,638 bytes; SHA-256 `2db65365ff2de1eea4615f7fab2fc73069919560a644d3da239a6c4f8d7371d0`.
+- `submission/FIRETRACE_slides.pptx`: 508,924 bytes; SHA-256 `d67820a76a15fc742d4bc1a7d13784608a42e1ba514e61730af2da04f4a5ee7c`.
+- `submission/FIRETRACE_slides.pdf`: 3,688,302 bytes; SHA-256 `6106a986c9fe082e5b895c0184e0e7c713f96bfa2615d3d03627b7bf9a5c6ccd`.
 
-Rebuild with `submission/generate_slides.mjs` and its documented runtime arguments. `submission/render_slides_pdf.py` packages the verified final-PPTX renders. Private build and validation intermediates are intentionally outside the submitted artifact set.
+Rebuild with `python submission/build_deck_fallback.py`, or with `node submission/generate_slides.mjs --modules … --skill … --python …` where the Codex runtime is available.

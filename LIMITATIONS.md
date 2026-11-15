@@ -1,4 +1,4 @@
-# FIRETRACE limitations
+# CINDERLINE limitations
 
 ## Supplemental count versus FRP comparison
 
@@ -70,7 +70,7 @@ Synthetic data can validate software under declared assumptions but cannot valid
 
 ## Product use
 
-The calendar describes historical observations. Critical periods are historical summaries, not operational fire forecasts. Anomaly flags are exploratory and should not be used as emergency alerts or stand-alone public-safety decisions. FIRETRACE is a hackathon research prototype; NASA does not endorse this project.
+The calendar describes historical observations. Critical periods are historical summaries, not operational fire forecasts. Anomaly flags are exploratory and should not be used as emergency alerts or stand-alone public-safety decisions. CINDERLINE is a hackathon research prototype; NASA does not endorse this project.
 
 Seasonal statistics and anomalies exclude bin 53 and other incomplete seven-day bins. This avoids comparing one or two days with a full week, but leaves the final calendar days outside those weekly statistical summaries. Their observations can still appear in the calendar and daily exports. A seasonal summary needs at least three eligible years, and missing history must remain unavailable rather than be filled with invented values. National seasonality does not become cell-specific when a cell is selected. Exported dates place historical windows into a selected year for reference only.
 

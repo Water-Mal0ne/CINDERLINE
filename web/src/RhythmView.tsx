@@ -115,7 +115,7 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
   return <div className="rhythm-page">
     <div className="section-intro"><span className="eyebrow">WEEKLY RHYTHM INDEX · PRE-SPECIFIED TEST · 7 COUNTRIES</span>
       <h2>Weekly Rhythm Index: do detections follow the <em>7-day week?</em></h2>
-      <p>We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration.</p>
+      <p>We reproduce a known weekly pattern in each satellite record separately. Independently, CINDERLINE tests whether its historical calendar survives a change of sensor and calibration.</p>
       <p>The test uses a stated expected rest day for each country. These weekday associations do not establish ignition cause or identify who burns or why.</p></div>
 
     <section className="panel rh-verdict" aria-labelledby="rh-verdict-title">

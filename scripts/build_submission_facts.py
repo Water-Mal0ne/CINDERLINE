@@ -132,9 +132,9 @@ def ledger(facts, sources, external):
             relative = str(Path(s["local_path"]).relative_to("submission/evidence")).replace("\\", "/")
             lines += [f"- `{source_id}`: [{s['source_path']}]({s['source_url']}) · [exact snapshot]({relative}) · SHA-256 `{s['sha256']}`."]
         lines.append("")
-    lines += ["## S13: External source constants", "", "These are attributed source statements, not values calculated from FIRETRACE data.", ""]
+    lines += ["## S13: External source constants", "", "These are attributed source statements, not values calculated from CINDERLINE data.", ""]
     for s in external:
-        lines += [f"- `{s['id']}`: [primary source]({s['url']}); checked {s['retrieved_utc_date']} UTC by the primary-source reviewer. {s['interpretation']}"]
+        lines += [f"- `{s['id']}`: [source]({s['url']}); {s['retrieved_utc_date']} UTC; {s['verified_by']}. {s['interpretation']}"]
     lines += ["", "## Interpretation controls", "",
               "- Layer 1 weekly MAE, yearly error percentages and monthly-share TV measure different things. Keep their units and reference explicit.",
               "- The official all-detection weekly rhythm result differs from the US daytime FRP subset. Do not interchange their Sunday indices.",

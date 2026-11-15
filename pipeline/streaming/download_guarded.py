@@ -36,7 +36,7 @@ def fetch(country, year, sensor, directory, reserve):
                 raise InterruptedError("Download paused by disk reserve guard")
             for attempt in range(3):
                 try:
-                    request = urllib.request.Request(url, headers={"User-Agent": "FIRETRACE-research/0.1"})
+                    request = urllib.request.Request(url, headers={"User-Agent": "CINDERLINE-research/0.1"})
                     with urllib.request.urlopen(request, timeout=90) as source, part.open("wb") as target:
                         expected = int(source.headers.get("Content-Length", "0"))
                         while block := source.read(1024*1024):

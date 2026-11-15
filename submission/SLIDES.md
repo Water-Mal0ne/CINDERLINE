@@ -1,4 +1,4 @@
-# FIRETRACE — seven-slide judging deck
+# CINDERLINE — seven-slide judging deck
 
 The seven sections below are the complete deck. Titles plus on-slide text stay within 40 words; each spoken note is 60–90 words. Sources and production directions are not spoken. Real screenshots show the earlier deployed baseline. FRP, season-sensitivity, month-calendar, area and 2025 additions are merged but appear live only after redeployment; do not imply they are live before then.
 
@@ -10,13 +10,15 @@ Or did the satellite change?
 
 A historical calendar that tests its own conversion.
 
+Kathmandu, Nepal local event
+
 ### Visual
 
 `submission/assets/live-calendar.jpg`: real Nepal calendar screenshot. Preserve the country, record dates and REAL FIRMS DATA label. The screenshot is an application view, not a before/after proof.
 
 ### Speaker notes
 
-A sharper satellite can make the fire record change even when burning has not. FIRETRACE builds a historical calendar on a declared reference scale, and tests whether better-looking numbers preserve the season people need to understand. Start here in Nepal. A hotspot is a satellite detection, and one continuing event can produce many detections. We let a viewer inspect the observations behind a week before interpreting a change across years.
+A sharper satellite can make the fire record change even when burning has not. CINDERLINE builds a historical calendar on a declared reference scale, and tests whether better-looking numbers preserve the season people need to understand. Start here in Nepal. A hotspot is a satellite detection, and one continuing event can produce many detections. We let a viewer inspect the observations behind a week before interpreting a change across years.
 
 ### Sources
 
@@ -132,7 +134,7 @@ FRP contrast: Aqua and S-NPP pass; Terra fails.
 
 ### Speaker notes
 
-We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration. US and Australia show Sunday dips. Brazil's newly active grid cells also pass, but are not verified ignitions. India, Nepal, Bangladesh and Egypt fail the country rule; Nepal's simulation has low power. Northeast India's map is exploratory; the Bangladesh hills prediction failed. US daytime count-versus-FRP passes for Aqua and S-NPP, not Terra, with a later Git receipt.
+We reproduce a known weekly pattern in each satellite record separately. Independently, CINDERLINE tests whether its historical calendar survives a change of sensor and calibration. US and Australia show Sunday dips. Brazil's newly active grid cells also pass, but are not verified ignitions. India, Nepal, Bangladesh and Egypt fail the country rule; Nepal's simulation has low power. Northeast India's map is exploratory; the Bangladesh hills prediction failed. US daytime count-versus-FRP passes for Aqua and S-NPP, not Terra, with a later Git receipt.
 
 ### Sources
 
@@ -148,7 +150,7 @@ NASA FIRMS data. Public code. Visible limitations. AI assistance disclosed.
 
 github.com/Water-Mal0ne/FIRETRACE
 
-firetrace-bhaktapur-2026.pages.dev
+cinderline-spaceapps.pages.dev
 
 ### Visual
 
@@ -160,4 +162,4 @@ Our contribution is an inspectable historical record and a test of what its corr
 
 ### Sources
 
-[S01] `METHODS.md`; [S08] `README.md`, `LIMITATIONS.md`; [S12] `AI_DISCLOSURE.md`; [S10–S11] independently checked branch evidence. [Live application](https://firetrace-bhaktapur-2026.pages.dev/) · [Repository](https://github.com/Water-Mal0ne/FIRETRACE).
+[S01] `METHODS.md`; [S08] `README.md`, `LIMITATIONS.md`; [S12] `AI_DISCLOSURE.md`; [S10–S11] independently checked branch evidence. [Live application](https://cinderline-spaceapps.pages.dev/) · [Repository](https://github.com/Water-Mal0ne/FIRETRACE).

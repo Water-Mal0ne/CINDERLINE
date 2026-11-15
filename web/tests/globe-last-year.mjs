@@ -33,6 +33,7 @@ test('a calendar running past the Earth data shares the latest globe year', () =
   const asked = state.createShareLink('https://example.org/firetrace/', {...resolved.state, globeYear: 2025}, catalog);
   assert.equal(new URL(asked.url).searchParams.get('globeYear'), String(integration.GLOBE_LAST_YEAR));
   assert.equal(integration.canShareSelection(resolved.state, catalog), true);
+  assert.ok(!resolved.notices.some(n => /no annual globe layer/.test(n)), 'no repeated link notice on a default load');
 });
 
 test('area period note matches the area files', () => {

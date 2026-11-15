@@ -21,8 +21,8 @@ def main() -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     width, height = 960, 540  # 16:9, matching the 1280x720 native slide canvas.
     pdf = canvas.Canvas(str(destination), pagesize=(width, height), pageCompression=1)
-    pdf.setTitle("FIRETRACE — Seven-slide judging deck")
-    pdf.setAuthor("FIRETRACE team")
+    pdf.setTitle("CINDERLINE — Seven-slide judging deck")
+    pdf.setAuthor("CINDERLINE team")
     pdf.setSubject("Historical fire observations, frozen calibration and visible limitations")
     for slide in manifest["slides"]:
         picture = Path(manifest["rendered"]) / f"slide-{slide['number']}.png"
@@ -34,7 +34,7 @@ def main() -> None:
         pdf.drawImage(ImageReader(str(picture)), 0, 0, width=width, height=height)
         if slide["number"] == 7:
             pdf.linkURL("https://github.com/Water-Mal0ne/FIRETRACE", (48, 91, 912, 132), relative=0)
-            pdf.linkURL("https://firetrace-bhaktapur-2026.pages.dev/", (48, 47, 912, 88), relative=0)
+            pdf.linkURL("https://cinderline-spaceapps.pages.dev/", (48, 47, 912, 88), relative=0)
         pdf.showPage()
     pdf.save()
     if len(PdfReader(str(destination)).pages) != 7:

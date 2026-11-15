@@ -45,7 +45,7 @@ export function buildEvidenceBrief({week, region, label, cellId, shareUrl, cavea
   const recordPeriod = days.firstRecord && days.lastRecord ? `${days.firstRecord} to ${days.lastRecord}` : 'Unavailable';
   const fields = (values: string[]) => `| ${values.map(text).join(' | ')} |`;
   const lines = [
-    '# FIRETRACE weekly evidence brief',
+    '# CINDERLINE weekly evidence brief',
     '',
     `Data label: ${text(label)}`,
     '',
@@ -123,7 +123,7 @@ export function buildEvidenceBrief({week, region, label, cellId, shareUrl, cavea
   lines.push(share ? `[Open this view](<${share}>)` : 'Share URL unavailable.', '');
   const location = cellId === 'ALL' ? 'whole-region' : `cell_${safeName(cellId)}`;
   return {
-    filename: `FIRETRACE_${safeName(region.meta.region)}_${location}_${safeName(week.date)}_week-${week.week}_evidence.md`,
+    filename: `CINDERLINE_${safeName(region.meta.region)}_${location}_${safeName(week.date)}_week-${week.week}_evidence.md`,
     content: lines.join('\n'),
   };
 }

@@ -1,6 +1,6 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//FIRETRACE//Seasonal calendar//EN
+PRODID:-//CINDERLINE//Seasonal calendar//EN
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:firetrace-United_States-2027-11

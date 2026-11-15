@@ -59,7 +59,7 @@ const csvCell = (value: unknown) => '"' + String(value ?? '').replaceAll('"', '"
 export function exportCSV(rows: Daily[], region: string, label: string) {
   const columns: (keyof Daily)[] = ['date','cell_id','raw_terra','raw_aqua','raw_viirs','raw','harmonized','lo','hi','coverage','source','model'];
   const lines = [['data_label','region',...columns].map(csvCell).join(','), ...rows.map(r => [label, region, ...columns.map(k => r[k])].map(csvCell).join(','))];
-  saveFile(`FIRETRACE_${region}.csv`, '\uFEFF' + lines.join('\r\n'), 'text/csv;charset=utf-8');
+  saveFile(`CINDERLINE_${region}.csv`, '\uFEFF' + lines.join('\r\n'), 'text/csv;charset=utf-8');
 }
 export function exportICS(periods: Critical[], year: number, region: string, label: string) {
   const escape = (s: string) => s.replaceAll('\\','\\\\').replaceAll('\n','\\n').replaceAll(';','\\;').replaceAll(',','\\,');
@@ -68,5 +68,5 @@ export function exportICS(periods: Critical[], year: number, region: string, lab
     const end = weekStart(year, p.end_week + 1).replaceAll('-','');
     return ['BEGIN:VEVENT', `UID:firetrace-${region}-${year}-${i}@firetrace.local`, `DTSTAMP:${new Date().toISOString().replaceAll('-','').replaceAll(':','').split('.')[0]}Z`, `DTSTART;VALUE=DATE:${start}`, `DTEND;VALUE=DATE:${end}`, `SUMMARY:${escape(`${region}: historical high-activity period`)}`, `DESCRIPTION:${escape(`${label}. ${p.label}. Based on historical seasonal patterns; this is not a forecast or emergency alert.`)}`, 'END:VEVENT'].join('\r\n');
   });
-  saveFile(`FIRETRACE_${region}_${year}.ics`, ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FIRETRACE//Historical Fire Calendar//EN','CALSCALE:GREGORIAN',...events,'END:VCALENDAR'].join('\r\n'), 'text/calendar;charset=utf-8');
+  saveFile(`CINDERLINE_${region}_${year}.ics`, ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//CINDERLINE//Historical Fire Calendar//EN','CALSCALE:GREGORIAN',...events,'END:VCALENDAR'].join('\r\n'), 'text/calendar;charset=utf-8');
 }
