@@ -1,0 +1,8 @@
+label,country,model,months_compared,max_abs_diff,max_rel_diff,worst_month,months_rel_diff_over_0.1pct,total_rel_diff
+REAL FIRMS DATA - AREA CELLS (national calibration; local accuracy not validated),Australia,B1,257,63.95078262428251,0.004265115609781453,2013-01,1,-2.026250136444879e-05
+REAL FIRMS DATA - AREA CELLS (national calibration; local accuracy not validated),Bangladesh,M1,257,3.9585068556391434e-05,7.965838555155391e-05,2020-07,0,2.0606578151106613e-08
+REAL FIRMS DATA - AREA CELLS (national calibration; local accuracy not validated),Brazil,B1,257,4.449814514373429e-05,2.5348269122854168e-08,2015-03,0,-5.852138849188536e-11
+REAL FIRMS DATA - AREA CELLS (national calibration; local accuracy not validated),Egypt,M1,257,0.06028431088868125,0.005647945916323181,2013-01,1,-6.81465396215066e-06
+REAL FIRMS DATA - AREA CELLS (national calibration; local accuracy not validated),India,M1,257,0.5174596925892274,0.0003581903871082142,2013-01,0,-4.666343722836084e-07
+REAL FIRMS DATA - AREA CELLS (national calibration; local accuracy not validated),Nepal,M1,257,0.0807369532357427,0.0006238977884542152,2013-01,0,-1.983222388359072e-06
+REAL FIRMS DATA - AREA CELLS (national calibration; local accuracy not validated),United_States,B1,257,6.531960389111191e-05,4.5334085776685734e-08,2024-01,0,2.94178458018664e-11

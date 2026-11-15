@@ -97,6 +97,8 @@ for entry in index["regions"]:
             np.testing.assert_allclose(sum(values), totals[year], atol=.1, rtol=1e-8)
             checks += 1
 size = sum(p.stat().st_size for p in public.rglob("*") if p.is_file())
-assert size < 50 * 1024 * 1024, f"Static data budget exceeded: {size}"
+# 80 MiB since the lazily loaded per-country area-of-interest cells (data/area/); every file stays under 25 MiB.
+assert size < 80 * 1024 * 1024, f"Static data budget exceeded: {size}"
+assert all(p.stat().st_size < 25 * 1024 * 1024 for p in public.rglob("*") if p.is_file()), "A static file exceeds 25 MiB"
 print(json.dumps({"regions": len(index["regions"]), "numeric_checks": checks,
                   "web_data_bytes": size, "status": "passed"}, indent=2))
