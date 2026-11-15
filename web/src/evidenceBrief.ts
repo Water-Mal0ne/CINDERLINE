@@ -1,6 +1,7 @@
 import type {Region, Week} from './types';
 import {weekCoverage} from './calendarView';
 import {fmt, geoCoordinate, numeric, sum} from './utils';
+import type {MonthHistory} from './monthStats';
 
 export interface EvidenceBriefInput {
   week: Week;
@@ -10,6 +11,8 @@ export interface EvidenceBriefInput {
   shareUrl: string | null;
   /** The current drawer's caveats, including any applicable spatial caveat. */
   caveats: readonly string[];
+  /** Optional comparison of the month containing the week's first day with the same month in other years. */
+  monthHistory?: MonthHistory | null;
 }
 
 /** Escape supplied prose as Markdown text, including within table cells. */
@@ -31,7 +34,7 @@ function publicLink(value: string): string | null {
 }
 
 /** A portable rendering of existing evidence; it does not calculate new analyses. */
-export function buildEvidenceBrief({week, region, label, cellId, shareUrl, caveats}: EvidenceBriefInput) {
+export function buildEvidenceBrief({week, region, label, cellId, shareUrl, caveats, monthHistory}: EvidenceBriefInput) {
   const days = weekCoverage(week, 'harmonized');
   const rawDays = weekCoverage(week, 'raw');
   const cell = region.cells.find(item => item.id === cellId);
@@ -77,6 +80,21 @@ export function buildEvidenceBrief({week, region, label, cellId, shareUrl, cavea
     `- Source: ${text(sources)}`,
     `- Coverage: ${text(coverage)}`,
     '',
+    ...(monthHistory ? [
+      '## Month vs history',
+      '',
+      'Historical comparison, not a forecast. The month containing the first day of this week is compared with the same month in the other fully observed years of this view (Aqua-reference-equivalent detections). Outage, partial and missing months are excluded.',
+      '',
+      '| Quantity | Value |',
+      '| --- | --- |',
+      fields(['Month', `${monthHistory.year}-${String(monthHistory.month).padStart(2, '0')}`]),
+      fields(['Month total', display(monthHistory.value, 1)]),
+      fields(['Median of the same month, other years', display(monthHistory.median, 1)]),
+      fields(['10th-90th percentile, other years', numeric(monthHistory.p10) && numeric(monthHistory.p90) ? `${display(monthHistory.p10, 1)} to ${display(monthHistory.p90, 1)}` : 'Unavailable']),
+      fields(['Other years compared', String(monthHistory.years)]),
+      fields(['Comparison', monthHistory.relation]),
+      '',
+    ] : []),
     '## Caveats from the evidence card',
     '',
     ...caveats.flatMap(caveat => [text(caveat), '']),
