@@ -12,3 +12,4 @@ work/
 *.part
 .openai/secrets*
 .wrangler/
+.deck-build/

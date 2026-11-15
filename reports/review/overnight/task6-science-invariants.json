@@ -1,0 +1,26 @@
+{
+  "AI_disclosure_exact_mirror": true,
+  "NOAA20_tables_unchanged": true,
+  "NOAA20_runtime_AST_unchanged": true,
+  "NOAA20_report_exact_mirror": true,
+  "NOAA20_script_exact_mirror": true,
+  "story_Q1_to_Q17_unchanged": true,
+  "story_Q18_exact_season_answer": true,
+  "decision_move_checks": [
+    {
+      "repo": "firetrace-story-wording",
+      "original_story_section_sha256": "cda1080f0cf7b6788f85c2e6d8ff77879fc9f7f3f28e8b3270fd53e28fb9a9ca",
+      "unchanged_original_section_present": true,
+      "other_sections_content_identical": true,
+      "terminal_section_separator_normalized_to_single_EOF_newline": true
+    },
+    {
+      "repo": "firetrace-submission-final",
+      "original_story_section_sha256": "cda1080f0cf7b6788f85c2e6d8ff77879fc9f7f3f28e8b3270fd53e28fb9a9ca",
+      "unchanged_original_section_present": true,
+      "other_sections_content_identical": true,
+      "terminal_section_separator_normalized_to_single_EOF_newline": true
+    }
+  ],
+  "final_twenty_QA_untouched": true
+}

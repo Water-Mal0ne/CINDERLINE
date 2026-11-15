@@ -1,0 +1,44 @@
+{
+  "file_checks": [
+    {
+      "path": "reports/official",
+      "baseline_files": 15,
+      "unchanged_baseline_files": 15,
+      "changed_or_missing": [],
+      "added": []
+    },
+    {
+      "path": "data/sample",
+      "baseline_files": 4,
+      "unchanged_baseline_files": 4,
+      "changed_or_missing": [],
+      "added": []
+    },
+    {
+      "path": "web/public/data",
+      "baseline_files": 113,
+      "unchanged_baseline_files": 112,
+      "changed_or_missing": [
+        "web/public/data/rhythm.json"
+      ],
+      "added": [
+        "web/public/data/frp.json"
+      ]
+    }
+  ],
+  "rhythm_json_changes": [
+    {
+      "path": "root.headline",
+      "before": "Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.",
+      "after": "Sunday dip clear in the US and Australia, weaker in Brazil, and not established where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.",
+      "type": "str"
+    },
+    {
+      "path": "root.robustness.notes.Brazil",
+      "before": "Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three satellites on new ignitions. Because of the 2002-2024 control, Brazil does not meet the stricter check; the official pre-specified result is unchanged (PASS).",
+      "after": "Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three satellites on newly active grid cells (not verified ignitions). Because of the 2002-2024 control, Brazil does not meet the stricter check; the official pre-specified result is unchanged (PASS).",
+      "type": "str"
+    }
+  ],
+  "all_original_numeric_values_preserved": true
+}

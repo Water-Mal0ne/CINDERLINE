@@ -1,5 +1,14 @@
 # Implementation decisions
 
+## Submission package decisions, 15 November 2026 Nepal time
+
+- 2026-11-14 20:05 UTC: Keep seven authored slides, each title plus authored content within 40 words and notes within 60–90. Preserve real chart and screenshot labels separately as evidence; do not erase scientific labels to satisfy a literal OCR word count.
+- 2026-11-14 20:07 UTC: Preserve exact source snapshots from the reviewed FRP and season branches, pin their source commits and hashes, and distinguish them from the deployed baseline. Repository visibility was checked with GitHub CLI and is PUBLIC; repeat public-link access checks before submission.
+- 2026-11-14 20:08 UTC: The bundled presentation engine can export editable PPTX and render slides, but its native PDF exporter lacks a standard-font dependency. Produce the PDF from the same verified high-resolution slide renders using bundled ReportLab; no library installation or scientific-chart alteration is needed.
+- 2026-11-14 20:10 UTC: Use NASA's current Global Organizing Team submission-field answer because the main guide URL returns HTTP 502. Leave registered team identity and the official project URL as explicit placeholders; no login, acceptance of terms or submission is performed.
+- 2026-11-14 20:10 UTC: Real live evidence screenshots show the deployed baseline. The Nepal 2016 example is from training, and the India rhythm map is exploratory. Do not present these screenshots as validation of new branch results.
+- 2026-11-14 20:10 UTC: Correct the judge explanation of uncertainty to match the app: daily conversion intervals are displayed separately, not summed into a weekly confidence interval. This is a documentation correction only.
+
 ## Scope and delivery
 
 - The user requested continued implementation, distinct builder/checker/creative roles and successive independent reviews. Up to three agents work alongside the coordinator, with separate file ownership; additional roles rotate through those slots. The coordinator integrates and publishes tested changes.
@@ -134,6 +143,20 @@ Kill rule: if any condition fails, the test fails. Do not change the cutoff, swi
 - 2026-11-14 19:40 UTC: Require an independent receipt matching the current scripts and scientific artifacts before public export; preserve exact artifact bytes across Git checkout so line-ending conversion cannot invalidate hashes.
 - 2026-11-14 19:40 UTC: Discover web test files through one shared runner so combining feature branches cannot silently omit either branch's tests; retain the existing three precheck suites.
 - 2026-11-14 19:40 UTC: Desktop and 390-pixel browser checks passed for the new panel, its disclosure controls, country scope, and recovery after a missing payload. Existing page-wide phone overflow is assigned to the UI polish task; the FRP panel itself fits its container.
+
+## Overnight integration and morning handoff
+
+- 2026-11-14 20:40 UTC: Preserve the combined audit as an exported, exact-source simulation rather than merging any real branch. Record its source heads and tree separately from the old checkout commit reported by the legacy check helper.
+- 2026-11-14 20:40 UTC: Resolve the morning Q&A conflicts in stages: corrected story questions 1–17 plus season Q18, followed by the final twenty-answer submission. Preserve the union of every DECISIONS section and the unchanged FRP protocol; no wholesale ours/theirs choice.
+- 2026-11-14 20:40 UTC: Treat esbuild sandbox-read failures and archive line-ending conversion as environment/export issues, retaining failed receipts and using permission-only build retry or exact-byte export; do not change product code to hide them.
+- 2026-11-14 20:40 UTC: Report the FRP task as partial against the impossible Git-before-result requirement, despite passing numerical/reproducibility gates. The old local protocol is evidence of local timing, not externally certified preregistration.
+- 2026-11-14 20:40 UTC: Preserve the existing Rhythm-country/share-link limitations and large lazy-globe warning. Browser QA establishes the exercised flows, not a promise of universal faultlessness.
+- 2026-11-14 20:40 UTC: Keep the frozen, reviewed briefing and twenty judge answers after a separate wording recheck found no material error. Leave genuine team identity and official project fields for the team, with no invented names or account actions.
+- 2026-11-14 20:40 UTC: If morning time is short, UI polish is optional first; any smaller PR combination still needs its own validation. Do not present branch-only FRP/season evidence as already deployed or compromise story corrections to rush release.
+- 2026-11-14 20:40 UTC: Re-run all five branch suites/builds once at their final source heads, then run submission checks again after the report commit. Publish only named feature branches and stop after the bounded handoff; no new analysis, feature, login, merge or deployment.
+- 2026-11-14 20:40 UTC: Give the team exact PowerShell release commands with clean-tree/unpublished-commit stops, fast-forward-only pull, fresh pytest temporary/cache directories and final asset hashes. Run these only after approved morning merges, not as overnight actions.
+- 2026-11-14 20:40 UTC: Use the supplied 14:00 feature freeze and 20:00 submission target, but require confirmation of any earlier local judging cutoff. Keep the seven-slide PDF as the ready demo option; the short script still needs an actual timed recording if used.
+- 2026-11-14 20:42 UTC: Independent handoff reviewers confirmed the claims and requested precise calculation/receipt timestamp labels and a pre-deploy HEAD identity guard. Preserve copied audit bytes with scoped Git attributes; keep frozen source audit receipts unchanged.
 
 ## Section-by-section UI review (15 November 2026, 02:37 UTC)
 

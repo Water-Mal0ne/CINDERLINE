@@ -1,6 +1,6 @@
 # Judge Q&A: the hardest questions, with honest answers
 
-Every number is from a committed report (path in brackets). "Detections" are satellite hotspot detections, not fires.
+Every number is from a committed report (path in brackets). "Detections" are satellite hotspot detections, not fires. Questions 9 and 19-22 cite the source index at the end ([S..] codes).
 
 We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration.
 
@@ -28,8 +28,8 @@ Egypt is biased high in every test year (+36% to +66%); Bangladesh 2022 fails (b
 **8. Is the weekly-rhythm result stable under the reported checks?**
 The US Sunday dip is large (Sunday 22-33% below an average day in all three satellites) and stable: leaving out any one year never changes the lowest day. Re-running the null test with 200,000 draws instead of 5,000 changes no significance call [reports/review/RHYTHM_REVIEW.md].
 
-**9. Was the rule pre-registered?**
-Pre-specified, not pre-registered. The rule and rest days were written before the data for five of the seven countries were downloaded, but after the US and Nepal data were in hand; no committed record predates the first real-data run [DECISIONS.md, gate timeline].
+**9. Was any of this preregistered?**
+No. For the original rhythm gate, US and Nepal data were already in hand, and no Git record predates the first real-data run. For FRP, the local protocol was frozen before its first calculation, but Git receipt `92626ed2f76fc6ab1bcefa6254d49609b7c6b982` was created after the original result was known. It is an honest later record of the earlier local specification, not proof that the Git commit preceded results. Both use already-inspected historical records. [S12, S11]
 
 **10. Brazil?**
 Suggestive, not clear. Terra and Aqua pass; VIIRS does not (Sunday is not its lowest day in 11 of 12 leave-one-year-out runs). Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three satellites on newly active grid cells: detections after a day without a detection, not verified ignitions. Because of the 2002-2024 control, Brazil does not meet the stricter check (Terra index 0.913, adjusted p = 0.021); the official pre-specified result is unchanged (PASS). [reports/review/controls/CONTROLS.md, reports/review/ignitions/IGNITIONS.md, reports/review/RHYTHM_REVIEW.md]
@@ -59,3 +59,35 @@ The reported four-country check (India, Australia and Brazil did not finish down
 No. In the original retrospective, unmasked whole-year replacement experiment for India, comparing B1 with the frozen selected M1 across 2020-2024, mean absolute annual count error improves from **16.46% to 3.80%**, while monthly-share total-variation disagreement (**TV x100**) worsens from **13.59 to 16.29**. Both metrics use Aqua as the reference, not ground truth; this compares two conversions, not raw VIIRS with conversion. The original results are preserved in `reports/review/season/original_all_country_whole_year_comparison.csv`.
 
 The direction survives both common-date outage masks. India's B1-to-M1 count error is **13.83% to 4.05%** with the primary mask and **13.94% to 4.51%** with one-day padding; seasonal TV worsens **12.31 to 15.57** and **12.28 to 15.42** respectively. Nepal's seasonal TV improves **13.82 to 5.75** and **13.79 to 5.69**. These compare totals and monthly shares over commonly retained dates, not reconstructed full-year activity. They are descriptive means of previously examined years, not new significance tests or guarantees for every cut/year. Sources: `reports/review/season/whole_year_comparison.csv`, `SEASON_CHECK.md` and independent verification. Reproduce with `python -m pipeline.review.season_check` and `python scripts/verify_season_check.py`. Production models and official results remain unchanged.
+
+**19. Was the Sunday pattern already known, and what is new here?**
+Yes: Earl, Simmonds and Tapper reported weekly fire cycles in 2015. We reproduce a known association separately in raw satellite streams. Our contribution is an inspectable calendar with baseline comparisons, explicit failures, retrospective tests of count versus seasonal agreement, and the fixed count-versus-FRP comparison. We do not claim first discovery or promise a prize. The official country rule passes US 3/3, Australia 3/3 and Brazil 2/3 streams; India, Nepal, Bangladesh and Egypt do not pass. [S04, S10–S11, S13]
+
+**20. What exactly passed in the count-versus-FRP test?**
+“In US daytime observations from 2013-2024, the Sunday deficit was stronger in detection counts than in summed fire radiative power in MODIS Aqua and VIIRS S-NPP, under a pre-specified test.”
+
+The same finite, nonnegative-FRP observations enter both measures. Aqua and S-NPP meet all fixed contrast and sensitivity criteria under both masks; Terra fails because its adjusted interval includes zero. Twelve year blocks drive uncertainty, not millions of independent detections. Independent recomputation passed. Summed FRP is sampled radiative power, not energy, emissions, burned area or distinct fire counts. The Git receipt is after the original result, as explained in question 9. [S11]
+
+**21. Can FIRETRACE forecast fires or replace alerts?**
+No. It is a historical exploration prototype for comparing measurement records and inspecting seasons. Anomaly flags and exported ICS windows are descriptive references, not predictions, risk scores, emergency warnings or safe-burning advice. It may complement near-real-time monitoring, but user impact and operational suitability have not been validated. NASA does not approve or endorse this conversion. [S08]
+
+**22. What did AI do, and how can judges reproduce the work?**
+Codex and Claude Code assisted with analysis implementation, UI, testing, documentation and submission drafts. NASA FIRMS supplies the observations; synthetic fixtures are labelled and separate. The team must review all claims before submitting. Core commands and fixed model sources are in README/METHODS; season and FRP scripts, CSVs, input hashes and independent verification receipts are linked in the evidence ledger. Repository access must be confirmed for judges, and new branch results are not automatically deployed. [S01, S10–S12]
+
+## Source index
+
+The machine-readable evidence ledger and exact cross-branch source commits are in [SOURCE_LEDGER.md](evidence/SOURCE_LEDGER.md) and `evidence/source_manifest.json`. Those snapshots preserve reviewed results without implying their branches have merged.
+
+- **S01 — Measurements, model and splits:** `METHODS.md`, `reports/harmonization_model.json`, `reports/selection_lock.json`; scripts `pipeline/harmonize.py`, `pipeline/streaming/prepared_runtime.py`.
+- **S02 — Held-out error:** `reports/review/layer1_table.csv`, `layer1_table.md`, `layer1_reproduction_check.csv`, and `reports/harmonization_eval.csv`; script `pipeline/review/harmonization_review.py`.
+- **S03 — Stability and failures:** `reports/review/ratio_trend.csv`, `layer1_per_year.csv`, `HARMONIZATION_REVIEW.md`, `LIMITATIONS.md`.
+- **S04 — Official rhythm rule and results:** `reference/kill_test.py`, `reports/official/kill_test_gate.json`, `kill_test_results.csv`. Streams corroborate; they are not independent experiments.
+- **S05 — Rhythm sensitivity and Nepal power:** `reports/review/RHYTHM_REVIEW.md`, `rhythm/b5_nepal_power.csv`; script `reference/rhythm_review.py`. The power experiment is synthetic, conditional on observed volume.
+- **S06 — New-cell and control diagnostics:** `reference/ignition_test.py`, `reports/review/ignitions/IGNITIONS.md`, `e1_ignition_results.csv`; `pipeline/review/control_check.py`, `reports/review/controls/CONTROLS.md`. Legacy filenames use “ignition”; our interpretation does not treat those detections as verified ignitions.
+- **S07 — Exploratory geography and failed prediction:** `reports/review/NORTHEAST_INDIA_REVIEW.md`, `reports/review/bangladesh_hills/RESULT.md`; scripts `reference/ne_india_review.py`, `reference/rhythm_map.py`.
+- **S08 — Product scope, missing observations and limits:** `README.md`, `LIMITATIONS.md`, `reports/review/OUTAGES.md`, `no_observation_summary.json`, `CUSTOM_AREA.md`; script `pipeline/review/no_observation.py`.
+- **S09 — NOAA-20:** `reports/review/noaa20/NOAA20.md`, `noaa20_conversion_check.csv`, `noaa20_rhythm_stream.csv`; script `pipeline/review/noaa20_check.py`.
+- **S10 — Season sensitivity:** `submission/evidence/season/SEASON_CHECK.md`, `whole_year_comparison.csv`, `summary.json`, independent verification; source branch script `pipeline/review/season_check.py`, checker `scripts/verify_season_check.py`. Original six-row India/Nepal summary remains at `reports/review/season/original_whole_year_comparison.csv`.
+- **S11 — Fixed FRP comparison:** `submission/evidence/frp/FRP_TEST.md`, `summary.csv`, original protocol and independent verification; source branch script `pipeline/review/frp_test.py`, checker `scripts/verify_frp_test.py`. The ledger pins the branch commit and distinguishes local protocol timing from the later Git receipt.
+- **S12 — Chronology and assistance:** `DECISIONS.md`, `AI_DISCLOSURE.md`, and the FRP protocol receipt. The detailed chronology in question 9 qualifies any broad “before analysis” wording elsewhere.
+- **S13 — Primary external context:** [NASA FIRMS notes](https://firms.modaps.eosdis.nasa.gov/alerts/notes.php), [VIIRS product description](https://firms.modaps.eosdis.nasa.gov/content/descriptions/FIRMS_VIIRS_Firehotspots.html), and [Earl, Simmonds and Tapper (2015)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL066383). External facts were checked on 15 November 2026 Nepal time; they are source facts, not outputs of our analysis.

@@ -1,0 +1,45 @@
+{
+  "source": "https://firetrace-bhaktapur-2026.pages.dev/",
+  "capture": "Real browser viewport screenshots, unedited JPEG captures",
+  "expected_deployed_commit_from_user_brief": "290e7569ee1c7334f1161dc45daf4b02dc5c06ea",
+  "server_commit_independently_verified": false,
+  "views": {
+    "live-calendar.jpg": "Nepal, harmonized, whole historical calendar",
+    "live-calendar-raw.jpg": "Nepal raw baseline; upper calendar only, viewport moved on toggle",
+    "live-outage.jpg": "Nepal, 2024 week 28: unavailable VIIRS dates, no-observation state",
+    "live-rhythm-map.jpg": "India exploratory Weekly Rhythm Index map; viewport does not show full panel header or map",
+    "live-evidence.jpg": "Nepal, 2016 week 15: training-period illustration, not validation"
+  },
+  "files": [
+    {
+      "file": "live-calendar.jpg",
+      "sha256": "faa2a92c3825487bd1ce19df1563dcce7eb43ab1db26dfe40d1c0264a085de29",
+      "bytes": 94221,
+      "saved_utc": "2026-11-14T20:01:11.4565616Z"
+    },
+    {
+      "file": "live-calendar-raw.jpg",
+      "sha256": "66f7799a2a12cb116668f4c7acfacb3ed0429562c3337675b71b28795b9a09a8",
+      "bytes": 96652,
+      "saved_utc": "2026-11-14T20:01:21.7032626Z"
+    },
+    {
+      "file": "live-evidence.jpg",
+      "sha256": "5beca0b4dd795c8becfa4f543e43c46b7427237bf6726167cefe4509466f476c",
+      "bytes": 53440,
+      "saved_utc": "2026-11-14T20:01:37.0978119Z"
+    },
+    {
+      "file": "live-outage.jpg",
+      "sha256": "0c229b242a339104bbbb2c6f5312eb93759c82f6d285b2d5837deefdd581c76e",
+      "bytes": 53489,
+      "saved_utc": "2026-11-14T20:01:52.1855099Z"
+    },
+    {
+      "file": "live-rhythm-map.jpg",
+      "sha256": "dc9571dd9fe7716aa90cf53329ca8220991b2831c701cbf1b2a67ddacacef54b",
+      "bytes": 65813,
+      "saved_utc": "2026-11-14T20:02:30.8666158Z"
+    }
+  ]
+}

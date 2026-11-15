@@ -1,0 +1,120 @@
+{
+  "fit_years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017
+  ],
+  "validation_years": [
+    2018,
+    2019
+  ],
+  "test_years_reserved": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "ratios": {
+    "B1": 0.1450130601167073,
+    "M1": {
+      "Australia|D:high": 1.4244062274453604,
+      "Australia|D:low": 0.02441375521021166,
+      "Australia|D:medium": 0.2891456119152875,
+      "Australia|N:high": 1.460805655749039,
+      "Australia|N:low": 0.010840626249168595,
+      "Australia|N:medium": 0.52642179476565,
+      "Bangladesh|D:high": 1.2690738894068974,
+      "Bangladesh|D:low": 0.06001372795363315,
+      "Bangladesh|D:medium": 0.4186774966294314,
+      "Bangladesh|N:high": 0.1750130601167073,
+      "Bangladesh|N:low": 0.009520758347830451,
+      "Bangladesh|N:medium": 0.30992814885678294,
+      "Brazil|D:high": 1.3237232881009209,
+      "Brazil|D:low": 0.035898924111565075,
+      "Brazil|D:medium": 0.3638195240416814,
+      "Brazil|N:high": 2.573489369783426,
+      "Brazil|N:low": 0.020751583448531122,
+      "Brazil|N:medium": 0.8226119311049145,
+      "Egypt|D:high": 0.32676011408627514,
+      "Egypt|D:low": 0.03521251882717115,
+      "Egypt|D:medium": 0.4399291459205673,
+      "Egypt|N:high": 0.28637550919700666,
+      "Egypt|N:low": 0.008615376111639683,
+      "Egypt|N:medium": 0.6771265904489695,
+      "India|D:high": 1.3573740639459644,
+      "India|D:low": 0.053297841139375884,
+      "India|D:medium": 0.5416941820500598,
+      "India|N:high": 1.1806832437955523,
+      "India|N:low": 0.006234414085575515,
+      "India|N:medium": 1.2784782617807617,
+      "Nepal|D:high": 1.6842783931490681,
+      "Nepal|D:low": 0.050021525267760575,
+      "Nepal|D:medium": 0.6706694265526845,
+      "Nepal|N:high": 0.26501306011670733,
+      "Nepal|N:low": 0.008071928665799852,
+      "Nepal|N:medium": 1.3797295739232671,
+      "United_States|D:high": 1.1280540876662384,
+      "United_States|D:low": 0.07777676981491147,
+      "United_States|D:medium": 0.3682306547080905,
+      "United_States|N:high": 1.2788510069228507,
+      "United_States|N:low": 0.00547872336951477,
+      "United_States|N:medium": 0.3823676934096219
+    }
+  },
+  "selection": {
+    "Australia": {
+      "selected": "B1",
+      "validation_daily_mae": {
+        "B1": 134.18509180237535,
+        "M1": 173.40331923832827
+      }
+    },
+    "Bangladesh": {
+      "selected": "M1",
+      "validation_daily_mae": {
+        "B1": 4.278281899374828,
+        "M1": 4.270197364174743
+      }
+    },
+    "Brazil": {
+      "selected": "B1",
+      "validation_daily_mae": {
+        "B1": 119.42667340410343,
+        "M1": 122.66678146599803
+      }
+    },
+    "Egypt": {
+      "selected": "M1",
+      "validation_daily_mae": {
+        "B1": 3.0856446044871944,
+        "M1": 0.8740921686831986
+      }
+    },
+    "India": {
+      "selected": "M1",
+      "validation_daily_mae": {
+        "B1": 82.49401800193057,
+        "M1": 70.91690694184852
+      }
+    },
+    "Nepal": {
+      "selected": "M1",
+      "validation_daily_mae": {
+        "B1": 6.158101311655551,
+        "M1": 3.7338381608229185
+      }
+    },
+    "United_States": {
+      "selected": "B1",
+      "validation_daily_mae": {
+        "B1": 57.429650729874446,
+        "M1": 69.36952977661261
+      }
+    }
+  },
+  "archive_manifest_fingerprint": "4bf6e7635b6cb9b7437fb069e4afb4866c5347dd15d46549288686fb8b21edd7",
+  "policy": "Selection locked from training and validation only, before test evaluation."
+}
