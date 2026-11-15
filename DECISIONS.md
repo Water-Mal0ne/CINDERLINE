@@ -184,3 +184,10 @@ Kill rule: if any condition fails, the test fails. Do not change the cutoff, swi
 - Preserve the displayed year through geographic drill-down, restore Whole region scope when requested, and let explicit date edits supersede stale evidence-link hydration.
 - Add only the user-approved annual/daily outage-handling notice. The pre-existing annual/daily discrepancy is disclosed, not corrected; no data or scientific pipeline change is authorized in this UI pass.
 - Keep changes on ui-polish-v2 and update its existing review. Do not merge or deploy. Require independent review, desktop/phone inspection, and the full tests/build after the commit.
+
+## 2025 extension (15 November 2026)
+
+- 2025 FIRMS country archives exist (S-NPP VIIRS and MODIS, dated 10 October 2026). Apply the frozen per-country model to 2025 VIIRS with no refitting and append 2025 to the national series and the 12 published cells, labelled "converted VIIRS, beyond the validation period". Script: `python -m pipeline.extend_2025`.
+- Leave lo/hi empty for 2025: the 200-draw calibration interval needs the full training bootstrap, which is not re-run. Weekly climatology, anomaly flags, critical periods, evaluation and rhythm results stay on 2003-2024.
+- Mark 12 November 2025 as no observation in Australia, Bangladesh, Egypt, India and Nepal: VIIRS has zero detections there while MODIS recorded hundreds (a partial-day S-NPP gap). No day had zero VIIRS in all seven countries.
+- Report the out-of-sample continuity check (2025 weekly converted VIIRS against observed Aqua) whatever the result, in JUDGE_QA question 3 and the Layer 1 section.

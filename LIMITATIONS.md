@@ -75,3 +75,7 @@ The calendar describes historical observations. Critical periods are historical 
 Seasonal statistics and anomalies exclude bin 53 and other incomplete seven-day bins. This avoids comparing one or two days with a full week, but leaves the final calendar days outside those weekly statistical summaries. Their observations can still appear in the calendar and daily exports. A seasonal summary needs at least three eligible years, and missing history must remain unavailable rather than be filled with invented values. National seasonality does not become cell-specific when a cell is selected. Exported dates place historical windows into a selected year for reference only.
 
 Share links reopen the current published data and are not immutable evidence snapshots. A later model/data revision can change the values shown by the same link. The link preserves the selected daily series and evidence week, but not the Earth camera, annual-cell selection or Earth/table preference.
+
+### 2025 extension
+
+2025 is converted S-NPP VIIRS beyond the validation period, using the frozen model with no refitting. No calibration interval is shown for it. In the out-of-sample 2025 continuity check, converted VIIRS was 21% below Aqua in Brazil, 18% below in Nepal and 11% below in India; those biases are larger than in the 2020-2024 test years. 12 November 2025 is marked as no observation in five eastern-hemisphere countries because of an S-NPP VIIRS data gap. See `reports/review/extend2025/CONTINUITY.md`.

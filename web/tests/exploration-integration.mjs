@@ -89,7 +89,7 @@ test('the year-end evidence bin restores even when only December 31 is visible',
 test('in-progress or invalid edited date inputs cannot create a misleading share link',()=>{
   const catalog=api.catalogForRegion(regions[0]),state=parser.defaultExploration(catalog);
   assert.equal(api.canShareSelection(state,catalog),true);
-  for(const patch of [{start:''},{end:'2024-02-30'},{start:'2025-01-01'},{start:'2023-01-01',end:'2020-01-01'},{end:'2099-12-31'},{cell:'unpublished'},{region:'unpublished'}])
+  for(const patch of [{start:''},{end:'2024-02-30'},{start:'2026-01-01'},{start:'2023-01-01',end:'2020-01-01'},{end:'2099-12-31'},{cell:'unpublished'},{region:'unpublished'}])
     assert.equal(api.canShareSelection({...state,...patch},catalog),false,JSON.stringify(patch));
 });
 
