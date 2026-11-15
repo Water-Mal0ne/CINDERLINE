@@ -15,3 +15,5 @@ work/
 .deck-build/
 
 .npm-cache/
+.test-cache/
+.test-temp/
