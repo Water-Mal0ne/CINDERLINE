@@ -1,0 +1,205 @@
+{
+  "status": "PASS",
+  "scientific_test_status": "PASS",
+  "verification_started_utc": "2026-11-14T19:33:58.369404+00:00",
+  "verification_finished_utc": "2026-11-14T19:34:15.704864+00:00",
+  "chronology": "Portable independent reproduction of an already-known outcome. Original local protocol was frozen 2026-11-14T18:57:23.284Z before original effects; Git receipt 92626ed2f76fc6ab1bcefa6254d49609b7c6b982 was committed after the outcome.",
+  "protocol_sha256": "1B88C8B3C7A1225FB2AA10E3B19DD9311CB7F4B022A9795C51552557BB434171",
+  "script": "scripts/verify_frp_test.py",
+  "script_sha256": "86d6ba19f452940caa4724fdd4d89471e97a1d34e169ff5c98006fcebf758c32",
+  "passing_streams_both_masks": [
+    "Aqua",
+    "VIIRS"
+  ],
+  "official_unmasked_daytime_reconciliation": [
+    {
+      "stream": "Terra",
+      "official_detections": 460657,
+      "reconstructed_detections": 460657,
+      "matches": true
+    },
+    {
+      "stream": "Aqua",
+      "official_detections": 631342,
+      "reconstructed_detections": 631342,
+      "matches": true
+    },
+    {
+      "stream": "VIIRS",
+      "official_detections": 2784451,
+      "reconstructed_detections": 2784451,
+      "matches": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "complete_daily_arrays",
+      "rows": 13149,
+      "keys_match": true,
+      "fields": {
+        "C": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "V": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "F": {
+          "pass": true,
+          "max_absolute_difference": 1.4551915228366852e-11
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "all_annual_weekday_indices",
+      "rows": 504,
+      "keys_match": true,
+      "fields": {
+        "C_index": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "V_index": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "F_index": {
+          "pass": true,
+          "max_absolute_difference": 6.661338147750939e-16
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "complete_sunday_summary",
+      "rows": 6,
+      "keys_match": true,
+      "fields": {
+        "count_sunday": {
+          "pass": true,
+          "max_absolute_difference": 2.220446049250313e-16
+        },
+        "valid_count_sunday": {
+          "pass": true,
+          "max_absolute_difference": 2.220446049250313e-16
+        },
+        "frp_sunday": {
+          "pass": true,
+          "max_absolute_difference": 1.1102230246251565e-16
+        },
+        "mean_delta": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "ci_lower": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "ci_upper": {
+          "pass": true,
+          "max_absolute_difference": 1.1102230246251565e-16
+        },
+        "loyo_min": {
+          "pass": true,
+          "max_absolute_difference": 9.71445146547012e-17
+        },
+        "loyo_max": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "max_day_removal_mean_delta": {
+          "pass": true,
+          "max_absolute_difference": 1.1102230246251565e-16
+        },
+        "pass": {
+          "pass": true
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "all_leave_one_year_out",
+      "rows": 72,
+      "keys_match": true,
+      "fields": {
+        "mean_delta": {
+          "pass": true,
+          "max_absolute_difference": 1.1102230246251565e-16
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "all_maximum_day_removals",
+      "rows": 72,
+      "keys_match": true,
+      "fields": {
+        "removed_date": {
+          "pass": true
+        },
+        "removed_F": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "max_day_frp_share": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "trimmed_delta": {
+          "pass": true,
+          "max_absolute_difference": 3.0531133177191805e-16
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "all_exposure_counts",
+      "rows": 168,
+      "keys_match": true,
+      "fields": {
+        "days": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "all_excluded_dates",
+      "rows": 160,
+      "pass": true
+    },
+    {
+      "name": "joint_bootstrap_draws",
+      "draws": 50000,
+      "indices": 600000,
+      "pass": true,
+      "sha256_raw": "1b19808faa458fe204271ff26bd9fab55a769d427b01388ca38e27b685c2353e"
+    },
+    {
+      "name": "final_gates",
+      "pass": true
+    }
+  ],
+  "detailed_receipt": "verification/agreement.json",
+  "data_limitations": [
+    "Independent clean-cache reaggregation, source hashes and stored IANA-zone timestamp conversion; not independent coordinate-to-timezone mapping or NASA retrieval.",
+    "Twelve annual resampling blocks; related satellite streams are not independent experiments; no cloud/weather correction."
+  ],
+  "analysis_script_sha256": "94e99b6375bce295f0c79094005871a38ab8ff144271f59024b0d583bbf79ea7",
+  "verified_artifacts_sha256": {
+    "data_gate.json": "e9a6d7ea4ba64509e88be0d7e1a8619ce7aab85772661e477258267aa4c3b94d",
+    "input_manifest.json": "807c70803df09d9e58c33b02db7e0cf65fbc975bafe447f1b82b2c9d59f8652f",
+    "daily_counts_and_frp.csv": "9e1287a8f0f51e47960b889664704ffbfca1b2d432ba1d8a61499e6818bafb8e",
+    "summary.csv": "c2e39d111e0706e038f828457ed6cf7a4c8ed60aa88ef5291742e91e53a886bb",
+    "annual_weekday_profiles.csv": "313fb291e09b16a5fbca6af79ddec5082d3a037bc060d0e05d98d88bcd522bd3",
+    "annual_contrasts.csv": "2fbb2c5acec898266f017fb2750a579ba54a43a4f6189d69d99c1e317ab0c963",
+    "maximum_day_sensitivity.csv": "4e92dfa4fb854376f1585715b030478981ccc3135fe1b483b7def0942e42a9fb",
+    "leave_one_year_out.csv": "41623bd3bd5d06aa0b7253ab2144720f043077217f9854409458c2c56e386eac",
+    "exposure_days.csv": "b84adac18baf507748b82451c5e3de9a43aa9d2dd7f7db6923c43f44f81d0195",
+    "excluded_dates.csv": "28e26fbf38e8fe2abbd9820f2e35aa3e48b00b079f0adf754b5a5ac50a3294be",
+    "bootstrap_year_draws.npy": "bf5991fd06667bd37cef1ce66b3ec1322755c47d38a1a54b086745ab65228aaa"
+  }
+}

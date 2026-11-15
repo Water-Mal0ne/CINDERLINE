@@ -1,4 +1,4 @@
-"""NOAA-20 VIIRS as an independent check (review E3). Not part of the official decision or the released model.
+"""NOAA-20 VIIRS as a separate-platform transfer check (review E3). Not part of the official decision or the released model.
 
 python -m pipeline.review.noaa20_check NOAA20_DATA_DIR [--out reports/review/noaa20]
 
@@ -11,6 +11,10 @@ Countries with all seven years present are analysed.
     compared with the published converted S-NPP series and with observed Aqua, 2018-2024 and test years 2020-2024.
 (b) Fourth rhythm stream: the kill_test.py weekday index, year bootstrap and null test on NOAA-20 detections, reported
     separately with the same 0.05/21 threshold for comparison; not added to the official gate.
+
+This checks transfer between related measurement products, not independent ground-truth accuracy.
+Shared discrepancy against Aqua does not diagnose its cause. A strict common-date outage sensitivity
+remains unfinished: partly masked S-NPP weeks can be compared with fuller NOAA-20 weeks.
 """
 from __future__ import annotations
 

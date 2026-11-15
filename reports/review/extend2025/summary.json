@@ -1,0 +1,41 @@
+{
+ "no_observation_days_2025": [],
+ "Australia": {
+  "days_added": 365,
+  "no_observation_days": [
+   "2025-11-12"
+  ]
+ },
+ "Bangladesh": {
+  "days_added": 365,
+  "no_observation_days": [
+   "2025-11-12"
+  ]
+ },
+ "Brazil": {
+  "days_added": 365,
+  "no_observation_days": []
+ },
+ "Egypt": {
+  "days_added": 365,
+  "no_observation_days": [
+   "2025-11-12"
+  ]
+ },
+ "India": {
+  "days_added": 365,
+  "no_observation_days": [
+   "2025-11-12"
+  ]
+ },
+ "Nepal": {
+  "days_added": 365,
+  "no_observation_days": [
+   "2025-11-12"
+  ]
+ },
+ "United_States": {
+  "days_added": 365,
+  "no_observation_days": []
+ }
+}

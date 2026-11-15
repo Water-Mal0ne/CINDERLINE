@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "original_rows_reproduced": 1365,
+  "checks": [
+    "original input and lock hashes",
+    "source and local-year identities",
+    "all finite nonnegative frozen inputs",
+    "exact frozen primary/padded dates",
+    "same dates for reference and every alternative",
+    "all original scenarios and whole-year summaries",
+    "all no-handover controls",
+    "all B1 whole-year shape invariants",
+    "all B1-selected daily values",
+    "unchanged input hashes after run"
+  ],
+  "original_scenario_max_abs_differences": {
+    "annual_absolute_relative_error": 7.105427357601002e-15,
+    "annual_relative_error": 7.105427357601002e-15,
+    "candidate_total": 5.820766091346741e-11,
+    "monthly_mae": 1.4551915228366852e-11,
+    "reference_total": 0.0,
+    "tv": 1.1102230246251565e-16
+  }
+}

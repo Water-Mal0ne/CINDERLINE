@@ -1,0 +1,159 @@
+{
+  "generated_utc": "2026-11-14T19:34:15.702863+00:00",
+  "pass": true,
+  "checks": [
+    {
+      "name": "complete_daily_arrays",
+      "rows": 13149,
+      "keys_match": true,
+      "fields": {
+        "C": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "V": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "F": {
+          "pass": true,
+          "max_absolute_difference": 1.4551915228366852e-11
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "all_annual_weekday_indices",
+      "rows": 504,
+      "keys_match": true,
+      "fields": {
+        "C_index": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "V_index": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "F_index": {
+          "pass": true,
+          "max_absolute_difference": 6.661338147750939e-16
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "complete_sunday_summary",
+      "rows": 6,
+      "keys_match": true,
+      "fields": {
+        "count_sunday": {
+          "pass": true,
+          "max_absolute_difference": 2.220446049250313e-16
+        },
+        "valid_count_sunday": {
+          "pass": true,
+          "max_absolute_difference": 2.220446049250313e-16
+        },
+        "frp_sunday": {
+          "pass": true,
+          "max_absolute_difference": 1.1102230246251565e-16
+        },
+        "mean_delta": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "ci_lower": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "ci_upper": {
+          "pass": true,
+          "max_absolute_difference": 1.1102230246251565e-16
+        },
+        "loyo_min": {
+          "pass": true,
+          "max_absolute_difference": 9.71445146547012e-17
+        },
+        "loyo_max": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "max_day_removal_mean_delta": {
+          "pass": true,
+          "max_absolute_difference": 1.1102230246251565e-16
+        },
+        "pass": {
+          "pass": true
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "all_leave_one_year_out",
+      "rows": 72,
+      "keys_match": true,
+      "fields": {
+        "mean_delta": {
+          "pass": true,
+          "max_absolute_difference": 1.1102230246251565e-16
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "all_maximum_day_removals",
+      "rows": 72,
+      "keys_match": true,
+      "fields": {
+        "removed_date": {
+          "pass": true
+        },
+        "removed_F": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "max_day_frp_share": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        },
+        "trimmed_delta": {
+          "pass": true,
+          "max_absolute_difference": 3.0531133177191805e-16
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "all_exposure_counts",
+      "rows": 168,
+      "keys_match": true,
+      "fields": {
+        "days": {
+          "pass": true,
+          "max_absolute_difference": 0.0
+        }
+      },
+      "pass": true
+    },
+    {
+      "name": "all_excluded_dates",
+      "rows": 160,
+      "pass": true
+    },
+    {
+      "name": "joint_bootstrap_draws",
+      "draws": 50000,
+      "indices": 600000,
+      "pass": true,
+      "sha256_raw": "1b19808faa458fe204271ff26bd9fab55a769d427b01388ca38e27b685c2353e"
+    },
+    {
+      "name": "final_gates",
+      "pass": true
+    }
+  ],
+  "independent_script": "scripts/verify_frp_test.py",
+  "runner_script": "pipeline/review/frp_test.py",
+  "review": "Runner implementation read and reviewed; same-data paired numerator, full-calendar denominator, frozen shared year draws, multiplicity-adjusted quantiles, both masks, all LOYO and largest-day removal follow protocol. No runner functions imported."
+}

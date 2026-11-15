@@ -1,66 +1,163 @@
-# FIRETRACE: seven-slide presentation outline
+# FIRETRACE — seven-slide judging deck
 
-Draft. Check the event's actual slide and video requirements before submitting. Two acts: harmonization, then the human rhythm. Keep unfavorable results visible.
+The seven sections below are the complete deck. Titles plus on-slide text stay within 40 words; each spoken note is 60–90 words. Sources and production directions are not spoken. Real screenshots show the earlier deployed baseline. FRP, season-sensitivity, month-calendar, area and 2025 additions are merged but appear live only after redeployment; do not imply they are live before then.
 
-## 1. The question
+## Slide 1 — Nepal: did fire increase?
 
-**Title:** Did fire activity change, or did our camera change?
+### On-slide text
 
-Show a real regional record with its instrument labels. When VIIRS joined MODIS in 2012 it saw many more small fires, so a naive joined record appears to jump. A hotspot is a detected pixel, not an independent fire.
+Or did the satellite change?
 
-**Speaker line:** "An apparent increase can mix real change with a change in what the instrument sees."
+A historical calendar that tests its own conversion.
 
-## 2. Act 1: one comparable history for seven countries
+### Visual
 
-**Title:** A burning activity calendar on one named scale
+`submission/assets/live-calendar.jpg`: real Nepal calendar screenshot. Preserve the country, record dates and REAL FIRMS DATA label. The screenshot is an application view, not a before/after proof.
 
-Select a country in the calendar (Australia, Bangladesh, Brazil, Egypt, India, Nepal, United States; 2003-2024). Flip the raw versus harmonized toggle to show how much of the apparent jump at the switch to VIIRS is the instrument, and what change remains on the Aqua scale. Show typical season, high-activity windows and unusual weeks. This is historical context, not a forecast.
+### Speaker notes
 
-## 3. Act 1: the method and the honest test
+A sharper satellite can make the fire record change even when burning has not. FIRETRACE builds a historical calendar on a declared reference scale, and tests whether better-looking numbers preserve the season people need to understand. Start here in Nepal. A hotspot is a satellite detection, and one continuing event can produce many detections. We let a viewer inspect the observations behind a week before interpreting a change across years.
 
-**Title:** Separate streams, one reference, a locked evaluation
+### Sources
 
-FIRMS archives, local civil dates, Terra/Aqua/VIIRS kept separate, Aqua-reference-equivalent scale. B0 is uncalibrated VIIRS, B1 one training ratio, M1 ratios by country, day/night and fire intensity. Train 2013-2017, select 2018-2019, test once 2020-2024.
+[S01] `METHODS.md`; [S08] `web/public/data/Nepal.json`; NASA FIRMS measurement context [S13]. Source identifiers are defined in `submission/JUDGE_QA.md`.
 
-| Country | Selected | Selected monthly MAE | Comparator | Remaining limitation |
-|---|---|---:|---:|---|
-| Nepal | M1 | 30.24 | B1: 182.52 | -8.11% bias |
-| United States | B1 | 1,537.79 | M1: 2,078.57 | simpler model wins |
-| Egypt | M1 | 15.04 | B1: 90.40 | +51.68% bias |
+## Slide 2 — Different sensors, different detections
 
-Units are Aqua-reference-equivalent detections, not fire counts.
+### On-slide text
 
-## 4. Act 1: one week, back to its evidence
+MODIS: 1 km
 
-**Title:** Follow the evidence before trusting the trend
+VIIRS: 375 m
 
-Open one week: separate sensor counts, the converted estimate and its bounds, the held-out results, then a share link that reopens the same view.
+Keep satellite records separate. Sharper detection can reveal smaller hotspots.
 
-## 5. Act 2: the human rhythm test
+### Visual
 
-**Title:** Nature has no seven-day cycle; people do
+`reports/review/aqua_vs_converted_viirs_Nepal.png`: observed Aqua and converted VIIRS comparison, retaining the chart's real labels and caveats. The resolution labels describe the products; they do not represent a controlled resolution experiment.
 
-Rest days fixed in advance: Sunday (US, Australia, Brazil, India), Saturday (Nepal), Friday (Bangladesh, Egypt). Pass rule fixed in advance: the US replicates the known Sunday dip, and at least two other countries show their rest day as the lowest weekday, significant after correction, in at least two of three satellite streams.
+### Speaker notes
 
-**Headline:** Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.
+NASA FIRMS supplies thermal hotspot observations. MODIS uses a one-kilometre active-fire product; the VIIRS product we use has 375-metre detections and greater sensitivity to small hotspots. Different counts therefore need not mean different burning. Terra MODIS, Aqua MODIS and Suomi-NPP VIIRS stay separate in our analysis. Aqua supplies the declared comparison scale. Resolution is only one difference: overpass timing, cloud, viewing geometry and retrieval limits still affect the observations and the comparison.
 
-**Result: pass.** US 3/3 streams (Sunday 22-33% below an average day), Australia 3/3, Brazil 2/3. India, Nepal, Bangladesh and Egypt fail. Show the Weekly Rhythm Index tab: weekday bars with 95% intervals, rest day highlighted.
+### Sources
 
-## 6. Act 2: what it does and does not show
+[S01] `METHODS.md`; [S13] [NASA FIRMS notes](https://firms.modaps.eosdis.nasa.gov/alerts/notes.php) and [VIIRS product description](https://firms.modaps.eosdis.nasa.gov/content/descriptions/FIRMS_VIIRS_Firehotspots.html).
 
-**Title:** The caveats are part of the result
+## Slide 3 — Freeze the correction before testing
 
-- All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show a dip, so this does not show the dip following each country's own rest day.
-- Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three satellites on new ignitions.
-- Exploratory map: in India the Sunday dip sits almost entirely in the northeast (19 of 26 cells significant after false-discovery correction, 14 of 21 cells mostly inside India; Aqua agrees); the rest of India shows none.
-- Within India, the Sunday dip is concentrated in the northeastern hill states, deepest in Nagaland, Mizoram and Manipur, where Sunday detections fall to about 40% of an average day; the rest of India, including the Punjab crop-burning belt, shows no weekly dip. The cause is unresolved; local scheduling of burning is one possible explanation we have not tested.
+### On-slide text
 
-**Speaker line:** "A dip is consistent with people scheduling their burning. It is not proof of who lit the fires."
+Aqua reference scale
 
-## 7. What is ready and what remains
+B0: raw VIIRS · B1: global ratio · M1: stratified ratios
 
-**Title:** A reproducible record with visible limits
+Train 2013–2017 → select 2018–2019 → test 2020–2024
 
-Show the [live app](https://firetrace-bhaktapur-2026.pages.dev/), the [public repository](https://github.com/Water-Mal0ne/FIRETRACE) and NASA FIRMS attribution. No worldwide coverage, 2000-2002 reconstruction or operational forecast is claimed; selected-cell errors stay visible. Include the AI disclosure and "NASA does not endorse this project."
+### Visual
 
-**Closing line:** "Follow the evidence before trusting the trend."
+`submission/assets/live-evidence.jpg`: real evidence card, paired with the three-stage timeline above. `reports/selection_lock.json` is the exact source for frozen model choices and year split. Do not label a training-period example as independent validation.
+
+### Speaker notes
+
+The simplest conversion multiplies VIIRS counts by one ratio learned where Aqua and VIIRS overlap. The detailed candidate uses country, day or night, and reported radiative-power strata, with sparse groups pulled toward the simple ratio. We fit on 2013–2017, select by daily error on 2018–2019, then evaluate the locked choice on 2020–2024. Nepal selects the detailed model; the United States selects the simple one. These are reference-equivalent estimates, not recovered counts of distinct fires.
+
+### Sources
+
+[S01] `reports/selection_lock.json`, `reports/harmonization_model.json`, `pipeline/streaming/prepared_runtime.py`, `METHODS.md`.
+
+## Slide 4 — Check held-out years and failures
+
+### On-slide text
+
+Against Aqua, 2020–2024
+
+| Country | Model | Weekly MAE | Bias |
+|---|---|---:|---:|
+| Nepal | B1 | 43.3 | +83.8% |
+| Nepal | M1 | 11.3 | −8.1% |
+| Egypt | M1 | 4.3 | +51.7% |
+
+MAE: Aqua-reference-equivalent detections/week.
+
+2025, out of sample: timing holds; totals drift (Brazil −21%).
+
+### Visual
+
+Render the Nepal B1/M1 and Egypt selected rows from `reports/review/layer1_table.csv`, with the same units as `reports/review/layer1_table.md`. Keep the comparison label “Aqua reference.” The NOAA-20 caption refers to `reports/review/noaa20/noaa20_conversion_check.csv`, not independent ground truth.
+
+### Speaker notes
+
+On years withheld from model selection, Nepal's weekly mean absolute error against Aqua falls from 43.3 with the simple conversion to 11.3 with the selected model. Egypt still has positive bias of 51.7 percent, so agreement is uneven. A NOAA-20 check supports transfer between VIIRS platforms, not fire truth. An out-of-sample 2025 check is weaker: weekly timing holds, but converted totals run 21 percent below Aqua in Brazil and 18 percent in Nepal, so 2025 is labelled beyond the validation period.
+
+### Sources
+
+[S02] `reports/review/layer1_table.csv`, `reports/harmonization_eval.csv`; [S09] `reports/review/noaa20/NOAA20.md`, `reports/review/noaa20/noaa20_conversion_check.csv`; [S10] season sensitivity evidence; 2025 continuity: `reports/review/extend2025/CONTINUITY.md`.
+
+## Slide 5 — Test the season as well as totals
+
+### On-slide text
+
+Calendar · month view · your own area · evidence · CSV/ICS
+
+India, retrospective: better totals, worse monthly shape.
+
+Both common-date masks preserve that finding.
+
+### Visual
+
+`submission/assets/live-outage.jpg`: real “no observation” calendar/evidence view. The India comparison is explained in the notes; keep its complete numerical table in `submission/evidence/season/whole_year_comparison.csv` and `submission/evidence/season/SEASON_CHECK.md`. Label the analysis retrospective.
+
+### Speaker notes
+
+Choose a country, switch the calendar scale, and open a week to inspect its measurements. Grey outage weeks remain unknown. A month-by-year view compares each month with the same month in other years, and users can draw their own area, which uses national calibration. The seasonal check asks a different question: in India, the selected conversion improves totals but worsens monthly shares against Aqua, under both common-date outage masks. These are retrospective results, not forecasts.
+
+### Sources
+
+[S08] `reports/review/OUTAGES.md`, `web/src/App.tsx`, `web/src/MonthCalendar.tsx`, `web/src/AreaOfInterest.tsx`, `reports/review/area/RECONCILIATION.md`; [S10] `submission/evidence/season/SEASON_CHECK.md`, `submission/evidence/season/whole_year_comparison.csv`.
+
+## Slide 6 — Weekly patterns, separate raw streams
+
+### On-slide text
+
+US/Australia: clear. Brazil: qualified.
+
+Four country rules fail. Exploratory maps and failed predictions stay visible.
+
+FRP contrast: Aqua and S-NPP pass; Terra fails.
+
+### Visual
+
+`submission/assets/live-rhythm-map.jpg`: real Weekly Rhythm Index exploratory map, clearly labelled exploratory. The reviewed count-versus-FRP chart is `submission/evidence/frp/count_vs_frp_weekdays.png`, labelled “REAL FIRMS DATA, US daytime 2013-2024.” Keep the full chart accessible in the evidence pack; do not crop away Terra's failed criterion.
+
+### Speaker notes
+
+We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration. US and Australia show Sunday dips. Brazil's newly active grid cells also pass, but are not verified ignitions. India, Nepal, Bangladesh and Egypt fail the country rule; Nepal's simulation has low power. Northeast India's map is exploratory; the Bangladesh hills prediction failed. US daytime count-versus-FRP passes for Aqua and S-NPP, not Terra, with a later Git receipt.
+
+### Sources
+
+[S04] `reports/official/kill_test_gate.json`; [S05] Nepal simulation; [S06] newly active cell and control checks; [S07] northeast India and Bangladesh prediction; [S11] `submission/evidence/frp/FRP_TEST.md`, `summary.csv`, original protocol and verification receipt; [S13] Earl et al. (2015).
+
+## Slide 7 — Evidence, limits, reproduction
+
+### On-slide text
+
+Historical observations. No cause attribution or forecast.
+
+NASA FIRMS data. Public code. Visible limitations. AI assistance disclosed.
+
+github.com/Water-Mal0ne/FIRETRACE
+
+firetrace-bhaktapur-2026.pages.dev
+
+### Visual
+
+`submission/assets/live-calendar.jpg` as a restrained background crop, with the two public links above and readable NASA FIRMS attribution. No NASA logo or endorsement claim. “NASA does not endorse this project” remains explicit in the project page and source material.
+
+### Speaker notes
+
+Our contribution is an inspectable historical record and a test of what its correction preserves. The calendar covers seven countries; it does not establish fire causes, future risk, or universal calibration accuracy. The public repository retains code, manifests, fixed models, failures and independently checked research outputs. NASA FIRMS provides the observations. Codex and Claude Code assisted with implementation, testing and writing; our team must review the claims before submission. Open the live calendar, then follow a result back to its evidence.
+
+### Sources
+
+[S01] `METHODS.md`; [S08] `README.md`, `LIMITATIONS.md`; [S12] `AI_DISCLOSURE.md`; [S10–S11] independently checked branch evidence. [Live application](https://firetrace-bhaktapur-2026.pages.dev/) · [Repository](https://github.com/Water-Mal0ne/FIRETRACE).

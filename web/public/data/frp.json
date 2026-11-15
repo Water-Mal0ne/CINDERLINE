@@ -1,0 +1,353 @@
+{
+  "version": 1,
+  "label": "REAL FIRMS DATA, US daytime 2013-2024",
+  "scope": {
+    "country": "United States",
+    "years": [
+      2013,
+      2024
+    ],
+    "source_type": 0,
+    "subset": "daytime",
+    "year_blocks": 12
+  },
+  "protocol": {
+    "sha256": "1B88C8B3C7A1225FB2AA10E3B19DD9311CB7F4B022A9795C51552557BB434171",
+    "frozen_utc": "2026-11-14T18:57:23.284Z",
+    "git_receipt_commit": "92626ed2f76fc6ab1bcefa6254d49609b7c6b982",
+    "git_receipt_after_original_results": true,
+    "chronology_note": "The local protocol was recorded before the original analysis. This Git receipt was committed after its results were known; this is not external preregistration or a new holdout."
+  },
+  "verdict": "pass",
+  "pass_sentence": "In US daytime observations from 2013-2024, the Sunday deficit was stronger in detection counts than in summed fire radiative power in MODIS Aqua and VIIRS S-NPP, under a pre-specified test.",
+  "weekdays": [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+    "Sun"
+  ],
+  "inference": {
+    "baseline": 1,
+    "ci_percent": 98.33333333333333,
+    "bootstrap_draws": 50000,
+    "point_threshold": 0.05
+  },
+  "streams": [
+    {
+      "stream": "Terra",
+      "name": "MODIS Terra",
+      "count_weekdays": [
+        1.0307163121152,
+        1.1835479210274522,
+        1.1391132089086546,
+        1.120476843369092,
+        1.0573570507191088,
+        0.8408199898567686,
+        0.6279686740037239
+      ],
+      "frp_weekdays": [
+        1.0063391143193416,
+        1.1555946364240153,
+        1.0208570307156848,
+        1.1427798467003594,
+        1.0401595916456117,
+        0.9126172112897918,
+        0.7216525689051948
+      ],
+      "count_sunday": 0.6279686740037239,
+      "frp_sunday": 0.7216525689051948,
+      "delta": 0.093683894901471,
+      "ci_low": -0.0016570225521303384,
+      "ci_high": 0.20463350525659452,
+      "passed": false,
+      "loyo_min": 0.06629991081675593,
+      "max_day_removed_delta": 0.0672637996591234
+    },
+    {
+      "stream": "Aqua",
+      "name": "MODIS Aqua",
+      "count_weekdays": [
+        1.0854748279048165,
+        1.1145049414155,
+        1.143882181843438,
+        1.145211244357552,
+        0.9913032143102095,
+        0.8753392169632374,
+        0.6442843732052473
+      ],
+      "frp_weekdays": [
+        0.9978531859828929,
+        1.1303103139513742,
+        1.0775119392052714,
+        1.0514097842112358,
+        1.0185529128270316,
+        0.9098228811727737,
+        0.8145389826494204
+      ],
+      "count_sunday": 0.6442843732052473,
+      "frp_sunday": 0.8145389826494204,
+      "delta": 0.17025460944417317,
+      "ci_low": 0.10186440642303496,
+      "ci_high": 0.2438192008564154,
+      "passed": true,
+      "loyo_min": 0.15009199645051238,
+      "max_day_removed_delta": 0.19838798832864146
+    },
+    {
+      "stream": "VIIRS",
+      "name": "VIIRS S-NPP",
+      "count_weekdays": [
+        1.0552206247347349,
+        1.1479023868690181,
+        1.1361743597289398,
+        1.1272432906103544,
+        1.009429991765381,
+        0.8695092499970235,
+        0.654520096294548
+      ],
+      "frp_weekdays": [
+        1.0316422918458439,
+        1.128736840966007,
+        1.0920746006877542,
+        1.1163844110444334,
+        1.00499320521234,
+        0.8807066999066039,
+        0.7454619503370177
+      ],
+      "count_sunday": 0.654520096294548,
+      "frp_sunday": 0.7454619503370177,
+      "delta": 0.09094185404246975,
+      "ci_low": 0.045115120865427086,
+      "ci_high": 0.13698426230718083,
+      "passed": true,
+      "loyo_min": 0.07882433844373817,
+      "max_day_removed_delta": 0.08923945607141921
+    }
+  ],
+  "masks": [
+    {
+      "name": "primary",
+      "excluded_days": 73,
+      "passing_streams": [
+        "Aqua",
+        "VIIRS"
+      ],
+      "streams": [
+        {
+          "stream": "Terra",
+          "name": "MODIS Terra",
+          "count_weekdays": [
+            1.0307163121152,
+            1.1835479210274522,
+            1.1391132089086546,
+            1.120476843369092,
+            1.0573570507191088,
+            0.8408199898567686,
+            0.6279686740037239
+          ],
+          "frp_weekdays": [
+            1.0063391143193416,
+            1.1555946364240153,
+            1.0208570307156848,
+            1.1427798467003594,
+            1.0401595916456117,
+            0.9126172112897918,
+            0.7216525689051948
+          ],
+          "count_sunday": 0.6279686740037239,
+          "frp_sunday": 0.7216525689051948,
+          "delta": 0.093683894901471,
+          "ci_low": -0.0016570225521303384,
+          "ci_high": 0.20463350525659452,
+          "passed": false,
+          "loyo_min": 0.06629991081675593,
+          "max_day_removed_delta": 0.0672637996591234
+        },
+        {
+          "stream": "Aqua",
+          "name": "MODIS Aqua",
+          "count_weekdays": [
+            1.0854748279048165,
+            1.1145049414155,
+            1.143882181843438,
+            1.145211244357552,
+            0.9913032143102095,
+            0.8753392169632374,
+            0.6442843732052473
+          ],
+          "frp_weekdays": [
+            0.9978531859828929,
+            1.1303103139513742,
+            1.0775119392052714,
+            1.0514097842112358,
+            1.0185529128270316,
+            0.9098228811727737,
+            0.8145389826494204
+          ],
+          "count_sunday": 0.6442843732052473,
+          "frp_sunday": 0.8145389826494204,
+          "delta": 0.17025460944417317,
+          "ci_low": 0.10186440642303496,
+          "ci_high": 0.2438192008564154,
+          "passed": true,
+          "loyo_min": 0.15009199645051238,
+          "max_day_removed_delta": 0.19838798832864146
+        },
+        {
+          "stream": "VIIRS",
+          "name": "VIIRS S-NPP",
+          "count_weekdays": [
+            1.0552206247347349,
+            1.1479023868690181,
+            1.1361743597289398,
+            1.1272432906103544,
+            1.009429991765381,
+            0.8695092499970235,
+            0.654520096294548
+          ],
+          "frp_weekdays": [
+            1.0316422918458439,
+            1.128736840966007,
+            1.0920746006877542,
+            1.1163844110444334,
+            1.00499320521234,
+            0.8807066999066039,
+            0.7454619503370177
+          ],
+          "count_sunday": 0.654520096294548,
+          "frp_sunday": 0.7454619503370177,
+          "delta": 0.09094185404246975,
+          "ci_low": 0.045115120865427086,
+          "ci_high": 0.13698426230718083,
+          "passed": true,
+          "loyo_min": 0.07882433844373817,
+          "max_day_removed_delta": 0.08923945607141921
+        }
+      ]
+    },
+    {
+      "name": "padded",
+      "excluded_days": 87,
+      "passing_streams": [
+        "Aqua",
+        "VIIRS"
+      ],
+      "streams": [
+        {
+          "stream": "Terra",
+          "name": "MODIS Terra",
+          "count_weekdays": [
+            1.032468426823818,
+            1.1813352225983789,
+            1.1410669265326152,
+            1.119371296693988,
+            1.0566937100729958,
+            0.8403906683476419,
+            0.6286737489305624
+          ],
+          "frp_weekdays": [
+            1.0075348003583702,
+            1.1543254157001617,
+            1.0220399218766294,
+            1.1399121177925664,
+            1.0398114790188506,
+            0.9124445002633733,
+            0.7239317649900481
+          ],
+          "count_sunday": 0.6286737489305624,
+          "frp_sunday": 0.7239317649900481,
+          "delta": 0.0952580160594857,
+          "ci_low": -0.001334414377379739,
+          "ci_high": 0.2083223590131737,
+          "passed": false,
+          "loyo_min": 0.06666830547078567,
+          "max_day_removed_delta": 0.0685495966949055
+        },
+        {
+          "stream": "Aqua",
+          "name": "MODIS Aqua",
+          "count_weekdays": [
+            1.0877958447758125,
+            1.1115939987831662,
+            1.146049733507103,
+            1.1445789817957568,
+            0.9898421935987417,
+            0.8742717854798564,
+            0.645867462059564
+          ],
+          "frp_weekdays": [
+            1.0016255371458478,
+            1.130271305162642,
+            1.0821222439306561,
+            1.0530911200503998,
+            1.0108013033690473,
+            0.902188603780043,
+            0.8198998865613638
+          ],
+          "count_sunday": 0.645867462059564,
+          "frp_sunday": 0.8198998865613638,
+          "delta": 0.1740324245017998,
+          "ci_low": 0.10551463725920782,
+          "ci_high": 0.24646384584240574,
+          "passed": true,
+          "loyo_min": 0.15421324924065052,
+          "max_day_removed_delta": 0.20275906718064207
+        },
+        {
+          "stream": "VIIRS",
+          "name": "VIIRS S-NPP",
+          "count_weekdays": [
+            1.0577951843457511,
+            1.1451019654779089,
+            1.1366281453176428,
+            1.126934697668038,
+            1.0084804310370763,
+            0.8687612306738742,
+            0.6562983454797084
+          ],
+          "frp_weekdays": [
+            1.0337028982176169,
+            1.1253218900711908,
+            1.0934757118499019,
+            1.115456213510805,
+            1.0043611774384253,
+            0.878357717427899,
+            0.7493243914841613
+          ],
+          "count_sunday": 0.6562983454797084,
+          "frp_sunday": 0.7493243914841613,
+          "delta": 0.09302604600445268,
+          "ci_low": 0.046202108762633774,
+          "ci_high": 0.13952011168204428,
+          "passed": true,
+          "loyo_min": 0.081098002402265,
+          "max_day_removed_delta": 0.09162957379744736
+        }
+      ]
+    }
+  ],
+  "data_gate": {
+    "passed": true,
+    "valid_frp_fraction": 1.0,
+    "records_primary": 3804061,
+    "records_padded": 3792660
+  },
+  "limitations": [
+    "Summed FRP is sampled radiative power, not energy, emissions, burned area or fire counts.",
+    "The same detections form both measures; a difference does not establish ignition cause.",
+    "Twelve year blocks, correlated sensors and unmeasured cloud/overpass exposure limit inference.",
+    "Terra does not meet the corrected uncertainty criterion; its interval includes zero.",
+    "The effect threshold is a project feasibility choice, not a NASA standard."
+  ],
+  "evidence": {
+    "chart": "/evidence/frp/weekday_profiles.svg",
+    "report": "/evidence/frp/FRP_TEST.md",
+    "protocol": "/evidence/frp/original_recorded_protocol.md",
+    "summary": "/evidence/frp/summary.csv",
+    "annual": "/evidence/frp/annual_contrasts.csv",
+    "verification": "/evidence/frp/independent_verification.json"
+  }
+}

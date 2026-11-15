@@ -1,4 +1,8 @@
-# Custom area selection (review E4): not built in this release
+# Custom area selection (review E4)
+
+**Update, 15 November 2026: built on branch `area-of-interest`** (`pipeline/area_cells.py`, `web/src/AreaOfInterest.tsx`). It uses monthly per-cell series at 0.25 degrees, lazily loaded per country, with a drawn rectangle or a typed point and radius. Values use national calibration, and local accuracy has not been validated. See DECISIONS.md, "Area of interest". The original note follows.
+
+## Original note: not built in that release
 
 Stopped under the 30-minute rule. What it needs and why it does not fit tonight:
 

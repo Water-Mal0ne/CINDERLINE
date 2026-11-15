@@ -12,3 +12,6 @@ work/
 *.part
 .openai/secrets*
 .wrangler/
+.deck-build/
+
+.npm-cache/

@@ -25,7 +25,7 @@ STREAMS = ["Terra", "Aqua", "VIIRS"]
 DAY_NAMES = {"Mon": "Monday", "Tue": "Tuesday", "Wed": "Wednesday", "Thu": "Thursday", "Fri": "Friday",
              "Sat": "Saturday", "Sun": "Sunday"}
 SHORT = {"United_States": "the US"}
-HEADLINE = ('Sunday dip clear in the US and Australia, weaker in Brazil, and absent where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.')  # team-agreed headline after expert review; numbers behind it are in reports/
+HEADLINE = ('Sunday dip clear in the US and Australia, weaker in Brazil, and not established where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.')  # team-agreed headline after expert review; numbers behind it are in reports/
 SUNDAY_CAVEAT = ("All three passing countries rest on Sunday; Friday- and Saturday-rest countries did not show "
                  "a dip, so this does not show the dip following each country's own rest day.")
 
@@ -141,7 +141,7 @@ def recheck_notes(review_dir, results: pd.DataFrame, decision: str) -> dict:
         "Brazil": ("Brazil's Terra industrial-source control dips on Sunday over 2002-2024, but the dip comes entirely "
                    "from 2002-2007; over 2013-2024, the window fixed for the rest-day test, the control is flat. "
                    "Brazil's Sunday dip is weaker on raw detections (VIIRS does not pass) but passes in all three "
-                   "satellites on new ignitions. Because of the 2002-2024 control, Brazil does not meet the stricter "
+                   "satellites on newly active grid cells (not verified ignitions). Because of the 2002-2024 control, Brazil does not meet the stricter "
                    f"check; the official pre-specified result is unchanged ({decision.upper()})."),
     }
 

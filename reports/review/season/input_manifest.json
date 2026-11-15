@@ -1,0 +1,80 @@
+{
+  "started_utc": "2026-11-14T19:54:33.264261+00:00",
+  "input_sha256": {
+    "data/sample/seven_country_national_counts.parquet": "44d45fb13c324b7232d05b2d62552dafd756eed8f355aba56d59607dbd2728d9",
+    "reports/harmonization_model.json": "596adf75f544032e1b733f2f85d4fd97120b4514bdd2f2a894e97bf7ab8a303a",
+    "reports/selection_lock.json": "3b7f7e3cf52b93287546a3756f612c9194b5c9ee032f63ccf5cf48b9f0178904",
+    "reports/harmonization_eval.csv": "976d23d94a68769028c3d1af2ea002d17206992fbca1e759fbbb3b7b0509337f",
+    "reports/LOCKED_ARTIFACTS.json": "d8ca1805be8e25d2c19cb95d89c7885122a7aed888952072cd4e138204ffa170"
+  },
+  "script_sha256_lf": "ff4a9d331cff8020279d76adcb929354a49e348b1d57a0ef2b6edeff00608c3e",
+  "source_snapshot_sha256": "9be03226d5d6bc6cdcec2b57b49336435ba31a00a3f718ebd55b6011ce9a8e74",
+  "countries": [
+    "Australia",
+    "Bangladesh",
+    "Brazil",
+    "Egypt",
+    "India",
+    "Nepal",
+    "United_States"
+  ],
+  "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "selected_models": {
+    "Australia": "B1",
+    "Bangladesh": "M1",
+    "Brazil": "B1",
+    "Egypt": "M1",
+    "India": "M1",
+    "Nepal": "M1",
+    "United_States": "B1"
+  },
+  "ranges": [
+    [
+      "Aqua",
+      "2020-08-16",
+      "2020-09-02"
+    ],
+    [
+      "Aqua",
+      "2022-03-31",
+      "2022-04-16"
+    ],
+    [
+      "VIIRS",
+      "2022-07-26",
+      "2022-08-10"
+    ],
+    [
+      "VIIRS",
+      "2024-07-09",
+      "2024-07-16"
+    ],
+    [
+      "VIIRS",
+      "2024-07-24",
+      "2024-08-01"
+    ],
+    [
+      "VIIRS",
+      "2024-05-31",
+      "2024-06-02"
+    ],
+    [
+      "VIIRS",
+      "2024-11-04",
+      "2024-11-05"
+    ]
+  ],
+  "mask_sizes": {
+    "unmasked": 0,
+    "primary": 73,
+    "padded": 87
+  },
+  "note": "Existing retrospective outcomes reproduced, then restricted to frozen common dates; no refitting."
+}
