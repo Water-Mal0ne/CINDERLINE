@@ -482,3 +482,15 @@ test('Home chosen week survives country changes, links and calendar navigation w
     assert.equal(namedChild(app.tree,'EvidenceDrawer'),undefined);
   }finally{app.dispose();}
 });
+
+test('calendar week controls persist the selected date and area shortcut opens the drawing panel',async()=>{
+  const app=journeyApp('?region=Nepal&calendar=weekly');
+  try{
+    await app.settle();calendar(app).props.onWeek('2023-01-08');await app.settle();
+    assert.equal(app.url.searchParams.get('homeWeek'),'2023-01-08');
+    assert.equal(calendar(app).props.focusDate,'2023-01-08');assert.equal(namedChild(app.tree,'EvidenceDrawer'),undefined);
+    press(app,'Draw an area');await app.settle();
+    assert.ok(app.focus.includes('area-panel'));assert.equal(elements(app.tree,node=>node.props?.className==='area-workspace')[0].props.open,true);
+    assert.equal(app.url.searchParams.get('start'),'2023-01-01');assert.equal(app.url.searchParams.get('end'),'2024-12-31');
+  }finally{app.dispose();}
+});

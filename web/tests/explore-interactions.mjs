@@ -318,3 +318,57 @@ test('selected comparison uses shared days only and keeps unavailable weeks insp
   tree=render({...props,selectedWeek:{...week,rows:[{date:'2003-01-01',source:'observed Aqua',harmonized:9,raw_aqua:9}]}});
   assert.equal(withClass(tree,'journey-values').length,0);assert.match(text(tree),/observed Aqua data directly/);
 });
+
+test('weekly picker handles year boundaries and preserves unavailable weeks for evidence',()=>{
+  const render=componentHarness('App.tsx',()=>{},'Heatmap');
+  const weeks=[{key:'2023-53',year:2023,week:53,date:'2023-12-31',raw:2,harmonized:1,rows:[{date:'2023-12-31',raw:2,harmonized:1}]},
+    {key:'2024-1',year:2024,week:1,date:'2024-01-01',raw:null,harmonized:null,rows:[{date:'2024-01-01',raw:null,harmonized:null,source:'no observation'}]}];
+  let linked,inspected;
+  const props={weeks,mode:'harmonized',label:'REAL FIRMS DATA',onSelect:w=>inspected=w,onWeek:date=>linked=date};
+  const field=(tree,id)=>elements(tree,item=>item.props?.id===id)[0];
+  let tree=render(props);
+  assert.equal(field(tree,'calendar-week').props.value,'2024-1');
+  const open=elements(tree,item=>item.type==='button'&&item.props.className==='button primary')[0];
+  open.props.onClick();assert.equal(inspected.date,'2024-01-01');assert.equal(inspected.harmonized,null);
+  field(tree,'calendar-year').props.onChange({target:{value:'2023'}});tree=render(props);
+  assert.equal(field(tree,'calendar-week').props.value,'2023-53');assert.equal(linked,'2023-12-31');
+  assert.equal(withClass(tree,'calendar-inspector-value')[0].props.children[0].props.children,'1');
+  assert.equal(withClass(tree,'week-cell').find(cell=>cell.props['aria-current']==='date').props.id,'calendar-week-2023-12-31');
+});
+
+test('monthly grid remains keyboard reachable when every available month is an outage',()=>{
+  const render=componentHarness('MonthCalendar.tsx');
+  const props={rows:[{date:'2024-03-01',source:'no observation',harmonized:null},{date:'2024-04-01',source:'no observation',harmonized:null}],mode:'harmonized',label:'REAL FIRMS DATA',regionId:'Nepal',regionName:'Nepal',scopeName:'Whole region',scopeId:'ALL'};
+  let tree=render(props);
+  const cells=withClass(tree,'month-cell').filter(cell=>cell.type==='button');
+  assert.equal(cells.filter(cell=>cell.props.tabIndex===0).length,1);
+  assert.match(cells.find(cell=>cell.props.tabIndex===0).props['aria-label'],/^April 2024/);
+  assert.equal(cells.find(cell=>cell.props['aria-pressed']).props.tabIndex,0);
+  const controls=withClass(tree,'month-history-controls')[0];
+  elements(controls,item=>item.type==='select')[0].props.onChange({target:{value:'3'}});tree=render(props);
+  assert.match(withClass(tree,'month-cell').find(cell=>cell.props.tabIndex===0).props['aria-label'],/^March 2024/);
+});
+
+test('monthly keyboard movement preserves columns across sparse filtered years',()=>{
+  const render=componentHarness('MonthCalendar.tsx');
+  const rows=days(['2023-01','2023-04','2024-01','2024-04']);
+  const tree=render({rows,mode:'harmonized',label:'REAL FIRMS DATA',regionId:'Nepal',regionName:'Nepal',scopeName:'Whole region',scopeId:'ALL'});
+  const cells=elements(tree,item=>item.type==='td');let focused;
+  const nodes=cells.map((cell,index)=>({querySelector(){const button=elements(cell,item=>item.type==='button')[0];return button?{disabled:false,focus(){focused=index;}}:null;}}));
+  const april=elements(cells[3],item=>item.type==='button')[0];
+  april.props.onKeyDown({key:'ArrowDown',preventDefault(){},currentTarget:{closest:selector=>selector==='table'?{querySelectorAll:()=>nodes}:nodes[3]}});
+  assert.equal(focused,15,'April moves to April in the previous year, preserving empty cells');
+});
+
+test('selecting a monthly cell brings its result into view without changing source totals',()=>{
+  let focusCalls=0,scrollCalls=0;
+  const render=componentHarness('MonthCalendar.tsx',tree=>{
+    const result=withClass(tree,'month-history')[0];if(result)result.ref.current={focus(){focusCalls++;},scrollIntoView(){scrollCalls++;}};
+  });
+  const props={rows:days(['2023-01','2023-04']),mode:'harmonized',label:'REAL FIRMS DATA',regionId:'Nepal',regionName:'Nepal',scopeName:'Whole region',scopeId:'ALL'};
+  let tree=render(props);const button=withClass(tree,'month-cell').find(cell=>cell.type==='button'&&cell.props['aria-label'].startsWith('January'));
+  button.props.onClick();tree=render(props);
+  assert.equal(focusCalls,1);assert.equal(scrollCalls,1);
+  assert.match(withClass(tree,'month-cell').find(cell=>cell.props['aria-pressed']).props['aria-label'],/^January 2023: 10/);
+  assert.equal(elements(withClass(tree,'month-history-controls')[0],item=>item.type==='select')[0].props.value,1);
+});

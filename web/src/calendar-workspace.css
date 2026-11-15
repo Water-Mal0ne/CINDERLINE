@@ -1,0 +1,85 @@
+/* Calendar reading flow. Chrome content-first, typography and form-factor guidance.
+   Craft approach: Unslop by Damir Sokolovsky, CC BY 4.0. */
+.atlas-app .calendar-workspace { container: calendar-workspace / inline-size; }
+.atlas-app .calendar-workspace-controls { gap: 16px 24px; margin-bottom: 12px; }
+.atlas-app .calendar-workspace-controls .segmented button { min-height: 44px; font-size: .875rem; }
+.atlas-app .calendar-workspace .calendar-reading { font-size: .8125rem; align-items: center; }
+.atlas-app .calendar-workspace .reading-guide summary { min-height: 44px; }
+.atlas-app .calendar-workspace .validation-disclosure { margin-bottom: 16px; font-size: .8125rem; }
+.atlas-app .calendar-workspace .validation-disclosure summary { min-height: 44px; display: list-item; align-content: center; }
+.atlas-app .calendar-overview-label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin: 0 0 16px; color: var(--secondary); font-size: .8125rem; line-height: 1.6; }
+.atlas-app .calendar-workspace .heat-legend,.atlas-app .month-quick-legend { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; font-size: .75rem; line-height: 1.6; color: var(--secondary); }
+.atlas-app .calendar-workspace .heat-legend > span,.atlas-app .month-quick-legend > span { margin-inline: 4px; }
+.atlas-app .month-quick-legend > i { width: 14px; height: 12px; border-radius: 2px; }
+.atlas-app .calendar-workspace .calendar-overview-scroll { max-height: 30rem; overflow: auto; scrollbar-gutter: stable; padding: 4px 4px 12px; border: 1px solid var(--line); border-radius: 6px; overscroll-behavior: contain; scroll-padding: 44px 64px; }
+.atlas-app .calendar-workspace .calendar-overview-scroll:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+.atlas-app .calendar-workspace .calendar-months { position: sticky; top: -4px; z-index: 3; background: var(--bg); padding-block: 12px; margin: 0 0 4px; }
+.atlas-app .calendar-workspace .year-label { position: sticky; left: -4px; z-index: 2; background: var(--bg); padding-left: 8px; min-width: 48px; align-content: center; font-size: .75rem; }
+.atlas-app .calendar-workspace .calendar-months .year-label { z-index: 4; }
+.atlas-app .calendar-scroll-help { font-size: .75rem; line-height: 1.7; color: var(--muted); margin: 12px 0 0; }
+.atlas-app .calendar-workspace .calendar-inspector { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 20px 32px; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); margin: 0 0 24px; }
+.atlas-app .calendar-workspace .calendar-inspector .week-picker { display: flex; flex-wrap: wrap; grid-column: 1; gap: 16px; }
+.atlas-app .week-picker label { display: grid; gap: 8px; font-size: .8125rem; line-height: 1.5; color: var(--secondary); min-width: 0; }
+.atlas-app .week-picker label:first-child { flex: 0 1 120px; }
+.atlas-app .week-picker label:last-child { flex: 1 1 220px; max-width: 320px; }
+.atlas-app .week-picker select { min-height: 44px; min-width: 0; width: 100%; padding: 8px 12px; border: 1px solid var(--control-line); border-radius: 6px; background: var(--bg); color: var(--text); font: 1rem/1.5 var(--sans); }
+.atlas-app .calendar-workspace .calendar-inspector .week-inspection-copy { grid-column: 1; gap: 8px; }
+.atlas-app .calendar-workspace .calendar-inspector span { font-size: .75rem; }
+.atlas-app .calendar-workspace .calendar-inspector small { font-size: .8125rem; line-height: 1.5; }
+.atlas-app .calendar-workspace .calendar-inspector-value { grid-column: 2; grid-row: 1/3; max-width: 24ch; text-align: end; }
+.atlas-app .calendar-workspace .calendar-inspector-value strong { font-size: 2.5rem; font-weight: 400; font-variant-numeric: tabular-nums; }
+.atlas-app .calendar-workspace .calendar-inspector > button { grid-column: 1/-1; justify-self: start; min-height: 44px; background: var(--text); color: var(--bg); border-color: var(--text); border-radius: 6px; font-size: .875rem; padding: 12px 16px; }
+.atlas-app .calendar-workspace .week-cell[aria-current=date] { outline: 2px solid var(--text); outline-offset: 1px; }
+.atlas-app .calendar-workspace .month-calendar-columns { gap: 24px; align-items: start; }
+.atlas-app .calendar-workspace .month-table thead th { position: sticky; top: -4px; z-index: 2; padding-block: 12px; background: var(--bg); }
+.atlas-app .calendar-workspace .month-table tbody th { position: sticky; left: -4px; z-index: 1; background: var(--bg); padding-inline: 4px; }
+.atlas-app .calendar-workspace .month-table thead th:first-child { left: -4px; z-index: 3; }
+.atlas-app .calendar-workspace .month-table .month-cell { min-height: 28px; height: auto; }
+.atlas-app .calendar-workspace .month-detail { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 20px; }
+.atlas-app .calendar-workspace .month-history-controls { margin-block: 16px 24px; gap: 12px; }
+.atlas-app .calendar-workspace .month-history-result dl { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; }
+.atlas-app .calendar-workspace .month-history-result dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.atlas-app .calendar-workspace .month-history-result dl > div:first-child { display: block; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.atlas-app .calendar-workspace .month-history-result dd { font-size: 1rem; margin: 0; flex-shrink: 0; }
+.atlas-app .calendar-workspace .month-history-result dl > div:first-child dd { font-size: 2.5rem; font-weight: 400; margin-top: 4px; }
+.atlas-app .calendar-workspace .month-history-result dt { font-size: .8125rem; }
+.atlas-app .calendar-workspace .month-history-result .month-relation { font-size: .875rem; margin-bottom: 12px; }
+.atlas-app :is(.calendar-legend-details,.month-comparison-help) summary { min-height: 44px; align-content: center; color: var(--secondary); font-size: .8125rem; line-height: 1.6; cursor: pointer; }
+.atlas-app .calendar-workspace .month-legend { margin: 12px 0; }
+.atlas-app .calendar-workspace .month-highlights { margin-top: 16px; padding-top: 16px; gap: 20px; }
+.atlas-app .calendar-workspace .month-highlights span { text-transform: none; }
+.atlas-app .calendar-workspace .month-highlights strong { font-size: 1.125rem; }
+.atlas-app .record-summary { margin-top: 24px; border-block: 1px solid var(--line); }
+.atlas-app .record-summary > summary { min-height: 52px; align-content: center; color: var(--secondary); font-size: .875rem; cursor: pointer; }
+.atlas-app .calendar-workspace .record-summary .metric-strip { padding-block: 12px 24px; }
+@container calendar-workspace (max-width: 44rem) {
+  .atlas-app .calendar-workspace .calendar-inspector { padding: 16px; gap: 16px; grid-template-columns: minmax(0,1fr); }
+  .atlas-app .calendar-workspace .calendar-inspector-value { grid-column: 1; grid-row: auto; text-align: start; max-width: none; }
+  .atlas-app .calendar-workspace .calendar-inspector-value strong { font-size: 2rem; }
+  .atlas-app .calendar-workspace .calendar-inspector > button { width: 100%; justify-content: center; white-space: normal; }
+  .atlas-app .calendar-workspace .calendar-overview-scroll { max-height: 23rem; }
+  .atlas-app .calendar-workspace .month-highlights { grid-template-columns: minmax(0,1fr); }
+  .atlas-app .calendar-workspace .month-detail { padding: 20px 16px; }
+}
+@media (pointer: coarse) {
+  .atlas-app .calendar-workspace .month-table .month-cell { min-height: 44px; min-width: 44px; }
+}
+@media (forced-colors: active) {
+  .atlas-app .calendar-workspace .calendar-inspector > button { background: ButtonFace; color: ButtonText; border-color: ButtonText; }
+  .atlas-app .calendar-workspace .calendar-overview-scroll { border-color: CanvasText; }
+  .atlas-app .calendar-workspace .month-table tbody th,.atlas-app .calendar-workspace .month-table thead th,.atlas-app .calendar-workspace .year-label,.atlas-app .calendar-workspace .calendar-months { background: Canvas; }
+}
+
+.atlas-app .calendar-area-action { min-height: 44px; font-size: .8125rem; }
+@container calendar-workspace (min-width: 56.25rem) {
+  .atlas-app .calendar-workspace .weekly-calendar { display: grid; grid-template-columns: minmax(0,1fr) 308px; gap: 0 24px; align-items: start; }
+  .atlas-app .calendar-workspace .weekly-calendar > .calendar-overview-label { grid-column: 1/-1; grid-row: 1; }
+  .atlas-app .calendar-workspace .weekly-calendar > .calendar-overview-scroll { grid-column: 1; grid-row: 2; }
+  .atlas-app .calendar-workspace .weekly-calendar > .calendar-scroll-help { grid-column: 1; grid-row: 3; }
+  .atlas-app .calendar-workspace .weekly-calendar > .calendar-inspector { grid-column: 2; grid-row: 2/4; grid-template-columns: minmax(0,1fr); gap: 20px; margin: 0; }
+  .atlas-app .calendar-workspace .weekly-calendar .week-picker { gap: 12px; }
+  .atlas-app .calendar-workspace .weekly-calendar .week-picker label:first-child { flex: 0 1 88px; }
+  .atlas-app .calendar-workspace .weekly-calendar .week-picker label:last-child { flex: 1 1 164px; }
+  .atlas-app .calendar-workspace .weekly-calendar .calendar-inspector-value { grid-column: 1; grid-row: auto; text-align: start; }
+  .atlas-app .calendar-workspace .weekly-calendar .calendar-inspector > button { width: 100%; justify-content: center; white-space: normal; }
+}

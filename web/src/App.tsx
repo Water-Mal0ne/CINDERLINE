@@ -62,25 +62,40 @@ function CellMap({cells,selected,onSelect,name}:{cells:Region['cells'];selected:
   </svg><div className="map-caption"><span><span className="map-dot"/> {fmt(valid.length)} grid centers</span><button onClick={()=>onSelect('ALL')} disabled={selected==='ALL'}>Reset</button></div></div>;
 }
 
-function Heatmap({weeks,mode,label,onSelect,focusDate}:{weeks:Week[];mode:Mode;label:string;onSelect:(w:Week)=>void;focusDate?:string}) {
+function Heatmap({weeks,mode,label,onSelect,focusDate,onWeek}:{weeks:Week[];mode:Mode;label:string;onSelect:(w:Week)=>void;focusDate?:string;onWeek?:(date:string)=>void}) {
   const [focusKey,setFocusKey]=useState(''),[hoverKey,setHoverKey]=useState('');
-  const years = [...new Set(weeks.map(w=>w.year))].sort((a,b)=>b-a);
-  const indexed = new Map(weeks.map(w=>[w.key,w]));
-  const vals = weeks.flatMap(w=>[w.raw,w.harmonized]).filter(numeric);
-  const max = Math.max(...vals, 1);
+  const years=[...new Set(weeks.map(w=>w.year))].sort((a,b)=>b-a);
+  const indexed=new Map(weeks.map(w=>[w.key,w]));
+  const vals=weeks.flatMap(w=>[w.raw,w.harmonized]).filter(numeric);
+  const max=Math.max(...vals,1);
   const details=useMemo(()=>new Map(weeks.map(week=>{const days=weekCoverage(week,mode);return [week.key,{...days,dateLabel:`${prettyDate(days.start)} to ${prettyDate(days.end)}`,valueLabel:fmt(week[mode],1)}];})),[weeks,mode]);
   const activeKey=indexed.has(focusKey)?focusKey:weeks.find(w=>w.date===focusDate)?.key??weeks.find(w=>w.year===years[0])?.key;
-  const preview=indexed.get(hoverKey)||indexed.get(activeKey||'');
+  const activeWeek=indexed.get(activeKey||'');
+  const preview=indexed.get(hoverKey)||activeWeek;
   const coverage=preview?weekCoverage(preview,mode):null;
-  if (!years.length) return <Empty title="No calendar data in this range"/>;
-  return <><div className="calendar-scroller"><div className="calendar-grid">
-    <div className="calendar-months"><span className="year-label">YEAR</span><div>{['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'].map(m=><span key={m}>{m}</span>)}</div></div>
-    {years.map(year=><div className="calendar-row" key={year}><span className="year-label">{year}</span><div className="week-cells">{Array.from({length:53},(_,i)=>{
-      const w=indexed.get(`${year}-${i+1}`); const v=w?.[mode]; const known=numeric(v);const days=w?details.get(w.key):null;
-      const color=known?COLORS[Math.min(6,Math.floor(Math.sqrt(Math.max(v,0)/max)*6))]:undefined;
-      return <button key={i} id={w?`calendar-week-${w.date}`:undefined} aria-current={w?.date===focusDate?'date':undefined} className={`week-cell ${known?'':'missing'} ${days?.partial?'partial-week':''}`} style={{backgroundColor:color}} disabled={!w} tabIndex={w?.key===activeKey?0:-1} onMouseEnter={()=>w&&setHoverKey(w.key)} onFocus={()=>{if(w)setFocusKey(w.key);setHoverKey('');}} onKeyDown={event=>{const step=({ArrowLeft:-1,ArrowRight:1,ArrowUp:-53,ArrowDown:53} as Record<string,number>)[event.key];if(!step)return;setHoverKey('');event.preventDefault();const buttons=Array.from(event.currentTarget.closest('.calendar-grid')?.querySelectorAll<HTMLButtonElement>('.week-cell')||[]);let next=buttons.indexOf(event.currentTarget)+step;while(next>=0&&next<buttons.length&&buttons[next].disabled)next+=step;if(next>=0&&next<buttons.length)buttons[next].focus();}} onClick={()=>w&&onSelect(w)} aria-label={`${year}, calendar week ${i+1}: ${known?days?.valueLabel+' '+(mode==='raw'?'raw detections':'Aqua-reference-equivalent detections'):'unavailable'}.${days?` ${days.dateLabel}. ${days.partial?'Partial week: ':''}${days.recordDays} of ${days.expectedDays} calendar days included; ${days.availableDays} available daily values.`:''} Arrow keys move between weeks; Enter opens evidence.`} title={`Week ${i+1} · ${known?days?.valueLabel:'No value'}${days?` · ${days.recordDays}/${days.expectedDays} days${days.partial?' · partial week':''}`:''}`}/>;
-    })}</div></div>)}
-  </div></div>{preview&&coverage&&<div className="calendar-inspector"><div><span>WEEK {preview.week} · {preview.year}</span><strong>{prettyDate(coverage.start)} – {prettyDate(coverage.end)}</strong><small>{coverage.partial?'Partial week · ':''}{coverage.recordDays} of {coverage.expectedDays} calendar days included · {coverage.availableDays} available daily values</small></div><div className="calendar-inspector-value"><strong>{fmt(preview[mode],1)}</strong><small>{mode==='raw'?'raw baseline detections':'Aqua-reference-equivalent detections'}</small></div><button className="text-button" onClick={()=>onSelect(preview)}>Open week evidence <ArrowUpRight size={13}/></button></div>}<div className="chart-bottom"><span><ScanLine size={13}/> Arrow keys explore · Enter opens evidence · 7-day bins start Jan 1</span><div className="heat-legend"><span>LOW</span>{COLORS.map(c=><i key={c} style={{background:c}}/>)}<span>HIGH</span><i className="missing"/><span>NO OBSERVATION / UNKNOWN</span></div></div></>;
+  const chooseWeek=(week:Week|undefined)=>{if(!week)return;setFocusKey(week.key);setHoverKey('');onWeek?.(week.date);};
+  if(!years.length)return <Empty title="No calendar data in this range"/>;
+  return <div className="weekly-calendar">
+    {preview&&coverage&&<div className="calendar-inspector">
+      <div className="week-picker" role="group" aria-label="Choose a week to inspect">
+        <label htmlFor="calendar-year">Year<select id="calendar-year" value={activeWeek?.year} onChange={event=>{const candidates=weeks.filter(w=>w.year===Number(event.target.value));chooseWeek(candidates.find(w=>w.week===activeWeek?.week)??candidates[0]);}}>{years.map(year=><option key={year} value={year}>{year}</option>)}</select></label>
+        <label htmlFor="calendar-week">Week<select id="calendar-week" value={activeKey} onChange={event=>chooseWeek(indexed.get(event.target.value))}>{weeks.filter(w=>w.year===activeWeek?.year).map(w=><option key={w.key} value={w.key}>Week {w.week} · {prettyDate(w.date).replace(/,? \d{4}$/, '')}</option>)}</select></label>
+      </div>
+      <div className="week-inspection-copy" aria-live="polite"><span>WEEK {preview.week} · {preview.year}</span><strong>{prettyDate(coverage.start)} – {prettyDate(coverage.end)}</strong><small>{coverage.partial?'Partial week · ':''}{coverage.recordDays} of {coverage.expectedDays} calendar days included · {coverage.availableDays} available daily values</small></div>
+      <div className="calendar-inspector-value"><strong>{fmt(preview[mode],1)}</strong><small>{mode==='raw'?'raw baseline detections':'Aqua-reference-equivalent detections'}</small></div>
+      <button className="button primary" onClick={()=>onSelect(preview)}>Open week evidence <ArrowUpRight size={16} aria-hidden="true"/></button>
+    </div>}
+    <div className="calendar-overview-label"><span>Each row is a year. Select a week to open its daily evidence.</span><div className="heat-legend" aria-label="Weekly activity colour scale"><span>Low</span>{COLORS.map(c=><i key={c} style={{background:c}} aria-hidden="true"/>)}<span>High</span><i className="missing" aria-hidden="true"/><span>No observation / unknown</span></div></div>
+    <div className="calendar-scroller calendar-overview-scroll" role="region" aria-label="Weekly fire activity calendar, scroll across weeks and down years" tabIndex={0}><div className="calendar-grid">
+      <div className="calendar-months"><span className="year-label">Year</span><div>{['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].map(m=><span key={m}>{m}</span>)}</div></div>
+      {years.map(year=><div className="calendar-row" key={year}><span className="year-label">{year}</span><div className="week-cells">{Array.from({length:53},(_,i)=>{
+        const w=indexed.get(`${year}-${i+1}`),v=w?.[mode],known=numeric(v),days=w?details.get(w.key):null;
+        const color=known?COLORS[Math.min(6,Math.floor(Math.sqrt(Math.max(v,0)/max)*6))]:undefined;
+        return <button key={i} id={w?`calendar-week-${w.date}`:undefined} aria-current={w?.key===activeKey?'date':undefined} className={`week-cell ${known?'':'missing'} ${days?.partial?'partial-week':''}`} style={{backgroundColor:color}} disabled={!w} tabIndex={w?.key===activeKey?0:-1} onMouseEnter={()=>w&&setHoverKey(w.key)} onMouseLeave={()=>setHoverKey('')} onFocus={()=>{if(w)setFocusKey(w.key);setHoverKey('');}} onKeyDown={event=>{const step=({ArrowLeft:-1,ArrowRight:1,ArrowUp:-53,ArrowDown:53} as Record<string,number>)[event.key];if(!step)return;setHoverKey('');event.preventDefault();const buttons=Array.from(event.currentTarget.closest('.calendar-grid')?.querySelectorAll<HTMLButtonElement>('.week-cell')||[]);let next=buttons.indexOf(event.currentTarget)+step;while(next>=0&&next<buttons.length&&buttons[next].disabled)next+=step;if(next>=0&&next<buttons.length)buttons[next].focus();}} onClick={()=>{if(w){chooseWeek(w);onSelect(w);}}} aria-label={`${year}, calendar week ${i+1}: ${known?days?.valueLabel+' '+(mode==='raw'?'raw detections':'Aqua-reference-equivalent detections'):'unavailable'}.${days?` ${days.dateLabel}. ${days.partial?'Partial week: ':''}${days.recordDays} of ${days.expectedDays} calendar days included; ${days.availableDays} available daily values.`:''} Arrow keys move between weeks; Enter opens evidence.`} title={`Week ${i+1} · ${known?days?.valueLabel:'No value'}${days?` · ${days.recordDays}/${days.expectedDays} days${days.partial?' · partial week':''}`:''}`}/>;
+      })}</div></div>)}
+    </div></div>
+    <p className="calendar-scroll-help">Scroll across for later weeks and down for earlier years. Arrow keys explore · Enter opens evidence · 7-day bins start Jan 1.</p>
+  </div>;
 }
 
 function EvaluationTable({rows}:{rows:Evaluation[]}) {
@@ -290,7 +305,7 @@ export default function App() {
     <main id="main" tabIndex={-1} aria-labelledby="workspace-title">
       {!isIntroduction&&<div className="workspace-heading">
         <h1 id="workspace-title">{view==='explore'?workspaceNames[exploreSection]:view==='evidence'?'Evidence & validation':view==='rhythm'?'Weekly Rhythm Index':'Methods'}</h1>
-        <div className="workspace-tools">{view!=='rhythm'&&view!=='methods'&&<ShareView url={shareUrl} disabledReason={loading||hydrating||!dailySeriesReady?'Wait for the selected observations to load.':'Choose a valid date range within the published record.'}/>}</div>
+        <div className="workspace-tools">{view==='explore'&&exploreSection==='calendar'&&<button className="text-button calendar-area-action" onClick={()=>focusSection('area-panel')}>Draw an area <MapPin size={16} aria-hidden="true"/></button>}{view!=='rhythm'&&view!=='methods'&&<ShareView url={shareUrl} disabledReason={loading||hydrating||!dailySeriesReady?'Wait for the selected observations to load.':'Choose a valid date range within the published record.'}/>}</div>
       </div>}
       {linkNotices.length>0&&<div className="share-notices"><div role="status" aria-live="polite">{linkNotices.map(notice=><p key={notice}>{notice}</p>)}</div><div className="share-notice-actions"><button onClick={resetSharedView} disabled={!catalog||loading}>Reset shared view</button><button onClick={()=>setLinkNotices([])}>Dismiss</button></div></div>}
       {isSynthetic&&<div className="synthetic-banner"><FlaskIcon/><span><strong>Synthetic demonstration.</strong> These observations were generated to test the pipeline. They are not measured fire activity.</span></div>}
@@ -331,9 +346,9 @@ export default function App() {
                   </div></details>
                 </div>
                 {rows.some(r=>/beyond the validation period/i.test(r.source||''))&&<details className="validation-disclosure"><summary>2025: {mode==='harmonized'?'converted':'raw'} VIIRS, beyond the validation period.</summary><p>Harmonized values use the frozen model with no refitting; no calibration interval is shown for 2025, and seasonal statistics and anomaly flags still use 2003–2024.</p></details>}
-                {calendarPeriod==='weekly'?<Heatmap weeks={weeks} mode={mode} label={label} onSelect={setSelected} focusDate={homeWeek}/>:<MonthCalendar rows={rows} mode={mode} label={label} regionId={region.meta.region} regionName={region.meta.name} scopeName={scopeName} scopeId={cell}/>}
+                {calendarPeriod==='weekly'?<Heatmap weeks={weeks} mode={mode} label={label} onSelect={setSelected} focusDate={homeWeek} onWeek={setHomeWeek}/>:<MonthCalendar rows={rows} mode={mode} label={label} regionId={region.meta.region} regionName={region.meta.name} scopeName={scopeName} scopeId={cell}/>}
               </section>
-              <div className="metric-strip"><div><span>{mode==='harmonized'?'Aqua-reference-equivalent activity':'Raw baseline activity'}</span><strong>{compact(total)}</strong><small>Sum of available values</small></div><div><span>Record in view</span><strong>{years}<i>{years===1?' year':' years'}</i></strong><small>{fmt(rows.length)} day records · {scopeName.toLowerCase()}</small></div><div><span>Peak observed week</span><strong>{peak?String(peak.week).padStart(2,'0'):'—'}<i>{peak?` / ${peak.year}`:''}</i></strong><small>{peak?prettyDate(peak.date):'No estimate available'}</small>{peak&&<button className="text-button peak-jump" onClick={()=>setSelected(peak)}>Inspect peak week <ArrowUpRight size={12}/></button>}</div></div>
+              <details className="record-summary"><summary>Record summary</summary><div className="metric-strip"><div><span>{mode==='harmonized'?'Aqua-reference-equivalent activity':'Raw baseline activity'}</span><strong>{compact(total)}</strong><small>Sum of available values</small></div><div><span>Record in view</span><strong>{years}<i>{years===1?' year':' years'}</i></strong><small>{fmt(rows.length)} day records · {scopeName.toLowerCase()}</small></div><div><span>Peak observed week</span><strong>{peak?String(peak.week).padStart(2,'0'):'—'}<i>{peak?` / ${peak.year}`:''}</i></strong><small>{peak?prettyDate(peak.date):'No estimate available'}</small>{peak&&<button className="text-button peak-jump" onClick={()=>setSelected(peak)}>Inspect peak week <ArrowUpRight size={12}/></button>}</div></div></details>
 
               <ReliabilityNotice regionName={region.meta.name} regionId={region.meta.region} cellId={cell} model={region.meta.model} evaluations={region.eval} rows={rows} start={start} end={end} mode={mode} showPeriodNote={calendarPeriod==='monthly'} onValidation={()=>navigateToView('evidence')}/>
               <details className="area-workspace" open={areaExpanded} onToggle={event=>setAreaExpanded(event.currentTarget.open)}><summary><MapPin size={17}/><span>Draw an area in {region.meta.name}</span><ChevronDown size={16}/></summary><section className="panel" id="area-panel" tabIndex={-1}><AreaOfInterest regionId={region.meta.region} regionName={region.meta.name} label={label}/></section>

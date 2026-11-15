@@ -79,3 +79,31 @@ Verification:
 - Python was not rerun for these UI/state-only changes; no Python, scientific dataset, calibration or pipeline code changed.
 
 Release scope: local commit on `test/atlas-redesign` and the `atlas` branch of `cinderline-ui-preview` only. No Git push, merge, or production deployment.
+
+## Calendar reading flow — 2026-11-15
+
+Request: review Calendar using the same Chrome guidance, make it clearer, test it, and update only the temporary preview.
+
+Design direction: a quiet scientific atlas. Keep the existing charcoal theme and activity scales; make the selected period and its value the main reading moment. The review found distant legends/results, a long page of competing summaries, and tiny weekly cells serving as the only direct week picker on phones.
+
+Changes:
+- Weekly and monthly calendars now pair the historical grid with a selected-period inspector on wide screens. Sticky year/month labels and a bounded, keyboard-focusable scroll region keep the coordinates readable. All years remain available.
+- Native Year/Week selectors offer a direct alternative to hunting for a weekly cell. They preserve January-1 seven-day bins, short final weeks, unavailable weeks and existing URL state. The primary action opens the chosen week's daily evidence.
+- The selected month's value leads its comparison panel. The numerical legend, comparison explanation and whole-record summary remain available in named disclosures. Existing scientific statements, counts, scale calculations and outage rules are preserved.
+- A visible Draw an area shortcut opens the existing lazy-loaded custom-area panel. Selecting a month brings its result into view and moves focus there.
+- Keyboard fixes keep the monthly grid reachable when all available months are outages, and preserve the month column when moving between sparse years.
+
+Guide application:
+- [Maximize content and reduce noise](https://developer.chrome.com/docs/modern-web-guidance/guides/user-experience/content-first-noise-reduction): prioritize the calendar and selected result, with secondary explanations in disclosures.
+- [Adapt to the form factor](https://developer.chrome.com/docs/modern-web-guidance/guides/user-experience/form-factor-adaptation): container-responsive inspectors, native period selectors, 44px controls, internal chart scrolling and visible focus.
+- [Typography](https://developer.chrome.com/docs/modern-web-guidance/guides/visual-design/typography): relative sizes, readable result hierarchy and flexible text/control heights. These checks do not certify every guide, physical-phone gesture, screen-reader experience or field Core Web Vital.
+
+Verification:
+- Python: 112 passed using fresh workspace temporary/cache directories. Web: 193 passed, including five new interaction regressions. TypeScript and root build passed.
+- Browser: all seven countries loaded 276 monthly cells each; April 2024 selected values were checked. Raw/harmonized switching, May 2024 outage semantics, native week selection, week evidence, seven-day CSV download and selection retention passed.
+- Desktop and 390px/320px layouts were inspected. No page-level horizontal overflow at either phone width; calendars retain their own scrolling. Clicking a monthly cell focuses its comparison panel. The new area shortcut loads the US cell data; point/radius selection renders a custom-area monthly calendar.
+- Regression smoke checks: Home retains the chosen week/country, the Weekly Rhythm Index survives reload via its URL, and the lazy 3D Earth renders a visible globe. No browser warning/error console entries during this flow.
+- Static output: 9,021 files, 311,007,117 bytes total; largest file 12,999,487 bytes; none exceeds 25 MiB. The existing lazy Globe bundle still exceeds Vite's advisory 500kB threshold.
+- No scientific payload, pipeline, calibration or Python code changed. Build/test logs and preview verification receipts are kept in ignored `work/calendar-preview/`.
+
+Release scope: local commit and the `atlas` branch of `cinderline-ui-preview` only. No Git push, merge or production deployment.
