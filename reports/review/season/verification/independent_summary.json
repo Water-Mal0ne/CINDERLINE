@@ -1,0 +1,157 @@
+{
+  "total_rows": 4095,
+  "eligible_country_years": 35,
+  "primary_paired_scenarios_per_mask": 385,
+  "alternative_rows_per_mask": 1365,
+  "mask_sizes": {
+    "unmasked": 0,
+    "primary": 73,
+    "padded": 87
+  },
+  "min_retained_days_per_month": 12,
+  "zero_coverage_months": 0,
+  "undefined_scenarios": 0,
+  "direction_checks": {
+    "India": {
+      "calendars": {
+        "unmasked": {
+          "selected_minus_B1_mean_tv": 0.027072745353605654,
+          "selected_minus_B1_mean_abs_annual_error": -0.12654732562037835,
+          "preserves_original_direction": true
+        },
+        "primary": {
+          "selected_minus_B1_mean_tv": 0.032579174168153174,
+          "selected_minus_B1_mean_abs_annual_error": -0.09781244387491679,
+          "preserves_original_direction": true
+        },
+        "padded": {
+          "selected_minus_B1_mean_tv": 0.031451912141291366,
+          "selected_minus_B1_mean_abs_annual_error": -0.09430227497167133,
+          "preserves_original_direction": true
+        }
+      },
+      "both_masks_preserve_direction": true
+    },
+    "Nepal": {
+      "calendars": {
+        "unmasked": {
+          "selected_minus_B1_mean_tv": -0.10042059520525183,
+          "selected_minus_B1_mean_abs_annual_error": -0.7543172809797078,
+          "preserves_original_direction": true
+        },
+        "primary": {
+          "selected_minus_B1_mean_tv": -0.08070246077942862,
+          "selected_minus_B1_mean_abs_annual_error": -0.6936771029431107,
+          "preserves_original_direction": true
+        },
+        "padded": {
+          "selected_minus_B1_mean_tv": -0.0809669228476795,
+          "selected_minus_B1_mean_abs_annual_error": -0.6868270473119595,
+          "preserves_original_direction": true
+        }
+      },
+      "both_masks_preserve_direction": true
+    }
+  },
+  "primary": {
+    "unmasked": {
+      "n_scenarios": 385,
+      "raw_mean_tv": 0.2749349469239271,
+      "raw_mean_annual_relative_error": 5.101517846057618,
+      "raw_mean_annual_absolute_relative_error": 5.101517846057618,
+      "raw_mean_monthly_mae": 20087.99891774892,
+      "raw_median_tv": 0.253045351112337,
+      "raw_peak_agreement_count": 224,
+      "B1_mean_tv": 0.08122883963047436,
+      "B1_mean_annual_relative_error": 0.3206937209862703,
+      "B1_mean_annual_absolute_relative_error": 0.37429056450987747,
+      "B1_mean_monthly_mae": 596.432714780735,
+      "B1_median_tv": 0.05739217725558381,
+      "B1_peak_agreement_count": 329,
+      "selected_mean_tv": 0.06234076376314769,
+      "selected_mean_annual_relative_error": 0.030381346772616953,
+      "selected_mean_annual_absolute_relative_error": 0.08819703013265266,
+      "selected_mean_monthly_mae": 599.1847634184944,
+      "selected_median_tv": 0.043600917058457214,
+      "selected_peak_agreement_count": 319,
+      "selected_vs_raw_mean_difference": -0.2125941831607794,
+      "selected_vs_raw_median_difference": -0.19621233868595087,
+      "selected_vs_raw_improved": 379,
+      "selected_vs_raw_tied": 0,
+      "selected_vs_raw_worsened": 6,
+      "selected_vs_raw_undefined": 0,
+      "selected_vs_B1_mean_difference": -0.018888075867326673,
+      "selected_vs_B1_median_difference": 0.0,
+      "selected_vs_B1_improved": 114,
+      "selected_vs_B1_tied": 165,
+      "selected_vs_B1_worsened": 106,
+      "selected_vs_B1_undefined": 0
+    },
+    "primary": {
+      "n_scenarios": 385,
+      "raw_mean_tv": 0.2735716701695545,
+      "raw_mean_annual_relative_error": 5.00929663002946,
+      "raw_mean_annual_absolute_relative_error": 5.00929663002946,
+      "raw_mean_monthly_mae": 19507.268398268396,
+      "raw_median_tv": 0.25272201487724144,
+      "raw_peak_agreement_count": 228,
+      "B1_mean_tv": 0.07813922334433729,
+      "B1_mean_annual_relative_error": 0.3074456467533173,
+      "B1_mean_annual_absolute_relative_error": 0.3664377124038584,
+      "B1_mean_monthly_mae": 533.7159279993934,
+      "B1_median_tv": 0.05016147758961994,
+      "B1_peak_agreement_count": 331,
+      "selected_mean_tv": 0.05840211692761478,
+      "selected_mean_annual_relative_error": 0.016331359780401462,
+      "selected_mean_annual_absolute_relative_error": 0.08027961399311812,
+      "selected_mean_monthly_mae": 536.9123211752059,
+      "selected_median_tv": 0.041639607748180256,
+      "selected_peak_agreement_count": 322,
+      "selected_vs_raw_mean_difference": -0.21516955324193976,
+      "selected_vs_raw_median_difference": -0.19638927556892108,
+      "selected_vs_raw_improved": 378,
+      "selected_vs_raw_tied": 0,
+      "selected_vs_raw_worsened": 7,
+      "selected_vs_raw_undefined": 0,
+      "selected_vs_B1_mean_difference": -0.01973710641672251,
+      "selected_vs_B1_median_difference": 0.0,
+      "selected_vs_B1_improved": 113,
+      "selected_vs_B1_tied": 165,
+      "selected_vs_B1_worsened": 107,
+      "selected_vs_B1_undefined": 0
+    },
+    "padded": {
+      "n_scenarios": 385,
+      "raw_mean_tv": 0.27444757727395813,
+      "raw_mean_annual_relative_error": 5.010789808364611,
+      "raw_mean_annual_absolute_relative_error": 5.010789808364611,
+      "raw_mean_monthly_mae": 19375.840043290045,
+      "raw_median_tv": 0.2536832102875819,
+      "raw_peak_agreement_count": 231,
+      "B1_mean_tv": 0.0780216875576162,
+      "B1_mean_annual_relative_error": 0.3076849379900133,
+      "B1_mean_annual_absolute_relative_error": 0.3655549190204131,
+      "B1_mean_monthly_mae": 529.6030292639892,
+      "B1_median_tv": 0.05092614394713899,
+      "B1_peak_agreement_count": 334,
+      "selected_mean_tv": 0.058299853779874226,
+      "selected_mean_annual_relative_error": 0.01740186146337183,
+      "selected_mean_annual_absolute_relative_error": 0.080213660275408,
+      "selected_mean_monthly_mae": 532.7239684238426,
+      "selected_median_tv": 0.041639607748180256,
+      "selected_peak_agreement_count": 325,
+      "selected_vs_raw_mean_difference": -0.21614772349408393,
+      "selected_vs_raw_median_difference": -0.19624748623083482,
+      "selected_vs_raw_improved": 377,
+      "selected_vs_raw_tied": 0,
+      "selected_vs_raw_worsened": 8,
+      "selected_vs_raw_undefined": 0,
+      "selected_vs_B1_mean_difference": -0.01972183377774197,
+      "selected_vs_B1_median_difference": 0.0,
+      "selected_vs_B1_improved": 112,
+      "selected_vs_B1_tied": 165,
+      "selected_vs_B1_worsened": 108,
+      "selected_vs_B1_undefined": 0
+    }
+  }
+}

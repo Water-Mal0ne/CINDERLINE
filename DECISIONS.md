@@ -56,6 +56,13 @@
 - Synthetic fixtures and figures are visibly labeled and kept separate. They cannot enable a real-data rhythm claim.
 - Calendar weeks begin January 1. Seasonal/anomaly statistics require seven distinct observed dates in bins 1–52 and exclude the target year from its anomaly history. The final one- or two-day bin remains inspectable but is not compared with complete weeks. ICS windows describe historical seasonality, not forecasts.
 
+## Overnight season-preservation sensitivity
+
+- 2026-11-14 19:55 UTC: Preserve the complete original retrospective scenario matrix and frozen models; rerun all seven countries and every original cut under the exact common 73-date mask and its 87-date padded sensitivity.
+- 2026-11-14 19:55 UTC: Apply each mask to the same Aqua and VIIRS dates, retain monthly coverage counts, and describe count errors as agreement over retained dates rather than reconstructed full-year activity.
+- 2026-11-14 19:55 UTC: Keep the January whole-year controls distinct from the February-to-December switch scenarios; report the India B1-to-M1 tradeoff and Nepal improvement descriptively, with no new significance or fresh-holdout claim.
+- 2026-11-14 19:55 UTC: Preserve the all-country original summary under a distinct filename so it cannot collide with the separate India/Nepal reproduction fixture in story-wording; keep hash-pinned baseline bytes unchanged.
+
 ## Partial scope retained explicitly
 
 - No validated pre-Aqua Terra bridge or 2000–2002 reconstruction is included. The supported record begins in 2003; no 2000-present claim is made.

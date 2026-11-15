@@ -1,3 +1,5 @@
+reports/review/season/** -text whitespace=cr-at-eol
+scripts/verify_season_check.py -text whitespace=cr-at-eol
 *.ics -text whitespace=cr-at-eol
 reports/harmonization_model.json -text whitespace=cr-at-eol
 reports/harmonization_eval.csv -text whitespace=cr-at-eol
