@@ -11,7 +11,7 @@ export interface ObservationControlsProps {
   availableMonths?:string[];status?:ObservationStatus;error?:string;onRetry?:()=>void;pointCount?:number;
   display?:'grid'|'points';detailLoading?:boolean;detailError?:string;loadedPointCount?:number;detailHint?:string;
   selectedPoint?:ObservationPoint|null;onClearSelection?:()=>void;sourceUrl?:string;
-  children?:ReactNode;
+  children?:ReactNode;actions?:ReactNode;
 }
 
 /** Cancellation plus key matching prevents the previous country's data flashing in a new selection. */
@@ -37,7 +37,7 @@ export function useObservationDetail({enabled,country,month}:{enabled:boolean;co
 const fmt=(value:number)=>new Intl.NumberFormat('en').format(value);
 const measure=(value:number|null,unit:string)=>value===null?'Unavailable':`${fmt(value)} ${unit}`;
 
-export default function ObservationControls({mode,onMode,month='2024-04',onMonth=()=>{},regionName='',availableMonths=[],status='idle',error,onRetry=()=>{},pointCount,display='grid',detailLoading=false,detailError,loadedPointCount,detailHint,selectedPoint,onClearSelection,sourceUrl,children}:ObservationControlsProps){
+export default function ObservationControls({mode,onMode,month='2024-04',onMonth=()=>{},regionName='',availableMonths=[],status='idle',error,onRetry=()=>{},pointCount,display='grid',detailLoading=false,detailError,loadedPointCount,detailHint,selectedPoint,onClearSelection,sourceUrl,children,actions}:ObservationControlsProps){
   const id=useId(),months=availableMonths.length?availableMonths:Array.from({length:12},(_,i)=>`2024-${String(i+1).padStart(2,'0')}`);
   const selectedEvidence=useRef<HTMLElement>(null),monthControl=useRef<HTMLSelectElement>(null);
   useEffect(()=>{
@@ -48,12 +48,12 @@ export default function ObservationControls({mode,onMode,month='2024-04',onMonth
   },[mode,selectedPoint?.id]);
   const clearSelection=()=>{onClearSelection?.();monthControl.current?.focus({preventScroll:true});};
   return <div className="observation-controls">
-    <div className="observation-mode" role="group" aria-label="Earth data layer">
+    <div className="earth-toolbar"><div className="observation-mode" role="group" aria-label="Earth data layer">
       <button type="button" aria-pressed={mode==='harmonized'} onClick={()=>onMode('harmonized')}>Harmonized overview</button>
       <button type="button" aria-pressed={mode==='observations'} onClick={()=>onMode('observations')}>Satellite observations</button>
-    </div>
+    </div>{actions&&<div className="globe-view-actions">{actions}</div>}</div>
     {mode==='observations'&&<div className="observation-context">
-      <div className="observation-context-row"><div><strong>Observed VIIRS detections · not harmonized · UTC dates</strong><p>VIIRS S-NPP · {regionName} · {observationMonthLabel(month)}</p></div><label htmlFor={`${id}-month`}>Observation month<select ref={monthControl} id={`${id}-month`} value={month} onChange={e=>onMonth(e.target.value)}>{months.map(m=><option key={m} value={m}>{observationMonthLabel(m)}</option>)}</select></label></div>
+      <div className="observation-context-row"><strong>Observed VIIRS detections · not harmonized · UTC dates</strong><label htmlFor={`${id}-month`}>Observation month<select ref={monthControl} id={`${id}-month`} value={month} onChange={e=>onMonth(e.target.value)}>{months.map(m=><option key={m} value={m}>{observationMonthLabel(m)}</option>)}</select></label></div>
       <p className="observation-scope">2024 detail only; this month is independent of the historical calendar. UTC records include detections on calendar-excluded dates, so totals differ.</p>
       {status==='loading'&&<p className="observation-status" role="status">Loading this month’s observed detections…</p>}
       {status==='error'&&<div className="observation-error" role="alert"><p>{error||'Detailed observations could not be loaded.'}</p><button type="button" className="chart-scale-button" onClick={onRetry}>Retry observations</button></div>}

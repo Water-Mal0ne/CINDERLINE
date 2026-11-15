@@ -32,8 +32,8 @@ export default function ShareView({url,disabledReason}:{url:string|null;disabled
     }
   }
   return <div ref={root} className="share-view" onKeyDown={event=>{if(event.key==='Escape'&&open){event.preventDefault();event.stopPropagation();close();}}}>
-    <button ref={trigger} className="button subtle" onClick={copy} disabled={!url} title={url?'Copy a link to these filters and evidence':disabledReason||'Wait for the selected observations to load.'} aria-expanded={open} aria-controls={id}>
-      {copied?<Check size={16}/>:<Link2 size={16}/>} Share this view
+    <button ref={trigger} className="button subtle" onClick={copy} disabled={!url} title={url?'Copy a link to these filters and evidence':disabledReason||'Wait for the selected observations to load.'} aria-label="Share this view" aria-expanded={open} aria-controls={id}>
+      {copied?<Check size={16}/>:<Link2 size={16}/>} Share
     </button>
     {open&&url&&<div className="share-panel" id={id} role="region" aria-label="Share details">
       <div className="share-panel-heading"><strong>Link to this exploration</strong><button className="icon-button" onClick={close} aria-label="Close share details"><X size={16}/></button></div>

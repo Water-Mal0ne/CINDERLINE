@@ -1,27 +1,86 @@
-.seasonal-context{margin:42px 0 30px;color:#dce4df}.seasonal-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:20px}.seasonal-intro .eyebrow{font-size:9px;color:#b59e79;letter-spacing:1.7px}.seasonal-intro h2{font-weight:400;font-size:clamp(25px,2.6vw,36px);letter-spacing:-1px;margin:12px 0 10px}.seasonal-intro p{font-size:12px;line-height:1.8;color:#9eafb0;max-width:620px;margin:0}.seasonal-scope{font-family:var(--mono,monospace);font-size:9px;line-height:1.7;display:flex;align-items:center;gap:8px;color:#a6b8ae;white-space:nowrap}.seasonal-national{display:flex;gap:9px;align-items:flex-start;border:1px solid #a2ae7d30;background:#8d9c6710;padding:13px 16px;font-size:11px;line-height:1.7;color:#a8b5ad;border-radius:5px;margin-bottom:17px}.seasonal-national svg{flex-shrink:0;margin-top:2px}.seasonal-national strong{font-weight:500;color:#d4dfcf}.seasonal-grid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(270px,1fr);gap:20px}.seasonal-chart-card,.seasonal-period-card{border:1px solid #45554b6b;background:#15262b;border-radius:8px;padding:25px;min-width:0}.seasonal-chart-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}.seasonal-kicker{font-family:var(--mono,monospace);font-size:8px;letter-spacing:1.4px;color:#91a6a6}.seasonal-chart-heading h3{font-size:14px;line-height:1.6;font-weight:400;color:#b1c0bc;margin:9px 0 0}.seasonal-chart-heading h3 span{display:block;color:#e9c197}.seasonal-peak{text-align:right;flex-shrink:0}.seasonal-peak strong{display:block;font-size:29px;font-weight:400;letter-spacing:-1px;color:#efb781}.seasonal-peak span{display:block;font-size:8px;color:#8ca5aa;line-height:1.5}.seasonal-legend{display:flex;align-items:center;gap:17px;margin:25px 0 8px;font-size:9px;line-height:1.6;color:#9cb0b0;flex-wrap:wrap}.seasonal-legend>span{display:flex;gap:6px;align-items:center}.seasonal-legend i{height:2px;width:16px;background:#f3ad73;display:inline-block}.seasonal-legend i.seasonal-band-key{height:9px;background:#b2865140;border:1px solid #b2865160}.seasonal-legend .seasonal-units{margin-left:auto;color:#81999c;font-size:8px}.seasonal-chart{width:100%;display:block;outline-offset:5px;border-radius:3px}.seasonal-chart:focus-visible{outline:2px solid #eabd86}.seasonal-gridline{stroke:#385052;stroke-dasharray:3 6;stroke-width:.7}.seasonal-axis{font-family:var(--mono,monospace);font-size:10px;fill:#8fa5a6}.seasonal-critical-shade{fill:#d99d58;opacity:.055}.seasonal-band{fill:#c49159;opacity:.2}.seasonal-median{fill:none;stroke:#f2aa6e;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}.seasonal-cursor{stroke:#f1d4ac;stroke-width:.8;stroke-dasharray:3 4;opacity:.7}.seasonal-point{fill:#f9d9ab;stroke:#1d302e;stroke-width:2}.seasonal-readout{display:grid;grid-template-columns:1.35fr 1fr 1.2fr auto;gap:12px;background:#0d1c2080;border:1px solid #344c4d70;padding:14px;border-radius:5px;align-items:center;min-height:66px}.seasonal-readout>div>span{display:block;font-family:var(--mono,monospace);font-size:7px;letter-spacing:.8px;color:#839c9d;margin-bottom:7px}.seasonal-readout strong{font-family:var(--mono,monospace);font-size:10px;font-weight:400;color:#e0cfb6;line-height:1.5}.seasonal-steppers{display:flex;gap:5px}.seasonal-steppers button{display:flex;align-items:center;justify-content:center;width:27px;height:29px;background:#273c3e;border:1px solid #4e686266;color:#c7d5c7;border-radius:3px}.seasonal-steppers button:disabled{opacity:.3;cursor:default}.seasonal-steppers button:hover:not(:disabled){background:#3b5149}.seasonal-instructions{font-size:9px;line-height:1.6;color:#8ba4a5;margin:12px 0}.seasonal-method-note{font-size:10px;line-height:1.8;color:#8ba1a1;margin:17px 0 0;padding-top:15px;border-top:1px solid #60716a28}.seasonal-data-label{display:block;font-family:var(--mono,monospace);font-size:7px;letter-spacing:1px;text-align:right;margin-top:13px;color:#7b9694}.seasonal-data-label.is-synthetic{color:#ffbb8b;font-weight:600}.seasonal-period-card{display:flex;flex-direction:column;background:linear-gradient(155deg,#26352d,#16272a 65%)}.seasonal-period-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;color:#bdad82}.seasonal-period-heading>span{font-family:var(--mono,monospace);font-size:8px;letter-spacing:1px;color:#aab294}.seasonal-period-card>h3{font-size:22px;letter-spacing:-.5px;line-height:1.4;font-weight:400;margin:24px 0 10px;max-width:250px}.seasonal-period-card>p{font-size:11px;line-height:1.8;color:#9eafa5;margin:0}.seasonal-period-list{display:flex;flex-direction:column;margin:24px 0;gap:5px;max-height:260px;overflow:auto}.seasonal-period-list>button{display:flex;align-items:center;gap:12px;text-align:left;padding:13px 9px;border:1px solid transparent;background:none;color:#bec8b8;border-radius:4px}.seasonal-period-list>button.is-selected{border-color:#c7ac6e38;background:#b8a0650d}.seasonal-period-list>button:hover{background:#c2b57b12}.seasonal-period-number{font-family:var(--mono,monospace);font-size:10px;color:#7f998c;align-self:flex-start;padding-top:2px}.seasonal-period-list strong{display:block;font-size:12px;line-height:1.5;font-weight:400;color:#e7c89d}.seasonal-period-list small{display:block;font-size:8px;color:#9cae9e;line-height:1.6;margin-top:4px}.seasonal-period-list>button>svg{margin-left:auto;flex-shrink:0;color:#8d9e84}.seasonal-export{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:auto;padding:13px 12px;border:1px solid #bdbb8a67;border-radius:4px;background:#abb78b12;color:#d3d6b7;font-size:10px;line-height:1.6}.seasonal-export:hover:not(:disabled){background:#abb78b26}.seasonal-export:disabled{opacity:.4;cursor:default}.seasonal-period-card>.seasonal-export-note{font-size:9px;line-height:1.8;margin-top:12px;color:#8fa397}.seasonal-empty{min-height:250px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:#839f9c}.seasonal-empty h3{font-weight:400;font-size:16px;color:#cbd6c9}.seasonal-empty p{font-size:11px;line-height:1.8;max-width:330px}.seasonal-no-periods{font-size:11px;line-height:1.8;color:#92a69b;padding:12px 0}.seasonal-context button:focus-visible{outline:2px solid #ead0a0;outline-offset:3px}@media(max-width:1100px){.seasonal-intro{align-items:flex-start;flex-direction:column;gap:15px}.seasonal-grid{grid-template-columns:1fr}.seasonal-period-card>h3{max-width:none}.seasonal-period-list{display:grid;grid-template-columns:1fr 1fr}.seasonal-export{align-self:flex-start}}@media(max-width:640px){.seasonal-context{margin:30px 0 20px}.seasonal-chart-card,.seasonal-period-card{padding:19px 15px}.seasonal-intro h2{font-size:28px}.seasonal-intro p{font-size:11px}.seasonal-scope{font-size:8px;white-space:normal}.seasonal-peak strong{font-size:24px}.seasonal-chart-heading h3{font-size:12px}.seasonal-legend{gap:12px;font-size:8px}.seasonal-legend .seasonal-units{margin-left:0;width:100%}.seasonal-readout{grid-template-columns:1fr 1fr;gap:15px;padding:12px}.seasonal-readout>div>span{font-size:7px}.seasonal-steppers{justify-content:flex-end}.seasonal-period-list{grid-template-columns:1fr}.seasonal-export{width:100%;align-self:stretch}.seasonal-method-note{font-size:9px}.seasonal-period-card>h3{font-size:21px}}
-.seasonal-tooltip{pointer-events:none}.seasonal-tooltip rect{fill:#102124;stroke:#7b927b;stroke-width:.7;opacity:.97}.seasonal-tooltip text{font-family:var(--mono,monospace);font-size:10px;fill:#e4cfad}.seasonal-tooltip text:last-child{font-size:9px;fill:#adbfac}
-.seasonal-week-control{margin-top:18px;padding-top:15px;border-top:1px solid #60716a28}
-.seasonal-week-control label,.seasonal-week-control>div{display:flex;justify-content:space-between;gap:12px;font-size:10px;color:#a8babb}
-.seasonal-week-control label strong{font-family:var(--mono,monospace);font-weight:400;color:#e9c197}
-.seasonal-week-control input{display:block;width:100%;min-height:36px;margin:5px 0;accent-color:#f2aa6e;cursor:pointer}
-.seasonal-week-control input:focus-visible{outline:2px solid #ead0a0;outline-offset:3px;border-radius:3px}
-.seasonal-week-control>div{font-size:9px;color:#8ba4a5}
-@media(pointer:coarse){.seasonal-steppers button{width:44px;height:44px}.seasonal-week-control input{min-height:44px}}
-@media(max-width:640px){
-  .seasonal-readout strong{font-size:12px}
-  .seasonal-readout>div>span{font-size:9px;line-height:1.5}
-  .seasonal-week-control label{font-size:12px}
-  .seasonal-week-control>div{font-size:10px}
-  .seasonal-instructions,.seasonal-method-note,.seasonal-period-card>.seasonal-export-note{font-size:11px}
-  .seasonal-axis{font-size:20px}
-  .seasonal-period-list small{font-size:10px}
-  .seasonal-intro p,.seasonal-national{font-size:13px}
-  .seasonal-scope,.seasonal-legend,.seasonal-legend .seasonal-units,.seasonal-peak span{font-size:11px}
-  .seasonal-instructions,.seasonal-method-note,.seasonal-period-card>.seasonal-export-note{font-size:12px;line-height:1.8}
-  .seasonal-period-card>p,.seasonal-no-periods,.seasonal-empty p{font-size:13px}
-  .seasonal-period-list strong{font-size:14px}
-  .seasonal-period-list small{font-size:11px}
-  .seasonal-steppers button{width:44px;height:44px}
-  .seasonal-export{min-height:44px;font-size:13px}
-  .seasonal-data-label{font-size:10px;line-height:1.6;overflow-wrap:anywhere}
+/* Historical season: an open chart and a date guide, without nested cards. */
+.atlas-app .seasonal-context { container: seasonal / inline-size; margin: 0; color: var(--text); }
+.atlas-app .seasonal-intro { display: flex; align-items: start; justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; margin-block-end: 32px; }
+.atlas-app .seasonal-intro h2 { font-size: 1.375rem; font-weight: 500; line-height: 1.35; letter-spacing: 0; margin: 0 0 12px; }
+.atlas-app .seasonal-intro p { max-inline-size: 76ch; font-size: .875rem; line-height: 1.7; color: var(--secondary); margin: 0; }
+.atlas-app .seasonal-scope { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); font-family: var(--mono); font-size: .75rem; line-height: 1.7; white-space: normal; }
+.atlas-app .seasonal-national { display: flex; gap: 12px; align-items: start; border: 0; border-inline-start: 2px solid var(--orange); border-radius: 0; background: transparent; padding: 0 16px; font-size: .875rem; line-height: 1.7; color: var(--secondary); margin: 0 0 24px; }
+.atlas-app .seasonal-national svg { flex-shrink: 0; margin-block-start: 4px; }
+.atlas-app .seasonal-national strong { font-weight: 500; color: var(--text); }
+.atlas-app .seasonal-grid { display: grid; grid-template-columns: minmax(0,2fr) minmax(240px,1fr); gap: 32px; }
+.atlas-app .seasonal-chart-card,.atlas-app .seasonal-period-card { min-inline-size: 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
+.atlas-app .seasonal-chart-heading { display: flex; align-items: start; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.atlas-app .seasonal-chart-heading h3 { font-size: 1rem; line-height: 1.5; font-weight: 400; color: var(--secondary); margin: 0; }
+.atlas-app .seasonal-chart-heading h3 span { display: block; color: var(--text); }
+.atlas-app .seasonal-peak { text-align: end; }
+.atlas-app .seasonal-peak strong { display: block; font-family: var(--mono); font-size: 1.75rem; line-height: 1.3; font-weight: 400; letter-spacing: 0; color: var(--orange); }
+.atlas-app .seasonal-peak span { display: block; font-size: .75rem; color: var(--muted); line-height: 1.5; }
+.atlas-app .seasonal-legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 24px 0 16px; font-size: .75rem; line-height: 1.6; color: var(--secondary); }
+.atlas-app .seasonal-legend > span { display: flex; gap: 8px; align-items: center; }
+.atlas-app .seasonal-legend i { block-size: 2px; inline-size: 16px; background: #f3ad73; display: inline-block; }
+.atlas-app .seasonal-legend i.seasonal-band-key { block-size: 8px; background: #b2865140; border: 1px solid #b2865160; }
+.atlas-app .seasonal-legend .seasonal-units { color: var(--muted); margin: 0; font-size: .75rem; }
+.atlas-app .seasonal-plot-scroller { overflow-x: auto; max-inline-size: 100%; overscroll-behavior-x: contain; }
+.atlas-app .seasonal-chart { display: block; inline-size: 100%; min-inline-size: 560px; block-size: auto; outline-offset: -2px; }
+.atlas-app .seasonal-gridline { stroke: #385052; stroke-dasharray: 3 6; stroke-width: .7; }
+.atlas-app .seasonal-axis { font-family: var(--mono); font-size: 1rem; fill: #9faeb2; }
+.atlas-app .seasonal-critical-shade { fill: #d99d58; opacity: .055; }
+.atlas-app .seasonal-band { fill: #c49159; opacity: .2; }
+.atlas-app .seasonal-median { fill: none; stroke: #f2aa6e; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.atlas-app .seasonal-cursor { stroke: #f1d4ac; stroke-width: .8; stroke-dasharray: 3 4; opacity: .7; }
+.atlas-app .seasonal-point { fill: #f9d9ab; stroke: #1d302e; stroke-width: 2; }
+.atlas-app .seasonal-readout { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; padding: 20px 0; margin-block-start: 16px; border: 0; border-block: 1px solid var(--line); border-radius: 0; background: transparent; align-items: center; }
+.atlas-app .seasonal-readout > div > span { display: block; font-family: inherit; font-size: .6875rem; line-height: 1.6; letter-spacing: 0; color: var(--muted); margin-block-end: 8px; }
+.atlas-app .seasonal-readout strong { font-family: var(--mono); font-size: .9375rem; font-weight: 400; color: var(--text); line-height: 1.5; }
+.atlas-app .seasonal-steppers { display: flex; gap: 8px; grid-column: 1 / -1; justify-content: end; }
+.atlas-app .seasonal-steppers button { display: flex; align-items: center; justify-content: center; min-inline-size: 44px; min-block-size: 44px; background: var(--panel); border: 1px solid var(--line); color: var(--text); border-radius: 6px; }
+.atlas-app .seasonal-steppers button:disabled { opacity: .35; cursor: not-allowed; }
+.atlas-app .seasonal-steppers button:hover:not(:disabled) { background: var(--raised); }
+.atlas-app .seasonal-steppers button:active:not(:disabled) { border-color: var(--orange); }
+.atlas-app .seasonal-instructions { font-size: .8125rem; line-height: 1.7; color: var(--muted); margin: 16px 0; }
+.atlas-app .seasonal-method-note { max-inline-size: 80ch; font-size: .875rem; line-height: 1.7; color: var(--secondary); margin: 24px 0 0; padding: 0; border: 0; }
+.atlas-app .seasonal-data-label { display: block; font-family: var(--mono); font-size: .6875rem; line-height: 1.6; letter-spacing: 0; text-align: start; margin-block-start: 16px; color: var(--muted); }
+.atlas-app .seasonal-data-label.is-synthetic { color: #ffbb8b; font-weight: 600; }
+.atlas-app .seasonal-period-card { display: flex; flex-direction: column; border-inline-start: 1px solid var(--line); padding-inline-start: 32px; }
+.atlas-app .seasonal-period-heading { display: flex; align-items: center; gap: 12px; color: var(--muted); }
+.atlas-app .seasonal-period-heading > span { font-family: var(--mono); font-size: .75rem; line-height: 1.6; letter-spacing: 0; }
+.atlas-app .seasonal-period-card > h3 { font-size: 1.125rem; line-height: 1.5; letter-spacing: 0; font-weight: 500; margin: 16px 0 8px; max-inline-size: none; }
+.atlas-app .seasonal-period-card > p { font-size: .875rem; line-height: 1.7; color: var(--secondary); margin: 0; }
+.atlas-app .seasonal-period-list { display: flex; flex-direction: column; margin: 24px 0; gap: 8px; }
+.atlas-app .seasonal-period-list > button { display: flex; align-items: center; gap: 12px; text-align: start; min-block-size: 44px; padding: 12px; border: 1px solid transparent; background: none; color: var(--secondary); border-radius: 6px; }
+.atlas-app .seasonal-period-list > button.is-selected { border-inline-start-color: var(--orange); background: var(--panel); }
+.atlas-app .seasonal-period-list > button:hover { background: var(--raised); }
+.atlas-app .seasonal-period-list > button:active { border-color: var(--muted); }
+.atlas-app .seasonal-period-number { font-family: var(--mono); font-size: .75rem; color: var(--muted); align-self: start; }
+.atlas-app .seasonal-period-list strong { display: block; font-size: .875rem; line-height: 1.5; font-weight: 500; color: var(--text); }
+.atlas-app .seasonal-period-list small { display: block; font-size: .75rem; color: var(--muted); line-height: 1.6; margin-block-start: 4px; }
+.atlas-app .seasonal-period-list > button > svg { margin-inline-start: auto; flex-shrink: 0; color: var(--muted); }
+.atlas-app .seasonal-export { display: flex; gap: 8px; justify-content: center; align-items: center; min-block-size: 44px; margin: 0; padding: 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--text); font-size: .8125rem; line-height: 1.6; }
+.atlas-app .seasonal-export:hover:not(:disabled) { background: var(--raised); }
+.atlas-app .seasonal-export:disabled { opacity: .4; cursor: not-allowed; }
+.atlas-app .seasonal-period-card > .seasonal-export-note { font-size: .8125rem; line-height: 1.7; margin-block-start: 16px; color: var(--muted); }
+.atlas-app .seasonal-empty { min-block-size: 240px; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: var(--muted); }
+.atlas-app .seasonal-empty h3 { font-weight: 500; font-size: 1rem; color: var(--text); }
+.atlas-app .seasonal-empty p,.atlas-app .seasonal-no-periods { font-size: .875rem; line-height: 1.7; max-inline-size: 60ch; color: var(--secondary); }
+.atlas-app .seasonal-context :is(button,input,[tabindex]):focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+.atlas-app .seasonal-tooltip { pointer-events: none; }
+.atlas-app .seasonal-tooltip rect { fill: #102124; stroke: #7b927b; stroke-width: .7; opacity: .97; }
+.atlas-app .seasonal-tooltip text { font-family: var(--mono); font-size: .875rem; fill: #e4cfad; }
+.atlas-app .seasonal-tooltip text:last-child { font-size: .8125rem; fill: #adbfac; }
+.atlas-app .seasonal-week-control { margin-block-start: 20px; padding: 0; border: 0; }
+.atlas-app .seasonal-week-control label,.atlas-app .seasonal-week-control > div { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: .8125rem; line-height: 1.6; color: var(--secondary); }
+.atlas-app .seasonal-week-control label strong { font-family: var(--mono); font-weight: 500; color: var(--text); }
+.atlas-app .seasonal-week-control input { display: block; inline-size: 100%; min-block-size: 44px; margin: 4px 0; accent-color: #f2aa6e; cursor: pointer; }
+.atlas-app .seasonal-week-control > div { font-size: .75rem; color: var(--muted); }
+@container seasonal (max-width: 1000px) {
+  .atlas-app .seasonal-grid { grid-template-columns: minmax(0,1fr); }
+  .atlas-app .seasonal-period-card { border-inline-start: 0; border-block-start: 1px solid var(--line); padding: 24px 0 0; }
+  .atlas-app .seasonal-period-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .atlas-app .seasonal-export { align-self: start; }
+}
+@container seasonal (max-width: 480px) {
+  .atlas-app .seasonal-readout { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .atlas-app .seasonal-readout > div:first-child { grid-column: 1 / -1; }
+  .atlas-app .seasonal-period-list { grid-template-columns: minmax(0,1fr); }
+  .atlas-app .seasonal-export { align-self: stretch; }
 }

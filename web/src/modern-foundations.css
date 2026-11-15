@@ -4,7 +4,6 @@
  * https://developer.chrome.com/docs/modern-web-guidance/guides
  */
 html { scrollbar-gutter: stable; }
-html:has(.content-first-app dialog:modal) { overflow: hidden; }
 .content-first-app {
   color-scheme: dark;
   font-variant-numeric: tabular-nums;

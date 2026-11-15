@@ -58,14 +58,13 @@ export default function AnomalyPanel({anomalies, cell, onSelect, label}: Anomaly
 
   return <section className="panel ft-anomalies" aria-labelledby={`${id}-heading`}>
     <div className="panel-heading">
-      <div><span className="eyebrow">04 / LOOK CLOSER</span><h2 id={`${id}-heading`}>Unusual observations</h2></div>
-      {cell === 'ALL' && <span className="count-badge">{fmt(anomalies.length)} flagged weeks in range</span>}
+      <div><h2 id={`${id}-heading`}>Unusual observations</h2></div>
     </div>
     {cell !== 'ALL' ? <div className="ft-anomaly-empty ft-anomaly-scope">
       <MapPin size={25} aria-hidden="true"/>
       <div><h3>This comparison is for the whole region.</h3><p>Select “Whole region” in Spatial scope to inspect regional anomalies. A regional flag is not a finding about cell {cell}.</p></div>
     </div> : <>
-      <p className="ft-anomaly-intro">Find complete weeks above or below their historical 10th–90th percentile range. Each comparison excludes its own year. These are observations to inspect, not fire warnings.</p>
+      <p className="ft-anomaly-intro">Find complete weeks above or below their historical 10th–90th percentile range. Each comparison excludes its own year. These are observations to inspect, not fire warnings. A flag describes a historical comparison, not hazard severity.</p>
       <div className="ft-anomaly-controls">
         <div className="ft-anomaly-filters" role="group" aria-label="Filter unusual observations">
           {([['all', 'All', anomalies.length], ['high', 'Higher activity', highCount], ['low', 'Lower activity', lowCount]] as const).map(([value, title, count]) =>

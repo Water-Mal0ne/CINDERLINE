@@ -23,6 +23,7 @@ test('workspace links restore each presentation choice without changing scientif
 });
 
 test('old and malformed workspace links use a safe calendar view', () => {
+  assert.equal(parseWorkspaceNavigation('').calendar, 'monthly');
   const defaults = {section: 'calendar', calendar: 'weekly', pattern: 'instruments'};
   assert.deepEqual(parseWorkspaceNavigation('?view=rhythm&region=Nepal'), defaults);
   assert.deepEqual(parseWorkspaceNavigation('?workspace=unknown&calendar=hourly&pattern=forecast'), defaults);

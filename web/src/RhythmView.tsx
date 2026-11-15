@@ -65,10 +65,10 @@ export function WeekdayChart({row, rest}: {row: RhythmStreamRow; rest: string}) 
 }
 
 function StreamCard({row, rest}: {row: RhythmStreamRow; rest: string}) {
-  if (row.status !== 'ok' || !row.weekdays) return <div className="rh-stream empty"><h4>{row.stream}</h4><p>Not enough complete years ({row.detections.toLocaleString()} detections).</p></div>;
+  if (row.status !== 'ok' || !row.weekdays) return <div className="rh-stream empty"><h3>{row.stream}</h3><p>Not enough complete years ({row.detections.toLocaleString()} detections).</p></div>;
   const restDay = row.weekdays.find(d => d.day === rest);
-  return <div className="rh-stream">
-    <div className="rh-stream-head"><h4>{row.stream}</h4>{row.significant
+  return <article className="rh-stream">
+    <div className="rh-stream-head"><h3>{row.stream}</h3>{row.significant
       ? <span className="rh-chip sig">significant</span> : <span className="rh-chip">not significant</span>}</div>
     <WeekdayChart row={row} rest={rest}/>
     <dl className="rh-facts">
@@ -78,7 +78,7 @@ function StreamCard({row, rest}: {row: RhythmStreamRow; rest: string}) {
       <div><dt>p (null test)</dt><dd>{fmt(row.p_null, 4)}</dd></div>
     </dl>
     <p className="rh-small">{row.years} complete years · {row.detections.toLocaleString()} detections</p>
-  </div>;
+  </article>;
 }
 
 export default function RhythmView({children}: {children?: React.ReactNode}) {
@@ -117,27 +117,18 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
   const testCount = data.countries.flatMap(c => c.streams).find(r => typeof r.bonferroni_m === 'number')?.bonferroni_m ?? '—';
 
   return <div className="rhythm-page rhythm-workspace">
-    <div className="section-intro"><span className="eyebrow">WEEKLY RHYTHM INDEX · PRE-SPECIFIED TEST · 7 COUNTRIES</span>
-      <h2>Weekly Rhythm Index: do detections follow the <em>7-day week?</em></h2>
-      <p>We reproduce a known weekly pattern in each satellite record separately. Independently, CINDERLINE tests whether its historical calendar survives a change of sensor and calibration.</p>
-      <p>The test uses a stated expected rest day for each country. These weekday associations do not establish ignition cause or identify who burns or why.</p></div>
-    <section className="rh-result-overview" aria-labelledby="rh-overview-title">
-      <div><span className="eyebrow">OFFICIAL DECISION</span><h3 id="rh-overview-title">{passed ? 'The pre-specified rule passes, narrowly' : `Decision: ${official.decision.replaceAll('_', ' ')}`}</h3></div>
-      <span className={`gate-badge ${passed ? 'pass' : ''}`}><ShieldCheck size={13}/>{official.decision.replaceAll('_', ' ')}</span>
-      {data.headline && <p className="rh-headline">{data.headline}</p>}
-      {data.sunday_caveat && <div className="rh-caveat" role="note"><AlertTriangle size={18}/><p><strong>Read this first.</strong> {data.sunday_caveat}</p></div>}
-    </section>
+    <p className="rh-page-intro">The test uses a stated expected rest day for each country. These weekday associations do not establish ignition cause or identify who burns or why.</p>
     <nav className="rh-analysis-nav" aria-label="Rhythm analysis views">
       {([['charts', 'Weekday charts'], ['results', 'Country results'], ['map', 'Spatial patterns']] as const).map(([key, title]) =>
         <button key={key} type="button" aria-pressed={analysisView === key} aria-controls={`rh-analysis-${key}`} onClick={() => { setAnalysisView(key); if (key === 'map') setMapOpened(true); }}>{title}</button>)}
     </nav>
     <div id="rh-analysis-charts" className="rh-analysis-content" hidden={analysisView !== 'charts'}>
     {selected && <section className="panel rh-charts-panel" id="rh-country-panel" aria-labelledby="rh-country-title">
-      <div className="panel-heading"><div><span className="eyebrow">WEEKDAY PATTERN · {selected.rest_day.toUpperCase()} PREDICTED</span><h2 id="rh-country-title" ref={countryTitle} tabIndex={-1}>{selected.name}</h2></div>
-        <div className="segmented" role="group" aria-label="Detections included">{(['all', 'day'] as const).map(s => <button key={s} className={subset === s ? 'active' : ''} aria-pressed={subset === s} onClick={() => setSubset(s)}>{s === 'all' ? 'All detections' : 'Daytime only'}</button>)}</div></div>
-      <label className="rh-country-select" htmlFor="rh-country-select"><span>Country for weekday charts</span>
+      <h2 className="rh-visually-hidden" id="rh-country-title" ref={countryTitle} tabIndex={-1}>{selected.name}</h2>
+      <div className="rh-chart-toolbar"><label className="rh-country-select" htmlFor="rh-country-select"><span>Country</span>
         <select id="rh-country-select" value={country} onChange={event => setCountry(event.target.value)}>{data.countries.map(c => <option key={c.country} value={c.country}>{c.name}</option>)}</select>
-      </label>
+      </label><span className="rh-prediction">Predicted rest day <strong>{selected.rest_day}</strong></span>
+      <div className="segmented" role="group" aria-label="Detections included">{(['all', 'day'] as const).map(s => <button key={s} className={subset === s ? 'active' : ''} aria-pressed={subset === s} onClick={() => setSubset(s)}>{s === 'all' ? 'All detections' : 'Daytime only'}</button>)}</div></div>
       <div className="rh-streams">{rows.map(r => <StreamCard key={r.stream} row={r} rest={selected.rest_day}/>)}</div>
       <p className="chart-note">Bars show each weekday's index relative to an average day (1.0). Orange = predicted rest day. Whiskers = 95% intervals from resampling whole years. Terra, Aqua and VIIRS observe many of the same fires, so agreement between them is corroboration, not independent replication.{subset === 'day' ? ' Daytime-only results are a sensitivity check and are not used by the gate.' : ''}</p>
     </section>}
@@ -150,9 +141,11 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
     </div>
     <div id="rh-analysis-results" className="rh-analysis-content" hidden={analysisView !== 'results'}>
     <section className="panel rh-verdict" aria-labelledby="rh-verdict-title">
-      <div className="panel-heading"><div><span className="eyebrow">OFFICIAL DECISION</span>
+      <div className="panel-heading"><div>
         <h2 id="rh-verdict-title">{passed ? 'The pre-specified rule passes, narrowly' : `Decision: ${official.decision.replaceAll('_', ' ')}`}</h2></div>
         <span className={`gate-badge ${passed ? 'pass' : ''}`}><ShieldCheck size={13}/>{official.decision.replaceAll('_', ' ')}</span></div>
+      {data.headline && <p className="rh-headline">{data.headline}</p>}
+      {data.sunday_caveat && <div className="rh-caveat" role="note"><AlertTriangle size={18}/><p>{data.sunday_caveat}</p></div>}
       <p className="panel-description">{passing.map(nameOf).join(', ') || 'No country'} passed: the predicted rest day is the lowest weekday and significant after correction in at least two satellite streams. The United States is the replication check. Source: {official.source}.</p>
       <div className="table-scroll" role="group" aria-labelledby="rh-verdict-title" tabIndex={0}><table className="rh-table"><thead><tr><th scope="col">Country</th><th scope="col">Rest day</th><th scope="col">Result</th><th scope="col">Streams significant</th><th scope="col">Terra</th><th scope="col">Aqua</th><th scope="col">VIIRS</th></tr></thead>
         <tbody>{data.countries.map(c => <tr key={c.country} className={c.country === country ? 'active' : ''}>
@@ -166,7 +159,7 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
     </section>
 
     {data.robustness && <section className="panel" aria-labelledby="rh-robust-title">
-      <div className="panel-heading"><div><span className="eyebrow">ROBUSTNESS CHECKS · DO NOT CHANGE THE DECISION</span><h2 id="rh-robust-title">Stricter checks on the passing countries</h2></div></div>
+      <div className="panel-heading"><div><h2 id="rh-robust-title">Stricter checks on the passing countries</h2><p className="rh-small">Robustness checks · do not change the decision</p></div></div>
       {Object.keys(flagged).length > 0
         ? <div className="rh-caveat warn" role="note"><AlertTriangle size={18}/><div><p><strong>Not every robustness check holds.</strong> {Object.entries(flagged).map(([c, f]) => `${nameOf(c)}: ${f.map(k => CHECK_LABELS[k] || k).join(', ')} not met`).join('. ')}.</p>
           {Object.entries(data.robustness.notes || {}).map(([c, note]) => <p key={c}>{note}</p>)}
@@ -185,7 +178,7 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
     </section>}
 
     <section className="panel" aria-labelledby="rh-control-title">
-      <div className="panel-heading"><div><span className="eyebrow">NEGATIVE CONTROL</span><h2 id="rh-control-title">Compare static heat sources</h2></div></div>
+      <div className="panel-heading"><div><h2 id="rh-control-title">Static heat sources</h2></div></div>
       <p className="panel-description">Gas flares, volcanoes and other static sources provide a comparison for the weekday pattern. Pooled across all seven countries, their largest weekday deviation is shown below. Per-country checks are in the robustness section above.</p>
       <div className="rh-control">{data.negative_control.map(c => <div key={c.stream}><span>{c.stream}</span><strong>{typeof c.max_abs_deviation === 'number' ? `${(c.max_abs_deviation * 100).toFixed(1)}%` : '—'}</strong><small>{c.detections.toLocaleString()} detections</small></div>)}</div>
     </section>
@@ -194,6 +187,7 @@ export default function RhythmView({children}: {children?: React.ReactNode}) {
       {mapOpened && children}
     </div>
     <details className="rh-disclosure rh-limitations"><summary>What this does and does not show</summary>
+      <p>We reproduce a known weekly pattern in each satellite record separately. Independently, CINDERLINE tests whether its historical calendar survives a change of sensor and calibration.</p>
       <ul><li>{data.wording}</li>{data.caveats.map(c => <li key={c}>{c}</li>)}</ul>
       <span className="chart-label"><Waves size={12}/> {data.label}</span></details>
   </div>;

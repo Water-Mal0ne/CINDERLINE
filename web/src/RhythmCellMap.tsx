@@ -108,14 +108,11 @@ export default function RhythmCellMap() {
       outN: outside.length, outSig: outside.filter(p => p.significant).length, outMed: median(outside.map(p => p.rest_index))};
   })();
 
-  return <section className="panel" aria-labelledby="rh-map-title">
-    <div className="panel-heading"><div><span className="rh-exploratory"><FlaskConical size={11}/> EXPLORATORY</span>
-      <h2 id="rh-map-title">Where is the dip? One-degree cells</h2></div></div>
-    <p className="panel-description">Not part of the pre-specified test. The same weekday method run for every 1° cell with enough VIIRS detections (at least 300 a year on average and 8 usable years), with a false-discovery correction (Benjamini-Hochberg, 5%) across all cells. Aqua is computed the same way as a check.</p>
+  return <section className="panel rh-spatial-panel" aria-labelledby="rh-map-title">
+    <div className="rh-map-toolbar"><div className="panel-heading"><div><h2 id="rh-map-title">One-degree cells</h2><span className="rh-exploratory"><FlaskConical size={16}/> Exploratory</span></div></div>
     <label className="rh-country-select" htmlFor="rh-map-country-select"><span>Country for this map</span>
       <select id="rh-map-country-select" value={country} onChange={event => { setCountry(event.target.value); setActive(null); setFocusIndex(0); }}>{countries.map(c => <option key={c} value={c}>{NAMES[c] || c}</option>)}</select>
-    </label>
-    <p className="rh-map-help" id="rh-map-help">Use Left and Right arrow keys to move between cells; Home and End jump to the first or last. Press Enter or Space to select. An orange outline marks the cell being inspected.</p>
+    </label></div>
     {landError && <div className="rh-map-outline-error" role="status"><span>The map outline could not be loaded.</span><button type="button" className="button" onClick={() => { invalidateData('world-land.json'); setOutlineAttempt(n => n + 1); }}>Retry map outline</button></div>}
     <div className="rh-map-wrap">
       <svg className="rh-map" viewBox={`0 0 ${view.w.toFixed(0)} ${view.h.toFixed(0)}`} role="group" aria-describedby="rh-map-help" aria-label={`${NAMES[country]}: ${props.length} cells analysed, ${sig.length} with a significant Sunday dip. Select a cell for its values.`}>
@@ -143,6 +140,8 @@ export default function RhythmCellMap() {
         {check && <div>Aqua check: {check.cells_with_both} cells have both satellites; their Sunday indices correlate at r = {f3(check.corr_rest_index)}. Of {check.viirs_sig_cells_with_aqua} VIIRS-significant cells with Aqua data, {check.of_those_aqua_below_1} are also below 1 in Aqua and {check.of_those_aqua_significant} are significant in Aqua.</div>}
       </div>
     </div>
+    <details className="rh-disclosure rh-map-controls"><summary>Map controls</summary><p className="rh-map-help" id="rh-map-help">Use Left and Right arrow keys to move between cells; Home and End jump to the first or last. Press Enter or Space to select. An orange outline marks the cell being inspected.</p></details>
+    <p className="panel-description rh-map-method">Not part of the pre-specified test. The same weekday method run for every 1° cell with enough VIIRS detections (at least 300 a year on average and 8 usable years), with a false-discovery correction (Benjamini-Hochberg, 5%) across all cells. Aqua is computed the same way as a check.</p>
     {hl && hlStats && <div className="rh-finding"><strong>{hl.title}.</strong> {hlStats.sig} of {hlStats.n} cells have a significant Sunday dip (median index {f3(hlStats.med)}). Of the {hlStats.aqua} significant cells that Aqua can also measure, {hlStats.aquaBelow} are below 1 in Aqua and {hlStats.aquaSig} are significant in Aqua. In the {hl.rest}, {hlStats.outSig} of {hlStats.outN} cells are significant (median {f3(hlStats.outMed)}). {country === 'India' && summary.northeast_india_area && <>Of the {hlStats.n} northeast cells, {summary.northeast_india_area.northeast_cross_border.cells} lie mostly outside India (their detections come from the Indian side of the border); using only the {summary.northeast_india_area.northeast_mostly_india.cells} cells mostly inside India, {summary.northeast_india_area.northeast_mostly_india.significant} are significant (median {f3(summary.northeast_india_area.northeast_mostly_india.median_sunday_index)}). </>}The area boundary was drawn after looking at the map; it is a description, not a test. This descriptive pattern does not establish ignition cause.{hl.context && <><br/><br/>{hl.context}</>}</div>}
     {all && <p className="chart-note">All four countries: Aqua and VIIRS Sunday indices correlate at r = {f3(all.corr_rest_index)} across {all.cells_with_both} shared cells. Neighbouring cells share weather and farming practice, so a cluster of significant cells is one regional pattern, not many independent findings. Grey land means too few detections to analyse, not "no dip".</p>}
     <span className="chart-label">{cells.metadata.label} · EXPLORATORY</span>

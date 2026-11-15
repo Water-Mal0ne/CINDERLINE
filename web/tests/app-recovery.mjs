@@ -220,7 +220,7 @@ test('journey: observed Earth mode and month survive country loading and section
     assert.equal(earth().props.regionId,'India');
     assert.equal(earth().props.earthMode,'observations');assert.equal(earth().props.observationMonth,'2024-11');
     press(app,'Methods');await app.settle();assert.equal(earth(),undefined);
-    press(app,'Explore the record');await app.settle();
+    press(app,'Earth');await app.settle();
     assert.equal(earth().props.earthMode,'observations');assert.equal(earth().props.observationMonth,'2024-11');
   }finally{app.dispose();}
 });
@@ -350,7 +350,7 @@ test('workspace share links and history restore monthly, pattern and Earth choic
     await app.settle();press(app,'Monthly');await app.settle();
     snapshots.push({url:app.url.toString(),check:tree=>{assert.ok(month(tree));assert.equal(namedChild(tree,'Heatmap'),undefined);}});
     press(app,'Patterns');await app.settle();press(app,'Seasons');await app.settle();
-    snapshots.push({url:app.url.toString(),check:tree=>{assert.equal(button(tree,'Patterns').props['aria-pressed'],true);assert.equal(button(tree,'Seasons').props['aria-pressed'],true);}});
+    snapshots.push({url:app.url.toString(),check:tree=>{assert.equal(button(tree,'Patterns').props['aria-current'],'page');assert.equal(button(tree,'Seasons').props['aria-pressed'],true);}});
     press(app,'Earth');await app.settle();
     snapshots.push({url:app.url.toString(),check:tree=>{assert.ok(earth(tree));assert.equal(month(tree),undefined);}});
     for(const snapshot of snapshots){

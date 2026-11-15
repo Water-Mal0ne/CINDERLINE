@@ -38,7 +38,7 @@
 .calendar-scale-bar .segmented button.active{background:var(--panel);color:var(--orange);box-shadow:inset 0 0 0 1px var(--line)}
 .calendar-scale-bar>.chart-note{max-width:440px;font-size:13px;line-height:1.6;color:var(--muted)}
 .calendar-scroller{max-width:100%;margin-right:0;padding-bottom:8px;scrollbar-color:#565b5e transparent}
-.calendar-scroller .calendar-grid{min-width:900px!important}
+.calendar-scroller .calendar-grid{min-width:900px}
 .calendar-months,.calendar-row{grid-template-columns:44px minmax(0,1fr);gap:12px}
 .calendar-months{margin-bottom:12px}
 .calendar-months>.year-label,.calendar-row>.year-label{font-size:12px;line-height:1.5;color:var(--muted);letter-spacing:0}

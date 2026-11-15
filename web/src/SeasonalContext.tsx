@@ -54,12 +54,12 @@ export default function SeasonalContext({region,label,selectedYear,onExport,cell
   const lineSegments=contiguous(points,p=>numeric(p.median));
   const bandSegments=contiguous(points,p=>numeric(p.p10)&&numeric(p.p90));
   return <section className="seasonal-context" id="seasonal-context" tabIndex={-1} aria-labelledby="seasonal-title">
-    <div className="seasonal-intro"><div><span className="eyebrow">03 / SEASONAL CONTEXT</span><h2 id="seasonal-title">The season behind the signal.</h2>
+    <div className="seasonal-intro"><div><h2 id="seasonal-title">The season behind the signal.</h2>
       <p>Explore when activity has typically been highest across {region.meta.name}. These patterns describe the historical record.</p></div>
       <span className="seasonal-scope"><Waves size={14}/> National baseline · {SEASONAL_BASELINE}</span></div>
     {cell!=='ALL'&&<p className="seasonal-national"><Info size={15}/><span>The map is focused on a grid cell. This section continues to show <strong>{region.meta.name} national patterns</strong>.</span></p>}
     <div className="seasonal-grid"><div className="seasonal-chart-card">
-      <div className="seasonal-chart-heading"><div><span className="seasonal-kicker">TYPICAL WEEKLY ACTIVITY</span><h3>{peak?<>Peak around <span>{dateSpan(selectedYear,peak.week)}</span></>:'Seasonal pattern'}</h3></div>
+      <div className="seasonal-chart-heading"><div><h3>{peak?<>Peak around <span>{dateSpan(selectedYear,peak.week)}</span></>:'Seasonal pattern'}</h3></div>
         {peak&&<div className="seasonal-peak"><strong>{compact(peak.median)}</strong><span>median detections / week</span></div>}</div>
       <div className="seasonal-legend"><span><i/>Median</span><span><i className="seasonal-band-key"/>10th–90th percentile</span><span className="seasonal-units">Aqua-reference-equivalent scale</span></div>
       {hasData?<><div className="seasonal-plot-scroller"><svg className="seasonal-chart" viewBox={`0 0 ${W} ${H}`} tabIndex={0} role="group" aria-label={`${region.meta.name} national historical weekly activity`} aria-describedby="seasonal-instructions" onKeyDown={keyboard}

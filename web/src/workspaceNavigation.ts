@@ -11,7 +11,8 @@ export function parseWorkspaceNavigation(search: string): WorkspaceNavigation {
   const pattern = params.get('pattern');
   return {
     section: section === 'patterns' || section === 'earth' ? section : 'calendar',
-    calendar: params.get('calendar') === 'monthly' ? 'monthly' : 'weekly',
+    // The month overview is legible on first arrival; existing shared links retain their weekly default.
+    calendar: params.get('calendar') === 'monthly' || params.size === 0 ? 'monthly' : 'weekly',
     pattern: pattern === 'seasons' || pattern === 'anomalies' ? pattern : 'instruments',
   };
 }

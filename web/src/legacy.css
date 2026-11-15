@@ -1,0 +1,12 @@
+/* Previous component foundations kept in one low-priority cascade layer.
+   New atlas design is controlled by modern-foundations and workspace-redesign. */
+@layer legacy;
+@import './styles.css' layer(legacy);
+@import './explorer.css' layer(legacy);
+@import './unslop.css' layer(legacy);
+@import './unslop-explore.css' layer(legacy);
+@import './unslop-earth-rhythm.css' layer(legacy);
+@import './section-polish-shell.css' layer(legacy);
+@import './section-polish-explore.css' layer(legacy);
+@import './section-polish-evidence.css' layer(legacy);
+@import './section-polish-rhythm-earth.css' layer(legacy);

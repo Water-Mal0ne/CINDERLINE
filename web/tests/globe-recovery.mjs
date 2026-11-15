@@ -26,8 +26,10 @@ async function alignmentFor(globe){
 const data={...shipped,cells:shipped.cells.filter(cell=>cell.region==='Nepal').slice(0,3)};
 const alignment=await alignmentFor(data);
 const props={regionId:'Nepal',year:2024,onYear(){},onRegion(){},onCell(){},availableCells:[]};
+// ObservationControls composes its toolbar from an actions slot. These hook
+// tests do not mount child components, so traverse that rendered slot too.
 const nodes=(value,predicate)=>Array.isArray(value)?value.flatMap(v=>nodes(v,predicate)):
-  !value||typeof value!=='object'?[]:[...(predicate(value)?[value]:[]),...nodes(value.props?.children,predicate)];
+  !value||typeof value!=='object'?[]:[...(predicate(value)?[value]:[]),...nodes(value.props?.children,predicate),...nodes(value.props?.actions,predicate)];
 const text=value=>Array.isArray(value)?value.map(text).join(''):
   value&&typeof value==='object'?text(value.props?.children):String(value??'');
 const button=(tree,label)=>nodes(tree,node=>node.type==='button'&&text(node)===label)[0];
