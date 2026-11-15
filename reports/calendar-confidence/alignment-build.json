@@ -1,0 +1,517 @@
+{
+  "revision": "calendar-dates-v1",
+  "artifact_sha256": "bfe56d93a94c569b8dabadca8c162c3867bf139aa35fcf217d236af2314530df",
+  "artifact_bytes": 65666,
+  "source": {
+    "globe_sha256": "c31d2f0b5f31a6b24f9fc4e0617f5636f1edad0f3211ff2f8f25b1c47e107cf2",
+    "globe_view_sha256": "44bfb78246b9fa5d15f6eb7640c83d8bf59e5e0911394699554f10658c84d4ad",
+    "model_sha256": "596adf75f544032e1b733f2f85d4fd97120b4514bdd2f2a894e97bf7ab8a303a",
+    "archive_manifest_fingerprint": "4bf6e7635b6cb9b7437fb069e4afb4866c5347dd15d46549288686fb8b21edd7"
+  },
+  "national_inputs": [
+    {
+      "file": "Australia.json",
+      "sha256": "9fa8c6c998f92dd58b09764bcc3ca2000a242502240afc56cb6cffa22c51cded"
+    },
+    {
+      "file": "Bangladesh.json",
+      "sha256": "0178b46d17393998306cc53284cd1489808d88fc403b9c418565ea6d5e8f1d74"
+    },
+    {
+      "file": "Brazil.json",
+      "sha256": "65ff8b628143df70e695f4786cff30a20cd82b3c8498ea687e1c88125907cc54"
+    },
+    {
+      "file": "Egypt.json",
+      "sha256": "eaf4f1769543de4a47d1216fa4b4174c95c4a59bb5b7c6130289c30e2eea0bd8"
+    },
+    {
+      "file": "India.json",
+      "sha256": "9a140363b8878fd0480e93dba2bd4715d56c978f85b7e5fadffb9776529c251e"
+    },
+    {
+      "file": "Nepal.json",
+      "sha256": "82bb0a6c89ec29a35875cb74d5e6d6643c3b8aeefcd78f563bff8548c020965f"
+    },
+    {
+      "file": "United_States.json",
+      "sha256": "7f2534a467d81749592647998ea94e781797a0e8fbff84875e705fbb7edb9c20"
+    }
+  ],
+  "count_partitions": [
+    {
+      "file": "Australia/viirs-snpp/2021/counts-00000.parquet",
+      "sha256": "3e12426437e4310a0b1d6149b024c3de12ca9ee6cc47d0ca2aba9809dd6530c1"
+    },
+    {
+      "file": "Australia/viirs-snpp/2021/counts-00001.parquet",
+      "sha256": "761f0be7d985fa2e28f1c716dabdd3240255b622c12b68c2bf3d98052deb1152"
+    },
+    {
+      "file": "Australia/viirs-snpp/2021/counts-00002.parquet",
+      "sha256": "a759722cdbafbb122c52e13eb83fa425a945b45794d2c20a8e1877bdca8dbf78"
+    },
+    {
+      "file": "Australia/viirs-snpp/2021/counts-00003.parquet",
+      "sha256": "b2383c3d5940618330f66ea4896f800a4dfe85cea4be3634f96c0abda695a324"
+    },
+    {
+      "file": "Australia/viirs-snpp/2021/counts-00004.parquet",
+      "sha256": "39f8500b395b0e22853c842f3e363dec41a400cb1e3e953b232b721d3909299a"
+    },
+    {
+      "file": "Australia/viirs-snpp/2022/counts-00000.parquet",
+      "sha256": "9b16f6a8d56ccf3bb8ccd6089476c17a94483087b64d1ea05a7ef599d80d94d6"
+    },
+    {
+      "file": "Australia/viirs-snpp/2022/counts-00001.parquet",
+      "sha256": "9651ce2ab0062cd708fcbe427b6432afe7ced4216c956532425de5ab7742fc1f"
+    },
+    {
+      "file": "Australia/viirs-snpp/2022/counts-00002.parquet",
+      "sha256": "3de259d07d01731bff39b3dae7b24680bc7515c6a606dced3db73d994b4b6124"
+    },
+    {
+      "file": "Australia/viirs-snpp/2022/counts-00003.parquet",
+      "sha256": "ba55257f5d79fc172e0d62b7cbbf90473ea6ce30fe9698f7c45547e2bb562af9"
+    },
+    {
+      "file": "Australia/viirs-snpp/2022/counts-00004.parquet",
+      "sha256": "794918e2bcfae7bc75a1443b4f2cc27ca40e524891c5a6d9656e5a93bafff26e"
+    },
+    {
+      "file": "Australia/viirs-snpp/2023/counts-00000.parquet",
+      "sha256": "d959503f2e18b91b93279b76299e4c7e518d35679fabec3ad54e41f2f33454a5"
+    },
+    {
+      "file": "Australia/viirs-snpp/2023/counts-00001.parquet",
+      "sha256": "38c45878f43b4d81a882475d35c93f702a610312f7bdca6c8fe7c2ecd39a4ca6"
+    },
+    {
+      "file": "Australia/viirs-snpp/2023/counts-00002.parquet",
+      "sha256": "45ae6f9c1d716e0281b94c2a2b174e5b4f292681583525f88eae8ccd84b9bcbd"
+    },
+    {
+      "file": "Australia/viirs-snpp/2023/counts-00003.parquet",
+      "sha256": "5b39cf5e45d16b849c26ec6cecb02150a6afd6f4d36aea70d9ddebdc3b2a25df"
+    },
+    {
+      "file": "Australia/viirs-snpp/2023/counts-00004.parquet",
+      "sha256": "cd18487b816d3c34d50b3d3308c6c7b879df36bf62a681b785c857617f7302cb"
+    },
+    {
+      "file": "Australia/viirs-snpp/2023/counts-00005.parquet",
+      "sha256": "0a55087bedd54930e9438154290013299b2b0e09565605b20c0760cabdd94887"
+    },
+    {
+      "file": "Australia/viirs-snpp/2023/counts-00006.parquet",
+      "sha256": "94eccd2e94987ed8a3ce3222805d93104b926bff684e1860f7ac66e227ded85f"
+    },
+    {
+      "file": "Australia/viirs-snpp/2023/counts-00007.parquet",
+      "sha256": "8bf84f8a5cf98a201f62c97968ecf93960f0e93d0f71f1433a5c46734222c5ae"
+    },
+    {
+      "file": "Australia/viirs-snpp/2023/counts-00008.parquet",
+      "sha256": "07a95dda34747dcc98c067163c551115d4d4002ec09ccb0fa41ffcaaf23a3b1d"
+    },
+    {
+      "file": "Australia/viirs-snpp/2023/counts-00009.parquet",
+      "sha256": "02ed767ea1ad7b455fe49a70c4035ad2328c4cbad9cc77a4668edf1290e050b5"
+    },
+    {
+      "file": "Australia/viirs-snpp/2024/counts-00000.parquet",
+      "sha256": "ea05e209507225dcb590455c2986b8f5f7f51ed9225d861ea0f6f1171ac01fa9"
+    },
+    {
+      "file": "Australia/viirs-snpp/2024/counts-00001.parquet",
+      "sha256": "a0b8d0cf3c2a72ddac8cd4f644e3fe9feff757f86db8cad6ba472030cdc2e76d"
+    },
+    {
+      "file": "Australia/viirs-snpp/2024/counts-00002.parquet",
+      "sha256": "10cf305bcb60a0e783d12915edb6e78759b892118c735109d3dea11f668589a8"
+    },
+    {
+      "file": "Australia/viirs-snpp/2024/counts-00003.parquet",
+      "sha256": "567143aaf2fa21ce359b197cbb382b4f82ca67d96f1c2cf344f18f484a873b17"
+    },
+    {
+      "file": "Australia/viirs-snpp/2024/counts-00004.parquet",
+      "sha256": "c8079ab43253344aed50c392c2a9caa79da07c17d36406d450a3368510678fb4"
+    },
+    {
+      "file": "Australia/viirs-snpp/2025/counts-00000.parquet",
+      "sha256": "429eecf35efe6ee81668efef1423467ca225a7fb388bda0889dbd976fa7432f5"
+    },
+    {
+      "file": "Australia/viirs-snpp/2025/counts-00001.parquet",
+      "sha256": "d3fc1d29f75e0581afab9e925c20b65694f39c75458edf14de322e450d1b0537"
+    },
+    {
+      "file": "Australia/viirs-snpp/2025/counts-00002.parquet",
+      "sha256": "276967023cb96c6e752aa2c4061eded3328248b962011961e31046ed17106f40"
+    },
+    {
+      "file": "Australia/viirs-snpp/2025/counts-00003.parquet",
+      "sha256": "da6ab6814e25e058d7f0ed90f3c8f189d128914cdd5e3da6add9adcc999a5d1c"
+    },
+    {
+      "file": "Australia/viirs-snpp/2025/counts-00004.parquet",
+      "sha256": "0457f6f44b77ba8d4eeac2e193990b0ebe889057c5365ed6a3cc714176de3971"
+    },
+    {
+      "file": "Australia/viirs-snpp/2025/counts-00005.parquet",
+      "sha256": "1b77419a07ea83c8b626cf584d2735cec52e038d8be99b624da24c7beacfc5b9"
+    },
+    {
+      "file": "Australia/viirs-snpp/2025/counts-00006.parquet",
+      "sha256": "58c1d4e836b35aa9b65937fcde151a50a81ef8b4f6c8cd9bb39f1b9465514037"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2021/counts-00000.parquet",
+      "sha256": "2705c15c1f64eaf91fa32edd1b43bc9c94440613e2d0081e31e4a3ca57928b13"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2021/counts-00001.parquet",
+      "sha256": "4e63daf6e3a53f3943695ecf3130c31841af8f608e45e118005f100f1cbfd2bd"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2021/counts-00002.parquet",
+      "sha256": "8355d5ff5290227fd7a6e8c0fecc2e5708b308fa79c9a33aa3d22da4f0f6a7ac"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2021/counts-00003.parquet",
+      "sha256": "35f5fe72335335df2892e8b87f48dbc0bf2f281c7f781e1e87419a021cf982f8"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2021/counts-00004.parquet",
+      "sha256": "89d956e121ef52059f2511c970e918e4a9f9b6b3322d64c892ac09f319cd524e"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2021/counts-00005.parquet",
+      "sha256": "b495592119f7b5c47c9e67da984743a4ed67ed28841789112e3847bd87f79995"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2021/counts-00006.parquet",
+      "sha256": "e59d347442ccd975287cbcc5b33d1f601761cfe8c0215e10cbcb8a2074ee30f0"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2022/counts-00000.parquet",
+      "sha256": "e73b2e4c38b022be2329e62aeb6eed9ac75d746bacfb1cbb7fbbf5dc64df2532"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2022/counts-00001.parquet",
+      "sha256": "1d2a847d5f38e1e1b0cf5e0f121d904b9d0c95c93315dc6296ba85e33e4c7031"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2022/counts-00002.parquet",
+      "sha256": "82edc9b57587170351d5696d5f70a9621b3044000d0b628f8cd8468d1c20c3f8"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2022/counts-00003.parquet",
+      "sha256": "6f9a1ee2f06b3a3f9b4b8e50aaf572c33e3795e0e26b85dd4a134b5fbb8ffb9b"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2022/counts-00004.parquet",
+      "sha256": "efbea1d9e9c17a443a2517e94415bd38e0fbf1371cfd362cdeb63a74a8477dca"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2022/counts-00005.parquet",
+      "sha256": "b6707b7c8191feef12bab9f1ce8ace1d02098e245f171205615797403fcf9b8a"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2022/counts-00006.parquet",
+      "sha256": "fefa7ad05658d64390b1c664a5c6e86ce2835317594ac6825c1cf27e03c5e03c"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2022/counts-00007.parquet",
+      "sha256": "1d7033064431fb07386895e3ff5437f70eb19fd41064712437410b27e099bef5"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2023/counts-00000.parquet",
+      "sha256": "e4b0a2089804ade16e0fa7ea0e3ed98eef975e5904b4ed690db3ed823c0cac86"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2023/counts-00001.parquet",
+      "sha256": "4b2f11a8d8cc352f08164f0a31c6f153cf8c7108e3c66d856568ba1b09015ef0"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2023/counts-00002.parquet",
+      "sha256": "eac5a0d40e8f54fdf639a1c4235cb6419bc88b6d364c8d24d1c488be1d0307a4"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2023/counts-00003.parquet",
+      "sha256": "5be8b7d5166022c8f7b4b783ec064d52f97976a05f8a26e9a7ddab9352f4db13"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2023/counts-00004.parquet",
+      "sha256": "3ddd5778e5618f3f42ca94a03a4e9efeafd10dd5513a79de5dfa5f682e62570f"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2023/counts-00005.parquet",
+      "sha256": "89fdd200ec10d5f936b953a473e670fee34c4b214928813ad785a9e9450c4516"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2023/counts-00006.parquet",
+      "sha256": "af5ffeb93944c3094763c8f4c7d3f712e0ad5ca8ecb4685bd13bb742e16ebe93"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2024/counts-00000.parquet",
+      "sha256": "28662851a09bb50957954b0c329b070b02b12e3f2b8b257be3ef11e2c2d3cda2"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2024/counts-00001.parquet",
+      "sha256": "13a490bcc5b9089f4a904c53c960b537c3e6ff72d418aafc1dee3ad52e58bfea"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2024/counts-00002.parquet",
+      "sha256": "7e9076e50fb9ffeaa0d19cd02f063c94793b7c1215206bc3ca31825226b382e1"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2024/counts-00003.parquet",
+      "sha256": "f0a25338f4d1dc9e3502372a3fb9caec72e50ae6db47c632788d4d14b19567ce"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2024/counts-00004.parquet",
+      "sha256": "aa7da56b257c866202ceb0f7a439865cb66aa2fb2bc8da26aefa3983aa79d179"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2024/counts-00005.parquet",
+      "sha256": "0f4cc5821fd18ca397e508ff215404db547ae8b9c824ac04c835a2a3eafa9424"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2024/counts-00006.parquet",
+      "sha256": "29e8bd321f7d70509ff62a7e5f8918bfad3e81c2be3d777772c698367b3ebfba"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2024/counts-00007.parquet",
+      "sha256": "5691e7075319cccb05584b06be15658efc5db5ca9c6471c669dd545cc9f56fce"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2024/counts-00008.parquet",
+      "sha256": "58d3158c2a322baff2164ae980c15c78ba0d42644fec5ad50b720c5ca462bdff"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2024/counts-00009.parquet",
+      "sha256": "9ffcc05441a52c6a81853e96a9032510304046f936fa5c3c2ecc78b6a5a15925"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2025/counts-00000.parquet",
+      "sha256": "741961934c3fb90e8ea47a1cc53d4d9055d22496bc98eb2b4891ffd291e5618a"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2025/counts-00001.parquet",
+      "sha256": "06898c1c10b00d325f42a4ba20cb0760b45f4bd87e88d267403eea08c9b31099"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2025/counts-00002.parquet",
+      "sha256": "2780b9be2a9d4f53e3eea71640deb169e569ec8ac966d228043caee1ccef44b7"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2025/counts-00003.parquet",
+      "sha256": "469e92fe842f06c7c4d06134e4ed855e10fa586c83bedcfd3c5990fc271da282"
+    },
+    {
+      "file": "Brazil/viirs-snpp/2025/counts-00004.parquet",
+      "sha256": "fb00c3b06952f2404ad51b8bf057b82e14ad5459ea3eb9c83871bb1857020f98"
+    },
+    {
+      "file": "India/viirs-snpp/2021/counts-00000.parquet",
+      "sha256": "e2bb21a6c92d15c397ad1db71cfcbb8801aa5dc1d4241bb33b81bf8c822c1782"
+    },
+    {
+      "file": "India/viirs-snpp/2021/counts-00001.parquet",
+      "sha256": "055921af271e33009c0cfa3bf3bd04032ff39c3f01b05dd841a559128ba53c60"
+    },
+    {
+      "file": "India/viirs-snpp/2021/counts-00002.parquet",
+      "sha256": "dc72ad757affc838432bc1766bdff231a5b41b3da35198ae0c36c776e26c3219"
+    },
+    {
+      "file": "India/viirs-snpp/2021/counts-00003.parquet",
+      "sha256": "77f31fca7fb0ce13dc69a9db46ecbff66d470e785c72367925d6721dc3f1f5ff"
+    },
+    {
+      "file": "India/viirs-snpp/2022/counts-00000.parquet",
+      "sha256": "7f406acdcb827c131aa38cb1fdd8e6055a4427abf4864e529ed40a111544ed8d"
+    },
+    {
+      "file": "India/viirs-snpp/2022/counts-00001.parquet",
+      "sha256": "dae40223e9fac5755e69cc489a35d99a505e51decfd33a390f3bb9573499dde4"
+    },
+    {
+      "file": "India/viirs-snpp/2022/counts-00002.parquet",
+      "sha256": "a0938b0ae19e3ed25cf42e5efaf5f9a837c0ee7c69678981cbdb77528b4c2c61"
+    },
+    {
+      "file": "India/viirs-snpp/2023/counts-00000.parquet",
+      "sha256": "06b509f9a8c8c10474fe6e7ea0a2bd6518da6c484b1c9e3742a62af89803f58a"
+    },
+    {
+      "file": "India/viirs-snpp/2023/counts-00001.parquet",
+      "sha256": "429106f6c573317f9dcae5dcb9df3435ed8a844754c21c35d2fcf170d39ab5d4"
+    },
+    {
+      "file": "India/viirs-snpp/2023/counts-00002.parquet",
+      "sha256": "7d41d9bc57474162bb2a4cef76b838985958373d98a903155d36151f99cb18d3"
+    },
+    {
+      "file": "India/viirs-snpp/2024/counts-00000.parquet",
+      "sha256": "019b27676414b741b86a2dee8acadc707f001f4c33919378d0a4e839bbc1c501"
+    },
+    {
+      "file": "India/viirs-snpp/2024/counts-00001.parquet",
+      "sha256": "4dd3f3069ff5cfffdafa2e5d63176a2b6dfe4dfc6c2942dd6387236fb2c48482"
+    },
+    {
+      "file": "India/viirs-snpp/2024/counts-00002.parquet",
+      "sha256": "7e5669a0ca309ca14fd5b15a37560255ab91f1e88ab934c5f1e30a68466f0734"
+    },
+    {
+      "file": "India/viirs-snpp/2025/counts-00000.parquet",
+      "sha256": "447ef7a8630cf401b4be46157580ecd8a137c4302b800c812a835b3db0031483"
+    },
+    {
+      "file": "India/viirs-snpp/2025/counts-00001.parquet",
+      "sha256": "16e493362eec1dee6f74e3d9c2f2324903cc646f0caad652d4806fda4fae1f61"
+    },
+    {
+      "file": "India/viirs-snpp/2025/counts-00002.parquet",
+      "sha256": "7e9255ecd8fced269fb2357a40b3db23678b0f544df67ef773b87da332e8e65d"
+    },
+    {
+      "file": "India/viirs-snpp/2025/counts-00003.parquet",
+      "sha256": "266d2e84239c8b7b24ed98fbf1174a9d744cdb1989763fd6159d07a6a44bf875"
+    },
+    {
+      "file": "Bangladesh/viirs-snpp/2021/counts-00000.parquet",
+      "sha256": "04694dc3a8a5d7e1ef42f967b6e69ca8819fed9d0a8e0ba1bd1259cf5ccec597"
+    },
+    {
+      "file": "Bangladesh/viirs-snpp/2022/counts-00000.parquet",
+      "sha256": "3c81a0a66a4c453f4f359eaf3ac40a5c3d262db4e44e1221f544949253a2713b"
+    },
+    {
+      "file": "Bangladesh/viirs-snpp/2023/counts-00000.parquet",
+      "sha256": "d36bff7fe6593615a4dbc99fbd49504800a5b6b60d773c91dbd3fb32eeb79d75"
+    },
+    {
+      "file": "Bangladesh/viirs-snpp/2024/counts-00000.parquet",
+      "sha256": "c16f31570063a305ef5cdfce84c385f79ab2ddfe9b5f36453929e941d65574c6"
+    },
+    {
+      "file": "Bangladesh/viirs-snpp/2025/counts-00000.parquet",
+      "sha256": "76c21c33d50c7c6411a71838076c3a7a937ef655b996c69927113fbdff4191b6"
+    },
+    {
+      "file": "Egypt/viirs-snpp/2021/counts-00000.parquet",
+      "sha256": "bf30b614887a6f4d4b7dcffa0c189f95350b495f11f37019c1bca35fd1724b4b"
+    },
+    {
+      "file": "Egypt/viirs-snpp/2022/counts-00000.parquet",
+      "sha256": "d42e92d45313e3c8c12067b3af3990fe92e92899c8ea19186c6edc0d3dc3c76c"
+    },
+    {
+      "file": "Egypt/viirs-snpp/2023/counts-00000.parquet",
+      "sha256": "f819484d9cc2e5f6019224a53b2f102bfde144f538be13b3c8d0955def0e577d"
+    },
+    {
+      "file": "Egypt/viirs-snpp/2024/counts-00000.parquet",
+      "sha256": "303af0b14b12e4ae2ddc984f168478acbcc3fac1412f65855a56f3e332b19dd3"
+    },
+    {
+      "file": "Egypt/viirs-snpp/2025/counts-00000.parquet",
+      "sha256": "0593c9f11467a4be41bb4ffe22fedd3f6863db7334654edfe372d4616144e08a"
+    },
+    {
+      "file": "Nepal/viirs-snpp/2021/counts-00000.parquet",
+      "sha256": "cfc0d1b1e8086ef0e9ef5d25ff348f726215ba189764bda3f6118f27af404b41"
+    },
+    {
+      "file": "Nepal/viirs-snpp/2022/counts-00000.parquet",
+      "sha256": "c7c61735370d5f32a5569c76da0bc31d9b88754b44bd6a1ee472b8af1803277a"
+    },
+    {
+      "file": "Nepal/viirs-snpp/2023/counts-00000.parquet",
+      "sha256": "9a2b771fd206212909f4100808e5d59ea1b5438a1e6d4c793c9eb02e9ab4fa49"
+    },
+    {
+      "file": "Nepal/viirs-snpp/2024/counts-00000.parquet",
+      "sha256": "2613eabf9d23d83eb410a735b336207d6689c181591a2361999b99c0c4164680"
+    },
+    {
+      "file": "Nepal/viirs-snpp/2025/counts-00000.parquet",
+      "sha256": "2c1139ae2dbbd5b9ed1ea12f2feaf6c4680e8f7b2a56330c558f5e3fcfcdd765"
+    },
+    {
+      "file": "United_States/viirs-snpp/2021/counts-00000.parquet",
+      "sha256": "0538df0231fce14981f231ae5c4ac88f4db725bab43176e006bb3d95d1babf2d"
+    },
+    {
+      "file": "United_States/viirs-snpp/2021/counts-00001.parquet",
+      "sha256": "60f735f1c937e0093ff292c8aa691d0bbf9f46b52b0b077d7bc0795a92f8b38b"
+    },
+    {
+      "file": "United_States/viirs-snpp/2021/counts-00002.parquet",
+      "sha256": "21ad29abedd04343ff63e52d06b847c1c3da68c97d45611cba9fe0296c7fcc01"
+    },
+    {
+      "file": "United_States/viirs-snpp/2021/counts-00003.parquet",
+      "sha256": "706669a2e7d7b862e1234a9366e3220bc352c175cbc8006c668496f98b3087ba"
+    },
+    {
+      "file": "United_States/viirs-snpp/2022/counts-00000.parquet",
+      "sha256": "b5cedab09817c490fbe6fdb998c20daf459ef7d4ea77cc0ddbb7b907f18c0804"
+    },
+    {
+      "file": "United_States/viirs-snpp/2022/counts-00001.parquet",
+      "sha256": "1cd06edadc1a35c2f1c76587be599f6be5ca022986b263bc3927bc016eec24d3"
+    },
+    {
+      "file": "United_States/viirs-snpp/2022/counts-00002.parquet",
+      "sha256": "38b479d727b0d4d62e9ae30436beccdee139ed258cd75c2f0d3220b6a1ab9ce7"
+    },
+    {
+      "file": "United_States/viirs-snpp/2023/counts-00000.parquet",
+      "sha256": "5072f8ef401cc38e21a790d133ddfde9eccf4798feaf377fc61467e7e6f6f9f1"
+    },
+    {
+      "file": "United_States/viirs-snpp/2023/counts-00001.parquet",
+      "sha256": "c05499accf7d61c712953116e349cd0864bdf9f3752e9b6e8032e20248ae42be"
+    },
+    {
+      "file": "United_States/viirs-snpp/2024/counts-00000.parquet",
+      "sha256": "4627c4326d14d5248c2da77c27b4e58892a59325dcdb208a6552fcb40298ffb2"
+    },
+    {
+      "file": "United_States/viirs-snpp/2024/counts-00001.parquet",
+      "sha256": "af5fa1a149e2739e347ca54bb3733c5b0075d15e821a51ad6442718852a60b22"
+    },
+    {
+      "file": "United_States/viirs-snpp/2024/counts-00002.parquet",
+      "sha256": "8e00efd232259a1a685b731e92113f16c318914ec90f2886eef37bd4528dab37"
+    },
+    {
+      "file": "United_States/viirs-snpp/2025/counts-00000.parquet",
+      "sha256": "d01267bc21239ac8e073e228a89814a2dba18dc600bd90a968b4c7a8bc539393"
+    },
+    {
+      "file": "United_States/viirs-snpp/2025/counts-00001.parquet",
+      "sha256": "833e5c71d1f5540f9e3bd4a5664c9c51ec93a9edd2d4429d5cc60ed9fc41f936"
+    },
+    {
+      "file": "United_States/viirs-snpp/2025/counts-00002.parquet",
+      "sha256": "aa354ce2e44c0443d9923d22ddeb7e196e58669871ec1295f83374a30063c93f"
+    }
+  ],
+  "excluded_recorded_detections": 57938,
+  "corrected_cell_years": 5756,
+  "deduction_dictionary_size": 242,
+  "reconciliation": {
+    "national_country_years": 154,
+    "published_cell_years": 1848,
+    "max_national_absolute_difference": 0.00016573240168327175,
+    "max_cell_absolute_difference": 0.0007042480501349146,
+    "daily_rounding_absolute_tolerance": 0.0018300100000000002
+  }
+}

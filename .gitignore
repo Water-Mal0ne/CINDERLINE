@@ -13,3 +13,7 @@ work/
 .openai/secrets*
 .wrangler/
 .deck-build/
+
+.npm-cache/
+.test-cache/
+.test-temp/

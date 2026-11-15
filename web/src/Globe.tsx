@@ -5,8 +5,11 @@ import {ArrowUpRight,Globe2,Minus,Plus,RotateCcw} from 'lucide-react';
 import {compact,fmt,numeric} from './utils';
 import {invalidateData,loadData} from './loadData';
 import {validGlobeData} from './globeData';
+import {applyCalendarAlignment,annualCalendarCoverage} from './calendarAlignment';
+import ReliabilityNotice from './ReliabilityNotice';
 import type {GlobeCell,GlobeData} from './globeData';
 import {createDemandRenderer} from './demandRenderer';
+import {globeOverviewDistance} from './globeViewport';
 import {createGlobeCellSelection,filterGlobeTableCells,globeTablePage,localGlobeCellId,visibleGlobeCells} from './globeCells';
 import './globe.css';
 
@@ -25,7 +28,21 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
   const yearIndex=data?.years.indexOf(year)??-1;
   const colorMaximum=useMemo(()=>data?.cells.reduce((max,cell)=>cell.values.reduce<number>((m,v)=>numeric(v)?Math.max(m,v):m,max),1)||1,[data]);
   selectedRef.current=setSelected;
-  useEffect(()=>{if(cachedData){setData(cachedData);return;}setError('');const c=new AbortController();loadData<unknown>('globe.json',c.signal).then(d=>{if(c.signal.aborted)return;if(!validGlobeData(d))throw new Error('Invalid annual globe data');cachedData=d;setData(d);}).catch(()=>{if(!c.signal.aborted)setError('The annual globe layer could not be loaded. The calendar and evidence remain available below.');});return()=>c.abort();},[loadAttempt]);
+  useEffect(()=>{
+    if(cachedData){setData(cachedData);return;}
+    setError('');const c=new AbortController();
+    Promise.all([loadData<unknown>('globe.json',c.signal),loadData<unknown>('calendar-alignment.json',c.signal)])
+      .then(async([source,alignment])=>{
+        if(c.signal.aborted)return;
+        if(!validGlobeData(source))throw new Error('Invalid annual globe data');
+        const aligned=await applyCalendarAlignment(source,alignment);
+        if(c.signal.aborted)return;
+        cachedData=aligned;setData(aligned);
+      }).catch(()=>{
+        if(!c.signal.aborted)setError('The annual globe layer could not be loaded or its calendar alignment could not be verified. The calendar and evidence remain available below.');
+      });
+    return()=>c.abort();
+  },[loadAttempt]);
   useEffect(()=>{
     if(!data||!host.current||fallback)return;
     const element=host.current;let renderer:THREE.WebGLRenderer;
@@ -54,7 +71,15 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
       requestRender();
     }).catch(()=>{});
     state.current={renderer,scene,camera,controls,heat:null,cells:[],max:1,requestRender};
-    const resize=()=>{const width=Math.max(element.clientWidth,1),height=Math.max(element.clientHeight,1);renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();requestRender();};resize();const observer=new ResizeObserver(resize);observer.observe(element);
+    const resize=()=>{
+      const width=Math.max(element.clientWidth,1),height=Math.max(element.clientHeight,1);
+      const previousFit=globeOverviewDistance(camera.fov,camera.aspect);
+      renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();
+      const nextFit=globeOverviewDistance(camera.fov,camera.aspect);
+      // Preserve the user's relative zoom when the available canvas changes.
+      camera.position.multiplyScalar(nextFit/previousFit);controls.maxDistance=Math.max(5.5,nextFit*1.5);
+      controls.update();requestRender();
+    };resize();const observer=new ResizeObserver(resize);observer.observe(element);
     let inViewport=false;
     const updateVisibility=()=>renderLoop.setActive(inViewport&&!document.hidden);
     const intersection=new IntersectionObserver(entries=>{inViewport=entries.some(entry=>entry.isIntersecting);updateVisibility();});intersection.observe(element);
@@ -87,7 +112,7 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
     // Average on the sphere so a region crossing the date line stays centered.
     const direction=cells.reduce((sum,c)=>sum.add(point(c.lat,c.lon)),new THREE.Vector3()).normalize();
     if(direction.lengthSq()===0)return;
-    let distance=3.3;
+    let distance=globeOverviewDistance(s.camera.fov,s.camera.aspect);
     if(close){
       const extent=cells.reduce((angle,c)=>Math.max(angle,direction.angleTo(point(c.lat,c.lon))),0)+THREE.MathUtils.degToRad(data.cell_size/Math.SQRT2);
       const vertical=THREE.MathUtils.degToRad(s.camera.fov)/2;
@@ -98,7 +123,7 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
         const fit=Math.cos(extent)+Math.sin(extent)/Math.tan(halfFov*.88);
         const horizon=1.015/Math.cos(extent);
         distance=THREE.MathUtils.clamp(Math.max(fit,horizon)*1.007,s.controls.minDistance,s.controls.maxDistance);
-      }else distance=3.6;
+      }
     }
     s.camera.position.copy(direction.multiplyScalar(distance));s.controls.target.set(0,0,0);s.controls.update();s.requestRender();
   }
@@ -112,12 +137,13 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
   const coverageNames=data?.coverage_regions.map(r=>r.name)||[];
   const coverageSummary=coverageNames.length>3?`${coverageNames.length} countries`:coverageNames.join(' + ');
   const chosenId=chosen?localGlobeCellId(chosen):undefined;
+  const annualCoverage=data?annualCalendarCoverage(data,regionId,year):null;
   const exactCenter=(cell:GlobeCell)=>`${Math.abs(cell.lat).toFixed(3)}° ${cell.lat<0?'S':'N'}, ${Math.abs(cell.lon).toFixed(3)}° ${cell.lon<0?'W':'E'}`;
   const inspectTableCell=(cell:GlobeCell)=>{setSelected(cell);requestAnimationFrame(()=>selectionPanel.current?.focus());};
-  if(error)return <div className="globe-unavailable"><Globe2 size={24}/><p role="alert">{error}</p><button className="button subtle" onClick={()=>{invalidateData('globe.json');setLoadAttempt(attempt=>attempt+1);}}>Retry annual globe layer</button></div>;
+  if(error)return <div className="globe-unavailable"><Globe2 size={24}/><p role="alert">{error}</p><button className="button subtle" onClick={()=>{invalidateData('globe.json');invalidateData('calendar-alignment.json');setLoadAttempt(attempt=>attempt+1);}}>Retry annual globe layer</button></div>;
   if(!data)return <div className="globe-unavailable" role="status"><span className="loader"/><p>Loading annual grid observations…</p></div>;
   return <div className="earth-explorer"><div className="globe-heading"><div><span className="eyebrow">A GEOGRAPHIC VIEW OF THE RECORD</span><h2>Where the signal comes from.</h2></div><div className="globe-view-actions">{!fallback&&<button className="chart-scale-button" onClick={()=>focus(true)}>Focus {regionInfo?.name||regionId}</button>}<button className="chart-scale-button" onClick={()=>{setFallbackReason('' );setFallback(v=>!v);}} aria-pressed={fallback}>{fallback?'Show 3D Earth':'Grid table'}</button></div></div>
-    {fallbackReason&&<p className="chart-note" role="status">{fallbackReason}</p>}<div className="globe-body">{!fallback?<div className="globe-stage"><div className="globe-canvas" ref={host}/><div className="globe-instructions">Drag to orbit · scroll to zoom · select a colored cell</div><div className="globe-buttons"><button aria-label="Zoom into Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(.85);s.requestRender();}}}><Plus size={16}/></button><button aria-label="Zoom out from Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(1.2);s.requestRender();}}}><Minus size={16}/></button><button aria-label="Refocus selected region" onClick={()=>focus(false)}><RotateCcw size={15}/></button><button aria-label="Show global view" onClick={()=>{const s=state.current;if(s){s.camera.position.normalize().multiplyScalar(3.6);s.controls.update();s.requestRender();}}}><Globe2 size={15}/></button></div><div className="globe-coverage">PROCESSED COVERAGE ONLY<br/><strong>{coverageSummary}</strong><span>Uncolored areas are not claims of no fire.</span></div></div>:<div className="globe-table">
+    {fallbackReason&&<p className="chart-note" role="status">{fallbackReason}</p>}<div className="globe-body">{!fallback?<div className="globe-stage"><div className="globe-canvas" ref={host}/><div className="globe-instructions">Drag to orbit · scroll to zoom · select a colored cell</div><div className="globe-buttons"><button aria-label="Zoom into Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(.85);s.requestRender();}}}><Plus size={16}/></button><button aria-label="Zoom out from Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(1.2);s.requestRender();}}}><Minus size={16}/></button><button aria-label="Refocus selected region" onClick={()=>focus(false)}><RotateCcw size={15}/></button><button aria-label="Show global view" onClick={()=>{const s=state.current;if(s){s.camera.position.normalize().multiplyScalar(globeOverviewDistance(s.camera.fov,s.camera.aspect));s.controls.update();s.requestRender();}}}><Globe2 size={15}/></button></div><div className="globe-coverage">PROCESSED COVERAGE ONLY<br/><strong>{coverageSummary}</strong><span>Uncolored areas are not claims of no fire.</span>{chosen&&<button type="button" className="chart-scale-button globe-selection-shortcut" aria-controls="globe-cell-selection" aria-label={`Inspect selected cell ${exactCenter(chosen)}, ${chosenRegionInfo?.name||chosen.region}`} onClick={()=>selectionPanel.current?.focus()}>Inspect selected cell</button>}</div></div>:<div className="globe-table">
       <p>Annual grid cells in {regionInfo?.name||regionId}, {year}, ordered by activity. Values cover available observations.</p>
       <div className="globe-table-filters"><label>Find grid center<input type="search" value={tableQuery} onChange={event=>setTableQuery(event.target.value)} placeholder="Latitude or longitude…"/></label><label className="globe-daily-filter"><input type="checkbox" checked={dailyOnly} onChange={event=>setDailyOnly(event.target.checked)}/> With a daily record</label></div>
       <p className="globe-table-count" role="status">{fmt(regionCells.length)} matching annual cells{regionCells.length>0&&` · showing ${table.first}–${table.last}`}. Daily records are available for {availableCells.length} selected cells in this region.</p>
@@ -125,8 +151,8 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
       {regionCells.length===0&&<div className="globe-table-empty"><p>No annual cells match these filters. Try another coordinate or include all annual cells.</p><button className="chart-scale-button" onClick={()=>{setTableQuery('');setDailyOnly(false);}}>Clear grid filters</button></div>}
       <nav className="globe-pagination" aria-label="Annual grid table pages"><button className="chart-scale-button" disabled={table.page===0} onClick={()=>setTablePage(table.page-1)}>Previous cells</button><span>Page {table.page+1} of {table.pages}</span><button className="chart-scale-button" disabled={table.page===table.pages-1} onClick={()=>setTablePage(table.page+1)}>Next cells</button></nav>
     </div>}
-    <div className="globe-detail"><span className="eyebrow">ANNUAL ACTIVITY</span><label className="globe-year" htmlFor="globe-year">{year}</label><input id="globe-year" aria-label="Globe year; updates calendar date range" aria-valuetext={String(year)} type="range" min="0" max={data.years.length-1} step="1" value={yearIndex} onChange={e=>onYear(data.years[Number(e.target.value)])}/><div className="year-range"><span>{data.years[0]}</span><span>{data.years[data.years.length-1]}</span></div><p className="globe-year-note">Choosing a year also filters the calendar below.</p><div className="globe-scale"><span>LOW</span><i/><span>HIGH</span></div><small>Fixed all-year log scale · annual Aqua-reference-equivalent detections · {data.cell_size}° cells · maximum {fmt(colorMaximum,1)}</small><div className="globe-zero-key"><i/> 0 recorded <span>Uncolored = no processed value</span></div><div className="globe-source"><span>SOURCE FOR {regionInfo?.name||regionId}</span><strong>{regionInfo?.sources?.[yearIndex]||'See daily evidence for source'}</strong></div>
-      {chosen?<div className="globe-selection" ref={selectionPanel} tabIndex={-1} role="region" aria-label={`Selected grid cell ${exactCenter(chosen)}, ${chosenRegionInfo?.name||chosen.region}`}><span>SELECTED GRID CELL · {chosenRegionInfo?.name||chosen.region.replaceAll('_',' ')}</span><strong>{exactCenter(chosen)}</strong><b>{compact(chosen.values[yearIndex])}</b><small>{fmt(chosen.values[yearIndex],1)} Aqua-reference-equivalent detections in {year}</small><small>Source: {chosenRegionInfo?.sources?.[yearIndex]||'See daily evidence for this region'}</small><p className="globe-outage-notice">Annual globe totals and daily records use different outage handling and may not sum to the same value</p>{chosen.region===regionId&&availableCells.includes(chosenId||'')?<button className="button subtle full" onClick={()=>onCell(chosenId!,year)}>Open {year} daily record <ArrowUpRight size={13}/></button>:<><p>Annual grid summary. Daily drill-down is available for a selected subset of cells.</p><button className="button subtle full" onClick={()=>onRegion(chosen.region,year)}>Open {year} region calendar <ArrowUpRight size={13}/></button></>}</div>:<div className="globe-selection"><span>FOLLOW THE EVIDENCE</span><p>Select a colored cell on Earth, or use the grid table to inspect exact values.</p></div>}
-    </div></div>{coverageNames.length>3&&<p className="chart-note globe-regions"><strong>Processed regions:</strong> {coverageNames.join(', ')}.</p>}<p className="chart-note">Shared border squares prioritize the selected country; otherwise country order is used. Switch country to see its values. Overlapping country records are not combined.</p><p className="chart-note">Annual sums are not burned area or distinct fires. Satellite observation coverage remains unknown; the heatmap shows only processed regions.</p><span className="chart-label">{data.label}</span>
+    <div className="globe-detail"><div className="globe-year-control"><span className="eyebrow">ANNUAL ACTIVITY</span><label className="globe-year" htmlFor="globe-year">{year}</label><input id="globe-year" aria-label="Globe year; updates calendar date range" aria-valuetext={String(year)} type="range" min="0" max={data.years.length-1} step="1" value={yearIndex} onChange={e=>onYear(data.years[Number(e.target.value)])}/><div className="year-range"><span>{data.years[0]}</span><span>{data.years[data.years.length-1]}</span></div><p className="globe-year-note">Choosing a year also filters the calendar below.</p></div><div className="globe-legend"><div className="globe-scale"><span>LOW</span><i/><span>HIGH</span></div><small>Fixed all-year log scale · annual Aqua-reference-equivalent detections · {data.cell_size}° cells · maximum {fmt(colorMaximum,1)}</small><div className="globe-zero-key"><i/> 0 recorded <span>Uncolored = no processed value</span></div><div className="globe-source"><span>SOURCE FOR {regionInfo?.name||regionId}</span><strong>{regionInfo?.sources?.[yearIndex]||'See daily evidence for source'}</strong></div></div></div>
+      {chosen?<div className="globe-selection" id="globe-cell-selection" ref={selectionPanel} tabIndex={-1} role="region" aria-label={`Selected grid cell ${exactCenter(chosen)}, ${chosenRegionInfo?.name||chosen.region}`}><div className="globe-selection-values"><span>SELECTED GRID CELL · {chosenRegionInfo?.name||chosen.region.replaceAll('_',' ')}</span><strong>{exactCenter(chosen)}</strong><b>{compact(chosen.values[yearIndex])}</b><small>{fmt(chosen.values[yearIndex],1)} Aqua-reference-equivalent detections in {year}</small><small>Source: {chosenRegionInfo?.sources?.[yearIndex]||'See daily evidence for this region'}</small></div><div className="globe-selection-evidence"><ReliabilityNotice regionName={chosenRegionInfo?.name||chosen.region.replaceAll('_',' ')} regionId={chosen.region} cellId={chosenId} scope="annual" start={`${year}-01-01`} end={`${year}-12-31`}/><p className="globe-outage-notice">Annual totals sum the available daily values with the same supplier-outage exclusions. Weekly and monthly calendars omit outage-affected bins, so their displayed sums can differ.</p>{chosen.region===regionId&&availableCells.includes(chosenId||'')?<button className="button subtle full" onClick={()=>onCell(chosenId!,year)}>Open {year} daily record <ArrowUpRight size={13}/></button>:<><p>Annual grid summary. Daily drill-down is available for a selected subset of cells.</p><button className="button subtle full" onClick={()=>onRegion(chosen.region,year)}>Open {year} region calendar <ArrowUpRight size={13}/></button></>}</div></div>:<div className="globe-selection globe-selection-empty"><span>FOLLOW THE EVIDENCE</span><p>Select a colored cell on Earth, or use the grid table to inspect exact values.</p></div>}
+    </div>{annualCoverage&&<details className="globe-outage-notice"><summary>{annualCoverage.retained_dates} of {annualCoverage.calendar_dates} calendar dates retained in {year}{annualCoverage.excluded_dates.length>0?` · ${annualCoverage.excluded_dates.length} outage dates excluded`:''}</summary><p>Annual values use the daily calendar's supplier-outage exclusions. Retained dates are not a measure of cloud-free satellite coverage. Weekly and monthly calendar totals omit bins affected by an outage.</p>{annualCoverage.excluded_dates.length>0&&<p>Excluded dates: {annualCoverage.excluded_dates.join(', ')}.</p>}<p>Custom-area monthly data omit entire outage-affected months and round each cell's values, so their sums can differ.</p></details>}{coverageNames.length>3&&<p className="chart-note globe-regions"><strong>Processed regions:</strong> {coverageNames.join(', ')}.</p>}<p className="chart-note">Shared border squares prioritize the selected country; otherwise country order is used. Switch country to see its values. Overlapping country records are not combined.</p><p className="chart-note">Annual sums are not burned area or distinct fires. Satellite observation coverage remains unknown; the heatmap shows only processed regions.</p><span className="chart-label">{data.label}</span>
   </div>;
 }

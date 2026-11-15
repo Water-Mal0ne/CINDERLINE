@@ -1,0 +1,15 @@
+/* Focused Unslop refinements. Based on Unslop by Damir Sokolovsky (@heydamir),
+   CC BY 4.0: https://github.com/heydamir/unslop. */
+
+/* Keep context and controls anchored while the wide plot is panned. */
+.seasonal-context .seasonal-chart-card{overflow:visible}
+.seasonal-plot-scroller{
+  min-width:0;
+  max-width:100%;
+  overflow-x:auto;
+  scrollbar-width:thin;
+  scrollbar-color:#565b5e transparent;
+  padding:6px;
+  margin:0 -6px 12px;
+}
+.seasonal-plot-scroller .seasonal-chart{margin-bottom:0}

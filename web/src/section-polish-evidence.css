@@ -1,0 +1,97 @@
+/* Focused Unslop pass: evidence, validation, methods, and share controls.
+   Unslop by Damir Sokolovsky (@heydamir), https://github.com/heydamir/unslop
+   Adapted under CC BY 4.0. Scientific content and result ordering are unchanged. */
+
+.evaluation-table table {
+  min-width: 640px;
+  font-variant-numeric: tabular-nums;
+}
+
+.evaluation-table table :is(th, td) {
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.evaluation-table table thead th {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.evaluation-table table :is(th, td):first-child {
+  padding-left: 0;
+}
+
+.evaluation-table table :is(th, td):nth-child(n+3) {
+  text-align: right;
+}
+
+.evaluation-table table tbody th {
+  color: var(--text);
+  border-bottom-color: var(--line);
+}
+
+.evaluation-table .model-chip {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.evaluation-table .model-start > * {
+  border-top: 2px solid var(--line);
+}
+
+/* Keep the way back visible while reading a long evidence drawer. */
+.evidence-drawer {
+  --evidence-inset: 24px;
+  scroll-padding-top: 80px;
+}
+
+.evidence-drawer .drawer-head {
+  position: sticky;
+  top: calc(-1 * var(--evidence-inset));
+  z-index: 3;
+  margin: calc(-1 * var(--evidence-inset)) calc(-1 * var(--evidence-inset)) 24px;
+  padding: 12px var(--evidence-inset);
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.share-view .share-panel {
+  top: calc(100% + 8px);
+}
+
+.share-panel-heading .icon-button {
+  flex: 0 0 44px;
+  min-width: 44px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  border-radius: 8px;
+}
+
+.sources-panel > a {
+  gap: 12px;
+  min-height: 44px;
+}
+
+.sources-panel > a > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.sources-panel > a > svg {
+  flex-shrink: 0;
+}
+
+.sources-panel small {
+  margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .evidence-drawer { --evidence-inset: 20px; }
+  .evaluation-table table :is(th, td) { padding: 12px 8px; }
+}

@@ -1,0 +1,33 @@
+/* Focused refinement using Unslop by Damir Sokolovsky (@heydamir), CC BY 4.0.
+   https://github.com/heydamir/unslop — retain the established FIRETRACE direction. */
+.masthead { padding-top: 32px; padding-bottom: 32px; }
+.masthead h1 { font-size: clamp(36px, 3.2vw, 44px); margin: 12px 0; }
+.masthead p { font-size: 15px; }
+.grid-preview { margin: 12px 0 16px; border-bottom: 1px solid var(--line); }
+.grid-preview > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--secondary);
+  font-size: 13px;
+  cursor: pointer;
+  list-style: none;
+}
+.grid-preview > summary::-webkit-details-marker { display: none; }
+.grid-preview > summary svg { width: 16px; height: 16px; stroke-width: 1.5; }
+.grid-preview[open] > summary svg { transform: rotate(180deg); }
+.grid-preview > summary:hover { color: var(--text); }
+.grid-preview > summary:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; border-radius: 4px; }
+.grid-preview .map-wrap, .grid-preview .map-placeholder { margin: 0 0 12px; }
+@media (min-width: 641px) and (max-width: 800px) {
+  .sidebar > .grid-preview { grid-column: 1 / -1; margin: 4px 0; }
+  .sidebar > .grid-preview .map-wrap { margin: 0 0 12px; }
+}
+@media (max-width: 640px) {
+  .masthead { padding-top: 24px; padding-bottom: 24px; }
+  .masthead h1 { font-size: 36px; }
+  .masthead p { font-size: 14px; }
+  .sidebar > .grid-preview { display: none; }
+}
