@@ -1,0 +1,1 @@
+{"schema":"observations-v1","sensor":"VIIRS S-NPP","country":"Brazil","month":"2024-04","id":"-3_-30_0","time_basis":"UTC","columns":["lat","lon","utc","confidence","scan","track","frp","daynight"],"count":2,"bounds":[-60,-6,-58,-4],"rows":[[-4.45189,-59.65198,"2024-04-11T17:11:00Z","n",0.5,0.41,4.08,"D"],[-4.24946,-59.39879,"2024-04-03T18:01:00Z","n",0.37,0.58,2.03,"D"]]}

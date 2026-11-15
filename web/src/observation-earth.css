@@ -1,0 +1,21 @@
+#earth-panel .observation-stage {position:relative;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 520px;min-height:0;border-top:1px solid var(--border,#334048)}
+#earth-panel .observation-earth .globe-canvas {height:520px;min-width:0;min-height:0;touch-action:none}
+.observation-map-key {position:absolute;left:16px;right:16px;bottom:16px;pointer-events:none;background:rgba(13,27,35,.92);padding:12px 16px;border:1px solid rgba(159,192,185,.2);border-radius:8px;font-size:13px;color:#edf1ee;max-width:560px;line-height:1.5}
+.observation-map-key span {display:block;color:#b4c3bf;font-size:12px;margin-top:4px}
+.observation-grid-table,.observation-records {padding:20px 24px;border-top:1px solid var(--border,#334048);min-width:0}
+.observation-records summary {cursor:pointer;font-weight:500;padding:8px 0}
+.observation-grid-table table,.observation-records table {width:100%;border-collapse:collapse;font-size:13px}
+.observation-grid-table th,.observation-grid-table td,.observation-records th,.observation-records td {padding:12px 8px;text-align:left;border-bottom:1px solid rgba(159,192,185,.15);font-variant-numeric:tabular-nums}
+.observation-earth .table-scroll {max-width:100%;overflow:auto}
+.observation-earth .globe-buttons {z-index:2}
+.observation-earth .globe-instructions {pointer-events:none;z-index:1}
+@media(max-width:640px){
+ .observation-earth .globe-heading {align-items:flex-start;gap:12px}
+ .observation-earth .globe-view-actions {flex-wrap:wrap}
+ #earth-panel .observation-stage {grid-template-rows:auto 460px}
+ #earth-panel .observation-earth .globe-canvas {height:460px}
+ .observation-map-key {left:12px;right:12px;bottom:12px;padding:8px 12px;font-size:12px}
+ .observation-grid-table,.observation-records {padding:16px}
+ .observation-earth .globe-pagination {gap:8px;flex-wrap:wrap}
+ .observation-earth button {min-height:40px}
+}

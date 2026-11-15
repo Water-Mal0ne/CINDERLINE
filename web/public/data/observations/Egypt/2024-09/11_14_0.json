@@ -1,0 +1,1 @@
+{"schema":"observations-v1","sensor":"VIIRS S-NPP","country":"Egypt","month":"2024-09","id":"11_14_0","time_basis":"UTC","columns":["lat","lon","utc","confidence","scan","track","frp","daynight"],"count":2,"bounds":[28,22,30,24],"rows":[[22.78572,28.54232,"2024-09-18T23:00:00Z","n",0.45,0.63,1.26,"N"],[22.78671,28.54264,"2024-09-18T23:00:00Z","n",0.45,0.63,1.36,"N"]]}

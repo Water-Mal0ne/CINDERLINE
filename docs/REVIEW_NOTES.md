@@ -1,6 +1,6 @@
 # Documentation review notes
 
-Maintainer-only review record for the documentation PR. This is not part of the reader guide and is not a new scientific result. Use the tables below when preparing the PR description. The guide describes merged application behavior; separate unmerged feature work is excluded.
+Maintainer-only review record for the documentation PR. This is not part of the reader guide and is not a new scientific result. The original documentation review described the deployed annual/calendar application. The later observation-layer integration adds a separately labelled repository-only section; its source review and verification are in [observation-detail](../reports/observation-detail/VERIFICATION.md).
 
 No model, source dataset, scientific result, code, deployment or branch history was changed by this documentation review. Historical reports remain intact. Where a report describes an earlier release, the guide states its scope instead of silently rewriting its result.
 

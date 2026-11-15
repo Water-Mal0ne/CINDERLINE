@@ -12,13 +12,23 @@ import {createDemandRenderer} from './demandRenderer';
 import {globeOverviewDistance} from './globeViewport';
 import {createGlobeCellSelection,filterGlobeTableCells,globeTablePage,localGlobeCellId,visibleGlobeCells} from './globeCells';
 import './globe.css';
+import ObservationControls from './ObservationControls';
+import type {ObservationMode} from './ObservationControls';
+import ObservationEarth from './ObservationEarth';
 
 interface Outline {type:string;coordinates:number[][][];geometry?:{type:string;coordinates:number[][][]}}
 interface SceneState {renderer:THREE.WebGLRenderer;scene:THREE.Scene;camera:THREE.PerspectiveCamera;controls:OrbitControls;heat:THREE.Mesh|null;cells:GlobeCell[];max:number;requestRender:()=>void}
 let cachedData:GlobeData|null=null;
 const point=(lat:number,lon:number,r=1)=>{const a=THREE.MathUtils.degToRad(lat),b=THREE.MathUtils.degToRad(lon);return new THREE.Vector3(r*Math.cos(a)*Math.sin(b),r*Math.sin(a),r*Math.cos(a)*Math.cos(b));};
 
-export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCell,availableCells}:{regionId:string;year:number;onYear:(year:number)=>void;onRegion:(id:string,year:number)=>void;onCell:(id:string,year:number)=>void;availableCells:string[]}) {
+interface GlobeProps {
+  regionId:string;year:number;onYear:(year:number)=>void;onRegion:(id:string,year:number)=>void;onCell:(id:string,year:number)=>void;availableCells:string[];
+  earthMode?:ObservationMode;onEarthMode?:(mode:ObservationMode)=>void;observationMonth?:string;onObservationMonth?:(month:string)=>void;
+}
+export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCell,availableCells,earthMode:controlledMode,onEarthMode,observationMonth:controlledMonth,onObservationMonth}:GlobeProps) {
+  const [localMode,setLocalMode]=useState<ObservationMode>('harmonized'),[localMonth,setLocalMonth]=useState('2024-04');
+  const earthMode=controlledMode??localMode,observationMonth=controlledMonth??localMonth;
+  const setEarthMode=onEarthMode??setLocalMode,setObservationMonth=onObservationMonth??setLocalMonth;
   const [data,setData]=useState<GlobeData|null>(cachedData),[error,setError]=useState(''),[fallback,setFallback]=useState(false),[selected,setSelected]=useState<GlobeCell|null>(null);
   const [fallbackReason,setFallbackReason]=useState('');
   const [loadAttempt,setLoadAttempt]=useState(0),[tablePage,setTablePage]=useState(0),[tableQuery,setTableQuery]=useState(''),[dailyOnly,setDailyOnly]=useState(false);
@@ -44,7 +54,7 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
     return()=>c.abort();
   },[loadAttempt]);
   useEffect(()=>{
-    if(!data||!host.current||fallback)return;
+    if(earthMode!=='harmonized'||!data||!host.current||fallback)return;
     const element=host.current;let renderer:THREE.WebGLRenderer;
     try {renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});}catch{setFallbackReason('3D rendering is unavailable on this device. The grid table provides the same annual values.');setFallback(true);return;}
     renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.75));renderer.setClearColor(0x0d1b23,1);element.appendChild(renderer.domElement);
@@ -95,7 +105,7 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
     // so that a finished pinch cannot leave the next tap blocked or select a cell.
     renderer.domElement.addEventListener('pointerdown',pointerDown);document.addEventListener('pointermove',pointerMove);document.addEventListener('pointerup',pointerUp);document.addEventListener('pointercancel',pointerCancel);window.addEventListener('blur',selectionGesture.reset);
     return()=>{controller.abort();renderLoop.dispose();observer.disconnect();intersection.disconnect();document.removeEventListener('visibilitychange',updateVisibility);controls.removeEventListener('change',requestRender);controls.dispose();landTexture?.dispose();renderer.domElement.removeEventListener('webglcontextlost',contextLost);renderer.domElement.removeEventListener('pointerdown',pointerDown);document.removeEventListener('pointermove',pointerMove);document.removeEventListener('pointerup',pointerUp);document.removeEventListener('pointercancel',pointerCancel);window.removeEventListener('blur',selectionGesture.reset);selectionGesture.reset();scene.traverse(object=>{if(object instanceof THREE.Mesh||object instanceof THREE.LineSegments){object.geometry.dispose();const mats=Array.isArray(object.material)?object.material:[object.material];mats.forEach(m=>m.dispose());}});renderer.dispose();renderer.domElement.remove();state.current=null;};
-  },[data,fallback]);
+  },[data,fallback,earthMode]);
   useEffect(()=>{
     const s=state.current;if(!s||!data||yearIndex<0)return;
     if(s.heat){s.scene.remove(s.heat);s.heat.geometry.dispose();(s.heat.material as THREE.Material).dispose();}
@@ -105,7 +115,7 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
     const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
     const heat=new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide}));s.scene.add(heat);s.heat=heat;s.cells=cells;s.max=max;
     s.requestRender();
-  },[data,yearIndex,regionId,fallback,colorMaximum]);
+  },[data,yearIndex,regionId,fallback,colorMaximum,earthMode]);
   function focus(close=false){
     const s=state.current;if(!s||!data)return;
     const cells=data.cells.filter(c=>c.region===regionId);if(!cells.length)return;
@@ -127,8 +137,8 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
     }
     s.camera.position.copy(direction.multiplyScalar(distance));s.controls.target.set(0,0,0);s.controls.update();s.requestRender();
   }
-  useEffect(()=>{focus(false);},[data,regionId,fallback]);
-  useEffect(()=>{setSelected(null);},[data,regionId]);
+  useEffect(()=>{focus(false);},[data,regionId,fallback,earthMode]);
+  useEffect(()=>{setSelected(null);},[data,regionId,earthMode]);
   const regionCells=useMemo(()=>filterGlobeTableCells(data?.cells||[],yearIndex,regionId,availableCells,dailyOnly,tableQuery),[data,regionId,yearIndex,availableCells,dailyOnly,tableQuery]);
   const table=globeTablePage(regionCells,tablePage);
   useEffect(()=>setTablePage(0),[regionId,yearIndex,dailyOnly,tableQuery]);
@@ -140,10 +150,12 @@ export default function Globe({regionId,year:requestedYear,onYear,onRegion,onCel
   const annualCoverage=data?annualCalendarCoverage(data,regionId,year):null;
   const exactCenter=(cell:GlobeCell)=>`${Math.abs(cell.lat).toFixed(3)}° ${cell.lat<0?'S':'N'}, ${Math.abs(cell.lon).toFixed(3)}° ${cell.lon<0?'W':'E'}`;
   const inspectTableCell=(cell:GlobeCell)=>{setSelected(cell);requestAnimationFrame(()=>selectionPanel.current?.focus());};
+  if(earthMode==='observations')return <ObservationEarth regionId={regionId} regionName={regionInfo?.name||regionId.replaceAll('_',' ')} month={observationMonth} onMonth={setObservationMonth} onMode={setEarthMode}/>;
   if(error)return <div className="globe-unavailable"><Globe2 size={24}/><p role="alert">{error}</p><button className="button subtle" onClick={()=>{invalidateData('globe.json');invalidateData('calendar-alignment.json');setLoadAttempt(attempt=>attempt+1);}}>Retry annual globe layer</button></div>;
   if(!data)return <div className="globe-unavailable" role="status"><span className="loader"/><p>Loading annual grid observations…</p></div>;
   return <div className="earth-explorer"><div className="globe-heading"><div><span className="eyebrow">A GEOGRAPHIC VIEW OF THE RECORD</span><h2>Where the signal comes from.</h2></div><div className="globe-view-actions">{!fallback&&<button className="chart-scale-button" onClick={()=>focus(true)}>Focus {regionInfo?.name||regionId}</button>}<button className="chart-scale-button" onClick={()=>{setFallbackReason('' );setFallback(v=>!v);}} aria-pressed={fallback}>{fallback?'Show 3D Earth':'Grid table'}</button></div></div>
-    {fallbackReason&&<p className="chart-note" role="status">{fallbackReason}</p>}<div className="globe-body">{!fallback?<div className="globe-stage"><div className="globe-canvas" ref={host}/><div className="globe-instructions">Drag to orbit · scroll to zoom · select a colored cell</div><div className="globe-buttons"><button aria-label="Zoom into Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(.85);s.requestRender();}}}><Plus size={16}/></button><button aria-label="Zoom out from Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(1.2);s.requestRender();}}}><Minus size={16}/></button><button aria-label="Refocus selected region" onClick={()=>focus(false)}><RotateCcw size={15}/></button><button aria-label="Show global view" onClick={()=>{const s=state.current;if(s){s.camera.position.normalize().multiplyScalar(globeOverviewDistance(s.camera.fov,s.camera.aspect));s.controls.update();s.requestRender();}}}><Globe2 size={15}/></button></div><div className="globe-coverage">PROCESSED COVERAGE ONLY<br/><strong>{coverageSummary}</strong><span>Uncolored areas are not claims of no fire.</span>{chosen&&<button type="button" className="chart-scale-button globe-selection-shortcut" aria-controls="globe-cell-selection" aria-label={`Inspect selected cell ${exactCenter(chosen)}, ${chosenRegionInfo?.name||chosen.region}`} onClick={()=>selectionPanel.current?.focus()}>Inspect selected cell</button>}</div></div>:<div className="globe-table">
+    <ObservationControls mode="harmonized" onMode={setEarthMode}/>
+    {fallbackReason&&<p className="chart-note" role="status">{fallbackReason}</p>}<div className="globe-body">{!fallback?<div className="globe-stage"><div className="globe-canvas" ref={host}/><div className="globe-instructions">Drag to orbit · scroll to zoom · select a colored cell</div><div className="globe-buttons"><button aria-label="Zoom into Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(.85);s.controls.update();s.requestRender();}}}><Plus size={16}/></button><button aria-label="Zoom out from Earth" onClick={()=>{const s=state.current;if(s){s.camera.position.multiplyScalar(1.2);s.controls.update();s.requestRender();}}}><Minus size={16}/></button><button aria-label="Refocus selected region" onClick={()=>focus(false)}><RotateCcw size={15}/></button><button aria-label="Show global view" onClick={()=>{const s=state.current;if(s){s.camera.position.normalize().multiplyScalar(globeOverviewDistance(s.camera.fov,s.camera.aspect));s.controls.update();s.requestRender();}}}><Globe2 size={15}/></button></div><div className="globe-coverage">PROCESSED COVERAGE ONLY<br/><strong>{coverageSummary}</strong><span>Uncolored areas are not claims of no fire.</span>{chosen&&<button type="button" className="chart-scale-button globe-selection-shortcut" aria-controls="globe-cell-selection" aria-label={`Inspect selected cell ${exactCenter(chosen)}, ${chosenRegionInfo?.name||chosen.region}`} onClick={()=>selectionPanel.current?.focus()}>Inspect selected cell</button>}</div></div>:<div className="globe-table">
       <p>Annual grid cells in {regionInfo?.name||regionId}, {year}, ordered by activity. Values cover available observations.</p>
       <div className="globe-table-filters"><label>Find grid center<input type="search" value={tableQuery} onChange={event=>setTableQuery(event.target.value)} placeholder="Latitude or longitude…"/></label><label className="globe-daily-filter"><input type="checkbox" checked={dailyOnly} onChange={event=>setDailyOnly(event.target.checked)}/> With a daily record</label></div>
       <p className="globe-table-count" role="status">{fmt(regionCells.length)} matching annual cells{regionCells.length>0&&` · showing ${table.first}–${table.last}`}. Daily records are available for {availableCells.length} selected cells in this region.</p>

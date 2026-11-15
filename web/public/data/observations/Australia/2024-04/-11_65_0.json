@@ -1,0 +1,1 @@
+{"schema":"observations-v1","sensor":"VIIRS S-NPP","country":"Australia","month":"2024-04","id":"-11_65_0","time_basis":"UTC","columns":["lat","lon","utc","confidence","scan","track","frp","daynight"],"count":2,"bounds":[130,-22,132,-20],"rows":[[-21.20223,130.81064,"2024-04-27T05:15:00Z","n",0.57,0.43,5.6,"D"],[-21.2014,130.80798,"2024-04-27T05:15:00Z","n",0.57,0.43,5.15,"D"]]}

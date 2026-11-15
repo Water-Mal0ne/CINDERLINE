@@ -24,6 +24,8 @@ flowchart TD
   J --> L
   Q --> L
   K --> L
+  B --> R[2024 source observation filter and spatial tiles]
+  R --> L
   L --> M[React views and downloadable evidence]
 ```
 
@@ -54,6 +56,7 @@ The weekly-rhythm branch starts from each raw satellite stream. It does not use 
 | [review/calendar_alignment.py](../pipeline/review/calendar_alignment.py) | Produces a source-bound annual deduction file that follows published daily exclusions |
 | [review/season_check.py](../pipeline/review/season_check.py), [review/season_payload.py](../pipeline/review/season_payload.py) | Repeat the retained-date seasonal comparison and export independently checked summaries |
 | [review/frp_test.py](../pipeline/review/frp_test.py) | Checks the paired US daytime count/FRP result and exports verified evidence |
+| [review/observation_detail.py](../pipeline/review/observation_detail.py) | Exports original 2024 VIIRS S-NPP observations, UTC monthly counts and spatial tiles without calibration |
 
 The older [run_all.py](../pipeline/run_all.py) raw-record route remains available. The released seven-country model used the exact-count route recorded in [build_summary.json](../reports/build_summary.json). Aggregate rows contain a multiplicity `n`: consumers must sum `n`, not count rows as detections.
 
@@ -83,6 +86,7 @@ Paths below are relative to `web/public/data/`.
 | `frp.json` | Verified count-versus-power comparison and links to public evidence files. |
 | `season-comparison.json` | National retained-month counts and shares, mask choices, published summary metrics and verification lineage. |
 | `world-land.json`, `world-outline.json` | Static map context produced from the locked `world-atlas` dependency. |
+| `observations/index.json`, country/month inventories and spatial tiles | `observations-v1`: source identity, original pixel centres, UTC acquisition time, confidence, dimensions and FRP. Monthly grids and point-tile descriptors conserve observed counts. |
 
 The TypeScript contracts are declared in [types.ts](../web/src/types.ts) and the corresponding feature modules. Runtime checks are implemented in [loadData.ts](../web/src/loadData.ts), [globeData.ts](../web/src/globeData.ts), [calendarAlignment.ts](../web/src/calendarAlignment.ts), [areaSelection.ts](../web/src/areaSelection.ts), [rhythmData.ts](../web/src/rhythmData.ts) and [seasonComparisonData.ts](../web/src/seasonComparisonData.ts). Their depth varies: the daily loader checks dictionary structure, and the area loader checks basic array shape. Type declarations alone do not validate every fetched numeric value.
 
@@ -109,6 +113,8 @@ That distinction matters when comparing totals. The area data round each cell-mo
 
 ## Frontend structure
 
+The observation layer has its own [contract](../reports/observation-detail/DATA.md). Its loader checks schema, source identity, coordinate bounds and SHA-256 links from index to month to tile. `.gitattributes` preserves these JSON bytes across platform checkouts. A viewport calculation selects nearby tiles; requests above the point budget retain the complete count grid rather than sampling. These controls keep the observed layer separate from annual harmonization and calendar exclusions.
+
 [main.tsx](../web/src/main.tsx) mounts [App.tsx](../web/src/App.tsx). The app owns the selected country, date range, spatial scope, raw/harmonized display, page and evidence week. It loads the index, then the selected country, then a selected daily-cell file if needed.
 
 The main components follow those responsibilities:
@@ -124,6 +130,7 @@ The main components follow those responsibilities:
 | `ReliabilityNotice.tsx`, `reliability.ts` | Evaluation scope, date completeness and uncertainty wording |
 | `RhythmView.tsx`, `RhythmCellMap.tsx`, `FrpComparison.tsx` | Weekly-rhythm decision, exploratory map and paired power comparison |
 | `Globe.tsx`, `globeCells.ts`, `globeViewport.ts` | Annual Earth rendering, country/cell selection, camera fitting and table alternative |
+| `ObservationEarth.tsx`, `ObservationControls.tsx`, `observationDetail.ts`, `observationViewport.ts` | Separate observed Earth renderer, UTC month selection, validated tile loading, point evidence and bounded close zoom |
 | `ShareView.tsx`, `explorationState.ts`, `explorationIntegration.ts` | Share-link parsing, recovery and restored selections |
 | `evidenceBrief.ts`, `comparisonExport.ts` | Downloadable evidence and comparison tables |
 
