@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {readFileSync} from 'node:fs';
+import {readFileSync,existsSync} from 'node:fs';
 import {createRequire} from 'node:module';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -51,7 +51,7 @@ function componentHarness(filename, commit = () => {}, namedFunction) {
     new Function('require', 'module', 'exports', compiled)(name => {
       if (name === 'react') return hooks;
       if (name.endsWith('.css')) return {};
-      if (name.startsWith('.')) return load(path.resolve(path.dirname(file), name + '.ts'));
+      if (name.startsWith('.')) {const base=path.resolve(path.dirname(file), name);return load(base+(existsSync(base+'.ts')?'.ts':'.tsx'));}
       return require(name);
     }, module, module.exports);
     modules.set(file, module.exports);
@@ -259,4 +259,62 @@ test('calendar boundary arrows restore the focused week after a different hover 
   withClass(tree, 'week-cell')[0].props.onKeyDown({key: 'Tab'});
   tree = render(props);
   assert.match(copy(withClass(tree, 'calendar-inspector')[0]), /WEEK 2/, 'ordinary tab navigation does not erase the pointer preview');
+});
+
+test('Home chooses an explicit week, retains its number across years, and opens that week in the calendar',()=>{
+  const render=componentHarness('HarmonizationIntro.tsx');
+  const weeks=[['2023-12-31',2023,53],['2024-01-01',2024,1],['2024-01-08',2024,2],['2024-12-30',2024,53]].map(([date,year,week],i)=>({key:`${year}-${week}`,date,year,week,raw:10,harmonized:5,rows:[{date,source:'converted VIIRS',raw_viirs:10,raw_aqua:5,harmonized:5}]}));
+  let choice,opened;
+  const props={weeks,context:'Nepal · Whole region',countries:[{id:'Nepal',name:'Nepal'}],country:'Nepal',loading:false,unavailable:false,onWeek:date=>choice=date,onExplore:week=>opened=week};
+  const field=(tree,id)=>elements(tree,item=>item.props?.id===id)[0];
+  let tree=render({...props,selectedDate:'2024-01-01'});
+  assert.equal(field(tree,'home-week').props.value,'2024-01-01');
+  field(tree,'home-week').props.onChange({target:{value:'2024-01-08'}});
+  assert.equal(choice,'2024-01-08');
+  tree=render({...props,selectedDate:choice});
+  const cta=elements(tree,item=>item.type==='button'&&item.props.className==='home-explore');
+  for(const button of cta){button.props.onClick();assert.equal(opened.date,'2024-01-08');}
+  tree=render({...props,selectedDate:'2024-12-30'});
+  field(tree,'home-year').props.onChange({target:{value:'2023'}});
+  assert.equal(choice,'2023-12-31','week 53 uses Jan-1 bins in both leap and non-leap years');
+  assert.equal(elements(tree,item=>item.props?.['aria-label']==='Next week')[0].props.disabled,true);
+  tree=render({...props,selectedDate:'2023-12-31'});
+  assert.equal(elements(tree,item=>item.props?.['aria-label']==='Previous week')[0].props.disabled,true);
+  elements(tree,item=>item.props?.['aria-label']==='Next week')[0].props.onClick();assert.equal(choice,'2024-01-01');
+  tree=render({...props,selectedDate:'2003-01-01'});
+  assert.equal(field(tree,'home-week').props.value,'','unavailable requested date never silently becomes a peak');
+  assert.equal(withClass(tree,'home-selection-notice').length,1);
+});
+
+test('Home monthly context preserves numeric zero, missing data and outage masking',()=>{
+  const render=componentHarness('HarmonizationIntro.tsx');
+  const weeks=[{key:'2024-1',year:2024,week:1,date:'2024-01-01',rows:[{date:'2024-01-01',harmonized:0,source:'converted VIIRS'}]},
+    {key:'2024-6',year:2024,week:6,date:'2024-02-05',rows:[{date:'2024-02-05',harmonized:50,source:'converted VIIRS'},{date:'2024-02-06',harmonized:null,source:'no observation'}]}];
+  const tree=render({weeks,context:'Nepal',countries:[],selectedDate:'2024-01-01',onWeek(){},onExplore(){}});
+  const months=withClass(tree,'home-months')[0].props.children;
+  assert.equal(withClass(months[0],'home-month-value')[0].props.children,'0');
+  assert.equal(elements(months[0],item=>item.type==='i')[0].props.style.height,'0%');
+  assert.equal(withClass(months[1],'home-month-value')[0].props.children,'—');
+  assert.equal(elements(months[1],item=>item.type==='small')[0].props.children,'Outage');
+  assert.equal(elements(months[2],item=>item.type==='small')[0].props.children,'No data');
+});
+
+test('selected comparison uses shared days only and keeps unavailable weeks inspectable',()=>{
+  const render=componentHarness('ComparisonJourney.tsx');
+  const text=node=>typeof node==='string'||typeof node==='number'?String(node):Array.isArray(node)?node.map(text).join(''):node&&typeof node==='object'?text(node.props?.children):'';
+  const rows=[{date:'2024-01-01',source:'converted VIIRS',raw_viirs:20,raw_aqua:9,harmonized:10},{date:'2024-01-02',source:'converted VIIRS',raw_viirs:100,raw_aqua:null,harmonized:50}];
+  const week={key:'2024-1',date:'2024-01-01',week:1,year:2024,rows};
+  let inspected;
+  const props={weeks:[week],selectedWeek:week,introduction:true,chosen:true,onInspect:w=>inspected=w};
+  let tree=render(props);
+  assert.deepEqual(elements(withClass(tree,'journey-values')[0],item=>item.type==='strong').map(item=>item.props.children),['20','10','9']);
+  assert.match(text(tree),/1 shared calendar days/);assert.doesNotMatch(text(tree),/highest-activity/);
+  assert.match(text(tree),/only shared days/);
+  const outage={...week,rows:[...rows,{date:'2024-01-03',source:'no observation'}]};
+  tree=render({...props,selectedWeek:outage});
+  assert.equal(withClass(tree,'journey-values').length,0);assert.match(text(tree),/unavailable, not zero/);
+  const inspect=elements(tree,item=>item.type==='button'&&text(item).includes('Inspect this week'))[0];
+  assert.equal(inspect.props.disabled,false);inspect.props.onClick();assert.equal(inspected,outage);
+  tree=render({...props,selectedWeek:{...week,rows:[{date:'2003-01-01',source:'observed Aqua',harmonized:9,raw_aqua:9}]}});
+  assert.equal(withClass(tree,'journey-values').length,0);assert.match(text(tree),/observed Aqua data directly/);
 });

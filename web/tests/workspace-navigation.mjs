@@ -37,3 +37,13 @@ test('old introduction URLs resolve to Home and are written back canonically', (
   assert.equal(state.section, 'home');
   assert.equal(new URL(withWorkspaceNavigation('https://preview.example/?workspace=introduction&region=Nepal', state)).searchParams.get('workspace'), 'home');
 });
+
+test('Home week links preserve Jan-1 bin dates independently of an open evidence drawer',()=>{
+  const state={section:'home',calendar:'monthly',pattern:'instruments',homeWeek:'2024-12-30'};
+  const url=new URL(withWorkspaceNavigation('https://preview.example/?region=Brazil&week=2023-12-31',state));
+  assert.deepEqual(parseWorkspaceNavigation(url.search),state);
+  assert.equal(url.searchParams.get('week'),'2023-12-31');
+  for(const bad of ['2024-02-30','2024-01-02','invalid','2023-12-30'])assert.equal(parseWorkspaceNavigation('?workspace=home&homeWeek='+bad).homeWeek,undefined);
+  assert.equal(parseWorkspaceNavigation('?workspace=home&homeWeek=2024-01-01&homeWeek=2024-01-08').homeWeek,undefined);
+  assert.equal(parseWorkspaceNavigation('?workspace=home&homeWeek=2023-12-31').homeWeek,'2023-12-31');
+});

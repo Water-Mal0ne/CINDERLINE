@@ -460,3 +460,25 @@ test('the evidence page calendar action returns to a weekly calendar after an Ea
     assert.ok(app.focus.includes('calendar-panel'));
   }finally{app.dispose();}
 });
+
+test('Home chosen week survives country changes, links and calendar navigation without narrowing the record',async()=>{
+  const app=journeyApp('?workspace=home&region=Nepal');
+  const home=()=>elements(app.tree,node=>typeof node.props?.onCountry==='function')[0];
+  try{
+    await app.settle();home().props.onWeek('2023-01-08');await app.settle();
+    assert.equal(app.url.searchParams.get('homeWeek'),'2023-01-08');assert.equal(app.url.searchParams.has('week'),false);
+    const saved=app.url.href;
+    home().props.onCountry('India');await app.settle();
+    assert.equal(home().props.selectedDate,'2023-01-08');
+    const week=home().props.weeks.find(w=>w.date==='2023-01-08');
+    const originalDates=home().props.weeks.flatMap(w=>w.rows.map(r=>r.date));
+    home().props.onExplore(week);await app.settle();
+    assert.equal(calendar(app).props.focusDate,week.date);
+    assert.deepEqual(calendar(app).props.weeks.flatMap(w=>w.rows.map(r=>r.date)),originalDates);
+    assert.equal(namedChild(app.tree,'EvidenceDrawer'),undefined);
+    assert.ok(app.focus.includes('calendar-week-2023-01-08'));
+    app.pop(saved);await app.settle();
+    assert.equal(home().props.country,'Nepal');assert.equal(home().props.selectedDate,week.date);
+    assert.equal(namedChild(app.tree,'EvidenceDrawer'),undefined);
+  }finally{app.dispose();}
+});

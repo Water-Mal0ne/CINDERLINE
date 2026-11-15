@@ -54,3 +54,28 @@ All seven catalogue countries are available. The selector uses the application's
 Fresh URLs use `workspace=home`. Previously saved `workspace=introduction` URLs remain valid and canonicalize to Home. Existing calendar and research links keep their destinations.
 
 Verification: 183 web tests passed, including delayed country loading, failure recovery, evidence/calendar consistency and legacy URL handling. Browser checks exercised every country and its weekly evidence at 320px, with no page overflow or wrapped numeric values. The desktop and full mobile page were visually reviewed. Release receipts for this update are under `work/home-preview`. No production deployment, Git push or merge is authorized by this review.
+
+## Home week selection and calendar context — 2026-11-15
+
+Request: select any available week from Home, make Calendar the clear next step, and replace the empty lower page with useful context. Chrome's guide catalogue has no dedicated landing-page recipe; this pass applies its relevant content, typography and responsive-control guidance.
+
+Changes:
+- Native Year and Week selectors plus previous/next controls for all seven countries. Labels use the project's January-1 seven-day bins, including the short final week, rather than ISO week numbering.
+- Home's selected week persists in `homeWeek` URL state independently of the evidence drawer's `week` parameter. Explicit choices do not silently switch to a peak when unavailable.
+- Both Calendar calls to action open the selected week, preserve the wider record and region, and focus the corresponding keyboard-operable calendar cell. No evidence dialog opens automatically.
+- A twelve-month bar preview supplies actual context below the comparison. It uses the existing month aggregation/outage rules, numeric labels, a selected-month outline and missing-data hatching. Zero has zero bar height; no-data months never get a numeric zero.
+- Selected comparisons use only comparable calendar days, identify that subset, and retain the reference/not-ground-truth and not-a-performance-test caveats. Aqua-only and outage weeks remain inspectable; 2025 retains the existing beyond-validation disclosure. Scientific payloads and models are unchanged.
+
+Guide application:
+- [Maximize content and reduce noise](https://developer.chrome.com/docs/modern-web-guidance/guides/user-experience/content-first-noise-reduction): content-led introduction, contextual calendar action and optional 2025 detail; no automatic overlays or extra promotional cards.
+- [Adapt to the form factor](https://developer.chrome.com/docs/modern-web-guidance/guides/user-experience/form-factor-adaptation): container-responsive week controls/month preview, named arrow buttons, visible focus, 44px targets, numeric alternatives to the visual bars.
+- [Typography](https://developer.chrome.com/docs/modern-web-guidance/guides/visual-design/typography): relative type, balanced short headings, pretty-wrapped body copy, flexible control heights. This is scoped implementation evidence, not a claim of full guide or accessibility certification.
+
+Verification:
+- Web tests: 188 passed, including selected-week navigation/history/country changes, year-boundary bins, invalid link state, comparable-day totals, zero and outage preview semantics. TypeScript passes.
+- Browser: all seven countries at the same 2024 week; country selection retained on reload; pre-conversion 2003 and beyond-validation 2025; outage week 22/2024 inspected successfully.
+- Desktop and 320px phone: no Home page horizontal overflow; new controls at least 44px high. On phone, Calendar focuses the requested week with tabIndex 0 and Enter opens its evidence. Month preview reflows to three columns. Existing lazy globe behavior is preserved; this pass does not change the globe.
+- Build and temporary deployment receipts/screenshots are saved under ignored `work/home-weeks-preview/`. The existing lazy Globe bundle remains above Vite's 500kB advisory threshold.
+- Python was not rerun for these UI/state-only changes; no Python, scientific dataset, calibration or pipeline code changed.
+
+Release scope: local commit on `test/atlas-redesign` and the `atlas` branch of `cinderline-ui-preview` only. No Git push, merge, or production deployment.
