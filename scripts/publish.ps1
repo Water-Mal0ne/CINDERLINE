@@ -17,7 +17,7 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Production build failed.' }
     git push $Remote $Branch
     if ($LASTEXITCODE -ne 0) { throw 'GitHub upload failed; Cloudflare was not updated.' }
-    npx --yes wrangler@4.162.0 pages deploy dist --project-name firetrace-bhaktapur-2026 --branch $Branch
+    npx --yes wrangler@4.162.0 pages deploy dist --project-name cinderline-spaceapps --branch $Branch
     if ($LASTEXITCODE -ne 0) { throw 'GitHub was updated, but Cloudflare deployment failed. Re-run after resolving the reported deployment error.' }
     & $projectPython scripts/verify_deployment.py --report work/latest_deployment_verification.json
     if ($LASTEXITCODE -ne 0) { throw 'Cloudflare accepted the deployment, but public asset verification failed. Inspect the verification report before calling the release complete.' }

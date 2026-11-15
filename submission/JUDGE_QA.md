@@ -2,7 +2,7 @@
 
 Every number is from a committed report (path in brackets). "Detections" are satellite hotspot detections, not fires. Questions 8, 9, 15, 19 and 20 cite the source index at the end ([S..] codes).
 
-We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration.
+We reproduce a known weekly pattern in each satellite record separately. Independently, CINDERLINE tests whether its historical calendar survives a change of sensor and calibration.
 
 **1. Aqua flew the whole time. Why switch to converted VIIRS from 2013?**
 The product tests continuity on Aqua's reference scale; it does not imply Aqua stopped observing. Requiring adjacent UTC archives for complete local years makes 2013 the first eligible VIIRS year in this snapshot, despite observations beginning in 2012. The release uses historical S-NPP data. NASA currently lists S-NPP coverage ending on 2 November 2026; NOAA-20 and NOAA-21 are separate, more recent VIIRS platforms, not substitutes silently added here. On held-out 2020-2024 weeks, converted VIIRS tracks Aqua with weekly r = 0.73-0.98 depending on country [METHODS.md, reports/review/layer1_table.md; NASA FIRMS product coverage: https://firms.modaps.eosdis.nasa.gov/content/descriptions/FIRMS_VIIRS_Firehotspots.html].

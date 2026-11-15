@@ -10,7 +10,7 @@ const scope={regionId:'United_States',regionName:'United States',cellId:'40.75:-
 
 test('monthly exports retain country, cell, precision and available-day counts after renaming',()=>{
   const result=buildMonthlyExport(points,scope);
-  assert.equal(result.filename,'FIRETRACE_United_States_cell_40.75_-123.50_2020-09_2020-09_monthly.csv');
+  assert.equal(result.filename,'CINDERLINE_United_States_cell_40.75_-123.50_2020-09_2020-09_monthly.csv');
   assert.equal(result.content,'\uFEFFregion,region_name,cell_id,month,raw_sensor_switch_detections,aqua_equivalent_detections,observed_aqua_detections,raw_days,harmonized_days,aqua_days,data_label\r\n"United_States","United States","40.75:-123.50","2020-09","134","19.43175","13","1","1","1","REAL FIRMS DATA"');
 });
 

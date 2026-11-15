@@ -1,4 +1,4 @@
-# FIRETRACE — recording scripts
+# CINDERLINE — recording scripts
 
 Use real app recordings and the reviewed research chart. The current live site remains the baseline until the team merges and deploys. Do not film an unmerged panel as though it were already public. Caption all speech, retain NASA FIRMS attribution, and disclose AI assistance. No NASA logo or endorsement claim.
 
@@ -8,7 +8,7 @@ Rehearse the complete script before recording. At a brisk, clear pace it targets
 
 ### Spoken script
 
-A sharper satellite can make the fire record change even when burning has not. FIRETRACE builds a historical calendar on a declared reference scale, and tests whether better-looking numbers preserve the season people need to understand. We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration. Explore the calendar. Open a week. Follow the evidence.
+A sharper satellite can make the fire record change even when burning has not. CINDERLINE builds a historical calendar on a declared reference scale, and tests whether better-looking numbers preserve the season people need to understand. We reproduce a known weekly pattern in each satellite record separately. Independently, CINDERLINE tests whether its historical calendar survives a change of sensor and calibration. Explore the calendar. Open a week. Follow the evidence.
 
 ### Shot list
 
@@ -24,7 +24,7 @@ Sources: [S01], [S04], [S08], [S13] in `submission/JUDGE_QA.md`. Submission timi
 
 ### Spoken script
 
-A sharper satellite can make the fire record change even when burning has not. FIRETRACE builds a historical calendar on a declared reference scale, and tests whether better-looking numbers preserve the season people need to understand.
+A sharper satellite can make the fire record change even when burning has not. CINDERLINE builds a historical calendar on a declared reference scale, and tests whether better-looking numbers preserve the season people need to understand.
 
 NASA's MODIS and VIIRS instruments detect hotspots at different resolutions. We keep their records separate and express the historical calendar on Aqua's scale. We fit earlier overlap years, choose between simple and detailed conversions on validation years, then check the locked choice on later years.
 
@@ -34,7 +34,7 @@ Open a week to inspect its sensor counts and calibration bounds. Missing observa
 
 Now ask whether a better total preserves the season. India's selected conversion improves annual count agreement but worsens monthly shape. Both common-date outage masks preserve that result. Nepal's seasonal improvement also survives. These comparisons are retrospective.
 
-We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration.
+We reproduce a known weekly pattern in each satellite record separately. Independently, CINDERLINE tests whether its historical calendar survives a change of sensor and calibration.
 
 The US and Australia show Sunday dips; Brazil needs qualifications. Four country rules fail. In a separate US daytime test, the Sunday deficit is smaller when the same detections are weighted by sampled radiative power. Aqua and Suomi-NPP pass; Terra does not.
 

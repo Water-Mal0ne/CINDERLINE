@@ -29,9 +29,9 @@ const daily = content => content.split('\n').filter(line => /^\| \d{4}-\d{2}-\d{
 test('published week exports current values, reference, sources, exact daily precision and the supplied view URL', () => {
   const week = publishedWeek(2016, 15);
   const before = JSON.stringify(week);
-  const shareUrl = 'https://firetrace-bhaktapur-2026.pages.dev/?region=Nepal&week=2016-04-08&scale=raw';
+  const shareUrl = 'https://cinderline-spaceapps.pages.dev/?region=Nepal&week=2016-04-08&scale=raw';
   const result = buildEvidenceBrief({...input(week), shareUrl});
-  assert.equal(result.filename, 'FIRETRACE_Nepal_whole-region_2016-04-08_week-15_evidence.md');
+  assert.equal(result.filename, 'CINDERLINE_Nepal_whole-region_2016-04-08_week-15_evidence.md');
   assert.match(result.content, /Reference scale: MODIS Aqua/);
   assert.match(result.content, /Calendar period: 2016-04-08 to 2016-04-14/);
   assert.equal(summary(result.content, 'Raw baseline'), '| Raw baseline | 17,034 |');
@@ -87,7 +87,7 @@ test('published cell identity and supplied spatial caveat survive a renamed port
   const week = aggregateWeeks(decodeCell(readData(cell.file))).find(item => item.year === 2016 && item.week === 15);
   const spatial = 'This cell uses a nationally selected calibration. Its bands omit spatial model error, and cell agreement can be much poorer than national agreement.';
   const {content, filename} = buildEvidenceBrief({...input(week), cellId: cell.id, caveats: [...caveats, spatial]});
-  assert.equal(filename, 'FIRETRACE_Nepal_cell_27.25_84.75_2016-04-08_week-15_evidence.md');
+  assert.equal(filename, 'CINDERLINE_Nepal_cell_27.25_84.75_2016-04-08_week-15_evidence.md');
   assert.match(content, /Country \/ region: Nepal/);
   assert.match(content, /Spatial scope: Cell 27.25:84.75 · 27.4° N, 84.9° E/);
   assert.ok(content.includes(spatial));

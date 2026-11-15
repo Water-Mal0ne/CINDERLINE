@@ -10,5 +10,5 @@ export function buildMonthlyExport(points: ReturnType<typeof monthly>, scope: Co
   const safe=(value: string)=>value.replace(/[^A-Za-z0-9._-]/g,'_');
   const location=scope.cellId==='ALL'?'whole-region':`cell_${safe(scope.cellId)}`;
   const range=points.length?`_${points[0].date}_${points[points.length-1].date}`:'';
-  return {filename:`FIRETRACE_${safe(scope.regionId)}_${location}${range}_monthly.csv`,content:'\uFEFF'+[fields.join(','),...lines].join('\r\n')};
+  return {filename:`CINDERLINE_${safe(scope.regionId)}_${location}${range}_monthly.csv`,content:'\uFEFF'+[fields.join(','),...lines].join('\r\n')};
 }

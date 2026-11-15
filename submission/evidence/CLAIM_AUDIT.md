@@ -98,8 +98,8 @@ The [Navigator demo clarification](https://github.com/nasa/spaceapps/discussions
 allows a presentation of at most seven slides or a video shorter than 30 seconds.
 These sources were independently reopened for this audit on 14 November 2026 UTC.
 
-The [local organizer listing](https://gdg.community.dev/events/details/google-gdg-kathmandu-presents-nasa-space-apps-challenge-2026-bhaktapur-local-event/)
-supports Bhaktapur, Khwopa Engineering College and the 14–15 November event dates.
+The team participates in the Kathmandu, Nepal local event. Its venue and organizer listing are to be filled in by the team
+(`submission/SUBMISSION_CHECKLIST.md`); the 14–15 November event dates are unchanged.
 Its event end is 23:59 Nepal time; the checklist correctly asks the team to confirm
 an earlier judging cutoff instead of assuming that event end guarantees a local
 submission deadline. The 20:00 target is a team planning target. Actual team name,

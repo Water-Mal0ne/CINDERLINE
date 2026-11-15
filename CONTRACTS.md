@@ -1,4 +1,4 @@
-# FIRETRACE implementation contracts
+# CINDERLINE implementation contracts
 
 All paths relative to repository. Python 3.11+; precomputed data, no server API.
 

@@ -1,10 +1,12 @@
-# FIRETRACE
+# CINDERLINE
 
-**Deployment status:** the seven-country update is live at [FIRETRACE](https://firetrace-bhaktapur-2026.pages.dev/). All 115 public assets and the seven-country browser workflows were verified on November 14, 2026. See `DEPLOYMENT.md`.
+**Deployment status:** planned at [CINDERLINE](https://cinderline-spaceapps.pages.dev/) (Cloudflare Pages project `cinderline-spaceapps`); not yet deployed under this name. See `DEPLOYMENT.md`.
+
+*Two satellites. One unbroken fire record.*
 
 Compare satellite fire observations on a named reference scale, inspect historical seasons, and follow each displayed week back to its evidence.
 
-FIRETRACE addresses **Harmonization of MODIS and VIIRS Hot Spots** with NASA FIRMS archives for **Australia, Bangladesh, Brazil, Egypt, India, Nepal and the United States**. The supported history is **2003–2024**: observed MODIS Aqua through 2012 and converted VIIRS S-NPP from 2013. Terra, Aqua and VIIRS remain separate during cleaning and evaluation. The harmonized series is an Aqua-reference-equivalent detection record: an instrument-scale estimate, not the true number of fires. The calendar is historical and descriptive. FIRETRACE is a long-term historical calendar, complementary to near-real-time fire alert systems (for example ICIMOD's), not a replacement.
+CINDERLINE addresses **Harmonization of MODIS and VIIRS Hot Spots** with NASA FIRMS archives for **Australia, Bangladesh, Brazil, Egypt, India, Nepal and the United States**. The supported history is **2003–2024**: observed MODIS Aqua through 2012 and converted VIIRS S-NPP from 2013. Terra, Aqua and VIIRS remain separate during cleaning and evaluation. The harmonized series is an Aqua-reference-equivalent detection record: an instrument-scale estimate, not the true number of fires. The calendar is historical and descriptive. CINDERLINE is a long-term historical calendar, complementary to near-real-time fire alert systems (for example ICIMOD's), not a replacement.
 
 ## The working experience
 
@@ -38,7 +40,7 @@ The seven-country model is a distinct revision, `seven-country-v1`. Adding count
 
 ## Weekly Rhythm Index result
 
-We reproduce a known weekly pattern in each satellite record separately. Independently, FIRETRACE tests whether its historical calendar survives a change of sensor and calibration.
+We reproduce a known weekly pattern in each satellite record separately. Independently, CINDERLINE tests whether its historical calendar survives a change of sensor and calibration.
 
 **Sunday dip clear in the US and Australia, weaker in Brazil, and not established by the country rule where the rest day is Friday or Saturday. Our pre-specified rule passed narrowly; a stricter version fails on Brazil on the 2002-2024 record.**
 
@@ -125,7 +127,7 @@ The release does **not** include a validated 2000–2002 Terra reconstruction, w
 
 ## Hosting and source
 
-[Public application on Cloudflare Pages](https://firetrace-bhaktapur-2026.pages.dev/) · [Public source repository](https://github.com/Water-Mal0ne/FIRETRACE)
+[Public application on Cloudflare Pages (planned)](https://cinderline-spaceapps.pages.dev/) · [Public source repository](https://github.com/Water-Mal0ne/FIRETRACE)
 
 Cloudflare serves static assets; no paid compute or database was provisioned. `scripts/publish.ps1` checks, builds, pushes, deploys and verifies the public files. See `DEPLOYMENT.md` for release-specific evidence.
 

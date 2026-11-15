@@ -1,13 +1,13 @@
 {
   "status": "PASS",
-  "project_page_words": 478,
+  "project_page_words": 486,
   "document_sha256_lf": {
-    "SLIDES.md": "50d4d09153bc249e63f039a8fd99fc2dfb2954aa3e0bb2387f8b7f0c3f35e68e",
-    "PROJECT_PAGE.md": "973ddcc1410b31fb26967d640fd695e9f12c3d4602e48df43bbaf61d524e51fa",
-    "JUDGE_QA.md": "6386d60fa12a7e4c86f4b3c67fac5abaf102f6f59c5682048c9fdf1a3766b3ea",
-    "TEAM_BRIEFING.md": "1b0afbffb3df45805ac353a50884633aed49618ac403eb24ebcb7cdefb6b8ced",
-    "VIDEO_SCRIPT.md": "5ff742916a7b026cc29d62b86d880ad2d1bf0435ef7fcd2efaabe7f049d8b084",
-    "SUBMISSION_CHECKLIST.md": "4a2956ba8a0d4523dbc51f13ac0a815961f277d304d3d99fd68c0bafa2534f9f",
+    "SLIDES.md": "68b4a79690c517cdee2bbdf0c39f31eaf309cb692a3e184cb702487935313fda",
+    "PROJECT_PAGE.md": "bdb07542b8a05a420390756564a55882ae681283b3179fc53a73c439efdc49b9",
+    "JUDGE_QA.md": "8de3380cd26c58216ebb43b1cbe45b974b083f2f5140b17b84d578d52136ebb1",
+    "TEAM_BRIEFING.md": "96b3506289b78c8b846cb019f1927c0945fe4d9c73a34eeea7e0e5171efeb208",
+    "VIDEO_SCRIPT.md": "1cc4562f48d2a042520a5a68d4932389b8c5dc1a486545217c0059357b315715",
+    "SUBMISSION_CHECKLIST.md": "c56c671b16c6b22f7ddbcbaf6d30d0b1a52421150731dea27ac04de54fcae60b",
     "../AI_DISCLOSURE.md": "b157b6f77ced670cc103bff012983b92a4265a43ccb1898b24d5ffecf7b8ff9f"
   },
   "judge_question_numbers": [
@@ -35,7 +35,7 @@
   "slides": [
     {
       "slide": 1,
-      "title_and_slide_words": 17,
+      "title_and_slide_words": 21,
       "speaker_note_words": 70,
       "passed": true
     },

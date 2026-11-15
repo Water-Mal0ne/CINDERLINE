@@ -1,8 +1,8 @@
-# FIRETRACE — team briefing
+# CINDERLINE — team briefing
 
 Read before judging. Every teammate should demonstrate one week and explain its limits.
 
-**Our opening:** A sharper satellite can make the fire record change even when burning has not. FIRETRACE builds a historical calendar on a declared reference scale, and tests whether better-looking numbers preserve the season people need to understand.
+**Our opening:** A sharper satellite can make the fire record change even when burning has not. CINDERLINE builds a historical calendar on a declared reference scale, and tests whether better-looking numbers preserve the season people need to understand.
 
 The calendar converts VIIRS detections to Aqua's reference scale. Separately, the Weekly Rhythm Index checks raw satellite streams for a known association. Harmonization did not discover it. Many detections can come from one continuing event.
 

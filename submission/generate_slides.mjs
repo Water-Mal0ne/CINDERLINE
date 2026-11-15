@@ -53,7 +53,7 @@ for(const item of slides){
   slide.speakerNotes.text=`${item.notes}\n\nSOURCES (not spoken)\n${item.sources}\n\nVISUAL PROVENANCE (not spoken)\n${item.visual}`;
   const p=paragraphs(item.prose);
   if(item.number===1){
-    txt(slide,'FIRETRACE',64,52,410,46,30,C.orange,true);
+    txt(slide,'CINDERLINE',64,52,410,46,30,C.orange,true);
     txt(slide,item.title,64,132,470,150,55,C.text,true);
     txt(slide,p[0],64,322,440,95,34,C.orange);
     txt(slide,p.slice(1).join('\n\n'),64,442,440,150,29,C.muted);

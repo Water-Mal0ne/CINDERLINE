@@ -1,4 +1,4 @@
-# FIRETRACE morning handoff — 15 November 2026, Nepal
+# CINDERLINE morning handoff — 15 November 2026, Nepal
 
 Prepared after the bounded overnight cycle. **Nothing was merged or deployed.**
 The existing live site remains the safe baseline. This report is a handoff, not a
@@ -190,12 +190,12 @@ Start with [TEAM_BRIEFING](submission/TEAM_BRIEFING.md), then
 - PDF SHA-256: `2db65365ff2de1eea4615f7fab2fc73069919560a644d3da239a6c4f8d7371d0`; PPTX SHA-256: `55cfdf62a1e1904df94772af8af52ee1aa635e7b797322a964c32442df313a1e`.
 - The PDF is raster, generated from the reviewed slide renders because native PDF export lacked a font dependency. It is not tagged accessible text. Markdown provides selectable text and the PPTX preserves editable titles/body/table/notes; desktop PowerPoint save/reopen was not tested.
 - The short script is 70 spoken words, targeting under 30 seconds; **time an actual recording**. The separate 271-word live pitch is not the short demo. A seven-slide PDF is ready if the team does not record a video.
-- Fill the registered team name, all six members and actual official team/project URL. Confirm the Bhaktapur/Khwopa local judging deadline with the organizers. The supplied Sunday 23:59 cutoff is not a substitute for an earlier local cutoff.
+- Fill the registered team name, all six members and actual official team/project URL. Confirm the Kathmandu, Nepal local event judging deadline with the organizers. The supplied Sunday 23:59 cutoff is not a substitute for an earlier local cutoff.
 - The repository is public. Anonymous requests to the repo, branch PDF/PPTX and current live site returned HTTP 200; the downloaded artifacts matched their hashes. Repeat these checks after merging and before submission. No account login, terms acceptance or actual submission was performed.
 
 ## Exact morning release commands — only after approved merges
 
-Run this entire PowerShell block as one script from the main FIRETRACE worktree,
+Run this entire PowerShell block as one script from the main CINDERLINE worktree,
 so a thrown error stops the sequence. This is a future checklist;
 **none of these deployment commands were run overnight**. Use the existing Python
 environment. Stop on every failure. `github`, not `origin`, is the remote.
@@ -252,8 +252,8 @@ if (@(git status --porcelain).Count -ne 0) {
 if ((git rev-parse HEAD).Trim() -ne $taskReleaseCommit) {
     throw 'HEAD changed during release checks; stop and rebuild.'
 }
-Invoke-Checked 'npx.cmd' @('--yes', 'wrangler@4.162.0', 'pages', 'deploy', 'dist', '--project-name', 'firetrace-bhaktapur-2026', '--branch', 'main')
-Invoke-Checked $taskPython @('scripts/verify_deployment.py', '--url', 'https://firetrace-bhaktapur-2026.pages.dev/', '--dist', 'dist', '--report', (Join-Path $taskRun 'deployment_verification.json'))
+Invoke-Checked 'npx.cmd' @('--yes', 'wrangler@4.162.0', 'pages', 'deploy', 'dist', '--project-name', 'cinderline-spaceapps', '--branch', 'main')
+Invoke-Checked $taskPython @('scripts/verify_deployment.py', '--url', 'https://cinderline-spaceapps.pages.dev/', '--dist', 'dist', '--report', (Join-Path $taskRun 'deployment_verification.json'))
 Write-Output ("Verified deployed commit: " + $taskReleaseCommit)
 ```
 
