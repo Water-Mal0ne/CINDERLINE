@@ -18,3 +18,5 @@
 .area-error{font-size:10px;color:#ffb3a1;margin:0}
 .area-summary p{font-size:11px;color:#c9cfc6;margin:14px 0}
 @media (max-width:720px){.area-layout{grid-template-columns:1fr}}
+.area-period-note{font-size:10px;color:#cfd8d4;margin:-6px 0 14px}
+.area-period-note strong{font-weight:600}

@@ -3,7 +3,7 @@ import type {FormEvent, PointerEvent as ReactPointerEvent} from 'react';
 import {AlertTriangle, Crosshair, MapPinned, RotateCcw} from 'lucide-react';
 import MonthCalendar from './MonthCalendar';
 import {invalidateData, loadData} from './loadData';
-import {AREA_NOTE, circleError, describeSelection, firstYear, selectCells, sumSeries, validPayload} from './areaSelection';
+import {AREA_NOTE, AREA_PERIOD_NOTE, circleError, describeSelection, firstYear, selectCells, sumSeries, validPayload} from './areaSelection';
 import type {AreaPayload, Rect, Selection} from './areaSelection';
 import {monthMatrixFromMonthly, RAMP} from './monthStats';
 import {fmt} from './utils';
@@ -124,7 +124,7 @@ export default function AreaOfInterest({regionId, regionName, label}: Props) {
   }
 
   if (!requested) return <div className="area-start">
-    <p className="panel-description">Draw a rectangle on a map, or type a point and radius, to see the monthly calendar for that area. The cell data for {regionName} load only when you ask for them.</p>
+    <p className="panel-description">Draw a rectangle on a map, or type a point and radius, to see the monthly calendar for that area. The cell data for {regionName} load only when you ask for them. {AREA_PERIOD_NOTE}</p>
     <button type="button" className="button subtle" onClick={() => setRequested(true)}><MapPinned size={15}/> Load {regionName} area cells</button>
   </div>;
   if (loading) return <div className="area-start" role="status"><span className="loader"/> Loading {regionName} area cells…</div>;
@@ -136,6 +136,7 @@ export default function AreaOfInterest({regionId, regionName, label}: Props) {
   const kmPerPx = 111.32 / scale;
   return <div className="area-tool">
     <div className="area-note" role="note"><AlertTriangle size={16}/><p><strong>{AREA_NOTE}</strong> Cells are 0.25° squares summed from the same frozen {area.model} model as the national series, with no refitting. Observed Aqua through 2012, converted VIIRS from {area.switch.slice(0, 4)}.</p></div>
+    <p className="area-period-note" role="note"><strong>{AREA_PERIOD_NOTE}</strong></p>
     <div className="area-layout">
       <div className="area-map-wrap">
         <div className="area-map" style={{aspectRatio: `${mapW} / ${mapH}`}}>
