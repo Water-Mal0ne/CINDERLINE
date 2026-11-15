@@ -237,6 +237,21 @@ python scripts/verify_calendar_alignment.py --preparations work/prepared-seven
 
 Substitute the preparation directory from the matching source snapshot, or pass multiple preparation directories. The [alignment report](../reports/calendar-confidence/OUTAGE_ALIGNMENT.md) records 5,756 corrected cell-years, 154 national annual comparisons and 1,848 selected-cell annual comparisons. A mismatched archive fingerprint is an error, not permission to force the correction onto another globe.
 
+## Rebuild the separate observed-hotspot layer
+
+The 2024 detail layer reads the seven VIIRS S-NPP archives identified by [the source manifest](../reports/data_manifest.json). Its [generator](../pipeline/review/observation_detail.py) verifies each source hash and row count before exporting original observation coordinates, monthly 0.05-degree counts and spatial tiles. It does not apply the harmonization model or the calendar's local-date outage exclusions.
+
+Use a fresh output directory so the committed data stay available:
+
+```powershell
+python -m pipeline.review.observation_detail --manifest reports/data_manifest.json --output work/reproduced-observations --receipt work/reproduced-observations-receipt.json
+python -m pytest tests/test_observation_detail.py
+```
+
+The manifest's local archive paths must resolve. If the archives are elsewhere, use a copy of the manifest with those paths updated and the recorded hashes preserved. This is separate from downloading data or running the older baseline reproduction command.
+
+Compare the generated index and country/month/tile hashes with the [checked-in export](../web/public/data/observations/index.json) before replacing any public files. The [generation receipt](../reports/observation-detail/generation.json) records 3,482,732 observations, 8,866 JSON files and 244,970,711 bytes. These files are loaded by month and nearby tiles rather than downloaded at startup. The [data contract](../reports/observation-detail/DATA.md) describes filters, UTC dates, duplicate retention and count-conservation checks; the [independent review](../reports/observation-detail/REVIEW.md) compares the entire export with the original records.
+
 ## Test and build
 
 ```powershell

@@ -1,6 +1,6 @@
 # Finer observation layer verification
 
-Branch: `feature/finer-observations`, based on main `cee2b56923fde55300c36af1c13facbb581fdedc`. This work is local and has not been pushed, merged or deployed.
+Initial verification of `feature/finer-observations`, based on main `cee2b56923fde55300c36af1c13facbb581fdedc`. At the time of these checks the work was local and had not been pushed, merged or deployed. The later integration incorporates documentation PR #18 without changing the scientific payloads; release status is tracked by the GitHub PR rather than this historical test receipt.
 
 ## Scope and data
 
@@ -55,3 +55,11 @@ Browser testing found and fixed two integration issues: country loading reset th
 Physical touch hardware and native two-finger pinch were not exercised. Existing automated gesture checks cover multi-pointer cancellation and tap/drag distinctions; browser checks cover phone-width buttons, selection and drag. Do not describe that as a physical-device performance test.
 
 Local screenshots are in ignored `work/qa/desktop-observations.jpg` and `work/qa/phone-observations.jpg`. Data remains on demand: the complete static build size is not the initial browser download. Context coastlines do not become higher-resolution satellite imagery when zoomed.
+
+## Integration after documentation PR 18
+
+Merged documentation main `a4cb32e` into the feature branch without conflicts and added the separate observed-layer scope, usage, reproduction and contracts to the guide. No existing harmonized data file differs from that main revision.
+
+The combined revision passed all 112 Python tests and 171 web tests. TypeScript and the production build passed again, producing the same bundle names and 310,740,011 total bytes across 9,003 files; no asset exceeds 25 MiB. Every monthly inventory and all 8,781 point-tile SHA-256 values were rechecked, with exact monthly grid/tile/daily count agreement for 3,482,732 observations. All 345 local documentation links resolve, and wording/punctuation checks pass.
+
+The earlier desktop and phone-width checks apply to the unchanged application source and identical built bundles. Physical touchscreen testing remains unverified. This integration check does not deploy the site.

@@ -28,9 +28,21 @@ For the US selection, week 36 covers September 2-8, 2024 and has 3,259.5 Aqua-re
 
 "Open the 3D Earth view" loads the map when needed. Drag to rotate, use the zoom controls and choose "Focus United States" to return to the selected country. "Grid table" provides exact values without relying on the map. Selecting a coloured cell exposes its annual value and, where a daily series exists, a route to that evidence.
 
-Earth uses 0.25-degree annual Aqua-reference-equivalent totals with a fixed all-year logarithmic colour scale. The year control also changes the calendar date range. Earth ends in 2024 even if the calendar includes 2025. Its squares are aggregation cells, not sensor pixels, fire boundaries or burned area; zooming does not add spatial information. Uncoloured areas have no processed value, while the legend separately identifies recorded zero.
+The harmonized Earth uses 0.25-degree annual Aqua-reference-equivalent totals with a fixed all-year logarithmic colour scale. The year control also changes the calendar date range. Annual Earth ends in 2024 even if the calendar includes 2025. Its squares are aggregation cells, not sensor pixels, fire boundaries or burned area; zooming within this layer does not add spatial information. Uncoloured areas have no processed value, while the legend separately identifies recorded zero.
 
 For 2024, the annual view retains 344 of 366 calendar dates and excludes 22 outage dates. A derived correction aligns annual values with the available daily record. Custom-area monthly totals use a different exclusion rule, described below. See the [annual alignment report](../reports/calendar-confidence/OUTAGE_ALIGNMENT.md), [globe data](../web/public/data/globe.json) and [alignment data](../web/public/data/calendar-alignment.json).
+
+### Satellite observations
+
+This additional mode is available in the current repository build and has not yet been deployed to the live site. The controls and interactions were checked in the local desktop and phone-width preview, as recorded in [the verification receipt](../reports/observation-detail/VERIFICATION.md).
+
+Choose "Satellite observations" on Earth to inspect original VIIRS S-NPP pixel centres in all seven countries during 2024. "Observation month" selects a UTC month independently of the main calendar's date range. A country change keeps that month and layer selected. "Harmonized overview" returns to the existing annual reference-scale view; the raw/harmonized switch above the calendar does not calibrate these observation points.
+
+At wider zoom, 0.05-degree squares count the qualifying archived detections. Select a square or zoom closer to load individual points for the nearby area. These are original coordinates, not subdivisions of the harmonized cells. Dense views keep the complete grid and ask for closer zoom instead of silently sampling records. Colour is scaled within the selected country and month, so equal colours across different selections need not mean equal counts.
+
+Selecting a point opens "Observed hotspot", with its UTC acquisition time, confidence, reported scan/track dimensions and FRP. The marker is a schematic pixel centre, not an exact location of ignition or a fire boundary. "Observation table" and "Inspect nearby observation records" provide another route to the records, including when 3D is unavailable. Nearby tile counts are distinguished from the complete country-month count.
+
+The layer contains 3,482,732 qualifying observations. It retains UTC source records on dates that the local-date calendar excludes for outages, so its totals need not match the harmonized view. An empty month means no qualifying archived records, not proof of no burning or complete satellite coverage. See the [data contract and country totals](../reports/observation-detail/DATA.md), [source audit](../reports/observation-detail/REVIEW.md) and [published index](../web/public/data/observations/index.json).
 
 ## Monthly calendar and history
 

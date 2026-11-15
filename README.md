@@ -10,6 +10,8 @@ Team: NASA Space Apps 2026, Kathmandu, Nepal local event.
 
 The calendar covers seven countries and extends through 2025; the main conversion evaluation ends in 2024. Hotspots are detections, not distinct burning events. The calendar is historical, not a forecast or warning. "Unbroken" describes the shared reference scale, not uninterrupted observation coverage: outages remain visible.
 
+The repository also includes a separate [2024 observed-hotspot layer](docs/02-user-guide.md#satellite-observations) for closer Earth inspection across all seven countries. It is not yet deployed to the live site above.
+
 ## Three results to inspect
 
 | Result | Evidence and limit |

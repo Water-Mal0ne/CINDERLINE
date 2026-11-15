@@ -171,11 +171,13 @@ For the exact testing rules, use [the weekly-rhythm method](../METHODS.md) and [
 | SHA-256 | The hashing method used for many source and output fingerprints. |
 | SQLite | The local database used to combine intermediate records without loading the full archive into memory. |
 | Static hosting | Serving prebuilt application and data files. Cloudflare Pages hosts the published site. |
+| Spatial tile | A file grouping nearby observation records for selective loading. Its storage bounds are separate from a sensor footprint or a scientific grid cell. |
 | Sufficient statistics | Aggregated counts that retain the group information needed by the implemented calculation. They do not preserve every possible question about the original rows. |
 | SVG | A vector image format used for charts and exported figures. |
 | Synthetic fixture | Explicitly artificial input used to test software behavior under known conditions. |
 | TypeScript | JavaScript with declared types checked during the build. A type declaration alone does not validate downloaded data at runtime. |
 | Vite | The tool that serves the local app and builds its production browser assets. |
+| Viewport | The visible browser or map area. The observed Earth layer uses its geographic view to request nearby data. |
 | WebGL | The browser graphics interface used to render the globe. |
 | Worker | Cloudflare's server-side execution product. The merged app described here is served as static Pages files and does not depend on a Worker function. |
 | Wrangler | Cloudflare's command-line tool, used here for explicit Pages uploads. |
