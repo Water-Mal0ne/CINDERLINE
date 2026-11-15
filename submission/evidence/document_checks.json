@@ -1,9 +1,9 @@
 {
   "status": "PASS",
-  "project_page_words": 419,
+  "project_page_words": 478,
   "document_sha256_lf": {
-    "SLIDES.md": "73c7f86c5da3b3a82ed02f045e4de84be61e9037c02a31e3bf79a8200a9db806",
-    "PROJECT_PAGE.md": "0e266cd23942e7370ffad584c2ad08e824f1d25a53020debee1c50071d4b9e4c",
+    "SLIDES.md": "50d4d09153bc249e63f039a8fd99fc2dfb2954aa3e0bb2387f8b7f0c3f35e68e",
+    "PROJECT_PAGE.md": "973ddcc1410b31fb26967d640fd695e9f12c3d4602e48df43bbaf61d524e51fa",
     "JUDGE_QA.md": "6386d60fa12a7e4c86f4b3c67fac5abaf102f6f59c5682048c9fdf1a3766b3ea",
     "TEAM_BRIEFING.md": "1b0afbffb3df45805ac353a50884633aed49618ac403eb24ebcb7cdefb6b8ced",
     "VIDEO_SCRIPT.md": "5ff742916a7b026cc29d62b86d880ad2d1bf0435ef7fcd2efaabe7f049d8b084",
@@ -53,14 +53,14 @@
     },
     {
       "slide": 4,
-      "title_and_slide_words": 35,
-      "speaker_note_words": 80,
+      "title_and_slide_words": 39,
+      "speaker_note_words": 81,
       "passed": true
     },
     {
       "slide": 5,
-      "title_and_slide_words": 25,
-      "speaker_note_words": 78,
+      "title_and_slide_words": 28,
+      "speaker_note_words": 75,
       "passed": true
     },
     {

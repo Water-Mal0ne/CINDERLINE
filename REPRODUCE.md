@@ -80,11 +80,31 @@ Expected: 492 significant VIIRS cells of 1,461 tested; northeast India 19 of 26 
 200,000-draw Monte Carlo changes no significance call; Nepal planted 20% Saturday dip passes the country rule 12% of
 the time.
 
-## 4. Web app
+## 4. Area-of-interest cells and the 2025 extension
+
+The area files (`web/public/data/area/{country}.json`) are built from FIRMS country archives: MODIS 2002-2013 and S-NPP VIIRS 2013-2024, laid out as `<dir>/modis/<year>/modis_<year>_<Country>.csv` and `<dir>/viirs-snpp/<year>/...`. The frozen model is applied with no refitting. Use as many directories as hold the archives:
+
+```powershell
+python -m pipeline.area_cells count <archive_dir> [<archive_dir> ...] --out work/area_counts --workers 12
+python -m pipeline.area_cells build --counts work/area_counts --out web/public/data/area
+```
+
+`build` writes `reports/review/area/reconciliation.csv`. Expected: summed cells match the published national monthly series to within 0.6%, with the only difference above rounding in January 2013 (the 2012 VIIRS archive was absent locally). The output is 41,736 cells in 11.2 MiB.
+
+The 2025 extension uses the 2025 archives plus the 2024 archives, for the 1 January local-time spill. Run it on unextended data files only:
+
+```powershell
+python -m pipeline.extend_2025 count <archive_dir_2025> <archive_dir_2024> --out work/extend_2025
+python -m pipeline.extend_2025 build --counts work/extend_2025
+```
+
+Expected continuity check (`reports/review/extend2025/continuity_2025.csv`): 2025 bias against Aqua is Australia +16.4%, Bangladesh -6.6%, Brazil -21.4%, Egypt +50.0%, India -11.1%, Nepal -17.6% and United States -7.0%.
+
+## 5. Web app
 
 ```powershell
 npm ci --prefix web
-npm --prefix web test        # 30 tests
-npm run build                # dist/, about 49.8 MiB
-python -m pytest tests -q    # 67 tests
+npm --prefix web test        # 120 tests
+npm run build                # dist/, about 62.6 MiB
+python -m pytest tests -q    # 85 tests
 ```

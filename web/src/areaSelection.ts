@@ -8,6 +8,7 @@ export interface Circle {lat: number; lon: number; km: number}
 export type Selection = {kind: 'rect'; rect: Rect} | {kind: 'circle'; circle: Circle};
 
 export const AREA_NOTE = 'Area values use national calibration; local accuracy has not been validated.';
+export const AREA_PERIOD_NOTE = 'Area series run 2003-2024; 2025 is national only.';
 const EARTH_KM = 6371.0088;
 
 export function validPayload(value: unknown): value is AreaPayload {

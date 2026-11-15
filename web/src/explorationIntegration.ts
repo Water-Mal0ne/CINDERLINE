@@ -14,12 +14,16 @@ export function isPublishedIndex(value:unknown):value is Index {
     new Set(index.regions.map(region=>region.id)).size===index.regions.length;
 }
 
+/** Last year of the annual Earth view (data/globe.json, built by pipeline/globe.py). The calendar can run later
+ * (the 2025 extension); the Earth view and share links then use this year. web/tests/globe-last-year.mjs checks it. */
+export const GLOBE_LAST_YEAR = 2024;
+
 /** Validate only against the country that was loaded from the published index. */
 export function catalogForRegion(region: Region): ExplorationCatalog {
   const start=region.meta.period_start.slice(0,10),end=region.meta.period_end.slice(0,10);
   if(!isCivilDate(start)||!isCivilDate(end)||start>end) throw new Error('Invalid published region dates.');
   return {regions:[{id:region.meta.region,start,end,dailyCellIds:region.cells.map(c=>c.id),
-    globeYears:Array.from({length:Number(end.slice(0,4))-Number(start.slice(0,4))+1},(_,i)=>Number(start.slice(0,4))+i)}],
+    globeYears:Array.from({length:Math.min(Number(end.slice(0,4)),GLOBE_LAST_YEAR)-Number(start.slice(0,4))+1},(_,i)=>Number(start.slice(0,4))+i)}],
     defaultRegionId:region.meta.region,globeCellIds:[]};
 }
 

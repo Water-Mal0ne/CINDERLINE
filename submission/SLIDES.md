@@ -1,6 +1,6 @@
 # FIRETRACE — seven-slide judging deck
 
-The seven sections below are the complete deck. Titles plus on-slide text stay within 40 words; each spoken note is 60–90 words. Sources and production directions are not spoken. Real screenshots show the deployed baseline; FRP and outage-sensitivity results are reviewed branch evidence pending team merge/deployment. Do not imply those new results are already live.
+The seven sections below are the complete deck. Titles plus on-slide text stay within 40 words; each spoken note is 60–90 words. Sources and production directions are not spoken. Real screenshots show the earlier deployed baseline. FRP, season-sensitivity, month-calendar, area and 2025 additions are merged but appear live only after redeployment; do not imply they are live before then.
 
 ## Slide 1 — Nepal: did fire increase?
 
@@ -80,7 +80,7 @@ Against Aqua, 2020–2024
 
 MAE: Aqua-reference-equivalent detections/week.
 
-NOAA-20: separate-platform check; coverage limits remain.
+2025, out of sample: timing holds; totals drift (Brazil −21%).
 
 ### Visual
 
@@ -88,17 +88,17 @@ Render the Nepal B1/M1 and Egypt selected rows from `reports/review/layer1_table
 
 ### Speaker notes
 
-On years withheld from model selection, Nepal's weekly mean absolute error against Aqua falls from 43.3 with the simple conversion to 11.3 with the selected model. Egypt still has positive bias of 51.7 percent, so agreement is uneven. A separate NOAA-20 check applies the saved conversion without refitting in four countries and supports transfer between VIIRS platforms. It is not independent fire truth, and its common-date outage sensitivity remains unfinished. Later seasonal experiments reuse these years and are explicitly retrospective.
+On years withheld from model selection, Nepal's weekly mean absolute error against Aqua falls from 43.3 with the simple conversion to 11.3 with the selected model. Egypt still has positive bias of 51.7 percent, so agreement is uneven. A NOAA-20 check supports transfer between VIIRS platforms, not fire truth. An out-of-sample 2025 check is weaker: weekly timing holds, but converted totals run 21 percent below Aqua in Brazil and 18 percent in Nepal, so 2025 is labelled beyond the validation period.
 
 ### Sources
 
-[S02] `reports/review/layer1_table.csv`, `reports/harmonization_eval.csv`; [S09] `reports/review/noaa20/NOAA20.md`, `reports/review/noaa20/noaa20_conversion_check.csv`; [S10] season sensitivity evidence.
+[S02] `reports/review/layer1_table.csv`, `reports/harmonization_eval.csv`; [S09] `reports/review/noaa20/NOAA20.md`, `reports/review/noaa20/noaa20_conversion_check.csv`; [S10] season sensitivity evidence; 2025 continuity: `reports/review/extend2025/CONTINUITY.md`.
 
 ## Slide 5 — Test the season as well as totals
 
 ### On-slide text
 
-Calendar · evidence · missing weeks · CSV/ICS
+Calendar · month view · your own area · evidence · CSV/ICS
 
 India, retrospective: better totals, worse monthly shape.
 
@@ -110,11 +110,11 @@ Both common-date masks preserve that finding.
 
 ### Speaker notes
 
-Choose a country, switch the calendar scale, and open a week to inspect its measurements. Grey outage weeks remain unknown; downloads preserve the distinction. The seasonal check asks a different question from count error. In India's whole-year comparison, the selected conversion improves agreement in totals but worsens monthly shares against Aqua. Both common-date outage masks preserve that direction. Nepal's monthly-shape improvement also remains. These are retrospective sensitivity results, not forecasts, and masked totals include only commonly retained dates.
+Choose a country, switch the calendar scale, and open a week to inspect its measurements. Grey outage weeks remain unknown. A month-by-year view compares each month with the same month in other years, and users can draw their own area, which uses national calibration. The seasonal check asks a different question: in India, the selected conversion improves totals but worsens monthly shares against Aqua, under both common-date outage masks. These are retrospective results, not forecasts.
 
 ### Sources
 
-[S08] `reports/review/OUTAGES.md`, `web/src/App.tsx`; [S10] `submission/evidence/season/SEASON_CHECK.md`, `submission/evidence/season/whole_year_comparison.csv`.
+[S08] `reports/review/OUTAGES.md`, `web/src/App.tsx`, `web/src/MonthCalendar.tsx`, `web/src/AreaOfInterest.tsx`, `reports/review/area/RECONCILIATION.md`; [S10] `submission/evidence/season/SEASON_CHECK.md`, `submission/evidence/season/whole_year_comparison.csv`.
 
 ## Slide 6 — Weekly patterns, separate raw streams
 
