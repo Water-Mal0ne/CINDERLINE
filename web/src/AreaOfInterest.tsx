@@ -137,6 +137,7 @@ export default function AreaOfInterest({regionId, regionName, label}: Props) {
   return <div className="area-tool">
     <div className="area-note" role="note"><AlertTriangle size={16}/><p><strong>{AREA_NOTE}</strong> Cells are 0.25° squares summed from the same frozen {area.model} model as the national series, with no refitting. Observed Aqua through 2012, converted VIIRS from {area.switch.slice(0, 4)}.</p></div>
     <p className="area-period-note" role="note"><strong>{AREA_PERIOD_NOTE}</strong></p>
+    <p className="chart-note">Area monthly data omit entire outage-affected months and are rounded per cell. Their sums can differ from annual Earth totals, which use available daily dates.</p>
     <div className="area-layout">
       <div className="area-map-wrap">
         <div className="area-map" style={{aspectRatio: `${mapW} / ${mapH}`}}>

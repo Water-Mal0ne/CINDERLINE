@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "method": "Independent declared-partition accumulation, frozen ratio application and published daily-table decoding; no producer imports.",
+  "artifact_sha256": "bfe56d93a94c569b8dabadca8c162c3867bf139aa35fcf217d236af2314530df",
+  "model_sha256": "596adf75f544032e1b733f2f85d4fd97120b4514bdd2f2a894e97bf7ab8a303a",
+  "original_globe_sha256": "c31d2f0b5f31a6b24f9fc4e0617f5636f1edad0f3211ff2f8f25b1c47e107cf2",
+  "source_partitions_checked": 116,
+  "full_grid_corrected_cell_years": 5756,
+  "excluded_recorded_detections": 57938,
+  "national_country_years": 154,
+  "published_cell_years": 1848,
+  "max_national_absolute_difference": 0.00016573240168327175,
+  "max_cell_absolute_difference": 0.0007042480501349146,
+  "daily_rounding_absolute_tolerance": 0.0018300100000000002,
+  "scope": "2003-2024 daily-aligned annual grid; not AOI whole-month totals or proof of cloud-free observations."
+}

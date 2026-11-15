@@ -8,6 +8,9 @@ import './seasonal.css';
 interface Props {region: Region; label: string; selectedYear: number; onExport: () => void; cell: string}
 const W=760, H=245, L=54, R=20, T=22, B=37;
 const DAY=86400000;
+// The 2025 extension appends observations without recomputing these statistics.
+// This is the frozen climatology's scope, not the calendar's available date range.
+const SEASONAL_BASELINE='2003–2024';
 
 function dateSpan(year:number,startWeek:number,endWeek=startWeek) {
   const first=Date.UTC(year,0,1),last=Date.UTC(year,11,31);
@@ -53,7 +56,7 @@ export default function SeasonalContext({region,label,selectedYear,onExport,cell
   return <section className="seasonal-context" id="seasonal-context" aria-labelledby="seasonal-title">
     <div className="seasonal-intro"><div><span className="eyebrow">03 / SEASONAL CONTEXT</span><h2 id="seasonal-title">The season behind the signal.</h2>
       <p>Explore when activity has typically been highest across {region.meta.name}. These patterns describe the historical record.</p></div>
-      <span className="seasonal-scope"><Waves size={14}/> National baseline · {region.meta.period_start.slice(0,4)}–{region.meta.period_end.slice(0,4)}</span></div>
+      <span className="seasonal-scope"><Waves size={14}/> National baseline · {SEASONAL_BASELINE}</span></div>
     {cell!=='ALL'&&<p className="seasonal-national"><Info size={15}/><span>The map is focused on a grid cell. This section continues to show <strong>{region.meta.name} national patterns</strong>.</span></p>}
     <div className="seasonal-grid"><div className="seasonal-chart-card">
       <div className="seasonal-chart-heading"><div><span className="seasonal-kicker">TYPICAL WEEKLY ACTIVITY</span><h3>{peak?<>Peak around <span>{dateSpan(selectedYear,peak.week)}</span></>:'Seasonal pattern'}</h3></div>
