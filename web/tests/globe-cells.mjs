@@ -5,7 +5,7 @@ import ts from 'typescript';
 
 const source=readFileSync(new URL('../src/globeCells.ts',import.meta.url),'utf8');
 const output=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2021,module:ts.ModuleKind.ES2022}}).outputText;
-const {visibleGlobeCells}=await import('data:text/javascript;base64,'+Buffer.from(output).toString('base64'));
+const {filterGlobeTableCells,globeTablePage,localGlobeCellId,visibleGlobeCells}=await import('data:text/javascript;base64,'+Buffer.from(output).toString('base64'));
 const globe=JSON.parse(readFileSync(new URL('../public/data/globe.json',import.meta.url),'utf8'));
 const yearIndex=globe.years.indexOf(2024);
 assert.ok(yearIndex>=0);
@@ -49,4 +49,68 @@ test('selected-country unknown stays unknown and recorded zero stays visible',()
   assert.deepEqual(visibleGlobeCells(cells,2,'B'),[]);
   assert.deepEqual(visibleGlobeCells(cells,3,'B'),[]);
   assert.deepEqual(visibleGlobeCells(cells,0,'A'),[foreign]);
+});
+
+test('annual table pagination reaches every country record without hiding cells after the top 20',()=>{
+  for(const region of globe.coverage_regions.map(r=>r.id)){
+    const rows=filterGlobeTableCells(globe.cells,yearIndex,region,[]);
+    const expected=globe.cells.filter(c=>c.region===region&&Number.isFinite(c.values[yearIndex]));
+    assert.equal(rows.length,expected.length);
+    assert.ok(rows.length>20);
+    assert.ok(rows.every((c,index)=>index===0||rows[index-1].values[yearIndex]>=c.values[yearIndex]));
+    const collected=[];
+    for(let page=0;page<globeTablePage(rows,0).pages;page++)collected.push(...globeTablePage(rows,page).rows);
+    assert.deepEqual(collected,rows);
+    assert.equal(new Set(collected.map(c=>c.id)).size,expected.length);
+    assert.equal(globeTablePage(rows,99999).last,rows.length,'stale page clamps to final page');
+  }
+});
+
+test('daily-record filter uses the actual available cell IDs in all seven countries',()=>{
+  for(const region of globe.coverage_regions.map(r=>r.id)){
+    const country=JSON.parse(readFileSync(new URL(`../public/data/${region}.json`,import.meta.url),'utf8'));
+    const ids=country.cells.map(cell=>cell.id);
+    const rows=filterGlobeTableCells(globe.cells,yearIndex,region,ids,true);
+    assert.equal(ids.length,12);
+    assert.deepEqual(rows.map(localGlobeCellId).sort(),[...ids].sort());
+    assert.ok(rows.every(c=>c.region===region),'no foreign country reuses a local ID');
+  }
+});
+
+test('grid search accepts exact signed centers and compass coordinates without losing zero',()=>{
+  const south={id:'A:-23.25:-50.25',region:'A',lat:-23.125,lon:-50.125,values:[0,null]};
+  const north={id:'A:23:50',region:'A',lat:23.125,lon:50.125,values:[10,5]};
+  const missing={id:'A:0:0',region:'A',lat:0.125,lon:0.125,values:[null,0]};
+  const cells=Object.freeze([Object.freeze(south),Object.freeze(north),Object.freeze(missing)]);
+  assert.deepEqual(filterGlobeTableCells(cells,0,'A',[],false,' -23.125, -50.125 '),[south]);
+  assert.deepEqual(filterGlobeTableCells(cells,0,'A',[],false,'23.125° S / 50.125° W'),[south]);
+  assert.deepEqual(filterGlobeTableCells(cells,0,'A',[],false,'23.125 N, 50.125 E'),[north]);
+  assert.deepEqual(filterGlobeTableCells(cells,0,'A',[],false,'23.125'),[north,south]);
+  assert.deepEqual(filterGlobeTableCells(cells,0,'A',[],false,'0.125 N'),[],'missing is not a zero');
+  assert.deepEqual(filterGlobeTableCells(cells,1,'A',[],false,'0.125 N'),[missing]);
+  assert.deepEqual(filterGlobeTableCells(cells,0,'A',[],true),[]);
+  assert.deepEqual(globeTablePage([],100),{page:0,pages:1,rows:[],first:0,last:0});
+  assert.equal(globeTablePage([north],-1).page,0);
+  assert.equal(globeTablePage([north],NaN).page,0);
+});
+
+test('compass searches bind each number to its latitude or longitude in the published data',()=>{
+  const cell=globe.cells.find(c=>c.id==='United_States:18.75:-155.75');
+  assert.ok(cell);
+  const search=query=>filterGlobeTableCells([cell],yearIndex,'United_States',[],false,query);
+  assert.deepEqual(search('18.875 N, 155.625 W'),[cell]);
+  assert.deepEqual(search('W 155.625 / N 18.875'),[cell]);
+  assert.deepEqual(search('155.625 N, 18.875 W'),[],'longitude magnitude must not satisfy a northward latitude');
+  assert.deepEqual(search('18.875 W'),[],'a north latitude is not a west longitude');
+  assert.deepEqual(search('155.625'),[cell],'single-coordinate search remains supported');
+});
+
+test('signed compass terms cannot contradict their hemisphere or swap valid axes',()=>{
+  const cell={id:'A:12:-45',region:'A',lat:12.125,lon:-45.125,values:[0]};
+  const search=query=>filterGlobeTableCells([cell],0,'A',[],false,query);
+  assert.deepEqual(search('12.125 N, -45.125 W'),[cell]);
+  assert.deepEqual(search('45.125 N, 12.125 W'),[]);
+  assert.deepEqual(search('-12.125 N'),[]);
+  assert.deepEqual(search('+45.125 W'),[]);
+  assert.deepEqual(search('12 N, 45 W'),[cell],'partial coordinate searches still work');
 });

@@ -91,6 +91,15 @@ export function linkedRegion(search: string, availableIds: readonly string[], fa
   return availableIds.includes(value) ? value : fallback;
 }
 
+/** Page selection does not require the calendar catalog to be available. */
+export function linkedView(search: string): View {
+  if (search.length > MAX_QUERY_LENGTH) return 'explore';
+  const params = new URLSearchParams(search.startsWith('?') ? search.slice(1) : search);
+  const versions = params.getAll('v'), views = params.getAll('view');
+  if (versions.length === 1 && versions[0] !== SHARE_VERSION) return 'explore';
+  return views.length === 1 && (['explore','evidence','rhythm','methods'] as string[]).includes(views[0]) ? views[0] as View : 'explore';
+}
+
 function encodeState(state: ExplorationState, dataVersion?: string): string {
   const params = new URLSearchParams();
   params.set('v', SHARE_VERSION);

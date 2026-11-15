@@ -13,6 +13,26 @@ const loader=await import(moduleUrl(compiled('loadData')));
 const index=JSON.parse(readFileSync(new URL('../public/data/index.json',import.meta.url),'utf8'));
 const regions=index.regions.map(entry=>loader.normalizePublishedData(JSON.parse(readFileSync(new URL(`../public/data/${entry.file}`,import.meta.url),'utf8'))));
 
+test('early page restoration agrees with full link validation without requiring data',()=>{
+  const catalog=api.catalogForRegion(regions[0]);
+  for(const query of ['', '?view=rhythm', '?view=methods', '?view=evidence', '?view=invalid',
+    '?view=rhythm&view=methods', '?v=99&view=rhythm', '?v=99&v=1&view=rhythm',
+    '?view=methods&region=missing', '?view=rhythm&padding='+'.'.repeat(2048)]){
+    assert.equal(parser.linkedView(query),parser.resolveExploration(query,catalog).state.view,query);
+  }
+});
+
+test('index failures stay recoverable instead of publishing unusable render state',()=>{
+  assert.equal(api.isPublishedIndex(index),true);
+  assert.equal(api.isPublishedIndex({...index,regions:[]}),true);
+  for(const malformed of [null,{}, {...index,regions:null}, {...index,regions:[null]},
+    {...index,regions:[{id:'Nepal',name:'Nepal'}]}, {...index,limitations:null},
+    {...index,limitations:[{}]}, {...index,label:{}},
+    {...index,regions:[index.regions[0],index.regions[0]]}]){
+    assert.equal(api.isPublishedIndex(malformed),false);
+  }
+});
+
 test('published country catalogs expose only real detailed cells and actual record bounds',()=>{
   for(const region of regions){
     const catalog=api.catalogForRegion(region),available=catalog.regions[0];

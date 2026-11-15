@@ -1,6 +1,18 @@
 import {createShareLink, isCivilDate, resolveExploration} from './explorationState';
 import type {ExplorationCatalog, ExplorationState} from './explorationState';
-import type {Region, Week} from './types';
+import type {Index, Region, Week} from './types';
+
+/** Reject unusable catalogs before they replace the recoverable loading state. */
+export function isPublishedIndex(value:unknown):value is Index {
+  if(!value||typeof value!=='object')return false;
+  const index=value as Partial<Index>;
+  return typeof index.label==='string'&&typeof index.generated_at==='string'&&
+    Array.isArray(index.limitations)&&index.limitations.every(note=>typeof note==='string')&&
+    Array.isArray(index.regions)&&index.regions.every(region=>region&&
+      typeof region.id==='string'&&region.id.length>0&&typeof region.name==='string'&&
+      typeof region.file==='string'&&region.file.length>0)&&
+    new Set(index.regions.map(region=>region.id)).size===index.regions.length;
+}
 
 /** Validate only against the country that was loaded from the published index. */
 export function catalogForRegion(region: Region): ExplorationCatalog {

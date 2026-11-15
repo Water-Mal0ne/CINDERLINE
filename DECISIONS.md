@@ -9,6 +9,15 @@
 - Worldwide expansion remains deferred. A complete seven-country manifest does not imply global observation coverage. [Space Apps Navigator guidance](https://github.com/nasa/spaceapps/discussions/2016) supports a selected-area implementation and emphasizes the harmonization method.
 - National totals include all qualifying cells. Daily exploration contains 12 cells per country selected using training-period activity. All 41,986 contributing cells appear in the annual globe, but only 84 have daily drill-down. The accessible fallback lists the 20 highest-activity annual cells for a country/year.
 
+## Overnight UI decisions
+
+- 2026-11-14 19:47 UTC: Move the existing scale control and its exact scope caption above the sidebar rather than introduce a second independent control; preserve readiness during link/data hydration.
+- 2026-11-14 19:47 UTC: Fix the observed phone navigation overflow with two columns and improve scoped Rhythm readability without changing scientific text, values or caveats.
+- 2026-11-14 19:47 UTC: Keep the existing independent rhythm-country picker and shared-URL schema; the requested deep link restores the tab, and broader state redesign exceeds this task.
+- 2026-11-14 19:47 UTC: Reuse the FRP branch's identical web test discovery runner so merging the features cannot omit either suite. All real country/grid assets passed; no speculative data-path rewrite or new dataset is needed.
+
+- 2026-11-14 20:20 UTC: During cross-PR review, relocate the unchanged UI decision section away from the shared end-of-file insertion point. Preserve every decision and all application code.
+
 ## Exact-count processing and payloads
 
 - The additive `pipeline.streaming` route cleans annual archives in bounded chunks, preserves exact count multiplicities and reduces repeated keys on disk. It never expands count rows back into individual detections. The original smaller raw-record `pipeline.run_all` route remains available; it is not the seven-country release command.
@@ -94,3 +103,30 @@ Prediction: the Chittagong Hill Tracts (hill shifting cultivation, communities m
 Test, fixed before running: the per-cell method of `reference/rhythm_map.py` (VIIRS for the map, Aqua as a check; 1-degree cells with at least 300 detections a year on average and 8 usable years; Benjamini-Hochberg at 5%) applied to Bangladesh with Sunday as the tested day. Cells are counted as Chittagong Hill Tracts if their centroid falls in Rangamati, Khagrachari or Bandarban districts, or otherwise if their centroid lies east of 91.5 E and south of 23.5 N. The prediction holds if no such cell has a significant Sunday dip. No Bangladesh per-cell result had been computed when this was committed.
 
 Result (added after the analysis): the prediction did NOT hold. Of the two hill-tract cells, 21N 92E has a significant Sunday dip in VIIRS (0.490, q 0.0004) and Aqua (0.564, q 0.020); 22N 92E does not (0.745, q 0.089). The prediction was committed in `5adb21a90e781ce642b17c9aee9915a600c84dda`. See `reports/review/bangladesh_hills/RESULT.md`.
+
+## Section-by-section UI review (15 November 2026, 02:37 UTC)
+
+- Keep this cycle on ui-polish-v2; do not merge or deploy. The existing main, backup branch and Workers migration worktree remain unchanged.
+- Preserve scientific wording and all published/model/official artifacts. Limit edits to interaction, accessibility, validation of response structure, and recoverable loading.
+- Treat retries as resource-specific refreshes. Keep a failed shared evidence week available for retry, but let explicit navigation supersede delayed link hydration.
+- Keep land-outline retry independent of scientific map data. Use one keyboard tab stop for the exploratory map and require an unambiguous primary-pointer tap to select a globe cell.
+- Record the section findings, regression evidence and browser limits in reports/SECTION_REVIEW_QA.md; run all Python and web tests plus the build after the commit.
+
+## Section review round two (15 November 2026, 09:25 Nepal time)
+
+- Keep new fixes on ui-polish-v2 and update its existing review; no merge or deployment. Preserve the backup branch and Workers worktree.
+- Restore independent page selection before calendar data arrives; retain full URL validation, exact data-scope restoration and the delayed-navigation guard.
+- Treat malformed globe payloads as recoverable failures; preserve null/zero and dataset values, and bind compass search terms to their coordinate axes.
+- Preserve keyboard context during observation expansion and country-detail navigation. Separate Earth/table presentation changes from scientific cell selection.
+- Draw isolated existing values and break lines across absent months without filling gaps, recomputing values or changing exports. Keep scientific wording/captions/caveats unchanged.
+- Require cross-review plus the full tests/build after the commit; document results and verification limits in reports/SECTION_REVIEW_ROUND2_QA.md.
+- 2026-11-15 09:29 Nepal time: Fix the observed desktop month-label wrapping with CSS only; retain phone layout and all chart content.
+
+## Full-flow review and Unslop UI pass (15 November 2026)
+
+- Use the user-requested Unslop skill by Damir Sokolovsky (@heydamir), credited in reports/UNSLOP_UI_QA.md and the new stylesheets. Keep all four views and their section order, existing scientific text, published data and chart encodings.
+- Use neutral graphite controls and readable labels; let the calendar, real charts and Earth provide the visual emphasis. Preserve the existing brand fonts and semantic palette. Keep the globe lazy-loaded and demand-rendered.
+- Export selected daily evidence as a Markdown brief with its existing caveats and source links. Keep CSV export available and label annual Earth navigation explicitly.
+- Preserve the displayed year through geographic drill-down, restore Whole region scope when requested, and let explicit date edits supersede stale evidence-link hydration.
+- Add only the user-approved annual/daily outage-handling notice. The pre-existing annual/daily discrepancy is disclosed, not corrected; no data or scientific pipeline change is authorized in this UI pass.
+- Keep changes on ui-polish-v2 and update its existing review. Do not merge or deploy. Require independent review, desktop/phone inspection, and the full tests/build after the commit.
