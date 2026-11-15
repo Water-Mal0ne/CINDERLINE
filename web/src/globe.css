@@ -16,6 +16,7 @@
 .globe-table-empty{padding:15px 0 22px;color:#b7cccb;font-size:11px;line-height:1.7}
 .globe-table caption.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .globe-selection:focus{outline:2px solid #edbc8a;outline-offset:5px;border-radius:2px}
+.globe-table .table-scroll:focus-visible{outline:2px solid #edbc8a;outline-offset:-2px;border-radius:2px}
 .globe-view-actions{display:flex;flex-wrap:wrap;gap:7px}
 @media(max-width:640px){.globe-table-filters{align-items:stretch;gap:9px}.globe-table-filters>label:first-child{flex:1 1 100%}.globe-table-filters input[type=search]{width:100%;font-size:16px}.globe-pagination{bottom:-11px;gap:5px}.globe-pagination button{font-size:9px;padding:7px;min-height:36px}.globe-pagination span{font-size:9px}.globe-table .globe-daily-badge{font-size:8px}.globe-table table td:first-child{min-width:104px;line-height:1.6}}
 @media(max-width:640px){

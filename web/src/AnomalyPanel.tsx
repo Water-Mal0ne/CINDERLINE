@@ -40,8 +40,9 @@ export default function AnomalyPanel({anomalies, cell, onSelect, label}: Anomaly
   const [sort, setSort] = useState<AnomalySort>('latest');
   const [limit, setLimit] = useState(8);
   const id = useId();
-  useEffect(() => setLimit(8), [anomalies, filter, sort, cell]);
   const selected = useMemo(() => selectAnomalies(anomalies, filter, sort), [anomalies, filter, sort]);
+  const selectionKey = selected.map(a => `${a.date}/${a.week}/${a.status}`).join('|');
+  useEffect(() => setLimit(8), [selectionKey, filter, sort, cell]);
   const highCount = anomalies.filter(a => anomalyDirection(a) === 'high').length;
   const lowCount = anomalies.filter(a => anomalyDirection(a) === 'low').length;
   const visible = selected.slice(0, limit);

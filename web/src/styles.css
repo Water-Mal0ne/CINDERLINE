@@ -32,5 +32,14 @@ footer{display:flex;align-items:center;justify-content:space-between;gap:25px;ma
 .calendar-inspector-value>strong{font-family:var(--mono);font-size:21px;color:#ffbf8c}
 .calendar-inspector>.text-button{min-height:34px;margin:0;font-size:10px}
 .week-cell.partial-week{box-shadow:inset 0 -2px #f6e0bb}
+#main{scroll-margin-top:20px}
+#main:focus{outline:none}
+.evidence-table-scroll:focus-visible,.method-grid:focus-visible,.methods-page section:focus-visible{outline:2px solid #f4bb88;outline-offset:4px}
+.method-jump-nav{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 24px}
+.method-jump-nav a{display:inline-flex;align-items:center;min-height:44px;padding:9px 15px;border:1px solid #607b7e80;border-radius:5px;background:#203239;color:#e4d8c5;font-size:13px}
+.method-jump-nav a:hover{border-color:#e1ae7f;background:#2b3e42}
+.methods-page [id^="method-"]{scroll-margin-top:20px}
+.error-banner>.button{flex-shrink:0;margin-left:auto;min-height:44px}
+@media(max-width:640px){.error-banner{flex-wrap:wrap}.error-banner>.button{margin-left:0}.evidence-table-scroll table th{font-size:10px}.evidence-table-scroll table td{font-size:12px}.evidence-drawer .evidence-section h3{font-size:14px}.evidence-drawer .evidence-section p,.evidence-drawer .drawer-date,.evidence-drawer .callout p{font-size:12px}.evidence-drawer .icon-button{min-width:44px;min-height:44px}.evidence-drawer .button{min-height:44px}}
 .partial-week-note{font-size:12px;line-height:1.7;color:#e8cbb1;border-left:2px solid #e7b37f;padding:10px 12px;background:#46362d55;border-radius:3px}
 @media(max-width:640px){.calendar-inspector{padding:13px;gap:10px}.calendar-inspector>div:first-child{flex-basis:100%}.calendar-inspector-value{text-align:left;margin:0}.calendar-inspector>.text-button{margin-left:auto;min-height:44px}.date-range-error{font-size:11px}.partial-week-note{font-size:11px}}

@@ -1,6 +1,7 @@
 import {useEffect, useMemo, useState} from 'react';
 import {AlertTriangle, ShieldCheck, Waves} from 'lucide-react';
-import {loadData} from './loadData';
+import {invalidateData, loadData} from './loadData';
+import {validRhythmPayload} from './rhythmData';
 import './rhythm.css';
 
 type Num = number | null;
@@ -80,15 +81,21 @@ function StreamCard({row, rest}: {row: RhythmStreamRow; rest: string}) {
 
 export default function RhythmView({children}: {children?: React.ReactNode}) {
   const [data, setData] = useState<RhythmPayload | null>(null), [error, setError] = useState('');
+  const [attempt, setAttempt] = useState(0);
   const [country, setCountry] = useState('United_States'), [subset, setSubset] = useState<'all' | 'day'>('all');
   useEffect(() => {
     const controller = new AbortController();
-    loadData<RhythmPayload>('rhythm.json', controller.signal).then(setData)
-      .catch(e => { if (e.name !== 'AbortError') setError('The rhythm results have not been published.'); });
+    setError('');
+    loadData<RhythmPayload>('rhythm.json', controller.signal)
+      .then(value => {
+        if (!validRhythmPayload(value)) throw new Error('Invalid weekday data');
+        if (!controller.signal.aborted) setData(value);
+      })
+      .catch(() => { if (!controller.signal.aborted) setError('The rhythm results could not be loaded. Please try again.'); });
     return () => controller.abort();
-  }, []);
+  }, [attempt]);
   const selected = useMemo(() => data?.countries.find(c => c.country === country), [data, country]);
-  if (error) return <div role="alert" className="error-banner"><AlertTriangle size={20}/><div><strong>Data not available</strong><p>{error}</p></div></div>;
+  if (error) return <div role="alert" className="error-banner rh-load-error"><AlertTriangle size={20}/><div><strong>Data not available</strong><p>{error}</p></div><button type="button" className="button" onClick={() => { invalidateData('rhythm.json'); setAttempt(n => n + 1); }}>Retry weekday analysis</button></div>;
   if (!data) return <div className="loading-state" role="status"><span className="loader"/><h2>Loading the weekday analysis…</h2></div>;
   const official = data.official, passed = official.decision === 'pass';
   const passing = Object.entries(official.per_country).filter(([, v]) => v.status === 'pass').map(([c]) => c);

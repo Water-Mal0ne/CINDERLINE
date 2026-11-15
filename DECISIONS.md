@@ -87,3 +87,11 @@ Prediction: the Chittagong Hill Tracts (hill shifting cultivation, communities m
 Test, fixed before running: the per-cell method of `reference/rhythm_map.py` (VIIRS for the map, Aqua as a check; 1-degree cells with at least 300 detections a year on average and 8 usable years; Benjamini-Hochberg at 5%) applied to Bangladesh with Sunday as the tested day. Cells are counted as Chittagong Hill Tracts if their centroid falls in Rangamati, Khagrachari or Bandarban districts, or otherwise if their centroid lies east of 91.5 E and south of 23.5 N. The prediction holds if no such cell has a significant Sunday dip. No Bangladesh per-cell result had been computed when this was committed.
 
 Result (added after the analysis): the prediction did NOT hold. Of the two hill-tract cells, 21N 92E has a significant Sunday dip in VIIRS (0.490, q 0.0004) and Aqua (0.564, q 0.020); 22N 92E does not (0.745, q 0.089). The prediction was committed in `5adb21a90e781ce642b17c9aee9915a600c84dda`. See `reports/review/bangladesh_hills/RESULT.md`.
+
+## Section-by-section UI review (15 November 2026, 02:37 UTC)
+
+- Keep this cycle on ui-polish-v2; do not merge or deploy. The existing main, backup branch and Workers migration worktree remain unchanged.
+- Preserve scientific wording and all published/model/official artifacts. Limit edits to interaction, accessibility, validation of response structure, and recoverable loading.
+- Treat retries as resource-specific refreshes. Keep a failed shared evidence week available for retry, but let explicit navigation supersede delayed link hydration.
+- Keep land-outline retry independent of scientific map data. Use one keyboard tab stop for the exploratory map and require an unambiguous primary-pointer tap to select a globe cell.
+- Record the section findings, regression evidence and browser limits in reports/SECTION_REVIEW_QA.md; run all Python and web tests plus the build after the commit.

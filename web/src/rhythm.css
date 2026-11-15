@@ -45,6 +45,10 @@
 .rh-exploratory{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:3px 9px;border-radius:4px;background:#e7c35a;color:#111b20;font-weight:600}
 .rh-finding{border-left:3px solid var(--orange);padding:4px 0 4px 12px;margin:12px 0;line-height:1.6}
 .rh-tooltip{font-size:13px;line-height:1.6;border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:88px}
+.rh-cell{cursor:pointer}.rh-cell.selected{stroke:var(--orange);stroke-width:1.6}.rh-cell:focus-visible{stroke:var(--orange);stroke-width:2.4}
+.rh-map-help{font-size:13px;line-height:1.6;color:var(--muted);margin-bottom:12px}
+.rh-map-outline-error{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px;font-size:13px}
+.rh-load-error{flex-wrap:wrap}.rh-load-error>.button,.rh-map-outline-error>.button{min-height:44px;white-space:normal}
 @media (max-width:760px){.rh-map-wrap{grid-template-columns:1fr}.rh-facts{grid-template-columns:1fr 1fr}.rh-table{font-size:13px}}
 .rh-headline{font-size:17px;line-height:1.55;margin:4px 0 12px;color:var(--text);font-weight:500}
 

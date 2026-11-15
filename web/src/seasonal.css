@@ -15,4 +15,13 @@
   .seasonal-instructions,.seasonal-method-note,.seasonal-period-card>.seasonal-export-note{font-size:11px}
   .seasonal-axis{font-size:20px}
   .seasonal-period-list small{font-size:10px}
+  .seasonal-intro p,.seasonal-national{font-size:13px}
+  .seasonal-scope,.seasonal-legend,.seasonal-legend .seasonal-units,.seasonal-peak span{font-size:11px}
+  .seasonal-instructions,.seasonal-method-note,.seasonal-period-card>.seasonal-export-note{font-size:12px;line-height:1.8}
+  .seasonal-period-card>p,.seasonal-no-periods,.seasonal-empty p{font-size:13px}
+  .seasonal-period-list strong{font-size:14px}
+  .seasonal-period-list small{font-size:11px}
+  .seasonal-steppers button{width:44px;height:44px}
+  .seasonal-export{min-height:44px;font-size:13px}
+  .seasonal-data-label{font-size:10px;line-height:1.6;overflow-wrap:anywhere}
 }

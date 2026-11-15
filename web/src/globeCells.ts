@@ -1,5 +1,36 @@
 interface AnnualCell {id:string;region:string;lat:number;lon:number;values:(number|null)[]}
 
+type PointerPosition=Pick<PointerEvent,'pointerId'|'clientX'|'clientY'>;
+type PointerPress=PointerPosition&Pick<PointerEvent,'button'|'isPrimary'>;
+
+/** Only a completed single-pointer tap selects a cell; orbit/zoom gestures do not. */
+export function createGlobeCellSelection() {
+  const active=new Set<number>();
+  let candidate:PointerPosition|null=null;
+  const withinTap=(event:PointerPosition)=>candidate!==null&&Math.hypot(event.clientX-candidate.clientX,event.clientY-candidate.clientY)<=6;
+  return {
+    down(event:PointerPress) {
+      active.add(event.pointerId);
+      candidate=active.size===1&&event.button===0&&event.isPrimary
+        ?{pointerId:event.pointerId,clientX:event.clientX,clientY:event.clientY}:null;
+    },
+    move(event:PointerPosition) {
+      if(candidate?.pointerId===event.pointerId&&!withinTap(event))candidate=null;
+    },
+    up(event:PointerPress) {
+      if(!active.has(event.pointerId))return false;
+      const select=active.size===1&&candidate?.pointerId===event.pointerId&&event.button===0&&event.isPrimary&&withinTap(event);
+      active.delete(event.pointerId);
+      candidate=null;
+      return select;
+    },
+    cancel(event:Pick<PointerEvent,'pointerId'>) {
+      if(active.delete(event.pointerId))candidate=null;
+    },
+    reset() {active.clear();candidate=null;},
+  };
+}
+
 export const localGlobeCellId=(cell:AnnualCell)=>cell.id.startsWith(`${cell.region}:`)?cell.id.slice(cell.region.length+1):cell.id;
 
 /** Annual table rows remain country-specific, including shared border centers. */
